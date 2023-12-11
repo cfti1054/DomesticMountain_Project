@@ -1,4 +1,4 @@
-package com.fa.puls.mail;
+package com.fa.plus.mail;
 
 import java.util.ArrayList;
 import java.util.List;

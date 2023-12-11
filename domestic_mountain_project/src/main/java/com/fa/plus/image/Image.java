@@ -1,4 +1,4 @@
-package com.fa.puls.image;
+package com.fa.plus.image;
 
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,4 +1,4 @@
-package com.fa.puls.common;
+package com.fa.plus.common;
 
 import org.springframework.stereotype.Service;
 

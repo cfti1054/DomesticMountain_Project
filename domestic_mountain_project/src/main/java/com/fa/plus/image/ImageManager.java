@@ -1,4 +1,4 @@
-package com.fa.puls.image;
+package com.fa.plus.image;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.renderable.ParameterBlock;

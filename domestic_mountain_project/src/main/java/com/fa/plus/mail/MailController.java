@@ -1,4 +1,4 @@
-package com.fa.puls.mail;
+package com.fa.plus.mail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

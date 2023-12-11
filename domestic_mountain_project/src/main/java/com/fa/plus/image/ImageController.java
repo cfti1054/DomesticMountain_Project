@@ -1,4 +1,4 @@
-package com.fa.puls.image;
+package com.fa.plus.image;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fa.puls.common.FileManager;
+import com.fa.plus.common.FileManager;
 
 @Controller("image.imageController")
 @RequestMapping("/image/*")
