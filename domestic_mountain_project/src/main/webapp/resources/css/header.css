@@ -144,10 +144,8 @@ img {
   align-items: center;
 }
 
-.nav__logo {
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
-  transition: color .4s;
+.header-bi .header .container img {
+	height: 55%;
 }
 
 .nav__actions {
@@ -179,12 +177,12 @@ img {
 }
 @media screen and (max-width: 1400px) {
   .container {
-    max-width: 1000px;
+    max-width: 1200px;
   }
 }
 
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1100px) {
   .nav__menu {
     position: fixed;
     top: -100%;
@@ -351,4 +349,65 @@ img {
 
 .show-login .login__form {
   transform: translateY(0);
+}
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .search,
+  .login {
+    padding-top: 10rem;
+  }
+
+  .search__form {
+    max-width: 450px;
+    margin-inline: auto;
+  }
+
+  .search__close,
+  .login__close {
+    width: max-content;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    font-size: 2rem;
+  }
+
+  .login__form {
+    max-width: 400px;
+    margin-inline: auto;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1100px) {
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    column-gap: 3rem;
+  }
+  .nav__close, 
+  .nav__toggle {
+    display: none;
+  }
+  .nav__menu {
+    margin-left: auto;
+  }
+  .nav__list {
+    flex-direction: row;
+    column-gap: 3rem;
+  }
+
+  .login__form {
+    padding: 3rem 2rem 3.5rem;
+  }
+}
+
+
+
+@media screen and (min-width: 1150px) {
+  .container {
+    margin-inline: auto;
+  }
 }

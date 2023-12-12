@@ -21,10 +21,11 @@
 </head>
 <style>
 .features-1 {
-  background-image: url(resources/images/mainImg/mainImg.svg),linear-gradient(to bottom,#f1f4fe 0,#fff 100%);
-  background-repeat: no-repeat,repeat-x;
-  background-position: 50% 0,0 0;
-  background-size: auto 600px,100% 600px;
+	background-image: url(resources/images/mainImg/mainImg.svg),
+		linear-gradient(to bottom, #f1f4fe 0, #fff 100%);
+	background-repeat: no-repeat, repeat-x;
+	background-position: 50% 0, 0 0;
+	background-size: auto 600px, 100% 600px;
 }
 </style>
 
@@ -42,12 +43,12 @@
 <!--==================== LOGIN ====================-->
 <div class="login" id="login">
 	<form action="" class="login__form">
-		<h2 class="login__title">Log In</h2>
+		<h2 class="login__title">로그인</h2>
 
 		<div class="login__group">
 			<div>
-				<label for="email" class="login__label">Email</label> <input
-					type="email" placeholder="Write your email" id="email"
+				<label for="ID" class="login__label">ID</label> <input
+					type="text" placeholder="Write your ID" id="ID"
 					class="login__input">
 			</div>
 
@@ -60,12 +61,12 @@
 
 		<div>
 			<p class="login__signup">
-				You do not have an account? <a href="#">Sign up</a>
+				아직 계정이 없으신가요? <a href="#"> 회원가입</a>
 			</p>
 
-			<a href="#" class="login__forgot"> You forgot your password </a>
+			<a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
 
-			<button type="submit" class="login__button">Log In</button>
+			<button type="submit" class="login__button">로그인</button>
 		</div>
 	</form>
 
@@ -77,23 +78,26 @@
 	<!--==================== HEADER ====================-->
 	<header class="header" id="header">
 		<nav class="nav container">
-			<a href="#" class="nav__logo">Logo</a>
+		
+			<img alt="" src="resources/images/logo/logo_black.png">
 
 			<div class="nav__menu" id="nav-menu">
 				<ul class="nav__list">
-					<li class="nav__item"><a href="#" class="nav__link">Home</a></li>
+					<li class="nav__item"><a href="#" class="nav__link">Information</a></li>
 
-					<li class="nav__item"><a href="#" class="nav__link">About
-							Us</a></li>
+					<li class="nav__item"><a href="#" class="nav__link">DM
+							Store</a></li>
+
+					<li class="nav__item"><a href="#" class="nav__link">Support</a>
+					</li>
+					
+					<li class="nav__item"><a href="#" class="nav__link">Community</a>
+					</li>
 
 					<li class="nav__item"><a href="#" class="nav__link">Services</a>
 					</li>
 
-					<li class="nav__item"><a href="#" class="nav__link">Featured</a>
-					</li>
-
-					<li class="nav__item"><a href="#" class="nav__link">Contact
-							Me</a></li>
+					<li class="nav__item"><a href="#" class="nav__link">My Page</a></li>
 				</ul>
 
 				<!-- Close button -->
@@ -103,6 +107,7 @@
 			</div>
 
 			<div class="nav__actions">
+				<i class=""></i>
 				<!-- Search button -->
 				<i class="ri-search-line nav__search" id="search-btn"></i>
 
@@ -138,20 +143,22 @@
          navMenu.classList.remove('show-menu')
       })
 
+      
       /*=============== SEARCH ===============*/
-      const search = document.getElementById('search'),
-         searchBtn = document.getElementById('search-btn'),
-         searchClose = document.getElementById('search-close')
+      /* const search = document.getElementById('search'),
+      searchBtn = document.getElementById('search-btn'),
+      searchClose = document.getElementById('search-close') */
 
       /* Search show */
-      searchBtn.addEventListener('click', () => {
+      /* searchBtn.addEventListener('click', () => {
          search.classList.add('show-search')
-      })
+      }) */
 
       /* Search hidden */
-      searchClose.addEventListener('click', () => {
+      /* searchClose.addEventListener('click', () => {
          search.classList.remove('show-search')
-      })
+      }) */
+      
 
       /*=============== LOGIN ===============*/
       const login = document.getElementById('login'),

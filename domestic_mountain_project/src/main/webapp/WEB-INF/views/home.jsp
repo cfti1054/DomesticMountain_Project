@@ -198,13 +198,13 @@
 			<div class="cards">
 				<article class="card-1 information [ card ]">
 					<div class="div-tag">
-						<span class="tag"> classification</span>
+						<span class="tag">분류</span>
 					</div>
 					<h2 class="title">지역별 커뮤니티</h2>
 					<p class="info">추천 코스, 유저가 만든 코스의 정보와 함께 동행 산행 신청 할 수 있는
 						커뮤니티입니다.</p>
 					<button class="area-6-button" type="button" onclick="">
-						<span>Learn more</span>
+						<span>보러 가기</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />
@@ -217,12 +217,12 @@
 			<div class="cards">
 				<article class="card-2 information [ card ]">
 					<div class="div-tag">
-						<span class="tag"> classification</span>
+						<span class="tag">분류</span>
 					</div>
 					<h2 class="title">유용한 정보</h2>
 					<p class="info">유저들 각자의 꿀팁 혹은 공유하고 싶은 정보를 담은 커뮤니티입니다.</p>
 					<button class="area-6-button" type="button" onclick="">
-						<span>Learn more</span>
+						<span>보러 가기</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />
@@ -235,13 +235,13 @@
 			<div class="cards">
 				<article class="card-3 information [ card ]">
 					<div class="div-tag">
-						<span class="tag"> classification</span>
+						<span class="tag">분류</span>
 					</div>
 					<h2 class="title">회원들의 모습</h2>
 					<p class="info">유저들이 추천 코스, 유저가 만든 코스를 직접 다녀와 보고 후기나 리뷰를 블로그
 						형식으로 작성한 커뮤니티입니다.</p>
 					<button class="area-6-button" type="button" onclick="">
-						<span>Learn more</span>
+						<span>보러 가기</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />
@@ -254,13 +254,13 @@
 			<div class="cards">
 				<article class="card-4 information [ card ]">
 					<div class="div-tag">
-						<span class="tag"> classification</span>
+						<span class="tag">분류</span>
 					</div>
 					<h2 class="title">Look & Style</h2>
-					<p class="info">다른 유저의 각자 개성을 드러낸 등산복 착상을 확인할 수 있습니다. ootd 형식으로
+					<p class="info">다른 유저의 각자 개성을 드러낸 등산복 착상을 확인할 수 있습니다. ootd 형식의
 						룩을 둘러보고 가세요!</p>
 					<button class="area-6-button" type="button" onclick="">
-						<span>Learn more</span>
+						<span>보러 가기</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />
