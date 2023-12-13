@@ -17,7 +17,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<title>Final Project</title>
+<title>DM Project</title>
 </head>
 <style>
 .features-1 {
@@ -65,7 +65,7 @@
 
 			<a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
 
-			<button type="submit" class="login__button">로그인</button>
+			<button type="submit" class="login__button" onclick="#">로그인</button>
 		</div>
 	</form>
 

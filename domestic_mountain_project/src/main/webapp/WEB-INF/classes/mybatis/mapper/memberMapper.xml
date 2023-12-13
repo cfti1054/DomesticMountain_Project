@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.MemberMapper">
+	<select id="loginMember" parameterType="String" resultType="com.fa.plus.domain.Member">
+		SELECT useridx, usership, user_id, user_name, user_pwd, enabled, reg_date, pwd_date
+		FROM userall u
+		JOIN user1 u1 ON u.userIdx = i1.userIdx
+		WHERE userId = #{userId} AND enabled = 1
+	</select>
+	
+	
+	<select id="memberSeq" resultType="Long">
+	
+	</select>
+	
+	<insert id="insertMember" parameterType="Long">
+	
+	</insert>
+	
+	<insert id="insertMemberAll" parameterType="com.fa.plus.domain.Member">
+	
+	</insert>
+	
+	<select id="findByPwd" parameterType="String" resultType="com.fa.plus.domain.Member">
+	
+	</select>
+	
+	<update id="updateMember1" parameterType="com.fa.plus.domain.Member">
+	
+	</update>
+	
+	<update id="updateMember2" parameterType="com.fa.plus.domain.Member">
+	
+	</update>
+	
+</mapper>
