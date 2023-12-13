@@ -144,8 +144,14 @@ img {
   align-items: center;
 }
 
-.header-bi .header .container img {
+.header-bi .header .container .img-div-tag {
 	height: 55%;
+}
+.header-bi .header .container .img-div-tag a {
+	height: 100%;
+}
+.header-bi .header .container .img-div-tag a img {
+	height: 100%;
 }
 
 .nav__actions {

@@ -47,9 +47,8 @@
 
 		<div class="login__group">
 			<div>
-				<label for="ID" class="login__label">ID</label> <input
-					type="text" placeholder="Write your ID" id="ID"
-					class="login__input">
+				<label for="ID" class="login__label">ID</label> <input type="text"
+					placeholder="Write your ID" id="ID" class="login__input">
 			</div>
 
 			<div>
@@ -78,9 +77,11 @@
 	<!--==================== HEADER ====================-->
 	<header class="header" id="header">
 		<nav class="nav container">
-		
-			<img alt="" src="resources/images/logo/logo_black.png">
-
+			<div class="img-div-tag">
+				<a class="img-a-tag" href="#"> 
+				<img alt="" src="resources/images/logo/logo_black.png">
+				</a>
+			</div>
 			<div class="nav__menu" id="nav-menu">
 				<ul class="nav__list">
 					<li class="nav__item"><a href="#" class="nav__link">Information</a></li>
@@ -90,14 +91,15 @@
 
 					<li class="nav__item"><a href="#" class="nav__link">Support</a>
 					</li>
-					
+
 					<li class="nav__item"><a href="#" class="nav__link">Community</a>
 					</li>
 
 					<li class="nav__item"><a href="#" class="nav__link">Services</a>
 					</li>
 
-					<li class="nav__item"><a href="#" class="nav__link">My Page</a></li>
+					<li class="nav__item"><a href="#" class="nav__link">My
+							Page</a></li>
 				</ul>
 
 				<!-- Close button -->
