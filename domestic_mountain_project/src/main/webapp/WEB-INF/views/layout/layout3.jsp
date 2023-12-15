@@ -53,5 +53,96 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
 
 
+
+<script type="text/javascript">
+function sendModelLogin() {
+    var f = document.modelLoginForm;
+	var str;
+	
+	str = f.userId.value;
+    if(!str) {
+        f.userId.focus();
+        return;
+    }
+
+    str = f.userPwd.value;
+    if(!str) {
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "${pageContext.request.contextPath}/user/login";
+    f.submit();
+}
+</script>
+
+
+
+
+<!--==================== LOGIN ====================-->
+<div class="login" id="login">
+	<form name="modelLoginForm" action="" class="login__form">
+		<h2 class="login__title">로그인</h2>
+
+		<div class="login__group">
+			<div>
+				<label for="ID" class="login__label">ID</label> <input type="text"
+					placeholder="Write your ID" id="ID" name="userId" class="login__input">
+			</div>
+
+			<div>
+				<label for="password" class="login__label">Password</label> <input
+					type="password" placeholder="Enter your password" name="userPwd" id="password"
+					class="login__input">
+			</div>
+		</div>
+
+		<div>
+			<p class="login__signup">
+				아직 계정이 없으신가요? <a href="#"> 회원가입</a>
+			</p>
+
+			<a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
+
+			<button type="submit" class="login__button" onclick="sendModelLogin();">로그인</button>
+		</div>
+	</form>
+
+	<i class="ri-close-line login__close" id="login-close"></i>
+</div>
+
+<script>
+/*=============== SEARCH ===============*/
+/* const search = document.getElementById('search'),
+searchBtn = document.getElementById('search-btn'),
+searchClose = document.getElementById('search-close') */
+
+/* Search show */
+/* searchBtn.addEventListener('click', () => {
+   search.classList.add('show-search')
+}) */
+
+/* Search hidden */
+/* searchClose.addEventListener('click', () => {
+   search.classList.remove('show-search')
+}) */
+
+
+/*=============== LOGIN ===============*/
+const login = document.getElementById('login'),
+   loginBtn = document.getElementById('login-btn'),
+   loginClose = document.getElementById('login-close')
+
+/* Login show */
+loginBtn.addEventListener('click', () => {
+   login.classList.add('show-login')
+})
+
+/* Login hidden */
+loginClose.addEventListener('click', () => {
+   login.classList.remove('show-login')
+})
+</script>
+
 </body>
 </html>
