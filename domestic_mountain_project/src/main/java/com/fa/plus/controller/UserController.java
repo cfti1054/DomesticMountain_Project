@@ -36,7 +36,7 @@ public class UserController {
 		User dto = service.loginUser(userId);
 		if (dto == null || !userPwd.equals(dto.getUser_pwd())) {
 			model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
-			return ".user.login";
+			return ".member.login";
 		}
 
 		// 세션에 로그인 정보 저장

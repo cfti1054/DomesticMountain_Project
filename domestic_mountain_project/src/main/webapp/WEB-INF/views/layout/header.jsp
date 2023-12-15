@@ -39,21 +39,41 @@
 
 	<i class="ri-close-line search__close" id="search-close"></i>
 </div>
+<script type="text/javascript">
+function sendModelLogin() {
+    var f = document.modelLoginForm;
+	var str;
+	
+	str = f.userId.value;
+    if(!str) {
+        f.userId.focus();
+        return;
+    }
 
+    str = f.userPwd.value;
+    if(!str) {
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "${pageContext.request.contextPath}/user/login";
+    f.submit();
+}
+</script>
 <!--==================== LOGIN ====================-->
 <div class="login" id="login">
-	<form action="" class="login__form">
+	<form name="modelLoginForm" action="" class="login__form">
 		<h2 class="login__title">로그인</h2>
 
 		<div class="login__group">
 			<div>
 				<label for="ID" class="login__label">ID</label> <input type="text"
-					placeholder="Write your ID" id="ID" class="login__input">
+					placeholder="Write your ID" id="ID" name="userId" class="login__input">
 			</div>
 
 			<div>
 				<label for="password" class="login__label">Password</label> <input
-					type="password" placeholder="Enter your password" id="password"
+					type="password" placeholder="Enter your password" name="userPwd" id="password"
 					class="login__input">
 			</div>
 		</div>
@@ -65,7 +85,7 @@
 
 			<a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
 
-			<button type="submit" class="login__button" onclick="#">로그인</button>
+			<button type="submit" class="login__button" onclick="sendModelLogin();">로그인</button>
 		</div>
 	</form>
 
