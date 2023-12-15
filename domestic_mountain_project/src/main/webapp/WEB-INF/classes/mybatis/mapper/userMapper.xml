@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.mapper.MemberMapper">
-	<select id="loginMember" parameterType="String" resultType="com.fa.plus.domain.Member">
+<mapper namespace="com.fa.plus.mapper.UserMapper">
+	<select id="loginUser" parameterType="String" resultType="com.fa.plus.domain.User">
 		SELECT useridx, usership, user_id, user_name, user_pwd, enabled, reg_date, pwd_date
 		FROM userall u
 		JOIN user1 u1 ON u.userIdx = i1.userIdx
@@ -10,27 +10,27 @@
 	</select>
 	
 	
-	<select id="memberSeq" resultType="Long">
+	<select id="userSeq" resultType="Long">
 	
 	</select>
 	
-	<insert id="insertMember" parameterType="Long">
+	<insert id="insertUser" parameterType="Long">
 	
 	</insert>
 	
-	<insert id="insertMemberAll" parameterType="com.fa.plus.domain.Member">
+	<insert id="insertUserAll" parameterType="com.fa.plus.domain.User">
 	
 	</insert>
 	
-	<select id="findByPwd" parameterType="String" resultType="com.fa.plus.domain.Member">
+	<select id="findByPwd" parameterType="String" resultType="com.fa.plus.domain.User">
 	
 	</select>
 	
-	<update id="updateMember1" parameterType="com.fa.plus.domain.Member">
+	<update id="updateUser1" parameterType="com.fa.plus.domain.User">
 	
 	</update>
 	
-	<update id="updateMember2" parameterType="com.fa.plus.domain.Member">
+	<update id="updateUser2" parameterType="com.fa.plus.domain.User">
 	
 	</update>
 	

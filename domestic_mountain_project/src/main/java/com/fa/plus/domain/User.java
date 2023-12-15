@@ -1,6 +1,6 @@
 package com.fa.plus.domain;
 
-public class Member {
+public class User {
 	private long useridx;
 	private int usership;
 	
@@ -23,7 +23,9 @@ public class Member {
 	private String tel2;
 	private String tel3;
 	
+	
 	// private int failure_cnt;
+	// private String last_login
 	
 	public long getUseridx() {
 		return useridx;
@@ -139,6 +141,5 @@ public class Member {
 	public void setTel3(String tel3) {
 		this.tel3 = tel3;
 	}
-	
-	
+
 }

@@ -18,14 +18,14 @@ function sendLogin() {
         f.userId.focus();
         return;
     }
-
+    
     str = f.userPwd.value.trim();
     if(!str) {
         f.userPwd.focus();
         return;
     }
-
-    f.action = "${pageContext.request.contextPath}/member/login";
+    
+    f.action = "${pageContext.request.contextPath}user/login";
     f.submit();
 }
 </script>
@@ -61,8 +61,8 @@ function sendLogin() {
                     <div class="col-12">
                         <p class="text-center mb-0">
                         	<a href="#" class="text-decoration-none me-2">아이디 찾기</a>
-                        	<a href="${pageContext.request.contextPath}/member/pwdFind" class="text-decoration-none me-2">패스워드 찾기</a>
-                        	<a href="${pageContext.request.contextPath}/member/member" class="text-decoration-none">회원가입</a>
+                        	<a href="${pageContext.request.contextPath}/user/pwdFind" class="text-decoration-none me-2">패스워드 찾기</a>
+                        	<a href="${pageContext.request.contextPath}/user/user" class="text-decoration-none">회원가입</a>
                         </p>
                     </div>
                 </div>

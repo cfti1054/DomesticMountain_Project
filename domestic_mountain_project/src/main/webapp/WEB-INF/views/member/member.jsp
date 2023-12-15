@@ -13,38 +13,38 @@ function memberOk() {
 	const f = document.memberForm;
 	let str;
 
-	str = f.userId.value;
+	str = f.memberId.value;
 	if( !/^[a-z][a-z0-9_]{4,9}$/i.test(str) ) { 
 		alert("아이디를 다시 입력 하세요. ");
-		f.userId.focus();
+		f.memberId.focus();
 		return;
 	}
 
 	let mode = "${mode}";
-	if(mode === "member" && f.userIdValid.value === "false") {
+	if(mode === "member" && f.memberIdValid.value === "false") {
 		str = "아이디 중복 검사가 실행되지 않았습니다.";
-		$("#userId").parent().find(".help-block").html(str);
-		f.userId.focus();
+		$("#memberId").parent().find(".help-block").html(str);
+		f.memberId.focus();
 		return;
 	}
 	
-	str = f.userPwd.value;
+	str = f.memberPwd.value;
 	if( !/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str) ) { 
 		alert("패스워드를 다시 입력 하세요. ");
-		f.userPwd.focus();
+		f.memberPwd.focus();
 		return;
 	}
 
-	if( str !== f.userPwd2.value ) {
+	if( str !== f.memberPwd2.value ) {
         alert("패스워드가 일치하지 않습니다. ");
-        f.userPwd.focus();
+        f.memberPwd.focus();
         return;
 	}
 	
-    str = f.userName.value;
+    str = f.memberName.value;
     if( !/^[가-힣]{2,5}$/.test(str) ) {
         alert("이름을 다시 입력하세요. ");
-        f.userName.focus();
+        f.memberName.focus();
         return;
     }
 
@@ -110,30 +110,30 @@ function changeEmail() {
     }
 }
 
-function userIdCheck() {
+function memberIdCheck() {
 	// 아이디 중복 검사
-	let userId = $("#userId").val();
+	let memberId = $("#memberId").val();
 	
-	if(! /^[a-z][a-z0-9_]{4,9}$/i.test(userId)) {
+	if(! /^[a-z][a-z0-9_]{4,9}$/i.test(memberId)) {
 		let str = "아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.";
-		$("#userId").focus();
-		$("#userId").parent().find(".help-block").html(str);
+		$("#memberId").focus();
+		$("#memberId").parent().find(".help-block").html(str);
 		return;
 	}
 	
-	let url = "${pageContext.request.contextPath}/member/userIdCheck";
+	let url = "${pageContext.request.contextPath}/member/memberIdCheck";
 	// AJAX - POST : JSON 응답 받기
-	$.post(url, {userId:userId}, function(data){
+	$.post(url, {memberId:memberId}, function(data){
 		let p = data.passed;
 		if(p === "true") {
-			let str = '<span style="color:blue; font-weight:bold;">' + userId + '</span> 아이디는 사용 가능합니다.';
-			$('.userId-box').find('.help-block').html(str);
-			$('#userIdValid').val('true');
+			let str = '<span style="color:blue; font-weight:bold;">' + memberId + '</span> 아이디는 사용 가능합니다.';
+			$('.memberId-box').find('.help-block').html(str);
+			$('#memberIdValid').val('true');
 		} else {
-			let str = '<span style="color:red; font-weight:bold;">' + userId + '</span> 아이디는 사용할 수 없습니다.';
-			$('.userId-box').find('.help-block').html(str);
-			$('#userIdValid').val('false');
-			$("#userId").focus();
+			let str = '<span style="color:red; font-weight:bold;">' + memberId + '</span> 아이디는 사용할 수 없습니다.';
+			$('.memberId-box').find('.help-block').html(str);
+			$('#memberIdValid').val('false');
+			$("#memberId").focus();
 		}
 	}, "json");
 	
@@ -154,17 +154,17 @@ function userIdCheck() {
 
 			<form name="memberForm" method="post">
 				<div class="row mb-3">
-					<label class="col-sm-2 col-form-label" for="userId">아이디</label>
-					<div class="col-sm-10 userId-box">
+					<label class="col-sm-2 col-form-label" for="memberId">아이디</label>
+					<div class="col-sm-10 memberId-box">
 						<div class="row">
 							<div class="col-5 pe-1">
-								<input type="text" name="userId" id="userId" class="form-control" value="${dto.userId}" 
+								<input type="text" name="memberId" id="memberId" class="form-control" value="${dto.memberId}" 
 										${mode=="update" ? "readonly ":""}
 										placeholder="아이디">
 							</div>
 							<div class="col-3 ps-1">
 								<c:if test="${mode=='member'}">
-									<button type="button" class="btn btn-light" onclick="userIdCheck();">아이디중복검사</button>
+									<button type="button" class="btn btn-light" onclick="memberIdCheck();">아이디중복검사</button>
 								</c:if>
 							</div>
 						</div>
@@ -175,25 +175,25 @@ function userIdCheck() {
 				</div>
 			 
 				<div class="row mb-3">
-					<label class="col-sm-2 col-form-label" for="userPwd">패스워드</label>
+					<label class="col-sm-2 col-form-label" for="memberPwd">패스워드</label>
 					<div class="col-sm-10">
-			            <input type="password" name="userPwd" id="userPwd" class="form-control" autocomplete="off" placeholder="패스워드">
+			            <input type="password" name="memberPwd" id="memberPwd" class="form-control" autocomplete="off" placeholder="패스워드">
 			            <small class="form-control-plaintext">패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</small>
 			        </div>
 			    </div>
 			    
 			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="userPwd2">패스워드 확인</label>
+			        <label class="col-sm-2 col-form-label" for="memberPwd2">패스워드 확인</label>
 			        <div class="col-sm-10">
-			            <input type="password" name="userPwd2" id="userPwd2" class="form-control" autocomplete="off" placeholder="패스워드 확인">
+			            <input type="password" name="memberPwd2" id="memberPwd2" class="form-control" autocomplete="off" placeholder="패스워드 확인">
 			            <small class="form-control-plaintext">패스워드를 한번 더 입력해주세요.</small>
 			        </div>
 			    </div>
 			 
 			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="userName">이름</label>
+			        <label class="col-sm-2 col-form-label" for="memberName">이름</label>
 			        <div class="col-sm-10">
-			            <input type="text" name="userName" id="userName" class="form-control" value="${dto.userName}" 
+			            <input type="text" name="memberName" id="memberName" class="form-control" value="${dto.memberName}" 
 			            		${mode=="update" ? "readonly ":""}
 			            		placeholder="이름">
 			        </div>
@@ -291,7 +291,7 @@ function userIdCheck() {
 			        <div class="text-center">
 			            <button type="button" name="sendButton" class="btn btn-primary" onclick="memberOk();"> ${mode=="member"?"회원가입":"정보수정"} <i class="bi bi-check2"></i></button>
 			            <button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/';"> ${mode=="member"?"가입취소":"수정취소"} <i class="bi bi-x"></i></button>
-						<input type="hidden" name="userIdValid" id="userIdValid" value="false">
+						<input type="hidden" name="memberIdValid" id="memberIdValid" value="false">
 			        </div>
 			    </div>
 			
@@ -317,7 +317,7 @@ function userIdCheck() {
                 var extraAddr = ''; // 조합형 주소 변수
 
                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                if (data.memberSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     fullAddr = data.roadAddress;
 
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
@@ -325,7 +325,7 @@ function userIdCheck() {
                 }
 
                 // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                if(data.userSelectedType === 'R'){
+                if(data.memberSelectedType === 'R'){
                     //법정동명이 있을 경우 추가한다.
                     if(data.bname !== ''){
                         extraAddr += data.bname;
