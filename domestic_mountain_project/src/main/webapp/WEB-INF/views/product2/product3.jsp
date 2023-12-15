@@ -7,20 +7,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
-    * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-    }
 
     .head-container {
         display: flex;
         justify-content: space-between;
-        margin-top:100px;
     }
 
     .div1, .div2 {
         flex: 1;
+        padding-top: 120px;
     }
 
     .div1 {
@@ -143,10 +138,12 @@
 
 </style>
 <!-- ================== body ================== -->
-<section class="features-1" style="height: 2600px;">
+<section class="features-1" style="height: auto;">
 	<div class="head-container">
-        <div class="div1"><button class="button1" type="button"> 장비 견적 맞춰보기 </button></div>
-        <div class="div2"> > 등산 장비</div>
+        <div class="div1">
+        	<button class="button1" type="button"> 장비 견적 맞춰보기 </button>
+        </div>
+        <div class="div2"><p> > 등산 장비</p></div>
     </div>
     <div class="jemok"> 등산장비 </div>
     <div class="img-container">

@@ -20,15 +20,8 @@
 <title>DM Project</title>
 </head>
 <style>
-.features-1 {
-	background-image: url(resources/images/mainImg/mainImg.svg),
-		linear-gradient(to bottom, #f1f4fe 0, #fff 100%);
-	background-repeat: no-repeat, repeat-x;
-	background-position: 50% 0, 0 0;
-	background-size: auto 600px, 100% 600px;
-}
-</style>
 
+</style>
 
 <!--==================== SEARCH ====================-->
 <div class="search" id="search">

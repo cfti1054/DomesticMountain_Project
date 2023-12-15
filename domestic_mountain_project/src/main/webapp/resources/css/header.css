@@ -92,6 +92,16 @@ img {
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
+
+.features-1 {
+	background-image: url(../images/mainImg/mainImg.svg),
+		linear-gradient(to bottom, #f1f4fe 0, #fff 100%);
+	background-repeat: no-repeat, repeat-x;
+	background-position: 50% 0, 0 0;
+	background-size: auto 600px, 100% 600px;
+}
+
+
 .container {
   max-width: 1500px;
   margin-inline: auto;
