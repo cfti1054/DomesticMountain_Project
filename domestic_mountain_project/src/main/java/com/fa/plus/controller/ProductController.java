@@ -17,7 +17,7 @@ public class ProductController {
 	public String product() {
 		return ".product.product";
 	}
-	
+	 
 	@GetMapping("product_detail")
 	public String product_detail() {
 		return ".product.product_detail";
