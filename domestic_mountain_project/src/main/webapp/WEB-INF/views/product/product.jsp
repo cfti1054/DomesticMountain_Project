@@ -150,12 +150,12 @@
         <div class="name"><a href="${pageContext.request.contextPath}/product/product_detail"> >> 신발과 양말 </a></div>
         <div class="box">
             <div class="img-box">
-                <a href="#">
-                	<div class="box1">
-                    	<img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-                    	<div class="product-name">등산화</div>
-                	</div>
-                </a>
+                <div class="box1">
+                	<a href="${pageContext.request.contextPath}/product/product_detail">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">등산화</span>
+                    </a>
+                </div>
             </div>
             <div class="img-box">
                 <div class="box2">
