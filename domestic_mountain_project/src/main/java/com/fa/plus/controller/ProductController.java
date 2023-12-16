@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/product/*")
-public class productController {
+public class ProductController {
 	
 	@Autowired
 	// private MemberService service;
