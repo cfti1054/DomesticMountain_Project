@@ -186,7 +186,7 @@
 					DM Store의 경우 기초 장비부터 전문 장비, 기타 장비 등의 <br>등산객들을 위한 상품들을 구비하고
 					있습니다.
 				</h4>
-				<a class="area-5-button">보러가기 >></a>
+				<a href="${pageContext.request.contextPath}/product/product" class="area-5-button">보러가기 >></a>
 			</div>
 		</div>
 	</div>

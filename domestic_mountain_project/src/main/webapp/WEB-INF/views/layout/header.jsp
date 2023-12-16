@@ -47,7 +47,7 @@
 				<ul class="nav__list">
 					<li class="nav__item"><a href="#" class="nav__link">Information</a></li>
 
-					<li class="nav__item"><a href="#" class="nav__link">DM
+					<li class="nav__item"><a href="${pageContext.request.contextPath}/product/product" class="nav__link">DM
 							Store</a></li>
 
 					<li class="nav__item"><a href="#" class="nav__link">Support</a>

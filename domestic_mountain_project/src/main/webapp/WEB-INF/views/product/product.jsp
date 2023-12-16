@@ -147,7 +147,7 @@
     </div>
     <div class="jemok"> 등산장비 </div>
     <div class="img-container">
-        <div class="name"><a href=""> >> 신발과 양말 </a></div>
+        <div class="name"><a href="${pageContext.request.contextPath}/product/product_detail"> >> 신발과 양말 </a></div>
         <div class="box">
             <div class="img-box">
                 <a href="#">

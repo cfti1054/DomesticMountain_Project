@@ -8,22 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/product/*")
-public class productController {
+public class ProductController {
 	
 	@Autowired
 	// private MemberService service;
 	
-	@GetMapping("product2")
+	@GetMapping("product")
 	public String product() {
-		return ".product2.product3";
+		return ".product.product";
 	}
 	
-	
-	
-	@GetMapping("product3")
+	@GetMapping("product_detail")
 	public String product_detail() {
-		return ".product2.product_detail";
+		return ".product.product_detail";
 	}
+	
 	
 	
 	
