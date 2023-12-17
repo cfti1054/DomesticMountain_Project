@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/service/*")
-public class ServiceController {
+@RequestMapping("/services/*")
+public class QnaController {
 	
-	@GetMapping("service")
-	public String serviceForm() {
+	@GetMapping("qna")
+	public String qnaForm() {
 		
-		return ".service.service";
+		return ".services.qna";
 	}
 }
