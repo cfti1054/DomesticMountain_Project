@@ -121,7 +121,7 @@
 .search-body input {
 	font-size: 16px;
 	height: 100%;
-	width: 150px;
+	width: 240px;
 	padding: 10px;
 	border: Opx;
 	outline: none;
@@ -186,14 +186,14 @@
 					</ul>
 
 					<h3>
-						<a>Walk & Climbing</a>
+						<a>Walk &amp; Climbing</a>
 					</h3>
 					<ul>
 						<li class=""><a href="#">&gt; 회원들의 모습</a></li>
 					</ul>
 
 					<h3>
-						<a>Look & Style</a>
+						<a>Look &amp; Style</a>
 					</h3>
 					<ul>
 						<li class=""><a href="#">&gt; 스트릿 스냅 (OOTD)</a></li>
