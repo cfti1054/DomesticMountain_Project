@@ -171,6 +171,14 @@
 .faq.active .faq-toggle {
 	background-color: #9fa4a8;
 }
+
+.eq1 {
+	  font-weight: 900;
+}
+.aside-box .aside ul .eq1 a {
+	color: hsl(212, 75%, 56%);
+
+}
 </style>
 
 <section class="features-1">
@@ -183,22 +191,18 @@
 						<a>카테고리</a>
 					</h3>
 					<ul>
-						<li class=""><a
-							href="${pageContext.request.contextPath}/services/qna">&gt;
-								Qna</a></li>
-						<li class=""><a
-							href="${pageContext.request.contextPath}/services/faq">&gt;
-								Faq</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/services/qna">&gt; Qna</a></li>
+						<li class="eq1"><a href="${pageContext.request.contextPath}/services/faq">&gt; Faq</a></li>
 					</ul>
 
 					<h3>
 						<a>서비스 이용 안내</a>
 					</h3>
 					<ul>
-						<li class=""><a href="#">&gt; 개인정보처리방침</a></li>
-						<li class=""><a href="#">&gt; 이용약관</a></li>
-						<li class=""><a href="#">&gt; 댓글 운영정책</a></li>
-						<li class=""><a href="#">&gt; 서비스 전화번호안내</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/services/privacy">&gt; 개인정보처리방침</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/services/policy">&gt; 이용약관</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/services/comment">&gt; 댓글 운영정책</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/services/serviceTel">&gt; 서비스 전화번호안내</a></li>
 					</ul>
 				</div>
 			</div>

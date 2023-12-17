@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FaqController {
 	
 	@GetMapping("faq")
-	public String qnaForm() {
+	public String faqForm() {
 		
 		return ".services.faq";
 	}
