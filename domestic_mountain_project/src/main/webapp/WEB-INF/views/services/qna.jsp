@@ -75,10 +75,20 @@
 	float: right;
 }
 
-.amain-main>span {
+.contentWrap .amain h1 {
+	display: flex;
+	justify-content: space-between;
+}
+
+.amain-main a>span {
 	font-size: 18px;
 	color: gray;
 	margin: 10px 0 0 20px;
+}
+.amain-main span {
+	font-size: 14px;
+	color: gray;
+	margin: 15px 0 0 20px;
 }
 
 .eq1 {
@@ -121,7 +131,8 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					QnA<span>| Question and Answer</span>
+					<a>QnA<span>| Question and Answer</span></a>
+					<span><a href="${pageContext.request.contextPath}/">home</a> &gt; services &gt; qna</span>
 				</h1>
 				<div>
 					여기에 디자인 작성해야함

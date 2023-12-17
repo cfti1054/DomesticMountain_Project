@@ -75,10 +75,20 @@
 	float: right;
 }
 
-.amain-main>span {
+.contentWrap .amain h1 {
+	display: flex;
+	justify-content: space-between;
+}
+
+.amain-main a>span {
 	font-size: 18px;
 	color: gray;
 	margin: 10px 0 0 20px;
+}
+.amain-main span {
+	font-size: 14px;
+	color: gray;
+	margin: 15px 0 0 20px;
 }
 
 .eq1 {
@@ -146,7 +156,8 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					이용약관<span>| Terms of Use</span>
+					<a>이용약관<span>| Terms of Use</span></a>
+					<span><a href="${pageContext.request.contextPath}/">home</a> &gt; services &gt; policy</span>
 				</h1>
 
 				<h3 class="ft_org17">제1장 총 칙</h3>
