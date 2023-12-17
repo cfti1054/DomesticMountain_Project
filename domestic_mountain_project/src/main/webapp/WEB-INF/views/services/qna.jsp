@@ -25,21 +25,26 @@
 	box-shadow: 3px 3px 3px 3px gray;
 }
 
+.aside-box {
+	width: 270px;
+	float: left;
+	margin-right: 100px;
+}
+
 #scroll {
 	width: 270px;
 	/*position: relative;*/
 	position: absolute;
-	float: left;
 	background-color: #f5f6ff;
 	border-radius: 3.8em;
 	top: 120px;
 }
 
-.aside .aside-wi {
+.aside .aside-wi, .amain {
 	margin: 30px;
 }
 
-.aside .submenu-main {
+.aside .submenu-main, .amain-main {
 	padding: 0 0 10px 10px;
 	border-bottom: 2px solid #3a3a3a;
 	font-size: xx-large;
@@ -56,6 +61,7 @@
 .aside ul li {
 	padding-bottom: 5px;
 }
+
 .aside ul li a {
 	color: black;
 }
@@ -64,35 +70,55 @@
 	color: gray;
 }
 
+.contentWrap {
+	width: 1100px;
+	float: right;
+}
 
+.amain-main>span {
+	font-size: 18px;
+	color: gray;
+	margin: 10px 0 0 20px;
+}
 </style>
 
 <section class="features-1">
 	<div class="body-container">
-		<div class="aside" id="scroll">
-			<div class="aside-wi">
-				<h1 class="submenu-main">Services</h1>
-				<h3>
-					<a>카테고리</a>
-				</h3>
-				<ul>
-					<li class="on1"><a href="#">&gt; QnA</a></li>
-				</ul>
+		<div class="aside-box">
+			<div class="aside" id="scroll">
+				<div class="aside-wi">
+					<h1 class="submenu-main">Services</h1>
+					<h3>
+						<a>카테고리</a>
+					</h3>
+					<ul>
+						<li class=""><a href="${pageContext.request.contextPath}/services/qna">&gt; Qna</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/services/faq">&gt; Faq</a></li>
+					</ul>
 
-				<h3>
-					<a>서비스 이용 안내</a>
-				</h3>
-				<ul>
-					<li class="on1"><a href="#">&gt; 개인정보처리방침</a></li>
-					<li class="on1"><a href="#">&gt; 이용약관</a></li>
-					<li class="on1"><a href="#">&gt; 댓글 운영정책</a></li>
-					<li class="on1"><a href="#">&gt; 서비스 전화번호안내</a></li>
-				</ul>
-
+					<h3>
+						<a>서비스 이용 안내</a>
+					</h3>
+					<ul>
+						<li class=""><a href="#">&gt; 개인정보처리방침</a></li>
+						<li class=""><a href="#">&gt; 이용약관</a></li>
+						<li class=""><a href="#">&gt; 댓글 운영정책</a></li>
+						<li class=""><a href="#">&gt; 서비스 전화번호안내</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 
-		<div class="contentWrap"></div>
+		<div class="contentWrap">
+			<div class="amain">
+				<h1 class="amain-main">
+					QnA<span>| Question and Answer</span>
+				</h1>
+				<div>
+					여기에 디자인 작성해야함
+				</div>
+			</div>
+		</div>
 
 	</div>
 </section>
