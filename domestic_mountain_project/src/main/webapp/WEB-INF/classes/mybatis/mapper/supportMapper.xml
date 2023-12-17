@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.SupportMapper">
+
+	<select id="faqCategorySeq" resultType="Long">
+		SELECT faq_category_seq.NEXTVAL FROM dual
+	</select>
+	
+	<select id="faqCategoryOrderSeq" resultType="Long">
+		SELECT faq_category_order_seq.NEXTVAL FROM dual
+	</select>
+
+	
+	
+	<!-- 카테고리 -->	
+	<insert id="insertFaqCategory" parameterType="com.fa.plus.admin.domain.Support">
+		INSERT INTO faq_category(faq_category_num, category_name, 
+			category_reg_id, category_reg_date, category_order, category_visible)
+			VALUES(#{faq_category_num}, #{category_name}, 11, SYSDATE, #{faq_category_order}, 1)
+	</insert>
+	
+	<update id="updateFaqCategory" parameterType="com.fa.plus.admin.domain.Support">
+	</update>
+	
+	
+	
+	
+
+		<!-- 검색 -->
+	<select id="findByNum" parameterType="Long">
+	</select>
+	
+	<select id="findByCategory" parameterType="Long">
+	</select>
+	
+	<select id="listFaqCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.Support">
+		SELECT faq_category_num, category_name, u.user_id, category_reg_date, category_order, category_visible
+		FROM faq_category f
+		JOIN user1 u ON f.category_reg_id = u.userIdx
+	</select>
+	
+	<select id="categoryCount" parameterType="map" resultType="Integer">
+	</select>
+	
+	<select id="boardCount" parameterType="map" resultType="Integer">
+	</select>
+	
+	
+	
+	<!-- 게시판 -->
+
+	<select id="faqBoardSeq" resultType="Long">
+		SELECT faq_board_seq.NEXTVAL FROM dual
+	</select>
+
+	<insert id="insertFaqBoard" parameterType="com.fa.plus.admin.domain.Support">
+	</insert>
+	
+	<update id="updateFaqBoard" parameterType="com.fa.plus.admin.domain.Support">
+	</update>
+	
+	<select id="listFaqBoard" resultType="com.fa.plus.admin.domain.Support" parameterType="Long">
+	</select>
+
+	
+
+	
+	
+	
+	
+</mapper>
