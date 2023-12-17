@@ -11,7 +11,7 @@
 
 /*=============== body (area) ===============*/
 .features-1 {
-	height: auto; /* 삭제 해야함 */
+	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
 }
 
 .body-container {
