@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/services/*")
 public class QnaController {
 	
-	@GetMapping("qna")
+	@GetMapping("qna_list")
 	public String qnaForm() {
 		
-		return ".services.qna";
+		return ".services.qna_list";
 	}
 }
