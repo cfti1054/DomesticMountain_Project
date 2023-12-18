@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/community/*")
+@RequestMapping("/recommend/*")
 public class RecommendController {
 	
-	@GetMapping("recommend")
+	@GetMapping("list")
 	public String recommendForm() {
 		
-		return ".community.recommend";
+		return ".recommend.list";
 	}
 }
 
