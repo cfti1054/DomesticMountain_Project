@@ -13,6 +13,7 @@
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/icon/bootstrap-icons.css" type="text/css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css">
@@ -31,6 +32,8 @@
    <!-- silder -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 	
 </head>
 
@@ -51,8 +54,6 @@
 <div id="loadingLayout" style="display:none; position: absolute; left: 0; top:0; width: 100%; height: 100%; z-index: 9000; background: #eee;">
 	<div class="loader"></div>
 </div>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -92,7 +93,7 @@
 
     <div class="login__group">
         <div>
-            <label for="user_id" class="login__label">아이디용</label> 
+            <label for="user_id" class="login__label">ID</label> 
             <input type="text" placeholder="Write your ID" id="user_id" name="user_id" class="login__input">
         </div>
 

@@ -2,17 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!--=============== REMIXICONS ===============-->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
-
-<!-- silder -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 
 <!--==================== SEARCH ====================-->
 <div class="search" id="search">
