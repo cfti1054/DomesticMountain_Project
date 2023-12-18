@@ -214,10 +214,10 @@ function searchList() {
 						<a>Community</a>
 					</h3>
 					<ul>
-						<li class="eq1"><a
+						<li class=""><a
 							href="${pageContext.request.contextPath}/recommend/list">&gt;
 								추천 코스</a></li>
-						<li class=""><a
+						<li class="eq1"><a
 							href="${pageContext.request.contextPath}/made/list">&gt;
 								유저가 만든 코스</a></li>
 						<li class=""><a href="#">&nbsp;</a></li>
@@ -254,9 +254,9 @@ function searchList() {
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>추천 코스<span>| Recommended course</span></a> <span><a
+					<a>유저가 만든 코스<span>| Course created by the User</span></a> <span><a
 						href="${pageContext.request.contextPath}/">home</a> &gt; community
-						&gt; 추천코스</span>
+						&gt; 유저가 만든 코스</span>
 				</h1>
 			</div>
 

@@ -19,7 +19,7 @@
 }
 
 .aside {
-	box-shadow: 3px 3px 3px 3px gray;
+	box-shadow: 2px 2px 2px 2px #e2e2e2;
 }
 
 .aside-box {
@@ -33,7 +33,7 @@
 	/*position: relative;*/
 	position: absolute;
 	background-color: #f5f6ff;
-	border-radius: 3.8em;
+	border-radius: 0.8em;
 	top: 120px;
 }
 
