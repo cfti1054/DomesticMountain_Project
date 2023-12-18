@@ -3,65 +3,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.SupportMapper">
 
-	<select id="faqCategorySeq" resultType="Long">
+	<select id="faq_category_seq" resultType="Long">
 		SELECT faq_category_seq.NEXTVAL FROM dual
 	</select>
 	
-	<select id="faqCategoryOrderSeq" resultType="Long">
+	<select id="faq_category_order_seq" resultType="Long">
 		SELECT faq_category_order_seq.NEXTVAL FROM dual
 	</select>
 
 	
 	
 	<!-- 카테고리 -->	
-	<insert id="insertFaqCategory" parameterType="com.fa.plus.admin.domain.Support">
+	<insert id="insert_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 		INSERT INTO faq_category(faq_category_num, category_name, 
 			category_reg_id, category_reg_date, category_order, category_visible)
 			VALUES(#{faq_category_num}, #{category_name}, 11, SYSDATE, #{faq_category_order}, 1)
 	</insert>
 	
-	<update id="updateFaqCategory" parameterType="com.fa.plus.admin.domain.Support">
+	<update id="update_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 	</update>
-	
-	
-	
-	
 
-		<!-- 검색 -->
-	<select id="findByNum" parameterType="Long">
-	</select>
-	
-	<select id="findByCategory" parameterType="Long">
-	</select>
-	
-	<select id="listFaqCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.Support">
+	<select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
 		SELECT faq_category_num, category_name, u.user_id, category_reg_date, category_order, category_visible
 		FROM faq_category f
 		JOIN user1 u ON f.category_reg_id = u.userIdx
 	</select>
 	
-	<select id="categoryCount" parameterType="map" resultType="Integer">
-	</select>
-	
-	<select id="boardCount" parameterType="map" resultType="Integer">
-	</select>
+	<delete id="delete_faq_category" parameterType="Long">
+		UPDATE faq_category_num 
+		SET category_visible = 0
+		WHERE faq_category_num = #{faq_category_num}
+	</delete>
 	
 	
 	
 	<!-- 게시판 -->
 
-	<select id="faqBoardSeq" resultType="Long">
+	<select id="faq_board_seq" resultType="Long">
 		SELECT faq_board_seq.NEXTVAL FROM dual
 	</select>
 
-	<insert id="insertFaqBoard" parameterType="com.fa.plus.admin.domain.Support">
+	<insert id="insert_faq_board" parameterType="com.fa.plus.admin.domain.Support">
+		INSERT INTO faq_board(faq_num, faq_category_num, faq_question, faq_content, faq_reg_id, faq_reg_date, faq_visible)
+			VALUES(#{faq_num}, #{faq_category_num}, #{faq_question), #{faq_content}, 11, SYSDATE, 1)
 	</insert>
 	
-	<update id="updateFaqBoard" parameterType="com.fa.plus.admin.domain.Support">
+	<update id="update_faq_board" parameterType="com.fa.plus.admin.domain.Support">
 	</update>
 	
-	<select id="listFaqBoard" resultType="com.fa.plus.admin.domain.Support" parameterType="Long">
+	<select id="list_faq_board" resultType="com.fa.plus.admin.domain.Support">
+		SELECT faq_num, faq_category_num, faq_question, faq_content, u.userId, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
+		FROM faq_board f
+		JOIN user1 u ON f.faq_reg_id = u.userIdx
 	</select>
+	<delete id="delete_faq_board" parameterType="Long">
+	
+	</delete>
 
 	
 

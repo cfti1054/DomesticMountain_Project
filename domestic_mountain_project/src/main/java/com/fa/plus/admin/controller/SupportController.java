@@ -42,7 +42,7 @@ public class SupportController {
 	
 	@RequestMapping("faq")
 	public String listFaq(HttpServletRequest req, Model model) throws Exception {
-		List<Support> list = service.listFaqCategory();
+		List<Support> list = service.list_faq_category();
 		
 		model.addAttribute("list", list);
 		

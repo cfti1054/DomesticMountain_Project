@@ -11,25 +11,21 @@ import com.fa.plus.admin.domain.Support;
 @Mapper
 public interface SupportMapper {
 	
-	public long faqCategorySeq();
-	public long faqCategoryOrderSeq();
+	public long faq_category_seq();
+	public long faq_category_order_seq();
 	
-	public void insertFaqCategory(Support dto) throws SQLException;
-	public void updateFaqCategory(Support dto) throws SQLException;
+	public void insert_faq_category(Support dto) throws SQLException;
+	public void update_faq_category(Support dto) throws SQLException;
+	public List<Support> list_faq_category() throws SQLException;
+	public void delete_faq_category(long faq_category_num) throws SQLException;
 	
-
-	public Support findByNum(long faqBoardNum);
-	public Support findByCategory(long categoryNum);
-	public List<Support> listFaqCategory() throws SQLException;
-	public int boardCount(Map<String, Object> map);
-	public int categoryCount(Map<String, Object> map);
 	
-	public long faqBoardSeq();
+	public long faq_board_seq();
 	
-	public void insertFaqBoard(Support dto) throws SQLException;
-	public void updateFaqBoard(Support dto) throws SQLException;
-	
-	public List<Support> listFaqBoard(long faqBoardNum) throws SQLException;
+	public void insert_faq_board(Support dto) throws SQLException;
+	public void update_faq_board(Support dto) throws SQLException;
+	public List<Support> list_faq_board() throws SQLException;
+	public void delete_faq_board(long faq_board_num) throws SQLException;
 	
 	
 	
