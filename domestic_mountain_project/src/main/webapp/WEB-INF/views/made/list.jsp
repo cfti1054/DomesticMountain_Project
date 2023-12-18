@@ -237,14 +237,14 @@ function searchList() {
 						<a>Walk &amp; Climbing</a>
 					</h3>
 					<ul>
-						<li class=""><a href="#">&gt; 회원들의 모습</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/appearance/list">&gt; 회원들의 모습</a></li>
 					</ul>
 
 					<h3>
 						<a>Look &amp; Style</a>
 					</h3>
 					<ul>
-						<li class=""><a href="#">&gt; 스트릿 스냅 (OOTD)</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/ootd/list">&gt; 스트릿 스냅 (OOTD)</a></li>
 					</ul>
 
 				</div>
