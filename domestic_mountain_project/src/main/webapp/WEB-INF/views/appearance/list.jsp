@@ -249,6 +249,10 @@
 .article-album-sub .num {
     padding-left: 5px;
 }
+.m-tcol-p .num {
+    color: #ff2f3b;
+}
+
 </style>
 
 
@@ -351,7 +355,9 @@
 												class="ellipsis">데일리룩</span>
 										</span>
 										</a>
-
+										<a href="#" class="m-tcol-p">
+											<span class="num">[7]</span>
+										</a>
 									</dt>
 
 									<dd class="p-nick">
