@@ -4,7 +4,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
     * {
@@ -139,47 +139,33 @@
     <div class="jemok"> 등산화 </div>
     <div class="img-container">
         <div class="box">
-            <div class="img-box">
-                <div class="box1">
-                    <img class="img" src="${pageContext.request.contextPath}/resources/images/area_4_2.jpg">
-                    <div class="product-name">등산화</div>
-                    <div class="price">200,000</div>
-                    
-                    <div class="review">
-                    	<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">찜 177 리뷰 87
-                    </div>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">등산용 양말</div>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">아이젠</div>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">등산화</div>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">등산화</div>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">등산화</div>
-                </div>
-            </div>
+        	<c:forEach var="dto" items="${list}" varStatus="status">
+	            <div class="img-box" data-productNum="${dto.product_num}">
+	                <div class="box1">
+	                    <c:choose>
+						   <c:when test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+						       <img class="img" src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+						   </c:when>
+						   <c:when test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+						       <img class="img" src="${dto.product_summary}">
+						   </c:when>
+						   
+						   <c:otherwise>
+						       
+						   </c:otherwise>
+						</c:choose>
+	                    <div class="product-name">${dto.product_name}</div>
+	                    <c:set var="formattedPrice" value="${dto.product_price}" />
+						<fmt:formatNumber value="${formattedPrice}" pattern="#,###" var="formattedPriceWithComma" />
+						
+						<div class="price">${formattedPriceWithComma}</div>
+	                    
+	                    <div class="review">
+	                    	<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">5.0 리뷰 87
+	                    </div>
+	                </div>
+	            </div>
+	        </c:forEach>
         </div>
     </div>
 </section>

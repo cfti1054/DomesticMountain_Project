@@ -151,7 +151,7 @@
         <div class="box">
             <div class="img-box">
                 <div class="box1">
-                	<a href="${pageContext.request.contextPath}/product/product_detail">
+                	<a href="${pageContext.request.contextPath}/product/product_detail?category_num=21">
 	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
 	                    <span class="product-name">등산화</span>
                     </a>
@@ -159,14 +159,18 @@
             </div>
             <div class="img-box">
                 <div class="box2">
-                    <img src="${pageContext.request.contextPath}/resources/images/hiking.png">
-                    <div class="product-name">등산용 양말</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=22">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">등산용 양말</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <img src="${pageContext.request.contextPath}/resources/images/bg-image.png">
-                    <div class="product-name">아이젠</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=23">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">아이젠</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -177,26 +181,42 @@
         <div class="box">
             <div class="img-box">
                 <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">아우터</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=11">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">자켓 / 점퍼 / 코트</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box2">
-                    <div class="img"></div>
-                    <div class="product-name">겉옷과 내피</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=12">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">조끼</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">모자</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=13">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">티셔츠</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">장갑</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=14">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">모자</span>
+                    </a>
+                </div>
+            </div>
+            <div class="img-box">
+                <div class="box1">
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=15">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">장갑</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -207,26 +227,42 @@
         <div class="box">
             <div class="img-box">
                 <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">기능성 등산복</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=16">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">자켓 / 점퍼 / 코트</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box2">
-                    <div class="img"></div>
-                    <div class="product-name">겉옷과 내피</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=17">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">조끼</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">모자</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=18">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">티셔츠</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">장갑</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=19">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">모자</span>
+                    </a>
+                </div>
+            </div>
+            <div class="img-box">
+                <div class="box1">
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=20">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">장갑</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -237,20 +273,26 @@
         <div class="box">
             <div class="img-box">
                 <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">등산용 가방</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=24">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">등산용 가방</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box2">
-                    <div class="img"></div>
-                    <div class="product-name">방수 커버</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=25">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">방수커버</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">가방 악세사리</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=26">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">장갑</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -261,45 +303,50 @@
         <div class="box">
             <div class="img-box">
                 <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">등산 스틱</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=27">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">등산스틱</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box2">
-                    <div class="img"></div>
-                    <div class="product-name">손전등</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=28">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">조명기구</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">무릎 보호대</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=29">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">무릎 보호대</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">선글라스</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=30">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">선글라스</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
                 <div class="box1">
-                    <div class="img"></div>
-                    <div class="product-name">의약품</div>
+                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=31">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">의약품</span>
+                    </a>
                 </div>
             </div>
             <div class="img-box">
-                <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">임시대기</div>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <div class="img"></div>
-                    <div class="product-name">임시대기</div>
-                </div>
+            	<div class="box2">
+                	<a href="${pageContext.request.contextPath}/product/product_detail?category_num=32">
+	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
+	                    <span class="product-name">방한용품</span>
+                    </a>
             </div>
         </div>
     </div>
