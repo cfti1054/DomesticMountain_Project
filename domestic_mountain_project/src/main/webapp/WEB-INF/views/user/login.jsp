@@ -13,15 +13,15 @@ function sendLogin() {
     const f = document.loginForm;
 	let str;
 	
-	str = f.userId.value.trim();
+	str = f.user_id.value.trim();
     if(!str) {
-        f.userId.focus();
+        f.user_id.focus();
         return;
     }
     
-    str = f.userPwd.value.trim();
+    str = f.user_pwd.value.trim();
     if(!str) {
-        f.userPwd.focus();
+        f.user_pwd.focus();
         return;
     }
     
@@ -40,11 +40,11 @@ function sendLogin() {
                         <h3 class="text-center"><i class="bi bi-lock"></i> 회원 로그인</h3>
                         <div class="col-12">
                             <label class="mb-1">아이디</label>
-                            <input type="text" name="userId" class="form-control" placeholder="아이디">
+                            <input type="text" name="user_id" class="form-control" placeholder="아이디">
                         </div>
                         <div class="col-12">
                             <label class="mb-1">패스워드</label>
-                            <input type="password" name="userPwd" class="form-control" autocomplete="off" 
+                            <input type="password" name="user_pwd" class="form-control" autocomplete="off" 
                             	placeholder="패스워드">
                         </div>
                         <div class="col-12">
@@ -60,7 +60,7 @@ function sendLogin() {
                     <hr class="mt-4">
                     <div class="col-12">
                         <p class="text-center mb-0">
-                        	<a href="#" class="text-decoration-none me-2">아이디 찾기</a>
+                        	<a href="${pageContext.request.contextPath}/user/idFind" class="text-decoration-none me-2">아이디 찾기</a>
                         	<a href="${pageContext.request.contextPath}/user/pwdFind" class="text-decoration-none me-2">패스워드 찾기</a>
                         	<a href="${pageContext.request.contextPath}/user/user" class="text-decoration-none">회원가입</a>
                         </p>

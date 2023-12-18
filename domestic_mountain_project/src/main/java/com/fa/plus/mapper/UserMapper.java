@@ -9,13 +9,17 @@ import com.fa.plus.domain.User;
 
 @Mapper
 public interface UserMapper {
-	public User loginUser(String userId);
+	public User loginUser(String user_id);
 	
 	public long UserSeq();
-	public void insertUser(long UserIdx) throws SQLException; // userall
-	public void insertUserAll(User dto) throws SQLException; // 회원가입
 	
-	// public User findById(String userId); // 아이디 찾기
+	public void insertUserAll(long useridx) throws SQLException; //
+	public void insertUser1(User dto) throws SQLException; //
+	public void insertUser2(User dto) throws SQLException; //
+	public void insertUser12(User dto) throws SQLException; //
+	
+	
+	public User findById(String userId); // 아이디 찾기
 	
 	
 	// 비밀번호와 email이 UNIQUE가 아니므로 동일한 이메일이 존재할 수 있어서 List로 반환 받아야 함

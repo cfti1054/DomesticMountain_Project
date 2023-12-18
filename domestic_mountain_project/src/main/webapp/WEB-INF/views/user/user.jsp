@@ -9,42 +9,42 @@
 </style>
 
 <script type="text/javascript">
-function memberOk() {
-	const f = document.memberForm;
+function userOk() {
+	const f = document.userForm;
 	let str;
 
-	str = f.memberId.value;
+	str = f.user_id.value;
 	if( !/^[a-z][a-z0-9_]{4,9}$/i.test(str) ) { 
 		alert("아이디를 다시 입력 하세요. ");
-		f.memberId.focus();
+		f.user_id.focus();
 		return;
 	}
 
 	let mode = "${mode}";
-	if(mode === "member" && f.memberIdValid.value === "false") {
+	if(mode === "user" && f.user_idValid.value === "false") {
 		str = "아이디 중복 검사가 실행되지 않았습니다.";
-		$("#memberId").parent().find(".help-block").html(str);
-		f.memberId.focus();
+		$("#user_id").parent().find(".help-block").html(str);
+		f.user_id.focus();
 		return;
 	}
 	
-	str = f.memberPwd.value;
+	str = f.user_pwd.value;
 	if( !/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str) ) { 
 		alert("패스워드를 다시 입력 하세요. ");
-		f.memberPwd.focus();
+		f.user_pwd.focus();
 		return;
 	}
 
-	if( str !== f.memberPwd2.value ) {
+	if( str !== f.user_pwd2.value ) {
         alert("패스워드가 일치하지 않습니다. ");
-        f.memberPwd.focus();
+        f.user_pwd.focus();
         return;
 	}
 	
-    str = f.memberName.value;
+    str = f.user_name.value;
     if( !/^[가-힣]{2,5}$/.test(str) ) {
         alert("이름을 다시 입력하세요. ");
-        f.memberName.focus();
+        f.user_name.focus();
         return;
     }
 
@@ -90,12 +90,12 @@ function memberOk() {
         return;
     }
 
-   	f.action = "${pageContext.request.contextPath}/member/${mode}";
+   	f.action = "${pageContext.request.contextPath}/user/${mode}";
     f.submit();
 }
 
 function changeEmail() {
-    const f = document.memberForm;
+    const f = document.userForm;
 	    
     let str = f.selectEmail.value;
     if(str !== "direct") {
@@ -110,30 +110,30 @@ function changeEmail() {
     }
 }
 
-function memberIdCheck() {
+function user_idCheck() {
 	// 아이디 중복 검사
-	let memberId = $("#memberId").val();
+	let userId = $("#user_id").val();
 	
-	if(! /^[a-z][a-z0-9_]{4,9}$/i.test(memberId)) {
+	if(! /^[a-z][a-z0-9_]{4,9}$/i.test(user_id)) {
 		let str = "아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.";
-		$("#memberId").focus();
-		$("#memberId").parent().find(".help-block").html(str);
+		$("#user_id").focus();
+		$("#user_id").parent().find(".help-block").html(str);
 		return;
 	}
 	
-	let url = "${pageContext.request.contextPath}/member/memberIdCheck";
+	let url = "${pageContext.request.contextPath}/user/user_idCheck";
 	// AJAX - POST : JSON 응답 받기
-	$.post(url, {memberId:memberId}, function(data){
+	$.post(url, {user_id:user_id}, function(data){
 		let p = data.passed;
 		if(p === "true") {
-			let str = '<span style="color:blue; font-weight:bold;">' + memberId + '</span> 아이디는 사용 가능합니다.';
-			$('.memberId-box').find('.help-block').html(str);
-			$('#memberIdValid').val('true');
+			let str = '<span style="color:blue; font-weight:bold;">' + user_id + '</span> 아이디는 사용 가능합니다.';
+			$('.user_id-box').find('.help-block').html(str);
+			$('#user_idValid').val('true');
 		} else {
-			let str = '<span style="color:red; font-weight:bold;">' + memberId + '</span> 아이디는 사용할 수 없습니다.';
-			$('.memberId-box').find('.help-block').html(str);
-			$('#memberIdValid').val('false');
-			$("#memberId").focus();
+			let str = '<span style="color:red; font-weight:bold;">' + user_id + '</span> 아이디는 사용할 수 없습니다.';
+			$('.user_id-box').find('.help-block').html(str);
+			$('#user_idValid').val('false');
+			$("#user_id").focus();
 		}
 	}, "json");
 	
@@ -143,7 +143,7 @@ function memberIdCheck() {
 <div class="container">
 	<div class="body-container">	
 		<div class="body-title">
-			<h3><i class="bi bi-person-square"></i> ${mode=="member"?"회원가입":"정보수정"} </h3>
+			<h3><i class="bi bi-person-square"></i> ${mode=="user"?"회원가입":"정보수정"} </h3>
 		</div>
 		
 	    <div class="alert alert-info" role="alert">
@@ -152,48 +152,48 @@ function memberIdCheck() {
 		    		
 		<div class="body-main">
 
-			<form name="memberForm" method="post">
+			<form name="userForm" method="post">
 				<div class="row mb-3">
-					<label class="col-sm-2 col-form-label" for="memberId">아이디</label>
-					<div class="col-sm-10 memberId-box">
+					<label class="col-sm-2 col-form-label" for="user_id">아이디</label>
+					<div class="col-sm-10 user_id-box">
 						<div class="row">
 							<div class="col-5 pe-1">
-								<input type="text" name="memberId" id="memberId" class="form-control" value="${dto.memberId}" 
+								<input type="text" name="user_id" id="user_id" class="form-control" value="${dto.user_id}" 
 										${mode=="update" ? "readonly ":""}
 										placeholder="아이디">
 							</div>
 							<div class="col-3 ps-1">
-								<c:if test="${mode=='member'}">
-									<button type="button" class="btn btn-light" onclick="memberIdCheck();">아이디중복검사</button>
+								<c:if test="${mode=='user'}">
+									<button type="button" class="btn btn-light" onclick="user_idCheck();">아이디중복검사</button>
 								</c:if>
 							</div>
 						</div>
-						<c:if test="${mode=='member'}">
+						<c:if test="${mode=='user'}">
 							<small class="form-control-plaintext help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</small>
 						</c:if>
 					</div>
 				</div>
 			 
 				<div class="row mb-3">
-					<label class="col-sm-2 col-form-label" for="memberPwd">패스워드</label>
+					<label class="col-sm-2 col-form-label" for="user_pwd">패스워드</label>
 					<div class="col-sm-10">
-			            <input type="password" name="memberPwd" id="memberPwd" class="form-control" autocomplete="off" placeholder="패스워드">
+			            <input type="password" name="user_pwd" id="user_pwd" class="form-control" autocomplete="off" placeholder="패스워드">
 			            <small class="form-control-plaintext">패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</small>
 			        </div>
 			    </div>
 			    
 			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="memberPwd2">패스워드 확인</label>
+			        <label class="col-sm-2 col-form-label" for="user_pwd2">패스워드 확인</label>
 			        <div class="col-sm-10">
-			            <input type="password" name="memberPwd2" id="memberPwd2" class="form-control" autocomplete="off" placeholder="패스워드 확인">
+			            <input type="password" name="user_pwd" id="user_pwd" class="form-control" autocomplete="off" placeholder="패스워드 확인">
 			            <small class="form-control-plaintext">패스워드를 한번 더 입력해주세요.</small>
 			        </div>
 			    </div>
 			 
 			    <div class="row mb-3">
-			        <label class="col-sm-2 col-form-label" for="memberName">이름</label>
+			        <label class="col-sm-2 col-form-label" for="user_name">이름</label>
 			        <div class="col-sm-10">
-			            <input type="text" name="memberName" id="memberName" class="form-control" value="${dto.memberName}" 
+			            <input type="text" name=user_name id="user_name" class="form-control" value="${dto.user_name}" 
 			            		${mode=="update" ? "readonly ":""}
 			            		placeholder="이름">
 			        </div>
@@ -289,9 +289,9 @@ function memberIdCheck() {
 			     
 			    <div class="row mb-3">
 			        <div class="text-center">
-			            <button type="button" name="sendButton" class="btn btn-primary" onclick="memberOk();"> ${mode=="member"?"회원가입":"정보수정"} <i class="bi bi-check2"></i></button>
-			            <button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/';"> ${mode=="member"?"가입취소":"수정취소"} <i class="bi bi-x"></i></button>
-						<input type="hidden" name="memberIdValid" id="memberIdValid" value="false">
+			            <button type="button" name="sendButton" class="btn btn-primary" onclick="userOk();"> ${mode=="user"?"회원가입":"정보수정"} <i class="bi bi-check2"></i></button>
+			            <button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/';"> ${mode=="user"?"가입취소":"수정취소"} <i class="bi bi-x"></i></button>
+						<input type="hidden" name="user_idValid" id="user_idValid" value="false">
 			        </div>
 			    </div>
 			
@@ -317,7 +317,7 @@ function memberIdCheck() {
                 var extraAddr = ''; // 조합형 주소 변수
 
                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.memberSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     fullAddr = data.roadAddress;
 
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
@@ -325,7 +325,7 @@ function memberIdCheck() {
                 }
 
                 // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                if(data.memberSelectedType === 'R'){
+                if(data.userSelectedType === 'R'){
                     //법정동명이 있을 경우 추가한다.
                     if(data.bname !== ''){
                         extraAddr += data.bname;

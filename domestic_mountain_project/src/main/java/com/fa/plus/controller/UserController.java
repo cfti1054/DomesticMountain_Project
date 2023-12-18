@@ -23,20 +23,22 @@ public class UserController {
 	
 	@GetMapping("login")
 	public String loginForm() {
-		return ".user.login";
+		return ".user.login"; 
 	}
 	
 	@PostMapping("login")
 	public String loginSubmit(
-			@RequestParam String userId,
-			@RequestParam String userPwd,
+			@RequestParam String user_id,
+			@RequestParam String user_pwd,
 			HttpSession session,
 			Model model
 			) {
-		User dto = service.loginUser(userId);
-		if (dto == null || !userPwd.equals(dto.getUser_pwd())) {
+		System.out.println("호출");
+			
+		User dto = service.loginUser(user_id);
+		if (dto == null || !user_pwd.equals(dto.getUser_pwd())) {
 			model.addAttribute("message", "아이디 또는 패스워드가 일치하지 않습니다.");
-			return ".member.login";
+			return ".user.login"; 
 		}
 
 		// 세션에 로그인 정보 저장
@@ -48,28 +50,77 @@ public class UserController {
 
 		session.setMaxInactiveInterval(30 * 60); // 세션유지시간 30분, 기본:30분
 
-		session.setAttribute("User", info);
+		session.setAttribute("loginUser", info);
 
 		// 로그인 이전 URI로 이동
 		String uri = (String) session.getAttribute("preLoginURI");
-		session.removeAttribute("preLoginURI");
 		if (uri == null) {
 			uri = "redirect:/";
 		} else {
 			uri = "redirect:" + uri;
 		}
-
+		System.out.println("Session Info: " + info);
+		
 		return uri;
 	}
 	
 	@GetMapping(value = "logout")
 	public String logout(HttpSession session) {
 		// 세션에 저장된 정보 지우기
-		session.removeAttribute("User");
+		session.removeAttribute("loginUser");
 
 		// 세션에 저장된 모든 정보 지우고, 세션초기화
 		session.invalidate();
 
 		return "redirect:/";
 	}
+	
+	@GetMapping("noAuthorized")
+	public String noAuthorized() {
+		// 권한이 없는 유저가 접근 한 경우
+		return ".member.noAuthorized";
+	}
+	
+	// 회원가입 폼
+		@GetMapping("user")
+		public String memberForm(Model model) {
+			model.addAttribute("mode", "member");
+			return ".member.member";
+		}
+		
+	// 회원 가입 완료 
+		@PostMapping("user")
+		public String userSubmit() {
+			
+			return "redirect://";
+		}
+		@PostMapping("update")
+		public String complete() {
+			
+			return "";
+		}
+		
+		@GetMapping("pwdFind")
+		public String pwdFindForm() throws Exception {
+			
+			return "redirect:/";
+		}
+		
+		@PostMapping("pwdFind")
+		public String pwdFindSubmit() throws Exception {
+			
+			return "redirect:";
+		}
+		
+		@GetMapping("idFind")
+		public String idFindForm() throws Exception {
+			
+			return "";
+		}
+		
+		@PostMapping("idFind")
+		public String idFindSubmit() throws Exception {
+			
+			return "";
+		}
 }

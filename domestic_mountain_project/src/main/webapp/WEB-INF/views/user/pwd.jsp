@@ -12,14 +12,14 @@
 function sendOk() {
 	const f = document.pwdForm;
 
-	let str = f.userPwd.value.trim();
+	let str = f.user_pwd.value.trim();
 	if(!str) {
 		alert("패스워드를 입력하세요. ");
-		f.userPwd.focus();
+		f.user_pwd.focus();
 		return;
 	}
 
-	f.action = "${pageContext.request.contextPath}/member/pwd";
+	f.action = "${pageContext.request.contextPath}/user/pwd";
 	f.submit();
 }
 </script>
@@ -39,11 +39,11 @@ function sendOk() {
                         
                         <div class="d-grid">
                             <input type="text" name="userId" class="form-control form-control-lg" placeholder="아이디"
-                            		value="${sessionScope.member.userId}" 
+                            		value="${sessionScope.user.user_id}" 
                             		readonly>
                         </div>
                         <div class="d-grid">
-                            <input type="password" name="userPwd" class="form-control form-control-lg" autocomplete="off" placeholder="패스워드">
+                            <input type="password" name="user_pwd" class="form-control form-control-lg" autocomplete="off" placeholder="패스워드">
                         </div>
                         <div class="d-grid">
                             <button type="button" class="btn btn-lg btn-primary" onclick="sendOk();">확인 <i class="bi bi-check2"></i> </button>

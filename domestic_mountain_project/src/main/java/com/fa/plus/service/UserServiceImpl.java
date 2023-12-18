@@ -14,11 +14,11 @@ public class UserServiceImpl implements UserService {
 	private UserMapper mapper;
 	
 	@Override
-	public User loginUser(String userId) {
+	public User loginUser(String user_id) {
 		User dto = null;
 
 		try {
-			dto = mapper.loginUser(userId);
+			dto = mapper.loginUser(user_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 			dto.setUseridx(seq);
 			
 			// 회원번호, membership 저장
-			mapper.insertUser(seq);
+			mapper.insertUserAll(seq);
 			
 			// member1, member2 테이블 저장
 			//mapper.insertMember12(dto);
@@ -61,12 +61,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateLastLogin(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void updateUser(User dto) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -79,15 +73,30 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByPwd(String userPwd) {
+	public User findById(long userIdx) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	
 	@Override
 	public void deleteUser(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void generatePwd(User dto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean findByEmailId(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 	
 }

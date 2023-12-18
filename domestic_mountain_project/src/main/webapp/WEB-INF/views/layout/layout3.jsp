@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,60 +55,63 @@
 
 
 <script type="text/javascript">
-function sendModelLogin() {
-    var f = document.modelLoginForm;
-	var str;
+	function dialogLogin() {
+    $("form[name=modelLoginForm] input[name=userId]").val("");
+    $("form[name=modelLoginForm] input[name=userPwd]").val("");
+    
+	$("#loginModal").modal("show");	
 	
-	str = f.userId.value;
-    if(!str) {
-        f.userId.focus();
-        return;
-    }
-
-    str = f.userPwd.value;
-    if(!str) {
-        f.userPwd.focus();
-        return;
-    }
-
-    f.action = "${pageContext.request.contextPath}/user/login";
-    f.submit();
-}
+    $("form[name=modelLoginForm] input[name=userId]").focus();
+	}
+	function sendModelLogin() {
+	    var f = document.modelLoginForm;
+		var str;
+		
+		str = f.user_id.value;
+	    if(!str) {
+	        f.user_id.focus();
+	        return;
+	    }
+	
+	    str = f.user_pwd.value;
+	    if(!str) {
+	        f.user_pwd.focus();
+	        return;
+	    }
+	
+	    f.action = "${pageContext.request.contextPath}/user/login";
+	    f.submit();
+	}
 </script>
-
-
-
-
 <!--==================== LOGIN ====================-->
 <div class="login" id="login">
-	<form name="modelLoginForm" action="" class="login__form">
-		<h2 class="login__title">로그인</h2>
+   <form name="modelLoginForm" id="loginForm" action="${pageContext.request.contextPath}/user/login" class="login__form" method="post">
+   	 <h2 class="login__title">로그인</h2>
 
-		<div class="login__group">
-			<div>
-				<label for="ID" class="login__label">ID</label> <input type="text"
-					placeholder="Write your ID" id="ID" name="userId" class="login__input">
-			</div>
+    <div class="login__group">
+        <div>
+            <label for="user_id" class="login__label">아이디용</label> 
+            <input type="text" placeholder="Write your ID" id="user_id" name="user_id" class="login__input">
+        </div>
 
-			<div>
-				<label for="password" class="login__label">Password</label> <input
-					type="password" placeholder="Enter your password" name="userPwd" id="password"
-					class="login__input">
-			</div>
-		</div>
+        <div>
+            <label for="password" class="login__label">Password</label> 
+            <input type="password" placeholder="Enter your password" name="user_pwd" id="password" class="login__input">
+        </div>
+    </div>
 
-		<div>
-			<p class="login__signup">
-				아직 계정이 없으신가요? <a href="#"> 회원가입</a>
-			</p>
+   		<div>
+        <p class="login__signup">
+            아직 계정이 없으신가요? <a href="#"> 회원가입</a>
+        </p>
 
-			<a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
+        <a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
 
-			<button type="submit" class="login__button" onclick="sendModelLogin();">로그인</button>
-		</div>
+        <button type="submit" class="login__button">로그인</button>
+	    </div>
 	</form>
 
-	<i class="ri-close-line login__close" id="login-close"></i>
+    <i class="ri-close-line login__close" id="login-close"></i>
 </div>
 
 <script>
