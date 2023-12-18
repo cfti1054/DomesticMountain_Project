@@ -189,7 +189,7 @@ caption {
 					</h3>
 					<ul>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/services/qna">&gt;
+							href="${pageContext.request.contextPath}/services/qna_list">&gt;
 								Qna</a></li>
 						<li class=""><a
 							href="${pageContext.request.contextPath}/services/faq">&gt;

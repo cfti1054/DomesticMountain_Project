@@ -36,7 +36,7 @@
 					<li class="nav__item"><a href="${pageContext.request.contextPath}/community/recommend" class="nav__link">Community</a>
 					</li>
 
-					<li class="nav__item"><a href="${pageContext.request.contextPath}/services/qna" class="nav__link">Services</a>
+					<li class="nav__item"><a href="${pageContext.request.contextPath}/services/qna_list" class="nav__link">Services</a>
 					</li>
 
 					<li class="nav__item"><a href="#" class="nav__link">My

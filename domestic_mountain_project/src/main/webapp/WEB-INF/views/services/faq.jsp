@@ -193,7 +193,7 @@
 						<a>카테고리</a>
 					</h3>
 					<ul>
-						<li class=""><a href="${pageContext.request.contextPath}/services/qna">&gt; Qna</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/services/qna_list">&gt; Qna</a></li>
 						<li class="eq1"><a href="${pageContext.request.contextPath}/services/faq">&gt; Faq</a></li>
 					</ul>
 
