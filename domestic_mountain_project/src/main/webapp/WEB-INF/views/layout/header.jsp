@@ -2,11 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <!--=============== REMIXICONS ===============-->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
@@ -16,12 +11,8 @@
 	href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script
 	src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<title>DM Project</title>
-</head>
-<style>
-
-</style>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 
 <!--==================== SEARCH ====================-->
 <div class="search" id="search">
@@ -53,7 +44,7 @@
 					<li class="nav__item"><a href="#" class="nav__link">Support</a>
 					</li>
 
-					<li class="nav__item"><a href="${pageContext.request.contextPath}/community/recommend" class="nav__link">Community</a>
+					<li class="nav__item"><a href="#" class="nav__link">Community</a>
 					</li>
 
 					<li class="nav__item"><a href="${pageContext.request.contextPath}/services/qna" class="nav__link">Services</a>
@@ -75,8 +66,13 @@
 				<i class="ri-search-line nav__search" id="search-btn"></i>
 
 				<!-- Login button -->
-				<i class="ri-user-line nav__login" id="login-btn"></i>
-
+				<c:if test="${empty sessionScope.loginUser}">
+					<i class="ri-user-line nav__login" id="login-btn"></i>
+				</c:if>
+				<c:if test="${not empty sessionScope.loginUser}">
+					<i class="fa-solid fa-right-from-bracket" id="logout-btn" 
+						onclick="location.href='${pageContext.request.contextPath}/user/logout';"></i>
+				</c:if>				
 				<!-- Toggle button -->
 				<div class="nav__toggle" id="nav-toggle">
 					<i class="ri-menu-line"></i>
