@@ -54,7 +54,6 @@
 				<!-- Search button -->
 				<i class="ri-search-line nav__search" id="search-btn"></i>
 				
-				<div></div>
 				<!-- Login button -->
 				<c:if test="${empty sessionScope.loginUser}">
 					<i class="ri-user-line nav__login" id="login-btn"></i>
