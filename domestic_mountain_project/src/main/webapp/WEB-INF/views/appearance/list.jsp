@@ -181,18 +181,18 @@
     height: 200px;
 }
 
-a {
+.article-album-sub a {
     color: inherit;
     text-decoration: none;
 }
 
-img {
+.article-album-sub img {
     vertical-align: top;
     border: 0;
     aspect-ratio: 200 / 200;
 }
 
-dl {
+.article-album-sub dl {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
