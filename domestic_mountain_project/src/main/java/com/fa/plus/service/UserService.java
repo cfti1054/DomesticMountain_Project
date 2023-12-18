@@ -6,15 +6,15 @@ import java.util.Map;
 import com.fa.plus.domain.User;
 
 public interface UserService {
-	public User loginUser(String user_Id);
+	public User loginUser(String user_id);
 	
 	public void insertUser(User dto) throws SQLException;
 	
 	public void updateUserShip(Map<String, Object> map) throws Exception;
 	public void updateUser(User dto) throws Exception;
 	
-	public User findById(String user_Id);
-	public User findById(long userIdx);
+	public User findById(String user_id);
+	public User findById(long useridx);
 	public boolean findByEmailId(String email);
 	
 	public void deleteUser(Map<String, Object> map) throws Exception;

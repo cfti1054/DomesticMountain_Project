@@ -33,7 +33,7 @@ public class UserController {
 			HttpSession session,
 			Model model
 			) {
-		System.out.println("호출");
+		
 			
 		User dto = service.loginUser(user_id);
 		if (dto == null || !user_pwd.equals(dto.getUser_pwd())) {
@@ -59,7 +59,7 @@ public class UserController {
 		} else {
 			uri = "redirect:" + uri;
 		}
-		System.out.println("Session Info: " + info);
+		
 		
 		return uri;
 	}
@@ -78,14 +78,14 @@ public class UserController {
 	@GetMapping("noAuthorized")
 	public String noAuthorized() {
 		// 권한이 없는 유저가 접근 한 경우
-		return ".member.noAuthorized";
+		return ".user.noAuthorized";
 	}
 	
 	// 회원가입 폼
 		@GetMapping("user")
 		public String memberForm(Model model) {
-			model.addAttribute("mode", "member");
-			return ".member.member";
+			model.addAttribute("mode", "user");
+			return ".user.user";
 		}
 		
 	// 회원 가입 완료 

@@ -17,19 +17,31 @@
 	
 	<insert id="insertUserAll" parameterType="Long">
 		INSERT INTO userall(useridx, usership)
-			VALUES(#{memberidx), 1)	
+			VALUES(#{useridx), 1)	
 	</insert>
 	
 	<insert id="insertUser1" parameterType="com.fa.plus.domain.User">
-	
+		INSERT INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date, pwd_date)
+			VALUES(#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE, SYSDATE)
 	</insert>
 	
 	<insert id="insertUser2" parameterType="com.fa.plus.domain.User">
-	
+		INSERT INTO user2(user_id, birth, email, addr1, addr2 zip, tel)
+			VALUES(#{user_id}, #{birth}, #{email}, #{tel}
+			#{zip, jdbcType=VARCHAR},
+			#{addr1, jdbcType=VARCHAR},
+			#{addr2, jdbcType=VARCHAR})
 	</insert>
 	
-	<insert id="insertUse12" parameterType="com.fa.plus.domain.User">
-	
+	<insert id="insertUser12" parameterType="com.fa.plus.domain.User">
+		INSERT ALL
+		INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date, pwd_date)
+			VALUES (#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE, SYSDATE)
+		INTO user2(user_id, birth, email, addr1, addr2 zip, tel)
+			VALUES(#{user_id}, #{birth}, #{email}, #{tel}
+			#{zip, jdbcType=VARCHAR},
+			#{addr1, jdbcType=VARCHAR},
+			#{addr2, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="findById" parameterType="String" resultType="com.fa.plus.domain.User">

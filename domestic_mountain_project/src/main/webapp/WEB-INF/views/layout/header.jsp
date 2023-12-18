@@ -33,7 +33,7 @@
 					<li class="nav__item"><a href="#" class="nav__link">Support</a>
 					</li>
 
-					<li class="nav__item"><a href="${pageContext.request.contextPath}/community/recommend" class="nav__link">Community</a>
+					<li class="nav__item"><a href="${pageContext.request.contextPath}/recommend/list" class="nav__link">Community</a>
 					</li>
 
 					<li class="nav__item"><a href="${pageContext.request.contextPath}/services/qna_list" class="nav__link">Services</a>
@@ -53,7 +53,8 @@
 				<i class=""></i>
 				<!-- Search button -->
 				<i class="ri-search-line nav__search" id="search-btn"></i>
-
+				
+				
 				<!-- Login button -->
 				<c:if test="${empty sessionScope.loginUser}">
 					<i class="ri-user-line nav__login" id="login-btn"></i>
@@ -61,7 +62,11 @@
 				<c:if test="${not empty sessionScope.loginUser}">
 					<i class="fa-solid fa-right-from-bracket" id="logout-btn" 
 						onclick="location.href='${pageContext.request.contextPath}/user/logout';"></i>
-				</c:if>				
+				</c:if>
+				<div class="p-2">
+					<a href="${pageContext.request.contextPath}/" title="회원가입"><i class="fa-sharp fa-solid fa-face-smile"></i></a>
+				</div>	
+				
 				<!-- Toggle button -->
 				<div class="nav__toggle" id="nav-toggle">
 					<i class="ri-menu-line"></i>
