@@ -1,5 +1,8 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,7 +11,10 @@
         <meta name="author" content="" />
         <title>Tables - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://code.jquery.com/jquery-3.7.0.js"  rel="stylesheet"/>
+        <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"></script>
+        
+        <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -125,44 +131,45 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                FAQ 카테고리
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table id="faq_category_table" class="display">
                                     <thead>
                                         <tr>
                                             <th>선택</th>
-                                            <th>번호</th>
-                                            <th>카테고리 이름</th>
-                                            <th>카테고리 등록인</th>
-                                            <th>등록일자</th>
+                                            <th>카테고리 번호</th>
+                                            <th>카테고리 이름</th>
+                                            <th>등록인</th>
+                                            <th>등록일자</th>
                                             <th>보이기</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>선택</th>
-                                            <th>번호</th>
-                                            <th>카테고리 이름</th>
-                                            <th>카테고리 등록인</th>
-                                            <th>등록일자</th>
+                                            <th>카테고리 번호</th>
+                                            <th>카테고리 이름</th>
+                                            <th>등록인</th>
+                                            <th>등록일자</th>
                                             <th>보이기</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     	<c:forEach var="dto" items="${list}" varStatus="status">
                                     	
-                                        <tr>
-                                            <td><button style="width: 1px; height: 1px;"></button></td>
-                                            <td>${dto.faq_category_num}</td>
-                                            <td>${dto.category_name}</td>
-                                            <td>${dto.category_reg_id}</td>
-                                            <td>${dto.category_reg_date}</td>
-                                            <td>${dto.category_visible == 1 ? '보이기' : '안보기'}</td>
-                                        </tr>
+	                                        <tr>
+	                                            <td><button style="width: 1px; height: 1px;"></button></td>
+	                                            <td>${dto.faq_category_num}</td>
+	                                            <td>${dto.category_name}</td>
+	                                            <td>${dto.category_reg_id}</td>
+	                                            <td>${dto.category_reg_date}</td>
+	                                            <td>${dto.category_visible == 1 ? "O":"X"}</td>
+	                                        </tr>
 										</c:forEach>
                                     </tbody>
                                 </table>
+                                <p><button id="visible_button">보이기 속성 변경</button></p>
                             </div>
                         </div>
                     </div>
@@ -182,8 +189,35 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/static/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        
+        
+        <script>
+         window.addEventListener('DOMContentLoaded', event => {
+            const datatablesSimple = document.getElementById('faq_category_table');
+            if (datatablesSimple) {
+                new simpleDatatables.DataTable(datatablesSimple);
+            }
+            
+            
+          
+        }); 
+        </script>
+        
+        <script>
+        table.on('click', 'tbody tr', function (e) {
+            e.currentTarget.classList.toggle('active');
+        });
+         
+        document.querySelector('#visible_button').addEventListener('click', function () {
+            alert(table.rows('.active').data().length + ' row(s) selected');
+        });
+        
+        </script>
+        
+        
     </body>
 </html>
