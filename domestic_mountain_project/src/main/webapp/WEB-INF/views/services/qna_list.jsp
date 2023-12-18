@@ -96,11 +96,58 @@
 }
 
 /*=============== notice ===============*/
+.board-list-header {
+	padding-top: 30px;
+	padding-bottom: 7px;
+	width: 100%;
+}
 
+.board-list {
+	width: 100%;
+}
 
+.board-list>thead {
+	color: #787878;
+}
 
+.board-list>thead tr:first-child {
+	border-top: 2px solid #454545;
+}
 
+.board-list tr>th, .board-list tr>td {
+	text-align: center;
+}
+
+.board-list .left {
+	text-align: left;
+	padding-left: 5px;
+}
+
+.board-list-footer {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	width: 100%;
+}
+.page-navigation {
+	 text-align: center;
+}
+
+.btn-light {
+	background-color: #ccc;
+	display: flex;
+}
+.text-end .text-end-row {
+	width: 100%;
+	justify-content: end;
+}
 </style>
+
+<script type="text/javascript">
+function searchList() {
+	const f = document.searchForm;
+	f.submit();
+}
+</script>
 
 <section class="features-1">
 	<div class="body-container">
@@ -155,8 +202,7 @@
 					<div class="notice-body">
 						<div class="body-main">
 							<div class="row board-list-header">
-								<div class="col-auto me-auto">
-									10개(1/2 페이지)</div>
+								<div class="col-auto me-auto">10개(1/2 페이지)</div>
 								<div class="col-auto">&nbsp;</div>
 							</div>
 
@@ -170,69 +216,63 @@
 										<th width="70">조회수</th>
 									</tr>
 								</thead>
-
 								<tbody>
-									<!-- <c:forEach var="dto" items="${noticeList}"> -->
-										<tr>
-											<td><span class="badge bg-primary">공지</span></td>
-											<td class="left">
-												<a href="#" class="text-reset">내용입니다.</a>
-											</td>
-											<td>관리자</td>
-											<td>2023-10-10</td>
-											<td>10</td>
-										</tr>
-									<!-- </c:forEach> -->
-
-									<!-- <c:forEach var="dto" items="${list}" varStatus="status"> -->
-										<tr>
-											<td>234</td>
-											<td class="left">
-												<a href="#" class="text-reset">내용입니다.</a> 
-												<!-- <c:if test="${dto.gap < 10}"> -->
-													<span class="badge text-bg-info">New</span>
-												<!-- </c:if> -->
-											</td>
-											<td>관리자</td>
-											<td>2023-11-11</td>
-											<td>11</td>
-										</tr>
-									<!-- </c:forEach> -->
+									<tr>
+										<td><span class="badge bg-primary">공지</span></td>
+										<td class="left"><a href="#" class="text-reset">내용입니다.</a>
+										</td>
+										<td>관리자</td>
+										<td>2023-10-10</td>
+										<td>10</td>
+									</tr>
+									
+									
+									<tr>
+										<td>234</td>
+										<td class="left"><a href="#" class="text-reset">내용입니다.</a>
+											<span class="badge text-bg-info">New</span></td>
+										<td>관리자</td>
+										<td>2023-11-11</td>
+										<td>11</td>
+									</tr>
 								</tbody>
 							</table>
 
-							<div class="page-navigation"> 
-								1 2 3
-							</div>
+							<div class="page-navigation">1 2 3</div>
 
 							<div class="row board-list-footer">
 								<div class="col">
-									<button type="button" class="btn btn-light" onclick="#" title="새로고침">
+									<button type="button" class="btn btn-light" onclick="#"
+										title="새로고침">
 										<i class="bi bi-arrow-counterclockwise"></i>
 									</button>
 								</div>
-								<div class="col-6 text-center">
-									<form class="row" name="searchForm" action="#" method="post">
+								<div class="col text-center">&nbsp;</div>
+								
+								<div class="col-6 text-end">
+									<form class="row text-end-row" name="searchForm" action="#" method="post">
 										<div class="col-auto p-1">
 											<select name="schType" class="form-select">
 												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-												<option value="all" >제목+내용</option>
-												<option value="reg_date" >등록일</option>
-												<option value="subject" >제목</option>
-												<option value="content" >내용</option>
+												<option value="all">제목+내용</option>
+												<option value="reg_date">등록일</option>
+												<option value="subject">제목</option>
+												<option value="content">내용</option>
 											</select>
 										</div>
 										<div class="col-auto p-1">
-											<input type="text" name="kwd" value="${kwd}" class="form-control">
+											<input type="text" name="kwd" value="${kwd}"
+												class="form-control">
 										</div>
 										<div class="col-auto p-1">
-											<button type="button" class="btn btn-light" onclick="searchList()">
+											<button type="button" class="btn btn-light"
+												onclick="searchList()">
 												<i class="bi bi-search"></i>
 											</button>
 										</div>
 									</form>
 								</div>
-								<div class="col text-end">&nbsp;</div>
+								
 							</div>
 						</div>
 					</div>
