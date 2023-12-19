@@ -335,15 +335,6 @@
 					<input type="text" placeholder="검색어 입력">
 					<button>검색</button>
 				</div>
-
-				<div class="sort_form">
-					<a href="#" onclick="" class="sort_card "><span class="blind"><i
-							class="fa-solid fa-server fa-2x"></i></span></a> <a href="#" onclick=""
-						class="sort_album "><span class="blind"><i
-							class="fa-solid fa-border-all fa-2x"></i></span></a> <a href="#" onclick=""
-						class="sort_list "><span class="blind"><i
-							class="fa-solid fa-list-ul fa-2x"></i></span></a>
-				</div>
 			</div>
 
 
