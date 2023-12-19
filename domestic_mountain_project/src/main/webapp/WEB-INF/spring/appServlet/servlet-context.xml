@@ -60,6 +60,36 @@
 			<!-- value="10485760" : 1M 용량임, 2097152 : 2M -->
     </beans:bean>
 
+
+	<!-- Interceptor 설정 -->                                                     
+<interceptors>                                                              
+	<interceptor>                                                           
+		<!-- 적용 -->                                                         
+		<mapping path="/**"/>                                               
+		                                                                    
+		<!-- 제외 -->                                                         
+		<exclude-mapping path="/"/>                                         
+		<exclude-mapping path="/resources/**"/>                             
+		<exclude-mapping path="/member/login"/>                             
+		<exclude-mapping path="/member/logout"/>                            
+		<exclude-mapping path="/member/member"/>                            
+		<exclude-mapping path="/user/user_idCheck"/>                       
+		<exclude-mapping path="/member/complete"/>                          
+		<exclude-mapping path="/member/pwdFind"/>                           
+		<exclude-mapping path="/product/**"/>                               
+		<exclude-mapping path="/review/list"/>                              
+		<exclude-mapping path="/qna/list"/>                                 
+		<exclude-mapping path="/uploads/product/**"/>                       
+		<exclude-mapping path="/uploads/jumbo/**"/>                         
+		<exclude-mapping path="/uploads/review/**"/>                        
+		<exclude-mapping path="/uploads/qna/**"/>                           
+		                                                                    
+		<beans:bean class="com.sp.app.interceptor.LoginCheckInterceptor"/>  
+	</interceptor>                                                          
+</interceptors>                                                             
+                                                                            
+
+
   	
     <!-- 예외처리 -->
 <!-- 

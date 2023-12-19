@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.mapper.UserMapper">
 	<select id="loginUser" parameterType="String" resultType="com.fa.plus.domain.User">
-		SELECT u.useridx, usership, user_id, user_name, user_pwd, enabled, reg_date, pwd_date
+		SELECT u.useridx, usership, user_id, user_name, user_pwd, enabled, reg_date
 		FROM userall u
 		JOIN user1 u1 ON u.useridx = u1.useridx
 		WHERE user_id = #{user_id} AND enabled != 0
@@ -17,17 +17,17 @@
 	
 	<insert id="insertUserAll" parameterType="Long">
 		INSERT INTO userall(useridx, usership)
-			VALUES(#{useridx), 1)	
+			VALUES(#{useridx), 1)
 	</insert>
 	
 	<insert id="insertUser1" parameterType="com.fa.plus.domain.User">
-		INSERT INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date, pwd_date)
-			VALUES(#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE, SYSDATE)
+		INSERT INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date)
+			VALUES(#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE)
 	</insert>
 	
 	<insert id="insertUser2" parameterType="com.fa.plus.domain.User">
-		INSERT INTO user2(user_id, birth, email, addr1, addr2 zip, tel)
-			VALUES(#{user_id}, #{birth}, #{email}, #{tel}
+		INSERT INTO user2(useridx, birth, email, addr1, addr2 zip, tel)
+			VALUES(#{useridx}, #{birth}, #{email}, #{tel}
 			#{zip, jdbcType=VARCHAR},
 			#{addr1, jdbcType=VARCHAR},
 			#{addr2, jdbcType=VARCHAR})
@@ -35,10 +35,10 @@
 	
 	<insert id="insertUser12" parameterType="com.fa.plus.domain.User">
 		INSERT ALL
-		INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date, pwd_date)
-			VALUES (#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE, SYSDATE)
-		INTO user2(user_id, birth, email, addr1, addr2 zip, tel)
-			VALUES(#{user_id}, #{birth}, #{email}, #{tel}
+		INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date)
+			VALUES (#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE)
+		INTO user2(useridx, birth, email, addr1, addr2 zip, tel)
+			VALUES(#{useridx}, #{birth}, #{email}, #{tel}
 			#{zip, jdbcType=VARCHAR},
 			#{addr1, jdbcType=VARCHAR},
 			#{addr2, jdbcType=VARCHAR})

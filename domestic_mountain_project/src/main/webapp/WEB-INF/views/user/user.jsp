@@ -112,7 +112,7 @@ function changeEmail() {
 
 function user_idCheck() {
 	// 아이디 중복 검사
-	let userId = $("#user_id").val();
+	let user_id = $("#user_id").val();
 	
 	if(! /^[a-z][a-z0-9_]{4,9}$/i.test(user_id)) {
 		let str = "아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.";
@@ -147,7 +147,7 @@ function user_idCheck() {
 		</div>
 		
 	    <div class="alert alert-info" role="alert">
-	        <i class="bi bi-person-check-fill"></i> SPRING의 회원이 되시면 회원님만의 유익한 정보를 만날수 있습니다.
+	        <i class="bi bi-person-check-fill"></i>
 	    </div>
 		    		
 		<div class="body-main">
@@ -185,7 +185,7 @@ function user_idCheck() {
 			    <div class="row mb-3">
 			        <label class="col-sm-2 col-form-label" for="user_pwd2">패스워드 확인</label>
 			        <div class="col-sm-10">
-			            <input type="password" name="user_pwd" id="user_pwd" class="form-control" autocomplete="off" placeholder="패스워드 확인">
+			            <input type="password" name="user_pwd2" id="user_pwd2" class="form-control" autocomplete="off" placeholder="패스워드 확인">
 			            <small class="form-control-plaintext">패스워드를 한번 더 입력해주세요.</small>
 			        </div>
 			    </div>

@@ -55,16 +55,20 @@
 				<i class="ri-search-line nav__search" id="search-btn"></i>
 				
 				<!-- Login button -->
-				<c:if test="${empty sessionScope.loginUser}">
-					<i class="ri-user-line nav__login" id="login-btn"></i>
-				</c:if>
-				<c:if test="${not empty sessionScope.loginUser}">
-					<i class="fa-solid fa-right-from-bracket" id="logout-btn" 
-						onclick="location.href='${pageContext.request.contextPath}/user/logout';"></i>
-				</c:if>
-				<div class="p-2">
-					<a href="${pageContext.request.contextPath}/" title="회원가입"><i class="fa-sharp fa-solid fa-face-smile"></i></a>
-				</div>	
+				<c:choose>
+				    <c:when test="${empty sessionScope.loginUser}">
+				        <i class="ri-user-line nav__login" id="login-btn"></i>
+				        <div class="p-2">
+				            <a href="${pageContext.request.contextPath}/user/user" title="회원가입"><i class="fa-solid fa-mountain-sun"></i></a>
+				        </div>
+				    </c:when>
+				    <c:otherwise>
+				        <div class="p-2">
+				            <a href="${pageContext.request.contextPath}/user/logout" title="로그아웃"><i class="fa-solid fa-right-from-bracket" id="logout-btn" 
+				                onclick="location.href='${pageContext.request.contextPath}/user/logout';"></i></a>
+				        </div>
+				    </c:otherwise>
+				</c:choose>
 				
 				<!-- Toggle button -->
 				<div class="nav__toggle" id="nav-toggle">

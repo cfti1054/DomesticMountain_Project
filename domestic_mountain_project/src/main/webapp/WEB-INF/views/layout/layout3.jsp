@@ -105,7 +105,7 @@
 
    		<div>
         <p class="login__signup">
-            아직 계정이 없으신가요? <a href="#"> 회원가입</a>
+            아직 계정이 없으신가요? <a href="${pageContext.request.contextPath}/user/user"> 회원가입</a>
         </p>
 
         <a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
