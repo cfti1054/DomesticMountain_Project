@@ -59,7 +59,29 @@
 		<beans:property name="maxUploadSize" value="2097152" /> 
 			<!-- value="10485760" : 1M 용량임, 2097152 : 2M -->
     </beans:bean>
-
+	
+	 <!-- 인터셉터 설정 -->
+    <interceptors>
+    	<interceptor>
+    		<!-- 적용 -->
+    		<mapping path="/**"/>
+    		
+    		<!-- 제외 -->
+    		<exclude-mapping path="/"/>
+    		<exclude-mapping path="/resources/**"/>
+    		<exclude-mapping path="/user/login"/>
+    		<exclude-mapping path="/user/logout"/>
+    		<exclude-mapping path="/user/user"/>
+    		<exclude-mapping path="/user/user_idCheck"/>
+    		<exclude-mapping path="/user/complete"/>
+    		<exclude-mapping path="/user/idFind"/>
+    		<exclude-mapping path="/user/pwdFind"/>
+                                    
+    		
+    		<!-- 인터셉터 빈 -->
+    		<beans:bean class="com.fa.plus.interceptor.LoginCheckInterceptor"/>
+    	</interceptor>
+    </interceptors>
 
     <!-- 예외처리 -->
 <!-- 

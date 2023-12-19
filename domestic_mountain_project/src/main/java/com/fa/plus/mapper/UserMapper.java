@@ -2,6 +2,7 @@ package com.fa.plus.mapper;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,5 +30,9 @@ public interface UserMapper {
 	// 회원 정보 수정
 	public void updateUser1(User dto) throws SQLException;
 	public void updateUser2(User dto) throws SQLException;
+
+	public void updateUsership(Map<String, Object> map);
+
+	
 	
 }

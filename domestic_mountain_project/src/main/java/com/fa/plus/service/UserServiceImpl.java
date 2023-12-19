@@ -37,15 +37,21 @@ public class UserServiceImpl implements UserService {
 				dto.setTel(dto.getTel1()+"-"+dto.getTel2()+"-"+dto.getTel3());
 			}
 			
+			// 패스워드 암호화 사용? 해야겠지.?
+			
+			
 			// 시퀀스 번호 가져오기
 			long seq = mapper.UserSeq();
 			dto.setUseridx(seq);
 			
-			// 회원번호, membership 저장
+			
+			// 회원번호, usership 저장
 			mapper.insertUserAll(seq);
 			
-			// member1, member2 테이블 저장
-			//mapper.insertMember12(dto);
+			mapper.insertUser12(dto);
+			
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,7 +62,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUserShip(Map<String, Object> map) throws Exception {
-		
+		try {
+			mapper.updateUsership(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
@@ -67,17 +78,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findById(String userId) {
+	public User findById(String user_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public User findById(long userIdx) {
+	public User findById(long useridx) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	@Override
+	public boolean findByEmailId(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	@Override
 	public void deleteUser(Map<String, Object> map) throws Exception {
@@ -91,11 +107,6 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	@Override
-	public boolean findByEmailId(String email) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 
 	

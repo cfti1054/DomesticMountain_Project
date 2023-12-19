@@ -10,14 +10,14 @@
 	</select>
 	
 	
-	<select id="userSeq" resultType="Long">
-		SELECT user_seq.NEXTVAL
+	<select id="UserSeq" resultType="Long">
+		SELECT userall_seq.NEXTVAL
 		FROM dual
 	</select>
 	
 	<insert id="insertUserAll" parameterType="Long">
 		INSERT INTO userall(useridx, usership)
-			VALUES(#{useridx), 1)
+			VALUES(#{useridx}, 1)
 	</insert>
 	
 	<insert id="insertUser1" parameterType="com.fa.plus.domain.User">

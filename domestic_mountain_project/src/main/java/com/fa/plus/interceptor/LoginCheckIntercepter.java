@@ -1,4 +1,4 @@
-package com.sp.app.interceptor;
+package com.fa.plus.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
