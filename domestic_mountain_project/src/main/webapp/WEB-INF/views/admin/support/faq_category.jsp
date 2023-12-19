@@ -13,6 +13,12 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="https://code.jquery.com/jquery-3.7.0.js"  rel="stylesheet"/>
         <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css"></script>
+        <link href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css">
         
         <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -137,18 +143,16 @@
                                 <table id="faq_category_table" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>선택</th>
                                             <th>카테고리 번호</th>
-                                            <th>카테고리 이름</th>
+                                            <th>카테고리 이름 </th>
                                             <th>등록인</th>
-                                            <th>등록일자</th>
+                                            <th>등록일자  </th>
                                             <th>보이기</th>
                                         </tr>
                                     </thead>
-                                    <!-- 
+                                     
                                     <tfoot>
                                         <tr>
-                                            <th>선택</th>
                                             <th>카테고리 번호</th>
                                             <th>카테고리 이름</th>
                                             <th>등록인</th>
@@ -156,12 +160,11 @@
                                             <th>보이기</th>
                                         </tr>
                                     </tfoot>
-                                     -->
-                                    <tbody>
+                                     
+                                     <tbody>
                                     	<c:forEach var="dto" items="${list}" varStatus="status">
                                     	
 	                                        <tr>
-	                                            <td><button style="width: 1px; height: 1px;"></button></td>
 	                                            <td>${dto.faq_category_num}</td>
 	                                            <td>${dto.category_name}</td>
 	                                            <td>${dto.category_reg_id}</td>
@@ -169,9 +172,11 @@
 	                                            <td>${dto.category_visible == 1 ? "O":"X"}</td>
 	                                        </tr>
 										</c:forEach>
-                                    </tbody>
+                                    </tbody> 
                                 </table>
-                                <p><button id="visible_button">속성변경</button></p>
+                                <p><button class="btn btn-secondary" id="visible_button">수정</button></p>
+                                <p><button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/support/faq_category_write';">추가</button></p>
+                                
                             </div>
                         </div>
                     </div>
@@ -191,46 +196,54 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/static/js/scripts.js"></script>
+        
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-        
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    	<script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+        <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/select/1.1.2/js/dataTables.select.min.js"></script>
         
         <script>
-           window.addEventListener('DOMContentLoaded', event => {
-            const datatablesSimple = document.getElementById('faq_category_table');
-            if (datatablesSimple) {
-                new simpleDatatables.DataTable(datatablesSimple, {
-                	('click', 'tbody tr', function (e) {
-                	    e.currentTarget.classList.toggle('selected');
-                	},
-                	(document.querySelector('#visible_button').addEventListener('click', function () {
-                	    alert(table.rows('.selected').data().length + ' row(s) selected');
-                	}
-                	
-                });
-            } 
-           });
-           
+             
+            
+        $(document).ready(function() {
+        	var oTable = $('#faq_category_table').DataTable();
 
+        	$('#faq_category_table tbody').on( 'click', 'tr', function () {
+        	    $(this).toggleClass('selected');
+        	    var pos = oTable.row(this).index();
+        	    var row = oTable.row(pos).data();
+        	} );
+
+        	$("#visible_button").on("click",function(){
+        	     var oAll =[];
+        	 $('#faq_category_table tbody tr.selected').each(function(){
+        	      var pos = oTable.row(this).index();
+        	    var row = oTable.row(pos).data();
+        	    oAll.push(row);
+        	 });
+        	    console.log(oAll);
+        	});
+
+        	});
+            /*
+            https://stackoverflow.com/questions/35498357/datatable-multiple-selection
+            */
             
             
             
-           
-        
+            
         </script>
         
-        <script>
-/*         const table = new DataTable('#faq_category_table');
         
-        table.on('click', 'tbody tr', function (e) {
-            e.currentTarget.classList.toggle('active');
-        });
-         
-        document.querySelector('#visible_button').addEventListener('click', function () {
-            alert(table.rows('.active').data().length + ' row(s) selected');
-        }); */
+        <script>
+	
+
+				
+			
+			
         
         </script>
         

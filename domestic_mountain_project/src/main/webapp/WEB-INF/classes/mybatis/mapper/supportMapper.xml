@@ -13,7 +13,7 @@
 	</select>
 
 	
-	
+	-->
 	
 		
 	<insert id="insert_faq_category" parameterType="com.fa.plus.admin.domain.Support">
@@ -21,7 +21,7 @@
 			category_reg_id, category_reg_date, category_order, category_visible)
 			VALUES(#{faq_category_num}, #{category_name}, 1, SYSDATE, #{faq_category_order}, 1)
 	</insert>
-	
+	<!-- 
 	<update id="update_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 		UPDATE faq_category
 		SET category_name = #{category_name}
@@ -85,7 +85,7 @@
 	</update>
   -->
   <select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_category_num, category_name, u.useridx AS category_reg_id, category_reg_date, category_order, category_visible
+		SELECT faq_category_num, category_name, u.user_name AS category_reg_id, category_reg_date, category_order, category_visible
 		FROM faq_category f
 		JOIN user1 u ON f.category_reg_id = u.userIdx
 	</select>	
