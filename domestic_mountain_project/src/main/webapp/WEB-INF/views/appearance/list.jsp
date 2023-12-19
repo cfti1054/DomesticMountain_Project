@@ -148,6 +148,11 @@
 	margin: 0 30px;
 }
 
+.page-navigation {
+    text-align: center;
+    clear:both;
+}
+
 .article-album-sub {
     margin-top: 50px;
 }
@@ -289,7 +294,7 @@
 						<a>Share Tips</a>
 					</h3>
 					<ul>
-						<li class=""><a href="#">&gt; 유용한 정보</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/share/list">&gt; 유용한 정보</a></li>
 					</ul>
 
 					<h3>
@@ -325,14 +330,6 @@
 					<button>검색</button>
 				</div>
 
-				<div class="sort_form">
-					<a href="#" onclick="" class="sort_card "><span class="blind"><i
-							class="fa-solid fa-server fa-2x"></i></span></a> <a href="#" onclick=""
-						class="sort_album "><span class="blind"><i
-							class="fa-solid fa-border-all fa-2x"></i></span></a> <a href="#" onclick=""
-						class="sort_list "><span class="blind"><i
-							class="fa-solid fa-list-ul fa-2x"></i></span></a>
-				</div>
 			</div>
 
 
@@ -472,12 +469,12 @@
 									</dd>
 								</dl></li>
 						</ul>
+						<div class="page-navigation">1 2 3</div>
 					</div>
 				</div>
 			</div>
-
-
-
+			
+			
 		</div>
 	</div>
 </section>

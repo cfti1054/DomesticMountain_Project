@@ -148,112 +148,118 @@
 	margin: 0 30px;
 }
 
+.page-navigation {
+	text-align: center;
+	clear: both;
+}
+
 .article-album-sub {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 .article-album-sub ul, dl {
-    list-style: none;
+	list-style: none;
 }
 
-.article-album-sub ul, 
-.article-album-sub li, 
-.article-album-sub dt, 
-.article-album-sub dd, 
-.article-album-sub dl {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
+.article-album-sub ul, .article-album-sub li, .article-album-sub dt,
+	.article-album-sub dd, .article-album-sub dl {
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
 }
 
 .article-album-sub li {
-    overflow: hidden;
-    float: left;
-    position: relative;
-    width: 200px;
-    height: 300px;
-    margin-left: 32px;
+	overflow: hidden;
+	float: left;
+	position: relative;
+	width: 200px;
+	height: 300px;
+	margin-left: 32px;
 }
 
 .article-album-sub .album-img {
-    display: block;
-    width: 200px;
-    height: 200px;
+	display: block;
+	width: 200px;
+	height: 200px;
 }
 
 .article-album-sub a {
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 .article-album-sub img {
-    vertical-align: top;
-    border: 0;
-    aspect-ratio: 200 / 200;
+	vertical-align: top;
+	border: 0;
+	aspect-ratio: 200/200;
 }
 
 .article-album-sub dl {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
 }
 
 .article-album-sub dt {
-    display: table;
-    padding-top: 8px;
+	display: table;
+	padding-top: 8px;
 }
 
 .article-album-sub .tit {
-    color: #222;
+	color: #222;
 }
+
 .article-album-sub dt a {
-    display: table-cell;
-    font-size: 13px;
-    font-weight: bold;
-    vertical-align: top;
+	display: table-cell;
+	font-size: 13px;
+	font-weight: bold;
+	vertical-align: top;
 }
+
 .article-album-sub .tit .inner {
-    display: table;
-    table-layout: fixed;
+	display: table;
+	table-layout: fixed;
 }
 
 .article-album-sub .tit .ellipsis {
-    display: block;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    max-height: 18px;
-    white-space: normal;
-    word-break: break-all;
-    word-wrap: break-word;
-    word-break: break-word;
+	display: block;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	max-height: 18px;
+	white-space: normal;
+	word-break: break-all;
+	word-wrap: break-word;
+	word-break: break-word;
 }
+
 .article-album-sub .p-nick {
-    position: relative;
-    padding-top: 7px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	position: relative;
+	padding-top: 7px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
+
 .article-album-sub dd .pers_nick_area span {
-    color: #666;
+	color: #666;
 }
 
 .article-album-sub .date_num {
-    color: #999;
+	color: #999;
 }
+
 .article-album-sub .num {
-    padding-left: 5px;
+	padding-left: 5px;
 }
 
 .m-tcol-p .num {
-    color: #ff2f3b;
+	color: #ff2f3b;
 }
-
 </style>
 
 
@@ -290,21 +296,25 @@
 						<a>Share Tips</a>
 					</h3>
 					<ul>
-						<li class=""><a href="#">&gt; 유용한 정보</a></li>
+						<li class=""><a href="${pageContext.request.contextPath}/share/list">&gt; 유용한 정보</a></li>
 					</ul>
 
 					<h3>
 						<a>Walk &amp; Climbing</a>
 					</h3>
 					<ul>
-						<li class=""><a href="${pageContext.request.contextPath}/appearance/list">&gt; 회원들의 모습</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/appearance/list">&gt;
+								회원들의 모습</a></li>
 					</ul>
 
 					<h3>
 						<a>Look &amp; Style</a>
 					</h3>
 					<ul>
-						<li class="eq1"><a href="${pageContext.request.contextPath}/ootd/list">&gt; 스트릿 스냅 (OOTD)</a></li>
+						<li class="eq1"><a
+							href="${pageContext.request.contextPath}/ootd/list">&gt; 스트릿
+								스냅 (OOTD)</a></li>
 					</ul>
 
 				</div>
@@ -347,7 +357,9 @@
 
 
 							<li><a href="#" class="album-img"> <img width="200"
-									height="200" src="${pageContext.request.contextPath}/resources/images/hiking.png" alt="">
+									height="200"
+									src="${pageContext.request.contextPath}/resources/images/hiking.png"
+									alt="">
 							</a>
 
 								<dl>
@@ -355,9 +367,7 @@
 										<a href="#" class="tit"> <span class="inner"> <span
 												class="ellipsis">데일리룩</span>
 										</span>
-										</a>
-										<a href="#" class="m-tcol-p">
-											<span class="num">[7]</span>
+										</a> <a href="#" class="m-tcol-p"> <span class="num">[7]</span>
 										</a>
 									</dt>
 
@@ -378,7 +388,8 @@
 
 
 							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/bg-image.png" alt="">
+									src="${pageContext.request.contextPath}/resources/images/bg-image.png"
+									alt="">
 							</a>
 
 								<dl>
@@ -402,7 +413,8 @@
 
 
 							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
+									src="${pageContext.request.contextPath}/resources/images/climbing.png"
+									alt="">
 							</a>
 
 								<dl>
@@ -426,7 +438,8 @@
 
 
 							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/hiking.png" alt="">
+									src="${pageContext.request.contextPath}/resources/images/hiking.png"
+									alt="">
 							</a>
 
 								<dl>
@@ -451,7 +464,8 @@
 
 
 							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/hiking.png" alt="">
+									src="${pageContext.request.contextPath}/resources/images/hiking.png"
+									alt="">
 							</a>
 
 								<dl>
@@ -473,6 +487,7 @@
 									</dd>
 								</dl></li>
 						</ul>
+						<div class="page-navigation">1 2 3</div>
 					</div>
 				</div>
 			</div>
