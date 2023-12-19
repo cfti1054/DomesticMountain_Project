@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.SupportMapper">
-
+<!-- 
 	<select id="faq_category_seq" resultType="Long">
 		SELECT faq_category_seq.NEXTVAL FROM dual
 	</select>
@@ -10,10 +10,11 @@
 	<select id="faq_category_order_seq" resultType="Long">
 		SELECT faq_category_order_seq.NEXTVAL FROM dual
 	</select>
-
+-->
 	
 	
-	<!-- 카테고리 -->	
+	<!-- 카테고리 -->
+	<!-- 	
 	<insert id="insert_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 		INSERT INTO faq_category(faq_category_num, category_name, 
 			category_reg_id, category_reg_date, category_order, category_visible)
@@ -24,7 +25,7 @@
 	</update>
 
 	<select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_category_num, category_name, u.user_id, category_reg_date, category_order, category_visible
+		SELECT faq_category_num, category_name, u.user_id AS category_reg_id, category_reg_date, category_order, category_visible
 		FROM faq_category f
 		JOIN user1 u ON f.category_reg_id = u.userIdx
 	</select>
@@ -34,11 +35,10 @@
 		SET category_visible = 0
 		WHERE faq_category_num = #{faq_category_num}
 	</delete>
+	 -->
 	
 	
-	
-	<!-- 게시판 -->
-
+	<!-- 게시판
 	<select id="faq_board_seq" resultType="Long">
 		SELECT faq_board_seq.NEXTVAL FROM dual
 	</select>
@@ -52,16 +52,13 @@
 	</update>
 	
 	<select id="list_faq_board" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_num, faq_category_num, faq_question, faq_content, u.userId, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
+		SELECT faq_num, faq_category_num, faq_question, faq_content, u.userId AS faq_reg_id, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
 		FROM faq_board f
 		JOIN user1 u ON f.faq_reg_id = u.userIdx
 	</select>
 	<delete id="delete_faq_board" parameterType="Long">
-	
 	</delete>
-
-	
-
+ -->
 	
 	
 	
