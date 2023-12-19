@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.MemberManageMapper">
+
+    <!-- 회원 리스트 -->
+	<sql id="where-list">
+		<choose>
+			<when test="schType=='useridx'">
+				INSTR(m1.useridx, #{kwd}) &gt;= 1
+			</when>
+			<otherwise>
+				INSTR(${schType}, #{kwd}) &gt;= 1
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 리스트 출력  -->
+	<select id="listMember" parameterType="map" resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT m1.useridx, usership, user_name, 
+			m1.reg_date, 
+			enabled, email, tel, 
+			TO_CHAR(birth, 'YYYY-MM-DD') birth
+		FROM userall m
+		JOIN user1 m1 ON m.useridx = m1.useridx
+		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
+		<where>
+			<if test="kwd!=null and kwd!='' ">
+				<include refid="where-list"/>
+			</if>
+
+		</where> 
+		ORDER BY reg_date DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*)
+		FROM userall m
+		JOIN user1 m1 ON m.useridx = m1.useridx
+		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
+		<where>
+			<if test="kwd!=null and kwd!='' ">
+				<include refid="where-list"/>
+			</if>
+			<if test="enabled!=''">
+				AND enabled = #{enabled}
+			</if>
+			
+		</where> 
+    </select>
+
+	<select id="findById" parameterType="long" resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT usership, m1.useridx, user_name, user_pwd, enabled,
+			reg_date, 
+			TO_CHAR(birth, 'YYYY-MM-DD') birth, email, tel, 
+			zip, addr1, addr2
+		FROM userall m
+		JOIN user1 m1 ON m.useridx = m1.useridx
+		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
+		WHERE m1.useridx = #{useridx}
+	</select>
+	
+    <update id="updateMemberEnabled" parameterType="map">
+		UPDATE user1 SET enabled=#{enabled} WHERE useridx=#{useridx}
+    </update>	
+
+
+
+	<!-- 회원 상태 입력  -->
+	<insert id="insertMemberState" parameterType="com.fa.plus.admin.domain.MemberManage">
+		INSERT INTO user_block(state, useridx, is_blocked, blocked_reason, blocked_date, unblocked_date)
+		VALUES (user_block_seq.NEXTVAL, #{useridx}, #{is_blocked}, #{blocked_reason}, SYSDATE, SYSDATE)
+	</insert>	
+	
+	<!-- 회원 상태 출력 -->
+	<select id="listMemberState" parameterType="long" resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT state, useridx, is_blocked, blocked_reason, blocked_date, unblocked_date
+		FROM user_block
+		WHERE useridx = #{useridx}
+		ORDER BY state DESC
+	</select>
+	
+	<select id="findByState" parameterType="long" resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT state, useridx, is_blocked, blocked_reason, blocked_date, unblocked_date
+		FROM user_block
+		WHERE useridx = #{useridx}
+		ORDER BY state DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>	
+	
+	<!-- 통계 -->
+	<select id="listAgeSection" resultType="com.fa.plus.admin.domain.MemberChart">
+	<![CDATA[
+		WITH memberAge AS (
+		    select m2.useridx, TRUNC(MONTHS_BETWEEN(SYSDATE, birth)/12) age
+		    from userall m
+		    JOIN user1 m1 ON m.useridx = m1.useridx
+		    JOIN user2 m2 ON m1.useridx = m2.useridx
+		    WHERE m.usership < 50
+		)
+		SELECT '10대' section, COUNT(*) count FROM memberAge WHERE age>=10 AND age<20
+		UNION ALL
+		SELECT '20대' section, COUNT(*) count FROM memberAge WHERE age>=20 AND age<30
+		UNION ALL
+		SELECT '30대' section, COUNT(*) count FROM memberAge WHERE age>=30 AND age<40
+		UNION ALL
+		SELECT '40대' section, COUNT(*) count FROM memberAge WHERE age>=40 AND age<50
+		UNION ALL
+		SELECT '50대' section, COUNT(*) count FROM memberAge WHERE age>=50 AND age<60
+		UNION ALL
+		SELECT '60대' section, COUNT(*) count FROM memberAge WHERE age>=60 AND age<70
+		UNION ALL
+		SELECT '기타' section, COUNT(*) count FROM memberAge WHERE age<10 AND age>=70
+	]]>
+	</select>	
+
+</mapper>
