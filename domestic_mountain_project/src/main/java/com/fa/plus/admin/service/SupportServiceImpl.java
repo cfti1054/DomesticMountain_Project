@@ -20,27 +20,44 @@ public class SupportServiceImpl implements SupportService {
 	private FileManager fileManager;
 
 	@Override
-	public void insert_faq_category(Support dto, String pathname) throws Exception {
-		// TODO Auto-generated method stub
+	public void insert_faq_category(Support dto) throws Exception {
+		try {
+			long faq_category_num = mapper.faq_category_seq();
+			long faq_category_order = mapper.faq_category_order_seq();
+			
+			dto.setFaq_category_num(faq_category_num);
+			dto.setCategory_order(faq_category_order);
+			
+			mapper.insert_faq_category(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+
 		
 	}
 
 	@Override
-	public void update_faq_category(Support dto, String pathname) throws Exception {
-		// TODO Auto-generated method stub
+	public void update_faq_category(Support dto) throws Exception {
+		try {
+			mapper.update_faq_category(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
 	@Override
-	public void delete_faq_category(long faq_board_num, String pathname) throws Exception {
-		// TODO Auto-generated method stub
+	public void visible_faq_category(Map<String, Object> map) throws Exception {
+		try {
+			mapper.visible_faq_category(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
-	}
-
-	@Override
-	public int data_count(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -57,13 +74,43 @@ public class SupportServiceImpl implements SupportService {
 	}
 
 	@Override
-	public Support find_by_id(long faq_board_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insert_faq_board(Support dto) throws Exception {
+		try {
+			long faq_num = mapper.faq_board_seq();
+			dto.setFaq_num(faq_num);
+			
+			mapper.insert_faq_board(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 	}
 
 	@Override
-	public List<Support> list_faq_board(Map<String, Object> map) {
+	public void update_faq_board(Support dto) throws Exception {
+		try {
+			mapper.update_faq_board(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void visible_faq_board(Map<String, Object> map) throws Exception {
+		try {
+			mapper.visible_faq_category(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public List<Support> list_faq_board() {
 		List<Support> list = null;
 		
 		try {
@@ -75,11 +122,7 @@ public class SupportServiceImpl implements SupportService {
 		return list;
 	}
 
-	@Override
-	public Support find_by_category(long faq_category_num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 }

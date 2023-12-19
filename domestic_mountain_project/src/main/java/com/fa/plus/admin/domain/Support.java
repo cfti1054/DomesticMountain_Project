@@ -6,7 +6,7 @@ public class Support {
 	private long faq_category_num;
 	private String category_name;
 	private String category_reg_id;
-	private String category_red_date;
+	private String category_reg_date;
 	private String category_update_date;
 	private long category_order;
 	private int category_visible;
@@ -20,7 +20,6 @@ public class Support {
 	private String faq_update_id;
 	private String faq_update_date;
 	private int visible;
-	
 	
 	public long getFaq_category_num() {
 		return faq_category_num;
@@ -40,11 +39,11 @@ public class Support {
 	public void setCategory_reg_id(String category_reg_id) {
 		this.category_reg_id = category_reg_id;
 	}
-	public String getCategory_red_date() {
-		return category_red_date;
+	public String getCategory_reg_date() {
+		return category_reg_date;
 	}
-	public void setCategory_red_date(String category_red_date) {
-		this.category_red_date = category_red_date;
+	public void setCategory_reg_date(String category_reg_date) {
+		this.category_reg_date = category_reg_date;
 	}
 	public String getCategory_update_date() {
 		return category_update_date;
@@ -112,6 +111,9 @@ public class Support {
 	public void setVisible(int visible) {
 		this.visible = visible;
 	}
+	
+	
+	
 
 	
 	

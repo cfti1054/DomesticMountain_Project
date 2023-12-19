@@ -2,6 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.SupportMapper">
+
 <!-- 
 	<select id="faq_category_seq" resultType="Long">
 		SELECT faq_category_seq.NEXTVAL FROM dual
@@ -10,35 +11,43 @@
 	<select id="faq_category_order_seq" resultType="Long">
 		SELECT faq_category_order_seq.NEXTVAL FROM dual
 	</select>
--->
+
 	
 	
-	<!-- 카테고리 -->
-	<!-- 	
+	
+		
 	<insert id="insert_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 		INSERT INTO faq_category(faq_category_num, category_name, 
 			category_reg_id, category_reg_date, category_order, category_visible)
-			VALUES(#{faq_category_num}, #{category_name}, 11, SYSDATE, #{faq_category_order}, 1)
+			VALUES(#{faq_category_num}, #{category_name}, 1, SYSDATE, #{faq_category_order}, 1)
 	</insert>
 	
 	<update id="update_faq_category" parameterType="com.fa.plus.admin.domain.Support">
+		UPDATE faq_category
+		SET category_name = #{category_name}
+		WHERE faq_category_num = #{faq_category_num}
 	</update>
 
 	<select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_category_num, category_name, u.user_id AS category_reg_id, category_reg_date, category_order, category_visible
+		SELECT faq_category_num, category_name, u.useridx AS category_reg_id, category_reg_date, category_order, category_visible
 		FROM faq_category f
 		JOIN user1 u ON f.category_reg_id = u.userIdx
-	</select>
+	</select>	
 	
-	<delete id="delete_faq_category" parameterType="Long">
+	<update id="visible_faq_category" parameterType="map">
 		UPDATE faq_category_num 
-		SET category_visible = 0
+		<if test="category_visible != 0">
+			SET category_visible = 0
+		</if>
+		<if test="category_visible != 1">
+			SET category_visible = 1
+		</if>
 		WHERE faq_category_num = #{faq_category_num}
-	</delete>
-	 -->
+	</update>
+	 
 	
 	
-	<!-- 게시판
+	
 	<select id="faq_board_seq" resultType="Long">
 		SELECT faq_board_seq.NEXTVAL FROM dual
 	</select>
@@ -49,16 +58,37 @@
 	</insert>
 	
 	<update id="update_faq_board" parameterType="com.fa.plus.admin.domain.Support">
+		UPDATE faq_board
+		SET faq_question = #{faq_question},
+			faq_content = #{faq_content},
+			faq_update_id = 11,
+			faq_update_date = SYSDATE
+		WHERE faq_num = #{faq_num}
 	</update>
 	
 	<select id="list_faq_board" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_num, faq_category_num, faq_question, faq_content, u.userId AS faq_reg_id, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
+		SELECT faq_num, faq_category_num, faq_question, faq_content, u.userIdx AS faq_reg_id, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
 		FROM faq_board f
 		JOIN user1 u ON f.faq_reg_id = u.userIdx
 	</select>
-	<delete id="delete_faq_board" parameterType="Long">
-	</delete>
- -->
+	
+	<update id="visible_faq_board" parameterType="map">
+		UPDATE faq_board
+		<if test="faq_visible != 0">
+			SET faq_visible = 0
+		</if>
+		<if test="faq_visible != 1">
+			SET faq_visible = 1
+		</if>
+		WHERE faq_num = #{faq_num} 
+		
+	</update>
+  -->
+  <select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
+		SELECT faq_category_num, category_name, u.useridx AS category_reg_id, category_reg_date, category_order, category_visible
+		FROM faq_category f
+		JOIN user1 u ON f.category_reg_id = u.userIdx
+	</select>	
 	
 	
 	

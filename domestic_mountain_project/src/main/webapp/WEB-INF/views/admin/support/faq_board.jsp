@@ -12,7 +12,7 @@
         <title>Tables - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="https://code.jquery.com/jquery-3.7.0.js"  rel="stylesheet"/>
-        <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"></script>
+        <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css"></script>
         
         <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -134,7 +134,7 @@
                                 FAQ 카테고리
                             </div>
                             <div class="card-body">
-                                <table id="faq_category_table" class="display">
+                                <table id="faq_category_table" class="display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>선택</th>
@@ -192,29 +192,42 @@
         <script src="${pageContext.request.contextPath}/resources/admin/static/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
         
         
         <script>
-         window.addEventListener('DOMContentLoaded', event => {
+          window.addEventListener('DOMContentLoaded', event => {
             const datatablesSimple = document.getElementById('faq_category_table');
             if (datatablesSimple) {
                 new simpleDatatables.DataTable(datatablesSimple);
             }
             
             
-          
-        }); 
+            
+            
+            datatablesSimple.on("datatable.selectrow", (rowIndex, event) => {
+            	event.preventDefault()
+            	const row = dataTable.data.data
+            	
+            	console.log(row)
+            })
+        });  
+        
+        
+        
+        
         </script>
         
         <script>
+/*         const table = new DataTable('#faq_category_table');
+        
         table.on('click', 'tbody tr', function (e) {
             e.currentTarget.classList.toggle('active');
         });
          
         document.querySelector('#visible_button').addEventListener('click', function () {
             alert(table.rows('.active').data().length + ' row(s) selected');
-        });
+        }); */
         
         </script>
         

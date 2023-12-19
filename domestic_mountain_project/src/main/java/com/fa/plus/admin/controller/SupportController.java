@@ -24,30 +24,30 @@ public class SupportController {
 	@Autowired
 	private MyUtil myUtil;
 	
-	@GetMapping("inquiryList")
-	public String inquiryList() {
+	@GetMapping("inquiry_list")
+	public String inquiry_list() {
 		// 1:1문의 리스트
 		
 		
 		
-		return ".admin.support.inquiryList";
+		return ".admin.support.inquiry_list";
 	}
 	
 
-	public String inquiryAnswer() {
+	public String inquiry_answer() {
 		// 1:1 문의 답변 폼
 		
 		return "";
 	}
 	
 	@RequestMapping("faq")
-	public String listFaq(HttpServletRequest req, Model model) throws Exception {
+	public String list_faq(HttpServletRequest req, Model model) throws Exception {
 		List<Support> list = service.list_faq_category();
 		
 		model.addAttribute("list", list);
 		
 		
-		return ".admin.support.faqCategory";
+		return ".admin.support.faq_category";
 	}
 	
 }

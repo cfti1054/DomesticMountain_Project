@@ -16,16 +16,17 @@ public interface SupportMapper {
 	
 	public void insert_faq_category(Support dto) throws SQLException;
 	public void update_faq_category(Support dto) throws SQLException;
+	public void visible_faq_category(Map<String, Object> map) throws SQLException;
 	public List<Support> list_faq_category() throws SQLException;
-	public void delete_faq_category(long faq_category_num) throws SQLException;
+	
 	
 	
 	public long faq_board_seq();
 	
 	public void insert_faq_board(Support dto) throws SQLException;
 	public void update_faq_board(Support dto) throws SQLException;
+	public void visible_faq_board(Map<String, Object> map) throws SQLException;
 	public List<Support> list_faq_board() throws SQLException;
-	public void delete_faq_board(long faq_board_num) throws SQLException;
 	
 	
 	

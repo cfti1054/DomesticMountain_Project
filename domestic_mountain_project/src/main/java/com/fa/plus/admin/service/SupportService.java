@@ -7,16 +7,14 @@ import com.fa.plus.admin.domain.Support;
 
 public interface SupportService {
 	
-	public void insert_faq_category(Support dto, String pathname) throws Exception;
-	public void update_faq_category(Support dto, String pathname) throws Exception;
-	public void delete_faq_category(long faq_board_num, String pathname)throws Exception;	
-	
-	public int data_count(Map<String, Object> map);
+	public void insert_faq_category(Support dto) throws Exception;
+	public void update_faq_category(Support dto) throws Exception;
+	public void visible_faq_category(Map<String, Object> map) throws Exception;	
 	public List<Support> list_faq_category();
 	
-	public Support find_by_id(long faq_board_num);
-	public List<Support> list_faq_board(Map<String, Object> map);
-	
+	public void insert_faq_board(Support dto) throws Exception;
+	public void update_faq_board(Support dto) throws Exception;
+	public void visible_faq_board(Map<String, Object> map) throws Exception;
+	public List<Support> list_faq_board();
 
-	public Support find_by_category(long faq_category_num);
 }
