@@ -24,14 +24,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 	
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <!--=============== REMIXICONS ===============-->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
 
-   <!-- silder -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- silder -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 	
@@ -109,6 +109,10 @@
         </p>
 
         <a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
+        
+        <div class="d-grid">
+			<p class="form-control-plaintext text-center text-primary">${message}</p>
+        </div>
 
         <button type="submit" class="login__button">로그인</button>
 	    </div>
