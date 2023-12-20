@@ -86,13 +86,27 @@
 			return;
 		}
 
+		str = f.email1.value.trim();
+		if (!str) {
+			alert("이메일을 입력하세요. ");
+			f.email1.focus();
+			return;
+		}
+
+		str = f.email2.value.trim();
+		if (!str) {
+			alert("이메일을 입력하세요. ");
+			f.email2.focus();
+			return;
+		}
+		
 		str = f.birth.value;
 		if (!str) {
 			alert("생년월일를 입력하세요. ");
 			f.birth.focus();
 			return;
 		}
-
+		
 		str = f.tel1.value;
 		if (!str) {
 			alert("전화번호를 입력하세요. ");
@@ -114,19 +128,6 @@
 			return;
 		}
 
-		str = f.email1.value.trim();
-		if (!str) {
-			alert("이메일을 입력하세요. ");
-			f.email1.focus();
-			return;
-		}
-
-		str = f.email2.value.trim();
-		if (!str) {
-			alert("이메일을 입력하세요. ");
-			f.email2.focus();
-			return;
-		}
 
 		f.action = "${pageContext.request.contextPath}/user/${mode}";
 		f.submit();
@@ -244,15 +245,6 @@
 						</div>
 					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label" for="birth">생년월일</label>
-						<div class="col-sm-10">
-							<input type="date" name="birth" id="birth" class="form-control"
-								value="${dto.birth}" placeholder="생년월일"> <small
-								class="form-control-plaintext">생년월일은 2000-01-01 형식으로 입력
-								합니다.</small>
-						</div>
-					</div>
 
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label" for="selectEmail">이메일</label>
@@ -282,6 +274,16 @@
 									value="${dto.email2}" readonly>
 							</div>
 
+						</div>
+					</div>
+					
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="birth">생년월일</label>
+						<div class="col-sm-10">
+							<input type="date" name="birth" id="birth" class="form-control"
+								value="${dto.birth}" placeholder="생년월일"> <small
+								class="form-control-plaintext">생년월일은 2000-01-01 형식으로 입력
+								합니다.</small>
 						</div>
 					</div>
 
