@@ -14,7 +14,6 @@
 }
 .row {
 	width:auto;
-	
 }
 
 .justify-content-md-center {
