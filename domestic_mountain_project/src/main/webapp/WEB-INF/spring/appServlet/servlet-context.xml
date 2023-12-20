@@ -77,7 +77,16 @@
     		<exclude-mapping path="/user/complete"/>
     		<exclude-mapping path="/user/idFind"/>
     		<exclude-mapping path="/user/pwdFind"/>
+    		
     		<exclude-mapping path="/emaps/main"/>
+    		<exclude-mapping path="/services/**"/>
+    		<exclude-mapping path="/ootd/**"/>
+    		<exclude-mapping path="/appearance/**"/>
+    		<exclude-mapping path="/product/**"/>
+    		<exclude-mapping path="/recommend/**"/>
+    		<exclude-mapping path="/together/**"/>
+    		<exclude-mapping path="/share/**"/>
+    		<exclude-mapping path="/made/**"/>
     		
                                     
     		

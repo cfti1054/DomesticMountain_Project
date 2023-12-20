@@ -247,7 +247,7 @@ public class UserController {
 	@PostMapping("pwdFind")
 	public String pwdFindSubmit() throws Exception {
 		
-		return "redirect:";
+		return "redirect:/user/complete";
 	}
 	
 	@GetMapping("idFind")
@@ -259,6 +259,6 @@ public class UserController {
 	@PostMapping("idFind")
 	public String idFindSubmit() throws Exception {
 		
-		return "";
+		return "redirect:/user/complete";
 	}
 }
