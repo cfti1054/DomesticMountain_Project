@@ -79,6 +79,7 @@
     		<exclude-mapping path="/user/pwdFind"/>
     		
     		<exclude-mapping path="/emaps/main"/>
+<<<<<<< HEAD
     		<exclude-mapping path="/services/**"/>
     		<exclude-mapping path="/ootd/**"/>
     		<exclude-mapping path="/appearance/**"/>
@@ -89,6 +90,10 @@
     		<exclude-mapping path="/made/**"/>
     		
     		
+=======
+    		<exclude-mapping path="/admin/**"/>
+    		<exclude-mapping path="/product/**"/>
+>>>>>>> branch 'main' of https://github.com/cfti1054/DomesticMountain_Project.git
                                     
     		
     		<!-- 인터셉터 빈 -->
