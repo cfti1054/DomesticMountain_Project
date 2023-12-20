@@ -148,6 +148,7 @@
 		}
 	}
 
+
 	function user_idCheck() {
 		// 아이디 중복 검사
 		let user_id = $("#user_id").val();

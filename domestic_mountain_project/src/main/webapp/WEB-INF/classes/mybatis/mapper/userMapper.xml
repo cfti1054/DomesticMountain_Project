@@ -9,7 +9,6 @@
 		WHERE user_id = #{user_id} AND enabled != 0
 	</select>
 	
-	
 	<select id="UserSeq" resultType="Long">
 		SELECT userall_seq.NEXTVAL
 		FROM dual

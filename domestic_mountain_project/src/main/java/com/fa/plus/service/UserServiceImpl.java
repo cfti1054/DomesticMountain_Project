@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
 				dto.setTel(dto.getTel1()+"-"+dto.getTel2()+"-"+dto.getTel3());
 			}
 			
+			
 			// 패스워드 암호화 사용? 해야겠지.?
 //			String encPwd = bcryptEncoder.encode(dto.getUser_pwd());
 //			dto.setUser_pwd(encPwd);
