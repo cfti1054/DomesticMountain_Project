@@ -150,36 +150,34 @@
 
 
 	function user_idCheck() {
-		// 아이디 중복 검사
-		let user_id = $("#user_id").val();
+	    // 아이디 중복 검사
+	    let user_id = $("#user_id").val();
 
-		if (!/^[a-z][a-z0-9_]{4,9}$/i.test(user_id)) {
-			let str = "아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.";
-			$("#user_id").focus();
-			$("#user_id").parent().find(".help-block").html(str);
-			return;
-		}
+	    if (!/^[a-z][a-z0-9_]{4,9}$/i.test(user_id)) {
+	        let str = '아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.';
+	        $('#user_id').focus();
+	        $('.user_id-box').find('.help-block').html(str);
+	        return;
+	    }
 
-		let url = "${pageContext.request.contextPath}/user/user_idCheck";
-		// AJAX - POST : JSON 응답 받기
-		$.post(url, {
-			user_id : user_id
-		}, function(data) {
-			let p = data.passed;
-			if (p === "true") {
-				let str = '<span style="color:blue; font-weight:bold;">'
-						+ user_id + '</span> 아이디는 사용 가능합니다.';
-				$('.user_id-box').find('.help-block').html(str);
-				$('#user_idValid').val('true');
-			} else {
-				let str = '<span style="color:red; font-weight:bold;">'
-						+ user_id + '</span> 아이디는 사용할 수 없습니다.';
-				$('.user_id-box').find('.help-block').html(str);
-				$('#user_idValid').val('false');
-				$("#user_id").focus();
-			}
-		}, "json");
+	    let url = "${pageContext.request.contextPath}/user/user_idCheck";
+	    // AJAX - POST: JSON 응답 받기
+	    $.post(url, { user_id: user_id }, function (data) {
+	        let passed = data.passed;
 
+	        if (passed === 'true') {
+	            let str = '<span style="color:blue; font-weight: bold;">' + user_id + '</span> 아이디는 사용가능 합니다.';
+	            $('.user_id-box').find('.help-block').html(str);
+	            $('#user_idValid').val('true');
+	        } else {
+	            let str = '<span style="color:red; font-weight: bold;">' + user_id + '</span> 아이디는 사용할수 없습니다.';
+	            $('.user_id-box').find('.help-block').html(str);
+	            $('#user_id').val('');
+	            $('#user_idValid').val('false');
+	            $('#user_id').focus();
+	        }
+	    }, 'json');
+	
 	}
 </script>
 

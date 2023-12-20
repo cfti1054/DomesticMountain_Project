@@ -127,29 +127,29 @@ public class UserController {
 	
 // 회원 가입 완료후 메시지 출력
 	@GetMapping("complete")
-	public String complete(@ModelAttribute("message") String message) {
-		
-		if(message == null || message.length() == 0) {
-			// F5를 누른 경우
-			return "redirect:/";
-		}
-		
-			return "return.complete";
-	}
+    public String complete(@ModelAttribute("message") String message) throws Exception {
+
+        // 컴플릿 페이지(complete.jsp)의 출력되는 message와 title는 RedirectAttributes 값이다.
+        // F5를 눌러 새로 고침을 하면 null이 된다.
+
+        if (message == null || message.length() == 0) // F5를 누른 경우
+            return "redirect:/";
+
+        return ".user.complete";
+    }
 	
 	// ID 중복 검사
 	@PostMapping("user_idCheck")
 	@ResponseBody
 	public Map<String, Object> idCheck(@RequestParam String user_id) {
-		Map<String, Object> model = new HashMap<String, Object>();
 	
-		String p = "false";
+		String p = "true";
 		User dto = service.findById(user_id);
 	
-		if(dto == null) {
-			p = "true";
+		if (dto != null) {
+			p = "false";
 		}
-		
+		Map<String, Object> model = new HashMap<>();
 		model.put("passed", p);
 		
 		return model;

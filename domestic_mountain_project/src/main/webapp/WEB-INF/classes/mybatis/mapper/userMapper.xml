@@ -38,7 +38,10 @@
 	</update>
 	
 	<select id="findById" parameterType="String" resultType="com.fa.plus.domain.User">
-	
+			SELECT m.useridx, usership, m1.user_id, user_name, user_pwd, enabled
+			FROM userall m 
+			JOIN user1 m1 ON m.useridx = m1.useridx 
+			WHERE m1.user_id = #{user_id}
 	</select>
 	
 	<select id="findByEmail" parameterType="String" resultType="com.fa.plus.domain.User">
