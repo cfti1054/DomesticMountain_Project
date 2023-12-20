@@ -14,7 +14,13 @@
 
 	
 	-->
+	<select id="faq_category_seq" resultType="Long">
+		SELECT faq_category_seq.NEXTVAL FROM dual
+	</select>
 	
+	<select id="faq_category_order_seq" resultType="Long">
+		SELECT faq_category_order_seq.NEXTVAL FROM dual
+	</select>
 		
 	<insert id="insert_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 		INSERT INTO faq_category(faq_category_num, category_name, 

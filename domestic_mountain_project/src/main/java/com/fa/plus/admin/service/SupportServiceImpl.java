@@ -26,7 +26,7 @@ public class SupportServiceImpl implements SupportService {
 			long faq_category_order = mapper.faq_category_order_seq();
 			
 			dto.setFaq_category_num(faq_category_num);
-			dto.setCategory_order(faq_category_order);
+			dto.setFaq_category_order(faq_category_order);
 			
 			mapper.insert_faq_category(dto);
 		} catch (Exception e) {

@@ -8,7 +8,7 @@ public class Support {
 	private String category_reg_id;
 	private String category_reg_date;
 	private String category_update_date;
-	private long category_order;
+	private long faq_category_order;
 	private int category_visible;
 	
 	// FAQ 게시판
@@ -51,11 +51,11 @@ public class Support {
 	public void setCategory_update_date(String category_update_date) {
 		this.category_update_date = category_update_date;
 	}
-	public long getCategory_order() {
-		return category_order;
+	public long getFaq_category_order() {
+		return faq_category_order;
 	}
-	public void setCategory_order(long category_order) {
-		this.category_order = category_order;
+	public void setFaq_category_order(long Faq_category_order) {
+		this.faq_category_order = Faq_category_order;
 	}
 	public int getCategory_visible() {
 		return category_visible;

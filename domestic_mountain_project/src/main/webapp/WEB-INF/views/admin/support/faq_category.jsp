@@ -19,9 +19,57 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css">
+
+<style>
+        #modal {
+          display: none;
+          position:relative;
+          width:100%;
+          height:100%;
+          z-index:2;
+        }
+        
+        #modal h2 {
+          margin:0;
+        }
+        #modal button {
+          display:inline-block;
+          width:100px;
+          margin-left:calc(100% - 100px - 10px);
+        }
+        
+        #modal .modal_content {
+          width:300px;
+          margin:100px auto;
+          padding:20px 10px;
+          background:#fff;
+          border:2px solid #666;
+        }
+        
+        #modal .modal_layer {
+          position:fixed;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+          background:rgba(0, 0, 0, 0.5);
+          z-index:-1;
+        }   
+</style> 
         
         <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
+        <script>
+        $(function(){    
+        		$("#popbutton").click(function(){        
+        			$('div.modal').modal({remote : 'layer.html'});    
+        		})
+        })
+        </script>
+        
+        
+        
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -139,43 +187,95 @@
                                 <i class="fas fa-table me-1"></i>
                                 FAQ 카테고리
                             </div>
-                            <div class="card-body">
-                                <table id="faq_category_table" class="display" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>카테고리 번호</th>
-                                            <th>카테고리 이름 </th>
-                                            <th>등록인</th>
-                                            <th>등록일자  </th>
-                                            <th>보이기</th>
-                                        </tr>
-                                    </thead>
-                                     
-                                    <tfoot>
-                                        <tr>
-                                            <th>카테고리 번호</th>
-                                            <th>카테고리 이름</th>
-                                            <th>등록인</th>
-                                            <th>등록일자</th>
-                                            <th>보이기</th>
-                                        </tr>
-                                    </tfoot>
-                                     
-                                     <tbody>
-                                    	<c:forEach var="dto" items="${list}" varStatus="status">
-                                    	
-	                                        <tr>
-	                                            <td>${dto.faq_category_num}</td>
-	                                            <td>${dto.category_name}</td>
-	                                            <td>${dto.category_reg_id}</td>
-	                                            <td>${dto.category_reg_date}</td>
-	                                            <td>${dto.category_visible == 1 ? "O":"X"}</td>
-	                                        </tr>
-										</c:forEach>
-                                    </tbody> 
-                                </table>
-                                <p><button class="btn btn-secondary" id="visible_button">수정</button></p>
-                                <p><button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/support/faq_category_write';">추가</button></p>
+                            
+                            
+                            
+                            <!-- The Modal -->
+<!-- <div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
+      Modal Header
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      Modal body
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      Modal footer
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+						<div id="modal">
+							<div class="modal_content">
+								<h2>모달 창</h2>
+								<p>모달 창 입니다.</p>
+								<button type="button" id="modal_close_btn">모달 창 닫기</button>
+							</div>
+							<div class="modal_layer"></div>
+						</div>
+
+
+
+						<div class="card-body">
+							<table id="faq_category_table" class="display"
+								style="width: 100%">
+								<thead>
+									<tr>
+										<th>카테고리 번호</th>
+										<th>카테고리 이름</th>
+										<th>등록인</th>
+										<th>등록일자 </th>
+										<th>보이기</th>
+									</tr>
+								</thead>
+
+								<tfoot>
+									<tr>
+										<th>카테고리 번호</th>
+										<th>카테고리 이름</th>
+										<th>등록인</th>
+										<th>등록일자</th>
+										<th>보이기</th>
+									</tr>
+								</tfoot>
+
+								<tbody>
+									<c:forEach var="dto" items="${list}" varStatus="status">
+
+										<tr>
+											<td>${dto.faq_category_num}</td>
+											<td>${dto.category_name}</td>
+											<td>${dto.category_reg_id}</td>
+											<td>${dto.category_reg_date}</td>
+											<td>${dto.category_visible == 1 ? "O":"X"}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<p>
+								<button class="btn btn-secondary" id="visible_button">수정</button>
+							</p>
+							<p>
+								<button type="button" class="btn btn-primary"
+									onclick="location.href='${pageContext.request.contextPath}/admin/support/faq_category_write';">추가</button>
+							</p>
+							<p>
+								<!-- Modal Button -->
+								<button type="button" id="modal_open_btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Open modal</button>
+							</p>
+							
+							
+							
+							
                                 
                             </div>
                         </div>
@@ -195,7 +295,10 @@
                 </footer>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
+	
+	
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
         
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -206,8 +309,7 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/select/1.1.2/js/dataTables.select.min.js"></script>
         
         <script>
-             
-            
+             /* simple data table 행 다중선택 스크립트 */
         $(document).ready(function() {
         	var oTable = $('#faq_category_table').DataTable();
 
@@ -231,19 +333,51 @@
             /*
             https://stackoverflow.com/questions/35498357/datatable-multiple-selection
             */
-            
-            
-            
-            
         </script>
         
         
         <script>
 	
-
-				
+       /*  function profile(useridx) {
+        	let dlg = $("#member-dialog").dialog({
+        		autoOpen: false,
+        		modal: true,
+        		buttons: {
+        			" 수정 " :function(){
+        				updateOk();
+        			}, " 닫기 ": function() {
+        				$(this).dialog("close");
+        			}
+        		},
+        		
+        		height: 550,
+        		width: 800,
+        		title: "회원 상세 정보",
+        		close: function(event, ui) {
+        		}
+        	});
+        	
+        	let url = "${pageContext.request.contextPath}/admin/memberManage/profile";
+        	let query = "useridx=" + useridx;
+        	
+        	const fn = function(data) {
+        		$("#member-dialog").html(data);
+        		dlg.dialog("open");
+        	};
+        	
+        	ajaxFun(url, "get", query, "text", fn);
+        } */
 			
-			
+        document.getElementById("modal_open_btn").onclick = function() {
+        	
+        	const m = document.getElementById("modal") 
+            m.style.display="block";
+            
+        }
+       
+        document.getElementById("modal_close_btn").onclick = function() {
+            document.getElementById("modal").style.display="none";
+        }   
         
         </script>
         

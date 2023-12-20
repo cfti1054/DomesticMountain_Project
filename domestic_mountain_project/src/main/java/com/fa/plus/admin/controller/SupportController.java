@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.admin.domain.Support;
@@ -57,7 +58,8 @@ public class SupportController {
 	
 	@GetMapping("faq_category_write")
 	public String write_form(Model model) throws Exception {
-//		model.addAttribute("mode")
+		model.addAttribute("mode","write");
+		
 		
 		return ".admin.support.write_form";
 	}
@@ -69,12 +71,13 @@ public class SupportController {
 		String root = session.getServletContext().getRealPath("/");
 		
 		try {
+			
 //			dto.setCategory_reg_id(info.getUserId());
 			service.insert_faq_category(dto);
 		} catch (Exception e) {
 		}
 		
-		return "redirect:/admin/support/faq_category";
+		return "redirect:/admin/support/faq_category_list";
 	}
 	
 	

@@ -14,15 +14,15 @@ function sendOk() {
     const f = document.writeForm;
 	let str;
 	
-    str = f.categoryName.value.trim();
+    str = f.category_name.value.trim();
     if(!str) {
         alert("카테고리 이름을 입력하세요. ");
-        f.subject.focus();
+        f.category_name.focus();
 		return;
     }
 	console.log("jsp");
 	console.log(str);
-    f.action = "${pageContext.request.contextPath}/admin/support/faq_category_list";
+    f.action = "${pageContext.request.contextPath}/admin/support/faq_category_write";
     f.submit();
     
 }
@@ -35,7 +35,7 @@ function sendOk() {
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">카테고리 등록</h3></div>
                                     <div class="card-body">
                                     
                                         <form name="writeForm" method="post">
@@ -43,7 +43,7 @@ function sendOk() {
                                         	<tr>
                                         	<td>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="categoryName" type="text"/>
+                                                <input class="form-control" name="category_name" type="text"/>
                                             </div>
                                             </td>
                                             </tr>
@@ -62,7 +62,7 @@ function sendOk() {
                                         
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                        <div class="small"></div>
                                     </div>
                                 </div>
                             </div>
