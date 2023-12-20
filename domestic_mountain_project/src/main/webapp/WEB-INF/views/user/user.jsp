@@ -3,7 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
+.features-1 {
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	display: flex;
+	justify-content: center;
+}
 .body-container {
+	padding: 130px 0 60px 0;
 	max-width: 800px;
 }
 </style>
@@ -140,7 +146,7 @@ function user_idCheck() {
 }
 </script>
 
-<div class="container">
+<div class="features-1">
 	<div class="body-container">	
 		<div class="body-title">
 			<h3><i class="bi bi-person-square"></i> ${mode=="user"?"회원가입":"정보수정"} </h3>

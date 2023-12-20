@@ -68,6 +68,7 @@
     		
     		<!-- 제외 -->
     		<exclude-mapping path="/"/>
+    		<exclude-mapping path="/data/**"/>
     		<exclude-mapping path="/resources/**"/>
     		<exclude-mapping path="/user/login"/>
     		<exclude-mapping path="/user/logout"/>
@@ -76,6 +77,8 @@
     		<exclude-mapping path="/user/complete"/>
     		<exclude-mapping path="/user/idFind"/>
     		<exclude-mapping path="/user/pwdFind"/>
+    		<exclude-mapping path="/emaps/main"/>
+    		
                                     
     		
     		<!-- 인터셉터 빈 -->

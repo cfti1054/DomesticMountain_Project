@@ -253,7 +253,7 @@ public class UserController {
 	@GetMapping("idFind")
 	public String idFindForm() throws Exception {
 		
-		return "";
+		return ".user.idFind";
 	}
 	
 	@PostMapping("idFind")
