@@ -88,6 +88,8 @@
     		<exclude-mapping path="/share/**"/>
     		<exclude-mapping path="/made/**"/>
     		
+    		<!-- <exclude-mapping path="/made/**"/> -->
+    		
                                     
     		
     		<!-- 인터셉터 빈 -->
