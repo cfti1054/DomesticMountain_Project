@@ -30,7 +30,7 @@
 					<li class="nav__item"><a href="${pageContext.request.contextPath}/product/product" class="nav__link">DM
 							Store</a></li>
 
-					<li class="nav__item"><a href="#" class="nav__link">Related</a>
+					<li class="nav__item"><a href="${pageContext.request.contextPath}/Related/main" class="nav__link">Related</a>
 					</li>
 
 					<li class="nav__item"><a href="${pageContext.request.contextPath}/recommend/list" class="nav__link">Community</a>
