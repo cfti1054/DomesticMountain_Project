@@ -18,7 +18,7 @@
 	min-height: 100vh;
 	overflow-x: hidden;
 }
-.body-container h2 {
+.body-container .gallery-name {
 	display: flex;
 	justify-content: center;
 	padding: 20px 0 40px 0;
@@ -220,7 +220,7 @@ figure img {
 <section class="features-1">
 	<div class="body-container">
 			<div>
-				<h2>산악 관련 클럽 및 구조대</h2>
+				<h2 class="gallery-name">산악 관련 클럽 및 구조대</h2>
 			</div>
 		<div id="gallery">
 			
