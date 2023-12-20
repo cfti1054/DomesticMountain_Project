@@ -50,9 +50,6 @@ public class UserServiceImpl implements UserService {
 			
 			mapper.insertUser12(dto);
 			
-			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
