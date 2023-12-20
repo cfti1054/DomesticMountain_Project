@@ -13,6 +13,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper mapper;
 	
+	
+	
+//	@Autowired
+//	private BCryptPasswordEncoder bcryptEncoder;
+	
 	@Override
 	public User loginUser(String user_id) {
 		User dto = null;
@@ -38,7 +43,8 @@ public class UserServiceImpl implements UserService {
 			}
 			
 			// 패스워드 암호화 사용? 해야겠지.?
-			
+//			String encPwd = bcryptEncoder.encode(dto.getUser_pwd());
+//			dto.setUser_pwd(encPwd);
 			
 			// 시퀀스 번호 가져오기
 			long seq = mapper.UserSeq();
@@ -48,7 +54,9 @@ public class UserServiceImpl implements UserService {
 			// 회원번호, usership 저장
 			mapper.insertUserAll(seq);
 			
-			mapper.insertUser12(dto);
+			// user1, user2 테이블에 저장
+			mapper.insertUser1(dto);
+			mapper.insertUser2(dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,13 +78,35 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(User dto) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			if (dto.getEmail1().length() != 0 && dto.getEmail2().length() != 0) {
+				dto.setEmail(dto.getEmail1() + "@" + dto.getEmail2());
+			}
+
+			if (dto.getTel1().length() != 0 && dto.getTel2().length() != 0 && dto.getTel3().length() != 0) {
+				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
+			}
+			
+			// 패스워드가 변경된 경우만 member1 테이블의 패스워드를 변경하도록 변경해야함
+//			String encPwd = bcryptEncoder.encode(dto.getUser_pwd());
+//			
+//			dto.setUser_pwd(encPwd);
+			
+			mapper.insertUser1(dto);
+			
+			mapper.insertUser2(dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
 	@Override
 	public User findById(String user_id) {
-		// TODO Auto-generated method stub
+		User dto = null;
+		
 		return null;
 	}
 

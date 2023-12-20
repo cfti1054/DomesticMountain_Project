@@ -26,23 +26,17 @@
 	</insert>
 	
 	<insert id="insertUser2" parameterType="com.fa.plus.domain.User">
-		INSERT INTO user2(useridx, birth, email, addr1, addr2 zip, tel)
-			VALUES(#{useridx}, #{birth}, #{email}, #{tel}
+		INSERT INTO user2(useridx, birth, email, addr1, addr2, zip, tel)
+			VALUES(#{useridx}, #{birth}, #{email},
 			#{zip, jdbcType=VARCHAR},
 			#{addr1, jdbcType=VARCHAR},
-			#{addr2, jdbcType=VARCHAR})
+			#{addr2, jdbcType=VARCHAR},
+			#{tel})
 	</insert>
 	
-	<insert id="insertUser12" parameterType="com.fa.plus.domain.User">
-		INSERT ALL
-		INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date)
-			VALUES (#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE)
-		INTO user2(useridx, birth, email, addr1, addr2 zip, tel)
-			VALUES(#{useridx}, #{birth}, #{email}, #{tel}
-			#{zip, jdbcType=VARCHAR},
-			#{addr1, jdbcType=VARCHAR},
-			#{addr2, jdbcType=VARCHAR})
-	</insert>
+	<update id="insertUser12" parameterType="com.fa.plus.domain.User">
+		
+	</update>
 	
 	<select id="findById" parameterType="String" resultType="com.fa.plus.domain.User">
 	

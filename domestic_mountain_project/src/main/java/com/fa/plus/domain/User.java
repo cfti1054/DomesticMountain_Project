@@ -9,7 +9,6 @@ public class User {
 	private String user_pwd;
 	private int enabled;
 	private String reg_date;
-	private String pwd_date;
 	
 	private String birth;
 	private String email;
@@ -68,12 +67,6 @@ public class User {
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
-	}
-	public String getPwd_date() {
-		return pwd_date;
-	}
-	public void setPwd_date(String pwd_date) {
-		this.pwd_date = pwd_date;
 	}
 	public String getBirth() {
 		return birth;
