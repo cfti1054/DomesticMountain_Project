@@ -1,78 +1,97 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" %>
+﻿<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
+.features-1 {
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	display: flex;
+	justify-content: center;
+}
 .body-container {
-	max-width: 800px;
+	padding: 130px 0 60px 0;
+	width: 400px;
+}
+
+.sub-login {
+    background-color: var(--container-color);
+    padding: 2rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+}
+
+.login__signup,
+.login__title {
+	margin-top: 20px;
+}
+
+.login__title,
+.login__signup,
+.login__forgot {
+	display: flex;
+	justify-content: center;
+}
+
+.sub-login .d-grid .text-primary {
+	color: red !important;
 }
 </style>
 
 <script type="text/javascript">
-function sendLogin() {
-    const f = document.loginForm;
-	let str;
-	
-	str = f.user_id.value.trim();
-    if(!str) {
-        f.user_id.focus();
-        return;
-    }
-    
-    str = f.user_pwd.value.trim();
-    if(!str) {
-        f.user_pwd.focus();
-        return;
-    }
-    
-    f.action = "${pageContext.request.contextPath}user/login";
-    f.submit();
-}
+	function sendLogin() {
+		const f = document.loginForm;
+		let str;
+
+		str = f.user_id.value.trim();
+		if (!str) {
+			f.user_id.focus();
+			return;
+		}
+
+		str = f.user_pwd.value.trim();
+		if (!str) {
+			f.user_pwd.focus();
+			return;
+		}
+
+		f.action = "${pageContext.request.contextPath}user/login";
+		f.submit();
+	}
 </script>
 
-<div class="container">
-	<div class="body-container">	
+<div class="features-1">
+	<div class="body-container">
+		<div class="sub-login">
+			<h2 class="login__title">로그인</h2>
 
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="border mt-5 p-4">
-                    <form name="loginForm" action="" method="post" class="row g-3">
-                        <h3 class="text-center"><i class="bi bi-lock"></i> 회원 로그인</h3>
-                        <div class="col-12">
-                            <label class="mb-1">아이디</label>
-                            <input type="text" name="user_id" class="form-control" placeholder="아이디">
-                        </div>
-                        <div class="col-12">
-                            <label class="mb-1">패스워드</label>
-                            <input type="password" name="user_pwd" class="form-control" autocomplete="off" 
-                            	placeholder="패스워드">
-                        </div>
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe"> 아이디 저장</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button type="button" class="btn btn-primary float-end" onclick="sendLogin();">&nbsp;Login&nbsp;<i class="bi bi-check2"></i></button>
-                        </div>
-                    </form>
-                    <hr class="mt-4">
-                    <div class="col-12">
-                        <p class="text-center mb-0">
-                        	<a href="${pageContext.request.contextPath}/user/idFind" class="text-decoration-none me-2">아이디 찾기</a>
-                        	<a href="${pageContext.request.contextPath}/user/pwdFind" class="text-decoration-none me-2">패스워드 찾기</a>
-                        	<a href="${pageContext.request.contextPath}/user/user" class="text-decoration-none">회원가입</a>
-                        </p>
-                    </div>
-                </div>
+			<div class="login__group">
+				<div>
+					<label for="user_id" class="login__label">ID</label> <input
+						type="text" placeholder="Write your ID" id="user_id"
+						name="user_id" class="login__input">
+				</div>
 
-                <div class="d-grid">
-						<p class="form-control-plaintext text-center text-primary">${message}</p>
-                </div>
+				<div>
+					<label for="password" class="login__label">Password</label> <input
+						type="password" placeholder="Enter your password" name="user_pwd"
+						id="password" class="login__input">
+				</div>
+			</div>
 
-            </div>
-        </div>
+			<div>
+				<p class="login__signup">
+					아직 계정이 없으신가요? <a
+						href="${pageContext.request.contextPath}/user/user"> 회원가입</a>
+				</p>
 
+				<a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
+
+				<div class="d-grid">
+					<p class="form-control-plaintext text-center text-primary">${message}</p>
+				</div>
+
+				<button type="submit" class="login__button">로그인</button>
+			</div>
+		</div>
 	</div>
 </div>
