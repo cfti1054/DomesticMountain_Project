@@ -187,43 +187,6 @@
                                 <i class="fas fa-table me-1"></i>
                                 FAQ 카테고리
                             </div>
-                            
-                            
-                            
-                            <!-- The Modal -->
-<!-- <div class="modal fade" id="myModal">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-
-      Modal Header
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      Modal body
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      Modal footer
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div> -->
-						<div id="modal">
-							<div class="modal_content">
-								<h2>모달 창</h2>
-								<p>모달 창 입니다.</p>
-								<button type="button" id="modal_close_btn">모달 창 닫기</button>
-							</div>
-							<div class="modal_layer"></div>
-						</div>
-
-
 
 						<div class="card-body">
 							<table id="faq_category_table" class="display"
@@ -368,16 +331,6 @@
         	ajaxFun(url, "get", query, "text", fn);
         } */
 			
-        document.getElementById("modal_open_btn").onclick = function() {
-        	
-        	const m = document.getElementById("modal") 
-            m.style.display="block";
-            
-        }
-       
-        document.getElementById("modal_close_btn").onclick = function() {
-            document.getElementById("modal").style.display="none";
-        }   
         
         </script>
         

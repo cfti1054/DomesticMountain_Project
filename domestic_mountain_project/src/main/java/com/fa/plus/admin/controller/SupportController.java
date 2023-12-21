@@ -61,7 +61,7 @@ public class SupportController {
 		model.addAttribute("mode","write");
 		
 		
-		return ".admin.support.write_form";
+		return ".admin.support.iconlist";
 	}
 	
 	@PostMapping("faq_category_write")
