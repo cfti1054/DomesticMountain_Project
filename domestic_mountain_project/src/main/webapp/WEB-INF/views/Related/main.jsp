@@ -230,34 +230,34 @@ figure img {
 						<h2>(사)대한산악연맹</h2>
 						<p>Korea Alpine Federation</p>
 						<p>
-							<br> <span>산하단체 & 유관기관(단체)<br> </span>
+							<br> <span>산하단체 &amp; 유관기관(단체)<br> </span>
 						</p>
 					</div>
 				</div>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/한국산악회.png" alt="">
-				<figcaption><a href="#">한국산악회</a></figcaption>
+				<a target="_blank" href="http://www.cac.or.kr/"><img src="${pageContext.request.contextPath}/resources/images/club/한국산악회.png" alt=""></a>
+				<figcaption><a target="_blank" href="http://www.cac.or.kr/">한국산악회</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/한국대학산악연맹.png" alt="">
-				<figcaption><a href="#">한국대학산악연맹</a></figcaption>
+				<a target="_blank" href="https://ksaf.modoo.at/"><img src="${pageContext.request.contextPath}/resources/images/club/한국대학산악연맹.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://ksaf.modoo.at/">한국대학산악연맹</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/대한산악스키협회.jpeg" alt="">
-				<figcaption><a href="#">대한산악스키협회</a></figcaption>
+				<a target="_blank" href="https://kafsma.or.kr/"><img src="${pageContext.request.contextPath}/resources/images/club/대한산악스키협회.jpeg" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafsma.or.kr/">대한산악스키협회</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/대한산악연맹교육원.png" alt="">
-				<figcaption><a href="#">대한산악연맹교육원</a></figcaption>
+				<a target="_blank" href="https://kafedu.or.kr/"><img src="${pageContext.request.contextPath}/resources/images/club/대한산악연맹교육원.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafedu.or.kr/">대한산악연맹교육원</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/대한산악구조협회.png" alt="">
-				<figcaption><a href="#">대한산악구조협회</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/"><img src="${pageContext.request.contextPath}/resources/images/club/대한산악구조협회.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/">대한산악구조협회</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/한국등산트레킹지원센터.jpeg" alt="">
-				<figcaption><a href="#">한국등산트레킹지원센터</a></figcaption>
+				<a target="_blank" href="https://www.komount.or.kr/"><img src="${pageContext.request.contextPath}/resources/images/club/한국등산트레킹지원센터.jpeg" alt=""></a>
+				<figcaption><a target="_blank" href="https://www.komount.or.kr/">한국등산트레킹지원센터</a></figcaption>
 			</figure>
 			<figure>
 				<div>
@@ -271,20 +271,20 @@ figure img {
 				</div>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/ISF.png" alt="">
-				<figcaption><a href="#">ISF</a></figcaption>
+				<a target="_blank" href="https://www.skyrunning.com/"><img src="${pageContext.request.contextPath}/resources/images/club/ISF.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://www.skyrunning.com/">ISF</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/iFSC.png" alt="">
-				<figcaption><a href="#">iFSC</a></figcaption>
+				<a target="_blank" href="https://www.ifsc-climbing.org/"><img src="${pageContext.request.contextPath}/resources/images/club/iFSC.png" alt=""></a>
+				<figcaption><a href="https://www.ifsc-climbing.org/">iFSC</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/UIAA.png" alt="">
-				<figcaption><a href="#">UIAA</a></figcaption>
+				<a target="_blank" href="https://www.theuiaa.org/"><img src="${pageContext.request.contextPath}/resources/images/club/UIAA.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://www.theuiaa.org/">UIAA</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/ISMF.jpeg" alt="">
-				<figcaption><a href="#">ISMF</a></figcaption>
+				<a target="_blank" href="http://www.ismf-ski.org/webpages/"><img src="${pageContext.request.contextPath}/resources/images/club/ISMF.jpeg" alt=""></a>
+				<figcaption><a target="_blank" href="http://www.ismf-ski.org/webpages/">ISMF</a></figcaption>
 			</figure>
 			<figure>
 				<div>
@@ -298,24 +298,24 @@ figure img {
 				</div>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/AAC.png" alt="">
-				<figcaption><a href="#">The American Alpine Club</a></figcaption>
+				<a target="_blank" href="https://americanalpineclub.org/"><img src="${pageContext.request.contextPath}/resources/images/club/AAC.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://americanalpineclub.org/">The American Alpine Club</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/theMountaineers.jpeg" alt="">
-				<figcaption><a href="#">The Mountaineers</a></figcaption>
+				<a target="_blank" href="https://www.mountaineers.org/"><img src="${pageContext.request.contextPath}/resources/images/club/theMountaineers.jpeg" alt=""></a>
+				<figcaption><a target="_blank" href="https://www.mountaineers.org/">The Mountaineers</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/tac.png" alt="">
-				<figcaption><a href="#">The Alpine Club</a></figcaption>
+				<a target="_blank" href="http://www.alpine-club.org.uk/"><img src="${pageContext.request.contextPath}/resources/images/club/tac.png" alt=""></a>
+				<figcaption><a target="_blank" href="http://www.alpine-club.org.uk/">The Alpine Club</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/society.png" alt="">
-				<figcaption><a href="#">Cal Hiking and Outdoor Society</a></figcaption>
+				<a target="_blank" href="https://www.chaosberkeley.org/"><img src="${pageContext.request.contextPath}/resources/images/club/society.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://www.chaosberkeley.org/">Cal Hiking and Outdoor Society</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/AF.png" alt="">
-				<figcaption><a href="#">Access Fund</a></figcaption>
+				<a target="_blank" href="https://www.accessfund.org/"><img src="${pageContext.request.contextPath}/resources/images/club/AF.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://www.accessfund.org/">Access Fund</a></figcaption>
 			</figure>
 			
 			
@@ -331,72 +331,72 @@ figure img {
 				</div>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/서울산악조난구조대.jpeg" alt="">
-				<figcaption><a href="#">서울산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/12/34"><img src="${pageContext.request.contextPath}/resources/images/club/structure/서울산악조난구조대.jpeg" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/12/34">서울산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">부산광역시구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/24/82"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/24/82">부산광역시구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/대구산악구조대.jpeg" alt="">
-				<figcaption><a href="#">대구광역시구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/106/107"><img src="${pageContext.request.contextPath}/resources/images/club/structure/대구산악구조대.jpeg" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/106/107">대구광역시구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">인천광역시 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/13/38"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/13/38">인천광역시 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">광주광역시 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/19/62"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/19/62">광주광역시 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">대전광역시 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/16/50"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/16/50">대전광역시 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">울산광역시 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/25/86"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/25/86">울산광역시 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">세종특별자치 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/21/70"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/21/70">세종특별자치 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">경기도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/14/42"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/14/42">경기도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">강원도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/22/74"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/22/74">강원도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">충청북도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/15/46"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/15/46">충청북도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">충청남도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/17/54"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/17/54">충청남도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">전라북도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/18/58"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/18/58">전라북도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">전라남도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/20/66"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/20/66">전라남도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">경상북도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/23/78"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/23/78">경상북도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">경상남도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/26/90"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/26/90">경상남도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt="">
-				<figcaption><a href="#">제주특별자치도 산악구조대</a></figcaption>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/27/94"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/27/94">제주특별자치도 산악구조대</a></figcaption>
 			</figure>
 		</div>
 
