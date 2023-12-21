@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,6 +39,43 @@ public class ProductController {
 	
 	@GetMapping("order")
 	public String order() {
+		return ".product.order";
+	}
+	
+	@GetMapping("{product}")
+	public String buyRequest(@PathVariable String product,
+			Model model
+			) throws Exception{
+		
+		try {
+			long product_num = Long.parseLong(product);
+			
+			// 상품
+			Product dto = service.findById(product_num);
+			
+			// 옵션명
+			List<Product> listOption = service.listProductOption(product_num);
+			
+			// 상위 옵션값
+			List<Product> listOptionDetail = null;
+			if(listOption.size() > 0) {
+				listOptionDetail = service.listOptionDetail(listOption.get(0).getOption_num());
+			}
+			
+			List<Product> listOptionDetail1 = null;
+	        if (listOption.size() > 1) {
+	            listOptionDetail1 = service.listOptionDetail(listOption.get(1).getOption_num());
+	        }
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("listOption", listOption);
+			model.addAttribute("listOptionDetail", listOptionDetail);
+			model.addAttribute("listOptionDetail1", listOptionDetail1);
+			
+		} catch (Exception e) {
+			return "redirect:/product/product";
+		}
+		 
 		return ".product.order";
 	}
 	

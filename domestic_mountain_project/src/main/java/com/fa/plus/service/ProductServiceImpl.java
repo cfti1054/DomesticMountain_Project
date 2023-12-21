@@ -14,7 +14,7 @@ import com.fa.plus.mapper.ProductMapper;
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductMapper mapper;
-	
+	 
 	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result = 0;
@@ -43,9 +43,17 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product findById(long productNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public Product findById(long product_num) {
+		Product dto = null;
+		
+		try {
+			dto = mapper.findById(product_num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 	@Override
@@ -73,16 +81,30 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> listProductOption(long productNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Product> listProductOption(long product_num) {
+		List<Product> list = null;
+		
+		try {
+			list = mapper.listProductOption(product_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
-	/*
+	
 	@Override
 	public List<Product> listOptionDetail(long option_num) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Product> list = null;
+		
+		try {
+			list = mapper.listOptionDetail(option_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
-	*/
+	
 	
 }

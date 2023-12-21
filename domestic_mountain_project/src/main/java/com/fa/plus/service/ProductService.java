@@ -17,5 +17,5 @@ public interface ProductService {
 	public List<Product> listSubCategory(long parent_num);
 	
 	public List<Product> listProductOption(long product_num);
-	// public List<Product> listOptionDetail(long optionNum);
+	public List<Product> listOptionDetail(long option_num);
 }

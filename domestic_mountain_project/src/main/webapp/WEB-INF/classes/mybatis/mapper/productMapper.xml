@@ -10,13 +10,53 @@
 	</select>
 	
 	<select id="listProduct" parameterType="map" resultType="com.fa.plus.domain.Product">
-		SELECT product_num, p.category_num, category_name, product_name, product_price, product_summary
+		SELECT p.product_num, p.category_num, category_name, product_name, product_price, product_summary,
+			product_content, product_hit, NVL(review_star, 0) review_star, NVL(review_count, 0) review_count
 		FROM product p
 		JOIN product_category c ON p.category_num = c.category_num
+		LEFT OUTER JOIN (
+			SELECT product_num, ROUND(AVG(review_star), 1) review_star, COUNT(*) review_count
+			FROM review
+			WHERE review_show = 1
+			GROUP BY product_num
+		) t ON p.product_num = t.product_num
 		WHERE p.product_status=1 AND p.category_num = #{category_num}
-		ORDER BY product_num DESC
+		ORDER BY p.product_num DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Product">
+		SELECT p.product_num, p.category_num, p.product_status, category_name, 
+		    product_name, product_price,
+			product_summary, p.product_content, p.product_reg_date,
+			NVL(review_star, 0) review_star, NVL(review_count, 0) review_count
+		FROM product p
+		JOIN product_category c ON p.category_num = c.category_num
+		LEFT OUTER JOIN (
+			SELECT product_num, ROUND(AVG(review_star), 1) review_star, COUNT(*) review_count
+			FROM review
+			WHERE review_show = 1
+			GROUP BY product_num
+		) t ON p.product_num = t.product_num
+		LEFT OUTER JOIN (
+			SELECT product_num
+			FROM order_detail
+			GROUP BY product_num
+		) pc ON p.product_num = pc.product_num
+		WHERE p.product_status = 1 AND p.product_num = #{product_num}
+	</select>
 	
+	<select id="listProductOption" parameterType="Long" resultType="com.fa.plus.domain.Product">
+		SELECT option_num, option_name, parent, product_num
+		FROM productOption
+		WHERE product_num = #{product_num}
+		ORDER BY parent NULLS FIRST, parent
+	</select>
+	
+	<select id="listOptionDetail" parameterType="Long" resultType="com.fa.plus.domain.Product">
+		SELECT detail_num, option_num, option_value
+		FROM optionDetail
+		WHERE option_num = #{option_num}
+		ORDER BY detail_num
+	</select>
 </mapper>

@@ -2,10 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <style>
     * {
         box-sizing: border-box;
@@ -92,7 +90,7 @@
     .box1{
         border: 1px solid green;
         width: 320px;
-        height: 370px;
+        height: 400px;
         border-radius: 10px;
         margin-top: 50px;
     }
@@ -131,8 +129,17 @@
     }
 
 </style>
+<script type="text/javascript">
+$(function(){
+	$(".img-box").click(function(){
+		let product_num = $(this).attr("data-productNum");
+		let url = "${pageContext.request.contextPath}/product/"+product_num;
+		location.href = url;
+	});
+});
+</script> 
 <!-- ================== body ================== -->
-<section class="features-1" style="height: 2600px;">
+<section class="features-1">
 	<div class="head-container">
         <div class="div2"> > 등산장비 > 신발과 양말 > 등산화</div>
     </div>
@@ -161,7 +168,7 @@
 						<div class="price">${formattedPriceWithComma}</div>
 	                    
 	                    <div class="review">
-	                    	<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">5.0 리뷰 87
+	                    	<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">${dto.review_star} 리뷰 ${dto.review_count}
 	                    </div>
 	                </div>
 	            </div>

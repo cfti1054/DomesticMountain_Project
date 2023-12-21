@@ -29,6 +29,24 @@ public class Product {
 	
 	private int detail_num;
 	private String option_value;
+	
+	private int review_star;
+	private int review_count;
+	
+	
+	
+	public int getReview_star() {
+		return review_star;
+	}
+	public void setReview_star(int review_star) {
+		this.review_star = review_star;
+	}
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
 	public int getProduct_num() {
 		return product_num;
 	}
