@@ -148,6 +148,7 @@ figure img {
 <!-- ================== body ================== -->
 <section class="features-1">
 	<div class="body-container">
+	
 		<div class="amain">
 			<h1 class="amain-main">
 				<a>등산화{dto.category_name} 으로 넘겨야 할듯<span>| DM Store</span></a> <span><a href="/plus/">home</a>
