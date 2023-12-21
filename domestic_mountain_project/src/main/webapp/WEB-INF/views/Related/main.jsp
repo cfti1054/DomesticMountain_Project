@@ -6,22 +6,24 @@
 
 /*=============== body (area) ===============*/
 .features-1 {
-	height: 2000px; /* 삭제 해야함 */
+	height: 2200px; /* 수정 시 auto로 바꾸고 해야함 */
 }
 
 .body-container {
 	padding-top: 120px;
-	max-width: 1400px;
-	margin: auto;
+	max-width: 1500px;
+	margin: 30px auto;
 	position: relative;
 	align-items: center;
 	min-height: 100vh;
 	overflow-x: hidden;
 }
-.body-container .gallery-name {
+.body-container h1 {
 	display: flex;
 	justify-content: center;
-	padding: 20px 0 40px 0;
+	margin: 20px 0 80px 0;
+	font-weight: 700;
+	color: #6558be;
 }
 
 
@@ -219,9 +221,7 @@ figure img {
 
 <section class="features-1">
 	<div class="body-container">
-			<div>
-				<h2 class="gallery-name">산악 관련 클럽 및 구조대</h2>
-			</div>
+		<h1>산악 관련 클럽 및 구조대</h1>
 		<div id="gallery">
 			
 			<figure>
@@ -391,7 +391,7 @@ figure img {
 				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/23/78">경상북도 산악구조대</a></figcaption>
 			</figure>
 			<figure>
-				<a target="_blank" href="https://kafrescue.or.kr/?c=3/26/90"><img src="${pageContext.request.contextPath}/resources/images/club/structure/산악구조대.png" alt=""></a>
+				<a target="_blank" href="https://kafrescue.or.kr/?c=3/26/90"><img src="${pageContext.request.contextPath}/resources/images/club/structure/경상남도산악구조대.jpeg" alt=""></a>
 				<figcaption><a target="_blank" href="https://kafrescue.or.kr/?c=3/26/90">경상남도 산악구조대</a></figcaption>
 			</figure>
 			<figure>

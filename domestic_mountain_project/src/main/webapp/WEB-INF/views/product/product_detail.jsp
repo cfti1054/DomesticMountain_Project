@@ -2,179 +2,199 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ page trimDirectiveWhitespaces="true"%>
-
 <style>
-    * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-    }
+.features-1 {
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+}
 
-    .head-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top:100px;
-    }
+.body-container {
+	margin: 30px auto;
+	max-width: 1300px;
+	padding-top: 120px;
+	position: relative;
+	align-items: center;
+	min-height: 100vh;
+	overflow-x: hidden;
+	max-width: 1300px;
+}
 
-    .div1, .div2 {
-        flex: 1;
-    }
+.amain h1 {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0 60px 0;
+	font-weight: 700;
+	color: #6558be;
+}
 
-    .div1 {
-        text-align: left;
-        margin-top: 30px;
-        margin-left: 40px;
-    }
+.amain-main {
+	padding: 0 0 10px 10px;
+	border-bottom: 2px solid #3a3a3a;
+	font-size: xx-large;
+	color: #6557be;
+}
 
-    .button1{
-        background-color: white;
-        width: 150px;
-        height: 25px;
-        border-radius: 5px;
-    }
+.amain-main a>span {
+	font-size: 18px;
+	color: gray;
+	margin: 10px 0 0 20px;
+}
 
-    .div2 {
-        text-align: right;
-        font-size: 13px;
-        color: blue;
-        margin-top: 40px;
-        margin-right: 40px;
-    }
+.amain-main span {
+	font-size: 14px;
+	color: gray;
+	margin: 15px 0 0 20px;
+}
 
-    .jemok{
-        text-align: center;
-        font-size: 50px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
+.features-1 img {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+}
 
-    .img-container{
-        display: flex;
-        margin: 80px 250px 80px 250px;
-        flex-direction: column; /* 세로 방향으로 정렬 */
-    }
+#gallery {
+	position: relative;
+	left: calc(-1 * var(- -adjust-size));
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 40px;
+	max-width: auto;
+	padding: 20px;
+	-webkit-perspective: 0;
+	perspective: 0;
+}
 
-    .img-container1{
-        display: flex;
-        margin: 30px 250px 80px 250px;
-        border: 1px solid black;
-        flex-direction: column; /* 세로 방향으로 정렬 */
-    }
+#gallery figure {
+	position: relative;
+	display: inline-block;
+	margin: 14px;
+	border-radius: 5px;
+	box-shadow: 0 7px 8px rgba(0, 0, 0, 0.4);
+	width: 280px;
+	height: 420px;
+	text-align: center;
+	background-color: ghostwhite;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: multiply;
+	transform-origin: center 0.22rem;
+	will-change: transform;
+	break-inside: avoid;
+	overflow: hidden;
+	outline: 1px solid transparent;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	padding: 0.5rem;
+}
 
-    .name{
-        text-align: left;
-        font-weight: bold;
-    }
+figure img {
+	aspect-ratio: 1/1;
+	width: 100%;
+	object-fit: cover;
+	display: block;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	z-index: 1;
+}
 
-    .img-box{
-        /* border: 1px solid blue; */
-        margin-top: 10px;
-		transition: transform 0.3s ease;
-    }
-    
-    .img-box:hover{
-        transform: scale(1.1); /* 1.1 배 확대 */
-    }
-    
-    
+.features-1 figure figcaption {
+	font-size: 18px;
+	font-weight: 400;
+	padding: 2px;
+	
+	width: 100%;
+	height: 80px;
+}
 
-    .box{
-        display: flex; /* 가로 방향으로 정렬 */
-        justify-content: space-between; /* 가로 간격을 맞추는 부분 */
-        flex-wrap: wrap;
-        margin-top: 10px;
-        align-items: flex-start; /* 왼쪽 정렬 */
-    }
+.price{
+	width: 100%;
+    text-align: left;
+    padding-left: 10px;
+}
+.star {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+}
 
-    .box1{
-        border: 1px solid green;
-        width: 320px;
-        height: 400px;
-        border-radius: 10px;
-        margin-top: 50px;
-    }
+.review {
+	text-align: left;
+	display: flex;
+	align-items: center; /* 수직 가운데 정렬 */
+	padding-left: 10px;
+}
 
-    .product-name{
-        text-align: left;
-        margin-left: 25px;
-    }
+.review p {
+	margin-bottom: 8px;
+}
 
-    .price{
-        text-align: left;
-        margin-left: 25px;
-    }
-
-    .review{
-        text-align: left;
-        margin-left: 25px;
-        margin-top: 10px;
-        display: flex;
-  		align-items: center; /* 수직 가운데 정렬 */
-    }
-    
-    .img{
-    	align-items: center;
-    	width: 280px;
-        height: 230px;
-        margin: 20px;
-        border: 1px solid black;
-        border-radius: 10px;
-    }
-    
-    .star{
-    	width: 15px;
-    	height:15px;
-    	margin-right: 5px;
-    }
-
+@media ( min-width : 800px) {
+	#gallery {
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	}
+}
 </style>
 <script type="text/javascript">
-$(function(){
-	$(".img-box").click(function(){
-		let product_num = $(this).attr("data-productNum");
-		let url = "${pageContext.request.contextPath}/product/"+product_num;
-		location.href = url;
+	$(function() {
+		$(".img-box").click(
+				function() {
+					let product_num = $(this).attr("data-productNum");
+					let url = "${pageContext.request.contextPath}/product/"
+							+ product_num;
+					location.href = url;
+				});
 	});
-});
-</script> 
+</script>
 <!-- ================== body ================== -->
 <section class="features-1">
-	<div class="head-container">
-        <div class="div2"> > 등산장비 > 신발과 양말 > 등산화</div>
-    </div>
-    <div class="jemok"> 등산화 </div>
-    <div class="img-container">
-        <div class="box">
-        	<c:forEach var="dto" items="${list}" varStatus="status">
-	            <div class="img-box" data-productNum="${dto.product_num}">
-	                <div class="box1">
-	                    <c:choose>
-						   <c:when test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
-						       <img class="img" src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
-						   </c:when>
-						   <c:when test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
-						       <img class="img" src="${dto.product_summary}">
-						   </c:when>
-						   
-						   <c:otherwise>
-						       
-						   </c:otherwise>
+	<div class="body-container">
+		<div class="amain">
+			<h1 class="amain-main">
+				<a>등산화{dto.category_name} 으로 넘겨야 할듯<span>| DM Store</span></a> <span><a href="/plus/">home</a>
+					&gt; DM Store &gt; 등산화{dto.category_name}</span>
+			</h1>
+		</div>
+
+		<div class="gallery-main">
+			<div id="gallery" data-productNum="${dto.product_num}">
+
+				<c:forEach var="dto" items="${list}" varStatus="status">
+					<figure>
+						<c:choose>
+							<c:when
+								test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+								<img class="img"
+									src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+							</c:when>
+							<c:when
+								test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+								<img class="img" src="${dto.product_summary}">
+							</c:when>
+							<c:otherwise>
+							</c:otherwise>
 						</c:choose>
-	                    <div class="product-name">${dto.product_name}</div>
-	                    <c:set var="formattedPrice" value="${dto.product_price}" />
-						<fmt:formatNumber value="${formattedPrice}" pattern="#,###" var="formattedPriceWithComma" />
+
+
+						<figcaption>
+							<a href=""><span>${dto.product_name}</span></a>
+						</figcaption>
 						
+						<c:set var="formattedPrice" value="${dto.product_price}" />
+						<fmt:formatNumber value="${formattedPrice}" pattern="#,###" var="formattedPriceWithComma" />
+
+
 						<div class="price">${formattedPriceWithComma}</div>
-	                    
-	                    <div class="review">
-	                    	<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">${dto.review_star} 리뷰 ${dto.review_count}
-	                    </div>
-	                </div>
-	            </div>
-	        </c:forEach>
-        </div>
-    </div>
-</section>
-<section class="features-6">
+
+						<div class="review">
+							<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">
+								<p>${dto.review_star}&nbsp;&nbsp;&nbsp;  리뷰&nbsp; &nbsp;${dto.review_count}</p>
+						</div>
+
+					</figure>
+				</c:forEach>
+
+			</div>
+		</div>
+
+	</div>
 </section>

@@ -2,354 +2,344 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 
-    .head-container {
-        display: flex;
-        justify-content: space-between;
-    }
+/*=============== body (area) ===============*/
+.features-1 {
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+}
 
-    .div1, .div2 {
-        flex: 1;
-        padding-top: 120px;
-    }
+.body-container {
+	margin: 30px auto;
+	max-width: 1300px;
+	padding-top: 120px;
+	position: relative;
+	align-items: center;
+	min-height: 100vh;
+	overflow-x: hidden;
+	max-width: 1300px;
+}
 
-    .div1 {
-        text-align: left;
-        margin-top: 30px;
-        margin-left: 80px;
-    }
+.amain h1 {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0 80px 0;
+	font-weight: 700;
+	color: #6558be;
+}
 
-    .button1{
-        background-color: white;
-        width: 150px;
-        height: 25px;
-        border-radius: 5px;
-    }
+.amain-main {
+	padding: 0 0 10px 10px;
+	border-bottom: 2px solid #3a3a3a;
+	font-size: xx-large;
+	color: #6557be;
+}
 
-    .div2 {
-        text-align: right;
-        font-size: 13px;
-        color: blue;
-        margin-top: 40px;
-        margin-right: 80px;
-    }
+.amain-main a>span {
+	font-size: 18px;
+	color: gray;
+	margin: 10px 0 0 20px;
+}
 
-    .jemok{
-        text-align: center;
-        font-size: 50px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
+.amain-main span {
+	font-size: 14px;
+	color: gray;
+	margin: 15px 0 0 20px;
+}
 
-    .img-container{
-        display: flex;
-        margin: 80px 300px 80px 300px;
-        /* border: 1px solid black; */
-        flex-direction: column; /* 세로 방향으로 정렬 */
-    }
+.features-1 a {
+	color: hsl(212deg 35.69% 49.28%);
+	text-decoration: none;
+}
 
-    .img-container1{
-        display: flex;
-        margin: 30px 300px 80px 300px;
-        /* border: 1px solid black; */
-        flex-direction: column; /* 세로 방향으로 정렬 */
-    }
+.features-1 img {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+}
 
-    .name{
-        text-align: left;
-        font-weight: bold;
-    }
+#gallery {
+	position: relative;
+	left: calc(-1 * var(- -adjust-size));
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 40px;
+	max-width: auto;
+	padding: 20px;
+	-webkit-perspective: 0;
+	perspective: 0;
+}
 
-    .img-box{
-        /* border: 1px solid blue; */
-        margin-top: 10px;
-		transition: transform 0.3s ease;
-    }
-    
-    .img-box:hover{
-        transform: scale(1.1); /* 1.1 배 확대 */
-    }
+#gallery figure {
+	position: relative;
+	display: inline-block;
+	margin: 14px; 
+	padding : 0.5rem;
+	border-radius: 5px;
+	box-shadow: 0 7px 8px rgba(0, 0, 0, 0.4);
+	width: 220px;
+	height: 260px;
+	text-align: center;
+	background-color: ghostwhite;
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: multiply;
+	transform-origin: center 0.22rem;
+	will-change: transform;
+	break-inside: avoid;
+	overflow: hidden;
+	outline: 1px solid transparent;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	padding: 0.5rem;
+}
 
-    .box{
-        display: flex; /* 가로 방향으로 정렬 */
-        flex-wrap: wrap;
-        margin-top: 10px;
-        align-items: flex-start; /* 왼쪽 정렬 */
-    }
+figure img {
+	aspect-ratio: 1/1;
+	width: 100%;
+	object-fit: cover;
+	display: block;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	z-index: 1;
+}
 
-    .box1{
-        border: 1px solid green;
-        width: 220px;
-        height: 290px;
-        border-radius: 10px;
-        
-    }
+.features-1 figure figcaption {
+	font-size: 18px;
+	font-weight: 400;
+	z-index: 1;
+}
 
-    .box2{
-        border: 1px solid green;
-        width: 220px;
-        height: 290px;
-        border-radius: 10px;
-        margin-left: 50px;
-    }
+@media ( min-width : 800px) {
+	#gallery {
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	}
+}
 
-    .box3{
-        border: 1px solid green;
-        width: 220px;
-        height: 290px;
-        border-radius: 10px;
-        margin-left: 50px;
-    }
-
-    .box4{
-        border: 1px solid green;
-        width: 220px;
-        height: 290px;
-        border-radius: 10px;
-        margin-left: 50px;
-    }
-
-    .img{
-        align-items: center;
-        height: 200px;
-        margin: 20px;
-        border: 1px solid black;
-        border-radius: 10px;
-    }
-
-    .product-name{
-        text-align: center;
-
-    }
-    
-    img{
-    	align-items: center;
-    	width: 180px;
-        height: 200px;
-        margin: 20px;
-        border: 1px solid black;
-        border-radius: 10px;
-    }
-
+.gallery-main h3 {
+	margin-top: 50px;
+	margin-left: 10px;
+}
 </style>
-<!-- ================== body ================== -->
-<section class="features-1" style="height: auto;">
-	<div class="head-container">
-        <div class="div1">
-        	<button class="button1" type="button"> 장비 견적 맞춰보기 </button>
-        </div>
-        <div class="div2"><p> > 등산 장비</p></div>
-    </div>
-    <div class="jemok"> 등산장비 </div>
-    <div class="img-container">
-        <div class="name"><a href="${pageContext.request.contextPath}/product/product_detail"> >> 신발과 양말 </a></div>
-        <div class="box">
-            <div class="img-box">
-                <div class="box1">
-                	<a href="${pageContext.request.contextPath}/product/product_detail?category_num=21">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">등산화</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box2">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=22">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">등산용 양말</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=23">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">아이젠</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="img-container1">
-        <div class="name"> >> 의류(남성) </div>
-        <div class="box">
-            <div class="img-box">
-                <div class="box1">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=11">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">자켓 / 점퍼 / 코트</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box2">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=12">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">조끼</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=13">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">티셔츠</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=14">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">모자</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=15">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">장갑</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="img-container1">
-        <div class="name"> >> 의류(여성) </div>
-        <div class="box">
-            <div class="img-box">
-                <div class="box1">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=16">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">자켓 / 점퍼 / 코트</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box2">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=17">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">조끼</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=18">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">티셔츠</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=19">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">모자</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=20">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">장갑</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="img-container1">
-        <div class="name"> >> 가방 </div>
-        <div class="box">
-            <div class="img-box">
-                <div class="box1">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=24">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">등산용 가방</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box2">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=25">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">방수커버</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=26">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">장갑</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="img-container1">
-        <div class="name"> >> 보호장비 </div>
-        <div class="box">
-            <div class="img-box">
-                <div class="box1">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=27">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">등산스틱</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box2">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=28">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">조명기구</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=29">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">무릎 보호대</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box3">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=30">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">선글라스</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-                <div class="box1">
-                    <a href="${pageContext.request.contextPath}/product/product_detail?category_num=31">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">의약품</span>
-                    </a>
-                </div>
-            </div>
-            <div class="img-box">
-            	<div class="box2">
-                	<a href="${pageContext.request.contextPath}/product/product_detail?category_num=32">
-	                    <img src="${pageContext.request.contextPath}/resources/images/climbing.png">
-	                    <span class="product-name">방한용품</span>
-                    </a>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="features-6">
+<section class="features-1">
+	<div class="body-container">
+		<div class="amain">
+			<h1 class="amain-main">
+				<a>DM Store 상품<span>| DM Store</span></a> <span><a
+					href="/plus/">home</a> &gt; DM Store</span>
+			</h1>
+		</div>
+		<div class="gallery-main">
+			<h3><a>&gt;&gt; 신발과 양말</a></h3>
+			<div id="gallery">
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=21">
+						<img src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=21">등산화</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=22">
+						<img src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=22">등산용 양말</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=23">
+						<img src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=23">아이젠</a>
+					</figcaption>
+				</figure>
+			</div>
+		</div>
+
+		<div class="gallery-title">
+			<h3><a>&gt;&gt; 의류(남성)</a></h3>
+			<div id="gallery">
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=11">
+						<img src="" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=11">자켓 / 점퍼 / 코트</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=12">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=12">조끼</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=13">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=13">티셔츠</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=14">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=14">모자</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=15">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=15">장갑</a>
+					</figcaption>
+				</figure>
+				
+			</div>
+		</div>
+
+		<div class="gallery-title">
+			<h3><a>&gt;&gt; 의류(여성)</a></h3>
+			<div id="gallery">
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=16">
+						<img src="" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=16">자켓 / 점퍼 / 코트</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=17">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=17">조끼</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=18">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=18">티셔츠</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=19">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=19">모자</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=20">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=20">장갑</a>
+					</figcaption>
+				</figure>
+			</div>
+		</div>
+
+		<div class="gallery-title">
+			<h3><a>&gt;&gt; 가방</a></h3>
+			<div id="gallery">
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=24">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=24">등산용 가방</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=25">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=25">방수커버</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=26">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=26">기타</a>
+					</figcaption>
+				</figure>
+			</div>
+		</div>
+
+		<div class="gallery-title">
+			<h3><a>&gt;&gt; 보호장비</a></h3>
+			<div id="gallery">
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=27">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=27">등산스틱</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=28">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=28">조명기구</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=29">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=29">무릎 보호대</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=30">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=30">선글라스</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=31">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=31">의약품</a>
+					</figcaption>
+				</figure>
+				<figure>
+					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=32">
+						<img src="#" alt="">
+					</a>
+					<figcaption>
+						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=32">방한용품</a>
+					</figcaption>
+				</figure>
+			</div>
+		</div>
+
+
+	</div>
 </section>

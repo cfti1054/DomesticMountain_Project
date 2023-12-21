@@ -288,24 +288,37 @@
     margin-right: 5px;
     vertical-align: top;
 }
+.article-movie-sub .card_area {
+	display: table;
+    position: relative;
+    width: 100%;
+    table-layout: fixed;
+}
 
 .article-movie-sub .movie-img {
     display: table-cell;
     position: relative;
-    width: 300px;
+    width: 120px;
     height: 120px;
     padding-left: 35px;
     vertical-align: top;
 }
-
+.article-movie-sub .movie-img a {
+	display: block;
+    position: relative;
+    height: 100%;
+}
 .article-movie-sub .movie-img a:before {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     content: '';
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    aspect-ratio: 120/120;
 }
 
 .article-movie-sub img {

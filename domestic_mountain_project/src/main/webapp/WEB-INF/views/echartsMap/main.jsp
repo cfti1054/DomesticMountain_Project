@@ -19,7 +19,7 @@
 	justify-content: center;
 	margin: 20px 0 80px 0;
 	font-weight: 700;
-	color: #4133B7;
+	color: #6558be;
 }
 
 .maps-body-container .maps {
