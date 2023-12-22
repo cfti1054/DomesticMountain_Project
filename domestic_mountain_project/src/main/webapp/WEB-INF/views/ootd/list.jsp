@@ -261,17 +261,21 @@
 	color: #ff2f3b;
 }
 
-.bottom-list {
-	display: flex;
-	justify-content: space-between;
+
+/* ================= 하단 버튼 ================= */
+
+.article-album-sub .row {
+	width: auto;
+    display: flex;
+    justify-content: end;
 }
-.bottom-list .col button {
-    height: 100%;
-    border: 0px;
-    background: #a69fd6;
-    outline: none;
-    color: #ffffff;
-    background: #gray;
+.btn-light {
+    background-color: #ada7e4;
+}
+
+.article-album-sub .row .col-auto .btn-light,
+.article-album-sub .row i{
+	color: white;
 }
 </style>
 
@@ -496,15 +500,27 @@
 
 						<div class="page-navigation">1 2 3</div>
 						
-						<div class="bottom-list">
-							<div class="col">
-								<button type="button" class="btn-light" onclick="#" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
+						<div class="row board-list-footer">
+								<div class="col">
+									<button type="button" class="btn btn-light" onclick="#"
+										title="새로고침">
+										<i class="bi bi-arrow-counterclockwise"></i>
+									</button>
+								</div>
+								<div class="col text-center">&nbsp;</div>
+								
+								<div class="col-6 text-end">
+									<form class="row text-end-row" name="searchForm" action="#" method="post">
+										
+										<div class="col-auto p-1">
+											<button type="button" class="btn btn-light"
+												onclick="searchList()">글올리기
+											</button>
+										</div>
+									</form>
+								</div>
+								
 							</div>
-
-							<div class="col">
-								<button type="button" class="btn-light" onclick="#">글올리기</button>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

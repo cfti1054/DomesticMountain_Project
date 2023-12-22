@@ -143,6 +143,11 @@
 	width: 100%;
 	justify-content: end;
 }
+
+.board-list-footer .row i,
+.board-list-footer .col i{
+	color: white;
+}
 </style>
 
 <script type="text/javascript">
