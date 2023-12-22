@@ -54,6 +54,7 @@
 		WHERE m1.user_id = #{user_id}
 	</select>
 	
+	
 	<select id="findByEmail" parameterType="String" resultType="com.fa.plus.domain.User">
 		SELECT user_id, email
 		FROM user2
