@@ -184,19 +184,11 @@ public class MemberManageController {
 		String rank = "true";
 		try {
 			Map<String, Object> map = new HashMap<>();
+			map.put("rank_num", dto.getRank_num());
 			map.put("useridx", dto.getUseridx());
-			if (dto.getRank1() == null) {
-				map.put("rank1", "브론즈");
-			} else {
-				map.put("rank2", "실버");
-				map.put("rank3", "골드");
-				map.put("rank4", "플레티넘");
-				map.put("rank5", "레드");
-			}
-			service.updateMemberRank(map);
-
-			// 회원 상태 변경 사항 저장
-			service.insertMemberRank(dto);
+			
+			// 회원 등급 변경
+			service.insertMemberRank(map);
 
 		} catch (Exception e) {
 			rank = "false";
