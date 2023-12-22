@@ -18,54 +18,43 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css">
-
-<style>
-        #modal {
-          display: none;
-          position:relative;
-          width:100%;
-          height:100%;
-          z-index:2;
-        }
-        
-        #modal h2 {
-          margin:0;
-        }
-        #modal button {
-          display:inline-block;
-          width:100px;
-          margin-left:calc(100% - 100px - 10px);
-        }
-        
-        #modal .modal_content {
-          width:300px;
-          margin:100px auto;
-          padding:20px 10px;
-          background:#fff;
-          border:2px solid #666;
-        }
-        
-        #modal .modal_layer {
-          position:fixed;
-          top:0;
-          left:0;
-          width:100%;
-          height:100%;
-          background:rgba(0, 0, 0, 0.5);
-          z-index:-1;
-        }   
-</style> 
-        
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css">   
         <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         
         <script>
-        $(function(){    
-        		$("#popbutton").click(function(){        
-        			$('div.modal').modal({remote : 'layer.html'});    
-        		})
-        })
+        function ajaxFun(url, method, formData, dataType, fn, file = false) {
+        	const settings = {
+        			type: method, 
+        			data: formData,
+        			success:function(data) {
+        				fn(data);
+        			},
+        			beforeSend: function(jqXHR) {
+        				jqXHR.setRequestHeader('AJAX', true);
+        			},
+        			complete: function () {
+        			},
+        			error: function(jqXHR) {
+        				if(jqXHR.status === 403) {
+        					login();
+        					return false;
+        				} else if(jqXHR.status === 400) {
+        					alert('요청 처리가 실패 했습니다.');
+        					return false;
+        		    	}
+        		    	
+        				console.log(jqXHR.responseText);
+        			}
+        	};
+        	
+        	if(file) {
+        		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
+        		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
+        	}
+        	
+        	$.ajax(url, settings);
+        }
         </script>
         
         
@@ -189,6 +178,7 @@
                             </div>
 
 						<div class="card-body">
+						<form id="faq">
 							<table id="faq_category_table" class="display"
 								style="width: 100%">
 								<thead>
@@ -224,17 +214,15 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							</form>
 							<p>
-								<button class="btn btn-secondary" id="visible_button">수정</button>
+								<button type="submit" class="btn btn-secondary" id="visible_button" onclick="location.href='${pageContext.request.contextPath}/admin/support/faq_category_update';">수정</button>
 							</p>
 							<p>
 								<button type="button" class="btn btn-primary"
 									onclick="location.href='${pageContext.request.contextPath}/admin/support/faq_category_write';">추가</button>
 							</p>
-							<p>
-								<!-- Modal Button -->
-								<button type="button" id="modal_open_btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Open modal</button>
-							</p>
+							
 							
 							
 							
@@ -243,6 +231,7 @@
                             </div>
                         </div>
                     </div>
+                    <div id="faq-dialog" style="display: none;"></div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -282,14 +271,43 @@
         	    var row = oTable.row(pos).data();
         	} );
 
-        	$("#visible_button").on("click",function(){
-        	     var oAll =[];
+        	$("#visible_button").on("click",function() {
+        		var oAll =[];
         	 $('#faq_category_table tbody tr.selected').each(function(){
-        	      var pos = oTable.row(this).index();
-        	    var row = oTable.row(pos).data();
+        		 var pos = oTable.row(this).index();
+        		 var row = oTable.row(pos).data();
         	    oAll.push(row);
         	 });
-        	    console.log(oAll);
+        	 	/* 수정 버튼 눌렸을 때의 action*/
+        	 	console.log(oAll.length);
+        	 	if (oAll.length > 1) {
+        	 		alert('수정은 한 번에 한개만 가능합니다.');
+        	 	} else {
+        	 		$.ajax({
+            	 		type: 'post',
+            	 		url: 'faq_category_update',
+            	 		data : {"val" : oAll },
+            	 		dataType: 'json',
+            	 		traditional: true,
+            	 		success: function(data) {
+            	 			
+            	 			
+            	 		}
+        	 	});
+        	 	
+        	 	}
+            	
+        	 		
+        	 	
+        	 	
+        	 	
+        	 	
+        	 	
+        	 	
+        	 	
+        	 	
+        	 	
+        	 	
         	});
 
         	});
@@ -297,12 +315,11 @@
             https://stackoverflow.com/questions/35498357/datatable-multiple-selection
             */
         </script>
-        
-        
         <script>
-	
-       /*  function profile(useridx) {
-        	let dlg = $("#member-dialog").dialog({
+        $("#visible_button").on("click",function() {
+        	
+        	
+        	let dlg = $("#faq-dialog").dialog({
         		autoOpen: false,
         		modal: true,
         		buttons: {
@@ -315,21 +332,61 @@
         		
         		height: 550,
         		width: 800,
-        		title: "회원 상세 정보",
+        		title: "FAQ 카테고리",
+        		close: function(event, ui) {
+        		}
+        	});
+    	 	
+    	 	const fn = function(data) {
+        		$("#faq-dialog").html(data);
+        		dlg.dialog("open");
+        	};
+        	
+        	
+        });
+        
+        
+        </script>
+        
+        <script>
+	
+         function profile() {
+        	let dlg = $("#faq-dialog").dialog({
+        		autoOpen: false,
+        		modal: true,
+        		buttons: {
+        			" 수정 " :function(){
+        				updateOk();
+        			}, " 닫기 ": function() {
+        				$(this).dialog("close");
+        			}
+        		},
+        		
+        		height: 550,
+        		width: 800,
+        		title: "FAQ 카테고리",
         		close: function(event, ui) {
         		}
         	});
         	
-        	let url = "${pageContext.request.contextPath}/admin/memberManage/profile";
-        	let query = "useridx=" + useridx;
+        	var oAll =[];
+       	 $('#faq_category_table tbody tr.selected').each(function(){
+       		 var pos = $('#faq_category_table').DataTable().row(this).index();
+       		 var row = $('#faq_category_table').DataTable().row(pos).data();
+       	    oAll.push(row);
+       	 })
+       	 
+       	 
+        	let url = "${pageContext.request.contextPath}/admin/support/faq_category_write";
+        	let query= oAll;
         	
         	const fn = function(data) {
-        		$("#member-dialog").html(data);
+        		$("#faq-dialog").html(data);
         		dlg.dialog("open");
         	};
         	
-        	ajaxFun(url, "get", query, "text", fn);
-        } */
+        	ajaxFun(url, "post", query, "text", fn);
+        } 
 			
         
         </script>

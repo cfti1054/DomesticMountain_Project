@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -58,27 +59,59 @@ public class SupportController {
 	
 	@GetMapping("faq_category_write")
 	public String write_form(Model model) throws Exception {
+//		model.addAttribute("mode")
 		model.addAttribute("mode","write");
-		
-		
-		return ".admin.support.iconlist";
+
+
+		return ".admin.support.write_form";
 	}
 	
-	@PostMapping("faq_category_write")
 	public String write_submit(Support dto, HttpSession session) throws Exception {
-//		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		
 		String root = session.getServletContext().getRealPath("/");
-		
+
 		try {
-			
+
 //			dto.setCategory_reg_id(info.getUserId());
 			service.insert_faq_category(dto);
 		} catch (Exception e) {
 		}
-		
+
 		return "redirect:/admin/support/faq_category_list";
 	}
+	
+	
+	@RequestMapping(value = "faq_category_update", method = RequestMethod.POST)
+	@ResponseBody
+	public String update_form(@RequestParam(value="val") List<String> val, Model model) throws Exception {
+		model.addAttribute("mode","write");
+		
+//		for(int i=0; i < val.length; i++) {
+//			System.out.println("vals(" + i + ") : " + );
+//		}
+		for(String s : val) {
+			System.out.println(s);
+		}
+		
+		
+		return "admin/support/write_modal";
+	}
+
+	
+//	@PostMapping("faq_category_write")
+//	public String write_submit(Support dto, HttpSession session) throws Exception {
+////		SessionInfo info = (SessionInfo) session.getAttribute("member");
+//		
+//		String root = session.getServletContext().getRealPath("/");
+//		
+//		try {
+//			
+////			dto.setCategory_reg_id(info.getUserId());
+//			service.insert_faq_category(dto);
+//		} catch (Exception e) {
+//		}
+//		
+//		return "redirect:/admin/support/faq_category_list";
+//	}
 	
 	
 	
