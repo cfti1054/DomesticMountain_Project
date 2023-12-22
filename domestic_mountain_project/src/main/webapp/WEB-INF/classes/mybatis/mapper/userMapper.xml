@@ -34,26 +34,49 @@
 	</insert>
 	
 	<update id="insertUser12" parameterType="com.fa.plus.domain.User">
-		
+		INSERT ALL
+   		INTO user1(useridx, user_id, user_name, user_pwd, enabled, reg_date)
+   			VALUES (#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE)
+    	INTO user2(useridx, birth, email, addr1, addr2, zip, tel)
+    		VALUES (#{useridx}, #{birth}, #{email},
+           		#{zip, jdbcType=VARCHAR},
+           		#{addr1, jdbcType=VARCHAR},
+           		#{addr2, jdbcType=VARCHAR},
+           		#{tel})
+    SELECT * FROM dual
 	</update>
 	
 	<select id="findById" parameterType="String" resultType="com.fa.plus.domain.User">
-			SELECT m.useridx, usership, m1.user_id, user_name, user_pwd, enabled
-			FROM userall m 
-			JOIN user1 m1 ON m.useridx = m1.useridx 
-			WHERE m1.user_id = #{user_id}
+		SELECT m.useridx, usership, m1.user_id, user_name, user_pwd, enabled
+		FROM userall m 
+		JOIN user1 m1 ON m.useridx = m1.useridx 
+		WHERE m1.user_id = #{user_id}
 	</select>
 	
 	<select id="findByEmail" parameterType="String" resultType="com.fa.plus.domain.User">
-			
+		SELECT user_id, email
+		FROM user2
+		WHERE email = #{email}
 	</select>
 	
 	<update id="updateUser1" parameterType="com.fa.plus.domain.User">
-	
+		UPDATE user1 SET user_pwd=#{user_pwd}
+		WHERE useridx=#{useridx}	
 	</update>
 	
 	<update id="updateUser2" parameterType="com.fa.plus.domain.User">
-	
+		UPDATE user2 SET birth=#{birth, jdbcType=VARCHAR}, email=#{email, jdbcType=VARCHAR}, 
+		zip=#{zip, jdbcType=VARCHAR}, tel=#{tel, jdbcType=VARCHAR},
+		addr1=#{addr1, jdbcType=VARCHAR}, addr2=#{addr2, jdbcType=VARCHAR}
+		WHERE useridx=#{useridx}
 	</update>
+	
+	<delete id="deleteUser1" parameterType="map">
+		DELETE FROM user1 WHERE useridx=#{useridx}
+	</delete>
+	
+	<delete id="deleteUser2" parameterType="map">
+		DELETE FROM user2 WHERE useridx=#{useridx}
+	</delete>
 	
 </mapper>

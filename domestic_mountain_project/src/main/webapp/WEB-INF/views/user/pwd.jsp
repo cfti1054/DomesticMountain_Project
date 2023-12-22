@@ -58,8 +58,8 @@ function sendOk() {
 		                </div>
                         
                         <div class="d-grid">
-                            <input type="text" name="userId" class="form-control form-control-lg" placeholder="아이디"
-                            		value="${sessionScope.loginUser.user_id}" 
+                            <input type="text" name="user_id" class="form-control form-control-lg" placeholder="아이디"
+                            		value="${sessionScope.loginUser.user_id}"
                             		readonly>
                         </div>
                         <div class="d-grid">

@@ -33,6 +33,7 @@ public interface UserMapper {
 
 	public void updateUsership(Map<String, Object> map);
 
-	
+	public void deleteUser1(Map<String, Object> map) throws SQLException;
+	public void deleteUser2(Map<String, Object> map) throws SQLException;
 	
 }

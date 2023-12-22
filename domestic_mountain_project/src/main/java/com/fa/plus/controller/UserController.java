@@ -29,9 +29,15 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@GetMapping("login")
+	@RequestMapping("login")
 	public String loginForm() {
-		return ".user.login"; 
+		return ".user.login";
+	}
+	// 회원가입 폼
+	@GetMapping("user")
+	public String userForm(Model model) {
+		model.addAttribute("mode", "user");
+		return ".user.user"; 
 	}
 	
 	@PostMapping("login")
@@ -88,11 +94,11 @@ public class UserController {
 	}
 	
 	// 회원가입 폼
-		@GetMapping("user")
-		public String memberForm(Model model) {
-			model.addAttribute("mode", "user");
-			return ".user.user";
-		}
+//		@GetMapping("user")dd
+//		public String userForm(Model model) {
+//			model.addAttribute("mode", "user");
+//			return ".user.user";
+//		}
 		
 	// 회원 가입 완료 
 	@PostMapping("user")
@@ -245,7 +251,28 @@ public class UserController {
 	}
 	
 	@PostMapping("pwdFind")
-	public String pwdFindSubmit() throws Exception {
+	public String pwdFindSubmit(@RequestParam String user_id,
+			RedirectAttributes rAttr,
+			Model model) throws Exception {
+		
+		User dto = service.findById(user_id);
+		
+		if(dto == null || dto.getEmail() == null || dto.getEnabled() == 0) {
+			model.addAttribute("message", "등록된 아이디가 아닙니다.");
+			return ".user.pwdFind";
+		}
+		try {
+			service.generatePwd(dto);
+		} catch (Exception e) {
+			model.addAttribute("message", "이메일 전송이 실패했습니다.");
+			return ".user.pwdFind";
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append("회원님의 이메일로 임시패스워드를 전송했습니다.<br>");
+		sb.append("로그인 후 패스워드를 변경하시기 바랍니다.<br>");
+		
+		rAttr.addFlashAttribute("title", "패스워드 찾기");
+		rAttr.addFlashAttribute("message", sb.toString());
 		
 		return "redirect:/user/complete";
 	}
@@ -257,7 +284,22 @@ public class UserController {
 	}
 	
 	@PostMapping("idFind")
-	public String idFindSubmit() throws Exception {
+	public String idFindSubmit(@RequestParam String email,
+			RedirectAttributes rAttr,
+			Model model) throws Exception {
+		
+		boolean b = service.findByEmailId(email);
+		
+		if( ! b ) {
+			model.addAttribute("message", "등록된 이메일이 아닙니다.");
+			return ".user.idFind";
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("회원님의 이메일로 아이디로 이메일을 전송했습니다 .<br>");
+		
+		rAttr.addFlashAttribute("title", "아이디 찾기");
+		rAttr.addFlashAttribute("message", sb.toString());
 		
 		return "redirect:/user/complete";
 	}

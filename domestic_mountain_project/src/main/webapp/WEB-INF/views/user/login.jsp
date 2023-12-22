@@ -84,7 +84,7 @@
 						href="${pageContext.request.contextPath}/user/user"> 회원가입</a>
 				</p>
 
-				<a href="#" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
+				<a href="${pageContext.request.contextPath}/user/pwdFind" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
 
 				<div class="d-grid">
 					<p class="form-control-plaintext text-center text-primary">${message}</p>
