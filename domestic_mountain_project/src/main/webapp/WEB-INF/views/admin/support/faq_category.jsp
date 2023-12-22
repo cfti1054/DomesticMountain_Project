@@ -216,7 +216,7 @@
 							</table>
 							</form>
 							<p>
-								<button type="submit" class="btn btn-secondary" id="visible_button" onclick="location.href='${pageContext.request.contextPath}/admin/support/faq_category_update';">수정</button>
+								<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
 							</p>
 							<p>
 								<button type="button" class="btn btn-primary"
@@ -279,73 +279,46 @@
         	    oAll.push(row);
         	 });
         	 	/* 수정 버튼 눌렸을 때의 action*/
-        	 	console.log(oAll.length);
-        	 	if (oAll.length > 1) {
-        	 		alert('수정은 한 번에 한개만 가능합니다.');
-        	 	} else {
-        	 		$.ajax({
-            	 		type: 'post',
-            	 		url: 'faq_category_update',
-            	 		data : {"val" : oAll },
-            	 		dataType: 'json',
-            	 		traditional: true,
-            	 		success: function(data) {
+
+        	 		 let dlg = $("#faq-dialog").dialog({
+             			autoOpen: false,
+             			modal: true,
+             			buttons: {
+             				" 수정 " :function(){
+             					updateOk();
+             				}, " 닫기 ": function() {
+             					$(this).dialog("close");
+             				}
+             			},
+             			
+             			height: 550,
+             			width: 800,
+             			title: " FAQ 카테고리 ",
+             			close: function(event, ui) {
+             			}
+             		});
+             		
+             		let url = "${pageContext.request.contextPath}/admin/support/multi_category";
+             		let query = "category_dto=" + oAll;
+             		
+             		
+             		const fn = function(data) {
+             			$("#member-dialog").html(data);
+             			dlg.dialog("open");
+             		};
+             		ajaxFun(url, "get", query, "text", fn);
+             		
             	 			
-            	 			
-            	 		}
+            	 		
         	 	});
         	 	
-        	 	}
-            	
-        	 		
-        	 	
-        	 	
-        	 	
-        	 	
-        	 	
-        	 	
-        	 	
-        	 	
-        	 	
-        	 	
-        	});
+        	 	});
 
-        	});
+             
+             
             /*
             https://stackoverflow.com/questions/35498357/datatable-multiple-selection
             */
-        </script>
-        <script>
-        $("#visible_button").on("click",function() {
-        	
-        	
-        	let dlg = $("#faq-dialog").dialog({
-        		autoOpen: false,
-        		modal: true,
-        		buttons: {
-        			" 수정 " :function(){
-        				updateOk();
-        			}, " 닫기 ": function() {
-        				$(this).dialog("close");
-        			}
-        		},
-        		
-        		height: 550,
-        		width: 800,
-        		title: "FAQ 카테고리",
-        		close: function(event, ui) {
-        		}
-        	});
-    	 	
-    	 	const fn = function(data) {
-        		$("#faq-dialog").html(data);
-        		dlg.dialog("open");
-        	};
-        	
-        	
-        });
-        
-        
         </script>
         
         <script>

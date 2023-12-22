@@ -1,5 +1,6 @@
 package com.fa.plus.admin.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -118,6 +119,25 @@ public class SupportServiceImpl implements SupportService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Support> find_by_category_num(List<String> input_list) throws Exception {
+		List<Integer> category_num_list = new ArrayList<Integer>() ;
+		List<Support> list = null;
+		try {
+			for(int i = 0 ; i < input_list.size() ; i+=5 ) {
+				category_num_list.add(Integer.parseInt(input_list.get(i)));
+			}
+			
+			list = mapper.find_by_category_num(category_num_list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		return list;
 	}

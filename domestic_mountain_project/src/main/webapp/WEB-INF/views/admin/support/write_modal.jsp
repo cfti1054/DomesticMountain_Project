@@ -4,34 +4,27 @@
 
 <h3 style="font-size: 15px; padding-top: 10px;"><i class="fa-solid fa-angles-right"></i> FAQ 카테고리 </h3>
 <table class="table td-border mx-auto my-10" style="width: 99%;">
-	<tr>
-		<td width="15%" class="text-center bg-light">카테고리 번호</td>
-		<td width="35%" class="ps-5">${dto.faq_category_num}</td>
-		<td width="15%" class="text-center bg-light">카테고리 이름</td>
-		<td width="35%" class="ps-5">${dto.category_name}</td>
-	</tr>
 	
-	<!-- forEach로 선택한 개수만큼 생성 -->
-	<tr>
-		<td class="text-center bg-light">등록인</td>
-		<td class="ps-5">${dto.category_reg_id}</td>
-		<td class="text-center bg-light">등록일자</td>
-		<td class="ps-5">${dto.category_reg_date}</td>
-		<td class="text-center bg-light"> 보이기 </td>
-		<td class="ps-5">${dto.visible}</td>
-	</tr>
+		<tr>
+			<td width="15%" class="text-center bg-light">카테고리 번호</td>
+			<td width="35%" class="ps-5">${dto.faq_category_num}</td>
+			<td width="15%" class="text-center bg-light">카테고리 이름</td>
+			<td width="35%" class="ps-5">${dto.category_name}</td>
+		</tr>
+		
+		<!-- forEach로 선택한 개수만큼 생성 -->
+		<tr>
+			<td class="text-center bg-light">등록인</td>
+			<td class="ps-5">${dto.category_reg_id}</td>
+			<td class="text-center bg-light">등록일자</td>
+			<td class="ps-5">${dto.category_reg_date}</td>
+			<td class="text-center bg-light"> 보이기 </td>
+			<td class="ps-5">${dto.visible}</td>
+		</tr>
 	
-	<tr>
-		<td class="text-center bg-light">계정상태</td>
-		<td colspan="3" class="ps-5">
-			${dto.enabled==1?"활성":"잠금"}
-			<c:if test="${dto.enabled==0 && not empty user_block}">, ${user_block.blocked_reason}</c:if>
-			&nbsp;<span class="btn" onclick="memberStateDetaileView();" style="cursor: pointer;">자세히</span>
-		</td>
-	</tr>
 </table>
 
-<form id="deteailedMemberForm" name="deteailedMemberForm" method="post">
+<%-- <form id="deteailedMemberForm" name="deteailedMemberForm" method="post">
 	<h3 style="font-size: 15px; padding-top: 10px;"><i class="fa-solid fa-angles-right"></i> 회원 상태 변경</h3>
 	
 	<table class="table td-border mx-auto my-5">
@@ -62,7 +55,7 @@
 	<input type="hidden" name="useridx" value="${dto.useridx}">
 	<input type="hidden" name="registerId" value="${sessionScope.userall.useridx}">
 
-</form>
+</form> 
 
 <div id="memberStateDetaile" style="display: none;">
 	<table class="table table-border mx-auto my-10">
@@ -89,3 +82,4 @@
 		</tbody>
 	</table>  
 </div>
+--%>

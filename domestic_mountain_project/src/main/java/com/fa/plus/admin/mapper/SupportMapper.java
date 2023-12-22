@@ -19,7 +19,7 @@ public interface SupportMapper {
 	public void visible_faq_category(Map<String, Object> map) throws SQLException;
 	public List<Support> list_faq_category() throws SQLException;
 	
-	
+	public List<Support> find_by_category_num(List<Integer> list) throws SQLException;
 	
 	public long faq_board_seq();
 	

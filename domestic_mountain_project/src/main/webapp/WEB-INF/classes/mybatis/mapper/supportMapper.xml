@@ -27,6 +27,20 @@
 			category_reg_id, category_reg_date, category_order, category_visible)
 			VALUES(#{faq_category_num}, #{category_name}, 1, SYSDATE, #{faq_category_order}, 1)
 	</insert>
+	
+	<select id="find_by_category_num" parameterType="hashmap" resultType="com.fa.plus.admin.domain.Support">
+		SELECT faq_category_num, category_name,
+			category_reg_id, category_reg_date, category_order, category_visible
+		FROM faq_category
+		WHERE faq_category_num IN
+		
+		<foreach item="item" index="index" collection="list"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+			
+	</select>
+	
 	<!-- 
 	<update id="update_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 		UPDATE faq_category

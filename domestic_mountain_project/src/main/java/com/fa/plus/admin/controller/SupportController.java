@@ -80,18 +80,21 @@ public class SupportController {
 	}
 	
 	
-	@RequestMapping(value = "faq_category_update", method = RequestMethod.POST)
-	@ResponseBody
-	public String update_form(@RequestParam(value="val") List<String> val, Model model) throws Exception {
-		model.addAttribute("mode","write");
-		
-//		for(int i=0; i < val.length; i++) {
-//			System.out.println("vals(" + i + ") : " + );
-//		}
-		for(String s : val) {
-			System.out.println(s);
+	@GetMapping("multi_category")
+	public String update_form(@RequestParam List<String> category_dto, Model model) throws Exception {
+		List<Support> list = null;
+		Support dto = null;
+		try {
+			list = service.find_by_category_num(category_dto);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
+		System.out.print("controller : ");
+		model.addAttribute("list", list);
+		for(Support s: list) {
+			dto = s;
+		}
+		model.addAttribute("dto", dto);
 		
 		return "admin/support/write_modal";
 	}
