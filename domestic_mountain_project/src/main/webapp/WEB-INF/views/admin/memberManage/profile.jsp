@@ -105,31 +105,34 @@
 </div>
 
 <div id="memberRankDetaile" style="display: none;">
-	<table class="table table-border mx-auto my-10" style="text-align: center;">
-		<thead>
-			<tr class="bg-light border-top2">
-				<th>내용</th>
-				<th width="300">등급설정</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-		<tr>
-			<td width="15%" class="text-center bg-light">회원등급</td>
-			<td class="ps-5">
-				<select class="form-select" name="rank1" id="rank1" onchange="selectStateChange()">
-
-					<c:forEach var="vo" items="${listRank}">
-					
-						<option value="${vo.rank_num}" ${dto.rank_num == vo.rank_num ? "selected":""}>${vo.rank1}</option>
-
-					</c:forEach>
-				</select>
-			</td>
-			<td>
-	  			<button type="button" class="btn" style="border-color: black;"
-	  				onclick="updateRankOk()">변경하기</button>
-			</td>
-		</tbody>
-	</table>  
+	<form name="memberRankForm" method="post">
+		<table class="table table-border mx-auto my-10" style="text-align: center;">
+			<thead>
+				<tr class="bg-light border-top2">
+					<th>내용</th>
+					<th width="300">등급설정</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+			<tr>
+				<td width="15%" class="text-center bg-light">회원등급</td>
+				<td class="ps-5">
+					<select class="form-select" name="rank_num" id="rank_num">
+	
+						<c:forEach var="vo" items="${listRank}">
+						
+							<option value="${vo.rank_num}" ${dto.rank_num == vo.rank_num ? "selected":""}>${vo.rank1}</option>
+	
+						</c:forEach>
+					</select>
+				</td>
+				<td>
+					<input type="hidden" name="useridx" value="${dto.useridx}">
+		  			<button type="button" class="btn" style="border-color: black;"
+		  				onclick="updateRankOk()">변경하기</button>
+				</td>
+			</tbody>
+		</table> 
+	</form>
 </div>

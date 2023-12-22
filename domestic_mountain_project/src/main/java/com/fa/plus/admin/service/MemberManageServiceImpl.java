@@ -138,23 +138,13 @@ public class MemberManageServiceImpl implements MemberManageService {
 	}
 
 	@Override
-	public void updateMemberRank(Map<String, Object> map) throws SQLException {
+	public void insertMemberRank(Map<String, Object> map) throws SQLException {
 		try {
-			mapper.updateMemberRank(map);
+			mapper.insertMemberRank(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-	}
-
-	@Override
-	public void insertMemberRank(MemberManage dto) throws SQLException {
-		try {
-			mapper.insertMemberRank(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
 	}
 
 	@Override

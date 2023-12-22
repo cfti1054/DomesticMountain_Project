@@ -126,20 +126,13 @@
 	</select>	
 	
 	<!-- 등급 입력/수정 -->
-	<insert id="insertMemberRank" parameterType="com.fa.plus.admin.domain.MemberManage">
-		INSERT ALL 
-			INTO user_rank_history (uph_num, rank_num, update_rank, useridx)
-				VALUES (user_rank_history_seq.NEXTVAL, #{rank_num}, #{update_rank}, #{useridx})
-			INTO user_rank (rank_num, rank1, base_order_money, sale)
-				VALUES (user_rank_seq.NEXTVAL, #{rank1}, #{base_order_money}, #{sale})
-			SELECT * FROM dual;	
-	</insert>			
-		
-    <update id="updateMemberRank" parameterType="map">
-		UPDATE user_rank SET rank1=#{rank1} WHERE rank_num=#{rank_num}
-    </update>
+	<insert id="insertMemberRank" parameterType="map">
+		INSERT INTO user_rank_history(uph_num, rank_num,update_rank, useridx)
+			VALUES(user_rank_history_seq.NEXTVAL,
+				#{rank_num}, SYSDATE, #{useridx})
+	</insert>
     
-	<select id="listRank"  resultType="com.fa.plus.admin.domain.MemberManage">
+	<select id="listRank" resultType="com.fa.plus.admin.domain.MemberManage">
 		SELECT rank_num, rank1, base_order_money, sale
 		FROM user_rank
 		ORDER BY rank_num DESC

@@ -22,8 +22,7 @@ public interface MemberManageService {
 	public List<MemberChart> listAgeSection();
 	
 	// 회원등급 수정
-	public void updateMemberRank(Map<String, Object> map) throws SQLException;	
-	public void insertMemberRank(MemberManage dto) throws SQLException;
+	public void insertMemberRank(Map<String, Object> map) throws SQLException;
 	
 	// 상세 등급 수정
 	public List<MemberManage> listRank();	

@@ -156,7 +156,7 @@ function memberRankDetaileView() {
 function updateRankOk() {
 
 	let url = "${pageContext.request.contextPath}/admin/memberManage/updateMemberRank";	
-	let query = $("#memberRankDetaile").serialize();
+	let query = $("#memberRankForm").serialize();
 	
 	const fn = function(data) {
 		$("form input[name=page]").val("${page}");
