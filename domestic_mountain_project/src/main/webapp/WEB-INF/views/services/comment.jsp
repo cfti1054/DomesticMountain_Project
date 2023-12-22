@@ -143,7 +143,7 @@
 					</h3>
 					<ul>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/services/qna_list">&gt;
+							href="${pageContext.request.contextPath}/qna/list">&gt;
 								Qna</a></li>
 						<li class=""><a
 							href="${pageContext.request.contextPath}/services/faq">&gt;

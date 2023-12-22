@@ -851,6 +851,5 @@ function searchList() {
 			return false;
 			});
 		
-		
 	});
 </script>

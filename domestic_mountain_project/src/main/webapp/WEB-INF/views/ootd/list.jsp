@@ -260,6 +260,19 @@
 .m-tcol-p .num {
 	color: #ff2f3b;
 }
+
+.bottom-list {
+	display: flex;
+	justify-content: space-between;
+}
+.bottom-list .col button {
+    height: 100%;
+    border: 0px;
+    background: #a69fd6;
+    outline: none;
+    color: #ffffff;
+    background: #gray;
+}
 </style>
 
 
@@ -296,7 +309,9 @@
 						<a>Share Tips</a>
 					</h3>
 					<ul>
-						<li class=""><a href="${pageContext.request.contextPath}/share/list">&gt; 유용한 정보</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/share/list">&gt; 유용한
+								정보</a></li>
 					</ul>
 
 					<h3>
@@ -478,7 +493,18 @@
 									</dd>
 								</dl></li>
 						</ul>
+
 						<div class="page-navigation">1 2 3</div>
+						
+						<div class="bottom-list">
+							<div class="col">
+								<button type="button" class="btn-light" onclick="#" title="새로고침"><i class="bi bi-arrow-counterclockwise"></i></button>
+							</div>
+
+							<div class="col">
+								<button type="button" class="btn-light" onclick="#">글올리기</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
