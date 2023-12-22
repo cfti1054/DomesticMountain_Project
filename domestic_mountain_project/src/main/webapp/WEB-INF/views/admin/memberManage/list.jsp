@@ -22,9 +22,6 @@ $(function(){
 	});
 });
 
-
-
-
 function searchList() {
 	const f = document.searchForm;
 	f.enabled.value = $("#selectEnabled").val();
@@ -141,6 +138,33 @@ function memberStateDetaileView() {
 			$(this).dialog("destroy");	
 		}
 	});
+}
+
+function memberRankDetaileView() {
+	$("#memberRankDetaile").dialog({
+		modal: true,
+		minHeight: 100,
+		maxHeight: 450,
+		width: 750,
+		title: "회원 등급 상세",
+		close: function(event, ui) {
+			$(this).dialog("destroy");	
+		}
+	});
+}
+
+function updateRankOk() {
+
+	let url = "${pageContext.request.contextPath}/admin/memberManage/updateMemberRank";	
+	let query = $("#memberRankDetaile").serialize();
+	
+	const fn = function(data) {
+		$("form input[name=page]").val("${page}");
+		searchList();
+	};
+	ajaxFun(url, "post", query, "json", fn);
+	
+	$("#member-dialog").dialog("close");
 }
 
 function selectStateChange() {
@@ -365,20 +389,20 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 			        
 			    <div class="container">
 
-			        <div style="padding-bottom: 10px; ">
-			            <select id="selectEnabled" class="form-select" onchange="searchList();" style="float: left; margin-right: 5px; padding: 2px; width: 140px;">
+			        <div style="padding-bottom: 10px; display: flex;">
+			            <select id="selectEnabled" class="form-select" onchange="searchList();" style="float: left; margin-right: 5px; padding: 2px; width: 140px;  display: flex;">
 							<option value="" ${enabled=="" ? "selected":""}>:계정상태:</option>
 							<option value="0" ${enabled=="0" ? "selected":""}>잠금 계정</option>
 							<option value="1" ${enabled=="1" ? "selected":""}>활성 계정</option>
 			            </select>  
 			           
-						<form name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post" style="float: left;">
+						<form name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post" style="float: left; width: 650px; display: flex;">
 							<select name="schType" class="form-select" style="width: 200px; padding: 3px;">
 								<option value="useridx"     ${schType=="useridx" ? "selected":""}>회원번호</option>
 								<option value="user_name"   ${schType=="user_name" ? "selected":""}>이름</option>
 								<option value="birth"      ${schType=="birth" ? "selected":""}>생년월일</option>
 							</select>
-							<input type="text" name="kwd" class="form-control" value="${kwd}" style="width: 300px; padding: 3px; float: left;" >
+							<input type="text" name="kwd" class="form-control" value="${kwd}" style="width: 200px; padding: 3px; float: left; display: flex;" >
 							<input type="hidden" name="enabled" value="${enabled}">
 							<input type="hidden" name="page" value="1">
 							<button type="button" class="btn" onclick="searchList()" style="width: 100px; padding: 3px; float: left;">검색</button>
@@ -391,26 +415,26 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 			        <form name="memberForm" method="post" id="datatablesSimple">
 			        <table class="table table-border table-form">
 			            <tr>
-			                <td style="width: 10%;" align="center">체크</td>
 			                <td style="width: 10%;" align="center">회원번호</td>
 			                <td style="width: 10%;" align="center">회원이름</td>
+			                <td style="width: 10%;" align="center">회원구분</td>
 			                <td style="width: 10%;" align="center">생년월일</td>
 			                <td style="width: 30%;" align="center">가입일</td>
-			                <td style="width: 10%;" align="center">이메일</td>
-			                <td style="width: 10%;" align="center">회원구분</td>
+			                <td style="width: 10%;" align="center">회원등급</td>
+			                <td style="width: 10%;" align="center">할인율</td>
 			                <td style="width: 10%;" align="center">상태</td>
 			            </tr>
 						
-			     		<c:forEach var="dto" items="${list}" varStatus="status">   
+			     		<c:forEach var="dto" items="${list}"  >   
 			            	<tr class="hover" onclick="profile('${dto.useridx}');">
-				                <td align="center">
-				                    <input type="checkbox">
-				                </td>
 				                <td align="center">
 				                    ${dto.useridx}
 				                </td>
 				                <td align="center">
 				                    ${dto.user_name}
+				                </td>
+				                <td align="center">
+				                    ${dto.usership==1?"일반회원":(dto.usership==51?"직원":"관리자")}
 				                </td>
 				                <td align="center"> 
 				                    ${dto.birth}
@@ -419,10 +443,10 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 									${dto.reg_date}
 				                </td>
 				                <td align="center">
-									${dto.email}
+									${dto.rank1}
 				                </td>
 				                <td align="center">
-									${dto.usership==1?"일반회원":(dto.usership==51?"직원":"관리자")}
+									${dto.sale}%
 				                </td>
 				                <td align="center">
 									${dto.enabled==1?"활성":"잠금"}
@@ -452,6 +476,7 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 			    </div>	
 			    
 				<div id="member-dialog" style="display: none;"></div>	
+				<div id="member-dialog2" style="display: none;"></div>	
 						     
                 </main>
                 

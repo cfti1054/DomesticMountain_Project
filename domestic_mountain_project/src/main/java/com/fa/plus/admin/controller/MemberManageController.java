@@ -118,10 +118,12 @@ public class MemberManageController {
 		MemberManage memberState = service.findByState(useridx);
 		List<MemberManage> listState = service.listMemberState(useridx);
 
-
+		List<MemberManage> listRank = service.listRank();
+	
 		model.addAttribute("dto", dto);
 		model.addAttribute("memberState", memberState);
 		model.addAttribute("listState", listState);
+		model.addAttribute("listRank", listRank);
 		
 		return "admin/memberManage/profile";
 	}	
@@ -171,6 +173,37 @@ public class MemberManageController {
 		
 		model.put("list", list);
 		
+		return model;
+	}	
+	
+	// update 회원등급
+	@PostMapping("updateMemberRank")
+	@ResponseBody
+	public Map<String, Object> updateMemberRank(MemberManage dto) throws Exception {
+
+		String rank = "true";
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("useridx", dto.getUseridx());
+			if (dto.getRank1() == null) {
+				map.put("rank1", "브론즈");
+			} else {
+				map.put("rank2", "실버");
+				map.put("rank3", "골드");
+				map.put("rank4", "플레티넘");
+				map.put("rank5", "레드");
+			}
+			service.updateMemberRank(map);
+
+			// 회원 상태 변경 사항 저장
+			service.insertMemberRank(dto);
+
+		} catch (Exception e) {
+			rank = "false";
+		}
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("rank", rank);
 		return model;
 	}	
 	

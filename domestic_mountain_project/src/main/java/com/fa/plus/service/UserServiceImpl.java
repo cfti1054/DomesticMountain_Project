@@ -2,18 +2,22 @@ package com.fa.plus.service;
 
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fa.plus.domain.User;
+import com.fa.plus.mail.Mail;
+import com.fa.plus.mail.MailSender;
 import com.fa.plus.mapper.UserMapper;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper mapper;
 	
-	
+	@Autowired
+	private MailSender mailSender;
 	
 //	@Autowired
 //	private BCryptPasswordEncoder bcryptEncoder;
@@ -130,32 +134,79 @@ public class UserServiceImpl implements UserService {
 		
 		return dto;
 	}
+	
+	@Override
+	public boolean findByEmailId(String email) {
+		boolean b = false;
+		
+		try {
+			//List<User> list = mapper.findByEmail(email);
+		} catch (Exception e) {
+			
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public void deleteUser(Map<String, Object> map) throws Exception {
+		try {
+			map.put("usership", 0);
+			updateUserShip(map);
+			
+			mapper.deleteUser2(map);
+			mapper.deleteUser1(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+	
+	@Override
+	public void generatePwd(User dto) throws Exception {
+		// 임시패스워드
+		StringBuilder sb = new StringBuilder();
+		Random rd = new Random();
+		String s = "~!@#$%^&*_+-=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+		
+		// 몇자리 보낼지 임시로 패스워드
+		for(int i=0; i<5; i++) {
+			int n = rd.nextInt(s.length());
+			sb.append(s.substring(n, n + 1));
+		}
+		
+		String result;
+		result = dto. getUser_id() + "님의 새로 발급된 임시 패스워드 <b>"
+			+ sb.toString()
+			+ "</b> 입니다.<br>"
+			+ "로그인 후 반드시 패스워드를 변경하시기 바랍니다.";
+		
+		Mail mail = new Mail();
+		mail.setReceiverEmail(dto.getEmail());
+		
+		// 설정한 이메일
+		mail.setSenderEmail("4reoil@gmail.com");
+		mail.setSenderName("관리자");
+		mail.setSubject("임시패스워드");
+		mail.setContent(result);
+		
+		boolean b = mailSender.mailSend(mail);
+		if ( b ) {
+			//임시패스워드로 패스워드 바꾸깅 수혁잉
+			dto.setUser_pwd(sb.toString());
+			
+			mapper.updateUser1(dto);
+		} else {
+			throw new Exception("이메일 전송중 오류가 발생했습니다");
+		}
+	}
 
 	@Override
 	public User findById(long useridx) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	@Override
-	public boolean findByEmailId(String email) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public void deleteUser(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void generatePwd(User dto) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 
-
-	
 }

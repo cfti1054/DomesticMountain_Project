@@ -30,14 +30,14 @@
 function sendOk() {
 	const f = document.pwdForm;
 
-	let str = f.userId.value.trim();
+	let str = f.user_id.value.trim();
 	if(!str) {
 		alert("아이디를 입력하세요. ");
-		f.userId.focus();
+		f.user_id.focus();
 		return;
 	}
 
-	f.action = "${pageContext.request.contextPath}/member/pwdFind";
+	f.action = "${pageContext.request.contextPath}/user/pwdFind";
 	f.submit();
 }
 </script>
@@ -56,7 +56,7 @@ function sendOk() {
 		                </div>
                         
                         <div class="d-grid">
-                            <input type="text" name="userId" class="form-control form-control-lg" placeholder="아이디">
+                            <input type="text" name="user_id" class="form-control form-control-lg" placeholder="아이디">
                         </div>
                         <div class="d-grid">
                             <button type="button" class="login__button" onclick="sendOk();">확인</button>
