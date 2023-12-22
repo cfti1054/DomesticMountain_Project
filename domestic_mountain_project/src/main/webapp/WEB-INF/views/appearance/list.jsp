@@ -94,41 +94,7 @@
 	margin: 15px 0 0 20px;
 }
 
-/*=============== 검색창 / form ===============*/
-.search-f {
-	display: flex;
-	justify-content: space-between;
-	margin: 0 30px;
-}
-
-.search-body {
-	height: 40px;
-	width: 300px;
-	border: 1px solid #a69fd6;
-	background: #ffffff;
-}
-
-.search-body input {
-	font-size: 16px;
-	height: 100%;
-	width: 240px;
-	padding: 10px;
-	border: Opx;
-	outline: none;
-	float: left;
-}
-
-.search-body button {
-	width: 50px;
-	height: 100%;
-	border: 0px;
-	background: #a69fd6;
-	outline: none;
-	float: right;
-	color: #ffffff;
-	background: #gray;
-}
-
+/*=============== form ===============*/
 .sort_form {
 	display: flex;
 	align-items: center;
@@ -258,6 +224,21 @@
     color: #ff2f3b;
 }
 
+/* ================= 하단 버튼 ================= */
+.article-album-sub .row {
+	width: auto;
+	display: flex;
+	justify-content: end;
+}
+
+.btn-light {
+	background-color: #ada7e4;
+}
+
+.article-album-sub .row .col-auto .btn-light, .article-album-sub .row i
+	{
+	color: white;
+}
 </style>
 
 
@@ -324,14 +305,7 @@
 				</h1>
 			</div>
 
-			<div class="search-f">
-				<div class="search-body">
-					<input type="text" placeholder="검색어 입력">
-					<button>검색</button>
-				</div>
-
-			</div>
-
+			
 
 
 			<div class="notice-container">
@@ -470,6 +444,48 @@
 								</dl></li>
 						</ul>
 						<div class="page-navigation">1 2 3</div>
+						
+						<div class="row board-list-footer">
+							<div class="col">
+								<button type="button" class="btn btn-light" onclick="#"
+									title="새로고침">
+									<i class="bi bi-arrow-counterclockwise"></i>
+								</button>
+							</div>
+							<div class="col text-center">&nbsp;</div>
+							
+
+							<div class="col-6 text-end">
+								<form class="row text-end-row" name="searchForm" action="#"
+									method="post">
+									<div class="col-auto p-1">
+										<select name="schType" class="form-select">
+											<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
+											<option value="all">제목+내용</option>
+											<option value="reg_date">등록일</option>
+											<option value="subject">제목</option>
+											<option value="writer">작성자</option>
+											<option value="content">내용</option>
+										</select>
+									</div>
+									<div class="col-auto p-1">
+										<input type="text" name="kwd" value="${kwd}"
+											class="form-control">
+									</div>
+									<div class="col-auto p-1">
+										<button type="button" class="btn btn-light"
+											onclick="searchList()">
+											<i class="bi bi-search"></i>
+										</button>
+
+										<button type="button" class="btn btn-light"
+											onclick="searchList()">글올리기</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						
+						
 					</div>
 				</div>
 			</div>
