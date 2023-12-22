@@ -403,6 +403,12 @@ video {
   background-color: var(--c-titan-white);
   padding: 1.5rem;
 }
+
+.information:hover {
+	translate: 1rem;
+	scale: 1.1;
+}
+
 .information .div-tag {
 	margin-bottom: 15px;
 }

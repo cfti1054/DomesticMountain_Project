@@ -95,6 +95,10 @@
 	padding: 0.5rem;
 }
 
+#gallery figure:hover {
+	scale: 1.1;
+}
+
 figure img {
 	aspect-ratio: 1/1;
 	width: 100%;

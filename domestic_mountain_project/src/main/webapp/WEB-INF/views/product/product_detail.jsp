@@ -86,6 +86,9 @@
 	backface-visibility: hidden;
 	padding: 0.5rem;
 }
+#gallery figure:hover {
+	scale: 1.05;
+}
 
 figure img {
 	aspect-ratio: 1/1;
