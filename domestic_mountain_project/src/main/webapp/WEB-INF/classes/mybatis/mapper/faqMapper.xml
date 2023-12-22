@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="temp">
+<mapper namespace="com.fa.plus.mapper.FaqMapper">
+	<sql id="where-list">
+		<choose>
+			<when test="schType == 'all' ">
+			   ( INSTR(subject, #{kwd}) &gt; 0
+		          OR DBMS_LOB.INSTR(content, #{kwd}) &gt; 0 
+		          OR INSTR(LOWER(category), LOWER(#{kwd})) &gt; 0 )
+			</when>
+			<when test="schType == 'reg_date' ">
+			   ( TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd}
+		          OR TO_CHAR(reg_date, 'YYYY-MM-DD') = #{kwd} )
+			</when>
+			<otherwise>
+			    ( INSTR(${schType}, #{kwd}) &gt; 0 )
+			</otherwise>
+		</choose>
+	</sql>
+	
+    <select id="dataCount" parameterType="map" resultType="Integer">
+	    SELECT NVL(COUNT(*), 0)
+	    FROM faq_board f
+	    JOIN faq_category c ON f.faq_category_num = c.faq_category_num
+	    <where>
+	        <if test="faq_category_num == null || faq_category_num!=0">
+	            ( c.faq_category_num = #{faq_category_num} )
+	        </if>
+	        AND c.category_visible = 1
+	    </where>
+	</select>
+
+   <select id="listFaq" parameterType="map" resultType="com.fa.plus.domain.Faq">
+	    SELECT f.faq_name, faq_question, faq_content, f.faq_category_num, category_name
+	    FROM faq_board f
+	    JOIN faq_category c ON f.faq_category_num = c.faq_category_num
+	    <where>
+	        <if test="faq_category_num == null || faq_category_num!=0">
+	            ( f.faq_category_num = #{faq_category_num} )
+	        </if>
+	        AND c.category_visible = 1
+	    </where>
+	    ORDER BY f.faq_name DESC
+	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+    
+    <select id="listCategory" parameterType="map" resultType="com.fa.plus.domain.Faq">
+		SELECT faq_category_num, category_name, category_visible
+		FROM faq_category
+		<where>
+			<if test="mode=='enabled'">
+				category_visible = 1
+			</if>
+		</where>
+		ORDER BY faq_category_num
+	</select>
 
 </mapper>

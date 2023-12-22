@@ -64,7 +64,7 @@
 	perspective: 0;
 }
 
-#gallery figure {
+#gallery .gallery-box {
 	position: relative;
 	display: inline-block;
 	margin: 14px;
@@ -86,7 +86,7 @@
 	backface-visibility: hidden;
 	padding: 0.5rem;
 }
-#gallery figure:hover {
+#gallery .gallery-box:hover{
 	scale: 1.05;
 }
 
@@ -139,11 +139,10 @@ figure img {
 </style>
 <script type="text/javascript">
 	$(function() {
-		$(".img-box").click(
+		$(".gallery-box").click(
 				function() {
 					let product_num = $(this).attr("data-productNum");
-					let url = "${pageContext.request.contextPath}/product/"
-							+ product_num;
+					let url = "${pageContext.request.contextPath}/product/"+ product_num;
 					location.href = url;
 				});
 	});
@@ -154,47 +153,49 @@ figure img {
 	
 		<div class="amain">
 			<h1 class="amain-main">
-				<a>등산화{dto.category_name} 으로 넘겨야 할듯<span>| DM Store</span></a> <span><a href="/plus/">home</a>
-					&gt; DM Store &gt; 등산화{dto.category_name}</span>
+				<a>${dto.category_name}<span>| DM Store</span></a> <span><a href="/plus/">home</a>
+					&gt; DM Store &gt; ${dto.category_name}</span>
 			</h1>
 		</div>
 
 		<div class="gallery-main">
-			<div id="gallery" data-productNum="${dto.product_num}">
-
+			
+			<div id="gallery">
 				<c:forEach var="dto" items="${list}" varStatus="status">
-					<figure>
-						<c:choose>
-							<c:when
-								test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
-								<img class="img"
-									src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
-							</c:when>
-							<c:when
-								test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
-								<img class="img" src="${dto.product_summary}">
-							</c:when>
-							<c:otherwise>
-							</c:otherwise>
-						</c:choose>
-
-
-						<figcaption>
-							<a href=""><span>${dto.product_name}</span></a>
-						</figcaption>
-						
-						<c:set var="formattedPrice" value="${dto.product_price}" />
-						<fmt:formatNumber value="${formattedPrice}" pattern="#,###" var="formattedPriceWithComma" />
-
-
-						<div class="price">${formattedPriceWithComma}</div>
-
-						<div class="review">
-							<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">
-								<p>${dto.review_star}&nbsp;&nbsp;&nbsp;  리뷰&nbsp; &nbsp;${dto.review_count}</p>
-						</div>
-
-					</figure>
+					<div class="gallery-box" data-productNum="${dto.product_num}" >
+						<figure>
+							<c:choose>
+								<c:when
+									test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+									<img class="img"
+										src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+								</c:when>
+								<c:when
+									test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+									<img class="img" src="${dto.product_summary}">
+								</c:when>
+								<c:otherwise>
+								</c:otherwise>
+							</c:choose>
+	
+	
+							<figcaption>
+								<span>${dto.product_name}</span>
+							</figcaption>
+							
+							<c:set var="formattedPrice" value="${dto.product_price}" />
+							<fmt:formatNumber value="${formattedPrice}" pattern="#,###" var="formattedPriceWithComma" />
+	
+	
+							<div class="price">${formattedPriceWithComma}</div>
+	
+							<div class="review">
+								<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">
+									<p>${dto.review_star}&nbsp;&nbsp;&nbsp;  리뷰&nbsp; &nbsp;${dto.review_count}</p>
+							</div>
+	
+						</figure>
+					</div>
 				</c:forEach>
 
 			</div>

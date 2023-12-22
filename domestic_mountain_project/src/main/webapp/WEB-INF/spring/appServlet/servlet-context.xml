@@ -81,6 +81,7 @@
     		<exclude-mapping path="/emaps/main"/>
 
     		<exclude-mapping path="/services/**"/>
+    		<exclude-mapping path="/faq/**"/>
     		<exclude-mapping path="/ootd/**"/>
     		<exclude-mapping path="/appearance/**"/>
     		<exclude-mapping path="/product/**"/>

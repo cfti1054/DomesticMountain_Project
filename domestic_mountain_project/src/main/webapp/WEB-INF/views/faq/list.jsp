@@ -233,20 +233,19 @@
 
 				<!-- 항목 선택에 따라 원하는 질문 출력할 수 있도록 작성해야함 -->
 
-				<div class="faq">
-					<h3 class="faq-title">자주 묻는 질문 1</h3>
-
-					<p class="faq-text">ㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅊㅋㅌㅋㅌㅊ</p>
-
-					<button class="faq-toggle">
-						<i class="fas fa-chevron-down"></i> <i class="fas fa-times"></i>
-					</button>
+				<c:forEach var="faq" items="${list}">
+		            <div class="faq">
+		                <h3 class="faq-title">${faq.faq_question}</h3>
+		                <p class="faq-text">${faq.faq_content}</p>
+		                <button class="faq-toggle">
+		                    <i class="fas fa-chevron-down"></i> <i class="fas fa-times"></i>
+		                </button>
+		            </div>
+		        </c:forEach>
+		
+		        <div class="page-navigation">
+					${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
 				</div>
-
-
-
-
-
 			</div>
 		</div>
 
