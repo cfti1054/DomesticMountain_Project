@@ -1,5 +1,6 @@
 package com.fa.plus.admin.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,4 +20,11 @@ public interface MemberManageService {
 	public MemberManage findByState(long useridx);	
 	
 	public List<MemberChart> listAgeSection();
+	
+	// 회원등급 수정
+	public void updateMemberRank(Map<String, Object> map) throws SQLException;	
+	public void insertMemberRank(MemberManage dto) throws SQLException;
+	
+	// 상세 등급 수정
+	public List<MemberManage> listRank();	
 }

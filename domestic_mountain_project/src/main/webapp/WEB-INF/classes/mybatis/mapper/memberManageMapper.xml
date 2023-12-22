@@ -20,10 +20,13 @@
 		SELECT m1.useridx, usership, user_name, 
 			m1.reg_date, 
 			enabled, email, tel, 
-			TO_CHAR(birth, 'YYYY-MM-DD') birth
+			TO_CHAR(birth, 'YYYY-MM-DD') birth,
+			u.rank_num, uph_num, update_rank, rank1, base_order_money, sale
 		FROM userall m
 		JOIN user1 m1 ON m.useridx = m1.useridx
 		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
+		LEFT OUTER JOIN user_rank_history u ON m1.useridx = u.useridx  
+		LEFT OUTER JOIN user_rank r ON u.rank_num = r.rank_num
 		<where>
 			<if test="kwd!=null and kwd!='' ">
 				<include refid="where-list"/>
@@ -51,21 +54,28 @@
     </select>
 
 	<select id="findById" parameterType="long" resultType="com.fa.plus.admin.domain.MemberManage">
-		SELECT usership, m1.useridx, user_name, user_pwd, enabled,
-			reg_date, 
-			TO_CHAR(birth, 'YYYY-MM-DD') birth, email, tel, 
-			zip, addr1, addr2
+		SELECT usership, ur.useridx, m1.user_name, m1.user_pwd, m1.enabled,
+			m1.reg_date,
+			TO_CHAR(birth, 'YYYY-MM-DD') birth, m2.email, m2.tel, 
+			m2.zip, m2.addr1, m2.addr2, ur.rank1, ur.rank_num
 		FROM userall m
 		JOIN user1 m1 ON m.useridx = m1.useridx
 		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
-		WHERE m1.useridx = #{useridx}
+		LEFT OUTER JOIN (
+			SELECT useridx, h.rank_num, rank1
+			FROM user_rank_history h
+			JOIN user_rank r ON r.rank_num = h.rank_num
+			WHERE useridx = #{useridx}
+			ORDER BY update_rank DESC
+			FETCH FIRST 1 ROWS ONLY
+		) ur ON m2.useridx = ur.useridx
+		WHERE ur.useridx = #{useridx}
 	</select>
 	
     <update id="updateMemberEnabled" parameterType="map">
 		UPDATE user1 SET enabled=#{enabled} WHERE useridx=#{useridx}
     </update>	
-
-
+ 
 
 	<!-- 회원 상태 입력  -->
 	<insert id="insertMemberState" parameterType="com.fa.plus.admin.domain.MemberManage">
@@ -114,5 +124,26 @@
 		SELECT '기타' section, COUNT(*) count FROM memberAge WHERE age<10 AND age>=70
 	]]>
 	</select>	
-
+	
+	<!-- 등급 입력/수정 -->
+	<insert id="insertMemberRank" parameterType="com.fa.plus.admin.domain.MemberManage">
+		INSERT ALL 
+			INTO user_rank_history (uph_num, rank_num, update_rank, useridx)
+				VALUES (user_rank_history_seq.NEXTVAL, #{rank_num}, #{update_rank}, #{useridx})
+			INTO user_rank (rank_num, rank1, base_order_money, sale)
+				VALUES (user_rank_seq.NEXTVAL, #{rank1}, #{base_order_money}, #{sale})
+			SELECT * FROM dual;	
+	</insert>			
+		
+    <update id="updateMemberRank" parameterType="map">
+		UPDATE user_rank SET rank1=#{rank1} WHERE rank_num=#{rank_num}
+    </update>
+    
+	<select id="listRank"  resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT rank_num, rank1, base_order_money, sale
+		FROM user_rank
+		ORDER BY rank_num DESC
+	</select>
+    
+    
 </mapper>

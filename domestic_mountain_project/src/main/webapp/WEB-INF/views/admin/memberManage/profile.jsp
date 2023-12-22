@@ -5,8 +5,8 @@
 <h3 style="font-size: 15px; padding-top: 10px;"><i class="fa-solid fa-angles-right"></i> 회원 정보</h3>
 <table class="table td-border mx-auto my-10" style="width: 99%;">
 	<tr>
-		<td width="15%" class="text-center bg-light">상태번호</td>
-		<td width="35%" class="ps-5">${dto.user_id}</td>
+		<td width="15%" class="text-center bg-light">회원등급</td>
+		<td width="35%" class="ps-5">${dto.rank1}</td>
 		<td width="15%" class="text-center bg-light">회원번호</td>
 		<td width="35%" class="ps-5">${dto.useridx}</td>
 	</tr>
@@ -31,10 +31,16 @@
 	
 	<tr>
 		<td class="text-center bg-light">계정상태</td>
-		<td colspan="3" class="ps-5">
+		<td colspan="1" class="ps-5">
 			${dto.enabled==1?"활성":"잠금"}
 			<c:if test="${dto.enabled==0 && not empty user_block}">, ${user_block.blocked_reason}</c:if>
-			&nbsp;<span class="btn" onclick="memberStateDetaileView();" style="cursor: pointer;">자세히</span>
+			&nbsp;<span class="btn" onclick="memberStateDetaileView();" style="cursor: pointer; border-color: black;">자세히</span>
+		</td>
+		<td class="text-center bg-light">회원등급</td>
+		<td colspan="1" class="ps-5">
+			${dto.rank1}
+			<c:if test="${dto.rank1==null && not empty user_rank}">, ${user_rank.rank1}</c:if>
+			&nbsp;<span class="btn" onclick="memberRankDetaileView();" style="cursor: pointer; border-color: black;">등급</span>
 		</td>
 	</tr>
 </table>
@@ -94,6 +100,36 @@
 					<td colspan="3">등록된 정보가 없습니다.</td>
 				</tr>  
 			</c:if>
+		</tbody>
+	</table>  
+</div>
+
+<div id="memberRankDetaile" style="display: none;">
+	<table class="table table-border mx-auto my-10" style="text-align: center;">
+		<thead>
+			<tr class="bg-light border-top2">
+				<th>내용</th>
+				<th width="300">등급설정</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		<tr>
+			<td width="15%" class="text-center bg-light">회원등급</td>
+			<td class="ps-5">
+				<select class="form-select" name="rank1" id="rank1" onchange="selectStateChange()">
+
+					<c:forEach var="vo" items="${listRank}">
+					
+						<option value="${vo.rank_num}" ${dto.rank_num == vo.rank_num ? "selected":""}>${vo.rank1}</option>
+
+					</c:forEach>
+				</select>
+			</td>
+			<td>
+	  			<button type="button" class="btn" style="border-color: black;"
+	  				onclick="updateRankOk()">변경하기</button>
+			</td>
 		</tbody>
 	</table>  
 </div>

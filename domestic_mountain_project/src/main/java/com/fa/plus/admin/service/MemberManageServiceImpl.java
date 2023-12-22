@@ -1,5 +1,6 @@
 package com.fa.plus.admin.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -135,6 +136,38 @@ public class MemberManageServiceImpl implements MemberManageService {
 		
 		return list;
 	}
-	
+
+	@Override
+	public void updateMemberRank(Map<String, Object> map) throws SQLException {
+		try {
+			mapper.updateMemberRank(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void insertMemberRank(MemberManage dto) throws SQLException {
+		try {
+			mapper.insertMemberRank(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<MemberManage> listRank() {
+		List<MemberManage> list = null;
+		
+		try {
+			list = mapper.listRank();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 }

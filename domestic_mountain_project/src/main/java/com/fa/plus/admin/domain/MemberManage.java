@@ -23,6 +23,14 @@ public class MemberManage {
 	private String blocked_date;	// 상태변경일
 	private String unblocked_date;	// 차단해제일
 	
+	private long uph_num;			// 등급변경번호
+	private long rank_num;			// 등급번호
+	private String update_rank;		// 등급변동날짜
+	
+	private String rank1;			// 등급
+	private long base_order_money;  // 기준 주문금액
+	private long sale;				// 할인율
+	
 	
 	public String getBlocked_date() {
 		return blocked_date;
@@ -132,8 +140,41 @@ public class MemberManage {
 	public void setUnblocked_date(String unblocked_date) {
 		this.unblocked_date = unblocked_date;
 	}
-	
-	
-	
-	
+	public long getUph_num() {
+		return uph_num;
+	}
+	public void setUph_num(long uph_num) {
+		this.uph_num = uph_num;
+	}
+	public long getRank_num() {
+		return rank_num;
+	}
+	public void setRank_num(long rank_num) {
+		this.rank_num = rank_num;
+	}
+	public String getUpdate_rank() {
+		return update_rank;
+	}
+	public void setUpdate_rank(String update_rank) {
+		this.update_rank = update_rank;
+	}
+	public String getRank1() {
+		return rank1;
+	}
+	public void setRank1(String rank1) {
+		this.rank1 = rank1;
+	}
+	public long getBase_order_money() {
+		return base_order_money;
+	}
+	public void setBase_order_money(long base_order_money) {
+		this.base_order_money = base_order_money;
+	}
+	public long getSale() {
+		return sale;
+	}
+	public void setSale(long sale) {
+		this.sale = sale;
+	}
+		
 }
