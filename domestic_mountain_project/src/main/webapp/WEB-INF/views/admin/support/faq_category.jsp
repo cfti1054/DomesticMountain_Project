@@ -180,7 +180,7 @@
 						<div class="card-body">
 						<form id="faq">
 							<table id="faq_category_table" class="display"
-								style="width: 100%">
+								style="width: 100%; text-align: center">
 								<thead>
 									<tr>
 										<th>카테고리 번호</th>
@@ -303,7 +303,7 @@
              		
              		
              		const fn = function(data) {
-             			$("#member-dialog").html(data);
+             			$("#faq-dialog").html(data);
              			dlg.dialog("open");
              		};
              		ajaxFun(url, "get", query, "text", fn);

@@ -89,7 +89,6 @@ public class SupportController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.print("controller : ");
 		model.addAttribute("list", list);
 		for(Support s: list) {
 			dto = s;
