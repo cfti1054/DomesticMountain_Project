@@ -66,6 +66,7 @@
 	
     $("form[name=modelLoginForm] input[name=userId]").focus();
 	}
+	
 	function sendModelLogin() {
 	    var f = document.modelLoginForm;
 		var str;
@@ -88,7 +89,7 @@
 </script>
 <!--==================== LOGIN ====================-->
 <div class="login" id="login">
-   <form name="modelLoginForm" id="loginForm" action="${pageContext.request.contextPath}/user/login" class="login__form" method="post">
+   <form name="modelLoginForm" id="loginForm" class="login__form" method="post">
    	 <h2 class="login__title">로그인</h2>
 
     <div class="login__group">
@@ -110,7 +111,7 @@
 
         <a href="${pageContext.request.contextPath}/user/userFind" class="login__forgot"> 비밀번호를 잊으셨나요? </a>
 
-        <button type="submit" class="login__button">로그인</button>
+        <button type="button" class="login__button" onclick="sendModelLogin();">로그인</button>
 	    </div>
 	</form>
 

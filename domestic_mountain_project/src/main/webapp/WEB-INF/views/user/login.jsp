@@ -54,7 +54,7 @@
 			return;
 		}
 
-		f.action = "${pageContext.request.contextPath}user/login";
+		f.action = "${pageContext.request.contextPath}/user/login";
 		f.submit();
 	}
 </script>
@@ -65,17 +65,20 @@
 			<h2 class="login__title">로그인</h2>
 
 			<div class="login__group">
-				<div>
-					<label for="user_id" class="login__label">ID</label> <input
-						type="text" placeholder="Write your ID" id="user_id"
-						name="user_id" class="login__input">
-				</div>
-
-				<div>
-					<label for="password" class="login__label">Password</label> <input
-						type="password" placeholder="Enter your password" name="user_pwd"
-						id="password" class="login__input">
-				</div>
+					<form name="loginForm" method="post">
+					<div>
+						<label for="user_id" class="login__label">ID</label> <input
+							type="text" placeholder="Write your ID" id="user_id"
+							name="user_id" class="login__input">
+					</div>
+	
+					<div>
+						<label for="password" class="login__label">Password</label> <input
+							type="password" placeholder="Enter your password" name="user_pwd"
+							id="password" class="login__input">
+					</div>
+					</form>
+				
 			</div>
 
 			<div>
@@ -90,8 +93,10 @@
 					<p class="form-control-plaintext text-center text-primary">${message}</p>
 				</div>
 
-				<button type="submit" class="login__button">로그인</button>
+				<button type="button" class="login__button" onclick="sendLogin();">로그인</button>
 			</div>
+			
 		</div>
+		
 	</div>
 </div>
