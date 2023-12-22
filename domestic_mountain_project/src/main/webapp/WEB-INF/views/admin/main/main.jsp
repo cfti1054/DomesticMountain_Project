@@ -37,6 +37,7 @@
                         <li><a class="dropdown-item" href="#!">Logout</a></li>
                     </ul>
                 </li>
+                
             </ul>
         </nav>
         <div id="layoutSidenav">
