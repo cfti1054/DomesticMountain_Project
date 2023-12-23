@@ -271,7 +271,7 @@
 .article-movie-sub .movie-img {
 	display: table-cell;
 	position: relative;
-	width: 120px;
+	width: 200px;
 	height: 120px;
 	padding-left: 35px;
 	vertical-align: top;
@@ -280,7 +280,8 @@
 .article-movie-sub .movie-img a {
 	display: block;
 	position: relative;
-	height: 100%;
+	height: 120px;
+	width: 120px;
 }
 
 .article-movie-sub .movie-img a:before {
@@ -304,7 +305,7 @@
 
 .article-movie-sub .movie-img .num {
 	position: absolute;
-	bottom: 7px;
+	bottom: 10px;
 	right: 5px;
 	height: 20px;
 	padding: 0 7px;
@@ -517,13 +518,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="movie-img">
-							<a href="#"> <img
-								src="${pageContext.request.contextPath}/resources/images/hiking.png"
-								width="200" height="120" alt="썸네일 이미지"> <span class="num">7<span
-									class="blind">개의 추가 이미지가 있습니다</span></span>
-							</a>
-						</div>
+						
 					</li>
 
 					<li>

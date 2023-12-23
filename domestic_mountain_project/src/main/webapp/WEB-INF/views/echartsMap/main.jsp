@@ -9,18 +9,38 @@
 
 .maps-container {
 	margin: 30px auto;
-	max-width: 1500px;
+	max-width: 1300px;
 	padding-top: 120px;
-	width: 1000px;
 }
 
-.maps-container h1 {
+
+.amain h1 {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	margin: 20px 0 80px 0;
 	font-weight: 700;
 	color: #6558be;
 }
+
+.amain-main {
+	padding: 0 0 10px 10px;
+	border-bottom: 2px solid #3a3a3a;
+	font-size: xx-large;
+	color: #6557be;
+}
+
+.amain-main a>span {
+	font-size: 18px;
+	color: gray;
+	margin: 10px 0 0 20px;
+}
+
+.amain-main span {
+	font-size: 14px;
+	color: gray;
+	margin: 15px 0 0 20px;
+}
+
 
 .maps-body-container .maps {
 	margin: 0 auto;
@@ -45,7 +65,12 @@ h3 {
 
 <section class="features-1">
 	<div class="maps-container">
-		<h1>한반도 지도</h1>
+		<div class="amain">
+			<h1 class="amain-main">
+				<a>한반도 지도<span>| Maps</span></a> <span><a
+					href="/plus/">home</a> &gt; Maps</span>
+			</h1>
+		</div>
 
 		<div class="maps-body-container" style="margin-top: 15px;">
 			<div class="maps"></div>

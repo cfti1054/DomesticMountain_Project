@@ -6,24 +6,43 @@
 
 /*=============== body (area) ===============*/
 .features-1 {
-	height: 2200px; /* 수정 시 auto로 바꾸고 해야함 */
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
 }
 
 .body-container {
 	padding-top: 120px;
-	max-width: 1500px;
+	max-width: 1300px;
 	margin: 30px auto;
 	position: relative;
 	align-items: center;
 	min-height: 100vh;
 	overflow-x: hidden;
 }
-.body-container h1 {
+.amain h1 {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	margin: 20px 0 80px 0;
 	font-weight: 700;
 	color: #6558be;
+}
+
+.amain-main {
+	padding: 0 0 10px 10px;
+	border-bottom: 2px solid #3a3a3a;
+	font-size: xx-large;
+	color: #6557be;
+}
+
+.amain-main a>span {
+	font-size: 18px;
+	color: gray;
+	margin: 10px 0 0 20px;
+}
+
+.amain-main span {
+	font-size: 14px;
+	color: gray;
+	margin: 15px 0 0 20px;
 }
 
 
@@ -215,13 +234,23 @@ figure img {
 		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 	}
 }
+
+
 </style>
 
 
 
 <section class="features-1">
 	<div class="body-container">
-		<h1>산악 관련 클럽 및 구조대</h1>
+		
+		<div class="amain">
+			<h1 class="amain-main">
+				<a>등산 관련 동호회 및 연맹<span>| Related</span></a> <span><a
+					href="/plus/">home</a> &gt; Related</span>
+			</h1>
+		</div>
+
+
 		<div id="gallery">
 			
 			<figure>

@@ -280,14 +280,24 @@
 	vertical-align: top;
 }
 
+.article-movie-sub .movie-img a {
+	display: block;
+	position: relative;
+	height: 120px;
+	width: 120px;
+}
+
 .article-movie-sub .movie-img a:before {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.05);
 	content: '';
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	aspect-ratio: 120/120;
 }
 
 .article-movie-sub img {
@@ -298,7 +308,7 @@
 
 .article-movie-sub .movie-img .num {
 	position: absolute;
-	bottom: 7px;
+	bottom: 10px;
 	right: 5px;
 	height: 20px;
 	padding: 0 7px;
