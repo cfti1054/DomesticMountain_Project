@@ -59,7 +59,7 @@
 				    <c:when test="${empty sessionScope.loginUser}">
 				        <i class="ri-user-line nav__login" id="login-btn"></i>
 				        <div class="p-2">
-				            <a href="${pageContext.request.contextPath}/user/user" title="회원가입"><i class="fa-solid fa-mountain-sun"></i></a>
+				            <a href="${pageContext.request.contextPath}/user/user" title="회원가입"><i class=""></i></a>
 				        </div>
 				    </c:when>
 				    <c:otherwise>
