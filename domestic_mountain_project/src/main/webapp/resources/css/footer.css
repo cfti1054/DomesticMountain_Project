@@ -79,6 +79,17 @@ img {
   margin-bottom: 2em;
 }
 
+.footer__addr .img-div-tag {
+	height: 100px;
+}
+.footer__addr .img-div-tag a {
+	height: 100%;
+}
+.footer__addr .img-div-tag a img {
+	height: 100%;
+}
+
+
 .footer__logo {
   font-family: 'Pacifico', cursive;
   font-weight: 400;

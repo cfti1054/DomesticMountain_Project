@@ -19,8 +19,8 @@
 	<header class="header" id="header">
 		<nav class="nav container">
 			<div class="img-div-tag">
-				<a class="img-a-tag" href="#"> 
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/logo/logo_black.png">
+				<a class="img-a-tag" href="${pageContext.request.contextPath}/"> 
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/logo/logo_black.png">
 				</a>
 			</div>
 			<div class="nav__menu" id="nav-menu">

@@ -6,7 +6,11 @@
 
 <footer class="footer">
 	<div class="footer__addr">
-		<h1 class="footer__logo">Hello word!</h1>
+		<div class="img-div-tag">
+				<a class="img-a-tag" href="${pageContext.request.contextPath}/"> 
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/logo/logo_white.png">
+				</a>
+			</div>
 
 		<h2>E-mail</h2>
 
