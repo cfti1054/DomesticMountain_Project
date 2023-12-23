@@ -126,10 +126,9 @@
 	</select>	
 	
 	<!-- 등급 입력/수정 -->
-	<insert id="insertMemberRank" parameterType="map">
-		INSERT INTO user_rank_history(uph_num, rank_num,update_rank, useridx)
-			VALUES(user_rank_history_seq.NEXTVAL,
-				#{rank_num}, SYSDATE, #{useridx})
+	<insert id="insertMemberRank" parameterType="map" >
+		INSERT INTO user_rank_history(uph_num, rank_num, update_rank, useridx)
+			VALUES(user_rank_history_seq.NEXTVAL, #{rank_num}, SYSDATE, #{useridx})
 	</insert>
     
 	<select id="listRank" resultType="com.fa.plus.admin.domain.MemberManage">

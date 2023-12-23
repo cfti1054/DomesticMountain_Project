@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
-<!DOCTYPE html>
-<html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+
 <script type="text/javascript">
 $(function(){
 	$("#tab-1").addClass("active");
@@ -47,7 +45,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					login();
 					return false;
 				} else if(jqXHR.status === 400) {
-					alert('¿äÃ» Ã³¸®°¡ ½ÇÆĞ Çß½À´Ï´Ù.');
+					alert('ìš”ì²­ ì²˜ë¦¬ê°€ ì‹¤íŒ¨ í–ˆìŠµë‹ˆë‹¤.');
 					return false;
 		    	}
 		    	
@@ -56,8 +54,8 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	};
 	
 	if(file) {
-		settings.processData = false;  // file Àü¼Û½Ã ÇÊ¼ö. ¼­¹ö·ÎÀü¼ÛÇÒ µ¥ÀÌÅÍ¸¦ Äõ¸®¹®ÀÚ¿­·Î º¯È¯¿©ºÎ
-		settings.contentType = false;  // file Àü¼Û½Ã ÇÊ¼ö. ¼­¹ö¿¡Àü¼ÛÇÒ µ¥ÀÌÅÍÀÇ Content-Type. ±âº»:application/x-www-urlencoded
+		settings.processData = false;  // file ì „ì†¡ì‹œ í•„ìˆ˜. ì„œë²„ë¡œì „ì†¡í•  ë°ì´í„°ë¥¼ ì¿¼ë¦¬ë¬¸ìì—´ë¡œ ë³€í™˜ì—¬ë¶€
+		settings.contentType = false;  // file ì „ì†¡ì‹œ í•„ìˆ˜. ì„œë²„ì—ì „ì†¡í•  ë°ì´í„°ì˜ Content-Type. ê¸°ë³¸:application/x-www-urlencoded
 	}
 	
 	$.ajax(url, settings);
@@ -68,16 +66,16 @@ function profile(useridx) {
 		autoOpen: false,
 		modal: true,
 		buttons: {
-			" ¼öÁ¤ " :function(){
+			" ìˆ˜ì • " :function(){
 				updateOk();
-			}, " ´İ±â ": function() {
+			}, " ë‹«ê¸° ": function() {
 				$(this).dialog("close");
 			}
 		},
 		
 		height: 550,
 		width: 800,
-		title: "È¸¿ø »ó¼¼ Á¤º¸",
+		title: "íšŒì› ìƒì„¸ ì •ë³´",
 		close: function(event, ui) {
 		}
 	});
@@ -97,13 +95,13 @@ function updateOk() {
 	const f = document.deteailedMemberForm;
 	
 	if(! f.is_blocked.value) {
-		alert("»óÅÂ ÄÚµå¸¦ ¼±ÅÃÇÏ¼¼¿ä");
+		alert("ìƒíƒœ ì½”ë“œë¥¼ ì„ íƒí•˜ì„¸ìš”");
 		f.is_blocked.focus();
 		return;
 	}
 	
 	if(! f.blocked_reason.value.trim()) {
-		alert("»óÅÂ¿¡ ´ëÇÑ ¸Ş¸ğ¸¦ ÀÔ·Â ÇÏ¼¼¿ä");
+		alert("ìƒíƒœì— ëŒ€í•œ ë©”ëª¨ë¥¼ ì…ë ¥ í•˜ì„¸ìš”");
 		f.blocked_reason.focus();
 		return;
 	}
@@ -121,7 +119,7 @@ function updateOk() {
 }
 
 function deleteOk(useridx) {
-	if(confirm("¼±ÅÃÇÑ °èÁ¤À» »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î ?")) {
+	if(confirm("ì„ íƒí•œ ê³„ì •ì„ ì‚­ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ ?")) {
 	}
 	
 	$('#member-dialog').dialog("close");
@@ -133,7 +131,7 @@ function memberStateDetaileView() {
 		minHeight: 100,
 		maxHeight: 450,
 		width: 750,
-		title: "È¸¿ø »óÅÂ »ó¼¼",
+		title: "íšŒì› ìƒíƒœ ìƒì„¸",
 		close: function(event, ui) {
 			$(this).dialog("destroy");	
 		}
@@ -146,13 +144,13 @@ function memberRankDetaileView() {
 		minHeight: 100,
 		maxHeight: 450,
 		width: 750,
-		title: "È¸¿ø µî±Ş »ó¼¼",
+		title: "íšŒì› ë“±ê¸‰ ìƒì„¸",
 		close: function(event, ui) {
 			$(this).dialog("destroy");	
 		}
 	});
 }
-
+/////////// !! ////////////////////////////
 function updateRankOk() {
 
 	let url = "${pageContext.request.contextPath}/admin/memberManage/updateMemberRank";	
@@ -201,7 +199,7 @@ function selectStateChange() {
 *, *::after, *::before { box-sizing: border-box; }
 
 body {
-	font-family:"Malgun Gothic", "¸¼Àº °íµñ", NanumGothic, ³ª´®°íµñ, µ¸¿ò, sans-serif;
+	font-family:"Malgun Gothic", "ë§‘ì€ ê³ ë”•", NanumGothic, ë‚˜ëˆ”ê³ ë”•, ë‹ì›€, sans-serif;
 	font-size: 14px;
 	color: #222;
 }
@@ -219,7 +217,7 @@ a:active, a:hover { color: #f28011; text-decoration: underline; }
 	font-weight: 500;
 	cursor:pointer;
 	font-size: 14px;
-	font-family: "¸¼Àº °íµñ", ³ª´®°íµñ, µ¸¿ò, sans-serif;
+	font-family: "ë§‘ì€ ê³ ë”•", ë‚˜ëˆ”ê³ ë”•, ë‹ì›€, sans-serif;
 	vertical-align: baseline;
 }
 .btn:active, .btn:focus, .btn:hover {
@@ -235,7 +233,7 @@ a:active, a:hover { color: #f28011; text-decoration: underline; }
 .form-control {
 	border: 1px solid #999; border-radius: 4px; background-color: #fff;
 	padding: 5px 5px; 
-	font-family: "¸¼Àº °íµñ", ³ª´®°íµñ, µ¸¿ò, sans-serif;
+	font-family: "ë§‘ì€ ê³ ë”•", ë‚˜ëˆ”ê³ ë”•, ë‹ì›€, sans-serif;
 	vertical-align: baseline;
 }
 .form-control[readonly] { background-color:#f8f9fa; }
@@ -245,7 +243,7 @@ textarea.form-control { height: 170px; resize : none; }
 .form-select {
 	border: 1px solid #999; border-radius: 4px; background-color: #fff;
 	padding: 4px 5px; 
-	font-family: "¸¼Àº °íµñ", ³ª´®°íµñ, µ¸¿ò, sans-serif;
+	font-family: "ë§‘ì€ ê³ ë”•", ë‚˜ëˆ”ê³ ë”•, ë‹ì›€, sans-serif;
 	vertical-align: baseline;
 }
 .form-select[readonly] { background-color:#f8f9fa; }
@@ -305,21 +303,21 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">±¹³»»ê</div>
+                            <div class="sb-sidenav-menu-heading">êµ­ë‚´ì‚°</div>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                ´ë½Ãº¸µå
+                                ëŒ€ì‹œë³´ë“œ
                             </a>
-                            <div class="sb-sidenav-menu-heading">ÁÖ ±â´É</div>
+                            <div class="sb-sidenav-menu-heading">ì£¼ ê¸°ëŠ¥</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                È¸¿ø°ü¸®
+                                íšŒì›ê´€ë¦¬
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/memberManage/list">È¸¿ø ¸ñ·Ï</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">°ü¸®ÀÚ ±ÇÇÑ ¼³Á¤</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/memberManage/list">íšŒì› ëª©ë¡</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">ê´€ë¦¬ì ê¶Œí•œ ì„¤ì •</a>
                                 </nav>
                             </div>           
                             
@@ -354,7 +352,7 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
                                     </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Åë°è</div>
+                            <div class="sb-sidenav-menu-heading">í†µê³„</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Charts
@@ -367,7 +365,7 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        °ü¸®ÀÚ
+                        ê´€ë¦¬ì
                     </div>
                 </nav>
             </div>
@@ -376,14 +374,14 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
             	<main>
 			        <div class="body-title">
 			
-			            <h2> È¸¿ø ¸ñ·Ï </h2>
+			            <h2> íšŒì› ëª©ë¡ </h2>
 			            <hr>
 			    </div>
 
 		<div>
 			<ul class="tabs">
-				<li id="tab-0" data-tab="0"><i class="fa-solid fa-person"></i>&nbsp;È¸¿ø ¸®½ºÆ®</li>
-				<li id="tab-1" data-tab="1"><i class="fa-solid fa-chart-column"></i>&nbsp;È¸¿ø ºĞ¼®</li>
+				<li id="tab-0" data-tab="0"><i class="fa-solid fa-person"></i>&nbsp;íšŒì› ë¦¬ìŠ¤íŠ¸</li>
+				<li id="tab-1" data-tab="1"><i class="fa-solid fa-chart-column"></i>&nbsp;íšŒì› ë¶„ì„</li>
 			</ul>
 		</div>			
 			        
@@ -391,22 +389,22 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 
 			        <div style="padding-bottom: 10px; display: flex;">
 			            <select id="selectEnabled" class="form-select" onchange="searchList();" style="float: left; margin-right: 5px; padding: 2px; width: 140px;  display: flex;">
-							<option value="" ${enabled=="" ? "selected":""}>:°èÁ¤»óÅÂ:</option>
-							<option value="0" ${enabled=="0" ? "selected":""}>Àá±İ °èÁ¤</option>
-							<option value="1" ${enabled=="1" ? "selected":""}>È°¼º °èÁ¤</option>
+							<option value="" ${enabled=="" ? "selected":""}>:ê³„ì •ìƒíƒœ:</option>
+							<option value="0" ${enabled=="0" ? "selected":""}>ì ê¸ˆ ê³„ì •</option>
+							<option value="1" ${enabled=="1" ? "selected":""}>í™œì„± ê³„ì •</option>
 			            </select>  
 			           
 						<form name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post" style="float: left; width: 650px; display: flex;">
 							<select name="schType" class="form-select" style="width: 200px; padding: 3px;">
-								<option value="useridx"     ${schType=="useridx" ? "selected":""}>È¸¿ø¹øÈ£</option>
-								<option value="user_name"   ${schType=="user_name" ? "selected":""}>ÀÌ¸§</option>
-								<option value="birth"      ${schType=="birth" ? "selected":""}>»ı³â¿ùÀÏ</option>
+								<option value="useridx"     ${schType=="useridx" ? "selected":""}>íšŒì›ë²ˆí˜¸</option>
+								<option value="user_name"   ${schType=="user_name" ? "selected":""}>ì´ë¦„</option>
+								<option value="birth"      ${schType=="birth" ? "selected":""}>ìƒë…„ì›”ì¼</option>
 							</select>
 							<input type="text" name="kwd" class="form-control" value="${kwd}" style="width: 200px; padding: 3px; float: left; display: flex;" >
 							<input type="hidden" name="enabled" value="${enabled}">
 							<input type="hidden" name="page" value="1">
-							<button type="button" class="btn" onclick="searchList()" style="width: 100px; padding: 3px; float: left;">°Ë»ö</button>
-			            	<a style="float: right;">${dataCount}°³(${page}/${total_page} ÆäÀÌÁö)</a>
+							<button type="button" class="btn" onclick="searchList()" style="width: 100px; padding: 3px; float: left;">ê²€ìƒ‰</button>
+			            	<a style="float: right;">${dataCount}ê°œ(${page}/${total_page} í˜ì´ì§€)</a>
 						</form>	
 			        </div>
 			
@@ -415,14 +413,14 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 			        <form name="memberForm" method="post" id="datatablesSimple">
 			        <table class="table table-border table-form">
 			            <tr>
-			                <td style="width: 10%;" align="center">È¸¿ø¹øÈ£</td>
-			                <td style="width: 10%;" align="center">È¸¿øÀÌ¸§</td>
-			                <td style="width: 10%;" align="center">È¸¿ø±¸ºĞ</td>
-			                <td style="width: 10%;" align="center">»ı³â¿ùÀÏ</td>
-			                <td style="width: 30%;" align="center">°¡ÀÔÀÏ</td>
-			                <td style="width: 10%;" align="center">È¸¿øµî±Ş</td>
-			                <td style="width: 10%;" align="center">ÇÒÀÎÀ²</td>
-			                <td style="width: 10%;" align="center">»óÅÂ</td>
+			                <td style="width: 10%;" align="center">íšŒì›ë²ˆí˜¸</td>
+			                <td style="width: 10%;" align="center">íšŒì›ì´ë¦„</td>
+			                <td style="width: 10%;" align="center">íšŒì›êµ¬ë¶„</td>
+			                <td style="width: 10%;" align="center">ìƒë…„ì›”ì¼</td>
+			                <td style="width: 30%;" align="center">ê°€ì…ì¼</td>
+			                <td style="width: 10%;" align="center">íšŒì›ë“±ê¸‰</td>
+			                <td style="width: 10%;" align="center">í• ì¸ìœ¨</td>
+			                <td style="width: 10%;" align="center">ìƒíƒœ</td>
 			            </tr>
 						
 			     		<c:forEach var="dto" items="${list}"  >   
@@ -434,7 +432,7 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 				                    ${dto.user_name}
 				                </td>
 				                <td align="center">
-				                    ${dto.usership==1?"ÀÏ¹İÈ¸¿ø":(dto.usership==51?"Á÷¿ø":"°ü¸®ÀÚ")}
+				                    ${dto.usership==1?"ì¼ë°˜íšŒì›":(dto.usership==51?"ì§ì›":"ê´€ë¦¬ì")}
 				                </td>
 				                <td align="center"> 
 				                    ${dto.birth}
@@ -449,22 +447,22 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 									${dto.sale}%
 				                </td>
 				                <td align="center">
-									${dto.enabled==1?"È°¼º":"Àá±İ"}
+									${dto.enabled==1?"í™œì„±":"ì ê¸ˆ"}
 				                </td>
 			            </tr>		
 			          </c:forEach>   
 			        </table>
 			        
 			   		<div class="page-navigation" align="center">
-						${dataCount == 0 ? "µî·ÏµÈ °Ô½Ã¹°ÀÌ ¾ø½À´Ï´Ù." : paging}
+						${dataCount == 0 ? "ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì—†ìŠµë‹ˆë‹¤." : paging}
 					</div>     
 			   		
 			        <table class="table">
 			            <tr>
 			                <td align="left">
-			                    <button type="button" class="btn" style="border-color: black;"> ¸ğµÎ¼±ÅÃ </button>
-			                    <button type="reset" class="btn" style="border-color: black;"> ¼±ÅÃÇØÁ¦ </button>
-			                    <button type="button" class="btn" style="float: right; border-color: black;"> ¼±ÅÃ»èÁ¦ </button>
+			                    <button type="button" class="btn" style="border-color: black;"> ëª¨ë‘ì„ íƒ </button>
+			                    <button type="reset" class="btn" style="border-color: black;"> ì„ íƒí•´ì œ </button>
+			                    <button type="button" class="btn" style="float: right; border-color: black;"> ì„ íƒì‚­ì œ </button>
 			                </td>
 			            </tr>
 			
@@ -484,7 +482,7 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
                          <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Å·Çõ 2023</div>
+                            <div class="text-muted">Copyright &copy; í‚¹í˜ 2023</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
@@ -506,5 +504,3 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
         });
         
         </script>
-    </body>
-</html>

@@ -181,7 +181,7 @@ public class MemberManageController {
 	@ResponseBody
 	public Map<String, Object> updateMemberRank(MemberManage dto) throws Exception {
 
-		String rank = "true";
+		String rank_num = "true";
 		try {
 			Map<String, Object> map = new HashMap<>();
 			map.put("rank_num", dto.getRank_num());
@@ -191,11 +191,11 @@ public class MemberManageController {
 			service.insertMemberRank(map);
 
 		} catch (Exception e) {
-			rank = "false";
+			rank_num = "false";
 		}
 
 		Map<String, Object> model = new HashMap<>();
-		model.put("rank", rank);
+		model.put("rank_num", rank_num);
 		return model;
 	}	
 	

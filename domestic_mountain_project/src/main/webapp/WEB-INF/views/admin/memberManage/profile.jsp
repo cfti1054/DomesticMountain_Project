@@ -105,12 +105,13 @@
 </div>
 
 <div id="memberRankDetaile" style="display: none;">
-	<form name="memberRankForm" method="post">
+	<form name="memberRankForm" id="memberRankForm" method="post">
 		<table class="table table-border mx-auto my-10" style="text-align: center;">
 			<thead>
 				<tr class="bg-light border-top2">
 					<th>내용</th>
 					<th width="300">등급설정</th>
+					<th>${dto.useridx}</th>
 				</tr>
 			</thead>
 			
