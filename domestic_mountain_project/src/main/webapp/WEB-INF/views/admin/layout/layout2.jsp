@@ -64,4 +64,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/js/jquery.ui.datepicker-ko.js"></script>
 
 </body>
+
+<footer class="py-4  mt-auto"><div class="py-4"></div></footer>
 </html>

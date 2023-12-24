@@ -2,12 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<div class="body-container">
-    <div class="body-title">
-		<h2><i class="fa-brands fa-perbyte"></i> 제목 </h2>
-    </div>
-    
-    <div class="body-main">
-    	<p> 템플릿 입니다. </p>
-	</div>
+<div id="layoutSidenav_content">
+	<main class="mt-4">
+		<div class="container-fluid px-4">
+
+			<div>
+				여기에 작성하면 됩니당~
+			</div>
+
+		</div>
+	</main>
 </div>
+
