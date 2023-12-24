@@ -1,182 +1,193 @@
-﻿<%-- <%@ page contentType="text/html; charset=UTF-8" %>
+﻿<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script type="text/javascript">
-// 메뉴 활성화
-$(function(){
-    var url = window.location.pathname;
-    var urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");
-    
-    try {
-    	$('nav ul>li>a').each(function() {
-    		if ( urlRegExp.test(this.href.replace(/\/$/, '')) ) {
-    			$(this).addClass('active_menu');
-    			return false;
-    		}
-    	});
-    	if($('nav ul>li>a').hasClass("active_menu")) return false;
 
-     	var parent = url.replace(/\/$/, '').substr(0, url.replace(/\/$/, '').lastIndexOf("/"));
-     	if(! parent) parent = "/";
-        var urlParentRegExp = new RegExp(parent);
-    	$('nav ul>li>a').each(function() {
-    		if($(this).attr("href")=="#") return true;
-    		
-    		var phref = this.href.replace(/\/$/, '').substr(0, this.href.replace(/\/$/, '').lastIndexOf("/"));
-    		
-    		if ( urlParentRegExp.test(phref) ) {
-    			$(this).addClass('active_menu');
-    			return false;
-    		}
-    	});
-    	if($('nav ul>li>a').hasClass("active_menu")) return false;
-    	
-    	$('nav ul>.menu--item__has_sub_menu').each(function() {
-    		if (urlRegExp.test(this.href.replace(/\/$/, '')) ) {
-    			$(this).addClass('active_menu');
-    			return false;
-    		}
-    	});
-    	
-    }catch(e) {
-    }
-});
+<!DOCTYPE html>
+<html>
 
-$(function(){
-	$('nav ul>.menu--item__has_sub_menu ul>li>a').each(function() {
-		if($(this).hasClass('active_menu')) {
-			$(this).closest(".menu--item__has_sub_menu").addClass('menu--subitens__opened');
-			return false;
-		}
-	});
-});
-</script>
+<body class="sb-nav-fixed">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3"
+			href="${pageContext.request.contextPath}/resources/WEB-INF/admin/main/main.jsp">국내산</a>
+		<!-- Sidebar Toggle-->
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+			id="sidebarToggle" href="#!">
+			<i class="fas fa-bars"></i>
+		</button>
+		<!-- Navbar Search-->
+		<form
+			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="Search for..."
+					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+					class="fas fa-user fa-fw"></i></a>
+				<ul class="dropdown-menu dropdown-menu-end"
+					aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="#!">Settings</a></li>
+					<li><a class="dropdown-item" href="#!">Activity Log</a></li>
+					<li><hr class="dropdown-divider" /></li>
+					<li><a class="dropdown-item" href="#!">Logout</a></li>
+				</ul></li>
 
-<header class="header clearfix">
-	<button type="button" id="toggleMenu" class="toggle_menu">
-		<i class="fa-solid fa-bars"></i>
-	</button>
-	
-	<div class="header-container">
-		<div class="header-left">
-			<h1>관리자 페이지</h1>
-		</div>
-		<div class="header-right">
-			<span class="img" style="background-image: url('${pageContext.request.contextPath}/resources/images/person.png');"></span>
-			<span class="roll-user">
-				<label class="roll">관리자</label>
-				<label class="user">
-					<span class="name">관리자 님</span>
-					<a href="${pageContext.request.contextPath}/"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-				</label>
-			</span>
-		</div>
+		</ul>
+	</nav>
+
+	<div id="layoutSidenav_nav">
+		<nav class="sb-sidenav accordion sb-sidenav-dark"
+			id="sidenavAccordion">
+			<div class="sb-sidenav-menu">
+				<div class="nav">
+					<div class="sb-sidenav-menu-heading">국내산</div>
+					<a class="nav-link"
+						href="${pageContext.request.contextPath}/resources/WEB-INF/admin/main/main.jsp">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-tachometer-alt"></i>
+						</div> 대시보드
+					</a>
+					<div class="sb-sidenav-menu-heading">주 기능</div>
+
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseLayouts" aria-expanded="false"
+						aria-controls="collapseLayouts">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-columns"></i>
+						</div> 회원관리
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="collapseLayouts"
+						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav">
+							<a class="nav-link"
+								href="${pageContext.request.contextPath}/admin/memberManage/list">회원
+								목록</a> <a class="nav-link"
+								href="${pageContext.request.contextPath}/resources/admin/static/layout-sidenav-light.html">관리자
+								권한 설정</a>
+						</nav>
+					</div>
+
+
+
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapsePages" aria-expanded="false"
+						aria-controls="collapsePages">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-headset"></i>
+						</div> 고객 지원
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+
+
+					<div class="collapse" id="collapsePages"
+						aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav accordion"
+							id="sidenavAccordionPages">
+							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+								data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+								aria-controls="pagesCollapseAuth"> 1 : 1 문의 관리
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fas fa-angle-down"></i>
+								</div>
+							</a>
+							<div class="collapse" id="pagesCollapseAuth"
+								aria-labelledby="headingOne"
+								data-bs-parent="#sidenavAccordionPages">
+								<nav class="sb-sidenav-menu-nested nav">
+									<a class="nav-link"
+										href="${pageContext.request.contextPath}/resources/admin/static/login.html">Login</a>
+									<a class="nav-link"
+										href="${pageContext.request.contextPath}/resources/admin/static/register.html">Register</a>
+									<a class="nav-link"
+										href="${pageContext.request.contextPath}/resources/admin/static/password.html">Forgot
+										Password</a>
+								</nav>
+							</div>
+
+
+							<a class="nav-link collapsed"
+								href="${pageContext.request.contextPath}/admin/support/faq"
+								data-bs-toggle="collapse" data-bs-target="#pagesCollapseError"
+								aria-expanded="false" aria-controls="pagesCollapseError">
+								FAQ 분류
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fas fa-angle-down"></i>
+								</div>
+							</a>
+							<div class="collapse" id="pagesCollapseError"
+								aria-labelledby="headingOne"
+								data-bs-parent="#sidenavAccordionPages">
+								<nav class="sb-sidenav-menu-nested nav">
+									<a class="nav-link"
+										href="${pageContext.request.contextPath}/resources/admin/static/401.html">401
+										Page</a> <a class="nav-link"
+										href="${pageContext.request.contextPath}/resources/admin/static/404.html">404
+										Page</a> <a class="nav-link"
+										href="${pageContext.request.contextPath}/resources/admin/static/500.html">500
+										Page</a>
+								</nav>
+							</div>
+
+						</nav>
+					</div>
+
+
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseProducts" aria-expanded="false"
+						aria-controls="collapseProducts">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-columns"></i>
+						</div> 상품관리
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="collapseProducts"
+						aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav">
+							<a class="nav-link"
+								href="${pageContext.request.contextPath}/admin/">장비 관리</a> <a
+								class="nav-link"
+								href="${pageContext.request.contextPath}/admin/">상품 리뷰 및 문의</a>
+						</nav>
+					</div>
+
+
+
+					<div class="sb-sidenav-menu-heading">통계</div>
+					<a class="nav-link"
+						href="${pageContext.request.contextPath}/resources/admin/static/charts.html">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-chart-area"></i>
+						</div> Charts
+					</a> <a class="nav-link"
+						href="${pageContext.request.contextPath}/resources/admin/static/tables.html">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-table"></i>
+						</div> Tables
+					</a>
+				</div>
+			</div>
+			<div class="sb-sidenav-footer">
+				<div class="small">Logged in as:</div>
+				관리자
+			</div>
+		</nav>
 	</div>
 
-</header>
-
-<nav class="vertical_nav">
-	<ul id="js-menu" class="menu">
-	
-		<li class="menu--item">
-			<a href="${pageContext.request.contextPath}/admin" class="menu--link" title="Home">
-				<i class="menu--icon  fa-fw fa-solid fa-house"></i>
-				<span class="menu--label">Home</span>
-			</a>
-		</li>
-
-		<li class="menu--item">
-	        <a href="<c:url value='/admin/memberManage/list'/>" class="menu--link" title="회원 관리">
-				<i class="menu--icon  fa-fw fa-solid fa-user-group"></i>
-				<span class="menu--label">회원 관리</span>
-			</a>
-		</li>
-	
-		<li class="menu--item menu--item__has_sub_menu">
-			<label class="menu--link" title="고객센터관리">
-				<i class="menu--icon  fa-fw fa-solid fa-person-circle-question"></i>
-				<span class="menu--label">고객센터관리</span>
-			</label>
-
-			<ul class="sub_menu">
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">자주하는 질문</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">공지사항</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">1:1문의</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">이벤트</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">신고</a>
-				</li>
-			</ul>
-		</li>
-
-		<li class="menu--item menu--item__has_sub_menu">
-			<label class="menu--link" title="강좌관리">
-				<i class="menu--icon  fa-fw fa-solid fa-graduation-cap"></i>
-				<span class="menu--label">강좌관리</span>
-			</label>
-
-			<ul class="sub_menu">
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">카테고리</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">강좌</a>
-				</li>
-				<li class="sub_menu--item">
-					<a href="#" class="sub_menu--link">강사</a>
-				</li>
-			</ul>
-		</li>
-
-		<li class="menu--item">
-			<a href="#" class="menu--link" title="일정관리">
-				<i class="menu--icon  fa-fw fa-regular fa-calendar"></i>
-				<span class="menu--label">일정관리</span>
-			</a>
-		</li>
-		
-		<li class="menu--item">
-			<a href="#" class="menu--link" title="지역명소관리">
-				<i class="menu--icon  fa-fw fa-solid fa-location-dot"></i>
-				<span class="menu--label">지역명소관리</span>
-			</a>
-		</li>
-
-		<li class="menu--item">
-			<a href="#" class="menu--link" title="메인화면 설정">
-				<i class="menu--icon  fa-fw fa-solid fa-gear"></i>
-				<span class="menu--label">메인화면 설정</span>
-			</a>
-		</li>
-
-		<li class="menu--item">
-			<a href="#" class="menu--link" title="GroupWare">
-				<i class="menu--icon  fa-fw fa-solid fa-id-card"></i>
-				<span class="menu--label">GroupWare</span>
-			</a>
-		</li>
-
-		<li class="menu--item">
-			<a href="${pageContext.request.contextPath}/member/logout" class="menu--link" title="Logout">
-				<i class="menu--icon fa-fw fa-solid fa-lock-open"></i>
-				<span class="menu--label">Logout</span>
-			</a>
-		</li>
-	</ul>
-
-	<button id="collapse_menu" class="collapse_menu">
-		<i class="collapse_menu--icon fa fa-fw"></i>
-		<span class="menu--label">Menu</span>
-	</button>
-
-</nav>
- --%>
+</body>
+</html>
