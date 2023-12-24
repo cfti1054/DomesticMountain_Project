@@ -33,7 +33,7 @@
 			</if>
 
 		</where> 
-		ORDER BY reg_date DESC
+		ORDER BY useridx DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 
@@ -137,5 +137,18 @@
 		ORDER BY rank_num DESC
 	</select>
     
-    
+ 	<select id="findByAll" resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT m1.useridx, usership, m1.user_name, 
+			m1.reg_date, 
+			m1.enabled, m2.email, m2.tel, 
+			TO_CHAR(birth, 'YYYY-MM-DD') birth,
+			h.rank_num, h.uph_num, h.update_rank, r.rank1, r.base_order_money, r.sale 
+		FROM userall m
+		JOIN user1 m1 ON m.useridx = m1.useridx
+		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
+		LEFT OUTER JOIN user_rank_history h ON m1.useridx = h.useridx
+		LEFT OUTER JOIN user_rank r ON h.rank_num = r.rank_num		
+		ORDER BY useridx ASC
+	</select>
+	   
 </mapper>

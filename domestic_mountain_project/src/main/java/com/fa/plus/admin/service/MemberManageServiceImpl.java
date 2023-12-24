@@ -159,5 +159,18 @@ public class MemberManageServiceImpl implements MemberManageService {
 		
 		return list;
 	}
+
+	@Override
+	public List<MemberManage> listMember() {
+		List<MemberManage> list = null;
+		try {
+			list = mapper.findByAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 	
 }

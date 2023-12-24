@@ -2,6 +2,7 @@ package com.fa.plus.admin.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
 
 import com.fa.plus.admin.domain.MemberChart;
 import com.fa.plus.admin.domain.MemberManage;
+import com.fa.plus.admin.pdf.ScorePdfView;
 import com.fa.plus.admin.service.MemberManageService;
+import com.fa.plus.common.MyExcelView;
 import com.fa.plus.common.MyUtil;
 
 @Controller
@@ -33,6 +37,9 @@ public class MemberManageController {
 	@Qualifier("myUtilGeneral")
 	private MyUtil myUtil;	
 	
+	@Autowired
+	private MyExcelView excelView;	
+	
 	@RequestMapping("list")
 	public String memberManage(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(defaultValue = "useridx") String schType,
@@ -43,7 +50,7 @@ public class MemberManageController {
 
 		String cp = req.getContextPath();	
 		
-		int size = 10;
+		int size = 15;
 		int total_page = 0;
 		int dataCount = 0;
 
@@ -198,5 +205,74 @@ public class MemberManageController {
 		model.put("rank_num", rank_num);
 		return model;
 	}	
+	
+	@RequestMapping("excel")
+	public View excel(Map<String, Object> model) throws Exception {
+		List<MemberManage> list = service.listMember();
+		String sheetName="회원목록";
+		List<String> columnLabels = new ArrayList<String>();
+		List<Object[]> columnValues=new ArrayList<Object[]>();
+		
+		columnLabels.add("회원번호");
+		columnLabels.add("회원이름");
+		columnLabels.add("회원구분");
+		columnLabels.add("생년월일");
+		columnLabels.add("가입일");
+		columnLabels.add("회원등급");
+		columnLabels.add("할인율");
+		columnLabels.add("상태");
+		
+		for(MemberManage dto : list) {
+			columnValues.add(new Object[]{dto.getUseridx(), dto.getUser_name(), dto.getUsership(), 
+					dto.getBirth(), dto.getReg_date(), dto.getRank1(), dto.getSale(), dto.getEnabled()});
+		}
+		
+		// model.put("filename", "score.xls"); // xlsx 파일을 인식하지 못하면 xls로 다운
+		model.put("filename", "member.xlsx"); // 저장할 파일 이름
+		model.put("sheetName", sheetName); // 시트이름
+		model.put("columnLabels", columnLabels); // 타이틀
+		model.put("columnValues", columnValues); // 값
+		model.put("list", list);
+		
+		return excelView;  // 엑셀 파일 다운 로드
+		// return new MyExcelView();
+	}
+	
+	@RequestMapping("pdf")
+	public View pdf(Map<String, Object> model) throws Exception {
+		List<MemberManage> list = service.listMember();
+		
+		List<String> columnLabels = new ArrayList<String>();
+		List<Object[]> columnValues=new ArrayList<Object[]>();
+		
+		columnLabels.add("회원번호");
+		columnLabels.add("회원이름");
+		columnLabels.add("회원구분");
+		columnLabels.add("생년월일");
+		columnLabels.add("가입일");
+		columnLabels.add("회원등급");
+		columnLabels.add("할인율");
+		columnLabels.add("상태");
+		
+		for(MemberManage dto : list) {
+			columnValues.add(new Object[]{dto.getUseridx(), dto.getUser_name(), dto.getUsership(), 
+					dto.getBirth(), dto.getReg_date(), dto.getRank1(), dto.getSale(), dto.getEnabled()});
+		}
+		
+		model.put("filename", "memberManage.pdf"); // 저장할 파일 이름
+		model.put("columnLabels", columnLabels); // 타이틀
+		model.put("columnValues", columnValues); // 값
+		model.put("list", list);
+		
+		return new ScorePdfView();
+	}
+	
+	@RequestMapping("print")
+	public String print(Model model) throws Exception {
+		List<MemberManage> list = service.listMember();
+		model.addAttribute("list", list);
+		
+		return "/admin/memberManage/print";
+	}		
 	
 }

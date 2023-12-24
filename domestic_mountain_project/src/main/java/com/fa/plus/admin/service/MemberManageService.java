@@ -25,5 +25,7 @@ public interface MemberManageService {
 	public void insertMemberRank(Map<String, Object> map) throws SQLException;
 	
 	// 상세 등급 수정
-	public List<MemberManage> listRank();	
+	public List<MemberManage> listRank();
+	
+	public List<MemberManage> listMember();
 }

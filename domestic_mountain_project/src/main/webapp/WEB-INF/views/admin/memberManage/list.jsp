@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 
 <script type="text/javascript">
+// 회원목록/회원분석 구분
 $(function(){
 	$("#tab-1").addClass("active");
 
@@ -61,6 +62,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 	$.ajax(url, settings);
 }
 
+// 회원상세정보
 function profile(useridx) {
 	let dlg = $("#member-dialog").dialog({
 		autoOpen: false,
@@ -91,6 +93,7 @@ function profile(useridx) {
 	ajaxFun(url, "get", query, "text", fn);
 }
 
+// 회원계정 잠금/활성 수정
 function updateOk() {
 	const f = document.deteailedMemberForm;
 	
@@ -118,6 +121,7 @@ function updateOk() {
 	$("#member-dialog").dialog("close");
 }
 
+// (미구현) 계정지우면 큰일남
 function deleteOk(useridx) {
 	if(confirm("선택한 계정을 삭제 하시겠습니까 ?")) {
 	}
@@ -125,6 +129,7 @@ function deleteOk(useridx) {
 	$('#member-dialog').dialog("close");
 }
 
+// 회원상세 뷰
 function memberStateDetaileView() {
 	$("#memberStateDetaile").dialog({
 		modal: true,
@@ -138,6 +143,7 @@ function memberStateDetaileView() {
 	});
 }
 
+// 회원등급 상세 뷰
 function memberRankDetaileView() {
 	$("#memberRankDetaile").dialog({
 		modal: true,
@@ -150,7 +156,8 @@ function memberRankDetaileView() {
 		}
 	});
 }
-/////////// !! ////////////////////////////
+
+// 회원등급 수정
 function updateRankOk() {
 
 	let url = "${pageContext.request.contextPath}/admin/memberManage/updateMemberRank";	
@@ -165,6 +172,7 @@ function updateRankOk() {
 	$("#member-dialog").dialog("close");
 }
 
+// 회원상세정보 메모 select
 function selectStateChange() {
 	const f = document.deteailedMemberForm;
 	
@@ -183,83 +191,34 @@ function selectStateChange() {
 	f.blocked_reason.focus();
 }
 
+// 프린트출력
+function printMemberManage() {
+	let url="${pageContext.request.contextPath}/admin/memberManage/print";
+	window.open(url, "score", "width=800, height=500, left=50, top=50");
+}
 </script>
-    <style type="text/css">
-        /* container */
-        .container { width: 600px; margin: 30px auto 25px; }
-        .title { width:100%; font-size: 16px; font-weight: bold; padding: 13px 0; }
-        
-        .table-form { margin-top: 7px; }
-        .table-form td { padding: 7px 0; }
-        .table-form tr:first-child { border-top: 2px solid #212529; }
-        .table-form tr > td:first-child { width: 120px; text-align: center; background: #f8f9fa; }
-        .table-form tr > td:nth-child(2) {padding-left: 10px; }
 
-        * { padding: 0; margin: 0; }
-*, *::after, *::before { box-sizing: border-box; }
+<style type="text/css">
+	.btn1 { 
+		font-weight: bold; 
+		background-color: red; 
+		color: white;"	
+		
+	}
 
-body {
-	font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
-	font-size: 14px;
-	color: #222;
-}
+	.btn2 { 
+		font-weight: bold; 
+		background-color: darkgreen; 
+		color: white;"	
+		
+	}
 
-a { color: #222; text-decoration: none; cursor: pointer; }
-a:active, a:hover { color: #f28011; text-decoration: underline; }
-
-/* form-control */
-.btn {
-	color: #333;
-	border: 1px solid #999;
-	background-color: #fff;
-	padding: 5px 10px;
-	border-radius: 4px;
-	font-weight: 500;
-	cursor:pointer;
-	font-size: 14px;
-	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
-	vertical-align: baseline;
-}
-.btn:active, .btn:focus, .btn:hover {
-	background-color: #f8f9fa;
-	color:#333;
-}
-.btn[disabled], fieldset[disabled] .btn {
-	pointer-events: none;
-	cursor: default;
-	opacity: .65;
-}
-
-.form-control {
-	border: 1px solid #999; border-radius: 4px; background-color: #fff;
-	padding: 5px 5px; 
-	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
-	vertical-align: baseline;
-}
-.form-control[readonly] { background-color:#f8f9fa; }
-
-textarea.form-control { height: 170px; resize : none; }
-
-.form-select {
-	border: 1px solid #999; border-radius: 4px; background-color: #fff;
-	padding: 4px 5px; 
-	font-family: "맑은 고딕", 나눔고딕, 돋움, sans-serif;
-	vertical-align: baseline;
-}
-.form-select[readonly] { background-color:#f8f9fa; }
-
-textarea:focus, input:focus { outline: none; }
-input[type=checkbox], input[type=radio] { vertical-align: middle; }
-
-/* table */
-.table { width: 100%; border-spacing: 0; border-collapse: collapse; }
-.table th, .table td { padding-top: 10px; padding-bottom: 10px; }
-
-.table-border thead > tr { border-top: 2px solid #212529; border-bottom: 1px solid #ced4da; }
-.table-border tbody > tr { border-bottom: 1px solid #ced4da; }
-.table-border tfoot > tr { border-bottom: 1px solid #ced4da; }
-.td-border td { border: 1px solid #ced4da; }  
-
+	.btn3 { 
+		font-weight: bold; 
+		background-color: orange; 
+		color: white;"	
+		
+	}	
 </style>
 
     <head>
@@ -269,7 +228,11 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Static Navigation - SB Admin</title>
-        <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" type = "text/css"/>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="https://code.jquery.com/jquery-3.7.0.js"  rel="stylesheet"/>
+        <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css"></script>
+        
+        <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -388,30 +351,33 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 			    <div class="container">
 
 			        <div style="padding-bottom: 10px; display: flex;">
-			            <select id="selectEnabled" class="form-select" onchange="searchList();" style="float: left; margin-right: 5px; padding: 2px; width: 140px;  display: flex;">
+			            <select id="selectEnabled" class="form-select" onchange="searchList();" style="margin-right: 5px; padding: 2px; width: 140px;  display: flex;">
 							<option value="" ${enabled=="" ? "selected":""}>:계정상태:</option>
 							<option value="0" ${enabled=="0" ? "selected":""}>잠금 계정</option>
 							<option value="1" ${enabled=="1" ? "selected":""}>활성 계정</option>
 			            </select>  
 			           
-						<form name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post" style="float: left; width: 650px; display: flex;">
-							<select name="schType" class="form-select" style="width: 200px; padding: 3px;">
+						<form name="searchForm" action="${pageContext.request.contextPath}/admin/memberManage/list" method="post" style="width: 650px; display: flex;">
+							<select name="schType" class="form-select" style="width: 200px; padding: 3px; ">
 								<option value="useridx"     ${schType=="useridx" ? "selected":""}>회원번호</option>
 								<option value="user_name"   ${schType=="user_name" ? "selected":""}>이름</option>
 								<option value="birth"      ${schType=="birth" ? "selected":""}>생년월일</option>
 							</select>
-							<input type="text" name="kwd" class="form-control" value="${kwd}" style="width: 200px; padding: 3px; float: left; display: flex;" >
+							<input type="text" name="kwd" class="form-control" value="${kwd}" style="width: 200px; padding: 3px; display: flex;" >
 							<input type="hidden" name="enabled" value="${enabled}">
 							<input type="hidden" name="page" value="1">
-							<button type="button" class="btn" onclick="searchList()" style="width: 100px; padding: 3px; float: left;">검색</button>
-			            	<a style="float: right;">${dataCount}개(${page}/${total_page} 페이지)</a>
+							<button type="button" class="btn" onclick="searchList()" style="width: 100px; padding: 3px; ">검색</button>
+			            	<a>${dataCount}개(${page}/${total_page} 페이지)</a>
 						</form>	
+			            	<button type="button" class="btn1" onclick="printMemberManage();" style="float: right;">Print</button>
+			            	<button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/excel';" class="btn2" style="float: right;">EXCEL</button>
+							<button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/pdf';" class="btn3" style="float: right;">PDF</button>
 			        </div>
 			
 			
 			
-			        <form name="memberForm" method="post" id="datatablesSimple">
-			        <table class="table table-border table-form">
+			        <form name="memberForm" method="post">
+			        <table class="table table-border table-form" id="">
 			            <tr>
 			                <td style="width: 10%;" align="center">회원번호</td>
 			                <td style="width: 10%;" align="center">회원이름</td>
@@ -422,7 +388,7 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 			                <td style="width: 10%;" align="center">할인율</td>
 			                <td style="width: 10%;" align="center">상태</td>
 			            </tr>
-						
+			            
 			     		<c:forEach var="dto" items="${list}"  >   
 			            	<tr class="hover" onclick="profile('${dto.useridx}');">
 				                <td align="center">
@@ -456,25 +422,13 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
 			   		<div class="page-navigation" align="center">
 						${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
 					</div>     
-			   		
-			        <table class="table">
-			            <tr>
-			                <td align="left">
-			                    <button type="button" class="btn" style="border-color: black;"> 모두선택 </button>
-			                    <button type="reset" class="btn" style="border-color: black;"> 선택해제 </button>
-			                    <button type="button" class="btn" style="float: right; border-color: black;"> 선택삭제 </button>
-			                </td>
-			            </tr>
-			
-			        </table>
 			        
-			        
-			        </form>
+			       </form>
 			        
 			    </div>	
 			    
-				<div id="member-dialog" style="display: none;"></div>	
-				<div id="member-dialog2" style="display: none;"></div>	
+				<div id="member-dialog" class="modal" style="display: none;"></div>	
+				<div id="member-dialog2" class="modal" style="display: none;"></div>	
 						     
                 </main>
                 
@@ -493,14 +447,28 @@ input[type=checkbox], input[type=radio] { vertical-align: middle; }
                 </footer>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-
-        window.addEventListener('DOMContentLoaded', event => {
-
-            const datatablesSimple = document.getElementById('datatablesSimple');
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/static/js/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+        
+        
+        <script>
+        // 부트스트랩 table (미적용)
+          window.addEventListener('DOMContentLoaded', event => {
+            const datatablesSimple = document.getElementById('memberManage_table');
             if (datatablesSimple) {
                 new simpleDatatables.DataTable(datatablesSimple);
             }
-        });
-        
+            
+            datatablesSimple.on("datatable.selectrow", (rowIndex, event) => {
+            	event.preventDefault()
+            	const row = dataTable.data.data
+            	
+            	console.log(row)
+            })
+        });  
+               
         </script>
+

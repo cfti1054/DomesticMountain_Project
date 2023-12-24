@@ -30,4 +30,6 @@ public interface MemberManageMapper {
 	// 등급 리스트
 	public List<MemberManage> listRank();
 	
+	public List<MemberManage> findByAll();
+	
 }
