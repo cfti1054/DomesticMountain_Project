@@ -355,13 +355,72 @@
         	
         	const fn = function(data) {
         		$("#faq-dialog").html(data);
+        		console.log("html data : ");
+        		console.log(data);
         		dlg.dialog("open");
         	};
         	
         	ajaxFun(url, "post", query, "text", fn);
         } 
+         function isEmpty(strIn)
+         {
+             if (strIn === undefined)
+             {
+                 return true;
+             }
+             else if(strIn == null)
+             {
+                 return true;
+             }
+             else if(strIn == "")
+             {
+                 return true;
+             }
+             else
+             {
+                 return false;
+             }
+         }
 			
-        
+         function updateOk() {
+				
+        	 let param=[];
+        	 
+        	 $(".input").each(function(i){
+        		 
+        		 var data = {
+        				 faq_category_num :$(this).parents('tr').find("input.faq_category_num").text(),
+        				 category_name :$(this).parents('tr').find("input.category_name").text(),
+        				 category_visible :$(this).parents('tr').find("input.category_visible").text(),
+        		 };
+        		 
+        		 param.push(data);
+        		 
+        	 })
+			var jsonData = JSON>stringify(param);
+			jQuery.ajaxSettings.traditional=true;
+				
+			 $.ajax({
+			        url : "${pageContext.request.contextPath}/admin/support/update_category_ok";,
+			        type: 'POST',
+			        headers: {
+			            "mode" : CommonConstant.RequestMode.regist
+			        },
+			        data: {"jsonData" : jsonData},
+			        dataType:'json',
+			        success: function(data) {
+			            alert('리스트에 추가하였습니다.');
+			            
+			        },
+			        error: function(x, e) {
+			            //err msg 출력
+			            $.failMsg('error');
+			        }
+			    });
+        	 
+        		
+        		$("#faq-dialog").dialog("close");
+        	}
         </script>
         
         

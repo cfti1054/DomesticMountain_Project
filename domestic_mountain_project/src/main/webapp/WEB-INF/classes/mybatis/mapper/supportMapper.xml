@@ -30,8 +30,9 @@
 	
 	<select id="find_by_category_num" parameterType="hashmap" resultType="com.fa.plus.admin.domain.Support">
 		SELECT faq_category_num, category_name,
-			category_reg_id, category_reg_date, category_order, category_visible
-		FROM faq_category
+			u.user_name AS category_reg_id, category_reg_date, category_order, category_visible
+		FROM faq_category f
+		JOIN user1 u ON f.category_reg_id = u.userIdx
 		WHERE faq_category_num IN
 		
 		<foreach item="item" index="index" collection="list"
@@ -86,11 +87,7 @@
 		WHERE faq_num = #{faq_num}
 	</update>
 	
-	<select id="list_faq_board" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_num, faq_category_num, faq_question, faq_content, u.userIdx AS faq_reg_id, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
-		FROM faq_board f
-		JOIN user1 u ON f.faq_reg_id = u.userIdx
-	</select>
+	
 	
 	<update id="visible_faq_board" parameterType="map">
 		UPDATE faq_board
@@ -110,7 +107,12 @@
 		JOIN user1 u ON f.category_reg_id = u.userIdx
 	</select>	
 	
-	
+	<select id="list_faq_board" resultType="com.fa.plus.admin.domain.Support">
+		SELECT faq_num, fc.category_name, faq_question, faq_content, u.userIdx AS faq_reg_id, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
+		FROM faq_board f
+		JOIN user1 u ON f.faq_reg_id = u.userIdx
+      	JOIN faq_category fc ON f.faq_category_num = fc.faq_category_num
+	</select>
 	
 	
 </mapper>

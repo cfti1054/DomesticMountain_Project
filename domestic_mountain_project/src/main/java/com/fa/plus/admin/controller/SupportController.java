@@ -1,10 +1,15 @@
 package com.fa.plus.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +53,7 @@ public class SupportController {
 
 	
 	@RequestMapping("faq_category_list")
-	public String list_faq(HttpServletRequest req, Model model) throws Exception {
+	public String faq_category_list(HttpServletRequest req, Model model) throws Exception {
 		List<Support> list = service.list_faq_category();
 		
 		model.addAttribute("list", list);
@@ -65,6 +70,7 @@ public class SupportController {
 
 		return ".admin.support.write_form";
 	}
+
 	
 	public String write_submit(Support dto, HttpSession session) throws Exception {
 		String root = session.getServletContext().getRealPath("/");
@@ -97,25 +103,29 @@ public class SupportController {
 		
 		return "admin/support/write_modal";
 	}
+	
+	
+	@RequestMapping(value="update_category_ok")
+	@ResponseBody
+	public String update_category_ok(@RequestParam String jsonData, Model model) throws Exception {
+		
 
-	
-//	@PostMapping("faq_category_write")
-//	public String write_submit(Support dto, HttpSession session) throws Exception {
-////		SessionInfo info = (SessionInfo) session.getAttribute("member");
-//		
-//		String root = session.getServletContext().getRealPath("/");
-//		
-//		try {
-//			
-////			dto.setCategory_reg_id(info.getUserId());
-//			service.insert_faq_category(dto);
-//		} catch (Exception e) {
-//		}
-//		
-//		return "redirect:/admin/support/faq_category_list";
-//	}
-	
-	
+		return "redirect:/admin/support/faq_category_list";
+	}
+	/*
+	 						===========	===========	FAQ 게시판======================	
+	*/
+	@RequestMapping("faq_board_list")
+	public String faq_board_list(HttpServletRequest req, Model model) throws Exception {
+		List<Support> list = service.list_faq_board();
+		
+		model.addAttribute("list", list);
+		
+		
+		return ".admin.support.faq_board";
+	}
+
+
 	
 	
 	
