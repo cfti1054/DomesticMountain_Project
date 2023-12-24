@@ -42,7 +42,7 @@ public class ScorePdfView extends AbstractPdfView {
 		font.setStyle(Font.BOLD);
 		
 		// 문장 표현
-		Paragraph p = new Paragraph("성적처리", font);
+		Paragraph p = new Paragraph("회원목록", font);
 		p.setAlignment(Paragraph.ALIGN_CENTER);
 		document.add(p);
 		
@@ -66,7 +66,7 @@ public class ScorePdfView extends AbstractPdfView {
 		for(int i = 0; i < columnValues.size(); i++) {
 			Object[] values = columnValues.get(i);
 			for(int col = 0; col < values.length; col++) {
-				cell = new PdfPCell(new Paragraph(values[col].toString(), font));
+				cell = new PdfPCell(new Paragraph(String.valueOf(values), font));
 				cell.setHorizontalAlignment(Cell.ALIGN_CENTER);
 				cell.setFixedHeight(25);
 				cell.setVerticalAlignment(Cell.ALIGN_MIDDLE);
