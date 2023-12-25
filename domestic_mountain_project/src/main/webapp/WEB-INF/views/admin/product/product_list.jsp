@@ -154,13 +154,29 @@ $(function(){
 									<button type="button" class="btn" onclick="location.href='#';">3개월</button>
 									<button type="button" class="btn" onclick="location.href='#';">6개월</button>
 								</c:if>
+								<c:if test="${dataCount!=0 && category == 'review'}">
+									<button type="button" class="btn" onclick="location.href='#';">문의답변</button>
+									<select name="size" class="form-select" onchange="changeList();">
+										<option value="" >분류1</option>
+										<option value="" >분류2</option>
+										<option value="" >분류3</option>
+									</select>
+								</c:if>
 								<input type="hidden" name="schType" value="${schType}">
 								<input type="hidden" name="kwd" value="${kwd}">
 							</form>
 						</td>
 						
 						<td align="right" width="50%">
-							<button type="button" class="btn" onclick="location.href='#';">상품등록</button>
+							<c:if test="${dataCount!=0 && (category == 'all' || category == 'special')}">
+								<button type="button" class="btn" onclick="location.href='#';">상품등록</button>
+							</c:if>
+							<c:if test="${dataCount!=0 && category == 'order'}">
+								<button type="button" class="btn" onclick="location.href='#';">Excel 저장</button>
+							</c:if>
+							<c:if test="${dataCount!=0 && category == 'review'}">
+								전체 : n 건
+							</c:if>
 						</td>
 					</tr>
 				</table>
