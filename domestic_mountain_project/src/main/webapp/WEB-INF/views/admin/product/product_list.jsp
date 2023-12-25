@@ -46,7 +46,7 @@ ul.tabs li.active {
 
 .table button,
 .table-select button {
-	width: 85px;
+	width: auto;
 	border: 1px solid #ccc;
 }
 
@@ -65,6 +65,15 @@ ul.tabs li.active {
 }
 .table-list tbody tr td {
 	vertical-align: middle;
+}
+.form-list {
+	width: auto; 
+	padding: 0;
+	display: flex;
+}
+.form-list select,
+.form-list button {
+	margin-right: 5px;
 }
 </style>
 
@@ -88,6 +97,8 @@ $(function(){
 		location.href = '${pageContext.request.contextPath}/admin/product/'+category+'/product_list';
 	});
 });
+
+
 </script>
 
 
@@ -112,16 +123,36 @@ $(function(){
 
 			<div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
 				
-				<table class="table-select">
+				<table class="table-select" style="width: 100%">
 					<tr>
-						<td align="left" width="50%">
-							<form action="#" name="boardListForm" method="post" style="width: auto; padding: 0;">
-								<c:if test="${dataCount!=0 }">
+						<td align="left" width="80%">
+							<form action="${pageContext.request.contextPath}/admin/product/${category}/product_list" name="boardListForm" class="form-list" method="post">
+								<c:if test="${dataCount!=0 && category == 'all'}">
 									<select name="size" class="form-select" onchange="changeList();">
 										<option value="10" ${size==10 ? "selected ":""}>10개씩 출력</option>
 										<option value="20" ${size==20 ? "selected ":""}>20개씩 출력</option>
 										<option value="30" ${size==30 ? "selected ":""}>30개씩 출력</option>
 									</select>
+								</c:if>
+								<c:if test="${dataCount!=0 && category == 'special'}">
+									<select name="size" class="form-select" onchange="changeList();">
+										<option value="" >브랜드 분류1</option>
+										<option value="" >브랜드 분류2</option>
+										<option value="" >브랜드 분류3</option>
+									</select>
+									<select name="size" class="form-select" onchange="changeList();">
+										<option value="" >종류 분류1</option>
+										<option value="" >종류 분류2</option>
+										<option value="" >종류 분류3</option>
+									</select>
+								</c:if>
+								<c:if test="${dataCount!=0 && category == 'order'}">
+									<input type="date" name="sday" class="form-control" value="" style="width: auto;">&nbsp;<p style="margin: 5px;">&#126;</p>&nbsp;
+									<input type="date" name="eday" class="form-control" value="" style="width: auto; margin-right: 20px;">
+									<button type="button" class="btn" onclick="location.href='#';">오늘</button>
+									<button type="button" class="btn" onclick="location.href='#';">1개월</button>
+									<button type="button" class="btn" onclick="location.href='#';">3개월</button>
+									<button type="button" class="btn" onclick="location.href='#';">6개월</button>
 								</c:if>
 								<input type="hidden" name="schType" value="${schType}">
 								<input type="hidden" name="kwd" value="${kwd}">
@@ -135,49 +166,40 @@ $(function(){
 				</table>
 
 				<table class="table table-border table-list">
-					<thead>
+					<thead class="table-light">
 						<tr>
 							<th width="60">번호</th>
-							<th width="200">이름</th>
+							<th>이름</th>
 							<th width="200">상품코드</th>
 							<th width="150">등록일</th>
-							<th>진열상태</th>
-							<th width="50">재고</th>
-							<th>판매가</th>
+							<th width="80">진열상태</th>
+							<th width="80">재고</th>
+							<th width="150">판매가</th>
 							<th width="150">관리</th>
 						</tr>
 					</thead>
 					
 					<tbody>
-						<tr>
-							<td>10</td>
-							<td>페라어스 남성 베이직</td>
-							<td><a href="#">100001</a></td>
-							<td>2024-10-10</td>
-							<td>숨김</td>
-							<td>223</td>
-							<td>30,500</td>
-							<td>
-								<button type="button" class="btn" style="height: auto; width: auto" onclick="location.href='#';">수정</button>
-							</td>
-						</tr>
-					</tbody>
-
-					<tbody>
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr>
 								<td>${dataCount - (page-1) * size - status.index}</td>
-								<td class="left"><a href="${articleUrl}&num=${dto.num}">${dto.title}</a>
+								<td class="left">
+									<a href="#">${dto.product_name}</a>
 								</td>
-								<td>${dto.startDate}</td>
-								<td>${dto.endDate}</td>
-								<td>${category=="winner" ? (dto.winnerCount==0?"예정":"완료") : (dto.winnerNumber == 0 ? "-" : dto.applyCount) }</td>
+								<td>${dto.product_num}</td>
+								<td>${dto.product_reg_date}</td>
+								<td>${dto.product_status == 1 ? "진열" : "숨김"}</td>
+								<td>재고</td>
+								<td>${dto.product_price}</td>
+								<td>
+								<button type="button" class="btn" style="height: auto; width: auto" onclick="location.href='#';">수정</button>
+							</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 
-				<div class="page-navigation">${dataCount == 0 ? "등록된 이벤트가 없습니다." : paging}
+				<div class="page-navigation">${dataCount == 0 ? "등록된 상품이 없습니다." : paging}
 				</div>
 
 				<table class="table">

@@ -13,7 +13,7 @@ public class ProductManage {
 	
 	private String product_summary; // 이미지
 	private String product_modify_date; // 수정일
-	private long product_hit; // 소회수
+	private long product_hit; // 조회수
 	
 	private long product_insertIdx; // 상품등록회원번호?
 	private long product_updateIdx; // 상품수정회원번호??

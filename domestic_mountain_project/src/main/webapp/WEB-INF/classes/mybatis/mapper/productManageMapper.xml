@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.ProductManageMapper">
+
+	<select id="listProduct" parameterType="map" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT product_num, TO_CHAR(product_reg_date, 'YYYY-MM-DD') product_reg_date, 
+			product_status, product_price, product_name
+		FROM product
+		
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM product
+	</select>
+	
+</mapper>
