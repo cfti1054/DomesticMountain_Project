@@ -51,33 +51,36 @@ public class SupportController {
 	}
 	
 
-	
+	// 카테고리 리스트
 	@RequestMapping("faq_category_list")
 	public String faq_category_list(HttpServletRequest req, Model model) throws Exception {
 		List<Support> list = service.list_faq_category();
 		
 		model.addAttribute("list", list);
 		
-		
 		return ".admin.support.faq_category";
 	}
 	
+	// 카테고리 추가
 	@GetMapping("faq_category_write")
-	public String write_form(Model model) throws Exception {
-//		model.addAttribute("mode")
+	public String category_write(Model model) throws Exception {
+
 		model.addAttribute("mode","write");
+		model.addAttribute("type", "category");
 
-
-		return ".admin.support.write_form";
+		return "admin/support/write_modal";
 	}
 
 	
+	// 카테고리 추가
+	@PostMapping("faq_category_write")
 	public String write_submit(Support dto, HttpSession session) throws Exception {
 		String root = session.getServletContext().getRealPath("/");
 
 		try {
 
 //			dto.setCategory_reg_id(info.getUserId());
+			System.out.println(dto.getCategory_name());
 			service.insert_faq_category(dto);
 		} catch (Exception e) {
 		}
@@ -85,7 +88,7 @@ public class SupportController {
 		return "redirect:/admin/support/faq_category_list";
 	}
 	
-	
+	// 카테고리 업데이트
 	@GetMapping("multi_category")
 	public String update_form(@RequestParam List<String> category_dto, Model model) throws Exception {
 		List<Support> list = null;
@@ -96,6 +99,7 @@ public class SupportController {
 			e.printStackTrace();
 		}
 		model.addAttribute("list", list);
+		model.addAttribute("mode", "update");
 		for(Support s: list) {
 			dto = s;
 		}
@@ -126,8 +130,17 @@ public class SupportController {
 	}
 
 
-	
-	
+	@GetMapping("faq_board_write")
+	public String board_write(Model model) throws Exception {
+		List<Support> list = service.list_faq_category();
+		
+		
+		model.addAttribute("mode","write");
+		model.addAttribute("type", "board");
+		model.addAttribute("list", list);
+
+		return ".admin.support.write_modal";
+	}
 	
 	
 }

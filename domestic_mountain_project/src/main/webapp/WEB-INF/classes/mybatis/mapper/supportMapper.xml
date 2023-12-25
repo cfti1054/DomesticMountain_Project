@@ -102,7 +102,7 @@
 	</update>
   -->
   <select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_category_num, category_name, u.user_name AS category_reg_id, category_reg_date, category_order, category_visible
+		SELECT faq_category_num, category_name, u.user_name AS category_reg_id, TO_CHAR(category_reg_date,'YYYY-MM-DD') AS category_reg_date, category_order, category_visible
 		FROM faq_category f
 		JOIN user1 u ON f.category_reg_id = u.userIdx
 	</select>	
