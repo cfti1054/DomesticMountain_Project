@@ -6,8 +6,8 @@ public class ProductManage {
 	
 	private String product_reg_date; // 등록일
 	private int product_status; // 이게 진열상태?
-	private String total_stock; // 재고
-	private String product_price; // 금액
+	private int total_stock; // 재고
+	private int product_price; // 금액
 	private String product_name; // 이름
 	
 	
@@ -65,19 +65,19 @@ public class ProductManage {
 		this.product_status = product_status;
 	}
 
-	public String getTotal_stock() {
+	public int getTotal_stock() {
 		return total_stock;
 	}
 
-	public void setTotal_stock(String total_stock) {
+	public void setTotal_stock(int total_stock) {
 		this.total_stock = total_stock;
 	}
 
-	public String getProduct_price() {
+	public int getProduct_price() {
 		return product_price;
 	}
 
-	public void setProduct_price(String product_price) {
+	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
 	}
 
