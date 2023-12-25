@@ -218,7 +218,7 @@
         	});
         	
         	let url = "${pageContext.request.contextPath}/admin/support/faq_category_write";
-        	let query = "";
+        	let query = "mode=write&type=category";
         	
         	const fn = function(data) {
         		$("#faq-dialog").html(data);
