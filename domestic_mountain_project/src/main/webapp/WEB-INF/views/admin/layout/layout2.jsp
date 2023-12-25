@@ -17,12 +17,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendor/jquery/css/jquery-ui.min.css" type="text/css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/menu2.css" type="text/css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/style.css" type="text/css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/main2.css" type="text/css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/forms.css" type="text/css">
+	<!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/tabs.css" type="text/css">  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/paginate.css" type="text/css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/ui-css.css" type="text/css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/forms.css" type="text/css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/board.css" type="text/css">
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/js/jquery.min.js"></script>
 	
