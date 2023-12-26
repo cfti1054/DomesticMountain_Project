@@ -32,7 +32,7 @@
 	</select>
 
    <select id="listFaq" parameterType="map" resultType="com.fa.plus.domain.Faq">
-	    SELECT f.faq_name, faq_question, faq_content, f.faq_category_num, category_name
+	    SELECT f.faq_num, faq_question, faq_content, f.faq_category_num, category_name
 	    FROM faq_board f
 	    JOIN faq_category c ON f.faq_category_num = c.faq_category_num
 	    <where>
@@ -41,7 +41,7 @@
 	        </if>
 	        AND c.category_visible = 1
 	    </where>
-	    ORDER BY f.faq_name DESC
+	    ORDER BY f.faq_num DESC
 	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
     
@@ -49,7 +49,7 @@
 		SELECT faq_category_num, category_name, category_visible
 		FROM faq_category
 		<where>
-			<if test="mode=='enabled'">
+			<if test="mode=='category_visible'">
 				category_visible = 1
 			</if>
 		</where>

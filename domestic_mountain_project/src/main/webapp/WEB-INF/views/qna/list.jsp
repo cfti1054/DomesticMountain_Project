@@ -171,7 +171,7 @@ function searchList() {
 							href="${pageContext.request.contextPath}/services/qna_list">&gt;
 								Qna</a></li>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/faq/list">&gt;
+							href="${pageContext.request.contextPath}/faq/main">&gt;
 								Faq</a></li>
 					</ul>
 

@@ -9,7 +9,7 @@ public class Faq {
 	private int category_order;
 	private int category_visible;
 	
-	private int faq_name;
+	private int faq_num;
 	// private String faq_category_num;
 	private String faq_question;
 	private String faq_content;
@@ -18,6 +18,14 @@ public class Faq {
 	private int faq_update_id;
 	private String faq_update_date;
 	private int faq_visible;
+	
+	
+	public int getFaq_num() {
+		return faq_num;
+	}
+	public void setFaq_num(int faq_num) {
+		this.faq_num = faq_num;
+	}
 	public int getFaq_category_num() {
 		return faq_category_num;
 	}
@@ -61,12 +69,6 @@ public class Faq {
 		this.category_visible = category_visible;
 	}
 	
-	public int getFaq_name() {
-		return faq_name;
-	}
-	public void setFaq_name(int faq_name) {
-		this.faq_name = faq_name;
-	}
 	public String getFaq_question() {
 		return faq_question;
 	}
