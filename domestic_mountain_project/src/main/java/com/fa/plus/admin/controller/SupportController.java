@@ -80,7 +80,7 @@ public class SupportController {
 		try {
 
 //			dto.setCategory_reg_id(info.getUserId());
-			System.out.println(dto.getCategory_name());
+
 			service.insert_faq_category(dto);
 		} catch (Exception e) {
 		}
@@ -100,6 +100,7 @@ public class SupportController {
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("mode", "update");
+		model.addAttribute("type", "category");
 		for(Support s: list) {
 			dto = s;
 		}
@@ -109,11 +110,15 @@ public class SupportController {
 	}
 	
 	
-	@RequestMapping(value="update_category_ok")
-	@ResponseBody
-	public String update_category_ok(@RequestParam String jsonData, Model model) throws Exception {
+	@GetMapping("update_category_ok")
+	public String update_category_ok(@RequestParam List<String> list, Model model) throws Exception {
+
+		for(String s : list) {
+			System.out.println(s);
+		}
 		
 
+		
 		return "redirect:/admin/support/faq_category_list";
 	}
 	/*
@@ -134,13 +139,26 @@ public class SupportController {
 	public String board_write(Model model) throws Exception {
 		List<Support> list = service.list_faq_category();
 		
-		
 		model.addAttribute("mode","write");
 		model.addAttribute("type", "board");
 		model.addAttribute("list", list);
 
-		return ".admin.support.write_modal";
+		return "admin/support/write_modal";
 	}
 	
+	@PostMapping("faq_board_write")
+	public String board_write_submit(@RequestParam String faq_category_num,Support dto, HttpSession session) throws Exception {
+		String root = session.getServletContext().getRealPath("/");
+
+		try {
+
+
+			System.out.println(dto.getFaq_category_num());
+			service.insert_faq_board(dto);
+		} catch (Exception e) {
+		}
+
+		return "redirect:/admin/support/faq_board_list";
+	}
 	
 }

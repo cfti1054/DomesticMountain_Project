@@ -117,12 +117,11 @@
 								<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
 							</p>
 							<p>
-								<button type="button" class="btn btn-primary"
-									onclick="location.href='${pageContext.request.contextPath}/admin/support/faq_category_write';">추가</button>
+								<button type="button" class="btn btn-primary" id="add_button">추가</button>
 							</p>
                             </div>
                         </div>
-
+					<div id="faq-dialog" style="display: none;"></div>	
 		</div>
 	</main>
 </div>
@@ -199,7 +198,68 @@
         </script>
         
         <script>
-	
+        $("#add_button").on("click",function() {
+        	let dlg = $("#faq-dialog").dialog({
+        		autoOpen: false,
+        		modal: true,
+        		buttons: {
+        			" 추가 " :function(){
+        				writeOk();
+        			}, " 닫기 ": function() {
+        				$(this).dialog("close");
+        			}
+        		},
+        		
+        		height: 550,
+        		width: 800,
+        		title: "FAQ 추가",
+        		close: function(event, ui) {
+        		}
+        	});
+        	
+        	let url = "${pageContext.request.contextPath}/admin/support/faq_board_write";
+        	let query = "mode=write&type=board";
+        	
+        	const fn = function(data) {
+        		$("#faq-dialog").html(data);
+        		dlg.dialog("open");
+        	};
+        	
+        	ajaxFun(url, "get", query, "text", fn);
+        });
+        
+        function writeOk() {
+        	const f = document.boardWriteForm;
+        	
+        	if(! f.faq_question.value) {
+        		alert("질문을 입력하세요.");
+        		f.faq_question.focus();
+        		return;
+        	}
+        	
+        	if(! f.faq_content.value) {
+        		alert("내용을 입력하세요.");
+        		f.faq_content.focus();
+        		return;
+        	}
+        	
+        	if(f.category_list.value === "" ) {
+        		alert("카테고리를 선택하세요.");
+        		f.category_list.focus();
+        		return;
+        	}
+        	
+        	let url = "${pageContext.request.contextPath}/admin/support/faq_board_write";
+        	let query = $("#boardWriteForm").serialize() + "&faq_category_num=" + $("#category_list").val();
+        	
+        	const fn = function(data) {
+        		
+        	}
+        	ajaxFun(url, "post", query, "json", fn);
+        	
+        	$("#faq-dialog").dialog("close");
+        	
+        }
          function isEmpty(strIn)
          {
              if (strIn === undefined)
@@ -239,7 +299,7 @@
 			jQuery.ajaxSettings.traditional=true;
 				
 			 $.ajax({
-			        url : "${pageContext.request.contextPath}/admin/support/update_category_ok";,
+			        url : "${pageContext.request.contextPath}/admin/support/update_category_ok",
 			        type: 'POST',
 			        headers: {
 			            "mode" : CommonConstant.RequestMode.regist

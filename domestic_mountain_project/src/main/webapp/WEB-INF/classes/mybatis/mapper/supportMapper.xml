@@ -3,17 +3,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.SupportMapper">
 
-<!-- 
-	<select id="faq_category_seq" resultType="Long">
-		SELECT faq_category_seq.NEXTVAL FROM dual
-	</select>
-	
-	<select id="faq_category_order_seq" resultType="Long">
-		SELECT faq_category_order_seq.NEXTVAL FROM dual
-	</select>
-
-	
-	-->
 	<select id="faq_category_seq" resultType="Long">
 		SELECT faq_category_seq.NEXTVAL FROM dual
 	</select>
@@ -69,14 +58,7 @@
 	
 	
 	
-	<select id="faq_board_seq" resultType="Long">
-		SELECT faq_board_seq.NEXTVAL FROM dual
-	</select>
-
-	<insert id="insert_faq_board" parameterType="com.fa.plus.admin.domain.Support">
-		INSERT INTO faq_board(faq_num, faq_category_num, faq_question, faq_content, faq_reg_id, faq_reg_date, faq_visible)
-			VALUES(#{faq_num}, #{faq_category_num}, #{faq_question), #{faq_content}, 11, SYSDATE, 1)
-	</insert>
+	
 	
 	<update id="update_faq_board" parameterType="com.fa.plus.admin.domain.Support">
 		UPDATE faq_board
@@ -101,6 +83,17 @@
 		
 	</update>
   -->
+  <select id="faq_board_seq" resultType="Long">
+		SELECT faq_board_seq.NEXTVAL FROM dual
+	</select>
+
+	<insert id="insert_faq_board" parameterType="com.fa.plus.admin.domain.Support">
+		INSERT INTO faq_board(faq_num, faq_category_num, faq_question, faq_content, faq_reg_id, faq_reg_date, faq_visible)
+			VALUES(#{faq_num}, #{faq_category_num}, #{faq_question}, #{faq_content}, 1, SYSDATE, 1)
+	</insert>
+  
+  
+  
   <select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
 		SELECT faq_category_num, category_name, u.user_name AS category_reg_id, TO_CHAR(category_reg_date,'YYYY-MM-DD') AS category_reg_date, category_order, category_visible
 		FROM faq_category f

@@ -112,7 +112,8 @@
 							<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
 						</p>
 						<p>
-							<button type="button" class="btn btn-primary" onclick="write();">추가</button>
+							<button type="button" class="btn btn-primary" id="add_button" >추가</button>
+							<!-- onclick="write();" -->
 						</p>
 
 					</div>
@@ -137,6 +138,18 @@
         
         <script>
              /* simple data table 행 다중선택 스크립트 */
+             function updateOk() {
+				
+        	 const f = document.categoryUpdateForm;
+        	 let param=[];
+        	 
+        	 $(".input").each(function(index, item){
+        		 
+        		 	param.push($(item).val());
+        		 	console.log($(item).val());
+        		 });
+        	 }
+             
         $(document).ready(function() {
         	var oTable = $('#faq_category_table').DataTable();
 
@@ -198,7 +211,8 @@
         
         <script>
         
-        function write() {
+        /* function write() { */
+        $("#add_button").on("click",function() {
         	let dlg = $("#faq-dialog").dialog({
         		autoOpen: false,
         		modal: true,
@@ -226,7 +240,7 @@
         	};
         	
         	ajaxFun(url, "get", query, "text", fn);
-        }
+        });
         
         function writeOk() {
         	const f = document.categoryWriteForm;
@@ -277,42 +291,17 @@
 			
          function updateOk() {
 				
+        	 const f = document.categoryUpdateForm;
         	 let param=[];
         	 
-        	 $(".input").each(function(i){
+        	 $(".input").each(function(index, item){
         		 
-        		 var data = {
-        				 faq_category_num :$(this).parents('tr').find("input.faq_category_num").text(),
-        				 category_name :$(this).parents('tr').find("input.category_name").text(),
-        				 category_visible :$(this).parents('tr').find("input.category_visible").text(),
-        		 };
-        		 
-        		 param.push(data);
-        		 
-        	 })
-			var jsonData = JSON>stringify(param);
-			jQuery.ajaxSettings.traditional=true;
-				
-			 $.ajax({
-			        url : "${pageContext.request.contextPath}/admin/support/update_category_ok",
-			        type: 'POST',
-			        headers: {
-			            "mode" : CommonConstant.RequestMode.regist
-			        },
-			        data: {"jsonData" : jsonData},
-			        dataType:'json',
-			        success: function(data) {
-			            alert('리스트에 추가하였습니다.');
-			            
-			        },
-			        error: function(x, e) {
-			            //err msg 출력
-			            $.failMsg('error');
-			        }
-			    });
-        	 
-        		
-        		$("#faq-dialog").dialog("close");
-        	}
+        		 	param.push($(item).val());
+        		 	console.log($(item).val());
+        		 });
+        	 }
+         	
+         	
+         	
         </script>
 
