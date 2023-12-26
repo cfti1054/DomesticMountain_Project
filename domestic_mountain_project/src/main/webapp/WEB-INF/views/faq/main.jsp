@@ -82,6 +82,7 @@
 	color: gray;
 	margin: 10px 0 0 20px;
 }
+
 .amain-main span {
 	font-size: 14px;
 	color: gray;
@@ -175,15 +176,19 @@
 }
 
 .eq1 {
-	  font-weight: 900;
+	font-weight: 900;
 }
+
 .aside-box .aside ul .eq1 a {
 	color: hsl(212, 75%, 56%);
-
 }
-.nav-tabs .nav-item {
-        margin-right: 5px;
-    }
+
+ul#myTab.nav {
+	margin-top: 20px;
+	height: auto;
+}
+
+
 </style>
 
 <section class="features-1">
@@ -196,18 +201,28 @@
 						<a>카테고리</a>
 					</h3>
 					<ul>
-						<li class=""><a href="${pageContext.request.contextPath}/qna/list">&gt; Qna</a></li>
-						<li class="eq1"><a href="${pageContext.request.contextPath}/faq/list">&gt; Faq</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/qna/list">&gt; Qna</a></li>
+						<li class="eq1"><a
+							href="${pageContext.request.contextPath}/faq/list">&gt; Faq</a></li>
 					</ul>
 
 					<h3>
 						<a>서비스 이용 안내</a>
 					</h3>
 					<ul>
-						<li class=""><a href="${pageContext.request.contextPath}/services/privacy">&gt; 개인정보처리방침</a></li>
-						<li class=""><a href="${pageContext.request.contextPath}/services/policy">&gt; 이용약관</a></li>
-						<li class=""><a href="${pageContext.request.contextPath}/services/comment">&gt; 댓글 운영정책</a></li>
-						<li class=""><a href="${pageContext.request.contextPath}/services/serviceTel">&gt; 서비스 전화번호안내</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/services/privacy">&gt;
+								개인정보처리방침</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/services/policy">&gt;
+								이용약관</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/services/comment">&gt;
+								댓글 운영정책</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/services/serviceTel">&gt;
+								서비스 전화번호안내</a></li>
 					</ul>
 				</div>
 			</div>
@@ -216,24 +231,32 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>Faq<span>| Frequently Asked Questions</span></a>
-					<span><a href="${pageContext.request.contextPath}/">home</a> &gt; services &gt; faq</span>
+					<a>Faq<span>| Frequently Asked Questions</span></a> <span><a
+						href="${pageContext.request.contextPath}/">home</a> &gt; services
+						&gt; faq</span>
 				</h1>
-				
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active btn-sm" id="tab-0" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="0" aria-selected="true" data-categoryNum="0">모두</button>
-    </li>
-    <c:forEach var="dto" items="${listCategory}" varStatus="status">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link btn-sm" id="tab-${status.count}" data-bs-toggle="tab" data-bs-target="#nav-content" type="button" role="tab" aria-controls="${status.count}" aria-selected="true" data-categoryNum="${dto.faq_category_num}">${dto.category_name}</button>
-        </li>
-    </c:forEach>
-</ul>
 
-				
-				<div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-tab-content"></div>
-		
+				<ul class="nav nav-list nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active btn-sm" id="tab-0"
+							data-bs-toggle="tab" data-bs-target="#nav-content" type="button"
+							role="tab" aria-controls="0" aria-selected="true"
+							data-categoryNum="0">모두</button>
+					</li>
+					<c:forEach var="dto" items="${listCategory}" varStatus="status">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link btn-sm" id="tab-${status.count}"
+								data-bs-toggle="tab" data-bs-target="#nav-content" type="button"
+								role="tab" aria-controls="${status.count}" aria-selected="true"
+								data-categoryNum="${dto.faq_category_num}">${dto.category_name}</button>
+						</li>
+					</c:forEach>
+				</ul>
+
+
+				<div class="tab-pane fade show active" id="nav-content"
+					role="tabpanel" aria-labelledby="nav-tab-content"></div>
+
 			</div>
 		</div>
 

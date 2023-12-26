@@ -14,6 +14,7 @@
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM product
+		
 	</select>
 	
 </mapper>

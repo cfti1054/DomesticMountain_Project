@@ -150,7 +150,6 @@ img {
 .nav {
   height: calc(var(--header-height) + 2rem);
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -401,7 +400,6 @@ img {
 @media screen and (min-width: 1100px) {
   .nav {
     height: calc(var(--header-height) + 2rem);
-    column-gap: 3rem;
   }
   .nav__close, 
   .nav__toggle {
