@@ -221,9 +221,6 @@ function printMemberManage() {
 }
 </style>
 
-
-
-
 <div id="layoutSidenav_content">
 	<main class="mt-4">
 		<div class="container-fluid px-4">

@@ -66,7 +66,11 @@ public class ScorePdfView extends AbstractPdfView {
 		for(int i = 0; i < columnValues.size(); i++) {
 			Object[] values = columnValues.get(i);
 			for(int col = 0; col < values.length; col++) {
-				cell = new PdfPCell(new Paragraph(String.valueOf(values), font));
+				if(values[col] != null) {
+					cell = new PdfPCell(new Paragraph(values[col].toString(), font));
+				} else {
+					cell = new PdfPCell(new Paragraph("", font));
+				}
 				cell.setHorizontalAlignment(Cell.ALIGN_CENTER);
 				cell.setFixedHeight(25);
 				cell.setVerticalAlignment(Cell.ALIGN_MIDDLE);
