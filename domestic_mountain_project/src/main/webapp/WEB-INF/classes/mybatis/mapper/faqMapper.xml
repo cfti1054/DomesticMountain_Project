@@ -30,7 +30,7 @@
 	        AND c.category_visible = 1
 	    </where>
 	</select>
-
+ 
    <select id="listFaq" parameterType="map" resultType="com.fa.plus.domain.Faq">
 	    SELECT f.faq_num, faq_question, faq_content, f.faq_category_num, category_name
 	    FROM faq_board f
