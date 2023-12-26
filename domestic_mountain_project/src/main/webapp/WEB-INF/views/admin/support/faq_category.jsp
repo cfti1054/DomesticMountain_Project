@@ -168,6 +168,12 @@
         	 });
         	 	/* 수정 버튼 눌렸을 때의 action*/
 
+        	 	if(oAll.length == 0) {
+        	 		alert("수정하려면 한개 이상의 행을 선택하세요");
+        	 		
+        	 	}
+        	 	
+        	 	
         	 		 let dlg = $("#faq-dialog").dialog({
              			autoOpen: false,
              			modal: true,
@@ -211,7 +217,7 @@
         
         <script>
         
-        /* function write() { */
+        /* 추가 모달 생성 */
         $("#add_button").on("click",function() {
         	let dlg = $("#faq-dialog").dialog({
         		autoOpen: false,
@@ -242,6 +248,7 @@
         	ajaxFun(url, "get", query, "text", fn);
         });
         
+        /* 추가 확정 */
         function writeOk() {
         	const f = document.categoryWriteForm;
         	
@@ -268,37 +275,61 @@
         	$("#faq-dialog").dialog("close");
         	
         }
-	
-         function isEmpty(strIn)
-         {
-             if (strIn === undefined)
-             {
-                 return true;
-             }
-             else if(strIn == null)
-             {
-                 return true;
-             }
-             else if(strIn == "")
-             {
-                 return true;
-             }
-             else
-             {
-                 return false;
-             }
-         }
-			
+        
+        function isEmpty(strIn)
+        {
+            if (strIn === undefined)
+            {
+                return true;
+            }
+            else if(strIn == null)
+            {
+                return true;
+            }
+            else if(strIn == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+         
+		/* 수정 확정 */
          function updateOk() {
 				
         	 const f = document.categoryUpdateForm;
-        	 let param=[];
+        	 let category_list=[];
         	 
-        	 $(".input").each(function(index, item){
-        		 
-        		 	param.push($(item).val());
-        		 	console.log($(item).val());
-        		 });
+ 
+ 
+					$(".input").each(function(index, item){
+						
+						if( isEmpty($(item).val()) ) {
+							alert("값을 입력하세요.");
+							return;
+						}
+						
+						
+						category_list.push($(item).val())
+						
+						
+						
+					});
+					
+					
+					let url = "${pageContext.request.contextPath}/admin/support/update_category_ok";
+		        	let query = "category_list=" + category_list;
+		        	
+		        	const fn = function(data) {
+		        		
+		        	}
+		        	ajaxFun(url, "get", query, "json", fn);
+		        	
+		        	
+		        	$("#faq-dialog").dialog("close");
+        
         	 }
          	
          	

@@ -111,13 +111,43 @@ public class SupportController {
 	
 	
 	@GetMapping("update_category_ok")
-	public String update_category_ok(@RequestParam List<String> list, Model model) throws Exception {
-
-		for(String s : list) {
-			System.out.println(s);
+	public String update_category_ok(@RequestParam List<String> category_list, Model model) throws Exception {
+		
+		Support dto = new Support();
+		try {
+			System.out.println("category_list = ");
+			for(String s: category_list) {
+				System.out.println(s);
+			}
+			
+			for(int i = 0; i < category_list.size(); i++) {
+				
+				if (i % 3 == 0 ) {
+					dto.setFaq_category_num(Long.parseLong(category_list.get(i)));
+				} else if (i % 3 == 1) {
+					dto.setCategory_name(category_list.get(i));
+				} else if ( i % 3 == 2) {
+					dto.setCategory_visible(Integer.parseInt(category_list.get(i)));
+					service.update_faq_category(dto);
+					dto = new Support();
+				
+				}
+				
+				
+			}
+			
+		
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
+		
 
+			
+			
+		
 		
 		return "redirect:/admin/support/faq_category_list";
 	}
@@ -153,7 +183,6 @@ public class SupportController {
 		try {
 
 
-			System.out.println(dto.getFaq_category_num());
 			service.insert_faq_board(dto);
 		} catch (Exception e) {
 		}

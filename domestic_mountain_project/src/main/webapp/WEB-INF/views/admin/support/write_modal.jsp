@@ -77,7 +77,8 @@
 					<tr>
 						<td colspan="3" class="text-center bg-light"> 보이기 </td>
 						<td colspan="1" class="ps-5">
-							<input type="text" class="input" name="category_visible" id="category_visible" value="${dto.category_visible}">
+							<input type="number" class="input" name="category_visible" id="category_visible" value="${dto.category_visible}"
+								>
 						</td>
 					</tr>
 				</table>
@@ -104,12 +105,30 @@
 					<tr>
 						<td colspan="3" class="text-center bg-light"> 보이기 </td>
 						<td colspan="1" class="ps-5">
-							<input type="text" class="input" name="category_visible" id="category_visible" value="${dto.category_visible}">
+							<input type="number" class="input" name="category_visible" id="category_visible" value="${dto.category_visible}"
+							 min="0" max="1" placeholder="유저에게 보이려면 1을 안보이게 하려면 0">
 						</td>
 					</tr>
 				</table>
 			</c:forEach>
 		</form>
+		
+		
+		
+		
+		
 	</c:when>
 	
 </c:choose>
+
+<script>
+		$(document).on("change", "input[name^=category_visible]", function() {
+		    var val= $(this).val();
+
+		    
+		    if(val < 0 || val > 1) {
+		        alert("0~1 범위로 입력해 주십시오.");
+		        $(this).val('');
+		    }
+		});
+</script>
