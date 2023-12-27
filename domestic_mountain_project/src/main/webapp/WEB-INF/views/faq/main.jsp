@@ -202,9 +202,9 @@ ul#myTab.nav {
 					</h3>
 					<ul>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/qna/list">&gt; Qna</a></li>
+							href="${pageContext.request.contextPath}/notice/list">&gt; Notice</a></li>
 						<li class="eq1"><a
-							href="${pageContext.request.contextPath}/faq/list">&gt; Faq</a></li>
+							href="${pageContext.request.contextPath}/faq/main">&gt; Faq</a></li>
 					</ul>
 
 					<h3>

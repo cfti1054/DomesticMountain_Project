@@ -83,7 +83,7 @@
 
     		<exclude-mapping path="/services/**"/>
     		<exclude-mapping path="/faq/**"/>
-    		<exclude-mapping path="/qna/**"/>
+    		<exclude-mapping path="/notice/**"/>
     		<exclude-mapping path="/ootd/**"/>
     		<exclude-mapping path="/appearance/**"/>
     		<exclude-mapping path="/product/**"/>
