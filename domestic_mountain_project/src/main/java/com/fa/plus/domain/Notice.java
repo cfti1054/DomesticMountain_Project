@@ -1,5 +1,5 @@
 package com.fa.plus.domain;
 
-public class Qna {
+public class Notice {
 
 }
