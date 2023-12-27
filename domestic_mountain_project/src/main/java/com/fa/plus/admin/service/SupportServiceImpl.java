@@ -136,8 +136,23 @@ public class SupportServiceImpl implements SupportService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
+		return list;
+	}
+
+	@Override
+	public List<Support> find_by_board_num(List<String> input_list) throws Exception {
+		List<Integer> board_num_list = new ArrayList<Integer>();
+		List<Support> list = null;
+		try {
+			for(int i = 0; i < input_list.size(); i+= 1 ) {
+				board_num_list.add(Integer.parseInt(input_list.get(i)));
+			}
+			
+			list = mapper.find_by_board_num(board_num_list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return list;
 	}

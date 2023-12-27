@@ -62,14 +62,7 @@
 	
 	
 	
-	<update id="update_faq_board" parameterType="com.fa.plus.admin.domain.Support">
-		UPDATE faq_board
-		SET faq_question = #{faq_question},
-			faq_content = #{faq_content},
-			faq_update_id = 11,
-			faq_update_date = SYSDATE
-		WHERE faq_num = #{faq_num}
-	</update>
+	
 	
 	
 	
@@ -93,7 +86,27 @@
 		INSERT INTO faq_board(faq_num, faq_category_num, faq_question, faq_content, faq_reg_id, faq_reg_date, faq_visible)
 			VALUES(#{faq_num}, #{faq_category_num}, #{faq_question}, #{faq_content}, 1, SYSDATE, 1)
 	</insert>
-  
+	
+	<select id="find_by_board_num" parameterType="hashmap" resultType="com.fa.plus.admin.domain.Support">
+		SELECT faq_num, faq_question, faq_content, faq_visible
+		FROM faq_board f
+		WHERE faq_num IN
+		<foreach item="item" index="index" collection="list"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<update id="update_faq_board" parameterType="com.fa.plus.admin.domain.Support">
+		UPDATE faq_board
+		SET faq_question = #{faq_question},
+			faq_content = #{faq_content},
+			faq_update_id = 1,
+			faq_update_date = SYSDATE,
+			faq_visible = #{visible}
+		WHERE faq_num = #{faq_num}
+	</update>
+
   
   
   <select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
@@ -103,7 +116,7 @@
 	</select>	
 	
 	<select id="list_faq_board" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_num, fc.category_name, faq_question, faq_content, u.userIdx AS faq_reg_id, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible
+		SELECT faq_num, fc.category_name, faq_question, faq_content, u.user_name AS faq_reg_id, TO_CHAR(faq_reg_date, 'YYYY-MM-DD') AS faq_reg_date, faq_visible AS visible
 		FROM faq_board f
 		JOIN user1 u ON f.faq_reg_id = u.userIdx
       	JOIN faq_category fc ON f.faq_category_num = fc.faq_category_num

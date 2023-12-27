@@ -20,6 +20,7 @@ public interface SupportMapper {
 	public List<Support> list_faq_category() throws SQLException;
 	
 	public List<Support> find_by_category_num(List<Integer> list) throws SQLException;
+	public List<Support> find_by_board_num(List<Integer> list) throws SQLException;
 	
 	public long faq_board_seq();
 	

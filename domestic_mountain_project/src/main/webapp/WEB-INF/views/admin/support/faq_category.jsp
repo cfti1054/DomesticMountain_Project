@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
 <link href="https://code.jquery.com/jquery-3.7.0.js"  rel="stylesheet"/>
 <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css"/>
@@ -129,7 +130,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
         
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     	<script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
         <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
@@ -298,8 +299,7 @@
          
 		/* 수정 확정 */
          function updateOk() {
-				
-        	 const f = document.categoryUpdateForm;
+			
         	 let category_list=[];
         	 
  

@@ -115,7 +115,7 @@ public class SupportController {
 		
 		Support dto = new Support();
 		try {
-			System.out.println("category_list = ");
+			
 			for(String s: category_list) {
 				System.out.println(s);
 			}
@@ -132,22 +132,12 @@ public class SupportController {
 					dto = new Support();
 				
 				}
-				
-				
+
 			}
-			
-		
-			
-			
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-
-			
-			
-		
 		
 		return "redirect:/admin/support/faq_category_list";
 	}
@@ -189,5 +179,65 @@ public class SupportController {
 
 		return "redirect:/admin/support/faq_board_list";
 	}
+	
+	// 카테고리 업데이트
+		@GetMapping("multi_board")
+		public String board_update_form(@RequestParam List<String> dto_list, Model model) throws Exception {
+			List<String> num_list = new ArrayList<String>();
+			List<Support> list = null;
+			try {
+				
+				
+				for(int i = 0; i < dto_list.size(); i+=7) {
+					num_list.add(dto_list.get(i));
+					
+					
+				}
+				
+				list = service.find_by_board_num(num_list);
+				
+				model.addAttribute("list", list);
+				model.addAttribute("mode", "update");
+				model.addAttribute("type", "board");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+			return "admin/support/write_modal";
+		}
+		
+		@GetMapping("update_board_ok")
+		public String update_board_ok(@RequestParam List<String> board_list, Model model) throws Exception {
+			
+			Support dto = new Support();
+			try {
+				
+
+				
+				for(int i = 0; i < board_list.size(); i++) {
+					System.out.println(board_list.get(i));
+					if (i % 4 == 0 ) {
+						dto.setFaq_num(Long.parseLong(board_list.get(i)));
+					} else if (i % 4 == 1) {
+						dto.setFaq_question(board_list.get(i));
+					} else if ( i % 4 == 2) {
+						dto.setFaq_content(board_list.get(i));
+					} else if ( i % 4 == 3) {
+						dto.setVisible(Integer.parseInt(board_list.get(i)));
+						
+						service.update_faq_board(dto);
+						dto = new Support();
+					}
+				}
+		
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return "redirect:/admin/support/faq_board_list";
+		}
 	
 }

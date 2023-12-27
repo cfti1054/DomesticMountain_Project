@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="https://code.jquery.com/jquery-3.7.0.js"  rel="stylesheet"/>
 <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css"/>
@@ -75,7 +75,7 @@
 								style="width: 100%; text-align: center">
 								<thead>
 									<tr>
-										<th>FAQ 번호</th>
+										<th>번호</th>
 										<th>카테고리 이름</th>
 										<th>질문</th>
 										<th>답변 </th>
@@ -87,7 +87,7 @@
 
 								<tfoot>
 									<tr>
-										<th>FAQ 번호</th>
+										<th>번호</th>
 										<th>카테고리 이름</th>
 										<th>질문</th>
 										<th>답변 </th>
@@ -101,13 +101,17 @@
 									<c:forEach var="dto" items="${list}" varStatus="status">
 
 										<tr>
-											<td>${dto.faq_num}</td>
-											<td>${dto.category_name}</td>
-											<td>${dto.faq_question}</td>
-											<td>답변 보기</td>
-											<td>${dto.faq_reg_id}</td>
-											<td>${dto.faq_reg_date}</td>
-											<td>${dto.visible == 1 ? "O":"X"}</td>
+											<td width="5%">${dto.faq_num}</td>
+											<td width="10%">${dto.category_name}</td>
+											<td width="20%">${dto.faq_question}</td>
+											<td width="35%">
+												<textarea  style="white-space: pre-line; width: 80%;" cols="40" rows="3" readonly>
+													${dto.faq_content}
+												</textarea>
+											</td>
+											<td width="10%">${dto.faq_reg_id}</td>
+											<td width="10%">${dto.faq_reg_date}</td>
+											<td width="10%">${dto.visible == 1 ? "O":"X"}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -129,7 +133,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
         
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     	<script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
         <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
@@ -149,13 +153,19 @@
 
         	$("#visible_button").on("click",function() {
         		var oAll =[];
-        	 $('#faq_category_table tbody tr.selected').each(function(){
+        	 $('#faq_board_table tbody tr.selected').each(function(){
         		 var pos = oTable.row(this).index();
         		 var row = oTable.row(pos).data();
         	    oAll.push(row);
+        	    console.log(row);
         	 });
         	 	/* 수정 버튼 눌렸을 때의 action*/
 
+        	 	if(oAll.length == 0) {
+        	 		alert("수정하려면 한개 이상의 행을 선택하세요");
+        	 		
+        	 	}
+        	 	
         	 		 let dlg = $("#faq-dialog").dialog({
              			autoOpen: false,
              			modal: true,
@@ -169,13 +179,13 @@
              			
              			height: 550,
              			width: 800,
-             			title: " FAQ 카테고리 ",
+             			title: " FAQ 질문글 ",
              			close: function(event, ui) {
              			}
              		});
              		
-             		let url = "${pageContext.request.contextPath}/admin/support/multi_category";
-             		let query = "category_dto=" + oAll;
+             		let url = "${pageContext.request.contextPath}/admin/support/multi_board";
+             		let query = "dto_list=" + oAll;
              		
              		
              		const fn = function(data) {
@@ -260,63 +270,68 @@
         	$("#faq-dialog").dialog("close");
         	
         }
-         function isEmpty(strIn)
-         {
-             if (strIn === undefined)
-             {
-                 return true;
-             }
-             else if(strIn == null)
-             {
-                 return true;
-             }
-             else if(strIn == "")
-             {
-                 return true;
-             }
-             else
-             {
-                 return false;
-             }
-         }
-			
+        function isEmpty(strIn)
+        {
+            if (strIn === undefined)
+            {
+                return true;
+            }
+            else if(strIn == null)
+            {
+                return true;
+            }
+            else if(strIn == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+         
+		/* 수정 확정 */
          function updateOk() {
-				
-        	 let param=[];
-        	 
-        	 $(".input").each(function(i){
-        		 
-        		 var data = {
-        				 faq_category_num :$(this).parents('tr').find("input.faq_category_num").text(),
-        				 category_name :$(this).parents('tr').find("input.category_name").text(),
-        				 category_visible :$(this).parents('tr').find("input.category_visible").text(),
-        		 };
-        		 
-        		 param.push(data);
-        		 
-        	 })
-			var jsonData = JSON>stringify(param);
-			jQuery.ajaxSettings.traditional=true;
-				
-			 $.ajax({
-			        url : "${pageContext.request.contextPath}/admin/support/update_category_ok",
-			        type: 'POST',
-			        headers: {
-			            "mode" : CommonConstant.RequestMode.regist
-			        },
-			        data: {"jsonData" : jsonData},
-			        dataType:'json',
-			        success: function(data) {
-			            alert('리스트에 추가하였습니다.');
-			            
-			        },
-			        error: function(x, e) {
-			            //err msg 출력
-			            $.failMsg('error');
-			        }
-			    });
-        	 
-        		
-        		$("#faq-dialog").dialog("close");
-        	}
+			
+        	 let board_list=[];
+        	 let content_list=[];
+        	 const f = document.boardUpdateForm;
+ 
+					$(".input").each(function(index, item){
+						
+						if( isEmpty($(item).val()) ) {
+							alert("값을 입력하세요.");
+							f.$(item).focus();
+							return;
+						}
+						
+						board_list.push($(item).val())
+
+					});
+					/*
+					$(".textarea").each(function(index, item){
+						
+						if( isEmpty($(item).val()) ) {
+							alert("값을 입력하세요.");
+							return;
+						}
+						
+						content_list.push($(item).val())
+					});
+					*/
+					
+					
+					
+					let url = "${pageContext.request.contextPath}/admin/support/update_board_ok";
+		        	let query = "board_list=" + board_list;
+		        	
+		        	const fn = function(data) {
+		        		
+		        	}
+		        	ajaxFun(url, "get", query, "json", fn);
+		        	
+		        	
+		        	$("#faq-dialog").dialog("close");
+        
+        	 }
         </script>

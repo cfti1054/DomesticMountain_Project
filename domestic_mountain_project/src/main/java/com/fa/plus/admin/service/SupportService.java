@@ -13,6 +13,8 @@ public interface SupportService {
 	public List<Support> list_faq_category();
 	
 	public List<Support> find_by_category_num(List<String> list) throws Exception;
+	public List<Support> find_by_board_num(List<String> list) throws Exception;
+	
 	
 	public void insert_faq_board(Support dto) throws Exception;
 	public void update_faq_board(Support dto) throws Exception;
