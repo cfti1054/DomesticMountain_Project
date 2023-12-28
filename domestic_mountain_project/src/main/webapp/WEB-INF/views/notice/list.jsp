@@ -210,7 +210,9 @@ function searchList() {
 					<div class="notice-body">
 						<div class="body-main">
 							<div class="row board-list-header">
-								<div class="col-auto me-auto">10개(1/2 페이지)</div>
+								<div class="col-auto me-auto">
+									${dataCount}개(${page}/${total_page} 페이지)
+								</div>
 								<div class="col-auto">&nbsp;</div>
 							</div>
 
@@ -225,28 +227,36 @@ function searchList() {
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><span class="badge bg-primary">공지</span></td>
-										<td class="left"><a href="#" class="text-reset">내용입니다.</a>
-										</td>
-										<td>관리자</td>
-										<td>2023-10-10</td>
-										<td>10</td>
-									</tr>
+									<c:forEach var="dto" items="${noticeList}">
+										<tr>
+											<td><span class="badge bg-primary">공지</span></td>
+											<td class="left">
+												<a href="#" class="text-reset">${notice_content}</a>
+											</td>
+											<td>관리자</td>
+											<td>${dto.notice_reg_date}</td>
+											<td>${notice_hit_count}</td>
+										</tr>
+									</c:forEach>
 									
-									
-									<tr>
-										<td>234</td>
-										<td class="left"><a href="#" class="text-reset">내용입니다.</a>
-											<span class="badge text-bg-info">New</span></td>
-										<td>관리자</td>
-										<td>2023-11-11</td>
-										<td>11</td>
-									</tr>
+									<c:forEach var="dto" items="${list}" varStatus="status">
+										<tr>
+											<td>${dataCount - (page-1) * size - status.index}</td>
+											<td class="left">
+												 <a href="#" class="text-reset">내용입니다.</a>
+													<span class="badge text-bg-info">New</span>
+											</td>
+											<td>관리자</td>
+											<td>${dto.notice_reg_date}</td>
+											<td>${dto.notice_hit_count}</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 
-							<div class="page-navigation">1 2 3</div>
+							<div class="page-navigation">
+								${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
+							</div>
 
 							<div class="row board-list-footer">
 								<div class="col">

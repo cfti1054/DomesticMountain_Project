@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footer.css" type="text/css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mountain.css" type="text/css">
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/js/jquery.min.js"></script>
 	

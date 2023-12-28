@@ -93,8 +93,7 @@
     		<exclude-mapping path="/made/**"/>
     		<exclude-mapping path="/Related/**"/>
     		
-    		
-
+    		<exclude-mapping path="/mypage/**"/>
     		<exclude-mapping path="/admin/**"/>
     		<exclude-mapping path="/product/**"/>
 
