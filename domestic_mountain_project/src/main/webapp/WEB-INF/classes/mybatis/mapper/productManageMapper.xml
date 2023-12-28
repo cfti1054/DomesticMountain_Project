@@ -3,18 +3,183 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.ProductManageMapper">
 
-	<select id="listProduct" parameterType="map" resultType="com.fa.plus.admin.domain.ProductManage">
-		SELECT product_num, TO_CHAR(product_reg_date, 'YYYY-MM-DD') product_reg_date, 
-			product_status, product_price, product_name
-		FROM product
-		
-		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	<!-- 상품 등록 -->
+	<select id="productSeq" resultType="Long">
+		SELECT product_seq.NEXTVAL FROM dual
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="insertProduct" parameterType="com.fa.plus.admin.domain.ProductManage">
+		INSERT INTO product(product_num, category_num, product_name, product_status, product_summary,
+						product_content, product_price, product_hit, product_reg_date,
+							product_modify_date, product_insertidx, product_updateidx)
+								VALUES (#{product_num}, #{category_num}, #{product_name}, 
+										#{product_status}, #{product_summary}, #{product_content}, 
+										#{product_price}, #{product_hit}, SYSDATE, SYSDATE, 
+										#{product_insertidx}, #{product_updateidx})	
+	</insert>	
+	
+	<!-- 추가 이미지 등록 -->
+	<insert id="insertProductFile" parameterType="com.fa.plus.admin.domain.ProductManage">
+		INSERT INTO productFile(file_num, product_num, file_name)
+			VALUES(productFile_seq.NEXTVAL, #{product_num}, #{file_name})
+	</insert>	
+	
+	<!-- 상위/하위 옵션 등록 -->
+	<select id="optionSeq" resultType="Long">
+		SELECT productOption_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertProductOption" parameterType="com.fa.plus.admin.domain.ProductManage">
+		INSERT INTO productOption(option_num, option_name, product_num, parent)
+			VALUES(#{option_num}, #{option_name}, #{product_num}, #{parent, jdbcType=INTEGER})
+	</insert>	
+	
+	<!-- 옵션 상세 정보 등록 -->
+	<select id="detailSeq" resultType="Long">
+		SELECT optionDetail_seq.NEXTVAL FROM dual
 	</select>
 
+	<insert id="insertOptionDetail" parameterType="com.fa.plus.admin.domain.ProductManage">
+		INSERT INTO optionDetail(detail_num, option_num, option_value)
+			VALUES(#{detail_num}, #{option_num}, #{option_value})
+	</insert>
+		
+	<!-- 상품 카테고리 -->
+	<select id="findByCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT category_num, category_name, category_order, product_status, parent_num
+		FROM productCategory
+		WHERE category_num = #{category_num}
+	</select>
+		
+	<!-- 상품 상위 카테고리 목록 -->
+	<select id="listCategory" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT category_num, category_name, category_order, product_status, parent_num
+		FROM product_category
+		WHERE product_status = 1 AND parent_num IS NULL
+		ORDER BY category_order
+	</select>	
+	
+	<!-- 상품 하위 카테고리 목록 -->
+	<select id="listSubCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT category_num, category_name, product_status, category_order, parent_num
+		FROM product_category
+		WHERE product_status = 1 AND parent_num = #{parent_num}
+		ORDER BY category_order
+	</select>	
+	
+	
+	
+	<!-- 상품 목록 -->
+	<sql id="where-list">
+		<if test="schType=='all' ">
+			( INSTR(product_name, #{kwd}) &gt; 0
+				OR DBMS_LOB.INSTR(product_content, #{kwd}) &gt; 0 )
+		</if>
+		<if test="schType=='product_num' ">
+			INSTR(p.product_num, #{kwd}) = 1
+		</if>
+		<if test="schType=='product_name' ">
+			INSTR(product_name, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='product_content' ">
+			DBMS_LOB.INSTR(product_content, #{kwd}) &gt; 0
+		</if>
+	</sql>
+		
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM product
-		
+		FROM product p
+	</select>	
+	
+	<select id="listProduct" parameterType="map" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT p.product_num, category_num, product_name, product_price,
+			product_summary, product_status, product_reg_date, TO_CHAR(product_modify_date, 'YYYY-MM-DD') product_modify_date, 
+			NVL(total_stock, 0) total_stock
+		FROM product p
+		LEFT OUTER JOIN (
+			SELECT product_num, NVL(SUM(total_stock), 0) total_stock
+			FROM productStock
+			GROUP BY product_num
+		) t ON p.product_num = t.product_num
+		ORDER BY p.product_num DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
+	
+	
+	
+	<!-- 상품 상세 정보 -->
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT product_num, p.category_num, c.category_name, product_name, product_price,
+			product_hit, product_content, product_summary, p.product_status, product_reg_date,
+				product_modify_date, product_insertidx, product_updateidx, c.product_status
+		FROM product p
+		JOIN product_category c ON p.category_num = c.category_num
+		WHERE product_num = #{product_num}
+	</select>	
+	
+	<select id="listProductFile" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT file_num, product_num, file_name
+		FROM productFile
+		WHERE product_num = #{product_num}
+	</select>	
+	
+	<!-- 상위/히위 옵션 -->
+	<select id="listProductOption" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT option_num, option_name, parent, product_num
+		FROM productOption
+		WHERE product_num = #{product_num}
+		ORDER BY parent NULLS FIRST, parent
+	</select>
+
+	<!-- 옵션 상세 정보 -->	
+	<select id="listOptionDetail" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT detail_num, option_num, option_value
+		FROM optionDetail
+		WHERE option_num = #{option_num}
+		ORDER BY detail_num
+	</select>	
+	
+	<update id="updateProduct" parameterType="com.fa.plus.admin.domain.ProductManage">
+		UPDATE product SET category_num = #{category_num}, product_name = #{product_name},
+			product_price = #{product_price}, product_hit = #{product_hit},
+			product_content = #{product_content}, product_summary = #{product_summary},
+			product_status = #{product_status}, product_modify_date = SYSDATE, product_updateidx = #{product_updateidx}
+		WHERE product_num = #{product_num}
+	</update>	
+	
+	<delete id="deleteProduct" parameterType="Long">
+		DELETE FROM product WHERE product_num = #{product_num}
+	</delete>
+	
+	<delete id="deleteProductFile" parameterType="Long">
+		DELETE FROM productFile WHERE file_num = #{file_num}
+	</delete>
+	
+	<update id="updateProductOption" parameterType="com.fa.plus.admin.domain.ProductManage">
+		UPDATE productOption SET option_name = #{option_name}
+		WHERE option_num = #{option_num}
+	</update>
+	
+	<delete id="deleteProductOption" parameterType="Long">
+		DELETE FROM productOption WHERE option_num = #{option_num}
+	</delete>
+	
+	<update id="updateOptionDetail" parameterType="com.fa.plus.admin.domain.ProductManage">
+		UPDATE optionDetail SET option_value = #{option_value}
+		WHERE detail_num = #{detail_num}
+	</update>
+	
+	<delete id="deleteOptionDetail" parameterType="Long">
+		DELETE FROM optionDetail WHERE detail_num = #{detail_num}
+	</delete>	
+	
+	<!-- 상품 재고 -->
+	
+	
+	
+	
+	
+			
 	
 </mapper>

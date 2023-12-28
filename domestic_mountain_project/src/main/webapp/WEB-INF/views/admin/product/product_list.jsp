@@ -83,21 +83,38 @@ function searchList() {
 	f.submit();
 }
 
-function changeList() {
-	const f = document.boardListForm;
-	f.submit();
-}
-
 $(function(){
 	$('#tab-${category}').addClass('active');
 
 	$('ul.tabs li').click(function() {
 		let category = $(this).attr('data-category');
 		
-		location.href = '${pageContext.request.contextPath}/admin/product/'+category+'/product_list';
+		location.href = '${pageContext.request.contextPath}/admin/product/product_list';
 	});
 });
 
+function changeList() {
+	let parent_num = $("#changeCategory").val();
+	let product_status = $("#changeShowProduct").val();
+	
+	const f = document.searchForm;
+	f.parent_num.value = parent_num;
+	f.category_num.value = 0;
+	f.product_status.value = product_status;
+	searchList();
+}
+
+function changeSubList() {
+	let parent_num = $("#changeCategory").val();
+	let category_num = $("#changeSubCategory").val();
+	let product_status = $("#changeShowProduct").val();
+	
+	const f = document.searchForm;
+	f.parent_num.value = parent_num;
+	f.category_num.value = category_num;
+	f.product_status.value = product_status;
+	searchList();
+}
 
 </script>
 
@@ -121,49 +138,46 @@ $(function(){
 				</ul>
 			</div>
 
+
 			<div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
 				
 				<table class="table-select" style="width: 100%">
 					<tr>
-						<td align="left" width="80%">
-							<form action="${pageContext.request.contextPath}/admin/product/${category}/product_list" name="boardListForm" class="form-list" method="post">
-								<c:if test="${dataCount!=0 && category == 'all'}">
-									<select name="size" class="form-select" onchange="changeList();">
-										<option value="10" ${size==10 ? "selected ":""}>10개씩 출력</option>
-										<option value="20" ${size==20 ? "selected ":""}>20개씩 출력</option>
-										<option value="30" ${size==30 ? "selected ":""}>30개씩 출력</option>
+						<td align="left" width="80%" >
+							<form>
+								<div style="float: left">
+									<select id="changeCategory" class="form-select" onchange="changeList();">
+										<c:if test="${listCategory.size() == 0}">
+											<option value="0">:: 메인카테고리 ::</option>
+										</c:if>
+										<c:forEach var="vo" items="${listCategory}">
+											<option value="${vo.category_num}" ${parent_num==vo.category_num?"selected":""}>${vo.category_name}</option>
+										</c:forEach>
 									</select>
-								</c:if>
-								<c:if test="${dataCount!=0 && category == 'special'}">
-									<select name="size" class="form-select" onchange="changeList();">
-										<option value="" >브랜드 분류1</option>
-										<option value="" >브랜드 분류2</option>
-										<option value="" >브랜드 분류3</option>
+								</div>
+								
+								<div style="float: left">
+									<select id="changeSubCategory" class="form-select" onchange="changeSubList();">
+										<c:if test="${listSubCategory.size() == 0}">
+											<option value="0">:: 카테고리 ::</option>
+										</c:if>
+										<c:forEach var="vo" items="${listSubCategory}">
+											<option value="${vo.category_num}" ${category_num==vo.category_num?"selected":""}>${vo.category_name}</option>
+										</c:forEach>
 									</select>
-									<select name="size" class="form-select" onchange="changeList();">
-										<option value="" >종류 분류1</option>
-										<option value="" >종류 분류2</option>
-										<option value="" >종류 분류3</option>
-									</select>
-								</c:if>
-								<c:if test="${dataCount!=0 && category == 'order'}">
-									<input type="date" name="sday" class="form-control" value="" style="width: auto;">&nbsp;<p style="margin: 5px;">&#126;</p>&nbsp;
-									<input type="date" name="eday" class="form-control" value="" style="width: auto; margin-right: 20px;">
-									<button type="button" class="btn" onclick="location.href='#';">오늘</button>
-									<button type="button" class="btn" onclick="location.href='#';">1개월</button>
-									<button type="button" class="btn" onclick="location.href='#';">3개월</button>
-									<button type="button" class="btn" onclick="location.href='#';">6개월</button>
-								</c:if>
-								<c:if test="${dataCount!=0 && category == 'review'}">
-									<button type="button" class="btn" onclick="location.href='#';">문의답변</button>
-									<select name="size" class="form-select" onchange="changeList();">
-										<option value="" >분류1</option>
-										<option value="" >분류2</option>
-										<option value="" >분류3</option>
-									</select>
-								</c:if>
-								<input type="hidden" name="schType" value="${schType}">
-								<input type="hidden" name="kwd" value="${kwd}">
+								</div>
+								
+								<div style="float: left"> 
+									<select id="changeShowProduct" class="form-select" onchange="changeList();">
+										<option value="-1">:: 진열 여부 ::</option>
+										<option value="1" ${product_status==1?"selected":""}>상품 진열</option>
+										<option value="0" ${product_status==0?"selected":""}>상품 숨김</option>
+									</select>						
+								</div>
+								
+								<div style="float: right">
+									${dataCount}개(${page}/${total_page} 페이지)
+								</div>																										
 							</form>
 						</td>
 						
@@ -180,6 +194,7 @@ $(function(){
 						</td>
 					</tr>
 				</table>
+
 
 				<table class="table table-border table-list">
 					<thead class="table-light">
@@ -205,10 +220,16 @@ $(function(){
 								<td>${dto.product_num}</td>
 								<td>${dto.product_reg_date}</td>
 								<td>${dto.product_status == 1 ? "진열" : "숨김"}</td>
-								<td>재고</td>
+								<td>최고</td>
 								<td>${dto.product_price}</td>
+									<c:url var="updateUrl" value="/admin/product/update">
+										<c:param name="product_num" value="${dto.product_num}"/>
+										<c:param name="parent_num" value="${parent_num}"/>
+										<c:param name="category_num" value="${category_num}"/>
+										<c:param name="page" value="${page}"/>
+									</c:url>
 								<td>
-								<button type="button" class="btn" style="height: auto; width: auto" onclick="location.href='#';">수정</button>
+								<button type="button" class="btn" style="height: auto; width: auto" onclick="location.href='${updateUrl}';">수정</button>
 							</td>
 							</tr>
 						</c:forEach>
@@ -228,21 +249,36 @@ $(function(){
 						</td>
 						<td align="center">
 							<form name="searchForm" 
-								action="${pageContext.request.contextPath}/admin/product/${category}/product_list"
+								action="${pageContext.request.contextPath}/admin/product/product_list"
 								method="post">
-								<select name="schType" class="form-select">
-									<option value="all" ${schType=="all"?"selected":""}>모두</option>
-									<option value="startDate">분류1</option>
-									<option value="endDate">분류2</option>
-									<option value="winningDate">분류3</option>
-								</select> <input type="text" name="kwd" value="${kwd}"
-									class="form-control">
-								<button type="button" class="btn" onclick="searchList()">검색</button>
+							<div class="col-auto p-1">
+										<select name="schType" class="form-select">
+											<option value="all" ${schType=="all"?"selected":""}>상품명+설명</option>
+											<option value="product_num" ${schType=="product_num"?"selected":""}>상품코드</option>
+											<option value="product_name" ${schType=="product_name"?"selected":""}>상품명</option>
+											<option value="product_content" ${schType=="product_content"?"selected":""}>설명</option>
+										</select>
+									</div>
+									<div class="col-auto p-1">
+										<input type="text" name="kwd" value="${kwd}" class="form-control">
+										<input type="hidden" name="size" value="${size}">
+										<input type="hidden" name="parent_num" value="${parent_num}">
+										<input type="hidden" name="category_num" value="${category_num}">
+										<input type="hidden" name="product_status" value="${product_status}">
+									</div>
+									<div>	
+										<button type="button" class="btn" onclick="searchList()">검색</button>
+									</div>
 							</form>
 						</td>
-						<td align="right" width="100">
+						<td align="right" width="200">
 							<button type="button" class="btn" onclick="location.href='#';">선택삭제</button>
 						</td>
+							<td align="right" width="200">
+								<c:url var="url" value="/admin/product/write">
+								</c:url>
+								<button type="button" class="btn btn-light" onclick="location.href='${url}';">등록하기</button>
+							</td>
 					</tr>
 				</table>
 			</div>
