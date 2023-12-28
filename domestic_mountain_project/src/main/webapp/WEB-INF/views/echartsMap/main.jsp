@@ -2,79 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<style type="text/css">
-.features-1 {
-	height: 1200px; /* 수정 시 auto로 바꾸고 해야함 */
+<style>
+.features-2 .text-end {
+	max-width: 1000px;
+	margin: auto;
 }
-
-.maps-container {
-	margin: 30px auto;
-	max-width: 1300px;
-	padding-top: 120px;
-}
-
-
-.amain h1 {
-	display: flex;
-	justify-content: space-between;
-	margin: 20px 0 80px 0;
-	font-weight: 700;
-	color: #6558be;
-}
-
-.amain-main {
-	padding: 0 0 10px 10px;
-	border-bottom: 2px solid #3a3a3a;
-	font-size: xx-large;
-	color: #6557be;
-}
-
-.amain-main a>span {
-	font-size: 18px;
-	color: gray;
-	margin: 10px 0 0 20px;
-}
-
-.amain-main span {
-	font-size: 14px;
-	color: gray;
-	margin: 15px 0 0 20px;
-}
-
-
-.maps-body-container .maps {
-	margin: 0 auto;
-	padding: 20px;
-	box-sizing: border-box;
-	width: 900px;
-	height: 800px;
-	border: 1px solid #ccc;
-	border-radius: 13px;
-}
-
-.features-2:active {
-	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
-}
-
-h3 {
-	display: flex;
-	justify-content: center;
-}
-
-.features-2 {
-	margin-bottom: 200px;
+.features-2 .row {
+	width: 1000px;
 }
 </style>
-
-
 
 
 <section class="features-1">
 	<div class="maps-container">
 		<div class="amain">
 			<h1 class="amain-main">
-				<a>한반도 지도<span>| Maps</span></a> <span><a
-					href="/plus/">home</a> &gt; Maps</span>
+				<a>한반도 지도<span>| Maps</span></a> <span><a href="/plus/">home</a>
+					&gt; Maps</span>
 			</h1>
 		</div>
 
@@ -82,7 +26,7 @@ h3 {
 			<div class="maps"></div>
 		</div>
 	</div>
-	
+
 </section>
 
 <script type="text/javascript">
@@ -297,103 +241,133 @@ h3 {
 </script>
 
 <section class="features-2">
-	<div>
-		<h2 id="test"></h2>
+	<div class="mountain-h2">
+		<div class="amain">
+			<h1 class="amain-main">
+				<a id="test">전체</a> <span>| Mountain List</span>
+			</h1>
+		</div>
 	</div>
-	
-	<div class="mountain-list" style="overflow-y: scroll; width:auto; height:1000px;">
-
-    <ul>
-        <li class="member co-funder type_bottom">
-            <div class="thumb">
-            	<img src="#">
+	<div class="col-6 text-end">
+		<form class="row text-end-row" name="searchForm" action="#"
+			method="post">
+			<div class="col-auto p-1">
+				<input type="text" name="kwd" value="" class="form-control" placeholder="산명 검색하세요.">
 			</div>
-            <div class="description">
-                <h3>산이름</h3>
-                <p>산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br><a href="#"># 상세보기</a></p>
-            </div>
-        </li>
-        <li class="member co-funder type_bottom">
-            <div class="thumb">
-            	<img src="#">
-            </div>
-            <div class="description">
-                <h3>산이름</h3>
-                <p>산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br><a href="#"># 상세보기</a></p>
-            </div>
-        </li>
-        <li class="member co-funder type_bottom">
-            <div class="thumb">
-				<img src="#">
-            </div>
-            <div class="description">
-                <h3>산이름</h3>
-                <p>산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br><a href="#"># 상세보기</a></p>
-            </div>
-        </li>
-        <li class="member co-funder type_bottom">
-            <div class="thumb">
-				<img src="#">
-            </div>
-            <div class="description">
-                <h3>산이름</h3>
-                <p>산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br><a href="#"># 상세보기</a></p>
-            </div>
-        </li>
-        <li class="member co-funder type_bottom">
-            <div class="thumb">
-				<img src="#">
-            </div>
-            <div class="description">
-                <h3>산이름</h3>
-                <p>산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br><a href="#"># 상세보기</a></p>
-            </div>
-        </li>
-        <li class="member co-funder type_bottom">
-            <div class="thumb">
-				<img src="#">
-            </div>
-            <div class="description">
-                <h3>산이름</h3>
-                <p>산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br><a href="#"># 상세보기</a></p>
-            </div>
-        </li>
-        <li class="member co-funder type_bottom">
-            <div class="thumb">
-				<img src="#">
-            </div>
-            <div class="description">
-                <h3>산이름</h3>
-                <p>산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-                산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br><a href="#"># 상세보기</a></p>
-            </div>
-        </li>
-    </ul>
+			<div class="col-auto p-1">
+				<button type="button" class="btn btn-light" onclick="searchList()" style="background-color: #d3d4d5">
+					<i class="bi bi-search"></i>
+				</button>
+			</div>
+		</form>
+	</div>
 
-</div>
+
+
+	<div class="mountain-main"
+		style="overflow-y: scroll; width: auto; height: 1000px;">
+
+		<ul>
+			<li class="member co-funder type_bottom">
+				<div class="thumb">
+					<img src="#">
+				</div>
+				<div class="description">
+					<h3 class="mountain-name">산이름</h3>
+					<p>
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+						<a href="#"># 상세보기</a>
+					</p>
+				</div>
+			</li>
+			<li class="member co-funder type_bottom">
+				<div class="thumb">
+					<img src="#">
+				</div>
+				<div class="description">
+					<h3 class="mountain-name">산이름</h3>
+					<p>
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+						<a href="#"># 상세보기</a>
+					</p>
+				</div>
+			</li>
+			<li class="member co-funder type_bottom">
+				<div class="thumb">
+					<img src="#">
+				</div>
+				<div class="description">
+					<h3 class="mountain-name">산이름</h3>
+					<p>
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+						<a href="#"># 상세보기</a>
+					</p>
+				</div>
+			</li>
+			<li class="member co-funder type_bottom">
+				<div class="thumb">
+					<img src="#">
+				</div>
+				<div class="description">
+					<h3 class="mountain-name">산이름</h3>
+					<p>
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+						<a href="#"># 상세보기</a>
+					</p>
+				</div>
+			</li>
+			<li class="member co-funder type_bottom">
+				<div class="thumb">
+					<img src="#">
+				</div>
+				<div class="description">
+					<h3 class="mountain-name">산이름</h3>
+					<p>
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+						<a href="#"># 상세보기</a>
+					</p>
+				</div>
+			</li>
+			<li class="member co-funder type_bottom">
+				<div class="thumb">
+					<img src="#">
+				</div>
+				<div class="description">
+					<h3 class="mountain-name">산이름</h3>
+					<p>
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+						<a href="#"># 상세보기</a>
+					</p>
+				</div>
+			</li>
+			<li class="member co-funder type_bottom">
+				<div class="thumb">
+					<img src="#">
+				</div>
+				<div class="description">
+					<h3 class="mountain-name">산이름</h3>
+					<p>
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
+						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+						<a href="#"># 상세보기</a>
+					</p>
+				</div>
+			</li>
+		</ul>
+
+	</div>
 </section>
-
-
-<script>
-const elements = [
-    {
-        $element: $('.scroll_txt.type_bottom'),
-        initTranslateY: 140, // 초기 Y축 이동 거리 (px)
-        finalTranslateY: 0, // 최종 Y축 이동 거리 (px)
-    },
-];
-</script>
 

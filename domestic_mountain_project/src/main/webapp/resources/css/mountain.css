@@ -1,25 +1,79 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
 
 :root {
-	--map-color: #98cbff;
-	--dark: #2f313a;
+	--map-color: #81aae6	;
+	--dark: #59595b;
 	--deg: -86deg;
 	--trans: all 0.4s ease 0s;
 }
 
+.maps-container {
+	margin: 30px auto;
+	max-width: 1300px;
+	padding-top: 120px;
+}
+
+
+.amain h1 {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0 80px 0;
+	font-weight: 700;
+	color: #6558be;
+}
+
+.amain-main {
+	padding: 0 0 10px 10px;
+	border-bottom: 2px solid #3a3a3a;
+	font-size: xx-large;
+	color: #6557be;
+}
+
+.amain-main a>span {
+	font-size: 18px;
+	color: gray;
+	margin: 10px 0 0 20px;
+}
+
+.amain-main span {
+	font-size: 14px;
+	color: gray;
+	margin: 15px 0 0 20px;
+}
+
+
+.maps-body-container .maps {
+	margin: 0 auto;
+	padding: 20px;
+	box-sizing: border-box;
+	width: 900px;
+	height: 800px;
+	border: 1px solid #ccc;
+	border-radius: 13px;
+}
+
+
+/*   features-2   */
+
+.features-2:active {
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+}
+
+.features-2 {
+	margin-bottom: 200px;
+}
 
 .mountain-main {
 	width: 90vmin;
 }
 
-h2 {
+.mountain-h2 {
 	text-align: center;
+	max-width: 1000px;
+	margin: 80px auto;
+	
 }
 
-.team {
-	padding: 2em 0 2em 2.5em;
-	margin: 0;
-}
 
 .member {
 	margin: 1.5em 0 0.5em;
@@ -110,8 +164,7 @@ h2 {
 	padding: 0 2em;
 	margin-bottom: 1em;
 }
-
-h3 {
+.description .mountain-name {
 	background: linear-gradient(182deg, #fff0 60%, var(--dark) 0 100%);
 	display: inline;
 	transform: rotate(-2deg);
@@ -126,7 +179,7 @@ h3 {
 	transform-origin: left bottom;
 }
 
-.member:nth-of-type(even) h3 {
+.member:nth-of-type(even) .mountain-name {
 	left: inherit;
 	right: 9vmin;
 	transform: rotate(2deg);
@@ -134,7 +187,7 @@ h3 {
 	background: linear-gradient(-182deg, #fff0 60%, var(--dark) 0 100%);
 }
 
-.member:hover h3 {
+.member:hover .mountain-name {
 	transition: var(--trans);
 	transform: rotate(0deg);
 	background: linear-gradient(180deg, #fff0 59%, var(--dark) 0 100%);
@@ -187,7 +240,7 @@ h3 {
 	margin-right: 2px;
 }
 
-.mountain-list {
+.mountain-main {
 	margin: 30px auto;
 	max-width: 1300px;
 	
@@ -195,12 +248,14 @@ h3 {
     scrollbar-width: none; /* 파이어폭스 */
 }
 
-.mountain-list ul {
-	padding: 2rem;
-	text-align: center;
+.mountain-main ul {
+	width: 1000px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	padding-left: 0;
 }
 
-.mountain-list::-webkit-scrollbar {
+.mountain-main::-webkit-scrollbar {
     display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
 
