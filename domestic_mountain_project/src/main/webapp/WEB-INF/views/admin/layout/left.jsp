@@ -133,10 +133,10 @@
 								data-bs-parent="#sidenavAccordionPages">
 								<nav class="sb-sidenav-menu-nested nav">
 									<a class="nav-link"
-										href="${pageContext.request.contextPath}/admin/product/support/faq_category_list">
+										href="${pageContext.request.contextPath}/admin/support/faq_category_list">
 										카테고리 관리</a> 
 									<a class="nav-link"
-										href="${pageContext.request.contextPath}/admin/product/support/faq_board_list">
+										href="${pageContext.request.contextPath}/admin/support/faq_board_list">
 										질문 및 답변 관리</a> 
 								</nav>
 							</div>
