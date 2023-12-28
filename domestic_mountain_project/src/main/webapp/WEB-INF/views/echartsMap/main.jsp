@@ -4,7 +4,7 @@
 
 <style type="text/css">
 .features-1 {
-	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
+	height: 1200px; /* 수정 시 auto로 바꾸고 해야함 */
 }
 
 .maps-container {
@@ -52,15 +52,18 @@
 	border-radius: 13px;
 }
 
+.features-2:active {
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+}
+
 h3 {
 	display: flex;
 	justify-content: center;
 }
+
 </style>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+
 
 
 <section class="features-1">
@@ -77,9 +80,6 @@ h3 {
 		</div>
 	</div>
 	
-	<div>
-		<h3> echat에서 선택한 항목의 이름을 저장한 변수를 html에서 넘겨 받아 그 넘겨받은 문자열을 검색 할 수 있도록 하면 되지 않을까? </h3>
-	</div>
 </section>
 
 <script type="text/javascript">
@@ -211,8 +211,12 @@ h3 {
 		if((! params.data) || (! params.data.fullName)) { // 시군구를 클릭 한 경우
 			// 세종시는 확인 필요
 			sigungu = params.name;
+		
+		
+			document.getElementById("test").innerHTML=fullSido + ' ' + sigungu;
 			
-			alert(fullSido + ' ' + sido + ' ' + sigungu);
+			
+			// alert(fullSido + ' ' + sido + ' ' + sigungu);
 			
 			return false;
 		}
@@ -220,8 +224,11 @@ h3 {
 		// 시도를 클릭한 경우
 		sido = params.name;
 		
+		
 		var id = params.data.id;
 		fullSido = params.data.fullName;
+		
+		document.getElementById("test").innerHTML=fullSido;
 		
 		var arr = [];
 		var colors = [0, 50, 30, 70, 20, 40, 80, 10, 90, 60, 100];	
@@ -285,3 +292,9 @@ h3 {
 	});
 	
 </script>
+
+<section class="features-2">
+	<div>
+		<h3 id="test"></h3>
+	</div>
+</section>
