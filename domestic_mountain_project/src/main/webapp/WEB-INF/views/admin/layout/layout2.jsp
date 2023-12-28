@@ -25,8 +25,8 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/js/jquery.min.js"></script>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/static/js/util-jquery.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/static/js/menu2.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util-jquery.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu2.js"></script>
 	
 	
 	
