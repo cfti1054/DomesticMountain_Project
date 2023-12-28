@@ -120,7 +120,7 @@
 
 
 							<a class="nav-link collapsed"
-								href="${pageContext.request.contextPath}/admin/support/faq"
+								href="${pageContext.request.contextPath}/admin/support/faq_category_list"
 								data-bs-toggle="collapse" data-bs-target="#pagesCollapseError"
 								aria-expanded="false" aria-controls="pagesCollapseError">
 								FAQ 분류
@@ -133,12 +133,11 @@
 								data-bs-parent="#sidenavAccordionPages">
 								<nav class="sb-sidenav-menu-nested nav">
 									<a class="nav-link"
-										href="${pageContext.request.contextPath}/resources/admin/static/401.html">401
-										Page</a> <a class="nav-link"
-										href="${pageContext.request.contextPath}/resources/admin/static/404.html">404
-										Page</a> <a class="nav-link"
-										href="${pageContext.request.contextPath}/resources/admin/static/500.html">500
-										Page</a>
+										href="${pageContext.request.contextPath}/admin/product/support/faq_category_list">
+										카테고리 관리</a> 
+									<a class="nav-link"
+										href="${pageContext.request.contextPath}/admin/product/support/faq_board_list">
+										질문 및 답변 관리</a> 
 								</nav>
 							</div>
 

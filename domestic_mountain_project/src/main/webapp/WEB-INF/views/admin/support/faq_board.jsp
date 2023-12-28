@@ -34,7 +34,15 @@
         					return false;
         		    	}
         		    	
+        				console.log("status : ");
+        				console.log(jqXHR.status);
+        				console.log("statusText : ");
+        				console.log(jqXHR.statusText);
+        				console.log("responseText : ");
         				console.log(jqXHR.responseText);
+        				console.log("readyState: ");
+        				console.log(jqXHR.readyState);
+        				
         			}
         	};
         	
@@ -157,13 +165,12 @@
         		 var pos = oTable.row(this).index();
         		 var row = oTable.row(pos).data();
         	    oAll.push(row);
-        	    console.log(row);
         	 });
         	 	/* 수정 버튼 눌렸을 때의 action*/
 
-        	 	if(oAll.length == 0) {
+        	 	if(oAll.length === 0) {
         	 		alert("수정하려면 한개 이상의 행을 선택하세요");
-        	 		
+        	 		return;
         	 	}
         	 	
         	 		 let dlg = $("#faq-dialog").dialog({
