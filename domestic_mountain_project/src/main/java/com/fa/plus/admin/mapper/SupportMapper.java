@@ -29,6 +29,7 @@ public interface SupportMapper {
 	public void visible_faq_board(Map<String, Object> map) throws SQLException;
 	public List<Support> list_faq_board() throws SQLException;
 	
+	public Support show_content(long faq_num) throws SQLException;
 	
 	
 	

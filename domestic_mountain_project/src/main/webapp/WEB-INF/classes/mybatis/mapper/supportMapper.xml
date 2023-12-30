@@ -14,7 +14,7 @@
 	<insert id="insert_faq_category" parameterType="com.fa.plus.admin.domain.Support">
 		INSERT INTO faq_category(faq_category_num, category_name, 
 			category_reg_id, category_reg_date, category_order, category_visible)
-			VALUES(#{faq_category_num}, #{category_name}, 1, SYSDATE, #{faq_category_order}, 1)
+			VALUES(#{faq_category_num}, #{category_name}, 1, SYSDATE, #{faq_category_order}, #{category_visible})
 	</insert>
 	
 	<select id="find_by_category_num" parameterType="hashmap" resultType="com.fa.plus.admin.domain.Support">
@@ -37,58 +37,18 @@
 		WHERE faq_category_num = #{faq_category_num}
 	</update>
 	
-	<!-- 
-	
 
-	<select id="list_faq_category" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_category_num, category_name, u.useridx AS category_reg_id, category_reg_date, category_order, category_visible
-		FROM faq_category f
-		JOIN user1 u ON f.category_reg_id = u.userIdx
-	</select>	
-	
-	<update id="visible_faq_category" parameterType="map">
-		UPDATE faq_category_num 
-		<if test="category_visible != 0">
-			SET category_visible = 0
-		</if>
-		<if test="category_visible != 1">
-			SET category_visible = 1
-		</if>
-		WHERE faq_category_num = #{faq_category_num}
-	</update>
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<update id="visible_faq_board" parameterType="map">
-		UPDATE faq_board
-		<if test="faq_visible != 0">
-			SET faq_visible = 0
-		</if>
-		<if test="faq_visible != 1">
-			SET faq_visible = 1
-		</if>
-		WHERE faq_num = #{faq_num} 
-		
-	</update>
-  -->
   <select id="faq_board_seq" resultType="Long">
 		SELECT faq_board_seq.NEXTVAL FROM dual
 	</select>
 
 	<insert id="insert_faq_board" parameterType="com.fa.plus.admin.domain.Support">
 		INSERT INTO faq_board(faq_num, faq_category_num, faq_question, faq_content, faq_reg_id, faq_reg_date, faq_visible)
-			VALUES(#{faq_num}, #{faq_category_num}, #{faq_question}, #{faq_content}, 1, SYSDATE, 1)
+			VALUES(#{faq_num}, #{faq_category_num}, #{faq_question}, #{faq_content}, 1, SYSDATE, #{visible})
 	</insert>
 	
 	<select id="find_by_board_num" parameterType="hashmap" resultType="com.fa.plus.admin.domain.Support">
-		SELECT faq_num, faq_question, faq_content, faq_visible
+		SELECT faq_num, faq_question, faq_content, faq_visible AS visible
 		FROM faq_board f
 		WHERE faq_num IN
 		<foreach item="item" index="index" collection="list"
@@ -122,5 +82,10 @@
       	JOIN faq_category fc ON f.faq_category_num = fc.faq_category_num
 	</select>
 	
+	<select id="show_content" parameterType="Long" resultType="com.fa.plus.admin.domain.Support">
+		SELECT faq_question ,faq_content
+		FROM faq_board
+		WHERE faq_num = #{faq_num}
+	</select>
 	
 </mapper>

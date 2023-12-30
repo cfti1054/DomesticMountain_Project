@@ -117,7 +117,6 @@ public class SupportController {
 		try {
 			
 			for(String s: category_list) {
-				System.out.println(s);
 			}
 			
 			for(int i = 0; i < category_list.size(); i++) {
@@ -218,7 +217,6 @@ public class SupportController {
 
 				
 				for(int i = 0; i < board_list.size(); i++) {
-					System.out.println(board_list.get(i));
 					if (i % 4 == 0 ) {
 						dto.setFaq_num(Long.parseLong(board_list.get(i)));
 					} else if (i % 4 == 1) {
@@ -238,6 +236,23 @@ public class SupportController {
 			}
 			
 			return "redirect:/admin/support/faq_board_list";
+		}
+		
+		@GetMapping("show_content")
+		public String show_content(@RequestParam String faq_num, Model model) throws Exception {
+			Support dto = null;
+			try {
+				
+				dto = service.show_content(faq_num);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("mode", "show");
+			
+			return "admin/support/write_modal";
 		}
 	
 }

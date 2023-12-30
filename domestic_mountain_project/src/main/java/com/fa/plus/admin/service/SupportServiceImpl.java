@@ -157,6 +157,20 @@ public class SupportServiceImpl implements SupportService {
 		return list;
 	}
 
+	@Override
+	public Support show_content(String s) throws Exception {
+		Support dto = null;
+
+		try {
+			dto = mapper.show_content(Long.parseLong(s));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
 	
 
 	

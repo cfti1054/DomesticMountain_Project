@@ -20,5 +20,7 @@ public interface SupportService {
 	public void update_faq_board(Support dto) throws Exception;
 	public void visible_faq_board(Map<String, Object> map) throws Exception;
 	public List<Support> list_faq_board();
+	
+	public Support show_content(String num) throws Exception;
 
 }
