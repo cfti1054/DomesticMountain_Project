@@ -82,6 +82,29 @@
 
 
 					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseProducts" aria-expanded="false"
+						aria-controls="collapseProducts">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-columns"></i>
+						</div> 상품관리
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="collapseProducts"
+						aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav">
+							<a class="nav-link"
+								href="${pageContext.request.contextPath}/admin/product/product_list">장비 관리</a> <a
+								class="nav-link"
+								href="${pageContext.request.contextPath}/admin/">상품 리뷰 및 문의</a>
+						</nav>
+					</div>
+
+
+
+
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 						data-bs-target="#collapsePages" aria-expanded="false"
 						aria-controls="collapsePages">
 						<div class="sb-nav-link-icon">
@@ -109,12 +132,9 @@
 								data-bs-parent="#sidenavAccordionPages">
 								<nav class="sb-sidenav-menu-nested nav">
 									<a class="nav-link"
-										href="${pageContext.request.contextPath}/resources/admin/static/login.html">Login</a>
+										href="${pageContext.request.contextPath}/admin/support/inquiry_category_list">카테고리 관리</a>
 									<a class="nav-link"
-										href="${pageContext.request.contextPath}/resources/admin/static/register.html">Register</a>
-									<a class="nav-link"
-										href="${pageContext.request.contextPath}/resources/admin/static/password.html">Forgot
-										Password</a>
+										href="${pageContext.request.contextPath}/admin/support/inquiry_board_list">문의 관리</a>
 								</nav>
 							</div>
 
@@ -145,25 +165,7 @@
 					</div>
 
 
-					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-						data-bs-target="#collapseProducts" aria-expanded="false"
-						aria-controls="collapseProducts">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-columns"></i>
-						</div> 상품관리
-						<div class="sb-sidenav-collapse-arrow">
-							<i class="fas fa-angle-down"></i>
-						</div>
-					</a>
-					<div class="collapse" id="collapseProducts"
-						aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
-						<nav class="sb-sidenav-menu-nested nav">
-							<a class="nav-link"
-								href="${pageContext.request.contextPath}/admin/product/product_list">장비 관리</a> <a
-								class="nav-link"
-								href="${pageContext.request.contextPath}/admin/">상품 리뷰 및 문의</a>
-						</nav>
-					</div>
+					
 
 
 

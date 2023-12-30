@@ -32,7 +32,10 @@ public interface SupportMapper {
 	public Support show_content(long faq_num) throws SQLException;
 	
 	
+	/* 											1:1 문의									*/
 	
+	public List<Support> list_inquiry_category() throws SQLException;
+	public List<Support> list_inquiry_board() throws SQLException;
 	
 	
 	
