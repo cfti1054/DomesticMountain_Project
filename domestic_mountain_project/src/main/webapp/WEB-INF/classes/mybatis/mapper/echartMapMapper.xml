@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="temp">
+<mapper namespace="com.fa.plus.mapper.EchartMapMapper">
+
+	<sql id="where-list">
+		<if test="schType=='mountain_name'">
+			DBMS_LOB.INSTR(mountain_name, #{kwd}) &gt; 0
+		</if>
+	</sql>
+
+	<select id="listMountain" parameterType="map" resultType="com.fa.plus.domain.EchartMap">
+		SELECT DISTINCT mountain_name, m.mountain_num, mountain_chinese,
+			mountain_subtitle, mountain_location,
+			mountain_manage, height, main_content, sub_content, mountain_img
+		FROM mountain m
+		JOIN mountain_addr ad ON m.mountain_num = ad.mountain_num
+		JOIN sigungoo si ON ad.sigungoo_num = si.sigungoo_num
+		JOIN sido do ON si.sido_num = do.sido_num
+		<where>
+			<if test="kwd!=null and kwd!='' ">
+				<include refid="where-list" />
+			</if>
+		</where>
+		<where>
+			<if test="sido_name !=null and sido_name!='' ">
+				WHERE sido_name = #{sido_name}
+				<if test="sigungoo_name !=null and sigungoo_name!='' ">
+					AND sigungoo_name = #{sigungoo_name}
+				</if>
+			</if>
+		</where>
+		ORDER BY mountain_name ASC
+		
+	</select>
+
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM mountain
+		<where>
+			<if test="kwd!=null and kwd!='' ">
+				<include refid="where-list" />
+			</if>
+		</where>
+	</select>
+
+	<select id="findByName" parameterType="Long"
+		resultType="com.fa.plus.domain.EchartMap">
+		SELECT mountain_num, mountain_name, main_content,
+		mountain_img
+		FROM mountain
+		WHERE mountain_num = #{mountain_num}
+	</select>
 
 </mapper>

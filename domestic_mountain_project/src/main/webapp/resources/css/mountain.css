@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
 
 :root {
-	--map-color: #81aae6	;
-	--dark: #59595b;
+	--map-color: #7d9c60;
+	--dark: #bad2af;
 	--deg: -86deg;
 	--trans: all 0.4s ease 0s;
 }
@@ -61,6 +61,10 @@
 
 .features-2 {
 	margin-bottom: 200px;
+}
+
+.features-2 .datacount {
+	display: flex;
 }
 
 .mountain-main {
@@ -163,6 +167,12 @@
 .description p {
 	padding: 0 2em;
 	margin-bottom: 1em;
+	color: #212121;
+	
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	overflow: hidden;
 }
 .description .mountain-name {
 	background: linear-gradient(182deg, #fff0 60%, var(--dark) 0 100%);
@@ -173,9 +183,9 @@
 	margin-top: -2.25em;
 	left: 9vmin;
 	padding: 0.5em 0.75em;
-	color: var(--map-color);
+	color: #525c49;
 	border-radius: 0.25em;
-	font-size: 1.35em;
+	font-size: 2.00em;
 	transform-origin: left bottom;
 }
 
@@ -194,7 +204,7 @@
 }
 
 .co-funder:after {
-	content: "CO-FUNDER";
+	content: "Domestic Mountain";
 	font-size: 0.75em;
 	position: absolute;
 	top: -1.5em;
@@ -213,7 +223,7 @@
 	transform: rotate(-3deg);
 }
 
-.description p a {
+.description a {
 	display: inline-block;
 	margin: 0.5em 0 0 0;
 	background: var(--dark);
@@ -222,15 +232,16 @@
 	border-radius: 0.5em;
 	text-decoration: none;
 	transition: var(--trans);
+	margin: 0 80px;
 }
-.description p a:hover {
+.description a:hover {
 	transition: var(--trans);
 	color: var(--dark);
 	background: var(--map-color);
 	font-weight: bold;
 }
 
-.description p a img {
+.description a img {
 	float: left;
 	width: 22px;
 	filter: invert(1);
@@ -253,6 +264,7 @@
   	margin-left: auto;
   	margin-right: auto;
   	padding-left: 0;
+  	padding-top: 15px;
 }
 
 .mountain-main::-webkit-scrollbar {

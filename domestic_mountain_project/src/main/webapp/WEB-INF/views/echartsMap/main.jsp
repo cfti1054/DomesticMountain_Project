@@ -7,6 +7,7 @@
 	max-width: 1000px;
 	margin: auto;
 }
+
 .features-2 .row {
 	width: 1000px;
 }
@@ -159,8 +160,11 @@
 			// 세종시는 확인 필요
 			sigungu = params.name;
 		
+			// 여기가 이제 시군구 클릭을 했을때 넘기는 코드
+			
 		
-			document.getElementById("test").innerHTML=fullSido + ' ' + sigungu;
+		
+			document.getElementById("region").innerHTML=fullSido + ' ' + sigungu;
 			
 			
 			// alert(fullSido + ' ' + sido + ' ' + sigungu);
@@ -172,10 +176,14 @@
 		sido = params.name;
 		
 		
+		// 여기가 이제 도를 클릭 했을때 넘기는 코드
+		
+		
 		var id = params.data.id;
 		fullSido = params.data.fullName;
 		
-		document.getElementById("test").innerHTML=fullSido;
+		document.getElementById("region").innerHTML = fullSido;
+		
 		
 		var arr = [];
 		var colors = [0, 50, 30, 70, 20, 40, 80, 10, 90, 60, 100];	
@@ -238,134 +246,76 @@
 		location.href = '${pageContext.request.contextPath}/emaps/main'; 
 	});
 	
+	
+	function searchList() {
+		const f = document.searchForm;
+		f.submit();
+	}
+	
 </script>
+
 
 <section class="features-2">
 	<div class="mountain-h2">
 		<div class="amain">
 			<h1 class="amain-main">
-				<a id="test">전체</a> <span>| Mountain List</span>
+				<a id="region">전체</a> <span>Mountain List</span>
 			</h1>
 		</div>
 	</div>
-	<div class="col-6 text-end">
-		<form class="row text-end-row" name="searchForm" action="#"
-			method="post">
+
+	<div class="col-6 text-end datacount">
+	
+		<form class="row text-end-row" name="searchForm"
+			action="${pageContext.request.contextPath}/emaps/main" method="post">
+			
 			<div class="col-auto p-1">
-				<input type="text" name="kwd" value="" class="form-control" placeholder="산명 검색하세요.">
+				<input type="text" name="kwd" value="${kwd}" class="form-control"
+					placeholder="산명 검색하세요.">
 			</div>
 			<div class="col-auto p-1">
-				<button type="button" class="btn btn-light" onclick="searchList()" style="background-color: #d3d4d5">
+				<button type="button" class="btn btn-light" onclick="searchList()"
+					style="background-color: #d3d4d5">
 					<i class="bi bi-search"></i>
 				</button>
 			</div>
 		</form>
+		
+		
+		<div class="col">
+			<button type="button" class="btn btn-light"
+				onclick="location.href='${pageContext.request.contextPath}/emaps/main';"
+				title="새로고침" style="background-color: #d3d4d5">
+				<i class="bi bi-arrow-counterclockwise"></i>
+			</button>
+		</div>
+		<div style="width: 100px; display: flex; justify-content: center; align-items: center; height: 38px;">
+			${dataCount} 개
+		</div>
+
 	</div>
 
 
 
 	<div class="mountain-main"
 		style="overflow-y: scroll; width: auto; height: 1000px;">
-
 		<ul>
-			<li class="member co-funder type_bottom">
-				<div class="thumb">
-					<img src="#">
-				</div>
-				<div class="description">
-					<h3 class="mountain-name">산이름</h3>
-					<p>
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
+			<c:forEach var="dto" items="${list}" varStatus="status">
+				
+				<li class="member co-funder type_bottom">
+					<div class="thumb">
+						<img src="${dto.mountain_img}">
+					</div>
+					<div class="description">
+						<h3 class="mountain-name">${dto.mountain_name}</h3>
+						<p>
+							${dto.main_content}<br>
+						</p>
 						<a href="#"># 상세보기</a>
-					</p>
-				</div>
-			</li>
-			<li class="member co-funder type_bottom">
-				<div class="thumb">
-					<img src="#">
-				</div>
-				<div class="description">
-					<h3 class="mountain-name">산이름</h3>
-					<p>
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
-						<a href="#"># 상세보기</a>
-					</p>
-				</div>
-			</li>
-			<li class="member co-funder type_bottom">
-				<div class="thumb">
-					<img src="#">
-				</div>
-				<div class="description">
-					<h3 class="mountain-name">산이름</h3>
-					<p>
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
-						<a href="#"># 상세보기</a>
-					</p>
-				</div>
-			</li>
-			<li class="member co-funder type_bottom">
-				<div class="thumb">
-					<img src="#">
-				</div>
-				<div class="description">
-					<h3 class="mountain-name">산이름</h3>
-					<p>
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
-						<a href="#"># 상세보기</a>
-					</p>
-				</div>
-			</li>
-			<li class="member co-funder type_bottom">
-				<div class="thumb">
-					<img src="#">
-				</div>
-				<div class="description">
-					<h3 class="mountain-name">산이름</h3>
-					<p>
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
-						<a href="#"># 상세보기</a>
-					</p>
-				</div>
-			</li>
-			<li class="member co-funder type_bottom">
-				<div class="thumb">
-					<img src="#">
-				</div>
-				<div class="description">
-					<h3 class="mountain-name">산이름</h3>
-					<p>
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
-						<a href="#"># 상세보기</a>
-					</p>
-				</div>
-			</li>
-			<li class="member co-funder type_bottom">
-				<div class="thumb">
-					<img src="#">
-				</div>
-				<div class="description">
-					<h3 class="mountain-name">산이름</h3>
-					<p>
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@
-						산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@산 상세설명@@@@@@@<br>
-						<a href="#"># 상세보기</a>
-					</p>
-				</div>
-			</li>
+					</div>
+				</li>
+					
+			</c:forEach>
 		</ul>
 
 	</div>
