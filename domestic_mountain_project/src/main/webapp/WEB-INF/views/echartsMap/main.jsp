@@ -296,7 +296,6 @@
 	</div>
 
 
-
 	<div class="mountain-main"
 		style="overflow-y: scroll; width: auto; height: 1000px;">
 		<ul>
