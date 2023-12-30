@@ -11,12 +11,12 @@
 	<!-- 상품 등록 -->
 	<insert id="insertProduct" parameterType="com.fa.plus.admin.domain.ProductManage">
 		INSERT INTO product(product_num, category_num, product_name, product_status, product_summary,
-						product_content, product_price, product_hit, product_reg_date,
-							product_modify_date, product_insertidx, product_updateidx)
-								VALUES (#{product_num}, #{category_num}, #{product_name}, 
-										#{product_status}, #{product_summary}, #{product_content}, 
-										#{product_price}, #{product_hit}, SYSDATE, SYSDATE, 
-										#{product_insertidx}, #{product_updateidx})	
+			product_content, product_price, product_hit, product_reg_date,
+				product_modify_date, product_insertidx, product_updateidx)
+					VALUES (#{product_num}, #{category_num}, #{product_name, jdbcType=VARCHAR}, 
+							#{product_status}, #{product_summary, jdbcType=VARCHAR}, #{product_content, jdbcType=VARCHAR}, 
+							#{product_price}, 0, SYSDATE, SYSDATE, 
+							#{product_insertidx}, #{product_updateidx})	
 	</insert>	
 	
 	<!-- 추가 이미지 등록 -->
@@ -142,7 +142,7 @@
 	
 	<update id="updateProduct" parameterType="com.fa.plus.admin.domain.ProductManage">
 		UPDATE product SET category_num = #{category_num}, product_name = #{product_name},
-			product_price = #{product_price}, product_hit = #{product_hit},
+			product_price = #{product_price}, product_hit = 0,
 			product_content = #{product_content}, product_summary = #{product_summary},
 			product_status = #{product_status}, product_modify_date = SYSDATE, product_updateidx = #{product_updateidx}
 		WHERE product_num = #{product_num}

@@ -9,7 +9,9 @@ public class ProductManage {
 	private long category_num; 			// 카테고리 번호(pk)
 	private String category_name; 		// 카테고리이름
 	private long category_order; 		// 순서
-	private long parent_num; 			// 부모번호
+	// private long parent_num; 		// 부모번호
+	private Long parent_num;			// 부모번호 Long 참조타입으로 선언
+	private Long parent;				// 상위옵션 Long 참조타입으로 선언
 	
 	private String product_reg_date; 	// 등록일 상품등록일
 	private int product_status; 		// 이게 진열상태? 보이기 상품출력여부
@@ -22,10 +24,10 @@ public class ProductManage {
 	private String product_modify_date; // 수정일 상품최종수정시간
 	private long product_hit; 			// 조회수 상품조회수
 	
-	private long product_insertIdx; 	// 상품등록회원번호? 
-	private long product_updateIdx; 	// 상품수정회원번호??
+	private long product_insertidx; 	// 상품등록회원번호? 
+	private long product_updateidx; 	// 상품수정회원번호??
 	// 이 두개는 왜있지?? 어짜피 관리자밖에 없지 않나?
-	// 아마 직원이 수정하거나 관리자가 더 있으면 누가 수정했는지 보려고? 뇌피셜임
+	// 아마 직원이 수정하거나 관리자가 더 있으면 누가 수정했는지 보려고? 나도모름
 	
 	// stock 테이블
 	private long stock_num; 			// 재고 번호(pk)
@@ -39,7 +41,7 @@ public class ProductManage {
 	// productOption 테이블
 	private long option_num; 			// 옵션번호(pk)
 	private String option_name; 		// 옵션 이름 [구분 / 색상 / 사이즈]
-	private long parent;				// 상위옵션
+	// private long parent;				// 상위옵션
 	private long option_num2;
 	private String option_name2;	
 	
@@ -53,8 +55,6 @@ public class ProductManage {
 	private String thumbnail;			
 	private MultipartFile thumbnailFile;
 	
-	private long fileNum;
-	private String filename;
 	private List<MultipartFile> addFiles;	
 	
 	public long getProduct_num() {
@@ -137,22 +137,6 @@ public class ProductManage {
 		this.product_hit = product_hit;
 	}
 
-	public long getProduct_insertIdx() {
-		return product_insertIdx;
-	}
-
-	public void setProduct_insertIdx(long product_insertIdx) {
-		this.product_insertIdx = product_insertIdx;
-	}
-
-	public long getProduct_updateIdx() {
-		return product_updateIdx;
-	}
-
-	public void setProduct_updateIdx(long product_updateIdx) {
-		this.product_updateIdx = product_updateIdx;
-	}
-
 	public long getStock_num() {
 		return stock_num;
 	}
@@ -209,28 +193,12 @@ public class ProductManage {
 		this.category_order = category_order;
 	}
 
-	public long getParent_num() {
-		return parent_num;
-	}
-
-	public void setParent_num(long parent_num) {
-		this.parent_num = parent_num;
-	}
-
 	public String getProduct_content() {
 		return product_content;
 	}
 
 	public void setProduct_content(String product_content) {
 		this.product_content = product_content;
-	}
-
-	public long getParent() {
-		return parent;
-	}
-
-	public void setParent(long parent) {
-		this.parent = parent;
 	}
 
 	public String getOption_value() {
@@ -272,23 +240,6 @@ public class ProductManage {
 	public void setThumbnailFile(MultipartFile thumbnailFile) {
 		this.thumbnailFile = thumbnailFile;
 	}
-
-	public long getFileNum() {
-		return fileNum;
-	}
-
-	public void setFileNum(long fileNum) {
-		this.fileNum = fileNum;
-	}
-
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
 	public List<MultipartFile> getAddFiles() {
 		return addFiles;
 	}
@@ -343,6 +294,38 @@ public class ProductManage {
 
 	public void setOption_name2(String option_name2) {
 		this.option_name2 = option_name2;
+	}
+
+	public Long getParent_num() {
+		return parent_num;
+	}
+
+	public void setParent_num(Long parent_num) {
+		this.parent_num = parent_num;
+	}
+
+	public void setParent(Long parent) {
+		this.parent = parent;
+	}
+
+	public Long getParent() {
+		return parent;
+	}
+
+	public long getProduct_insertidx() {
+		return product_insertidx;
+	}
+
+	public void setProduct_insertidx(long product_insertidx) {
+		this.product_insertidx = product_insertidx;
+	}
+
+	public long getProduct_updateidx() {
+		return product_updateidx;
+	}
+
+	public void setProduct_updateidx(long product_updateidx) {
+		this.product_updateidx = product_updateidx;
 	}
 
 	

@@ -174,7 +174,6 @@ public class ProductManageController {
 	
 	@PostMapping("write")
 	public String writeSubmit(ProductManage dto,
-			@RequestParam(defaultValue = "0") int special,
 			HttpSession session,
 			Model model) {
 		
@@ -186,7 +185,7 @@ public class ProductManageController {
 		} catch (Exception e) {
 		}
 		
-		String url = "redirect:/admin/product/main?parent_num=" + dto.getParent_num()
+		String url = "redirect:/admin/product/product_list?parent_num=" + dto.getParent_num()
 						+ "&category_num=" + dto.getCategory_num();
 
 		return url;
@@ -283,5 +282,11 @@ public class ProductManageController {
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
 		return model;
+	}	
+	
+	@GetMapping("article")
+	public String article(Model model) {
+		
+		return ".admin.product.article";
 	}	
 }

@@ -12,7 +12,7 @@ import com.fa.plus.admin.domain.ProductManage;
 import com.fa.plus.admin.mapper.ProductManageMapper;
 import com.fa.plus.common.FileManager;
 
-@Service
+@Service 
 public class ProductManageServiceImpl implements ProductManageService {
 	@Autowired
 	private ProductManageMapper mapper;
@@ -87,33 +87,96 @@ public class ProductManageServiceImpl implements ProductManageService {
 
 	@Override
 	public void insertProduct(ProductManage dto, String pathname) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			// 썸네일 이미지
+			String file_name = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
+			dto.setThumbnail(file_name);
+			
+			// 상품 저장
+			long product_num = mapper.productSeq();
+			
+			dto.setProduct_num(product_num);
+			mapper.insertProduct(dto);	
+			
+			// 추가 이미지 저장
+			if(! dto.getAddFiles().isEmpty()) {
+				for(MultipartFile mf : dto.getAddFiles()) {
+					file_name = fileManager.doFileUpload(mf, pathname);
+					if(file_name == null) {
+						continue;
+					}
+					dto.setFile_name(file_name);
+					
+					mapper.insertProductFile(dto);
+				}
+			}		
+			
+			// 상위 옵션 저장
+			long option_num = mapper.optionSeq();
+			dto.setOption_num(option_num);
+			dto.setParent(null);
+			mapper.insertProductOption(dto);	
+			
+			// 상위 옵션 값 저장
+			long detail_num;
+			dto.setDetail_nums(new ArrayList<Long>());
+			for(String option_value : dto.getOption_values()) {
+				detail_num = mapper.detailSeq(); 
+				dto.setDetail_num(detail_num);
+				dto.setOption_value(option_value);
+
+				mapper.insertOptionDetail(dto);
+				
+				dto.getDetail_nums().add(detail_num);
+			}		
+			
+			// 하위 옵션 저장
+			long option_num2 = mapper.optionSeq();
+			dto.setOption_num(option_num2);
+			dto.setOption_name(dto.getOption_name2());
+			dto.setParent(option_num);
+			mapper.insertProductOption(dto);
+			
+			// 하위 옵션 값 저장
+			dto.setDetail_nums2(new ArrayList<Long>());
+			for(String option_value2 : dto.getOption_values2()) {
+				detail_num = mapper.detailSeq(); 
+				dto.setDetail_num(detail_num);
+				dto.setOption_value(option_value2);
+				mapper.insertOptionDetail(dto);
+				
+				dto.getDetail_nums2().add(detail_num);
+			}		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}			
 	}
 
 	@Override
 	public void updateProduct(ProductManage dto, String pathname) throws Exception {
 		try {
 			// 썸네일 이미지
-			String filename = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
-			if(filename != null) {
+			String file_name = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
+			if(file_name != null) {
 				// 이전 파일 지우기
 				if (dto.getThumbnail().length() != 0) {
 					fileManager.doFileDelete(dto.getThumbnail(), pathname);
 				}
 				
-				dto.setThumbnail(filename);
+				dto.setThumbnail(file_name);
 			}
 			
 			mapper.updateProduct(dto);
 			
 			if(! dto.getAddFiles().isEmpty()) {
 				for(MultipartFile mf : dto.getAddFiles()) {
-					filename = fileManager.doFileUpload(mf, pathname);
-					if(filename == null) {
+					file_name = fileManager.doFileUpload(mf, pathname);
+					if(file_name == null) {
 						continue;
 					}
-					dto.setFilename(filename);
+					dto.setFile_name(file_name);
 					
 					mapper.insertProductFile(dto);
 				}

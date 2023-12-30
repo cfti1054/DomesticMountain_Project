@@ -4,10 +4,9 @@
 
 <style type="text/css">
 .body-container {
-	max-width: 950px;
+	max-width: 900px;
 	position: relative;
-	position: absolute;
-  	top: 15%;
+  	top: 100px;
   	left: 20%;
   	margin: -25px 0 0 -25px; 
 }
@@ -363,8 +362,9 @@ $(function(){
 					<tr>
 						<td class="table-light col-sm-2">상품구분</td>
 						<td>
-	
+						상품
 						</td>
+						
 					</tr>
 					<tr>
 						<td class="table-light col-sm-2">상품가격</td>
@@ -472,7 +472,7 @@ $(function(){
 					<tr>
 						<td class="table-light col-sm-2">상품설명</td>
 						<td>
-							<textarea name="product_content" id="ir1" class="form-control" style="max-width: 95%; height: 290px;">${dto.product_content}</textarea>
+							<textarea name="product_content" id="ir1" class="form-control" style="max-width: 100%; height: 290px;">${dto.product_content}</textarea>
 						</td>
 					</tr>
 					
@@ -480,7 +480,7 @@ $(function(){
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
 							<div class="thumbnail-viewer"></div>
-							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">
+							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">${dto.product_summary}
 						</td>
 					</tr>
 					

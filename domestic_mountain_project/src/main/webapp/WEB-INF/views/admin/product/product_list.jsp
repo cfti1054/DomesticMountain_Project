@@ -132,8 +132,6 @@ function changeSubList() {
 			<div>
 				<ul class="tabs">
 					<li id="tab-all" data-category="all">등산장비 목록</li>
-					<li id="tab-special" data-category="special">특가 상품</li>
-					<li id="tab-order" data-category="order">주문현황</li>
 					<li id="tab-review" data-category="review">상품리뷰 및 문의</li>
 				</ul>
 			</div>
