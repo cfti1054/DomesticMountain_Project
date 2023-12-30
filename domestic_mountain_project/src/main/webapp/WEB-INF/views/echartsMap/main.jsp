@@ -311,7 +311,7 @@
 						<p>
 							${dto.main_content}<br>
 						</p>
-						<a href="#"># 상세보기</a>
+						<a href="${pageContext.request.contextPath}/emaps/article"># 상세보기</a>
 					</div>
 				</li>
 					

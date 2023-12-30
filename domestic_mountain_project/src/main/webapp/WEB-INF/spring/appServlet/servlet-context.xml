@@ -79,7 +79,7 @@
     		<exclude-mapping path="/user/pwdFind"/>
     		
     		
-    		<exclude-mapping path="/emaps/main"/>
+    		<exclude-mapping path="/emaps/**"/>
 
     		<exclude-mapping path="/services/**"/>
     		<exclude-mapping path="/faq/**"/>

@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+
+.maps-sub-title {
+	display: flex;
+	margin: 50px 0 100px 0;
+	
+}
+
+.maps-sub-title .mountain-img {
+	width: 400px;
+	height: 400px;
+}
+.maps-sub-title .mountain-img img {
+	width: 400px;
+	height: 400px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.maps-sub-title .mountain-title {
+	width: 800px;
+}
+
+.maps-sub-title .mountain-title .name-kor h2 {
+	margin-top: 100px;
+	font-size: 60px;
+}
+.maps-sub-title .mountain-title .name-chi h6 {
+	margin-top: 10px;
+	font-size: 20px;
+}
+.maps-sub-title .mountain-title .mountain_height p {
+	margin-top: 40px;
+	font-size: 20px;
+}
+
+.maps-sub-title .mountain-title .name-kor h2,
+.maps-sub-title .mountain-title .name-chi *,
+.maps-sub-title .mountain-title .mountain_height p {
+	text-align: center;
+}
+
+.maps-container .mountain-sub h3 {
+	padding-top: 0;
+	margin-bottom: 20px;
+	font-size: 1.829em;
+	font-weight: 700;
+    color: #111;
+    clear: both;
+}
+
+.maps-container .mountain-sub p {
+	margin-bottom: 50px;
+	font-size: 20px;
+}
