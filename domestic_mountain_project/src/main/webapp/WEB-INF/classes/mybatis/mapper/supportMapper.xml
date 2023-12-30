@@ -88,4 +88,60 @@
 		WHERE faq_num = #{faq_num}
 	</select>
 	
+	
+	<select id="list_inquiry_category">
+		SELECT inquiry_category_num, inquiry_category_name, u.user_name AS inquiry_category_reg_id, TO_CHAR(inquiry_category_reg_date,'YYYY-MM-DD') AS inquiry_category_reg_date, inquiry_category_visible
+		FROM inquiry_category i
+		JOIN user1 u ON i.inquiry_category_reg_id = u.userIdx
+	</select>
+	
+	<select id="list_inquiry_board">
+		SELECT inquiry_board_num,ic.category_name, inquiry_board_title, inquiry_board_content, u.user_name AS inquiry_board_reg_id, TO_CHAR(inquiry_board_reg_date,'YYYY-MM-DD') AS inquiry_board_reg_date, inquiry_board_status
+		FROM inquiry_board i
+		JOIN user1 u ON i.inquiry_board_reg_id = u.userIdx
+      	JOIN inquiry_category ic ON ic.inquiry_category_num = i.inquiry_category_num
+	</select>
+	
+	<select id="list_inquiry_answer">
+		SELECT inquiry_answer_num, inquiry_board_num, b.inquiry_board_title, b.inquiry_board_content, u.user_name AS inquiry_answer_reg_id, inquiry_answer_title, inquiry_answer_content, TO_CHAR(inquiry_answer_reg_date,'YYYY-MM-DD') AS inquiry_answer_reg_date, TO_CHAR(inquiry_answer_update_date, 'YYYY-MM-DD') AS inquiry_answer_update_date
+		FROM inquiry_answer i
+		JOIN user1 u ON i.inquiry_board_reg_id = u.userIdx
+		JOIN inquiry_board b ON i.inquiry_board_num = b.inquiry_board_num		
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

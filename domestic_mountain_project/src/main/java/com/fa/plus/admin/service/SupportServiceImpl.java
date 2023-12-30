@@ -171,6 +171,30 @@ public class SupportServiceImpl implements SupportService {
 		return dto;
 	}
 
+	@Override
+	public List<Support> list_inquiry_category() throws Exception {
+		List<Support> list = null;
+		
+		try {
+			list = mapper.list_inquiry_category();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Support> list_inquiry_board() throws Exception {
+		List<Support> list = null;
+		
+		try {
+			list = mapper.list_inquiry_board();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	
 
 	

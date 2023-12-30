@@ -34,16 +34,42 @@ public class SupportController {
 	@Autowired
 	private MyUtil myUtil;
 	
-	@GetMapping("inquiry_list")
-	public String inquiry_list() {
-		// 1:1문의 리스트
+	
+	@GetMapping("inquiry_category_list")
+	public String inquiry_category_list(HttpServletRequest req, Model model) {
+		List<Support> list = null;
+		
+		try {
+			list = service.list_inquiry_category();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("list", list);
 		
 		
 		
-		return ".admin.support.inquiry_list";
+		return ".admin.support.inquiry_category";
+	}
+	
+	@GetMapping("inquiry_board_list")
+	public String inquiry_board_list(HttpServletRequest req, Model model) {
+		List<Support> list = null;
+		
+		try {
+			list = service.list_inquiry_board();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("list", list);
+		
+		return ".admin.support.inquiry_board";
 	}
 	
 
+	
+	
 	public String inquiry_answer() {
 		// 1:1 문의 답변 폼
 		
@@ -254,5 +280,7 @@ public class SupportController {
 			
 			return "admin/support/write_modal";
 		}
+		
+		
 	
 }

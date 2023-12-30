@@ -63,21 +63,21 @@
 				<h1 class="mt-4">고객지원</h1>
 				<ol class="breadcrumb mb-4">
 					<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-					<li class="breadcrumb-item active">FAQ 카테고리</li>
+					<li class="breadcrumb-item active">1:1 문의 카테고리</li>
 				</ol>
 				<div class="card mb-4">
 					<div class="card-body">
-						고객이 자주 묻는 질문들의 카테고리를 추가 / 수정할 수 있습니다.
+						1:1 문의들의 카테고리를 추가 / 수정할 수 있습니다.
 					</div>
 				</div>
 				<div class="card mb-4">
 					<div class="card-header">
-						<i class="fas fa-table me-1"></i> FAQ 카테고리
+						<i class="fas fa-table me-1"></i> 1:1 문의 카테고리
 					</div>
 
 					<div class="card-body">
 						<form id="faq">
-							<table id="faq_category_table" class="display"
+							<table id="inquiry_category_table" class="display"
 								style="width: 100%; text-align: center">
 								<thead>
 									<tr>
@@ -103,11 +103,11 @@
 									<c:forEach var="dto" items="${list}" varStatus="status">
 
 										<tr>
-											<td>${dto.faq_category_num}</td>
-											<td>${dto.category_name}</td>
-											<td>${dto.category_reg_id}</td>
-											<td>${dto.category_reg_date}</td>
-											<td>${dto.category_visible == 1 ? "O":"X"}</td>
+											<td>${dto.inquiry_category_num}</td>
+											<td>${dto.inquiry_category_name}</td>
+											<td>${dto.inquiry_category_reg_id}</td>
+											<td>${dto.inquiry_category_reg_date}</td>
+											<td>${dto.inquiry_category_visible == 1 ? "O":"X"}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -123,7 +123,7 @@
 
 					</div>
 				</div>
-				<div id="faq-dialog" style="display: none;"></div>
+				<div id="inquiry-dialog" style="display: none;"></div>
 			</div>
 
 
@@ -156,9 +156,9 @@
         	 }
              
         $(document).ready(function() {
-        	var oTable = $('#faq_category_table').DataTable();
+        	var oTable = $('#inquiry_category_table').DataTable();
 
-        	$('#faq_category_table tbody').on( 'click', 'tr', function () {
+        	$('#inquiry_category_table tbody').on( 'click', 'tr', function () {
         	    $(this).toggleClass('selected');
         	    var pos = oTable.row(this).index();
         	    var row = oTable.row(pos).data();
@@ -166,7 +166,7 @@
 
         	$("#visible_button").on("click",function() {
         		var oAll =[];
-        	 $('#faq_category_table tbody tr.selected').each(function(){
+        	 $('#inquiry_category_table tbody tr.selected').each(function(){
         		 var pos = oTable.row(this).index();
         		 var row = oTable.row(pos).data();
         	    oAll.push(row);
@@ -180,7 +180,7 @@
         	 	}
         	 	
         	 	
-        	 		 let dlg = $("#faq-dialog").dialog({
+        	 		 let dlg = $("#inquiry-dialog").dialog({
              			autoOpen: false,
              			modal: true,
              			buttons: {

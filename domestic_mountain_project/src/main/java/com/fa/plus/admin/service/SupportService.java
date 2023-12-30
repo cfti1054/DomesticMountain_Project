@@ -22,5 +22,10 @@ public interface SupportService {
 	public List<Support> list_faq_board();
 	
 	public Support show_content(String num) throws Exception;
+	
+	
+	/* 											1:1 문의									*/
+	public List<Support> list_inquiry_category() throws Exception;
+	public List<Support> list_inquiry_board() throws Exception;
 
 }
