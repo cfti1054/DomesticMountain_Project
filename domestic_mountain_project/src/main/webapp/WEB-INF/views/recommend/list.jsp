@@ -369,9 +369,6 @@
 	overflow: hidden;
 	float: left;
 	position: relative;
-	width: 200px;
-	height: 300px;
-	margin-left: 32px;
 }
 
 .article-album-sub .album-img {
