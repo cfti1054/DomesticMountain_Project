@@ -53,4 +53,17 @@ public class EchartMapServiceImpl implements EchartMapService {
 		return dto;
 	}
 
+	@Override
+	public EchartMap findById(long num) {
+		EchartMap dto = null;
+		
+		try {
+			dto = mapper.findById(num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
 }

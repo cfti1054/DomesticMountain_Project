@@ -52,4 +52,12 @@
 		WHERE mountain_num = #{mountain_num}
 	</select>
 
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.EchartMap">
+		SELECT mountain_name, mountain_num, mountain_chinese,
+			mountain_subtitle, mountain_location,
+			mountain_manage, height, main_content, sub_content, mountain_img
+		FROM mountain
+		WHERE mountain_num = #{mountain_num}
+	</select>
+
 </mapper>

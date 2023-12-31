@@ -13,4 +13,6 @@ public interface EchartMapMapper {
 	public int dataCount(Map<String, Object> map);
 	
 	public EchartMap findByName(long num);
+	
+	public EchartMap findById(long num);
 }

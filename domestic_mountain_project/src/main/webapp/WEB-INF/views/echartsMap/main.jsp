@@ -310,7 +310,7 @@
 						<p>
 							${dto.main_content}<br>
 						</p>
-						<a href="${pageContext.request.contextPath}/emaps/article"># 상세보기</a>
+						<a href="${pageContext.request.contextPath}/emaps/article?mountain_num=${dto.mountain_num}"># 상세보기</a>
 					</div>
 				</li>
 					

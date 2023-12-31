@@ -60,6 +60,7 @@ public class EChartsMapController {
 		
 		String query = "";
 		String listUrl = cp + "/emaps/main";
+		String articleUrl = cp + "/emaps/article";
 		
 		if (kwd.length() != 0) {
 			query =  "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
@@ -67,10 +68,12 @@ public class EChartsMapController {
 		
 		if (query.length() != 0) {
 			listUrl = listUrl + "?" + query;
+			articleUrl = cp + "/emaps/article?" + query;
 		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("articleUrl", articleUrl);
 		
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
@@ -82,7 +85,28 @@ public class EChartsMapController {
 	}
 
 	@GetMapping("article")
-	public String article() throws Exception {
+	public String article(
+			@RequestParam long mountain_num,
+			@RequestParam(defaultValue = "mountain_name") String schType,
+			@RequestParam(defaultValue = "") String kwd,
+			Model model
+			) throws Exception {
+		
+		kwd = URLDecoder.decode(kwd, "utf-8");
+		
+		String query = "";
+		
+		if (kwd.length() != 0) {
+			query += "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "UTF-8");
+		}
+		
+		EchartMap dto = service.findById(mountain_num);
+		if (dto == null) {
+			return "redirect:/emaps/main?" + query;
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("query", query);
 		
 		return ".echartsMap.article";
 	}
