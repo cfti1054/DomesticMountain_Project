@@ -607,23 +607,24 @@ function searchList() {
 					</div>
 				</div>
 
-
+				
 
 				<div class="notice-container">
+				<div class="col-auto me-auto">
+	            	${dataCount}개(${page}/${total_page} 페이지)
+	            </div>
+	            <c:forEach var="dto" items="${list}" varStatus="status">
 					<ul class="article-movie-sub">
 						<li>
 							<div class="card_area">
 								<div class="con">
 									<div class="con_top">
 										<div class="tit_area">
-											<a href="#" class="tit"> <span class="inner"> <strong>제목입니당</strong>
+											<a href="#" class="tit"> <span class="inner"> <strong>${dto.post_title}</strong>
 											</span>
 											</a>
 										</div>
-										<a href="#" class="txt">세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부
-											설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-											입니다~~~세부설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-											입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~ </a>
+										<a href="#" class="txt">${dto.post_content} </a>
 									</div>
 
 									<div class="con_bottom">
@@ -632,24 +633,25 @@ function searchList() {
 												<table role="presentation">
 													<tbody>
 														<tr>
-															<td class="p-nick"><a class="m-tcol-c" onclick="">관리자</a>
+															<td class="p-nick"><a class="m-tcol-c" onclick="">${dto.user_name}</a>
 															</td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
 											<div class="date_num">
-												<span class="date">2021.12.31</span> <span class="num">조회수
-													2,509</span> <span class="comment_ico">댓글</span> <em class="num">7</em>
+												<span class="date">${dto.post_reg_date}</span> <span class="num">조회수
+													${dto.post_hit_count}</span> <span class="comment_ico">댓글</span> <em class="num">${dto.replyCount}</em>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="movie-img">
+							
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/hiking.png"
-									width="200" height="120" alt="썸네일 이미지"> <span class="num">7<span
+									src="${pageContext.request.contextPath}/resources/images/${dto.file_name}"
+									width="200" height="120" alt="썸네일 이미지"> <span class="num">${dto.post_fileCount}<span
 										class="blind">개의 추가 이미지가 있습니다</span></span>
 								</a>
 							</div>
@@ -657,7 +659,10 @@ function searchList() {
 
 
 					</ul>
-					<div class="page-navigation">1 2 3</div>
+					</c:forEach>
+					<div class="page-navigation">
+						${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
+					</div>
 
 					<div class="row board-list-footer">
 						<div class="col">
