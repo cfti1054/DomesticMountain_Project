@@ -146,6 +146,9 @@
 	.article-movie-sub dl {
 	list-style: none;
 	font-size: 13px;
+	
+    display: flex;
+    justify-content: space-between;
 }
 
 .article-movie-sub .con {
@@ -274,7 +277,7 @@
 .article-movie-sub .movie-img {
 	display: table-cell;
 	position: relative;
-	width: 300px;
+	/* width: 300px; */
 	height: 120px;
 	padding-left: 35px;
 	vertical-align: top;
@@ -343,7 +346,6 @@
 }
 
 .article-movie-sub li:after {
-	content: '';
 	display: block;
 	clear: both;
 }
@@ -623,6 +625,46 @@ function searchList() {
 											설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
 											입니다~~~세부설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
 											입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~ </a>
+									</div>
+
+									<div class="con_bottom">
+										<div class="user_info">
+											<div class="pers_nick_area">
+												<table role="presentation">
+													<tbody>
+														<tr>
+															<td class="p-nick"><a class="m-tcol-c" onclick="">관리자</a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="date_num">
+												<span class="date">2021.12.31</span> <span class="num">조회수
+													2,509</span> <span class="comment_ico">댓글</span> <em class="num">7</em>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="movie-img">
+								<a href="#"> <img
+									src="${pageContext.request.contextPath}/resources/images/hiking.png"
+									width="200" height="120" alt="썸네일 이미지"> <span class="num">7<span
+										class="blind">개의 추가 이미지가 있습니다</span></span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="card_area">
+								<div class="con">
+									<div class="con_top">
+										<div class="tit_area">
+											<a href="#" class="tit"> <span class="inner"> <strong>제목입니당</strong>
+											</span>
+											</a>
+										</div>
+										<a href="#" class="txt"></a>
 									</div>
 
 									<div class="con_bottom">
