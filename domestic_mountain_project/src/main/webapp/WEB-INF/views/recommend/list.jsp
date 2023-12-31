@@ -732,35 +732,39 @@ function searchList() {
 
 					<div class="section">
 						<div class="article-album-sub">
-							<ul>
-								<li><a href="#" class="album-img"> <img width="200"
-										height="200"
-										src="${pageContext.request.contextPath}/resources/images/hiking.png"
-										alt="">
-								</a>
-
-									<dl>
-										<dt>
-											<a href="#" class="tit"> <span class="inner"> <span
-													class="ellipsis">데일리룩</span>
-											</span>
-											</a> <a href="#" class="m-tcol-p"> <span class="num">[7]</span>
-											</a>
-										</dt>
-
-										<dd class="p-nick">
-											<div class="pers_nick_area">
-												<span>작성자</span>
-											</div>
-										</dd>
-
-										<dd class="date_num">
-											<span class="date">2023-11-11</span> <span class="num">조회:
-												8</span>
-										</dd>
-									</dl></li>
-							</ul>
-							<div class="page-navigation">1 2 3</div>
+							<c:forEach var="dto" items="${list}" varStatus="status">
+								<ul>
+									<li><a href="#" class="album-img"> <img width="200"
+											height="200"
+											src="${pageContext.request.contextPath}/resources/images/${dto.file_name}"
+											alt="">
+									</a>
+	
+										<dl>
+											<dt>
+												<a href="#" class="tit"> <span class="inner"> <span
+														class="ellipsis">${dto.post_title}</span>
+												</span>
+												</a> <a href="#" class="m-tcol-p"> <span class="num">[${dto.replyCount}]</span>
+												</a>
+											</dt>
+	
+											<dd class="p-nick">
+												<div class="pers_nick_area">
+													<span>${dto.user_name}</span>
+												</div>
+											</dd>
+	
+											<dd class="date_num">
+												<span class="date">${dto.post_reg_date}</span> <span class="num">조회:
+													${dto.post_hit_count}</span>
+											</dd>
+										</dl></li>
+								</ul>
+							</c:forEach>
+							<div class="page-navigation">
+								${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
+							</div>
 
 
 							<div class="row board-list-footer">
@@ -830,35 +834,37 @@ function searchList() {
 					<div class="notice-body">
 						<div class="body-main">
 							<div class="row board-list-header">
-								<div class="col-auto me-auto">10개(1/2 페이지)</div>
+								<div class="col-auto me-auto">${dataCount}개(${page}/${total_page} 페이지)</div>
 								<div class="col-auto">&nbsp;</div>
 							</div>
-
-							<table class="table table-hover board-list">
-								<thead class="table-light">
-									<tr>
-										<th width="60">번호</th>
-										<th>제목</th>
-										<th width="100">작성자</th>
-										<th width="100">작성일</th>
-										<th width="70">조회수</th>
-									</tr>
-								</thead>
-								<tbody>
-
-
-									<tr>
-										<td>234</td>
-										<td class="left"><a href="#" class="text-reset">내용입니다.</a>
-											<span class="badge text-bg-info">New</span></td>
-										<td>관리자</td>
-										<td>2023-11-11</td>
-										<td>11</td>
-									</tr>
-								</tbody>
-							</table>
-
-							<div class="page-navigation">1 2 3</div>
+							<c:forEach var="dto" items="${list}" varStatus="status">
+								<table class="table table-hover board-list">
+									<thead class="table-light">
+										<tr>
+											<th width="60">번호</th>
+											<th>제목</th>
+											<th width="100">작성자</th>
+											<th width="100">작성일</th>
+											<th width="70">조회수</th>
+										</tr>
+									</thead>
+									<tbody>
+	
+	
+										<tr>
+											<td>${dto.post_num }</td>
+											<td class="left"><a href="#" class="text-reset">${dto.post_title}</a>
+												<span class="badge text-bg-info">New</span></td>
+											<td>${dto.user_name}</td>
+											<td>${dto.post_reg_date}</td>
+											<td>${dto.post_hit_count}</td>
+										</tr>
+									</tbody>
+								</table>
+							</c:forEach>
+							<div class="page-navigation">
+								${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
+							</div>
 
 							<div class="row board-list-footer">
 								<div class="col">
