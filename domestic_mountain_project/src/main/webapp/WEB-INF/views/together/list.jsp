@@ -136,6 +136,9 @@
 	.article-movie-sub dl {
 	list-style: none;
 	font-size: 13px;
+	
+	display: flex;
+    justify-content: space-between;
 }
 
 .article-movie-sub .con {
@@ -271,7 +274,7 @@
 .article-movie-sub .movie-img {
 	display: table-cell;
 	position: relative;
-	width: 200px;
+	/* width: 200px; */
 	height: 120px;
 	padding-left: 35px;
 	vertical-align: top;
@@ -340,7 +343,6 @@
 }
 
 .article-movie-sub li:after {
-	content: '';
 	display: block;
 	clear: both;
 }
