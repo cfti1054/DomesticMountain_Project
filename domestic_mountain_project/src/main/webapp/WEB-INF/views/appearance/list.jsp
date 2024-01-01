@@ -15,227 +15,6 @@
 	margin: auto;
 }
 
-.aside {
-	box-shadow: 2px 2px 2px 2px #e2e2e2;
-}
-
-.aside-box {
-	width: 270px;
-	float: left;
-	margin-right: 100px;
-}
-
-#scroll {
-	width: 270px;
-	/*position: relative;*/
-	position: absolute;
-	background-color: #f5f6ff;
-	border-radius: 0.8em;
-	top: 120px;
-}
-
-.aside .aside-wi, .amain {
-	margin: 30px;
-}
-
-.aside .submenu-main, .amain-main {
-	padding: 0 0 10px 10px;
-	border-bottom: 2px solid #3a3a3a;
-	font-size: xx-large;
-	color: #6557be;
-}
-
-.aside h3 {
-	font-size: 18px;
-	color: #000;
-	padding: 10px 0 0 10px;
-	font-weight: 700;
-}
-
-.aside ul li {
-	padding-bottom: 5px;
-}
-
-.aside ul li a {
-	color: black;
-}
-
-.aside ul li a:hover {
-	color: gray;
-}
-
-.eq1 {
-	font-weight: 900;
-}
-
-.aside-box .aside ul .eq1 a {
-	color: hsl(212, 75%, 56%);
-}
-
-.contentWrap {
-	width: 1100px;
-	float: right;
-}
-
-.contentWrap .amain h1 {
-	display: flex;
-	justify-content: space-between;
-}
-
-.amain-main a>span {
-	font-size: 18px;
-	color: gray;
-	margin: 10px 0 0 20px;
-}
-
-.amain-main span {
-	font-size: 14px;
-	color: gray;
-	margin: 15px 0 0 20px;
-}
-
-/*=============== form ===============*/
-.sort_form {
-	display: flex;
-	align-items: center;
-}
-
-.sort_form a {
-	size: 10px;
-	margin-left: 10px;
-	color: #a69fd6;
-}
-
-.sort_form a:hover {
-	color: hsl(212, 75%, 56%);
-}
-/*=============== notice ===============*/
-.notice-container {
-	margin: 0 30px;
-}
-
-.page-navigation {
-    text-align: center;
-    clear:both;
-}
-
-.article-album-sub {
-    margin-top: 50px;
-}
-
-.article-album-sub ul, dl {
-    list-style: none;
-}
-
-.article-album-sub ul, 
-.article-album-sub li, 
-.article-album-sub dt, 
-.article-album-sub dd, 
-.article-album-sub dl {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
-}
-
-.article-album-sub li {
-    overflow: hidden;
-    float: left;
-    position: relative;
-}
-
-.article-album-sub .album-img {
-    display: block;
-    width: 200px;
-    height: 200px;
-}
-
-.article-album-sub a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.article-album-sub img {
-    vertical-align: top;
-    border: 0;
-    aspect-ratio: 200 / 200;
-}
-
-.article-album-sub dl {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
-
-.article-album-sub dt {
-    display: table;
-    padding-top: 8px;
-}
-
-.article-album-sub .tit {
-    color: #222;
-}
-.article-album-sub dt a {
-    display: table-cell;
-    font-size: 13px;
-    font-weight: bold;
-    vertical-align: top;
-}
-.article-album-sub .tit .inner {
-    display: table;
-    table-layout: fixed;
-}
-
-.article-album-sub .tit .ellipsis {
-    display: block;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    max-height: 18px;
-    white-space: normal;
-    word-break: break-all;
-    word-wrap: break-word;
-    word-break: break-word;
-}
-.article-album-sub .p-nick {
-    position: relative;
-    padding-top: 7px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.article-album-sub dd .pers_nick_area span {
-    color: #666;
-}
-
-.article-album-sub .date_num {
-    color: #999;
-}
-.article-album-sub .num {
-    padding-left: 5px;
-}
-.m-tcol-p .num {
-    color: #ff2f3b;
-}
-
-/* ================= 하단 버튼 ================= */
-.article-album-sub .row {
-	width: auto;
-	display: flex;
-	justify-content: end;
-}
-
-.btn-light {
-	background-color: #ada7e4;
-}
-
-.article-album-sub .row .col-auto .btn-light, .article-album-sub .row i
-	{
-	color: white;
-}
 </style>
 
 
@@ -272,21 +51,27 @@
 						<a>Share Tips</a>
 					</h3>
 					<ul>
-						<li class=""><a href="${pageContext.request.contextPath}/share/list">&gt; 유용한 정보</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/share/list">&gt; 유용한
+								정보</a></li>
 					</ul>
 
 					<h3>
 						<a>Walk &amp; Climbing</a>
 					</h3>
 					<ul>
-						<li class="eq1"><a href="${pageContext.request.contextPath}/appearance/list">&gt; 회원들의 모습</a></li>
+						<li class="eq1"><a
+							href="${pageContext.request.contextPath}/appearance/list">&gt;
+								회원들의 모습</a></li>
 					</ul>
 
 					<h3>
 						<a>Look &amp; Style</a>
 					</h3>
 					<ul>
-						<li class=""><a href="${pageContext.request.contextPath}/ootd/list">&gt; 스트릿 스냅 (OOTD)</a></li>
+						<li class=""><a
+							href="${pageContext.request.contextPath}/ootd/list">&gt; 스트릿
+								스냅 (OOTD)</a></li>
 					</ul>
 
 				</div>
@@ -302,7 +87,7 @@
 				</h1>
 			</div>
 
-			
+
 
 
 			<div class="notice-container">
@@ -313,8 +98,10 @@
 
 
 
-							<li><a href="#" class="album-img"> <img width="200"
-									height="200" src="${pageContext.request.contextPath}/resources/images/hiking.png" alt="">
+							<li class="show-2-li"><a href="#" class="album-img"> <img
+									width="200" height="200"
+									src="${pageContext.request.contextPath}/resources/images/hiking.png"
+									alt="">
 							</a>
 
 								<dl>
@@ -322,9 +109,7 @@
 										<a href="#" class="tit"> <span class="inner"> <span
 												class="ellipsis">데일리룩</span>
 										</span>
-										</a>
-										<a href="#" class="m-tcol-p">
-											<span class="num">[7]</span>
+										</a> <a href="#" class="m-tcol-p"> <span class="num">[7]</span>
 										</a>
 									</dt>
 
@@ -343,105 +128,9 @@
 
 
 
-
-							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/bg-image.png" alt="">
-							</a>
-
-								<dl>
-									<dt>
-										<a href="#"> <span class="inner">오늘의 데일리룩</span>
-										</a>
-
-									</dt>
-
-									<dd class="p-nick">
-										<div class="pers_nick_area">
-											<span>작성자</span>
-										</div>
-									</dd>
-
-									<dd class="date_num">
-										<span class="date">2023-11-11</span> <span class="num">조회:
-											8</span>
-									</dd>
-								</dl></li>
-
-
-							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
-							</a>
-
-								<dl>
-									<dt>
-										<a href="#"> <span class="inner">오늘의 데일리룩</span>
-										</a>
-
-									</dt>
-
-									<dd class="p-nick">
-										<div class="pers_nick_area">
-											<span>작성자</span>
-										</div>
-									</dd>
-
-									<dd class="date_num">
-										<span class="date">2023-11-11</span> <span class="num">조회:
-											8</span>
-									</dd>
-								</dl></li>
-
-
-							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/hiking.png" alt="">
-							</a>
-
-								<dl>
-									<dt>
-										<a href="#"> <span class="inner">오늘의 데일리룩</span>
-										</a>
-
-									</dt>
-
-									<dd class="p-nick">
-										<div class="pers_nick_area">
-											<span>작성자</span>
-										</div>
-									</dd>
-
-									<dd class="date_num">
-										<span class="date">2023-11-11</span> <span class="num">조회:
-											8</span>
-									</dd>
-								</dl></li>
-
-
-
-							<li><a href="#"> <img width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/hiking.png" alt="">
-							</a>
-
-								<dl>
-									<dt>
-										<a href="#"> <span class="inner">오늘의 데일리룩</span>
-										</a>
-
-									</dt>
-
-									<dd class="p-nick">
-										<div class="pers_nick_area">
-											<span>작성자</span>
-										</div>
-									</dd>
-
-									<dd class="date_num">
-										<span class="date">2023-11-11</span> <span class="num">조회:
-											8</span>
-									</dd>
-								</dl></li>
 						</ul>
 						<div class="page-navigation">1 2 3</div>
-						
+
 						<div class="row board-list-footer">
 							<div class="col">
 								<button type="button" class="btn btn-light" onclick="#"
@@ -450,7 +139,7 @@
 								</button>
 							</div>
 							<div class="col text-center">&nbsp;</div>
-							
+
 
 							<div class="col-6 text-end">
 								<form class="row text-end-row" name="searchForm" action="#"
@@ -481,13 +170,13 @@
 								</form>
 							</div>
 						</div>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 		</div>
 	</div>
 </section>
