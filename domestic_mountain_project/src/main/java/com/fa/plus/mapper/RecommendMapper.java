@@ -17,4 +17,6 @@ public interface RecommendMapper {
 	public Recommend findById(long num);
 	public Recommend findByPrev(Map<String, Object> map);
 	public Recommend findByNext(Map<String, Object> map);
+	
+	public void updateHitCount(long num) throws SQLException;
 }

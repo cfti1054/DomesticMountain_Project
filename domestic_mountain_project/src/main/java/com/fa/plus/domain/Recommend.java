@@ -3,6 +3,17 @@ package com.fa.plus.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Recommend {
+	
+	private long num;
+	
+	public long getNum() {
+		return num;
+	}
+
+	public void setNum(long num) {
+		this.num = num;
+	}
+
 	// post 테이블
 	private long post_num;
 	private long community_category_num;

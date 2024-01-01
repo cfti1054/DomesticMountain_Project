@@ -8,27 +8,27 @@
 		VALUES (photo_seq.NEXTVAL, #{userId}, #{subject},  
 			#{imageFilename}, #{content}, SYSDATE)
 	</insert>
-	
+	-->
 	<sql id="where-list">
 		<if test="schType=='all'">
-			( INSTR(subject, #{kwd}) &gt; 0
-				OR INSTR(content, #{kwd}) &gt; 0 )
+			( INSTR(post_title, #{kwd}) &gt; 0
+				OR INSTR(post_content, #{kwd}) &gt; 0 )
 		</if>
-		<if test="schType=='subject'">
-			INSTR(subject, #{kwd}) &gt; 0
+		<if test="schType=='post_title'">
+			INSTR(post_title, #{kwd}) &gt; 0
 		</if>
-		<if test="schType=='content'">
-			INSTR(content, #{kwd}) &gt; 0 
+		<if test="schType=='post_content'">
+			INSTR(post_content, #{kwd}) &gt; 0 
 		</if>
-		<if test="schType=='userName'">
-			userName=#{kwd}
+		<if test="schType=='user_name'">
+			user_name=#{kwd}
 		</if>
-		<if test="schType=='reg_date'">
-			( TO_CHAR(p.reg_date, 'YYYY-MM-DD') = #{kwd}
-				OR TO_CHAR(p.reg_date, 'YYYYMMDD') = #{kwd} )
+		<if test="schType=='post_reg_date'">
+			( TO_CHAR(p.post_reg_date, 'YYYY-MM-DD') = #{kwd}
+				OR TO_CHAR(p.post_reg_date, 'YYYYMMDD') = #{kwd} )
 		</if>
 	</sql>
-	-->	
+	
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM post p
@@ -66,52 +66,56 @@
 	</select>
 
 
-	<!-- 
-	<select id="findById" parameterType="Long" resultType="com.sp.app.domain.Photo">
-		SELECT num, p.userId, userName, subject, imageFilename, 
-			content, reg_date
-		FROM photo p
-		JOIN member1 m ON p.userId = m.userId
-		WHERE num=#{num}
+	<!-- 글보기 -->
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Recommend">
+		SELECT post_num, p.post_reg_id, user_name, post_title, post_hit_count,
+			post_content, post_reg_date
+		FROM post p
+		JOIN user1 m ON p.post_reg_id = m.useridx
+		WHERE post_num=#{num}
 	</select>
-	 -->
+
 	 
-	<!-- 조회수 증가 --> <!--
+	
 	<update id="updateHitCount" parameterType="Long">
-		UPDATE bbs SET hitCount=hitCount+1 WHERE num = #{num}
+		UPDATE post SET post_hit_count=post_hit_count+1 WHERE post_num = #{num}
 	</update>
-	-->
 	
-	<!-- 이전글 --> <!-- 
-	<select id="findByPrev" parameterType="map" resultType="com.sp.app.domain.Photo">
-		SELECT num, subject
-		FROM photo p
-		JOIN member1 m ON p.userId=m.userId
+	
+	<!-- 이전글 -->
+	<select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Recommend">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 m ON p.post_reg_id = m.useridx
+		
 		<where>
 			<if test="kwd != null and kwd != '' ">
 				<include refid="where-list"/>
 			</if>
-			AND (num &gt; #{num})
+			AND (post_num &gt; #{num})
 		</where>
-		ORDER BY num ASC
+		 
+		ORDER BY post_num ASC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
-	 -->
-	<!-- 다음글 --> <!-- 
-	<select id="findByNext" parameterType="map" resultType="com.sp.app.domain.Photo">
-		SELECT num, subject
-		FROM photo p
-		JOIN member1 m ON p.userId=m.userId
+	
+	<!-- 다음글 -->
+	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Recommend">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 m ON p.post_reg_id = m.useridx
+		 
 		<where>
 			<if test="kwd != null and kwd != '' ">
 				<include refid="where-list"/>
 			</if>
-			AND (num &lt; #{num})
+			AND (post_num &lt; #{num})
 		</where>
-		ORDER BY num DESC
+		 
+		ORDER BY post_num DESC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
-	
+	<!--
 	<update id="updatePhoto" parameterType="com.sp.app.domain.Photo">
 		UPDATE photo SET subject=#{subject}, imageFilename=#{imageFilename},
 			content=#{content}

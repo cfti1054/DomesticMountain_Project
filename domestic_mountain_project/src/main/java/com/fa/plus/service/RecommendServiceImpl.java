@@ -138,4 +138,16 @@ public class RecommendServiceImpl implements RecommendService{
 		
 	}
 
+	@Override
+	public void updateHitCount(long num) throws Exception {
+		// 조회수 증가
+				try {
+					mapper.updateHitCount(num);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw e;
+				}
+		
+	}
+
 }

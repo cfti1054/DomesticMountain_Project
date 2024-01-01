@@ -14,4 +14,6 @@ public interface RecommendService {
 	public Recommend findByNext(Map<String, Object> map);
 	public void updateRecommend(Recommend dto, String pathname) throws Exception;
 	public void deleteRecommend(long num, String pathname) throws Exception;
+	
+	public void updateHitCount(long num) throws Exception;
 }

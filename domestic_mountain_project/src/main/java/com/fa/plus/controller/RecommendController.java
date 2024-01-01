@@ -92,5 +92,46 @@ public class RecommendController {
 
 		return ".recommend.list";
 	}
+	
+	@GetMapping("article")
+	public String article(@RequestParam long num,
+			@RequestParam String page,
+			@RequestParam(defaultValue = "all") String schType,
+			@RequestParam(defaultValue = "") String kwd,
+			Model model) throws Exception {
+
+		kwd = URLDecoder.decode(kwd, "utf-8");
+
+		String query = "page=" + page;
+		if (kwd.length() != 0) {
+			query += "&schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "UTF-8");
+		}
+		service.updateHitCount(num);
+		
+		Recommend dto = service.findById(num);
+		if (dto == null) {
+			return "redirect:/recommend/list?" + query;
+		}
+
+		dto.setPost_content(dto.getPost_content().replaceAll("\n", "<br>"));
+
+		// 이전 글, 다음 글
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("schType", schType);
+		map.put("kwd", kwd);
+		map.put("num", num);
+
+		Recommend prevDto = service.findByPrev(map);
+		Recommend nextDto = service.findByNext(map);
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("prevDto", prevDto);
+		model.addAttribute("nextDto", nextDto);
+
+		model.addAttribute("page", page);
+		model.addAttribute("query", query);
+
+		return ".recommend.article";
+	}
 }
 

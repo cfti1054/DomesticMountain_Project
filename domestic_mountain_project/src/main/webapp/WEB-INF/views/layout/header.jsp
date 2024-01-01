@@ -6,7 +6,7 @@
 <!--==================== SEARCH ====================-->
 <div class="search" id="search">
 	<form action="" class="search__form">
-		<i class="ri-search-line search__icon"></i> <input type="search"
+		<i class="ri-search-line search__icon"></i> <input type="search" id="search"
 			placeholder="What are you looking for?" class="search__input">
 	</form>
 

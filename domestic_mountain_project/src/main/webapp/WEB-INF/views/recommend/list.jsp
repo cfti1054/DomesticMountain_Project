@@ -605,7 +605,7 @@ function searchList() {
 								class="fa-solid fa-list-ul fa-2x show-3"></i></span></a>
 					</div>
 				</div>
-
+				
 				
 
 				<div class="notice-container">
@@ -613,17 +613,19 @@ function searchList() {
 	            	${dataCount}개(${page}/${total_page} 페이지)
 	            </div>
 	            <c:forEach var="dto" items="${list}" varStatus="status">
-					<ul class="article-movie-sub">
+					<ul class="article-movie-sub" onclick="location.href='${articleUrl}&num=${dto.post_num}';">
 						<li>
 							<div class="card_area">
 								<div class="con">
 									<div class="con_top">
 										<div class="tit_area">
-											<a href="#" class="tit"> <span class="inner"> <strong>${dto.post_title}</strong>
-											</span>
-											</a>
+										    <span class="inner">
+										        <strong>${dto.post_title}</strong>
+										    </span>
 										</div>
-										<a href="#" class="txt">${dto.post_content} </a>
+
+
+										<p class="txt">${dto.post_content} </p>
 									</div>
 
 									<div class="con_bottom">
@@ -632,7 +634,7 @@ function searchList() {
 												<table role="presentation">
 													<tbody>
 														<tr>
-															<td class="p-nick"><a class="m-tcol-c" onclick="">${dto.user_name}</a>
+															<td class="p-nick"><a class="m-tcol-c" onclick="location.href='${articleUrl}&post_num=${dto.post_num}';">${dto.user_name}</a>
 															</td>
 														</tr>
 													</tbody>
@@ -674,10 +676,10 @@ function searchList() {
 
 
 						<div class="col-6 text-end">
-							<form class="row text-end-row" name="searchForm" action="#"
+							<form class="row text-end-row" name="searchForm" action="/recommend/list"
 								method="post">
 								<div class="col-auto p-1">
-									<select name="schType" class="form-select">
+									<select id="schType1" name="schType" class="form-select">
 										<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
 										<option value="all">제목+내용</option>
 										<option value="reg_date">등록일</option>
@@ -687,7 +689,7 @@ function searchList() {
 									</select>
 								</div>
 								<div class="col-auto p-1">
-									<input type="text" name="kwd" value="${kwd}"
+									<input type="text" id="kwd1" name="kwd" value="${kwd}"
 										class="form-control">
 								</div>
 								<div class="col-auto p-1">
@@ -775,10 +777,10 @@ function searchList() {
 
 
 								<div class="col-6 text-end">
-									<form class="row text-end-row" name="searchForm" action="#"
+									<form class="row text-end-row" name="searchForm" action="/recommend/list"
 										method="post">
 										<div class="col-auto p-1">
-											<select name="schType" class="form-select">
+											<select id="schType2" name="schType" class="form-select">
 												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
 												<option value="all">제목+내용</option>
 												<option value="reg_date">등록일</option>
@@ -788,7 +790,7 @@ function searchList() {
 											</select>
 										</div>
 										<div class="col-auto p-1">
-											<input type="text" name="kwd" value="${kwd}"
+											<input type="text" id="kwd2" name="kwd" value="${kwd}"
 												class="form-control">
 										</div>
 										<div class="col-auto p-1">
@@ -874,10 +876,10 @@ function searchList() {
 
 
 								<div class="col-6 text-end">
-									<form class="row text-end-row" name="searchForm" action="#"
+									<form class="row text-end-row" name="searchForm" action="/recommend/list"
 										method="post">
 										<div class="col-auto p-1">
-											<select name="schType" class="form-select">
+											<select id="schType3" name="schType" class="form-select">
 												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
 												<option value="all">제목+내용</option>
 												<option value="reg_date">등록일</option>
@@ -887,7 +889,7 @@ function searchList() {
 											</select>
 										</div>
 										<div class="col-auto p-1">
-											<input type="text" name="kwd" value="${kwd}"
+											<input type="text" id="kwd3" name="kwd" value="${kwd}"
 												class="form-control">
 										</div>
 										<div class="col-auto p-1">
