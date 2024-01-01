@@ -39,7 +39,7 @@
 					<li class="nav__item"><a href="${pageContext.request.contextPath}/notice/list" class="nav__link">Services</a>
 					</li>
 
-					<li class="nav__item"><a href="#" class="nav__link">My
+					<li class="nav__item"><a href="${pageContext.request.contextPath}/mypage/main" class="nav__link">My
 							Page</a></li>
 				</ul>
 

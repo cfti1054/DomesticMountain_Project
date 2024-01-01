@@ -1,0 +1,207 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&display=swap");
+
+
+.mypage-main {
+	display: flex; /* flex 속성을 사용하여 가로 정렬 설정 */
+	justify-content: space-between; /* 자식 요소 간에 공간을 동일하게 분배 */
+	align-items: center; /* 세로 방향 가운데 정렬 */
+	margin: 80px 200px 80px 200px;
+}
+
+.mypage-left {
+	flex: 1;
+	height: 900px;
+	background-color: #f5f6ff;
+	border-radius: 30px 0 0 30px;
+	box-shadow: 5px 5px 5px 5px #e2e2e2;
+}
+
+.mypage-right {
+	flex: 2;
+	height: 900px;
+	background-color: #f9f4ff;
+	border-radius: 0 30px 30px 0;
+	box-shadow: 5px 5px 5px 5px #e2e2e2;
+}
+
+.mymain-img {
+	border: 1px solid #ccc;
+	border-radius: 80px;
+	margin: 0 auto;
+	width: 120px;
+	height: 120px;
+	margin-bottom: 30px;
+	margin-top: 60px;
+}
+
+.ad-img {
+	border-radius: 20px;
+	width: 320px;
+	height: 90px;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 30px;
+}
+
+.left-footer-img {
+	width: 100px;
+	height: 30px;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 30px;
+}
+
+.submain-img {
+	border: 1px solid #ccc;
+	border-radius: 50px;
+	width: 50px;
+	height: 50px;
+	margin-right: 20px;
+}
+
+.small-img {
+	width: 18px;
+	height: 18px;
+	margin: 15px;
+}
+
+.mypage-left .p1 {
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 25px;
+}
+
+.mypage-left .p2 {
+	font-size: 14px;
+	font-weight: lighter;
+	margin-left: 25px;
+}
+
+.mypage-left .p3 {
+	font-size: 10px;
+	font-weight: lighter;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.mymain-img-div {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.profile {
+	margin: 0 auto;
+	display: block;
+	border-radius: 10px;
+	width: 580px;
+	background-color: #f9fbfc;
+	box-shadow: 3px 3px 3px 3px #e2e2e2;
+}
+
+.titlebox {
+	margin-left: 78px; 
+	font-weight: bold;
+}
+
+.sub-profile {
+	margin: 0 auto;
+	display: block;
+	border-radius: 10px;
+	width: 580px;
+	
+	background-color: #f9fbfc;
+	box-shadow: 3px 3px 3px 3px #e2e2e2;
+}
+
+.profile-correction {
+	display: flex; /* flex 속성을 사용하여 가로 정렬 설정 */
+	justify-content: space-between;
+	padding: 20px;
+	align-items: center;
+}
+
+.privacy {
+	display: flex; /* flex 속성을 사용하여 가로 정렬 설정 */
+	justify-content: space-between;
+	padding: 0 20px;
+	align-items: center;
+}
+.privacy-main {
+	display: flex;
+}
+
+.privacy-2 {
+	display: flex;
+	align-items: center;
+}
+
+/* =========== button =========== */
+.btn_edit{
+    display: inline-block;
+    min-width: 44px;
+    padding: 2px 9px 3px;
+    border-radius: 4px;
+    border: solid 1px rgba(212,216,229,.5);
+    background-color: rgba(212,216,229,.25);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.btn_edit .text{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: -.47px;
+    color: #7b8994;
+}
+
+.secession-btn {
+	margin-left: 100px; 
+	font-weight: lighter; 
+	font-size: 13px;
+	
+    float: right;
+    margin: 50px;
+}
+
+
+
+/* =========== on/off =========== */
+.mypage-onoff[type=checkbox] {
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+.onoff-label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 40px;
+	height: 25px;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+.onoff-label:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 15px;
+	height: 15px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+.mypage-onoff:checked+.onoff-label {
+	background: #bada55;
+}
+
+.mypage-onoff:checked+.onoff-label:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
