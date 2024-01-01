@@ -163,7 +163,7 @@ function changeSubList() {
 											<option value="${vo.category_num}" ${category_num==vo.category_num?"selected":""}>${vo.category_name}</option>
 										</c:forEach>
 									</select>
-								</div>
+								</div>							
 								
 								<div style="float: left"> 
 									<select id="changeShowProduct" class="form-select" onchange="changeList();">

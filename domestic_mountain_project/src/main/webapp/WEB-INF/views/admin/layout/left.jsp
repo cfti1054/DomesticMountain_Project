@@ -51,7 +51,7 @@
 				<div class="nav">
 					<div class="sb-sidenav-menu-heading">국내산</div>
 					<a class="nav-link"
-						href="${pageContext.request.contextPath}/resources/WEB-INF/admin/main/main.jsp">
+						href="${pageContext.request.contextPath}/admin/">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-tachometer-alt"></i>
 						</div> 대시보드

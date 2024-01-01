@@ -2,7 +2,7 @@ package com.fa.plus.admin.domain;
 
 public class ProductQNA {
 	private long num;				// 문의번호
-	private long productNum;		// 상품번호
+	private long product_num;		// 상품번호
 	private String question;		// 질문내용
 	private String question_date;	// 질문날짜
 	private int secret;				// 비밀글
@@ -18,12 +18,6 @@ public class ProductQNA {
 	}
 	public void setNum(long num) {
 		this.num = num;
-	}
-	public long getProductNum() {
-		return productNum;
-	}
-	public void setProductNum(long productNum) {
-		this.productNum = productNum;
 	}
 	public String getQuestion() {
 		return question;
@@ -72,6 +66,12 @@ public class ProductQNA {
 	}
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
+	}
+	public long getProduct_num() {
+		return product_num;
+	}
+	public void setProduct_num(long product_num) {
+		this.product_num = product_num;
 	}
 	
 	
