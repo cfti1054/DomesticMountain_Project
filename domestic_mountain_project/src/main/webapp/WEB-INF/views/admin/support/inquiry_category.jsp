@@ -145,7 +145,6 @@
              /* simple data table 행 다중선택 스크립트 */
              function updateOk() {
 				
-        	 const f = document.categoryUpdateForm;
         	 let param=[];
         	 
         	 $(".input").each(function(index, item){
@@ -193,17 +192,17 @@
              			
              			height: 550,
              			width: 800,
-             			title: " FAQ 카테고리 ",
+             			title: " 1:1문의 카테고리 ",
              			close: function(event, ui) {
              			}
              		});
              		
-             		let url = "${pageContext.request.contextPath}/admin/support/multi_category";
+             		let url = "${pageContext.request.contextPath}/admin/support/multi_inquiry_category";
              		let query = "category_dto=" + oAll;
              		
              		
              		const fn = function(data) {
-             			$("#faq-dialog").html(data);
+             			$("#inquiry-dialog").html(data);
              			dlg.dialog("open");
              		};
              		ajaxFun(url, "get", query, "text", fn);
@@ -225,7 +224,7 @@
         
         /* 추가 모달 생성 */
         $("#add_button").on("click",function() {
-        	let dlg = $("#faq-dialog").dialog({
+        	let dlg = $("#inquiry-dialog").dialog({
         		autoOpen: false,
         		modal: true,
         		buttons: {
@@ -243,11 +242,11 @@
         		}
         	});
         	
-        	let url = "${pageContext.request.contextPath}/admin/support/faq_category_write";
+        	let url = "${pageContext.request.contextPath}/admin/support/inquiry_category_write";
         	let query = "mode=write&type=category";
         	
         	const fn = function(data) {
-        		$("#faq-dialog").html(data);
+        		$("#inquiry-dialog").html(data);
         		dlg.dialog("open");
         	};
         	
@@ -258,19 +257,18 @@
         function writeOk() {
         	const f = document.categoryWriteForm;
         	
-        	if(! f.category_name.value) {
+        	if(! f.inquiry_category_name.value) {
         		alert("카테고리 이름을 입력하세요.");
         		f.category_name.focus();
         		return;
         	}
         	
-        	if(f.category_visible.value === "" ) {
+        	if(f.inquiry_category_visible.value === "" ) {
         		alert("보이기 상태를 선택하세요.");
-        		f.category_visible.focus();
         		return;
         	}
         	
-        	let url = "${pageContext.request.contextPath}/admin/support/faq_category_write";
+        	let url = "${pageContext.request.contextPath}/admin/support/inquiry_category_write";
         	let query = $("#categoryWriteForm").serialize();
         	
         	const fn = function(data) {
@@ -278,7 +276,7 @@
         	}
         	ajaxFun(url, "post", query, "json", fn);
         	
-        	$("#faq-dialog").dialog("close");
+        	$("#inquiry-dialog").dialog("close");
         	
         }
         
@@ -324,7 +322,7 @@
 					});
 					
 					
-					let url = "${pageContext.request.contextPath}/admin/support/update_category_ok";
+					let url = "${pageContext.request.contextPath}/admin/support/update_inquiry_category_ok";
 		        	let query = "category_list=" + category_list;
 		        	
 		        	const fn = function(data) {
@@ -333,7 +331,7 @@
 		        	ajaxFun(url, "get", query, "json", fn);
 		        	
 		        	
-		        	$("#faq-dialog").dialog("close");
+		        	$("#inquiry-dialog").dialog("close");
         
         	 }
          	

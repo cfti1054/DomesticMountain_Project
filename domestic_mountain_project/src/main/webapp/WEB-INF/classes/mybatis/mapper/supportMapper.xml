@@ -89,43 +89,105 @@
 	</select>
 	
 	
-	<select id="list_inquiry_category">
+	<select id="list_inquiry_category" resultType="com.fa.plus.admin.domain.Support">
 		SELECT inquiry_category_num, inquiry_category_name, u.user_name AS inquiry_category_reg_id, TO_CHAR(inquiry_category_reg_date,'YYYY-MM-DD') AS inquiry_category_reg_date, inquiry_category_visible
 		FROM inquiry_category i
 		JOIN user1 u ON i.inquiry_category_reg_id = u.userIdx
 	</select>
 	
-	<select id="list_inquiry_board">
-		SELECT inquiry_board_num,ic.category_name, inquiry_board_title, inquiry_board_content, u.user_name AS inquiry_board_reg_id, TO_CHAR(inquiry_board_reg_date,'YYYY-MM-DD') AS inquiry_board_reg_date, inquiry_board_status
+	<select id="list_inquiry_board" resultType="com.fa.plus.admin.domain.Support">
+		SELECT inquiry_board_num,ic.inquiry_category_name, inquiry_board_title, inquiry_board_content, u.user_name AS inquiry_board_reg_id, TO_CHAR(inquiry_board_reg_date,'YYYY-MM-DD') AS inquiry_board_reg_date, inquiry_board_status
 		FROM inquiry_board i
 		JOIN user1 u ON i.inquiry_board_reg_id = u.userIdx
       	JOIN inquiry_category ic ON ic.inquiry_category_num = i.inquiry_category_num
 	</select>
 	
-	<select id="list_inquiry_answer">
+	<select id="list_inquiry_answer" resultType="com.fa.plus.admin.domain.Support">
 		SELECT inquiry_answer_num, inquiry_board_num, b.inquiry_board_title, b.inquiry_board_content, u.user_name AS inquiry_answer_reg_id, inquiry_answer_title, inquiry_answer_content, TO_CHAR(inquiry_answer_reg_date,'YYYY-MM-DD') AS inquiry_answer_reg_date, TO_CHAR(inquiry_answer_update_date, 'YYYY-MM-DD') AS inquiry_answer_update_date
 		FROM inquiry_answer i
 		JOIN user1 u ON i.inquiry_board_reg_id = u.userIdx
 		JOIN inquiry_board b ON i.inquiry_board_num = b.inquiry_board_num		
 	</select>
 	
+	<select id="inquiry_category_seq" resultType="Long">
+		SELECT inquiry_category_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insert_inquiry_category" parameterType="com.fa.plus.admin.domain.Support">
+		INSERT INTO inquiry_category(inquiry_category_num, inquiry_category_name, 
+			inquiry_category_reg_id, inquiry_category_reg_date, inquiry_category_order, inquiry_category_visible)
+			VALUES(#{inquiry_category_num}, #{inquiry_category_name}, 1, SYSDATE, INQUIRY_CATEGORY_SEQ.CURRVAL, #{inquiry_category_visible})
+	</insert>
+	
+		
+	<select id="find_by_inquiry_category_num" parameterType="hashmap" resultType="com.fa.plus.admin.domain.Support">
+		SELECT inquiry_category_num, inquiry_category_name,
+			u.user_name AS inquiry_category_reg_id, inquiry_category_reg_date, inquiry_category_visible
+		FROM inquiry_category i
+		JOIN user1 u ON i.inquiry_category_reg_id = u.userIdx
+		WHERE inquiry_category_num IN
+		
+		<foreach item="item" index="index" collection="list"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+			
+	</select>
+	
+	<select id="find_by_inquiry_board_num" parameterType="Long" resultType="com.fa.plus.admin.domain.Support">
+		SELECT inquiry_board_num, inquiry_board_title, ic.inquiry_category_name, inquiry_board_content,
+			u.user_name AS inquiry_board_reg_id, inquiry_board_reg_date
+		FROM inquiry_board i
+		JOIN user1 u ON i.inquiry_board_reg_id = u.userIdx
+		JOIN inquiry_category ic ON i.inquiry_category_num = ic.inquiry_category_num
+		WHERE inquiry_board_num = #{inquiry_board_num}
+		
+	</select>	
+	
+	<update id="update_inquiry_category" parameterType="com.fa.plus.admin.domain.Support">
+		UPDATE inquiry_category
+		SET inquiry_category_name = #{inquiry_category_name}, inquiry_category_visible = #{inquiry_category_visible}
+		WHERE inquiry_category_num = #{inquiry_category_num}
+	</update>
 	
 	
 	
+	<select id="inquiry_answer_seq">
+		SELECT inquiry_answer_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insert_inquiry_answer" parameterType="com.fa.plus.admin.domain.Support">
+		INSERT INTO inquiry_answer(inquiry_answer_num, inquiry_board_num, inquiry_answer_title, 
+			inquiry_answer_content, inquiry_answer_reg_id, inquiry_answer_reg_date, inquiry_answer_update_date)
+			VALUES(#{inquiry_board_num}, #{inquiry_board_num}, #{inquiry_answer_title}, 
+						#{inquiry_answer_content}, 1, SYSDATE, SYSDATE)
+	</insert>
+	
+	<update id="chage_inquiry_board_status" parameterType="com.fa.plus.admin.domain.Support">
+		UPDATE inquiry_board
+		SET inquiry_board_status = 1
+		WHERE inquiry_board_num = #{inquiry_board_num}
+		
+	</update>
 	
 	
+	<select id="find_by_answer_num" parameterType="Long" resultType="com.fa.plus.admin.domain.Support">
+		SELECT inquiry_answer_num, inquiry_answer_title, inquiry_answer_content, inquiry_board_content,
+			u.user_name AS inquiry_board_reg_id, inquiry_board_reg_date, ic.inquiry_category_name
+		FROM inquiry_answer ia
+		JOIN inquiry_board i ON ia.inquiry_answer_num = i.inquiry_board_num
+		JOIN inquiry_category ic ON i.inquiry_category_num = ic.inquiry_category_num
+		JOIN user1 u ON i.inquiry_board_reg_id = u.userIdx
+		WHERE inquiry_board_num = #{inquiry_board_num}
 	
+	</select>
 	
+	<update id="update_inquiry_answer" parameterType="com.fa.plus.admin.domain.Support">
+		UPDATE inquiry_answer
+		SET inquiry_answer_title = #{inquiry_answer_title}, inquiry_answer_content = #{inquiry_answer_content}, inquiry_answer_update_date = SYSDATE
+		WHERE inquiry_answer_num = #{inquiry_board_num}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	</update>
 	
 	
 	
