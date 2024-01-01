@@ -10,8 +10,8 @@ public interface NoticeService {
 	public List<Notice> listNoticeTop();
 	public List<Notice> listNotice(Map<String, Object> map);
 	
-	public void updateHitCount(long num) throws Exception;
-	public Notice findById(long num);
+	public void updateHitCount(long notice_category_num) throws Exception;
+	public Notice findById(long notice_category_num);
 	public Notice findByPrev(Map<String, Object> map);
 	public Notice findByNext(Map<String, Object> map);
 	

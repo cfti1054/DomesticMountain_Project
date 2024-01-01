@@ -9,7 +9,7 @@ public class Notice {
     private int category_order;
     private int category_visible;
     
-    private int notice_name;
+    private String notice_name;
     // private int notice_category_num;
     private String notice_title;
     private String notice_content;
@@ -17,10 +17,9 @@ public class Notice {
     private String notice_reg_id;
     private String notice_reg_date;
     private String notice_update_id;
-    private String notice_update_date;
+    private String notice_update_date;	
     private int notice_visible;
     private String notice_invisible_date;
-    
 	public int getNotice_category_num() {
 		return notice_category_num;
 	}
@@ -63,10 +62,10 @@ public class Notice {
 	public void setCategory_visible(int category_visible) {
 		this.category_visible = category_visible;
 	}
-	public int getNotice_name() {
+	public String getNotice_name() {
 		return notice_name;
 	}
-	public void setNotice_name(int notice_name) {
+	public void setNotice_name(String notice_name) {
 		this.notice_name = notice_name;
 	}
 	public String getNotice_title() {
@@ -123,5 +122,7 @@ public class Notice {
 	public void setNotice_invisible_date(String notice_invisible_date) {
 		this.notice_invisible_date = notice_invisible_date;
 	}
+    
+	
     
 }

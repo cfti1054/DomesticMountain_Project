@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Notice;
 import com.fa.plus.service.NoticeService;
@@ -31,8 +30,8 @@ public class NoticeController {
 	@Autowired
 	private MyUtil myUtil;
 	
-	@Autowired
-	private FileManager fileManager;
+//	@Autowired
+//	private FileManager fileManager;
 
 	
 	@RequestMapping("list")
@@ -122,7 +121,7 @@ public class NoticeController {
 		return ".notice.list";
 	}
 	@GetMapping("article")
-	public String article(@RequestParam long num,
+	public String article(@RequestParam long notice_category_num,
 			@RequestParam String page,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
@@ -135,9 +134,9 @@ public class NoticeController {
 			query += "&schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "UTF-8");
 		}
 		
-		service.updateHitCount(num);
+		service.updateHitCount(notice_category_num);
 		
-		Notice dto = service.findById(num);
+		Notice dto = service.findById(notice_category_num);
 		if (dto == null) {
 			return "redirect:/notice/list?" + query;
 		}
@@ -145,12 +144,12 @@ public class NoticeController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("schType", schType);
 		map.put("kwd", kwd);
-		map.put("num", num);
+		map.put("notice_category_num", notice_category_num);
 
 		Notice prevDto = service.findByPrev(map);
 		Notice nextDto = service.findByNext(map);
 		
-		List<Notice> listFile = service.listNoticeFile(num);
+		List<Notice> listFile = service.listNoticeFile(notice_category_num);
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("prevDto", prevDto);

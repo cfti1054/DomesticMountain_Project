@@ -20,7 +20,7 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		try {
 			result = mapper.dataCount(map);
-		} catch (Exception e) {
+		} catch (Exception e) {	
 			e.printStackTrace();	
 		}
 		
@@ -49,39 +49,64 @@ public class NoticeServiceImpl implements NoticeService{
 			e.printStackTrace();
 		}
 		
-		return null;
+		return list;
 	}
 
 	@Override
-	public void updateHitCount(long num) throws Exception {
-		// TODO Auto-generated method stub
+	public void updateHitCount(long notice_category_num) throws Exception {
+		try {
+			mapper.updateHitCount(notice_category_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
-	public Notice findById(long num) {
-		// TODO Auto-generated method stub
-		return null;
+	public Notice findById(long notice_category_num) {
+		Notice dto = null;
+		
+		try {
+			dto = mapper.findById(notice_category_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
 	public Notice findByPrev(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Notice dto = null;
+		
+		try {
+			dto = mapper.findByPrev(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public Notice findByNext(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Notice dto = null;
+		
+		try {
+			dto = mapper.findByNext(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public List<Notice> listNoticeFile(long num) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
-
+	
 	@Override
 	public Notice findByFileId(long fileNum) {
 		// TODO Auto-generated method stub

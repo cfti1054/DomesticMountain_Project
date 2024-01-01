@@ -4,57 +4,41 @@
 <mapper namespace="com.fa.plus.mapper.NoticeMapper">
 	<sql id="where-list">
 		<if test="schType=='all' ">
-			( INSTR(subject, #{kwd}) &gt; 0 
+			( INSTR(n.notice_title, #{kwd}) &gt; 0 
 				OR DBMS_LOB.INSTR(notice_content, #{kwd}) &gt; 0)
 		</if>
 		<if test="schType=='notice_title' ">
-			INSTR(notice_title, #{kwd}) &gt;0
+			INSTR(n.notice_title, #{kwd}) &gt;0
 		</if>
 		<if test="schType=='notice_content' ">
-			DBMS_LOB.INSTR( notice_content, #{kwd}) &gt; 0 
+			DBMS_LOB.INSTR( n.notice_content, #{kwd}) &gt; 0 
 		</if>
 		<if test="schType=='notice_reg_id' ">
-			notice_reg_id=#{kwd}
+			n.notice_reg_id=#{kwd}
 		</if>
 		<if test="schType=='notice_reg_date' ">
-			( TO_CHAR(notice_reg_date, 'YYYY-MM-DD') = #{kwd}
-				OR TO_CHAR(notice_reg_date, 'YYYYMMDD') = #{kwd} )
+			( TO_CHAR(n.notice_reg_date, 'YYYY-MM-DD') = #{kwd}
+				OR TO_CHAR(n.notice_reg_date, 'YYYYMMDD') = #{kwd} )
 		</if>
 		
 	</sql>
 	
-	<!--
-	<select id="listNoticeTop" resultType="com.sp.app.domain.Notice">
-		SELECT n.num, notice, n.userId, userName, subject, hitCount, 
-				TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date,
-				NVL(fileCount, 0) fileCount
-		FROM notice n
-		JOIN member1 m ON n.userId=m.userId
-		LEFT OUTER JOIN (
-			SELECT num, COUNT(*) fileCount FROM noticeFile
-			GROUP BY num
-		) f ON n.num=f.num
-		WHERE notice = 1 AND showNotice = 1
-		ORDER BY num DESC
-	</select>
-	
-	  -->
 	<select id="listNoticeTop" resultType="com.fa.plus.domain.Notice">
-		SELECT n.notice_category_num, category_name, notice_title, n.category_reg_id, 
-			TO_CHAR(category_reg_date, 'YYYY-MM-DD') category_reg_date
-		FROM notice n
-		JOIN user1 u ON n.category_reg_id = u.useridx
-		WHERE notice = 1 AND category_visible = 1
-		ORDER BY notice DESC
+		SELECT n.notice_category_num, notice_name, notice_title, n.notice_reg_id, notice_hit_count, 
+			TO_CHAR(notice_reg_date, 'YYYY-MM-DD') notice_reg_date
+		FROM notice_board n
+		JOIN user1 u ON n.notice_reg_id = u.useridx
+		WHERE n.notice_visible = 1
+		ORDER BY n.notice_category_num DESC
 		
 	</select>
 	
-	<select id="dataCount" parameterType="map" resultType="com.fa.plus.domain.Notice">
+	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM notice n
-		JOIN user1 u ON n.category_reg_id=m.useridx
+		FROM notice_board n
+		JOIN user1 u ON n.notice_reg_id=u.useridx
 		<where>
-			category_visible = 1
+			notice_visible = 1
 			<if test="kwd != null and kwd!='' ">
 				AND <include refid="where-list"/>
 			</if>
@@ -63,19 +47,63 @@
 	</select>
 	
 	<select id="listNotice" parameterType="map" resultType="com.fa.plus.domain.Notice">
-	
+  	    SELECT n.notice_category_num, notice_name, notice_title, n.notice_reg_id, 
+     	     notice_hit_count, notice_reg_date
+   	    FROM notice_board n
+ 	    JOIN user1 u ON n.notice_reg_id = u.useridx
+   	 <where>
+     	   n.notice_visible = 1
+         <if test="kwd != null and kwd != ''">
+    	     AND <include refid="where-list"/>
+     	 </if>
+   	 </where>
+	    ORDER BY n.notice_category_num DESC
+	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
+	<update id="updateHitCount" parameterType="Long">
+		UPDATE notice_board SET notice_hit_count=notice_hit_count+1 
+		WHERE notice_category_num=#{notice_category_num}
+	
+	</update>
+	
 	 <select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Notice">
-	 
+	 	SELECT notice_category_num, n.notice_reg_id, notice_title, notice_content, notice_hit_count,
+	 		notice_reg_date, notice_visible
+	 		FROM notice_board n
+	 		JOIN user1 u ON n.notice_reg_id=u.useridx
+	 		WHERE notice_category_num = #{notice_category_num}
 	 </select>
 	 
 	 <select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Notice">
-	 
+	 	SELECT notice_category_num, notice_title
+	 	FROM notice_board n
+	 	JOIN user1 u ON n.notice_reg_id=u.useridx
+	 	<where>
+	 		notice_visible = 1
+	 		<if test="kwd != null and kwd != '' ">
+				AND <include refid="where-list"/>
+			</if>
+			AND (notice_category_num &gt; #{notice_category_num})
+	 	</where>
+	 	ORDER BY notice_category_num ASC
+	 	FETCH FIRST 1 ROWS ONLY
+	 	
 	 </select>
 	
 	 <select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Notice">
-	
+		SELECT notice_category_num, notice_title
+	 	FROM notice_board n
+	 	JOIN user1 u ON n.notice_reg_id=u.useridx
+	 	<where>
+	 		notice_visible = 1
+	 		<if test="kwd != null and kwd != '' ">
+				AND <include refid="where-list"/>
+			</if>
+			AND (notice_category_num &lt; #{notice_category_num})
+	 	</where>
+	 	ORDER BY notice_category_num DESC
+	 	FETCH FIRST 1 ROWS ONLY
 	</select>
 	
 	<select id="listNoticeFile" parameterType="Long" resultType="com.fa.plus.domain.Notice">

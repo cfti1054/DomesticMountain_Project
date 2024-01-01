@@ -14,8 +14,8 @@ public interface NoticeMapper {
 	public List<Notice> listNoticeTop();
 	public List<Notice> listNotice(Map<String, Object> map);
 	
-	public Notice findById(long num);
-	public void updateHitCount(long num) throws SQLException;
+	public Notice findById(long notice_category_num);
+	public void updateHitCount(long notice_category_num) throws SQLException;
 	public Notice findByPrev(Map<String, Object> map);
 	public Notice findByNext(Map<String, Object> map);
 

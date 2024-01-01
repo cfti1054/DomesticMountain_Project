@@ -199,9 +199,9 @@ function searchList() {
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>QnA<span>| Question and Answer</span></a> <span><a
+					<a>Notice<span>| 공지사항 </span></a> <span><a
 						href="${pageContext.request.contextPath}/">home</a> &gt; services
-						&gt; qna</span>
+						&gt; notice </span>
 				</h1>
 
 
@@ -231,9 +231,8 @@ function searchList() {
 										<tr>
 											<td><span class="badge bg-primary">공지</span></td>
 											<td class="left">
-												<a href="#" class="text-reset">${notice_content}</a>
-											</td>
-											<td>관리자</td>
+												<a href="${articleUrl}&notice_category_num=${dto.notice_category_num}" class="text-reset">${dto.notice_title}</a>											</td>
+											<td>${dto.notice_reg_id}</td>
 											<td>${dto.notice_reg_date}</td>
 											<td>${notice_hit_count}</td>
 										</tr>
@@ -243,7 +242,7 @@ function searchList() {
 										<tr>
 											<td>${dataCount - (page-1) * size - status.index}</td>
 											<td class="left">
-												 <a href="#" class="text-reset">내용입니다.</a>
+												 <a href="${articleUrl}&notice_category_num=${dto.notice_category_num}" class="text-reset">${dto.notice_title}</a>
 													<span class="badge text-bg-info">New</span>
 											</td>
 											<td>관리자</td>
@@ -260,7 +259,7 @@ function searchList() {
 
 							<div class="row board-list-footer">
 								<div class="col">
-									<button type="button" class="btn btn-light" onclick="#"
+									<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/notice/list';"
 										title="새로고침">
 										<i class="bi bi-arrow-counterclockwise"></i>
 									</button>
@@ -268,14 +267,13 @@ function searchList() {
 								<div class="col text-center">&nbsp;</div>
 								
 								<div class="col-6 text-end">
-									<form class="row text-end-row" name="searchForm" action="#" method="post">
+									<form class="row text-end-row" name="searchForm" action="${pageContext.request.contextPath}/notice/list" method="post">
 										<div class="col-auto p-1">
 											<select name="schType" class="form-select">
-												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-												<option value="all">제목+내용</option>
-												<option value="reg_date">등록일</option>
-												<option value="subject">제목</option>
-												<option value="content">내용</option>
+												<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
+												<option value="notice_reg_date" ${schType=="reg_date"?"selected":""}>등록일</option> 
+												<option value="notice_title" ${schType=="subject"?"selected":""}>제목</option>    
+												<option value="notice_content" ${schType=="content"?"selected":""}>내용</option>    
 											</select>
 										</div>
 										<div class="col-auto p-1">
@@ -290,7 +288,9 @@ function searchList() {
 										</div>
 									</form>
 								</div>
-								
+								<div class="col text-end">
+									&nbsp;
+								</div>
 							</div>
 						</div>
 					</div>
