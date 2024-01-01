@@ -400,9 +400,10 @@
 	vertical-align: top;
 }
 
-.article-album-sub .tit .inner {
+.inner {
 	display: table;
 	table-layout: fixed;
+	font-size: larger;
 }
 
 .article-album-sub .tit .ellipsis {
