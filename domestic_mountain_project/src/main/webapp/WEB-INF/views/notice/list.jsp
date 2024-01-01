@@ -227,17 +227,6 @@ function searchList() {
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="dto" items="${noticeList}">
-										<tr>
-											<td><span class="badge bg-primary">공지</span></td>
-											<td class="left">
-												<a href="${articleUrl}&notice_category_num=${dto.notice_category_num}" class="text-reset">${dto.notice_title}</a>											</td>
-											<td>${dto.notice_reg_id}</td>
-											<td>${dto.notice_reg_date}</td>
-											<td>${notice_hit_count}</td>
-										</tr>
-									</c:forEach>
-									
 									<c:forEach var="dto" items="${list}" varStatus="status">
 										<tr>
 											<td>${dataCount - (page-1) * size - status.index}</td>

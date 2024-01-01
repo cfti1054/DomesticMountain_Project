@@ -87,7 +87,7 @@ public class NoticeController {
 			// dto.어쩌구
 				
 			dto.setNotice_reg_date(dto.getNotice_reg_date().substring(0, 10));
-		 }
+		 	}
 		}		
 		
 		String cp = req.getContextPath();
@@ -169,11 +169,5 @@ public class NoticeController {
 		
 		return null;
 	}
-	
-	
-	
-	
-	
-	
 	
 }
