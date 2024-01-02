@@ -480,7 +480,7 @@ $(function(){
 						<td class="table-light col-sm-2">대표이미지</td>
 						<td>
 							<div class="thumbnail-viewer"></div>
-							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">${dto.product_summary}
+							<input type="file" name="thumbnailFile" accept="image/*" class="form-control" style="display: none;">
 						</td>
 					</tr>
 					

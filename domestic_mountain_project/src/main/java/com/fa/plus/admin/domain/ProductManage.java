@@ -20,7 +20,6 @@ public class ProductManage {
 	private String product_name; 		// 이름
 	private String product_content;		// 상품상세설명
 	
-	private String product_summary; 	// 이미지 상품간단설명
 	private String product_modify_date; // 수정일 상품최종수정시간
 	private long product_hit; 			// 조회수 상품조회수
 	
@@ -51,8 +50,8 @@ public class ProductManage {
 	private long file_num; 				// 파일번호
 	private String file_name; 			// 파일이름
 	
-	// * 파일 처리 * 
-	private String thumbnail;			
+	// * 파일 처리 * 		
+	private String product_summary; 	// 썸네일
 	private MultipartFile thumbnailFile;
 	
 	private List<MultipartFile> addFiles;	
@@ -225,13 +224,6 @@ public class ProductManage {
 		this.file_name = file_name;
 	}
 
-	public String getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
 
 	public MultipartFile getThumbnailFile() {
 		return thumbnailFile;

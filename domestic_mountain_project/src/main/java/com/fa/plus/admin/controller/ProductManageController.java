@@ -49,6 +49,7 @@ public class ProductManageController {
 			Model model
 			) throws Exception {
 		
+		/*
 		String cp = req.getContextPath();
 		
 		int total_page = 0;
@@ -122,6 +123,7 @@ public class ProductManageController {
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
+		*/
 		
 		return ".admin.product.product_list";
 	}
@@ -183,6 +185,7 @@ public class ProductManageController {
 		try {
 			service.insertProduct(dto, path);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		String url = "redirect:/admin/product/product_list?parent_num=" + dto.getParent_num()
