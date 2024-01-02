@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fa.plus.admin.domain.ProductManage;
+import com.fa.plus.admin.domain.ProductStockManage;
 
 public interface ProductManageService {
 	public void insertProduct(ProductManage dto, String pathname) throws Exception;
@@ -28,9 +29,8 @@ public interface ProductManageService {
 	public List<ProductManage> listCategory();
 	public List<ProductManage> listSubCategory(long parent_num);
 	
-	/*
 	// 상품 재고
 	public List<ProductStockManage> listProductStock(long productNum);
 	public void updateProductStock(ProductStockManage dto) throws Exception;
-	*/
+	
 }

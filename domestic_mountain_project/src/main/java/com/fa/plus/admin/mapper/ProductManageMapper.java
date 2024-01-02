@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.fa.plus.admin.domain.ProductManage;
+import com.fa.plus.admin.domain.ProductStockManage;
 
 @Mapper
 public interface ProductManageMapper {
@@ -45,9 +46,8 @@ public interface ProductManageMapper {
 	public void deleteOptionDetail(long detail_num) throws SQLException;
 	
 	// 상품 재고
-	/*
 	public List<ProductStockManage> listProductStock(long productNum);
 	public void insertProductStock(ProductStockManage dto) throws SQLException;
 	public void updateProductStock(ProductStockManage dto) throws SQLException;
-	*/
+	
 }

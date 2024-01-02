@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fa.plus.admin.domain.ProductManage;
+import com.fa.plus.admin.domain.ProductStockManage;
 import com.fa.plus.admin.mapper.ProductManageMapper;
 import com.fa.plus.common.FileManager;
 
@@ -327,6 +328,29 @@ public class ProductManageServiceImpl implements ProductManageService {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public List<ProductStockManage> listProductStock(long productNum) {
+		List<ProductStockManage> list = null;
+		
+		try {
+			list = mapper.listProductStock(productNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void updateProductStock(ProductStockManage dto) throws Exception {
+		try {
+			mapper.updateProductStock(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	

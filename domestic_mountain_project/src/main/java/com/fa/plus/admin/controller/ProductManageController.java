@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.admin.domain.ProductManage;
+import com.fa.plus.admin.domain.ProductStockManage;
 import com.fa.plus.admin.service.ProductManageService;
 import com.fa.plus.common.MyUtil;
 
@@ -49,7 +50,6 @@ public class ProductManageController {
 			Model model
 			) throws Exception {
 		
-		/*
 		String cp = req.getContextPath();
 		
 		int total_page = 0;
@@ -123,7 +123,7 @@ public class ProductManageController {
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
-		*/
+		
 		
 		return ".admin.product.product_list";
 	}
@@ -292,4 +292,23 @@ public class ProductManageController {
 		
 		return ".admin.product.article";
 	}	
+	
+	
+	@GetMapping("stock")
+	public String stockForm(@RequestParam long product_num
+			,Model model) throws Exception {
+
+		long stock_num = 0;
+
+		List<ProductStockManage> listProductStock = service.listProductStock(stock_num );
+		
+		listProductStock = service.listProductStock(stock_num);
+		
+		model.addAttribute("mode", "stock");
+		model.addAttribute("listProductStock", listProductStock);
+		
+		
+		return ".admin.product.stock";
+	}
+	
 }

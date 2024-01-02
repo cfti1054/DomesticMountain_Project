@@ -174,7 +174,24 @@
 	</delete>	
 	
 	<!-- 상품 재고 -->
+	<select id="listProductStock" parameterType="long" resultType="com.fa.plus.admin.domain.ProductStockManage">
+		SELECT stock_num, detail_num, detail_num2, total_stock, p.product_num, product_name
+		FROM productStock s
+		JOIN product p ON s.product_num = p.product_num
+		WHERE p.product_num = #{product_num}
+		ORDER BY stock_num
+	</select>
 	
+	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">
+		INSERT INTO productStock(stock_num, detail_num, detail_num2, total_stock, product_num)
+			VALUES (productStock_seq.NEXTVAL, #{detail_num}, #{detail_num2},
+				#{total_stock}, #{product_num})
+	</insert>
+	
+	<update id="updateProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">
+		UPDATE productStock SET total_stock = #{total_stock}
+		WHERE stock_num = #{stock_num}
+	</update>	
 	
 	
 	
