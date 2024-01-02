@@ -125,6 +125,7 @@ figure img {
 	margin-top: 50px;
 	margin-left: 10px;
 }
+
 </style>
 
 
