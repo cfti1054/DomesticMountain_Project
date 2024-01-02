@@ -208,7 +208,7 @@ public class SupportController {
 		model.addAttribute("mode", "update");
 		
 		try {
-			dto = service.find_by_inquiry_board_num(inquiry_board_num);
+			dto = service.find_by_answer_num(inquiry_board_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -233,7 +233,7 @@ public class SupportController {
 		} catch (Exception e) {
 		}
 
-		return "redirect:/admin/support/faq_board_list";
+		return "redirect:/admin/support/inquiry_board_list";
 	}
 	
 
