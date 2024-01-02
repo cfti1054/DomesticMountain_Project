@@ -84,6 +84,7 @@ public class EChartsMapController {
 		return ".echartsMap.main";
 	}
 
+	
 	@GetMapping("article")
 	public String article(
 			@RequestParam long mountain_num,
