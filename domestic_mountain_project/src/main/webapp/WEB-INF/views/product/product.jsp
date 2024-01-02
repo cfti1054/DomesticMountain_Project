@@ -142,7 +142,7 @@ figure img {
 			<div id="gallery">
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=21">
-						<img src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/shoes.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=21">등산화</a>
@@ -150,7 +150,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=22">
-						<img src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/socks.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=22">등산용 양말</a>
@@ -158,7 +158,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=23">
-						<img src="${pageContext.request.contextPath}/resources/images/climbing.png" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/eisen.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=23">아이젠</a>
@@ -172,7 +172,7 @@ figure img {
 			<div id="gallery">
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=11">
-						<img src="" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/jumper.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=11">자켓 / 점퍼 / 코트</a>
@@ -180,7 +180,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=12">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/vest.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=12">조끼</a>
@@ -188,7 +188,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=13">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/tshirt.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=13">티셔츠</a>
@@ -196,7 +196,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=14">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/hat.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=14">모자</a>
@@ -204,7 +204,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=15">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/gloves.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=15">장갑</a>
@@ -219,7 +219,7 @@ figure img {
 			<div id="gallery">
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=16">
-						<img src="" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/jumper.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=16">자켓 / 점퍼 / 코트</a>
@@ -227,7 +227,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=17">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/vest.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=17">조끼</a>
@@ -235,7 +235,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=18">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/tshirt.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=18">티셔츠</a>
@@ -243,7 +243,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=19">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/hat.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=19">모자</a>
@@ -251,7 +251,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=20">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/gloves.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=20">장갑</a>
@@ -265,7 +265,7 @@ figure img {
 			<div id="gallery">
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=24">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/bag.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=24">등산용 가방</a>
@@ -273,7 +273,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=25">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/waterproof.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=25">방수커버</a>
@@ -281,7 +281,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=26">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/guitar.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=26">기타</a>
@@ -295,7 +295,7 @@ figure img {
 			<div id="gallery">
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=27">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/stick.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=27">등산스틱</a>
@@ -303,7 +303,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=28">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/lighting.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=28">조명기구</a>
@@ -311,7 +311,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=29">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/knee.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=29">무릎 보호대</a>
@@ -319,7 +319,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=30">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/sunglasses.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=30">선글라스</a>
@@ -327,7 +327,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=31">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/medicines.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=31">의약품</a>
@@ -335,7 +335,7 @@ figure img {
 				</figure>
 				<figure>
 					<a href="${pageContext.request.contextPath}/product/product_detail?category_num=32">
-						<img src="#" alt="">
+						<img src="${pageContext.request.contextPath}/resources/images/product_illustration/cold_weather_items.png" alt="">
 					</a>
 					<figcaption>
 						<a href="${pageContext.request.contextPath}/product/product_detail?category_num=32">방한용품</a>

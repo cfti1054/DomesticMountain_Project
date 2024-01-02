@@ -65,6 +65,7 @@
 
 .features-2 .datacount {
 	display: flex;
+	align-items: center;
 }
 
 .mountain-main {
