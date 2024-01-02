@@ -55,8 +55,8 @@
         	$.ajax(url, settings);
         }
         
-function showContent(faq_num) {
-        	let dlg = $("#faq-dialog").dialog({
+function showContent(inquiry_board_num) {
+        	let dlg = $("#inquiry-dialog").dialog({
        			autoOpen: false,
        			modal: true,
        			buttons: {
@@ -67,20 +67,80 @@ function showContent(faq_num) {
        			
        			height: 550,
        			width: 800,
-       			title: " FAQ 답변",
+       			title: " 1:1문의 내용",
        			close: function(event, ui) {
        			}
        		});
        		
-       		let url = "${pageContext.request.contextPath}/admin/support/show_content";
-       		let query = "faq_num=" + faq_num;
+       		let url = "${pageContext.request.contextPath}/admin/support/show_inquiry_content";
+       		let query = "inquiry_board_num=" + inquiry_board_num;
        		
        		
        		const fn = function(data) {
-       			$("#faq-dialog").html(data);
+       			$("#inquiry-dialog").html(data);
        			dlg.dialog("open");
        		};
        		ajaxFun(url, "get", query, "text", fn);
+}
+
+function answer(inquiry_board_num) {
+	let dlg = $("#inquiry-dialog").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			" 답변 " :function(){
+				writeOk();
+			}, " 닫기 ": function() {
+				$(this).dialog("close");
+			}
+		},
+		
+		height: 550,
+		width: 800,
+		title: "1:1 문의 답변",
+		close: function(event, ui) {
+		}
+	});
+	
+	let url = "${pageContext.request.contextPath}/admin/support/inquiry_answer";
+	let query = "inquiry_board_num=" + inquiry_board_num;
+	
+	const fn = function(data) {
+		$("#inquiry-dialog").html(data);
+		dlg.dialog("open");
+	};
+	
+	ajaxFun(url, "get", query, "text", fn);
+}
+
+function update(inquiry_board_num) {
+	let dlg = $("#inquiry-dialog").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			" 수정 " :function(){
+				updateOk();
+			}, " 닫기 ": function() {
+				$(this).dialog("close");
+			}
+		},
+		
+		height: 550,
+		width: 800,
+		title: "1:1 문의 답변 수정",
+		close: function(event, ui) {
+		}
+	});
+	
+	let url = "${pageContext.request.contextPath}/admin/support/inquiry_answer_update";
+	let query = "inquiry_board_num=" + inquiry_board_num;
+	
+	const fn = function(data) {
+		$("#inquiry-dialog").html(data);
+		dlg.dialog("open");
+	};
+	
+	ajaxFun(url, "get", query, "text", fn);
 }
 </script>
 
@@ -91,33 +151,34 @@ function showContent(faq_num) {
 			<h1 class="mt-4">Tables</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">FAQ 질문과 답변</li>
+                            <li class="breadcrumb-item active">1:1문의와 답변</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                고객이 자주 묻는 질문과 답변들을 추가 / 수정할 수 있습니다.
+                                고객의 1:1 질문들의 정보와 답변을 추가 / 수정할 수 있습니다.
                                 
                             </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                FAQ 질문과 답변
+                                1:1 문의와 답변
                             </div>
 
 						<div class="card-body">
-						<form id="faq">
-							<table id="faq_board_table" class="display"
+						<form id="inquiry">
+							<table id="inquiry_board_table" class="display"
 								style="width: 100%; text-align: center; word-break: keep-all;">
 								<thead>
 									<tr>
 										<th>번호</th>
 										<th>분류</th>
 										<th>질문</th>
-										<th>답변 </th>
-										<th>등록인</th>
+										<th>내용 </th>
+										<th>작성자</th>
 										<th>등록일자</th>
-										<th>보이기</th>
+										<th>답변 여부</th>
+										<th>관리</th>
 									</tr>
 								</thead>
 
@@ -127,9 +188,10 @@ function showContent(faq_num) {
 										<th>분류</th>
 										<th>질문</th>
 										<th>답변 </th>
-										<th>등록인</th>
+										<th>작성자</th>
 										<th>등록일자</th>
-										<th>보이기</th>
+										<th>답변 여부</th>
+										<th>관리</th>
 									</tr>
 								</tfoot>
 
@@ -137,32 +199,54 @@ function showContent(faq_num) {
 									<c:forEach var="dto" items="${list}" varStatus="status">
 
 										<tr>
-											<td width="5%">${dto.faq_num}</td>
-											<td width="15%">${dto.category_name}</td>
-											<td width="25%">${dto.faq_question}</td>
+											<td width="5%">${dto.inquiry_board_num}</td>
+											<td width="15%">${dto.inquiry_category_name}</td>
+											<td width="25%">${dto.inquiry_board_title}</td>
 											<td width="20%">
 												<%-- <textarea  style="white-space: pre-line; width: 80%;" cols="40" rows="3" readonly>
 													${dto.faq_content}
 												</textarea> --%>
-												<button type="button" class="btn btn-info" id="show_content" onclick="showContent('${dto.faq_num}');">답변 보기</button>
+												<button type="button" class="btn btn-info" id="show_content" onclick="showContent('${dto.inquiry_board_num}');">내용 보기</button>
 											</td>
-											<td width="10%">${dto.faq_reg_id}</td>
-											<td width="15%">${dto.faq_reg_date}</td>
-											<td width="10%">${dto.visible == 1 ? "O":"X"}</td>
+											<td width="10%">${dto.inquiry_board_reg_id}</td>
+											<td width="15%">${dto.inquiry_board_reg_date}</td>
+											<td width="10%">	
+													<c:choose>
+														<c:when test="${dto.inquiry_board_status ==  0}">
+															<span style="color: red;"> 진행중 </span>
+														</c:when>
+														
+														<c:when test="${dto.inquiry_board_status == 1 }">	
+															<span style="color: blue;"> 완료 </span>
+														</c:when>
+													</c:choose>
+											</td>
+											<td>
+												<c:choose>
+													<c:when test="${dto.inquiry_board_status == 0 }">
+													<button type="button" class="btn btn-danger" id="answer_button" onclick="answer('${dto.inquiry_board_num}');">관리</button>
+													
+													</c:when>
+													<c:when test="${dto.inquiry_board_status == 1 }">
+													<button type="button" class="btn btn-success" id="update_button" onclick="update('${dto.inquiry_board_num}');">관리</button>
+													</c:when>
+												</c:choose>
+											</td>
+											
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 							</form>
-							<p>
+							<!-- <p>
 								<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
 							</p>
 							<p>
 								<button type="button" class="btn btn-primary" id="add_button">추가</button>
-							</p>
+							</p> -->
                             </div>
                         </div>
-					<div id="faq-dialog" style="display: none;"></div>
+					<div id="inquiry-dialog" style="display: none;"></div>
 				</div>	
 		</div>
 	</main>
@@ -181,9 +265,10 @@ function showContent(faq_num) {
         <script>
              /* simple data table 행 다중선택 스크립트 */
         $(document).ready(function() {
-        	var oTable = $('#faq_board_table').DataTable();
-
-        	$('#faq_board_table tbody').on( 'click', 'tr', function () {
+        	var oTable = $('#inquiry_board_table').DataTable();
+    	});
+        	/*
+        	$('#inquiry_board_table tbody').on( 'click', 'tr', function () {
         	    $(this).toggleClass('selected');
         	    var pos = oTable.row(this).index();
         	    var row = oTable.row(pos).data();
@@ -191,13 +276,13 @@ function showContent(faq_num) {
 
         	$("#visible_button").on("click",function() {
         		var oAll =[];
-        	 $('#faq_board_table tbody tr.selected').each(function(){
+        	 $('#inquiry_board_table tbody tr.selected').each(function(){
         		 var pos = oTable.row(this).index();
         		 var row = oTable.row(pos).data();
         	    oAll.push(row);
         	 });
-        	 	/* 수정 버튼 눌렸을 때의 action*/
-
+        	 
+		
         	 	if(oAll.length === 0) {
         	 		alert("수정하려면 한개 이상의 행을 선택하세요");
         	 		return;
@@ -230,11 +315,10 @@ function showContent(faq_num) {
              			dlg.dialog("open");
              		};
              		ajaxFun(url, "get", query, "text", fn);
-             		
+             		*/
             	 			
             	 		
-        	 	});
-        	
+        	 	
         	/* 답변 보기 버튼 눌렀을  때 */
         	/* $("#show_content").on("click", function() {
         		var oAll = [];
@@ -274,7 +358,7 @@ function showContent(faq_num) {
            		ajaxFun(url, "get", query, "text", fn);
         		
         	}); */
-	});
+
 
              
              
@@ -286,67 +370,32 @@ function showContent(faq_num) {
         <script>
         
         
-        
-        $("#add_button").on("click",function() {
-        	let dlg = $("#faq-dialog").dialog({
-        		autoOpen: false,
-        		modal: true,
-        		buttons: {
-        			" 추가 " :function(){
-        				writeOk();
-        			}, " 닫기 ": function() {
-        				$(this).dialog("close");
-        			}
-        		},
-        		
-        		height: 550,
-        		width: 800,
-        		title: "FAQ 추가",
-        		close: function(event, ui) {
-        		}
-        	});
-        	
-        	let url = "${pageContext.request.contextPath}/admin/support/faq_board_write";
-        	let query = "mode=write&type=board";
-        	
-        	const fn = function(data) {
-        		$("#faq-dialog").html(data);
-        		dlg.dialog("open");
-        	};
-        	
-        	ajaxFun(url, "get", query, "text", fn);
-        });
-        
         function writeOk() {
-        	const f = document.boardWriteForm;
+        	const f = document.answerWriteForm;
         	
-        	if(! f.faq_question.value) {
-        		alert("질문을 입력하세요.");
-        		f.faq_question.focus();
+        	if(! f.inquiry_answer_title.value.trim()) {
+        		alert("답변 제목을 입력하세요.");
+        		f.inquiry_answer_title.focus();
         		return;
         	}
         	
-        	if(! f.faq_content.value) {
-        		alert("내용을 입력하세요.");
-        		f.faq_content.focus();
+        	if(! f.inquiry_answer_content.value.trim()) {
+        		alert("답변 내용을 입력하세요.");
+        		f.inquiry_answer_content.focus();
         		return;
         	}
         	
-        	if(f.category_list.value === "" ) {
-        		alert("카테고리를 선택하세요.");
-        		f.category_list.focus();
-        		return;
-        	}
         	
-        	let url = "${pageContext.request.contextPath}/admin/support/faq_board_write";
-        	let query = $("#boardWriteForm").serialize() + "&faq_category_num=" + $("#category_list").val();
+        	
+        	let url = "${pageContext.request.contextPath}/admin/support/inquiry_answer";
+        	let query = $("#answerWriteForm").serialize();
         	
         	const fn = function(data) {
         		
         	}
         	ajaxFun(url, "post", query, "json", fn);
         	
-        	$("#faq-dialog").dialog("close");
+        	$("#inquiry-dialog").dialog("close");
         	
         }
         function isEmpty(strIn)
@@ -372,21 +421,9 @@ function showContent(faq_num) {
 		/* 수정 확정 */
          function updateOk() {
 			
-        	 let board_list=[];
-        	 let content_list=[];
-        	 const f = document.boardUpdateForm;
- 
-					$(".input").each(function(index, item){
-						
-						if( isEmpty($(item).val()) ) {
-							alert("값을 입력하세요.");
-							f.$(item).focus();
-							return;
-						}
-						
-						board_list.push($(item).val())
 
-					});
+ 
+					
 					/*
 					$(".textarea").each(function(index, item){
 						
@@ -401,16 +438,16 @@ function showContent(faq_num) {
 					
 					
 					
-					let url = "${pageContext.request.contextPath}/admin/support/update_board_ok";
-		        	let query = "board_list=" + board_list;
+					let url = "${pageContext.request.contextPath}/admin/support/inquiry_answer_update";
+		        	let query = $("#answerUpdateForm").serialize();
 		        	
 		        	const fn = function(data) {
 		        		
 		        	}
-		        	ajaxFun(url, "get", query, "json", fn);
+		        	ajaxFun(url, "post", query, "json", fn);
 		        	
 		        	
-		        	$("#faq-dialog").dialog("close");
+		        	$("#inquiry-dialog").dialog("close");
         
         	 }
         </script>

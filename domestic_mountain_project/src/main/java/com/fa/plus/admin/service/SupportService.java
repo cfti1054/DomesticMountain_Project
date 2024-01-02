@@ -28,4 +28,15 @@ public interface SupportService {
 	public List<Support> list_inquiry_category() throws Exception;
 	public List<Support> list_inquiry_board() throws Exception;
 
+	public void insert_inquiry_category(Support dto) throws Exception;
+	public void update_inquiry_category(Support dto) throws Exception;
+	public List<Support> find_by_inquiry_category_num(List<String> list) throws Exception;
+
+	public Support find_by_inquiry_board_num(String num) throws Exception;
+	public void insert_inquiry_answer(Support dto) throws Exception;
+	
+	public Support find_by_answer_num(String num) throws Exception;
+	public void update_inquiry_answer(Support dto);
+	
+	
 }

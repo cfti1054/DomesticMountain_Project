@@ -34,7 +34,7 @@ public class SupportController {
 	@Autowired
 	private MyUtil myUtil;
 	
-	
+	// 1:1 문의 카테고리 리스트
 	@GetMapping("inquiry_category_list")
 	public String inquiry_category_list(HttpServletRequest req, Model model) {
 		List<Support> list = null;
@@ -52,6 +52,7 @@ public class SupportController {
 		return ".admin.support.inquiry_category";
 	}
 	
+	// 1:1 문의 게시판 리스트
 	@GetMapping("inquiry_board_list")
 	public String inquiry_board_list(HttpServletRequest req, Model model) {
 		List<Support> list = null;
@@ -67,17 +68,176 @@ public class SupportController {
 		return ".admin.support.inquiry_board";
 	}
 	
+	// 카테고리 추가
+		@GetMapping("inquiry_category_write")
+		public String inquiry_category_write(Model model) throws Exception {
 
+			model.addAttribute("mode","write");
+			model.addAttribute("type", "category");
+
+			return "admin/support/inquiry_modal";
+		}
 	
+	// 1:1 문의 카테고리 추가
+		@PostMapping("inquiry_category_write")
+		public String inquiry_category_write_submit(Support dto, HttpSession session) throws Exception {
+			String root = session.getServletContext().getRealPath("/");
+
+			try { 
+
+//				dto.setCategory_reg_id(info.getUserId());
+
+				service.insert_inquiry_category(dto);
+			} catch (Exception e) {
+			}
+
+			return "redirect:/admin/support/inquiry_category_list";
+		}
 	
-	public String inquiry_answer() {
-		// 1:1 문의 답변 폼
+		// 1:1문의 카테고리 업데이트
+		@GetMapping("multi_inquiry_category")
+		public String inquiry_category_update_form(@RequestParam List<String> category_dto, Model model) throws Exception {
+			List<Support> list = null;
+			Support dto = null;
+			try {
+				list = service.find_by_inquiry_category_num(category_dto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("list", list);
+			model.addAttribute("mode", "update");
+			model.addAttribute("type", "category");
+			for(Support s: list) {
+				dto = s;
+			}
+			model.addAttribute("dto", dto);
+			
+			return "admin/support/inquiry_modal";
+		}
+		// 1:1 문의 카테고리 업데이트 완료
+		@GetMapping("update_inquiry_category_ok")
+		public String update_inquiry_category_ok(@RequestParam List<String> category_list, Model model) throws Exception {
+			
+			Support dto = new Support();
+			try {
+				
+				for(String s: category_list) {
+				}
+				
+				for(int i = 0; i < category_list.size(); i++) {
+					
+					if (i % 3 == 0 ) {
+						dto.setInquiry_category_num(Long.parseLong(category_list.get(i)));
+					} else if (i % 3 == 1) {
+						dto.setInquiry_category_name(category_list.get(i));
+					} else if ( i % 3 == 2) {
+						dto.setInquiry_category_visible(Integer.parseInt(category_list.get(i)));
+						service.update_inquiry_category(dto);
+						dto = new Support();
+					
+					}
+
+				}
 		
-		return "";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return "redirect:/admin/support/inquiry_category_list";
+		}
+		
+		@GetMapping("show_inquiry_content")
+		public String show_inquiry_content(@RequestParam String inquiry_board_num, Model model) throws Exception {
+			Support dto = null;
+			try {
+				
+				dto = service.find_by_inquiry_board_num(inquiry_board_num);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("mode", "show");
+			model.addAttribute("type", "board");
+			
+			return "admin/support/inquiry_modal";
+		}
+		
+	@GetMapping("inquiry_answer")
+	public String inquiry_answer(@RequestParam String inquiry_board_num, Model model) {
+		// 1:1 문의 답변 폼
+		Support dto = null;
+		model.addAttribute("type", "answer");
+		model.addAttribute("mode", "write");
+		
+		try {
+			dto = service.find_by_inquiry_board_num(inquiry_board_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+		model.addAttribute("dto", dto);
+		
+		return "admin/support/inquiry_modal";
+	}
+	
+	@PostMapping("inquiry_answer")
+	public String inquiry_answer_submit(Support dto, HttpSession session) throws Exception {
+		String root = session.getServletContext().getRealPath("/");
+
+		try {
+
+//			dto.setCategory_reg_id(info.getUserId());
+
+			service.insert_inquiry_answer(dto);
+
+			
+		} catch (Exception e) {
+		}
+
+		return "redirect:/admin/support/faq_board_list";
+	}
+	
+	@GetMapping("inquiry_answer_update")
+	public String inquiry_answer_update(@RequestParam String inquiry_board_num, Model model) {
+		// 1:1 문의 답변 폼
+		Support dto = null;
+		model.addAttribute("type", "answer");
+		model.addAttribute("mode", "update");
+		
+		try {
+			dto = service.find_by_inquiry_board_num(inquiry_board_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+		model.addAttribute("dto", dto);
+		
+		return "admin/support/inquiry_modal";
+	}
+	
+	@PostMapping("inquiry_answer_update")
+	public String inquiry_answer_update_submit(Support dto, HttpSession session) throws Exception {
+		String root = session.getServletContext().getRealPath("/");
+
+		try {
+
+//			dto.setCategory_reg_id(info.getUserId());
+
+			service.update_inquiry_answer(dto);
+
+			
+		} catch (Exception e) {
+		}
+
+		return "redirect:/admin/support/faq_board_list";
 	}
 	
 
-	// 카테고리 리스트
+	// FAQ 카테고리 리스트
 	@RequestMapping("faq_category_list")
 	public String faq_category_list(HttpServletRequest req, Model model) throws Exception {
 		List<Support> list = service.list_faq_category();
@@ -87,7 +247,7 @@ public class SupportController {
 		return ".admin.support.faq_category";
 	}
 	
-	// 카테고리 추가
+	// FAQ 카테고리 추가
 	@GetMapping("faq_category_write")
 	public String category_write(Model model) throws Exception {
 
@@ -98,7 +258,7 @@ public class SupportController {
 	}
 
 	
-	// 카테고리 추가
+	// FAQ 카테고리 추가
 	@PostMapping("faq_category_write")
 	public String write_submit(Support dto, HttpSession session) throws Exception {
 		String root = session.getServletContext().getRealPath("/");

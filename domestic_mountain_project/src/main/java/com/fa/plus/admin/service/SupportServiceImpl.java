@@ -195,6 +195,105 @@ public class SupportServiceImpl implements SupportService {
 		return list;
 	}
 
+	@Override
+	public void insert_inquiry_category(Support dto) throws Exception {
+		try {
+			long inquiry_category_num = mapper.inquiry_category_seq();
+			
+			dto.setInquiry_category_num(inquiry_category_num);
+			
+			mapper.insert_inquiry_category(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void update_inquiry_category(Support dto) throws Exception {
+		try {
+			mapper.update_inquiry_category(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public List<Support> find_by_inquiry_category_num(List<String> input_list) throws Exception {
+		List<Integer> category_num_list = new ArrayList<Integer>() ;
+		List<Support> list = null;
+		try {
+			for(int i = 0 ; i < input_list.size() ; i+=5 ) {
+				category_num_list.add(Integer.parseInt(input_list.get(i)));
+			}
+			
+			list = mapper.find_by_inquiry_category_num(category_num_list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public Support find_by_inquiry_board_num(String num) throws Exception {
+		Support dto = null;
+		
+		try {
+			Long l = Long.parseLong(num);
+			dto = mapper.find_by_inquiry_board_num(l);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public void insert_inquiry_answer(Support dto) throws Exception {
+		
+		try {
+
+			mapper.insert_inquiry_answer(dto);
+			mapper.chage_inquiry_board_status(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
+	}
+
+	@Override
+	public Support find_by_answer_num(String num) throws Exception {
+		Support dto = null;
+		
+		try {
+			long l = Long.parseLong(num);
+			dto = mapper.find_by_answer_num(l);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		return dto;
+	}
+
+	@Override
+	public void update_inquiry_answer(Support dto) {
+		
+		try {
+			mapper.update_inquiry_answer(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+
 	
 
 	

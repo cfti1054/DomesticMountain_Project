@@ -86,11 +86,11 @@
 			</if>
 			AND (notice_category_num &gt; #{notice_category_num})
 	 	</where>
-	 	ORDER BY notice_category_num ASC
+	 	ORDER BY notice_category_num ASC, notice_reg_date DESC
 	 	FETCH FIRST 1 ROWS ONLY
 	 	
 	 </select>
-	
+		
 	 <select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Notice">
 		SELECT notice_category_num, notice_title
 	 	FROM notice_board n
@@ -102,7 +102,7 @@
 			</if>
 			AND (notice_category_num &lt; #{notice_category_num})
 	 	</where>
-	 	ORDER BY notice_category_num DESC
+	 	ORDER BY notice_category_num DESC, notice_reg_date DESC
 	 	FETCH FIRST 1 ROWS ONLY
 	</select>
 	
