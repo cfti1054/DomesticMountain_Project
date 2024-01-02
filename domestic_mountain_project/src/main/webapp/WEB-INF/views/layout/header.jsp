@@ -51,22 +51,27 @@
 
 			<div class="nav__actions">
 				<i class=""></i>
-				<!-- Search button -->
-				<i class="ri-search-line nav__search" id="search-btn"></i>
 				
 				<!-- Login button -->
 				<c:choose>
 				    <c:when test="${empty sessionScope.loginUser}">
-				        <i class="ri-user-line nav__login" id="login-btn"></i>
+				        
 				        <div class="p-2">
-				            <a href="${pageContext.request.contextPath}/user/user" title="회원가입"><i class=""></i></a>
+				            <i class="fa-solid fa-user login-btn" id="login-btn"></i>
 				        </div>
+				        <a href="${pageContext.request.contextPath}/user/user" title="회원가입"><i class="fa-solid fa-user-plus login-btn"></i></a>
+				        
 				    </c:when>
 				    <c:otherwise>
 				        <div class="p-2">
-				            <a href="${pageContext.request.contextPath}/user/logout" title="로그아웃"><i class="fa-solid fa-right-from-bracket" id="logout-btn" 
+				            <a href="${pageContext.request.contextPath}/user/logout" title="로그아웃"><i class="fa-solid fa-right-from-bracket login-btn" id="logout-btn" 
 				                onclick="location.href='${pageContext.request.contextPath}/user/logout';"></i></a>
 				        </div>
+				        <c:if test="${sessionScope.loginUser.userid == 'admin'}">
+							<div class="p-2">
+								<a href="${pageContext.request.contextPath}/admin" title="관리자"><i class="bi bi-gear login-btn"></i></a>
+							</div>
+						</c:if>
 				    </c:otherwise>
 				</c:choose>
 				

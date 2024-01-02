@@ -327,6 +327,9 @@
   transform: translateY(0);
 }
 
+.login-btn {
+	color: #555;
+}
 
 /*=============== BREAKPOINTS ===============*/
 /* For medium devices */

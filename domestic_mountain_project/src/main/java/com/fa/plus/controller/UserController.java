@@ -94,7 +94,7 @@ public class UserController {
 	}
 	
 	// 회원가입 폼
-//		@GetMapping("user")dd
+//		@GetMapping("user")
 //		public String userForm(Model model) {
 //			model.addAttribute("mode", "user");
 //			return ".user.user";
