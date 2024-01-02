@@ -25,7 +25,7 @@
 			</div>
 			<div class="mountain-title">
 				<button type="button" class="btn btn-light" style="color: white; background-color: #6e91b4; float: right;" 
-					onclick="location.href='${pageContext.request.contextPath}/emaps/main'">뒤로가기</button>
+					onclick="location.href='${pageContext.request.contextPath}/echartsMap/main'">뒤로가기</button>
 				
 				<div class="name-kor">
 					<h2>${dto.mountain_name}</h2>

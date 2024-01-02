@@ -31,8 +31,9 @@
 </section>
 
 <script type="text/javascript">
+	  
 	var ROOT_PATH = '${pageContext.request.contextPath}/data/asset/geo';
-	var sido, fullSido, sigungu; 
+	var sido, sido_name, sigungoo_name; 
 	
 	var chartDom = document.querySelector('.maps');
 	var myChart = echarts.init(chartDom);
@@ -158,16 +159,16 @@
 	myChart.on('click', function(params){
 		if((! params.data) || (! params.data.fullName)) { // 시군구를 클릭 한 경우
 			// 세종시는 확인 필요
-			sigungu = params.name;
+			sigungoo_name = params.name;
 		
 			// 여기가 이제 시군구 클릭을 했을때 넘기는 코드
 			
-		
-		
-			document.getElementById("region").innerHTML=fullSido + ' ' + sigungu;
+			document.getElementById("region").innerHTML=sido_name + ' ' + sigungoo_name;
 			
 			
-			// alert(fullSido + ' ' + sido + ' ' + sigungu);
+			
+			
+			// alert(sido_name + ' ' + sido + ' ' + sigungoo_name);
 			
 			return false;
 		}
@@ -175,14 +176,25 @@
 		// 시도를 클릭한 경우
 		sido = params.name;
 		
-		
-		// 여기가 이제 도를 클릭 했을때 넘기는 코드
-		
-		
 		var id = params.data.id;
-		fullSido = params.data.fullName;
+		sido_name = params.data.fullName;
 		
-		document.getElementById("region").innerHTML = fullSido;
+		document.getElementById("region").innerHTML = sido_name;
+		
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/echartsMap/main",
+			type : 'post',
+			data : {
+				fullSido : sido_name
+			},
+			success : function(data) {
+				alert(sido_name);
+		     },
+			error : function() {
+				alert("error");
+			}
+		});
 		
 		
 		var arr = [];
@@ -226,7 +238,7 @@
 		  
 		  myChart.setOption({
 			  title: {
-			    text: fullSido
+			    text: sido_name
 			  },
 			  series: [{  // 지도에 색상을 칠하기 위해(series를 지우면 기본 색상 - data 에서 value 속성이 색상)
 	    	  	name: 'map',
@@ -267,7 +279,7 @@
 	<div class="col-6 text-end datacount">
 	
 		<form class="row text-end-row" name="searchForm"
-			action="${pageContext.request.contextPath}/emaps/main" method="post">
+			action="${pageContext.request.contextPath}/echartsMap/main" method="post">
 			
 			<div class="col-auto p-1">
 				<input type="text" name="kwd" value="${kwd}" class="form-control"
@@ -310,7 +322,7 @@
 						<p>
 							${dto.main_content}<br>
 						</p>
-						<a href="${pageContext.request.contextPath}/emaps/article?mountain_num=${dto.mountain_num}"># 상세보기</a>
+						<a href="${pageContext.request.contextPath}/echartsMap/article?mountain_num=${dto.mountain_num}"># 상세보기</a>
 					</div>
 				</li>
 					

@@ -21,10 +21,9 @@
 			<if test="kwd!=null and kwd!='' ">
 				<include refid="where-list" />
 			</if>
-		</where>
-		<where>
+
 			<if test="sido_name !=null and sido_name!='' ">
-				WHERE sido_name = #{sido_name}
+				AND sido_name = #{sido_name}
 				<if test="sigungoo_name !=null and sigungoo_name!='' ">
 					AND sigungoo_name = #{sigungoo_name}
 				</if>
@@ -35,11 +34,21 @@
 	</select>
 
 	<select id="dataCount" parameterType="map" resultType="Integer">
-		SELECT NVL(COUNT(*), 0)
-		FROM mountain
+		SELECT NVL(COUNT(DISTINCT m.mountain_num), 0)
+		FROM mountain m
+		JOIN mountain_addr ad ON m.mountain_num = ad.mountain_num
+		JOIN sigungoo si ON ad.sigungoo_num = si.sigungoo_num
+		JOIN sido do ON si.sido_num = do.sido_num
 		<where>
 			<if test="kwd!=null and kwd!='' ">
 				<include refid="where-list" />
+			</if>
+
+			<if test="sido_name !=null and sido_name!='' ">
+				AND sido_name = #{sido_name}
+				<if test="sigungoo_name !=null and sigungoo_name!='' ">
+					AND sigungoo_name = #{sigungoo_name}
+				</if>
 			</if>
 		</where>
 	</select>

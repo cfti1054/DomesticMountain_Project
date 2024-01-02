@@ -21,7 +21,7 @@ import com.fa.plus.domain.EchartMap;
 import com.fa.plus.service.EchartMapService;
 
 @Controller
-@RequestMapping("/emaps/*")
+@RequestMapping("/echartsMap/*")
 public class EChartsMapController {
 	@Autowired
 	private EchartMapService service;
@@ -44,7 +44,7 @@ public class EChartsMapController {
 		
 		int dataCount = 0;
 		
-		if (req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
+		if (req.getMethod().equalsIgnoreCase("GET")) {
 			kwd = URLDecoder.decode(kwd, "utf-8");
 		}
 		
@@ -59,8 +59,8 @@ public class EChartsMapController {
 		List<EchartMap> list = service.listMountain(map);
 		
 		String query = "";
-		String listUrl = cp + "/emaps/main";
-		String articleUrl = cp + "/emaps/article";
+		String listUrl = cp + "/echartsMap/main";
+		String articleUrl = cp + "/echartsMap/article";
 		
 		if (kwd.length() != 0) {
 			query =  "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
@@ -68,7 +68,7 @@ public class EChartsMapController {
 		
 		if (query.length() != 0) {
 			listUrl = listUrl + "?" + query;
-			articleUrl = cp + "/emaps/article?" + query;
+			articleUrl = cp + "/echartsMap/article?" + query;
 		}
 		
 		model.addAttribute("list", list);
@@ -102,7 +102,7 @@ public class EChartsMapController {
 		
 		EchartMap dto = service.findById(mountain_num);
 		if (dto == null) {
-			return "redirect:/emaps/main?" + query;
+			return "redirect:/echartsMap/main?" + query;
 		}
 		
 		model.addAttribute("dto", dto);
@@ -110,4 +110,5 @@ public class EChartsMapController {
 		
 		return ".echartsMap.article";
 	}
+	
 }
