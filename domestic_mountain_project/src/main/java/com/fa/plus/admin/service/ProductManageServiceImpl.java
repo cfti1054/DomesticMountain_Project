@@ -90,7 +90,7 @@ public class ProductManageServiceImpl implements ProductManageService {
 		try {
 			// 썸네일 이미지
 			String file_name = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
-			dto.setThumbnail(file_name);
+			dto.setProduct_summary(file_name);
 			
 			// 상품 저장
 			long product_num = mapper.productSeq();
@@ -161,11 +161,11 @@ public class ProductManageServiceImpl implements ProductManageService {
 			String file_name = fileManager.doFileUpload(dto.getThumbnailFile(), pathname);
 			if(file_name != null) {
 				// 이전 파일 지우기
-				if (dto.getThumbnail().length() != 0) {
-					fileManager.doFileDelete(dto.getThumbnail(), pathname);
+				if (dto.getProduct_summary().length() != 0) {
+					fileManager.doFileDelete(dto.getProduct_summary(), pathname);
 				}
 				
-				dto.setThumbnail(file_name);
+				dto.setProduct_summary(file_name);
 			}
 			
 			mapper.updateProduct(dto);
