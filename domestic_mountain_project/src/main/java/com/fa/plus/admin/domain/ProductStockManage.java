@@ -6,6 +6,7 @@ public class ProductStockManage {
 	private long product_num;
 	private long detail_num;
 	private long detail_num2;
+	private String product_name;
 	
 	public long getStock_num() {
 		return stock_num;
@@ -36,6 +37,12 @@ public class ProductStockManage {
 	}
 	public void setDetail_num2(long detail_num2) {
 		this.detail_num2 = detail_num2;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
 	
 	

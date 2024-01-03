@@ -173,19 +173,22 @@
 		DELETE FROM optionDetail WHERE detail_num = #{detail_num}
 	</delete>	
 	
+	
 	<!-- 상품 재고 -->
 	<select id="listProductStock" parameterType="long" resultType="com.fa.plus.admin.domain.ProductStockManage">
-		SELECT stock_num, detail_num, detail_num2, total_stock, p.product_num, product_name
-		FROM productStock s
-		JOIN product p ON s.product_num = p.product_num
+		SELECT o.product_num, product_name, d.option_num, parent, detail_num,
+			d.option_value
+		FROM product p
+		JOIN productOption o ON p.product_num = o.product_num
+		LEFT OUTER JOIN optionDetail d ON o.option_num = d.option_num
 		WHERE p.product_num = #{product_num}
-		ORDER BY stock_num
+		ORDER BY product_num
 	</select>
 	
 	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">
 		INSERT INTO productStock(stock_num, detail_num, detail_num2, total_stock, product_num)
 			VALUES (productStock_seq.NEXTVAL, #{detail_num}, #{detail_num2},
-				#{total_stock}, #{product_num})
+					#{total_stock}, #{product_num})
 	</insert>
 	
 	<update id="updateProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">
@@ -193,9 +196,5 @@
 		WHERE stock_num = #{stock_num}
 	</update>	
 	
-	
-	
-	
-			
 	
 </mapper>

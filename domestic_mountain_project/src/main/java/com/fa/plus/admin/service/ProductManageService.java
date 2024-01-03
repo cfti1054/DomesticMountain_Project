@@ -30,7 +30,7 @@ public interface ProductManageService {
 	public List<ProductManage> listSubCategory(long parent_num);
 	
 	// 상품 재고
-	public List<ProductStockManage> listProductStock(long productNum);
+	public List<ProductStockManage> listProductStock(long product_num);
 	public void updateProductStock(ProductStockManage dto) throws Exception;
 	
 }

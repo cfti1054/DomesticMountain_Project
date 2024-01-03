@@ -331,11 +331,11 @@ public class ProductManageServiceImpl implements ProductManageService {
 	}
 
 	@Override
-	public List<ProductStockManage> listProductStock(long productNum) {
+	public List<ProductStockManage> listProductStock(long product_num) {
 		List<ProductStockManage> list = null;
 		
 		try {
-			list = mapper.listProductStock(productNum);
+			list = mapper.listProductStock(product_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

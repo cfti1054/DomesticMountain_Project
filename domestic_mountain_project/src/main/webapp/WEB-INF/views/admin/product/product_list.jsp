@@ -228,9 +228,7 @@ function changeSubList() {
 									</c:url>
 									<c:url var="stockUrl" value="/admin/product/stock">
 										<c:param name="product_num" value="${dto.product_num}"/>
-										<c:param name="detail_num" value="${detail_num}"/>
-										<c:param name="detail_num2" value="${detail_num2}"/>
-										<c:param name="page" value="${page}"/>
+										<c:param name="page" value="${page}"/>										
 									</c:url>									
 								<td>
 								<button type="button" class="btn" style="height: auto; width: auto" onclick="location.href='${stockUrl}';">재고</button>

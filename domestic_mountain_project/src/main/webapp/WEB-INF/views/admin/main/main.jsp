@@ -7,7 +7,6 @@
 
 <html>
 
-
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
@@ -16,61 +15,96 @@
 				<li class="breadcrumb-item active">대시보드</li>
 			</ol>
 		<div class="inner-page">
+		
+          <div class="row">
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">이곳은</h5>
+                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="">
+                        <i class="fas fa-chart-bar"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">대시보드</h5>
+                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="">
+                        <i class="fas fa-chart-pie"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last week</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">열심히</h5>
+                      <span class="h2 font-weight-bold mb-0">924</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="">
+                        <i class="fa-regular fa-calendar"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                    <span class="text-nowrap">Since yesterday</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">고치는중</h5>
+                      <span class="h2 font-weight-bold mb-0">49,65%</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="">
+                        <i class="fas fa-percent"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          	
 
-			<div class="row g-1 mt-4 p-1">
-				<div class="col p-2">
-					<div class="fs-6 fw-semibold mb-2">
-						<i class="bi bi-chevron-right"></i> 오늘 판매 현황
-					</div>
-					<div class="border rounded p-5 text-center">
-						<div class="fs-5 mb-2">
-							총 판매 건수 : <span
-								class="product-totalAmount fw-semibold text-primary">${today.COUNT}</span>
-						</div>
-						<div class="fs-5">
-							총 판매 금액 : <span
-								class="product-totalAmount fw-semibold text-danger"><fmt:formatNumber
-									value="${today.TOTAL}" /></span>원
-						</div>
-					</div>
-				</div>
-
-				<div class="col p-2">
-					<div class="fs-6 fw-semibold mb-2">
-						<i class="bi bi-chevron-right"></i> 이번주 판매 현황
-					</div>
-					<div class="border rounded p-5 text-center" style="border-color: black;">
-						<div class="fs-5 mb-2">
-							총 판매 건수 : <span
-								class="product-totalAmount fw-semibold text-primary">${thisMonth.COUNT}</span>
-						</div>
-						<div class="fs-5">
-							총 판매 금액 : <span
-								class="product-totalAmount fw-semibold text-danger"><fmt:formatNumber
-									value="${thisMonth.TOTAL}" /></span>원
-						</div>
-					</div>
-				</div>
-
-				<div class="col p-2">
-					<div class="fs-6 fw-semibold mb-2">
-						<i class="bi bi-chevron-right"></i> 이번달 판매 현황
-					</div>
-					<div class="border rounded p-5 text-center">
-						<div class="fs-5 mb-2">
-							총 판매 건수 : <span
-								class="product-totalAmount fw-semibold text-primary">${previousMonth.COUNT}</span>
-						</div>
-						<div class="fs-5">
-							총 판매 금액 : <span
-								class="product-totalAmount fw-semibold text-danger"><fmt:formatNumber
-									value="${previousMonth.TOTAL}" /></span>원
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-			<div class="row">
+			<div class="row" style="margin-top: 20px;">
 				<div class="col-xl-6 col-md-9">
 					<div class="card bg-danger text-white mb-4">
 						<div class="card-body">관리 현황</div>
@@ -138,6 +172,60 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="row g-1 mt-4 p-1">
+				<div class="col p-2">
+					<div class="fs-6 fw-semibold mb-2">
+						<i class="bi bi-chevron-right"></i> 오늘 판매 현황
+					</div>
+					<div class="border rounded p-5 text-center">
+						<div class="fs-5 mb-2">
+							총 판매 건수 : <span
+								class="product-totalAmount fw-semibold text-primary">${today.COUNT}</span>
+						</div>
+						<div class="fs-5">
+							총 판매 금액 : <span
+								class="product-totalAmount fw-semibold text-danger"><fmt:formatNumber
+									value="${today.TOTAL}" /></span>원
+						</div>
+					</div>
+				</div>
+
+				<div class="col p-2">
+					<div class="fs-6 fw-semibold mb-2">
+						<i class="bi bi-chevron-right"></i> 이번주 판매 현황
+					</div>
+					<div class="border rounded p-5 text-center" style="border-color: black;">
+						<div class="fs-5 mb-2">
+							총 판매 건수 : <span
+								class="product-totalAmount fw-semibold text-primary">${thisMonth.COUNT}</span>
+						</div>
+						<div class="fs-5">
+							총 판매 금액 : <span
+								class="product-totalAmount fw-semibold text-danger"><fmt:formatNumber
+									value="${thisMonth.TOTAL}" /></span>원
+						</div>
+					</div>
+				</div>
+
+				<div class="col p-2">
+					<div class="fs-6 fw-semibold mb-2">
+						<i class="bi bi-chevron-right"></i> 이번달 판매 현황
+					</div>
+					<div class="border rounded p-5 text-center">
+						<div class="fs-5 mb-2">
+							총 판매 건수 : <span
+								class="product-totalAmount fw-semibold text-primary">${previousMonth.COUNT}</span>
+						</div>
+						<div class="fs-5">
+							총 판매 금액 : <span
+								class="product-totalAmount fw-semibold text-danger"><fmt:formatNumber
+									value="${previousMonth.TOTAL}" /></span>원
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		</div>
 
 
@@ -205,6 +293,7 @@
 				</table>
 			</div>
 		</div>
+					
 </div>
 </main>
 </div>

@@ -295,15 +295,18 @@ public class ProductManageController {
 	
 	
 	@GetMapping("stock")
-	public String stockForm(@RequestParam long product_num
-			,Model model) throws Exception {
+	public String stockForm(@RequestParam long product_num,
+			Model model) throws Exception {
 
-		long stock_num = 0;
-
-		List<ProductStockManage> listProductStock = service.listProductStock(stock_num );
+		List<ProductStockManage> listProductStock = service.listProductStock(product_num);
 		
-		listProductStock = service.listProductStock(stock_num);
+		listProductStock = service.listProductStock(product_num);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		int dataCount = 0;
+		dataCount = service.dataCount(map);
+		
+		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("mode", "stock");
 		model.addAttribute("listProductStock", listProductStock);
 		
