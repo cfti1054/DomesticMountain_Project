@@ -43,7 +43,7 @@
 							${dto.notice_content}
 						</td>
 					</tr>
-					
+					<!--  
 				 	<tr>
 						<td colspan="2">
 							<c:forEach var="vo" items="${listFile}" varStatus="status">
@@ -55,7 +55,7 @@
 							</c:forEach>
 						</td>
 					</tr> 
-					
+					-->
 					<tr>
 						<td colspan="2">
 							이전글 :
