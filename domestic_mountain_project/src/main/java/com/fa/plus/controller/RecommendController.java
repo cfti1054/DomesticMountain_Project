@@ -32,12 +32,13 @@ public class RecommendController {
 	public String list(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
+			@RequestParam(defaultValue = "1") String show,
 			HttpServletRequest req,
 			Model model) throws Exception {
 
 		String cp = req.getContextPath();
 
-		int size = 5;
+		int size = 2;
 		int total_page;
 		int dataCount;
 
@@ -66,14 +67,14 @@ public class RecommendController {
 		List<Recommend> list = service.listRecommend(map);
 
 		String query = "";
-		String listUrl = cp + "/recommend/list";
+		String listUrl = cp + "/recommend/list?show="+show;
 		String articleUrl = cp + "/recommend/article?page=" + current_page;
 		if (kwd.length() != 0) {
 			query = "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
 		}
 
 		if (query.length() != 0) {
-			listUrl = cp + "/recommend/list?" + query;
+			listUrl += "&" + query;
 			articleUrl = cp + "/recommend/article?page=" + current_page + "&" + query;
 		}
 
@@ -89,6 +90,7 @@ public class RecommendController {
 
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
+		model.addAttribute("show", show);
 
 		return ".recommend.list";
 	}

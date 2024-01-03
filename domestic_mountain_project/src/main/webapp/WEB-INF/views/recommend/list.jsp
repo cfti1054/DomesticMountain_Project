@@ -17,14 +17,6 @@
 
 </style>
 
-
-<script type="text/javascript">
-function searchList() {
-	const f = document.searchForm;
-	f.submit();
-}
-</script>
-
 <section class="features-1">
 	<div class="body-container">
 		<div class="aside-box">
@@ -88,16 +80,16 @@ function searchList() {
 			</div>
 
 
-			<div class="show1">
+			<div class="show1 tab-show">
 				<div class="output-type">
 
 					<div class="sort_form">
 						<a href="#" onclick="" class="sort_card "><span class="blind"><i
-								class="fa-solid fa-server fa-2x sort-color show-1"></i></span></a> <a
+								class="fa-solid fa-server fa-2x sort-color btn-show" data-show="1"></i></span></a> <a
 							href="#" onclick="" class="sort_album "><span class="blind"><i
-								class="fa-solid fa-border-all fa-2x show-2"></i></span></a> <a href="#"
+								class="fa-solid fa-border-all fa-2x btn-show" data-show="2"></i></span></a> <a href="#"
 							onclick="" class="sort_list "><span class="blind"><i
-								class="fa-solid fa-list-ul fa-2x show-3"></i></span></a>
+								class="fa-solid fa-list-ul fa-2x btn-show" data-show="3"></i></span></a>
 					</div>
 				</div>
 
@@ -163,7 +155,7 @@ function searchList() {
 
 					<div class="row board-list-footer">
 						<div class="col">
-							<button type="button" class="btn btn-light" onclick="#"
+							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/recommend/list';"
 								title="새로고침">
 								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
@@ -172,30 +164,28 @@ function searchList() {
 
 
 						<div class="col-6 text-end">
-							<form class="row text-end-row" name="searchForm"
-								action="/recommend/list" method="post">
+							<form class="row text-end-row" name="searchForm1"
+								action="${pageContext.request.contextPath}/recommend/list" method="post">
 								<div class="col-auto p-1">
 									<select id="schType1" name="schType" class="form-select">
 										<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
 										<option value="all">제목+내용</option>
-										<option value="reg_date">등록일</option>
-										<option value="subject">제목</option>
-										<option value="writer">작성자</option>
-										<option value="content">내용</option>
+												<option value="post_reg_date">등록일</option>
+												<option value="post_title">제목</option>
+												<option value="user_name">작성자</option>
+												<option value="post_content">내용</option>
 									</select>
 								</div>
 								<div class="col-auto p-1">
-									<input type="text" id="kwd1" name="kwd" value="${kwd}"
+									<input type="text" name="kwd" value="${kwd}"
 										class="form-control">
 								</div>
 								<div class="col-auto p-1">
-									<button type="button" class="btn btn-light"
-										onclick="searchList()">
+									<input type="hidden" name="show" value="1">
+									<button type="button" class="btn btn-light" onclick="searchList(this.form)">
 										<i class="bi bi-search"></i>
 									</button>
 
-									<button type="button" class="btn btn-light"
-										onclick="searchList()">글올리기</button>
 								</div>
 							</form>
 						</div>
@@ -207,18 +197,18 @@ function searchList() {
 
 
 
-			<div class="show2">
+			<div class="show2 tab-show">
 				<div class="output-type">
 
 
 					<div class="sort_form">
 
 						<a href="#" onclick="" class="sort_card "><span class="blind"><i
-								class="fa-solid fa-server fa-2x show-1"></i></span></a> <a href="#"
+								class="fa-solid fa-server fa-2x btn-show" data-show="1"></i></span></a> <a href="#"
 							onclick="" class="sort_album "><span class="blind"><i
-								class="fa-solid fa-border-all fa-2x sort-color show-2"></i></span></a> <a
+								class="fa-solid fa-border-all fa-2x sort-color btn-show" data-show="2"></i></span></a> <a
 							href="#" onclick="" class="sort_list "><span class="blind"><i
-								class="fa-solid fa-list-ul fa-2x show-3"></i></span></a>
+								class="fa-solid fa-list-ul fa-2x btn-show" data-show="3"></i></span></a>
 					</div>
 				</div>
 
@@ -263,7 +253,7 @@ function searchList() {
 
 							<div class="row board-list-footer">
 								<div class="col">
-									<button type="button" class="btn btn-light" onclick="#"
+									<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/recommend/list';"
 										title="새로고침">
 										<i class="bi bi-arrow-counterclockwise"></i>
 									</button>
@@ -272,16 +262,16 @@ function searchList() {
 
 
 								<div class="col-6 text-end">
-									<form class="row text-end-row" name="searchForm"
-										action="/recommend/list" method="post">
+									<form class="row text-end-row" name="searchForm2"
+										action="${pageContext.request.contextPath}/recommend/list" method="post">
 										<div class="col-auto p-1">
 											<select id="schType2" name="schType" class="form-select">
 												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
 												<option value="all">제목+내용</option>
-												<option value="reg_date">등록일</option>
-												<option value="subject">제목</option>
-												<option value="writer">작성자</option>
-												<option value="content">내용</option>
+												<option value="post_reg_date">등록일</option>
+												<option value="post_title">제목</option>
+												<option value="user_name">작성자</option>
+												<option value="post_content">내용</option>
 											</select>
 										</div>
 										<div class="col-auto p-1">
@@ -289,13 +279,12 @@ function searchList() {
 												class="form-control">
 										</div>
 										<div class="col-auto p-1">
-											<button type="button" class="btn btn-light"
-												onclick="searchList()">
+											<input type="hidden" name="show" value="2">
+											<button type="button" class="btn btn-light" onclick="searchList(this.form)">
 												<i class="bi bi-search"></i>
 											</button>
 
-											<button type="button" class="btn btn-light"
-												onclick="searchList()">글올리기</button>
+											<button type="button" class="btn btn-light">글올리기</button>
 										</div>
 									</form>
 								</div>
@@ -308,17 +297,17 @@ function searchList() {
 			</div>
 
 
-			<div class="show3">
+			<div class="show3 tab-show">
 				<div class="output-type">
 
 
 					<div class="sort_form">
 						<a href="#" onclick="" class="sort_card "><span class="blind"><i
-								class="fa-solid fa-server fa-2x show-1"></i></span></a> <a href="#"
+								class="fa-solid fa-server fa-2x btn-show" data-show="1"></i></span></a> <a href="#"
 							onclick="" class="sort_album "><span class="blind"><i
-								class="fa-solid fa-border-all fa-2x show-2"></i></span></a> <a href="#"
+								class="fa-solid fa-border-all fa-2x btn-show" data-show="2"></i></span></a> <a href="#"
 							onclick="" class="sort_list "><span class="blind"><i
-								class="fa-solid fa-list-ul fa-2x sort-color show-3"></i></span></a>
+								class="fa-solid fa-list-ul fa-2x sort-color btn-show" data-show="3"></i></span></a>
 					</div>
 				</div>
 
@@ -362,7 +351,7 @@ function searchList() {
 
 							<div class="row board-list-footer">
 								<div class="col">
-									<button type="button" class="btn btn-light" onclick="#"
+									<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/recommend/list';"
 										title="새로고침">
 										<i class="bi bi-arrow-counterclockwise"></i>
 									</button>
@@ -371,16 +360,16 @@ function searchList() {
 
 
 								<div class="col-6 text-end">
-									<form class="row text-end-row" name="searchForm"
-										action="/recommend/list" method="post">
+									<form class="row text-end-row kwd-search" name="searchForm3"
+										action="${pageContext.request.contextPath}/recommend/list" method="post">
 										<div class="col-auto p-1">
 											<select id="schType3" name="schType" class="form-select">
 												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
 												<option value="all">제목+내용</option>
-												<option value="reg_date">등록일</option>
-												<option value="subject">제목</option>
-												<option value="writer">작성자</option>
-												<option value="content">내용</option>
+												<option value="post_reg_date">등록일</option>
+												<option value="post_title">제목</option>
+												<option value="user_name">작성자</option>
+												<option value="post_content">내용</option>
 											</select>
 										</div>
 										<div class="col-auto p-1">
@@ -388,13 +377,12 @@ function searchList() {
 												class="form-control">
 										</div>
 										<div class="col-auto p-1">
-											<button type="button" class="btn btn-light"
-												onclick="searchList()">
+											<input type="hidden" name="show" value="3">
+											<button type="button" class="btn btn-light" onclick="searchList(this.form)">
 												<i class="bi bi-search"></i>
 											</button>
 
-											<button type="button" class="btn btn-light"
-												onclick="searchList()">글올리기</button>
+											<button type="button" class="btn btn-light">글올리기</button>
 										</div>
 									</form>
 								</div>
@@ -424,30 +412,23 @@ function searchList() {
 	
 	
 	$(document).ready(function() {
-		$('.show1').show(); //페이지를 로드할 때 표시할 요소
-		$('.show2').hide(); //페이지를 로드할 때 숨길 요소
-		$('.show3').hide(); //페이지를 로드할 때 숨길 요소
+		let show = '${show}';
 		
-		$('.show-1').click(function(){
-			$ ('.show2').hide(); //클릭 시 두 번째 요소 숨김
-			$ ('.show3').hide(); //클릭 시 세 번째 요소 숨김
-			$ ('.show1').show(); //클릭 시 첫 번째 요소 표시
-			return false;
-		});
-		
-		$('.show-2').click(function(){
-			$ ('.show3').hide(); //클릭 시 세 번째 요소 숨김
-			$ ('.show1').hide(); //클릭 시 첫 번째 요소 숨김
-			$ ('.show2').show(); //클릭 시 두 번째 요소 표시
-			return false;
-			});
-		
-		$('.show-3').click(function(){
-			$ ('.show1').hide(); //클릭 시 첫 번째 요소 숨김
-			$ ('.show2').hide(); //클릭 시 두 번째 요소 숨김
-			$ ('.show3').show(); //클릭 시 세 번째 요소 표시
-			return false;
-			});
-		
+		$('.tab-show').hide();
+		$('.show'+show).show();
 	});
+	
+	$(function(){
+		$('.btn-show').click(function(){
+			let $btn = $(this);
+			let s = $btn.attr('data-show');
+
+			$('.tab-show').hide();
+			$('.show'+s).show();
+		});		
+	});
+	
+	function searchList(f) {
+		f.submit();
+	}
 </script>

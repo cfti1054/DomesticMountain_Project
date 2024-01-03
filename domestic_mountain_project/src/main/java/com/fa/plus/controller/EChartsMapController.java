@@ -32,53 +32,12 @@ public class EChartsMapController {
 	private MyUtil myUtil;
 	
 	@RequestMapping("main")
-	public String main(
-			@RequestParam(defaultValue = "mountain_name") String schType,
-			@RequestParam(defaultValue = "") String kwd,
-			HttpServletRequest req,
-			Model model
-			) throws Exception {
-		
-		String cp = req.getContextPath();
-		
-		int dataCount = 0;
-		
-		if (req.getMethod().equalsIgnoreCase("GET")) {
-			kwd = URLDecoder.decode(kwd, "utf-8");
-		}
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("schType", schType);
-		map.put("kwd", kwd);
-		
-		dataCount = service.dataCount(map);
-		
-		List<EchartMap> list = service.listMountain(map);
-		
-		String query = "";
-		String listUrl = cp + "/echartsMap/main";
-		String articleUrl = cp + "/echartsMap/article";
-		
-		if (kwd.length() != 0) {
-			query =  "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
-		}
-		
-		if (query.length() != 0) {
-			listUrl = listUrl + "?" + query;
-			articleUrl = cp + "/echartsMap/article?" + query;
-		}
-		
-		model.addAttribute("list", list);
-		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("articleUrl", articleUrl);
-		
-		model.addAttribute("schType", schType);
-		model.addAttribute("kwd", kwd);
-		
+	public String main(Model model) throws Exception {	
 		
 		return ".echartsMap.main";
 	}
 
+	
 	
 	@GetMapping("article")
 	public String article(

@@ -175,31 +175,6 @@
 				dataType : 'json',
 				success : function(data) {
 					sidomountain(data);
-					
-					
-					$(data.list).each(function(index, item){
-						
-						let mountain_img = item.mountain_img;
-						let mountain_name = item.mountain_name;
-						let main_content = item.main_content;
-						let mountain_num = item.mountain_num;
-						
-						let out = '<li class="member co-funder type_bottom">';
-						out += '<div class="thumb">';
-						out += '<img src="' + mountain_img + '">';
-						out += '</div>';
-						out += '<div class="description">';
-						out += '<h3 class="mountain-name">' + mountain_name + '</h3>';
-						out += '<p>';
-						out += main_content + '<br>';
-						out += '</p>';
-						out += '<a href="${pageContext.request.contextPath}/echartsMap/article?mountain_num=' + mountain_num + '"># 상세보기</a>';
-						out += '</div>';
-						out += '</li>';
-						
-						$("#mountain-main-2").append(out);
-					});
-					
 			     },
 				error : function(e) {
 					console.log(e.responseText);
@@ -231,31 +206,6 @@
 			dataType : 'json',
 			success : function(data) {
 				sidomountain(data);
-				
-				
-				$(data.list).each(function(index, item){
-					
-					let mountain_img = item.mountain_img;
-					let mountain_name = item.mountain_name;
-					let main_content = item.main_content;
-					let mountain_num = item.mountain_num;
-					
-					let out = '<li class="member co-funder type_bottom">';
-					out += '<div class="thumb">';
-					out += '<img src="' + mountain_img + '">';
-					out += '</div>';
-					out += '<div class="description">';
-					out += '<h3 class="mountain-name">' + mountain_name + '</h3>';
-					out += '<p>';
-					out += main_content + '<br>';
-					out += '</p>';
-					out += '<a href="${pageContext.request.contextPath}/echartsMap/article?mountain_num=' + mountain_num + '"># 상세보기</a>';
-					out += '</div>';
-					out += '</li>';
-					
-					$("#mountain-main").append(out);
-				});
-				
 		     },
 			error : function(e) {
 				console.log(e.responseText);
@@ -325,14 +275,59 @@
 	});
 	
 	
+	// 전체 출력
+	$(function(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/echartsMap/search",
+			type : 'get',
+			data : {
+				sido_name : ''
+			},
+			dataType : 'json',
+			success : function(data) {
+				sidomountain(data);
+		     },
+			error : function(e) {
+				console.log(e.responseText);
+			}
+		});
+		
+	});
+	
 	function searchList() {
-		const f = document.searchForm;
-		f.submit();
+
 	}
 	
 	function sidomountain(data) {
-		console.log(data);
+		$(".mountain-main").empty();
+		
+		$(data.list).each(function(index, item){
+			
+			let mountain_img = item.mountain_img;
+			let mountain_name = item.mountain_name;
+			let main_content = item.main_content;
+			let mountain_num = item.mountain_num;
+			
+			let out = '<li class="member co-funder type_bottom">';
+			out += '<div class="thumb">';
+			out += '<img src="' + mountain_img + '">';
+			out += '</div>';
+			out += '<div class="description">';
+			out += '<h3 class="mountain-name">' + mountain_name + '</h3>';
+			out += '<p>';
+			out += main_content + '<br>';
+			out += '</p>';
+			out += '<a href="${pageContext.request.contextPath}/echartsMap/article?mountain_num=' + mountain_num + '"># 상세보기</a>';
+			out += '</div>';
+			out += '</li>';
+			
+			$(".mountain-main").append(out);
+		});
+		
 	}
+	
+	
+	
 </script>
 
 
@@ -376,44 +371,10 @@
 	</div>
 	
 	
+	
 
-	<div class="mountain-main"
-		style="overflow-y: scroll; width: auto; height: 1000px;">
-		<ul>
-			<c:forEach var="dto" items="${list}" varStatus="status">
-			
-			
-				<c:choose>
-					<c:when test="${empty dto.sigungoo_name && empty dto.sido_name}">
-						<li class="member co-funder type_bottom">
-							<div class="thumb">
-								<img src="${dto.mountain_img}">
-							</div>
-							<div class="description">
-								<h3 class="mountain-name">${dto.mountain_name}</h3>
-								<p>
-									${dto.main_content}<br>
-								</p>
-								<a href="${pageContext.request.contextPath}/echartsMap/article?mountain_num=${dto.mountain_num}"># 상세보기</a>
-							</div>
-						</li>
-					</c:when>
-					
-					<c:when test="${not empty dto.sido_name}">
-						
-						<div id="mountain-main"></div>
-						
-					</c:when>
-					
-					<c:otherwise>
-						<div id="mountain-main-2"></div>
-					</c:otherwise>
-				</c:choose>
-				
-				
-			</c:forEach>
-		</ul>
-
+	<div class="mountain-main" style="overflow-y: scroll; width: auto; height: 1000px;"> 
+	
 	</div>
 </section>
 
