@@ -2,14 +2,15 @@ package com.fa.plus.domain;
 
 public class Notice {
     private int notice_category_num;
-    private String category_name;
-    private int category_reg_id;	// idx로 번호로 넘겨져서 number
-    private String category_reg_date;
-    private String category_update_date;
-    private int category_order;
-    private int category_visible;
+    private String notice_category_name;
+    private int notice_category_reg_id;	// idx로 번호로 넘겨져서 number
+    private String notice_category_reg_date;
+    private String notice_category_update_id;
+    private String notice_category_update_date;
+    private int notice_category_order;
+    private int notice_category_visible;
     
-    private String notice_name;
+    private String notice_num;
     // private int notice_category_num;
     private String notice_title;
     private String notice_content;
@@ -20,53 +21,60 @@ public class Notice {
     private String notice_update_date;	
     private int notice_visible;
     private String notice_invisible_date;
+    
 	public int getNotice_category_num() {
 		return notice_category_num;
 	}
 	public void setNotice_category_num(int notice_category_num) {
 		this.notice_category_num = notice_category_num;
 	}
-	public String getCategory_name() {
-		return category_name;
+	public String getNotice_category_name() {
+		return notice_category_name;
 	}
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setNotice_category_name(String notice_category_name) {
+		this.notice_category_name = notice_category_name;
 	}
-	public int getCategory_reg_id() {
-		return category_reg_id;
+	public int getNotice_category_reg_id() {
+		return notice_category_reg_id;
 	}
-	public void setCategory_reg_id(int category_reg_id) {
-		this.category_reg_id = category_reg_id;
+	public void setNotice_category_reg_id(int notice_category_reg_id) {
+		this.notice_category_reg_id = notice_category_reg_id;
 	}
-	public String getCategory_reg_date() {
-		return category_reg_date;
+	public String getNotice_category_reg_date() {
+		return notice_category_reg_date;
 	}
-	public void setCategory_reg_date(String category_reg_date) {
-		this.category_reg_date = category_reg_date;
+	public void setNotice_category_reg_date(String notice_category_reg_date) {
+		this.notice_category_reg_date = notice_category_reg_date;
 	}
-	public String getCategory_update_date() {
-		return category_update_date;
+	public String getNotice_category_update_id() {
+		return notice_category_update_id;
 	}
-	public void setCategory_update_date(String category_update_date) {
-		this.category_update_date = category_update_date;
+	public void setNotice_category_update_id(String notice_category_update_id) {
+		this.notice_category_update_id = notice_category_update_id;
 	}
-	public int getCategory_order() {
-		return category_order;
+	public String getNotice_category_update_date() {
+		return notice_category_update_date;
 	}
-	public void setCategory_order(int category_order) {
-		this.category_order = category_order;
+	public void setNotice_category_update_date(String notice_category_update_date) {
+		this.notice_category_update_date = notice_category_update_date;
 	}
-	public int getCategory_visible() {
-		return category_visible;
+	public int getNotice_category_order() {
+		return notice_category_order;
 	}
-	public void setCategory_visible(int category_visible) {
-		this.category_visible = category_visible;
+	public void setNotice_category_order(int notice_category_order) {
+		this.notice_category_order = notice_category_order;
 	}
-	public String getNotice_name() {
-		return notice_name;
+	public int getNotice_category_visible() {
+		return notice_category_visible;
 	}
-	public void setNotice_name(String notice_name) {
-		this.notice_name = notice_name;
+	public void setNotice_category_visible(int notice_category_visible) {
+		this.notice_category_visible = notice_category_visible;
+	}
+	public String getNotice_num() {
+		return notice_num;
+	}
+	public void setNotice_num(String notice_num) {
+		this.notice_num = notice_num;
 	}
 	public String getNotice_title() {
 		return notice_title;
@@ -122,7 +130,5 @@ public class Notice {
 	public void setNotice_invisible_date(String notice_invisible_date) {
 		this.notice_invisible_date = notice_invisible_date;
 	}
-    
-	
-    
+
 }

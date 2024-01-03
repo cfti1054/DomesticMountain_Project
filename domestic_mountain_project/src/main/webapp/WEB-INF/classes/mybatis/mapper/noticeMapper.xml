@@ -24,19 +24,18 @@
 	</sql>
 	
 	<select id="listNoticeTop" resultType="com.fa.plus.domain.Notice">
-		SELECT n.notice_category_num, notice_name, notice_title, n.notice_reg_id, notice_hit_count, 
-			TO_CHAR(notice_reg_date, 'YYYY-MM-DD') notice_reg_date
-		FROM notice_board n
-		JOIN user1 u ON n.notice_reg_id = u.useridx
-		WHERE n.notice_visible = 1
-		ORDER BY n.notice_category_num DESC
-		
+  	  	SELECT n.notice_num, c.notice_category_num, n.notice_title, n.notice_reg_id, n.notice_hit_count, 
+        	TO_CHAR(n.notice_reg_date, 'YYYY-MM-DD') AS notice_reg_date
+    	FROM notice_board n
+    	JOIN notice_category c ON n.notice_category_num = c.notice_category_num
+    	WHERE n.notice_visible = 1
+    	ORDER BY n.notice_category_num DESC
 	</select>
 	
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM notice_board n
-		JOIN user1 u ON n.notice_reg_id=u.useridx
+		JOIN notice_category c ON n.notice_category_num = c.notice_category_num
 		<where>
 			notice_visible = 1
 			<if test="kwd != null and kwd!='' ">
@@ -47,18 +46,18 @@
 	</select>
 	
 	<select id="listNotice" parameterType="map" resultType="com.fa.plus.domain.Notice">
-  	    SELECT n.notice_category_num, notice_name, notice_title, n.notice_reg_id, 
-     	     notice_hit_count, notice_reg_date
-   	    FROM notice_board n
- 	    JOIN user1 u ON n.notice_reg_id = u.useridx
-   	 <where>
-     	   n.notice_visible = 1
-         <if test="kwd != null and kwd != ''">
-    	     AND <include refid="where-list"/>
-     	 </if>
-   	 </where>
-	    ORDER BY n.notice_category_num DESC
-	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+    	SELECT n.notice_num, c.notice_category_num, n.notice_title, n.notice_reg_id, 
+       		n.notice_hit_count, n.notice_reg_date
+   		FROM notice_board n
+    	JOIN notice_category c ON n.notice_category_num = c.notice_category_num
+    	<where>
+        	n.notice_visible = 1
+        	<if test="kwd != null and kwd != ''">
+            	AND <include refid="where-list"/>
+        	</if>
+    	</where>
+    	ORDER BY n.notice_category_num DESC
+    	OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
 	<update id="updateHitCount" parameterType="Long">

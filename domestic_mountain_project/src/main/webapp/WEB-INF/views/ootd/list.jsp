@@ -74,7 +74,7 @@
 								스냅 (OOTD)</a></li>
 					</ul>
 
-				</div>
+				</div> 
 			</div>
 		</div>
 
@@ -86,8 +86,6 @@
 						&gt; ootd</span>
 				</h1>
 			</div>
-
-
 
 			<div class="notice-container">
 
@@ -102,7 +100,6 @@
 									src="${pageContext.request.contextPath}/resources/images/hiking.png"
 									alt="">
 							</a>
-
 								<dl>
 									<dt>
 										<a href="#" class="tit"> <span class="inner"> <span
@@ -124,9 +121,8 @@
 									</dd>
 								</dl>
 							</li>
-
-
-
+							
+							
 
 						</ul>
 
@@ -171,8 +167,6 @@
 								</form>
 							</div>
 						</div>
-
-
 
 					</div>
 				</div>
