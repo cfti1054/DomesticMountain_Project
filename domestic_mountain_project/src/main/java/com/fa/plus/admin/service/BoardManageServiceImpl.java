@@ -36,11 +36,22 @@ public class BoardManageServiceImpl implements BoardManageService {
 		
 		try {
 				
-//			list = mapper.find_by_category_num(category_num_list);
+			list = mapper.find_by_category_num(category_num_list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void insert_notice_category(BoardManage dto) throws Exception {
+		
+		try {
+			mapper.insert_notice_category(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

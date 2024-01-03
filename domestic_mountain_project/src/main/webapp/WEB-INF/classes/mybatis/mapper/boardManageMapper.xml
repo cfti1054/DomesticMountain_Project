@@ -9,12 +9,12 @@
 	</select>
 	
 	<select id="find_by_category_num" parameterType="hashmap" resultType="com.fa.plus.admin.domain.BoardManage">
-		SELECT notice_category_num, category_name AS notice_category_name, 
-			u.user_name AS notice_category_reg_id, category_reg_date AS notice_category_reg_date, 
-			u.user_name AS notice_category_update_id, category_update_date AS notice_category_update_date, 
-			category_order AS notice_category_order, category_visible AS notice_category_visible
+		SELECT notice_category_num, notice_category_name, 
+			u.user_name AS notice_category_reg_id, notice_category_reg_date, 
+			u.user_name AS notice_category_update_id, notice_category_update_date, 
+			notice_category_order, notice_category_visible
 		FROM notice_category nc
-		JOIN user1 u ON nc.category_reg_id = u.userIdx
+		JOIN user1 u ON nc.notice_category_reg_id = u.userIdx
 		WHERE notice_category_num IN
 		<foreach item="item" index="index" collection="list"
 			open="(" separator="," close=")">
@@ -24,15 +24,22 @@
 	</select>
 	
 	<select id="list_notice_category" resultType="com.fa.plus.admin.domain.BoardManage">
-		SELECT notice_category_num, category_name AS notice_category_name, 
-			u.user_name AS notice_category_reg_id, TO_CHAR(category_reg_date,'YYYY-MM-DD') AS notice_category_reg_date, 
-			u.user_name AS notice_category_update_id, TO_CHAR(category_update_date,'YYYY-MM-DD') AS notice_category_update_date, 
-			category_order AS notice_category_order, category_visible AS notice_category_visible
+		SELECT notice_category_num, notice_category_name, 
+			u.user_name AS notice_category_reg_id, TO_CHAR(notice_category_reg_date,'YYYY-MM-DD') AS notice_category_reg_date, 
+			u.user_name AS notice_category_update_id, TO_CHAR(notice_category_update_date,'YYYY-MM-DD') AS notice_category_update_date, 
+			notice_category_order, notice_category_visible
 		FROM notice_category nc
-		JOIN user1 u ON nc.category_reg_id = u.userIdx
+		JOIN user1 u ON nc.notice_category_reg_id = u.userIdx
 	</select>
 	
-	
+	<insert id="insert_notice_category" parameterType="com.fa.plus.admin.domain.BoardManage">
+		INSERT INTO notice_category(NOTICE_CATEGORY_NUM, NOTICE_CATEGORY_NAME, 
+			NOTICE_CATEGORY_REG_ID, NOTICE_CATEGORY_REG_DATE,
+			NOTICE_CATEGORY_ORDER, NOTICE_CATEGORY_VISIBLE)
+		VALUES(#{notice_category_num}, #{notice_category_name}, 
+			#{notice_category_reg_id}, SYSDATE, #{notice_category_num}, 1)
+	</insert>
+
 	
 	
 	<!-- 공시사항 게시판 -->

@@ -12,12 +12,12 @@
 			<table class="table td-border mx-auto my-10" style="width: 99%; vertical-align: middle;">
 				<tr>
 					<td width="25%" class="text-center bg-light">카테고리 이름</td>
-					<td width="75%" class="ps-5"><input type="text" class="form-control" name="inquiry_category_name"  id="inquiry_category_name" value="${dto.inquiry_category_name}"></td>
+					<td width="75%" class="ps-5"><input type="text" class="form-control" name="notice_category_name"  id="notice_category_name" value="${dto.notice_category_name}"></td>
 				</tr>
 				<tr>
 					<td class="text-center bg-light"> 보이기 </td>
 					<td class="ps-5">
-						<select id="inquiry_category_visible" class="form-select">
+						<select id="notice_category_visible" class="form-select">
 							<option value=""> :: 보이기 상태 :: </option>
 							<option value="0">안보이기</option>
 							<option value="1">보이기</option>

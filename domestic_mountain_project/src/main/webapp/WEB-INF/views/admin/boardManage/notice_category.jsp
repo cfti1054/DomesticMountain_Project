@@ -113,14 +113,15 @@
 								</tbody>
 							</table>
 						</form>
-						<p>
-							<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
-						</p>
-						<p>
-							<button type="button" class="btn btn-primary" id="add_button" >추가</button>
-							<!-- onclick="write();" -->
-						</p>
-
+							<div>
+								<p>
+									<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
+								</p>
+								<p>
+									<button type="button" class="btn btn-primary" id="add_button" >추가</button>
+									<!-- onclick="write();" -->
+								</p>
+							</div>
 					</div>
 				</div>
 				<div id="notice-dialog" style="display: none;"></div>
@@ -197,12 +198,12 @@
              			}
              		});
              		
-             		let url = "${pageContext.request.contextPath}/admin/support/multi_inquiry_category";
+             		let url = "${pageContext.request.contextPath}/admin/boardManage/multi_inquiry_category";
              		let query = "category_dto=" + oAll;
              		
              		
              		const fn = function(data) {
-             			$("#inquiry-dialog").html(data);
+             			$("#notice-dialog").html(data);
              			dlg.dialog("open");
              		};
              		ajaxFun(url, "get", query, "text", fn);
@@ -224,7 +225,7 @@
         
         /* 추가 모달 생성 */
         $("#add_button").on("click",function() {
-        	let dlg = $("#inquiry-dialog").dialog({
+        	let dlg = $("#notice-dialog").dialog({
         		autoOpen: false,
         		modal: true,
         		buttons: {
@@ -242,11 +243,11 @@
         		}
         	});
         	
-        	let url = "${pageContext.request.contextPath}/admin/support/inquiry_category_write";
+        	let url = "${pageContext.request.contextPath}/admin/boardManage/notice_category_write";
         	let query = "mode=write&type=category";
         	
         	const fn = function(data) {
-        		$("#inquiry-dialog").html(data);
+        		$("#notice-dialog").html(data);
         		dlg.dialog("open");
         	};
         	
@@ -257,18 +258,18 @@
         function writeOk() {
         	const f = document.categoryWriteForm;
         	
-        	if(! f.inquiry_category_name.value) {
+        	if(! f.notice_category_name.value) {
         		alert("카테고리 이름을 입력하세요.");
         		f.category_name.focus();
         		return;
         	}
         	
-        	if(f.inquiry_category_visible.value === "" ) {
+        	if(f.notice_category_visible.value === "" ) {
         		alert("보이기 상태를 선택하세요.");
         		return;
         	}
         	
-        	let url = "${pageContext.request.contextPath}/admin/support/inquiry_category_write";
+        	let url = "${pageContext.request.contextPath}/admin/support/notice_category_write";
         	let query = $("#categoryWriteForm").serialize();
         	
         	const fn = function(data) {
@@ -276,7 +277,7 @@
         	}
         	ajaxFun(url, "post", query, "json", fn);
         	
-        	$("#inquiry-dialog").dialog("close");
+        	$("#notice-dialog").dialog("close");
         	
         }
         
