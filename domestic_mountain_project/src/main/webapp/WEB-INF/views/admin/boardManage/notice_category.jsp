@@ -269,7 +269,7 @@
         		return;
         	}
         	
-        	let url = "${pageContext.request.contextPath}/admin/support/notice_category_write";
+        	let url = "${pageContext.request.contextPath}/admin/boardManage/notice_category_write";
         	let query = $("#categoryWriteForm").serialize();
         	
         	const fn = function(data) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fa.plus.admin.domain.BoardManage;
+import com.fa.plus.admin.domain.Support;
 import com.fa.plus.admin.service.BoardManageService;
 
 @Controller
@@ -43,7 +44,7 @@ public class BoardManageController {
 	public String notice_category_write(@RequestParam String mode, @RequestParam String type, Model model) throws Exception {
 		System.out.println(mode);
 		System.out.println(type);
-		model.addAttribute("mode", model);
+		model.addAttribute("mode", mode);
 		model.addAttribute("type", type);
 
 		return "admin/boardManage/notice_modal";
@@ -62,5 +63,24 @@ public class BoardManageController {
 		return "redirect:/admin/boardManage/notice_category";
 	}
 	
+	@GetMapping("update_inquiry_category")
+	public String inquiry_category_update_form(@RequestParam List<String> category_dto, Model model) throws Exception {
+		List<BoardManage> list = null;
+		BoardManage dto = null;
+		try {
+			list = service.find_by_category_num(category_dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("mode", "update");
+		model.addAttribute("type", "category");
+		for(BoardManage s: list) {
+			dto = s;
+		}
+		model.addAttribute("dto", dto);
+		
+		return "admin/boardManage/notice_modal";
+	}
 	
 }

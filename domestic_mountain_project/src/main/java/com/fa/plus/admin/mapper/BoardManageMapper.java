@@ -11,10 +11,11 @@ import com.fa.plus.admin.domain.BoardManage;
 public interface BoardManageMapper {
 	
 //	공지사항 카테고리
-	public long notice_category_seq() throws SQLException;;
-	public List<BoardManage> find_by_category_num(List<Integer> list) throws SQLException;;
-	public List<BoardManage> list_notice_category();
+	public long notice_category_seq() throws SQLException;
+	public List<BoardManage> find_by_category_num(List<Integer> list) throws SQLException;
+	public List<BoardManage> list_notice_category() throws SQLException;;
 	
-	public void insert_notice_category(BoardManage dto);
+	public void insert_notice_category(BoardManage dto) throws SQLException;;
+	public void update_notice_category(BoardManage dto) throws SQLException;;
 	
 }

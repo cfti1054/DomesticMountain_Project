@@ -37,8 +37,14 @@
 			NOTICE_CATEGORY_REG_ID, NOTICE_CATEGORY_REG_DATE,
 			NOTICE_CATEGORY_ORDER, NOTICE_CATEGORY_VISIBLE)
 		VALUES(#{notice_category_num}, #{notice_category_name}, 
-			#{notice_category_reg_id}, SYSDATE, #{notice_category_num}, 1)
+			1, SYSDATE, #{notice_category_num}, 1)
 	</insert>
+	
+	<update id="update_notice_category" parameterType="com.fa.plus.admin.domain.BoardManage">
+		UPDATE notice_category
+		SET notice_category_name = #{notice_category_name}, notice_category_visible = #{notice_category_visible}
+		WHERE notice_category_num = #{notice_category_num}
+	</update>
 
 	
 	
