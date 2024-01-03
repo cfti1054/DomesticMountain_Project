@@ -23,7 +23,7 @@ public class RecommendServiceImpl implements RecommendService{
 		try {
 			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
 			if (saveFilename != null) {
-				dto.setFile_name(saveFilename);
+				dto.setOriginalFilename(saveFilename);
 
 				mapper.insertRecommend(dto);
 			}
@@ -107,11 +107,11 @@ public class RecommendServiceImpl implements RecommendService{
 
 			if (saveFilename != null) {
 				// 이전 파일 지우기
-				if (dto.getFile_name().length() != 0) {
-					fileManager.doFileDelete(dto.getFile_name(), pathname);
+				if (dto.getOriginalFilename().length() != 0) {
+					fileManager.doFileDelete(dto.getOriginalFilename(), pathname);
 				}
 
-				dto.setFile_name(saveFilename);
+				dto.setOriginalFilename(saveFilename);
 			}
 
 			 mapper.updateRecommend(dto);

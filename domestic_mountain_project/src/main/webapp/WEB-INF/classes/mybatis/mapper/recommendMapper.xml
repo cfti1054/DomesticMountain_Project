@@ -47,12 +47,12 @@
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
 	           NVL(c.replyCount, 0) as replyCount,
-	           f.file_name
+	           f.originalFilename
 	    FROM post p
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
 	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
-	         MAX(file_name) KEEP (DENSE_RANK FIRST ORDER BY file_num) as file_name
+	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
 	        FROM post_file
 	        GROUP BY post_num
 	    ) f ON p.post_num = f.post_num

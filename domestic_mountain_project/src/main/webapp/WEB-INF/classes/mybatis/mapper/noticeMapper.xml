@@ -56,7 +56,7 @@
             	AND <include refid="where-list"/>
         	</if>
     	</where>
-    	ORDER BY n.notice_category_num DESC
+    	ORDER BY n.notice_num DESC
     	OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	

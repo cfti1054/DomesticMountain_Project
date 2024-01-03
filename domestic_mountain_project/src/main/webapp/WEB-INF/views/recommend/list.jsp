@@ -139,7 +139,7 @@
 								<div class="movie-img">
 
 									<a href="#"> <img
-										src="${pageContext.request.contextPath}/resources/images/${dto.file_name}"
+										src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
 										width="200" height="120" alt="썸네일 이미지"> <span
 										class="num">${dto.post_fileCount}<span class="blind">개의
 												추가 이미지가 있습니다</span></span>
@@ -221,7 +221,7 @@
 								<ul>
 									<li class="show-2-li"><a href="#" class="album-img"> <img
 											width="200" height="200"
-											src="${pageContext.request.contextPath}/resources/images/${dto.file_name}"
+											src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
 											alt="">
 									</a>
 

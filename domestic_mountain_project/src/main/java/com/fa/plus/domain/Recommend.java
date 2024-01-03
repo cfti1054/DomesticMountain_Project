@@ -29,7 +29,8 @@ public class Recommend {
 	// post_file 테이블
 	private long file_num;
 	// private int post_num;
-	private String file_name;
+	private String saveFilename;
+	private String originalFilename;
 	
 	private MultipartFile selectFile;
 
@@ -39,6 +40,22 @@ public class Recommend {
 	private long replyCount;
 	
 	private long post_fileCount;
+	
+	public String getSaveFilename() {
+		return saveFilename;
+	}
+
+	public void setSaveFilename(String saveFilename) {
+		this.saveFilename = saveFilename;
+	}
+
+	public String getOriginalFilename() {
+		return originalFilename;
+	}
+
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
+	}
 	
 	public long getPost_fileCount() {
 		return post_fileCount;
@@ -150,14 +167,6 @@ public class Recommend {
 
 	public void setFile_num(long file_num) {
 		this.file_num = file_num;
-	}
-
-	public String getFile_name() {
-		return file_name;
-	}
-
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
 	}
 
 	public MultipartFile getSelectFile() {
