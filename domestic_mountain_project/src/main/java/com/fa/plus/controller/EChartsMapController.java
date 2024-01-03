@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.EchartMap;
@@ -34,8 +35,6 @@ public class EChartsMapController {
 	public String main(
 			@RequestParam(defaultValue = "mountain_name") String schType,
 			@RequestParam(defaultValue = "") String kwd,
-			@RequestParam(defaultValue = "") String sido_name,
-			@RequestParam(defaultValue = "") String sigungoo_name,
 			HttpServletRequest req,
 			Model model
 			) throws Exception {
@@ -51,8 +50,6 @@ public class EChartsMapController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("schType", schType);
 		map.put("kwd", kwd);
-		map.put("sido_name", sido_name);
-		map.put("sigungoo_name", sigungoo_name);
 		
 		dataCount = service.dataCount(map);
 		
@@ -77,8 +74,6 @@ public class EChartsMapController {
 		
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
-		model.addAttribute("sido_name", sido_name);
-		model.addAttribute("sigungoo_name", sigungoo_name);
 		
 		
 		return ".echartsMap.main";
@@ -110,6 +105,35 @@ public class EChartsMapController {
 		model.addAttribute("query", query);
 		
 		return ".echartsMap.article";
+	}
+	
+	@GetMapping("search")
+	@ResponseBody
+	public Map<String, Object> search(
+			@RequestParam(defaultValue = "") String kwd,
+			@RequestParam(defaultValue = "") String sido_name,
+			@RequestParam(defaultValue = "") String sigungoo_name
+			) throws Exception {
+		
+		
+		int dataCount = 0;
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("kwd", kwd);
+		map.put("sido_name", sido_name);
+		map.put("sigungoo_name", sigungoo_name);
+		
+		dataCount = service.dataCount(map);
+		
+		List<EchartMap> list = service.listMountain(map);
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		model.put("list", list);
+		model.put("dataCount", dataCount);
+		
+		return model;
 	}
 	
 }
