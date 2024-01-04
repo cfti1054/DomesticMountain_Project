@@ -376,6 +376,12 @@
 	<div class="mountain-main" style="overflow-y: scroll; width: auto; height: auto; padding: 40px 160px;"> 
 	
 	</div>
+	<div class="col" style="width: 900px; margin: auto;">
+	
+		<button type="button" class="btn btn-light" onclick="#" title="이전" style="background-color: #d3d4d5"> 이전 </button>
+		<button type="button" class="btn btn-light" onclick="#" title="이전" style="background-color: #d3d4d5"> 다음 </button>
+	
+	</div>
 	
 </section>
 
