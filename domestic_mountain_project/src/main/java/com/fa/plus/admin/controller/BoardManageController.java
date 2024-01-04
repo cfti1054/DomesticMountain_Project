@@ -136,4 +136,16 @@ public class BoardManageController {
 		return ".admin.boardManage.notice_write";
 	}
 	
+	@PostMapping("notice_board_write")
+	public String notice_board_write_submit(BoardManage dto, HttpSession session) throws Exception{
+		
+		try {
+			System.out.println(dto.getNotice_board_invisible_date());
+			service.insert_notice_board(dto);
+		} catch (Exception e) {
+		}
+		
+		return "redirect:/admin/boardManage/notice_board_list";
+	}
+	
 }

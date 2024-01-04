@@ -27,11 +27,31 @@ function check() {
         f.notice_board_content.focus();
         return false;
     }
-
+	
+	str = f.notice_category_num.value;
+	if(!str) {
+		alert("카테고리 분류를 선택하세요. ");
+		f.notice_category_num.focus();
+		return false;
+		
+	}
+	console.log(f.notice_board_invisible_date.value);
+	
     f.action = "${pageContext.request.contextPath}/admin/boardManage/notice_board_${mode}";
     
     return true;
 }
+$(function() {
+	$("#write_table").on('click', 'tr', function() {
+		if ($("input[name=expireUse]").is(":checked")) {
+			$("#expire").show();
+			console.log("yes");
+		} else {
+			$("#expire").hide();
+			console.log("no");
+		}
+	})
+});
 </script>
 
 <div class="container">
@@ -43,11 +63,24 @@ function check() {
 		<div class="body-main">
 		
 			<form name="boardForm" method="post" enctype="multipart/form-data">
-				<table class="table mt-5 write-form">
+				<table class="table mt-5 write-form" id="write_table">
 					<tr>
 						<td class="bg-light col-sm-2" scope="row">제 목</td>
 						<td>
 							<input type="text" name="notice_board_title" class="form-control" value="${dto.notice_board_title}">
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="bg-light col-sm-2" scope="row">카테고리 분류</td>
+						<td>
+							<select style="text-align: center;" id="notice_category_num" class="form-select" style=" width: 100%;">
+								<option value=""> :: 카테고리 선택 :: </option>
+								<c:forEach var="dto" items="${list}" varStatus="status">
+								
+								<option value="${dto.notice_category_num}">${dto.notice_category_name}</option>
+								</c:forEach>
+							</select>					
 						</td>
 					</tr>
         
@@ -58,7 +91,19 @@ function check() {
 							<p class="form-control-plaintext">관리자</p>
 						</td>
 					</tr>
-
+					
+					<tr>
+						<td class="bg-light col-sm-2" scope="row">만료 기한 사용</td>
+						<td ><input type="checkbox" name="expireUse"></td>
+						
+					</tr>
+					
+					<tr id="expire" style="display:none;">
+							<td class="bg-light col-sm-2">만료 날짜</td>
+							<td><input type="date" id="notice_board_invisible_date" value="${dto.notice_board_invisible_date}"></td>
+					</tr>
+					
+					
 					<tr>
 						<td class="bg-light col-sm-2" scope="row">내 용</td>
 						<td>

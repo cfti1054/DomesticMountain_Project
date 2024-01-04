@@ -78,7 +78,7 @@
 			NOTICE_CONTENT, NOTICE_HIT_COUNT, NOTICE_REG_ID,
 			NOTICE_REG_DATE, NOTICE_VISIBLE, NOTICE_INVISIBLE_DATE)
 		VALUES(#{notice_board_num}, #{notice_category_num}, #{notice_board_title},
-			#{notice_board_content}, 0, 1, SYSDATE, 
+			#{notice_board_content}, 0, 1, SYSDATE, 1,
 			<if test="notice_board_invisible_date == 0">
 				TO_DATE('9999-12-31','YYYY-MM-DD')
 			</if>
