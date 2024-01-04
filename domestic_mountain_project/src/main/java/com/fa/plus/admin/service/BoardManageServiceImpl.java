@@ -102,11 +102,9 @@ public class BoardManageServiceImpl implements BoardManageService  {
 	@Override
 	public void insert_notice_board(BoardManage dto) throws Exception {
 		try {
-			String s = "=";
-			
-			System.out.println(s.repeat(80));
-			System.out.println(dto.getNotice_board_invisible_date());
-			System.out.println(s.repeat(80));
+			long l = mapper.notice_board_seq();
+			dto.setNotice_board_num(l);
+			mapper.insert_notice_board(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
