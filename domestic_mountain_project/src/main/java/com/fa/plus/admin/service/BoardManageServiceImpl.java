@@ -52,6 +52,8 @@ public class BoardManageServiceImpl implements BoardManageService  {
 	public void insert_notice_category(BoardManage dto) throws Exception {
 		
 		try {
+			long l = mapper.notice_category_seq();
+			dto.setNotice_category_num(l);
 			mapper.insert_notice_category(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,6 +69,46 @@ public class BoardManageServiceImpl implements BoardManageService  {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
+		}
+		
+	}
+
+	@Override
+	public List<BoardManage> list_notice_board() throws Exception {
+		List<BoardManage> list = null;
+		
+		try {
+			list = mapper.list_notice_board();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public BoardManage find_by_notice_board_num(String s) throws Exception {
+		BoardManage dto = null;
+		
+		try {
+			Long l = Long.parseLong(s);
+			dto = mapper.find_by_notice_board_num(l);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public void insert_notice_board(BoardManage dto) throws Exception {
+		try {
+			String s = "=";
+			
+			System.out.println(s.repeat(80));
+			System.out.println(dto.getNotice_board_invisible_date());
+			System.out.println(s.repeat(80));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}

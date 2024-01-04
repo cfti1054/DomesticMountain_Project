@@ -13,7 +13,7 @@ public class BoardManage {
 	public int notice_category_visible;
 	
 	// 공지사항 게시판
-	public long notice_board_name;
+	public long notice_board_num;
 	public String notice_board_title;
 	public String notice_board_content;
 	public int notice_board_hit_count;
@@ -71,11 +71,11 @@ public class BoardManage {
 	public void setNotice_category_visible(int notice_category_visible) {
 		this.notice_category_visible = notice_category_visible;
 	}
-	public long getNotice_board_name() {
-		return notice_board_name;
+	public long getnotice_board_num() {
+		return notice_board_num;
 	}
-	public void setNotice_board_name(long notice_board_name) {
-		this.notice_board_name = notice_board_name;
+	public void setnotice_board_num(long notice_board_num) {
+		this.notice_board_num = notice_board_num;
 	}
 	public String getNotice_board_title() {
 		return notice_board_title;

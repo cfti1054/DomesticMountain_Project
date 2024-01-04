@@ -151,33 +151,33 @@ function update(inquiry_board_num) {
 			<h1 class="mt-4">Tables</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">1:1문의와 답변</li>
+                            <li class="breadcrumb-item active">공지사항 리스트</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                고객의 1:1 질문들의 정보와 답변을 추가 / 수정할 수 있습니다.
+                                공지사항이나 뉴스/이벤트와 같은 게시물을 추가 / 수정할 수 있습니다.
                                 
                             </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                1:1 문의와 답변
+                                공지사항
                             </div>
 
 						<div class="card-body">
-						<form id="inquiry">
-							<table id="inquiry_board_table" class="display"
+						<form id="notice">
+							<table id="notice_board_table" class="display"
 								style="width: 100%; text-align: center; word-break: keep-all;">
 								<thead>
 									<tr>
 										<th>번호</th>
 										<th>분류</th>
-										<th>질문</th>
+										<th>제목</th>
 										<th>내용 </th>
 										<th>작성자</th>
 										<th>등록일자</th>
-										<th>답변 여부</th>
+										<th>만료일자</th>
 										<th>관리</th>
 									</tr>
 								</thead>
@@ -186,11 +186,11 @@ function update(inquiry_board_num) {
 									<tr>
 										<th>번호</th>
 										<th>분류</th>
-										<th>질문</th>
+										<th>제목</th>
 										<th>답변 </th>
 										<th>작성자</th>
 										<th>등록일자</th>
-										<th>답변 여부</th>
+										<th>만료일자</th>
 										<th>관리</th>
 									</tr>
 								</tfoot>
@@ -199,38 +199,22 @@ function update(inquiry_board_num) {
 									<c:forEach var="dto" items="${list}" varStatus="status">
 
 										<tr>
-											<td width="5%">${dto.inquiry_board_num}</td>
-											<td width="15%">${dto.inquiry_category_name}</td>
-											<td width="25%">${dto.inquiry_board_title}</td>
+											<td width="5%">${dto.notice_board_num}</td>
+											<td width="15%">${dto.notice_category_name}</td>
+											<td width="25%">${dto.notice_board_title}</td>
 											<td width="20%">
 												<%-- <textarea  style="white-space: pre-line; width: 80%;" cols="40" rows="3" readonly>
 													${dto.faq_content}
 												</textarea> --%>
-												<button type="button" class="btn btn-info" id="show_content" onclick="showContent('${dto.inquiry_board_num}');">내용 보기</button>
+												<button type="button" class="btn btn-info" id="show_content" onclick="showContent('${dto.notice_board_num}');">내용 보기</button>
 											</td>
-											<td width="10%">${dto.inquiry_board_reg_id}</td>
-											<td width="15%">${dto.inquiry_board_reg_date}</td>
+											<td width="10%">${dto.notice_board_reg_id}</td>
+											<td width="15%">${dto.notice_board_reg_date}</td>
 											<td width="10%">	
-													<c:choose>
-														<c:when test="${dto.inquiry_board_status ==  0}">
-															<span style="color: red;"> 진행중 </span>
-														</c:when>
-														
-														<c:when test="${dto.inquiry_board_status == 1 }">	
-															<span style="color: blue;"> 완료 </span>
-														</c:when>
-													</c:choose>
+													${dto.notice_board_invisible_date}
 											</td>
 											<td>
-												<c:choose>
-													<c:when test="${dto.inquiry_board_status == 0 }">
-													<button type="button" class="btn btn-danger" id="answer_button" onclick="answer('${dto.inquiry_board_num}');">관리</button>
-													
-													</c:when>
-													<c:when test="${dto.inquiry_board_status == 1 }">
-													<button type="button" class="btn btn-success" id="update_button" onclick="update('${dto.inquiry_board_num}');">관리</button>
-													</c:when>
-												</c:choose>
+												관리 버튼
 											</td>
 											
 										</tr>
@@ -262,10 +246,10 @@ function update(inquiry_board_num) {
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/select/1.1.2/js/dataTables.select.min.js"></script>
         
-        <script>
+        <script type="text/javascript" charset="utf-8">
              /* simple data table 행 다중선택 스크립트 */
         $(document).ready(function() {
-        	var oTable = $('#inquiry_board_table').DataTable();
+        	var oTable = $('#notice_board_table').DataTable();
     	});
         	/*
         	$('#inquiry_board_table tbody').on( 'click', 'tr', function () {

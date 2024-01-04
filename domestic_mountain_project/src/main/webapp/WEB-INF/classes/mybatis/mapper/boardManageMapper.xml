@@ -37,7 +37,7 @@
 			NOTICE_CATEGORY_REG_ID, NOTICE_CATEGORY_REG_DATE,
 			NOTICE_CATEGORY_ORDER, NOTICE_CATEGORY_VISIBLE)
 		VALUES(#{notice_category_num}, #{notice_category_name}, 
-			1, SYSDATE, #{notice_category_num}, 1)
+			1, SYSDATE, #{notice_category_num}, #{notice_category_visible})
 	</insert>
 	
 	<update id="update_notice_category" parameterType="com.fa.plus.admin.domain.BoardManage">
@@ -49,6 +49,44 @@
 	
 	
 	<!-- 공시사항 게시판 -->
+	<select id="notice_board_seq" resultType="Long">
+		SELECT notice_board_seq.NEXTVAL FROM DUAL;
+	</select>
+	
+	<select id="find_by_notice_board_num" parameterType="Long" resultType="com.fa.plus.admin.domain.BoardManage">
+		SELECT notice_num AS notice_board_num, notice_title AS notice_board_title, 
+			notice_content AS notice_board_content, notice_hit_count AS notice_board_hit_count, 
+			u.user_name AS notice_board_reg_id, TO_CHAR(notice_reg_date,'YYYY-MM-DD') AS notice_board_reg_date,
+			notice_visible AS notice_board_visible, TO_CHAR(notice_invisible_date, 'YYYY-MM-DD') AS notice_board_invisible_date
+		FROM notice_board nb 
+		JOIN user1 u ON nb.notice_reg_id = u.userIdx
+		WHERE notice_num = #{notice_board_num}
+	</select>
+	
+	<select id="list_notice_board" resultType="com.fa.plus.admin.domain.BoardManage">
+		SELECT notice_num AS notice_board_num, notice_title AS notice_board_title, nc.notice_category_name AS notice_category_name,
+			notice_content AS notice_board_content, notice_hit_count AS notice_board_hit_count, 
+			u.user_name AS notice_board_reg_id, TO_CHAR(notice_reg_date,'YYYY-MM-DD') AS notice_board_reg_date,
+			notice_visible AS notice_board_visible, TO_CHAR(notice_invisible_date, 'YYYY-MM-DD') AS notice_board_invisible_date
+	FROM notice_board nb 
+	JOIN user1 u ON nb.notice_reg_id = u.userIdx
+	JOIN notice_category nc ON nb.notice_category_num = nc.notice_category_num
+	</select>
+	
+	<insert id="insert_notice_board" parameterType="com.fa.plus.admin.domain.BoardManage">
+		INSERT INTO notice_board(NOTICE_NUM, NOTICE_CATEGORY_NUM, NOTICE_TITLE, 
+			NOTICE_CONTENT, NOTICE_HIT_COUNT, NOTICE_REG_ID,
+			NOTICE_REG_DATE, NOTICE_VISIBLE, NOTICE_INVISIBLE_DATE)
+		VALUES(#{notice_board_num}, #{notice_category_num}, #{notice_board_title},
+			#{notice_board_content}, 0, 1, SYSDATE, 
+			<if test="notice_board_invisible_date == 0">
+				TO_DATE('9999-12-31','YYYY-MM-DD')
+			</if>
+			<if test="notice_board_invisible_date > SYSDATE">
+				TO_DATE('#{notice_board_invisible_date}','YYYY-MM-DD')
+			</if>
+			)
+	</insert>
 	
 	
 </mapper>

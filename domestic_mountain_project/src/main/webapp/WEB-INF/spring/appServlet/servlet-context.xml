@@ -96,6 +96,8 @@
     		<exclude-mapping path="/mypage/**"/>
     		<exclude-mapping path="/admin/**"/>
     		<exclude-mapping path="/product/**"/>
+			<exclude-mapping path="/uploads/**"/>
+			<exclude-mapping path="/image/**"/>
 
                                     
     		

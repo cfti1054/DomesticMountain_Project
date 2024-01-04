@@ -198,7 +198,7 @@
              			}
              		});
              		
-             		let url = "${pageContext.request.contextPath}/admin/boardManage/multi_inquiry_category";
+             		let url = "${pageContext.request.contextPath}/admin/boardManage/notice_category_update";
              		let query = "category_dto=" + oAll;
              		
              		
@@ -322,8 +322,9 @@
 						
 					});
 					
+					console.log(category_list);
 					
-					let url = "${pageContext.request.contextPath}/admin/support/update_inquiry_category_ok";
+					let url = "${pageContext.request.contextPath}/admin/boardManage/notice_category_update_ok";
 		        	let query = "category_list=" + category_list;
 		        	
 		        	const fn = function(data) {
@@ -332,7 +333,7 @@
 		        	ajaxFun(url, "get", query, "json", fn);
 		        	
 		        	
-		        	$("#inquiry-dialog").dialog("close");
+		        	$("#notice-dialog").dialog("close");
         
         	 }
          	

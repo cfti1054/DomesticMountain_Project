@@ -34,20 +34,20 @@
 				<table class="table td-border mx-auto my-10" style="width: 99%; vertical-align: middle;">
 					<tr>
 						<td width="15%" class="text-center bg-light">번호</td>
-						<td width="15%" class="ps-5"><input type="text" class="input" id="inquiry_category_num" value="${dto.inquiry_category_num}" readonly></td>
+						<td width="15%" class="ps-5"><input type="text" class="input" id="notice_category_num" value="${dto.notice_category_num}" readonly></td>
 						<td width="35%" class="text-center bg-light">카테고리 이름</td>
-						<td width="35%" class="ps-5"><input type="text" class="input" name="inquiry_category_name"  id="inquiry_category_name" value="${dto.inquiry_category_name}"></td>
+						<td width="35%" class="ps-5"><input type="text" class="input" name="notice_category_name"  id="notice_category_name" value="${dto.notice_category_name}"></td>
 					</tr>
 					<tr>
 						<td class="text-center bg-light">등록인</td>
-						<td class="ps-5">${dto.inquiry_category_reg_id}</td>
+						<td class="ps-5">${dto.notice_category_reg_id}</td>
 						<td class="text-center bg-light">등록일자</td>
-						<td class="ps-5">${dto.inquiry_category_reg_date}</td>
+						<td class="ps-5">${dto.notice_category_reg_date}</td>
 					</tr>
 					<tr>
 						<td colspan="3" class="text-center bg-light"> 보이기 </td>
 						<td colspan="1" class="ps-5">
-							<input type="number" class="input" name="inquiry_category_visible" id="inquiry_category_visible" value="${dto.inquiry_category_visible}">
+							<input type="number" class="input" name="notice_category_visible" id="notice_category_visible" value="${dto.notice_category_visible}">
 						</td>
 					</tr>
 				</table>

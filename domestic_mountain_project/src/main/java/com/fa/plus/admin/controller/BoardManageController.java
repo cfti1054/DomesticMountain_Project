@@ -25,7 +25,7 @@ public class BoardManageController {
 	private BoardManageService service;
 	
 	// 공지사항 카테고리 리스트
-	@GetMapping("notice_category_list")
+	@RequestMapping(value="notice_category_list")
 	public String notice_category_list(HttpServletRequest req, Model model) {
 		List<BoardManage> list = null;
 		
@@ -63,8 +63,8 @@ public class BoardManageController {
 		return "redirect:/admin/boardManage/notice_category";
 	}
 	
-	@GetMapping("update_inquiry_category")
-	public String inquiry_category_update_form(@RequestParam List<String> category_dto, Model model) throws Exception {
+	@GetMapping("notice_category_update")
+	public String notice_category_update(@RequestParam List<String> category_dto, Model model) throws Exception {
 		List<BoardManage> list = null;
 		BoardManage dto = null;
 		try {
@@ -81,6 +81,59 @@ public class BoardManageController {
 		model.addAttribute("dto", dto);
 		
 		return "admin/boardManage/notice_modal";
+	}
+	
+	@GetMapping("notice_category_update_ok")
+	public String update_notice_category_ok(@RequestParam List<String> category_list, Model model) throws Exception {
+		
+		BoardManage dto = new BoardManage();
+		try {
+			
+			for(String s: category_list) {
+			}
+			
+			for(int i = 0; i < category_list.size(); i++) {
+				
+				if (i % 3 == 0 ) {
+					dto.setNotice_category_num(Long.parseLong(category_list.get(i)));
+				} else if (i % 3 == 1) {
+					dto.setNotice_category_name(category_list.get(i));
+				} else if ( i % 3 == 2) {
+					dto.setNotice_category_visible(Integer.parseInt(category_list.get(i)));
+					service.update_notice_category(dto);
+					dto = new BoardManage();
+				
+				}
+
+			}
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/admin/boardManage/notice_category_list";
+	}
+	/*
+	 						======================공지사항 게시판====================== 
+	 */
+	@RequestMapping("notice_board_list")
+	public String notice_board_list(HttpServletRequest req, Model model) throws Exception {
+		List<BoardManage> list = service.list_notice_board();
+		
+		model.addAttribute("list", list);
+		
+		
+		return ".admin.boardManage.notice_board";
+	}
+	
+	@GetMapping("notice_board_write")
+	public String notice_board_write(Model model) throws Exception {
+		List<BoardManage> list = service.list_notice_category();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("mode", "write");
+		
+		return ".admin.boardManage.notice_write";
 	}
 	
 }

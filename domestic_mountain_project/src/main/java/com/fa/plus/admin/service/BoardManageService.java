@@ -12,4 +12,12 @@ public interface BoardManageService {
 	public void insert_notice_category(BoardManage dto) throws Exception;
 	public void update_notice_category(BoardManage dto) throws Exception;
 	
+	public List<BoardManage> list_notice_board() throws Exception;
+	public BoardManage find_by_notice_board_num(String s) throws Exception;
+	
+	public void insert_notice_board(BoardManage dto) throws Exception;
+	
+	
+	
+	
 }
