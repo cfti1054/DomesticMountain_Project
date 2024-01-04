@@ -373,8 +373,9 @@
 	
 	
 
-	<div class="mountain-main" style="overflow-y: scroll; width: auto; height: 1000px;"> 
+	<div class="mountain-main" style="overflow-y: scroll; width: auto; height: auto; padding: 40px 160px;"> 
 	
 	</div>
+	
 </section>
 
