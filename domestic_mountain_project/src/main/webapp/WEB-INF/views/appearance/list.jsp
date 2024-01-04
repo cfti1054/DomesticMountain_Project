@@ -14,7 +14,6 @@
 	display: flex;
 	margin: auto;
 }
-
 </style>
 
 
@@ -91,45 +90,55 @@
 
 
 			<div class="notice-container">
-
+				<div class="col-auto me-auto">
+						${dataCount}개(${page}/${total_page} 페이지)</div>
 				<div class="section">
 					<div class="article-album-sub">
-						<ul>
+						<c:forEach var="dto" items="${list}" varStatus="status">
+							<ul>
 
 
+								<li class="show-2-li"><a href="#" class="album-img"> <img
+										width="200" height="200"
+										src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+										alt="">
+								</a>
 
-							<li class="show-2-li"><a href="#" class="album-img"> <img
-									width="200" height="200"
-									src="${pageContext.request.contextPath}/resources/images/hiking.png"
-									alt="">
-							</a>
+									<dl>
+										<dt>
+											<c:url var="url" value="/appearance/article">
+												<c:param name="post_num" value="${dto.post_num}"/>
+												<c:param name="page" value="${page}"/>
+												<c:if test="${not empty kwd}">
+													<c:param name="schType" value="${schType}"/>
+													<c:param name="kwd" value="${kwd}"/>
+												</c:if>	
+											</c:url>
+										
+											<a href="${url}" class="tit"> <span class="inner"> <span
+													class="ellipsis">${dto.post_title}</span>
+											</span>
+											</a> <a href="#" class="m-tcol-p"> <span class="num">[${dto.replyCount}]</span>
+											</a>
+										</dt>
 
-								<dl>
-									<dt>
-										<a href="#" class="tit"> <span class="inner"> <span
-												class="ellipsis">데일리룩</span>
-										</span>
-										</a> <a href="#" class="m-tcol-p"> <span class="num">[7]</span>
-										</a>
-									</dt>
+										<dd class="p-nick">
+											<div class="pers_nick_area">
+												<span>${dto.user_name}</span>
+											</div>
+										</dd>
 
-									<dd class="p-nick">
-										<div class="pers_nick_area">
-											<span>작성자</span>
-										</div>
-									</dd>
+										<dd class="date_num">
+											<span class="date">${dto.post_reg_date}</span> <span
+												class="num">조회: ${dto.post_hit_count}</span>
+										</dd>
+									</dl></li>
 
-									<dd class="date_num">
-										<span class="date">2023-11-11</span> <span class="num">조회:
-											8</span>
-									</dd>
-								</dl></li>
+							</ul>
 
+						</c:forEach>
 
-
-
-						</ul>
-						<div class="page-navigation">1 2 3</div>
+						<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</div>
 
 						<div class="row board-list-footer">
 							<div class="col">
@@ -165,7 +174,7 @@
 										</button>
 
 										<button type="button" class="btn btn-light"
-											onclick="searchList()">글올리기</button>
+											onclick="location.href='${pageContext.request.contextPath}/appearance/write';">글올리기</button>
 									</div>
 								</form>
 							</div>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.AppearanceMapper">
+
+	<select id="post_file_seq" resultType="Long">
+		SELECT post_file_seq.NEXTVAL FROM dual
+	</select>
+	
+	<select id="post_seq" resultType="Long">
+		SELECT post_seq.NEXTVAL FROM dual
+	</select>
+
+	<update id="insertAppearance" parameterType="com.fa.plus.domain.Appearance">
+	
+		INSERT ALL
+		INTO post(post_num, community_category_num, post_title, post_content, post_reg_id, 
+				post_reg_date, post_update_date, post_hit_count, post_visible, post_gather)
+			VALUES (#{post_num}, 5, #{post_title}, #{post_content}, #{post_reg_id},
+				SYSDATE, SYSDATE, 0, 1, 1)
+		INTO post_file (file_num, post_num, saveFilename, originalFilename)
+			VALUES (#{file_num}, #{post_num}, #{saveFilename}, #{originalFilename})
+		SELECT * FROM dual
+	
+	</update>
+
+	<sql id="where-list">
+		<if test="schType=='all'">
+			( INSTR(post_title, #{kwd}) &gt; 0
+				OR INSTR(post_content, #{kwd}) &gt; 0 )
+		</if>
+		<if test="schType=='post_title'">
+			INSTR(post_title, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='post_content'">
+			INSTR(post_content, #{kwd}) &gt; 0 
+		</if>
+		<if test="schType=='user_name'">
+			user_name=#{kwd}
+		</if>
+		<if test="schType=='post_reg_date'">
+			( TO_CHAR(p.post_reg_date, 'YYYY-MM-DD') = #{kwd}
+				OR TO_CHAR(p.post_reg_date, 'YYYYMMDD') = #{kwd} )
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+		AND community_category_num = 5
+		</where>
+	</select>
+	
+	<select id="listAppearance" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+	    SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
+	           NVL(f.post_fileCount, 0) as post_fileCount,
+	           NVL(c.replyCount, 0) as replyCount,
+	           f.originalFilename
+	    FROM post p
+	    JOIN user1 m ON p.post_reg_id = m.useridx
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
+	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
+	        FROM post_file
+	        GROUP BY post_num
+	    ) f ON p.post_num = f.post_num
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as replyCount 
+	        FROM reply
+	        WHERE reply_visible = 1
+	        GROUP BY post_num
+	    ) c ON p.post_num = c.post_num
+	    <where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND community_category_num = 5
+		</where>
+	    ORDER BY p.post_num DESC
+	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Appearance">
+		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
+	           originalFilename, saveFilename,
+	           NVL(LikeCount, 0) LikeCount
+	    FROM post p
+	    JOIN post_file fp ON p.post_num = fp.post_num
+	    JOIN user1 u ON p.post_reg_id = u.useridx
+	    LEFT OUTER JOIN (
+	    	SELECT post_num, COUNT(*) LikeCount
+	    	FROM post_like
+	    	GROUP BY post_num
+	    ) pl ON p.post_num = pl.post_num
+	    WHERE p.post_num = #{post_num}
+	</select>
+	
+	<update id="updateHitCount" parameterType="Long">
+		UPDATE post SET post_hit_count = post_hit_count + 1
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (post_num &gt; #{post_num})
+			AND community_category_num = 5
+		</where>
+		ORDER BY post_num ASC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (post_num &lt; #{post_num})
+			AND community_category_num = 5
+		</where>
+		ORDER BY post_num DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+
+</mapper>

@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +26,6 @@ public class EChartsMapController {
 	private EchartMapService service;
 	
 	@Autowired
-	@Qualifier("myUtilGeneral")
 	private MyUtil myUtil;
 	
 	@RequestMapping("main")
@@ -69,12 +66,17 @@ public class EChartsMapController {
 	@GetMapping("search")
 	@ResponseBody
 	public Map<String, Object> search(
+			@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
+			@RequestParam(defaultValue = "all") String schType,
+			
 			@RequestParam(defaultValue = "") String kwd,
 			@RequestParam(defaultValue = "") String sido_name,
 			@RequestParam(defaultValue = "") String sigungoo_name
 			) throws Exception {
 		
-		
+
+        int size = 5;
+        int total_page = 0;
 		int dataCount = 0;
 		
 		
@@ -84,13 +86,34 @@ public class EChartsMapController {
 		map.put("sigungoo_name", sigungoo_name);
 		
 		dataCount = service.dataCount(map);
+		if (dataCount != 0) {
+	        total_page = myUtil.pageCount(dataCount, size);
+	    }
+		if (total_page < current_page) {
+            current_page = total_page;
+        }
+		
+		int offset = (current_page - 1) * size;
+        if (offset < 0) offset = 0;
+
+        map.put("offset", offset);
+        map.put("size", size);
+        
+        
 		
 		List<EchartMap> list = service.listMountain(map);
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		
+		
+		
 		model.put("list", list);
 		model.put("dataCount", dataCount);
+		
+		model.put("size", size);
+		model.put("pageNo", current_page);
+        model.put("schType", schType);
+        model.put("kwd", kwd);
 		
 		return model;
 	}
