@@ -310,7 +310,7 @@
 			
 			let mountain_img = item.mountain_img;
 			if(! mountain_img) {
-				mountain_img = "${pageContext.request.contextPath}/resources/images/mountain/2.png";
+				mountain_img = "${pageContext.request.contextPath}/resources/images/mountain/default_mountain.png";
 			}
 
 			let mountain_name = item.mountain_name;

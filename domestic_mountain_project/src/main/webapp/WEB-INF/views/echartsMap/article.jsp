@@ -17,11 +17,19 @@
 
 <section class="features-1">
 	<div class="maps-container">
-
+	<div class="test">
 		<div class="maps-sub-title">
 
 			<div class="mountain-img">
-				<img src="${dto.mountain_img}">
+			<c:choose>
+				<c:when test="${not empty dto.mountain_img}">
+					<img src="${dto.mountain_img}">
+				</c:when>
+				<c:otherwise>
+					<img src="${pageContext.request.contextPath}/resources/images/mountain/default_mountain.png">
+				</c:otherwise>
+			</c:choose>
+				
 			</div>
 			<div class="mountain-title">
 				<button type="button" class="btn btn-light" style="color: white; background-color: #6e91b4; float: right;" 
@@ -61,7 +69,7 @@
 				<p>${dto.sub_content != null ? dto.sub_content : '부가 설명이 등록되어 있지 않습니다.'}</p>
 			</div>
 		</div>
-
+</div>
 	</div>
 </section>
 

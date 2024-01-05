@@ -18,7 +18,7 @@
 }
 
 .maps-sub-title .mountain-title {
-	width: 800px;
+	width: 700px;
 }
 
 .maps-sub-title .mountain-title .name-kor h2 {
@@ -52,4 +52,11 @@
 .maps-container .mountain-sub p {
 	margin-bottom: 50px;
 	font-size: 20px;
+}
+
+.test {
+	background-color: #f5f6ff;
+	padding: 50px;
+    box-shadow: 0px 0px 15px 5px #ccc;
+    border-radius: 10px;
 }
