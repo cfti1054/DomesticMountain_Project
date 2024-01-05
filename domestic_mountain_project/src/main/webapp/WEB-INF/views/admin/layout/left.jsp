@@ -24,7 +24,10 @@
 					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
 					<i class="fas fa-search"></i>
-				</button>
+				</button>				
+				<div class="p-2" style="color: gray;">
+					<a href="${pageContext.request.contextPath}/" title="사용자"><i class="fas fa-user fa-fw"></i></a>
+				</div>
 			</div>
 		</form>
 		<!-- Navbar-->
