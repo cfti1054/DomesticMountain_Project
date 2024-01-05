@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.table-form input[type=text], 
+.table-form input[type=file] {
+    width: 50%;
+}
+
+.form-control {
+	width: auto;
+	margin-right: 5px;
+}
+
+.table-form .td-date {
+    padding-left: 10px;
+    display: flex;
+}
+
+.table-form textarea {
+	height: 400px;
+}
+
+.table-form p {
+    line-height: 200%;
+    display: contents;
+}
