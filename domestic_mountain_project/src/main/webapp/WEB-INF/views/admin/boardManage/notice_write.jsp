@@ -10,9 +10,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">
 
 <script type="text/javascript">
+$( function() {
+	$("#notice_board_invisible_date").datepicker();
+});
+
 function check() {
     const f = document.boardForm;
 	let str;
+	let x;
 	
     str = f.notice_board_title.value.trim();
     if(!str) {
@@ -34,6 +39,14 @@ function check() {
 		f.notice_category_num.focus();
 		return false;
 		
+	}
+	
+	str = f.notice_board_invisible_date.value;
+	x = f.expireUse.value;
+	if(!str && x) {
+		alert("만료일자를 입력하세요. ");
+		f.notice_board_invisible_date.focus();
+		return false;
 	}
 	console.log(f.notice_board_invisible_date.value);
 	
@@ -94,13 +107,13 @@ $(function() {
 					
 					<tr>
 						<td class="bg-light col-sm-2" scope="row">만료 기한 사용</td>
-						<td ><input type="checkbox" name="expireUse"></td>
+						<td><input type="checkbox" name="expireUse" id="expireUse" value="checked"></td>
 						
 					</tr>
 					
 					<tr id="expire" style="display:none;">
 							<td class="bg-light col-sm-2">만료 날짜</td>
-							<td><input type="date" id="notice_board_invisible_date" value="${dto.notice_board_invisible_date}"></td>
+							<td><input type="text" name="notice_board_invisible_date" id="notice_board_invisible_date" value="${dto.notice_board_invisible_date}"></td>
 					</tr>
 					
 					

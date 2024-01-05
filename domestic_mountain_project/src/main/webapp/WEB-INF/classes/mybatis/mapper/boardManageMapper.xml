@@ -50,7 +50,7 @@
 	
 	<!-- 공시사항 게시판 -->
 	<select id="notice_board_seq" resultType="Long">
-		SELECT notice_board_seq.NEXTVAL FROM DUAL;
+		SELECT notice_board_seq.NEXTVAL FROM DUAL
 	</select>
 	
 	<select id="find_by_notice_board_num" parameterType="Long" resultType="com.fa.plus.admin.domain.BoardManage">
@@ -79,11 +79,11 @@
 			NOTICE_REG_DATE, NOTICE_VISIBLE, NOTICE_INVISIBLE_DATE)
 		VALUES(#{notice_board_num}, #{notice_category_num}, #{notice_board_title},
 			#{notice_board_content}, 0, 1, SYSDATE, 1,
-			<if test="notice_board_invisible_date == 0">
-				TO_DATE('9999-12-31','YYYY-MM-DD')
+			<if test="notice_board_invisible_date == null">
+				TO_DATE(9999-12-30,'YYYY-MM-DD')
 			</if>
-			<if test="notice_board_invisible_date > SYSDATE">
-				TO_DATE('#{notice_board_invisible_date}','YYYY-MM-DD')
+			<if test="notice_board_invisible_date != null">
+				TO_DATE(#{notice_board_invisible_date},'YYYY-MM-DD')
 			</if>
 			)
 	</insert>
