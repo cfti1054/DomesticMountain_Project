@@ -39,7 +39,7 @@
 	        <if test="faq_category_num == null || faq_category_num!=0">
 	            ( f.faq_category_num = #{faq_category_num} )
 	        </if>
-	        AND c.category_visible = 1
+	        AND c.category_visible = 1 AND f.faq_visible = 1
 	    </where>
 	    ORDER BY f.faq_num DESC
 	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
