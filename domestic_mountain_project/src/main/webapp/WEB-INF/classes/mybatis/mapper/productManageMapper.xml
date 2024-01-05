@@ -173,16 +173,25 @@
 		DELETE FROM optionDetail WHERE detail_num = #{detail_num}
 	</delete>	
 	
-	
 	<!-- 상품 재고 -->
 	<select id="listProductStock" parameterType="long" resultType="com.fa.plus.admin.domain.ProductStockManage">
-		SELECT o.product_num, product_name, d.option_num, parent, detail_num,
-			d.option_value
+		SELECT p.product_num, p.product_name, op.option_num poption_num, op.option_name poption_name,
+                os.option_num soption_num, os.option_name soption_name,
+                odp.detail_num pdetail_num, odp.option_value poption_value,
+                sdp.detail_num sdetail_num, sdp.option_value soption_value,
+                NVL(stock_num, 0) stock_num, NVL(total_stock, 0) total_stock
 		FROM product p
-		JOIN productOption o ON p.product_num = o.product_num
-		LEFT OUTER JOIN optionDetail d ON o.option_num = d.option_num
+		JOIN (
+            SELECT product_num, option_num, option_name, parent FROM productOption WHERE product_num = #{product_num} AND parent IS NULL
+        ) op ON p.product_num = op.product_num
+		LEFT OUTER JOIN (
+            SELECT option_num, option_name, parent FROM productOption WHERE product_num = #{product_num} AND parent IS NOT NULL
+        ) os ON op.option_num = os.parent
+        JOIN optionDetail odp ON op.option_num = odp.option_num
+        LEFT OUTER JOIN optionDetail sdp ON os.option_num = sdp.option_num
+        LEFT OUTER JOIN productStock ps ON odp.detail_num = ps.detail_num AND sdp.detail_num = ps.detail_num2
 		WHERE p.product_num = #{product_num}
-		ORDER BY product_num
+        ORDER  BY pdetail_num, sdetail_num
 	</select>
 	
 	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">

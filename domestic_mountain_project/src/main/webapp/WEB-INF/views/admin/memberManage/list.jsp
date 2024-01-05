@@ -121,7 +121,6 @@ function updateOk() {
 	$("#member-dialog").dialog("close");
 }
 
-// (미구현) 계정지우면 큰일남
 function deleteOk(useridx) {
 	if(confirm("선택한 계정을 삭제 하시겠습니까 ?")) {
 	}

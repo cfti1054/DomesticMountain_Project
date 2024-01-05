@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style type="text/css">
 .body-container {
-	max-width: 900px;
+	max-width: 1100px;
 	position: relative;
 	top: 100px;
 	left: 20%;
@@ -77,7 +77,52 @@ ul.tabs li.active {
 	display: none;
 }
 
+.btn1 {
+	background-color: #FFC596;
+	border-color: white;	
+	border-radius: 5px;
+}
+
+.text1 {
+	border-radius: 5px;
+	border-color: #dcdcdc;
+}
+
 </style>
+<script type="text/javascript">
+$(function(){
+	$('.btnStockUpdate').click(function(){
+		const $btn = $(this);
+		const $input = $(this).closest('tr').find('input[name="total_stock"]');
+		
+		if(! /^[0-9]+$/.test($input.val())) {
+			alert('숫자만 가능합니다.');
+			$input.focus();
+			return false;
+		}
+		
+		if(parseInt($input.val()) < 1) {
+			alert('재고는 하나 이상 가능합니다.');
+			$input.focus();
+			return false;			
+		}
+	
+		let detail_num = $btn.attr("data-detail_num");
+		let detail_num2 = $btn.attr("data-detail_num2");
+		let stock_num = $btn.attr("data-stock_num");
+		let total_stock = $input.val();
+		
+		const f = document.stockUpdateForm;
+		f.detail_num.value = detail_num;
+		f.detail_num2.value = detail_num2;
+		f.stock_num.value = stock_num;
+		f.total_stock.value = total_stock;
+		
+
+	});
+});
+</script>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/boot-board.css"
 	type="text/css">
@@ -93,20 +138,22 @@ ul.tabs li.active {
 			<div class="body-main">
 
 				<div class="row board-list-header">
-					<div class="col-auto pt-2">
-						<span>${dataCount}개</span>
+					<div class="col-auto me-auto pt-2">
+						<h3>${productName}(${productNum})</h3>
 					</div>
+					<div class="col-auto pt-2">
+						<span>상품 종류 : ${listProductStock.size()} 개</span>
+					</div>					
 				</div>
 
 				<table class="table table-borderless board-list">
 					<thead class="table-light">
 						<tr class="border-bottom1">
-							<th width="100">재고번호</th>
-							<th width="100">상품번호</th>
-							<th>상품이름</th>
-							<th width="100">상세번호1</th>
-							<th width="100">상세번호2</th>
-							<th width="100">재고</th>
+							<th width="110">번호</th>
+							<th width="250">${titleOptionParent}</th>
+							<th width="250">${titleOptionSub}</th>
+							<th width="250">재고</th>
+							<th>관리</th>
 						</tr>
 					</thead>
 
@@ -114,29 +161,36 @@ ul.tabs li.active {
 						<c:forEach var="dto" items="${listProductStock}"
 							varStatus="status">
 							<tr class="item-basic-content border-bottom">
-								<td></td>
-								<td>${dto.product_num}</td>
-								<td><span>${dto.product_name}</span></td>
-								<td>${dto.detail_num}</td>
-								<td></td>
-								<td>${dto.total_stock}</td>
+								<td>${status.count}</td>
+								<td>${dto.poption_value}</td>
+								<td>${dto.soption_value}</td>
+
+								<td><input type="text" class="form-control" name="total_stock" value="${dto.total_stock}">  </td>
+								<td>	
+									<button type="button" class="form-control btnStockUpdate" data-detail_num="${dto.pdetail_num}" data-detail_num2="${dto.sdetail_num}" data-stock_num="${dto.stock_num}">${total_stock == 0 ?"변경":"등록"}</button>
+								</td>
 							</tr>
 
 						</c:forEach>
 					</tbody>
 				</table>
 
-				<div class="page-navigation">${dataCount == 0 ? "등록된 상품이 없습니다." : paging}
-				</div>
-
 			</div>
 			<table class="table table-borderless">
 				<tr>
-					<td>
-						<button type="button" class="btn btn-dark" onclick="submitContents(this.form);" style="float: right;">등록완료</button>
+					<td>					
+						<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/admin/product/product_list?page=${page}';" style="float: right;">돌아가기</button>
 					</td>
 				</tr>
 			</table>
+			
+			<form name="stockUpdateForm" method="post">
+				<input type="hidden" name="product_num" value="${productNum}">
+				<input type="hidden" name="detail_num" value="${detail_num}">
+				<input type="hidden" name="detail_num2" value="${detail_num2}">
+				<input type="hidden" name="stock_num" value="${stock_num}">
+				<input type="hidden" name="total_stock" value="${total_stock}">
+			</form>
 
 		</div>
 	</main>

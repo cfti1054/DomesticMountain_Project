@@ -293,25 +293,55 @@ public class ProductManageController {
 		return ".admin.product.article";
 	}	
 	
-	
+	// 재고 관리 이동
 	@GetMapping("stock")
 	public String stockForm(@RequestParam long product_num,
+			@RequestParam String page,
 			Model model) throws Exception {
 
 		List<ProductStockManage> listProductStock = service.listProductStock(product_num);
+		if(listProductStock.size() < 1) {
+			return "redirect:/admin/product/product_list?page="+page;
+		}
 		
-		listProductStock = service.listProductStock(product_num);
+		long productNum = listProductStock.get(0).getProduct_num();
+		String productName = listProductStock.get(0).getProduct_name();
+		String titleOptionParent = listProductStock.get(0).getPoption_name();
+		String titleOptionSub = listProductStock.get(0).getSoption_name();
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		int dataCount = 0;
-		dataCount = service.dataCount(map);
-		
-		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("mode", "stock");
+		model.addAttribute("productNum", productNum);
+		model.addAttribute("productName", productName);
+		model.addAttribute("titleOptionParent", titleOptionParent);
+		model.addAttribute("titleOptionSub", titleOptionSub);
+		model.addAttribute("page", page);
 		model.addAttribute("listProductStock", listProductStock);
 		
 		
 		return ".admin.product.stock";
 	}
+	
+	// 재고 추가
+	@PostMapping("insertStock")
+	@ResponseBody
+	public Map<String, Object> insertStock(ProductStockManage dto) throws Exception {
+		
+		String stock_num = "true";
+	
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("stock_num", dto.getStock_num());
+			map.put("product_num", dto.getProduct_num());
+			
+			// 상품 재고 추가
+			service.insertProductStock(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("stock_num", stock_num);
+		return model;
+	}		
 	
 }
