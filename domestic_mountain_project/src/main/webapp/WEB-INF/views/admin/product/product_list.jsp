@@ -218,7 +218,7 @@ function changeSubList() {
 								<td>${dto.product_num}</td>
 								<td>${dto.product_reg_date}</td>
 								<td>${dto.product_status == 1 ? "진열" : "숨김"}</td>
-								<td>최고</td>
+								<td>${dto.total_stock}</td>
 								<td>${dto.product_price}</td>
 									<c:url var="updateUrl" value="/admin/product/update">
 										<c:param name="product_num" value="${dto.product_num}"/>
@@ -228,7 +228,7 @@ function changeSubList() {
 									</c:url>
 									<c:url var="stockUrl" value="/admin/product/stock">
 										<c:param name="product_num" value="${dto.product_num}"/>
-										<c:param name="page" value="${page}"/>										
+										<c:param name="page" value="${page}"/>				
 									</c:url>									
 								<td>
 								<button type="button" class="btn" style="height: auto; width: auto" onclick="location.href='${stockUrl}';">재고</button>

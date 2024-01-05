@@ -1,5 +1,6 @@
 package com.fa.plus.admin.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -351,6 +352,17 @@ public class ProductManageServiceImpl implements ProductManageService {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+
+	@Override
+	public void insertProductStock(ProductStockManage dto) throws SQLException {
+		try {
+			mapper.insertProductStock(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 	}
 
 	

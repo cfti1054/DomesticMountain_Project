@@ -1,5 +1,6 @@
 package com.fa.plus.admin.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,5 +33,6 @@ public interface ProductManageService {
 	// 상품 재고
 	public List<ProductStockManage> listProductStock(long product_num);
 	public void updateProductStock(ProductStockManage dto) throws Exception;
+	public void insertProductStock(ProductStockManage dto) throws SQLException;
 	
 }
