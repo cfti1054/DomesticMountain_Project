@@ -3,11 +3,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.mapper.EchartMapMapper">
 
-	<sql id="where-list">
-		<if test="schType=='mountain_name'">
-			DBMS_LOB.INSTR(mountain_name, #{kwd}) &gt; 0
-		</if>
-	</sql>
 
 	<select id="listMountain" parameterType="map" resultType="com.fa.plus.domain.EchartMap">
 		SELECT DISTINCT mountain_name, m.mountain_num, mountain_chinese,
@@ -19,14 +14,13 @@
 		JOIN sido do ON si.sido_num = do.sido_num
 		<where>
 			<if test="kwd!=null and kwd!='' ">
-				<include refid="where-list" />
+				( INSTR(mountain_name, #{kwd}) &gt; 0 )
 			</if>
-
 			<if test="sido_name !=null and sido_name!='' ">
 				AND sido_name = #{sido_name}
-				<if test="sigungoo_name !=null and sigungoo_name!='' ">
-					AND sigungoo_name = #{sigungoo_name}
-				</if>
+			</if>
+			<if test="sigungoo_name !=null and sigungoo_name!='' ">
+				AND sigungoo_name = #{sigungoo_name}
 			</if>
 		</where>
 		ORDER BY mountain_name ASC
@@ -41,14 +35,13 @@
 		JOIN sido do ON si.sido_num = do.sido_num
 		<where>
 			<if test="kwd!=null and kwd!='' ">
-				<include refid="where-list" />
+				( INSTR(mountain_name, #{kwd}) &gt; 0 )
 			</if>
-
 			<if test="sido_name !=null and sido_name!='' ">
 				AND sido_name = #{sido_name}
-				<if test="sigungoo_name !=null and sigungoo_name!='' ">
-					AND sigungoo_name = #{sigungoo_name}
-				</if>
+			</if>
+			<if test="sigungoo_name !=null and sigungoo_name!='' ">
+				AND sigungoo_name = #{sigungoo_name}
 			</if>
 		</where>
 	</select>

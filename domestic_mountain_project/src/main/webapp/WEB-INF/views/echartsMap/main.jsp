@@ -31,16 +31,15 @@
 </section>
 
 <script type="text/javascript">
-	  
 	var ROOT_PATH = '${pageContext.request.contextPath}/data/asset/geo';
-	var sido, sido_name, sigungoo_name; 
+	var sido='', sido_name='', sigungoo_name=''; 
 	
 	var chartDom = document.querySelector('.maps');
 	var myChart = echarts.init(chartDom);
 	var option;
 	
 	myChart.showLoading();
-	$.get(ROOT_PATH + '/0.json', function (geoJson) {
+	$.getJSON(ROOT_PATH + '/0.json', function (geoJson) {
 	  myChart.hideLoading();
 	  echarts.registerMap('KOREA', geoJson);
 	  
@@ -157,33 +156,19 @@
 	
 	// 지도에서 지역을 클릭한 경우 -----
 	myChart.on('click', function(params){
+		$("#search-kwd").val("");
+		
 		if((! params.data) || (! params.data.fullName)) { // 시군구를 클릭 한 경우
 			// 세종시는 확인 필요
 			sigungoo_name = params.name;
 		
 			// 여기가 이제 시군구 클릭을 했을때 넘기는 코드
-			
 			document.getElementById("region").innerHTML=sido_name + ' ' + sigungoo_name;
-			
-			$.ajax({
-				url : "${pageContext.request.contextPath}/echartsMap/search",
-				type : 'get',
-				data : {
-					sido_name : sido_name,
-					sigungoo_name : sigungoo_name
-				},
-				dataType : 'json',
-				success : function(data) {
-					sidomountain(data);
-			     },
-				error : function(e) {
-					console.log(e.responseText);
-				}
-			});
-			
-			
-			
-			// alert(sido_name + ' ' + sido + ' ' + sigungoo_name);
+		
+			$(".mountain-main").empty();
+			$(".mountain-main").attr("data-sigungoo_name", sigungoo_name);
+			let reqParams = {sido_name:sido_name, sigungoo_name:sigungoo_name};
+			ajaxMountainFun(reqParams);
 			
 			return false;
 		}
@@ -195,27 +180,15 @@
 		sido_name = params.data.fullName;
 		
 		document.getElementById("region").innerHTML = sido_name;
-		
 
-		$.ajax({
-			url : "${pageContext.request.contextPath}/echartsMap/search",
-			type : 'get',
-			data : {
-				sido_name : sido_name
-			},
-			dataType : 'json',
-			success : function(data) {
-				sidomountain(data);
-		     },
-			error : function(e) {
-				console.log(e.responseText);
-			}
-		});
-		
+		$(".mountain-main").empty();
+		$(".mountain-main").attr("data-sido_name", sido_name);
+		let reqParams = {sido_name:sido_name};
+		ajaxMountainFun(reqParams);		
 		
 		var arr = [];
 		var colors = [0, 50, 30, 70, 20, 40, 80, 10, 90, 60, 100];	
-		$.get(ROOT_PATH + '/' + id + '.json', function (geoJson) {
+		$.getJSON(ROOT_PATH + '/' + id + '.json', function (geoJson) {
 		  echarts.registerMap('KOREA', geoJson);
 	
 		  //console.log(geoJson);
@@ -271,18 +244,14 @@
 	// 오른쪽 Restore 버튼을 클릭한 경우 -----
 	// 시군구에서 Restore 버튼을 클릭하면 지도 색상이 초기화 되므로
 	myChart.on('restore', function(params){
-		location.href = '${pageContext.request.contextPath}/emaps/main'; 
+		location.href = '${pageContext.request.contextPath}/echartsMap/main'; 
 	});
-	
-	
-	// 전체 출력
-	$(function(){
+		
+	function ajaxMountainFun(reqParams) {
 		$.ajax({
 			url : "${pageContext.request.contextPath}/echartsMap/search",
 			type : 'get',
-			data : {
-				sido_name : ''
-			},
+			data : reqParams,
 			dataType : 'json',
 			success : function(data) {
 				sidomountain(data);
@@ -290,16 +259,52 @@
 			error : function(e) {
 				console.log(e.responseText);
 			}
-		});
-		
-	});
-	
-	function searchList() {
-
+		});	
 	}
 	
-	function sidomountain(data) {
+	// 전체 출력
+	$(function(){
+		let reqParams = {sido_name:'', sigungoo_name:''};
+		ajaxMountainFun(reqParams);
+	});	
+	
+	function listMountainPage(page) {
+		let kwd = $("#search-kwd").val().trim();
+		let s_name = $(".mountain-main").attr("data-sido_name");
+		let sg_name = $(".mountain-main").attr("data-sigungoo_name");
+		
+		let reqParams = {sido_name:s_name, sigungoo_name:sg_name, kwd:kwd, pageNo:page};
+		
+		ajaxMountainFun(reqParams);
+	}
+	
+	function searchList() {
+		let kwd = $("#search-kwd").val().trim();
+		let s_name = $(".mountain-main").attr("data-sido_name");
+		let sg_name = $(".mountain-main").attr("data-sigungoo_name");
+		
 		$(".mountain-main").empty();
+		let reqParams = {sido_name:s_name, sigungoo_name:sg_name, kwd:kwd};
+		ajaxMountainFun(reqParams);
+	}
+
+	function sidomountain(data) {
+		let pageNo = data.pageNo;
+		let dataCount = data.dataCount;
+		let total_page = data.total_page;
+		
+		$(".mountain-main").attr("data-pageNo", pageNo);
+		$(".mountain-main").attr("data-totalPage", total_page);
+		
+		$('.mountain-footer').hide();
+		if(parseInt(dataCount) == 0) {
+			$(".mountain-main").empty();
+			return;
+		}
+		
+		if(parseInt(pageNo) < parseInt(total_page)) {
+			$('.mountain-footer').show();
+		}
 		
 		$(data.list).each(function(index, item){
 			
@@ -326,7 +331,18 @@
 		
 	}
 	
-	
+	$(function(){
+		$('.btn-more').click(function(){
+			let pageNo = $(".mountain-main").attr("data-pageNo");
+			let total_page = $(".mountain-main").attr("data-totalPage");
+			
+			if(parseInt(pageNo) < parseInt(total_page)) {
+				pageNo++;
+				listMountainPage(pageNo);
+			}
+
+		});
+	});
 	
 </script>
 
@@ -342,11 +358,10 @@
 
 	<div class="col-6 text-end datacount">
 	
-		<form class="row text-end-row" name="searchForm"
-			action="${pageContext.request.contextPath}/echartsMap/main" method="post">
+		<div class="row text-end-row">
 			
 			<div class="col-auto p-1">
-				<input type="text" name="kwd" value="${kwd}" class="form-control"
+				<input type="text" id="search-kwd" class="form-control"
 					placeholder="산명 검색하세요.">
 			</div>
 			<div class="col-auto p-1">
@@ -355,7 +370,7 @@
 					<i class="bi bi-search"></i>
 				</button>
 			</div>
-		</form>
+		</div>
 		
 		<div class="col">
 			<button type="button" class="btn btn-light"
@@ -364,23 +379,14 @@
 				<i class="bi bi-arrow-counterclockwise"></i>
 			</button>
 		</div>
-		<div style="width: 100px; display: flex; justify-content: center; align-items: center; height: 38px;">
-			${dataCount} 개
-		</div>
 
 	</div>
-	
-	
-	
 
-	<div class="mountain-main" style="overflow-y: scroll; width: auto; height: auto; padding: 40px 160px;"> 
+	<div class="mountain-main" style="overflow-y: scroll; width: auto; height: auto; padding: 40px 160px;" 
+		data-sido_name="" data-sigungoo_name="" data-pageNo="0" data-totalPage="0" > </div>
 	
-	</div>
-	<div class="col" style="width: 900px; margin: auto;">
-	
-		<button type="button" class="btn btn-light" onclick="#" title="이전" style="background-color: #d3d4d5"> 이전 </button>
-		<button type="button" class="btn btn-light" onclick="#" title="이전" style="background-color: #d3d4d5"> 다음 </button>
-	
+	<div class="mountain-footer" style="width: 900px; margin: auto; display:none; display: flex; justify-content: end;">
+		<button type="button" class="btn btn-light btn-more" title="더보기" style="background-color: #d3d4d5;"> 더보기 </button>
 	</div>
 	
 </section>

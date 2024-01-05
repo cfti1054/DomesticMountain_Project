@@ -67,15 +67,13 @@ public class EChartsMapController {
 	@ResponseBody
 	public Map<String, Object> search(
 			@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
-			@RequestParam(defaultValue = "all") String schType,
-			
 			@RequestParam(defaultValue = "") String kwd,
 			@RequestParam(defaultValue = "") String sido_name,
 			@RequestParam(defaultValue = "") String sigungoo_name
 			) throws Exception {
 		
 
-        int size = 5;
+        int size = 10;
         int total_page = 0;
 		int dataCount = 0;
 		
@@ -89,6 +87,7 @@ public class EChartsMapController {
 		if (dataCount != 0) {
 	        total_page = myUtil.pageCount(dataCount, size);
 	    }
+		
 		if (total_page < current_page) {
             current_page = total_page;
         }
@@ -98,8 +97,7 @@ public class EChartsMapController {
 
         map.put("offset", offset);
         map.put("size", size);
-        
-        
+         
 		
 		List<EchartMap> list = service.listMountain(map);
 		
@@ -108,12 +106,11 @@ public class EChartsMapController {
 		
 		
 		model.put("list", list);
-		model.put("dataCount", dataCount);
 		
 		model.put("size", size);
+		model.put("dataCount", dataCount);
+		model.put("total_page", total_page);
 		model.put("pageNo", current_page);
-        model.put("schType", schType);
-        model.put("kwd", kwd);
 		
 		return model;
 	}
