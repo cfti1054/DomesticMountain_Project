@@ -309,6 +309,10 @@
 		$(data.list).each(function(index, item){
 			
 			let mountain_img = item.mountain_img;
+			if(! mountain_img) {
+				mountain_img = "${pageContext.request.contextPath}/resources/images/mountain/2.png";
+			}
+
 			let mountain_name = item.mountain_name;
 			let main_content = item.main_content;
 			let mountain_num = item.mountain_num;
