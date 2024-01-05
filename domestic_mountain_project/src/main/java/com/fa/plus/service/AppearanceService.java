@@ -16,5 +16,27 @@ public interface AppearanceService {
 	public void updateHitCount(long file_num) throws Exception;
 	public Appearance findByPrev(Map<String, Object> map);
 	public Appearance findByNext(Map<String, Object> map);
+	public void updateAppearance(Appearance dto, String pathname) throws Exception;
+	public void updateAppearance2(Appearance dto, String pathname) throws Exception;
+	// public void deleteBoard(long num, String pathname, String userId, int membership) throws Exception;
 	
+	public void insertBoardLike(Map<String, Object> map) throws Exception;
+	public void deleteBoardLike(Map<String, Object> map) throws Exception;
+	public int boardLikeCount(long post_num);
+	public boolean userBoardLiked(Map<String, Object> map);
+	
+	/*
+	public void insertReply(Reply dto) throws Exception;
+	public List<Reply> listReply(Map<String, Object> map);
+	public int replyCount(Map<String, Object> map);
+	public void deleteReply(Map<String, Object> map) throws Exception;
+	
+	public List<Reply> listReplyAnswer(Map<String, Object> map);
+	public int replyAnswerCount(Map<String, Object> map);
+	
+	public void insertReplyLike(Map<String, Object> map) throws Exception;
+	public Map<String, Object> replyLikeCount(Map<String, Object> map);
+	
+	public void updateReplyShowHide(Map<String, Object> map) throws Exception;
+	*/
 }

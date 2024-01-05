@@ -63,10 +63,12 @@
 						</td>
 					</tr>
 					
-					
-					
-					
-					
+					<tr>
+						<td colspan="2" class="text-center p-3" style="border-bottom: none;">
+							<button type="button" class="btn btn-outline-secondary btnSendBoardLike" title="좋아요"><i class="bi ${userBoardLiked ? 'bi-hand-thumbs-up-fill':'bi-hand-thumbs-up' }"></i>&nbsp;&nbsp;<span id="boardLikeCount">${dto.boardLikeCount}</span></button>
+						</td>
+					</tr>
+
 					<tr>
 						<td colspan="2">
 							<c:if test="${not empty dto.saveFilename}">
@@ -203,7 +205,7 @@ $(function(){
 		
 		let url = '${pageContext.request.contextPath}/appearance/insertBoardLike';
 		let num = '${dto.post_num}';
-		let query = 'num=' + num + '&userLiked=' + userLiked;
+		let query = 'post_num=' + num + '&userLiked=' + userLiked;
 		
 		const fn = function(data){
 			let state = data.state;

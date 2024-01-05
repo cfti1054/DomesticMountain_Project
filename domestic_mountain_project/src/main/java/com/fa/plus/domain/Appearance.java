@@ -22,7 +22,7 @@ public class Appearance {
 	private String saveFilename;
 	private String originalFilename;
 	private MultipartFile selectFile; // <input type='file' name='selectFile' ..
-
+	
 	private String user_name;
 	private long useridx;
 	private int usership;
@@ -32,8 +32,17 @@ public class Appearance {
 	private long replyCount;
 	
 	private long post_fileCount;
+
+	private int boardLikeCount;
 	
-	
+	public int getBoardLikeCount() {
+		return boardLikeCount;
+	}
+
+	public void setBoardLikeCount(int boardLikeCount) {
+		this.boardLikeCount = boardLikeCount;
+	}
+
 	
 	public long getPost_fileCount() {
 		return post_fileCount;

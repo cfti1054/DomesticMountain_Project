@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Appearance;
@@ -159,10 +161,10 @@ public class AppearanceController {
 		Appearance prevDto = service.findByPrev(map);
 		Appearance nextDto = service.findByNext(map);
 		
-//		SessionInfo info = (SessionInfo) session.getAttribute("user");
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		// 게시글 좋아요 여부
-//		map.put("userId", info.getUserId());
-//		boolean userBoardLiked = service.userBoardLiked(map);
+		map.put("useridx", info.getUseridx());
+		boolean userBoardLiked = service.userBoardLiked(map);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("prevDto", prevDto);
@@ -171,10 +173,81 @@ public class AppearanceController {
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 
-//		model.addAttribute("userBoardLiked", userBoardLiked);
+  		model.addAttribute("userBoardLiked", userBoardLiked);
 		
 		return ".appearance.article";
 	}
+	
+	@GetMapping("update")
+	public String updateForm(@RequestParam long post_num,
+			@RequestParam String page,
+			HttpSession session,
+			Model model) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+
+		Appearance dto = service.findById(post_num);
+		if (dto == null || ! info.getUserid().equals(dto.getUser_id())) {
+			return "redirect:/appearance/list?page=" + page;
+		}
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
+		model.addAttribute("page", page);
+
+		return ".appearance.write";
+	}
+
+	@PostMapping("update")
+	public String updateSubmit(Appearance dto,
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "bbs";
+
+		try {
+			service.updateAppearance(dto, pathname);
+			service.updateAppearance2(dto, pathname);
+		} catch (Exception e) {
+		}
+
+		return "redirect:/Appearance/list?page=" + page;
+	}
+	
+	// 게시글 좋아요 추가/삭제 : AJAX-JSON
+		@PostMapping("insertBoardLike")
+		@ResponseBody
+		public Map<String, Object> insertBoardLike(@RequestParam long post_num, 
+				@RequestParam boolean userLiked,
+				HttpSession session) {
+			String state = "true";
+			int boardLikeCount = 0;
+			SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+
+			Map<String, Object> paramMap = new HashMap<>();
+			paramMap.put("post_num", post_num);
+			paramMap.put("useridx", info.getUseridx());
+
+			try {
+				if(userLiked) {
+					service.deleteBoardLike(paramMap);
+				} else {
+					service.insertBoardLike(paramMap);
+				}
+			} catch (DuplicateKeyException e) {
+				state = "liked";
+			} catch (Exception e) {
+				state = "false";
+			}
+
+			boardLikeCount = service.boardLikeCount(post_num);
+
+			Map<String, Object> model = new HashMap<>();
+			model.put("state", state);
+			model.put("boardLikeCount", boardLikeCount);
+
+			return model;
+		}
 	
 }
 

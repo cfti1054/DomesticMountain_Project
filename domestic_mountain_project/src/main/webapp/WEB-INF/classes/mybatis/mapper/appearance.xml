@@ -23,6 +23,19 @@
 		SELECT * FROM dual
 	
 	</update>
+	
+	<!-- 수정 -->
+	<update id="updateAppearance" parameterType="com.fa.plus.domain.Appearance">
+		UPDATE post SET post_title=#{post_title}, post_content=#{post_content}
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="updateAppearance2" parameterType="com.fa.plus.domain.Appearance">
+		UPDATE post_file SET saveFilename=#{saveFilename, jdbcType=VARCHAR},
+				originalFilename=#{originalFilename, jdbcType=VARCHAR}
+		WHERE post_num = #{post_num}
+	</update>
 
 	<sql id="where-list">
 		<if test="schType=='all'">
@@ -90,12 +103,12 @@
 		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
 	           originalFilename, saveFilename,
-	           NVL(LikeCount, 0) LikeCount
+	           NVL(boardLikeCount, 0) boardLikeCount
 	    FROM post p
 	    JOIN post_file fp ON p.post_num = fp.post_num
 	    JOIN user1 u ON p.post_reg_id = u.useridx
 	    LEFT OUTER JOIN (
-	    	SELECT post_num, COUNT(*) LikeCount
+	    	SELECT post_num, COUNT(*) boardLikeCount
 	    	FROM post_like
 	    	GROUP BY post_num
 	    ) pl ON p.post_num = pl.post_num
@@ -136,5 +149,29 @@
 		ORDER BY post_num DESC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
+	
+    
+	
+	<!-- 게시 글 좋아요 추가 -->
+	<insert id="insertBoardLike" parameterType="map">
+		INSERT INTO post_like(post_num, useridx) VALUES (#{post_num}, #{useridx})
+	</insert>
+	
+	<!-- 게시 글 좋아요 삭제 -->
+	<delete id="deleteBoardLike" parameterType="map">
+		DELETE FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
+	</delete>
+    
+	<!-- 게시글 좋아요 개수 -->
+	<select id="boardLikeCount" parameterType="Long" resultType="Integer">
+		SELECT COUNT(*) FROM post_like WHERE post_num=#{post_num}
+	</select>
 
+	<!-- 게시글 좋아요 여부 -->
+	<select id="userBoardLiked" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+		SELECT post_num, useridx FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
+	</select>
+	
+	
+	
 </mapper>

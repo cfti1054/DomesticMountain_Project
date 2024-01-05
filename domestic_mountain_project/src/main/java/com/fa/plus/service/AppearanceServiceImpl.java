@@ -117,5 +117,90 @@ public class AppearanceServiceImpl implements AppearanceService {
 
 		return dto;
 	}
+
+	@Override
+	public boolean userBoardLiked(Map<String, Object> map) {
+		
+		boolean result = false;
+		try {
+			Appearance dto = mapper.userBoardLiked(map);
+			if(dto != null) {
+				result = true; 
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void insertBoardLike(Map<String, Object> map) throws Exception {
+		try {
+			mapper.insertBoardLike(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteBoardLike(Map<String, Object> map) throws Exception {
+		try {
+			mapper.deleteBoardLike(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public int boardLikeCount(long post_num) {
+		int result = 0;
+		
+		try {
+			result = mapper.boardLikeCount(post_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@Override
+	public void updateAppearance(Appearance dto, String pathname) throws Exception {
+		try {
+			mapper.updateAppearance(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+	
+	@Override
+	public void updateAppearance2(Appearance dto, String pathname) throws Exception {
+		try {
+			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+			if (saveFilename != null) {
+				if (dto.getSaveFilename() != null && dto.getSaveFilename().length() != 0) {
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				}
+
+				dto.setSaveFilename(saveFilename);
+				dto.setOriginalFilename(dto.getSelectFile().getOriginalFilename());
+			}
+
+			mapper.updateAppearance2(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	
 	
 }
