@@ -118,7 +118,9 @@ $(function(){
 		f.stock_num.value = stock_num;
 		f.total_stock.value = total_stock;
 		
-
+		f.action = "${pageContext.request.contextPath}/admin/product/updateStock";
+		f.submit();
+		
 	});
 });
 </script>
@@ -190,6 +192,7 @@ $(function(){
 				<input type="hidden" name="detail_num2" value="${detail_num2}">
 				<input type="hidden" name="stock_num" value="${stock_num}">
 				<input type="hidden" name="total_stock" value="${total_stock}">
+				<input type="hidden" name="page" value="${page}">
 			</form>
 
 		</div>

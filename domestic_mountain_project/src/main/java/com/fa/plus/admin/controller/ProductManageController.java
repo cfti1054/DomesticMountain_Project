@@ -251,7 +251,7 @@ public class ProductManageController {
 	public String updateSubmit(ProductManage dto,
 			@RequestParam String page,
 			HttpSession session,
-			Model model) {
+			Model model) {		
 		
 		String root = session.getServletContext().getRealPath("/");
 		String path = root + "uploads" + File.separator + "product";
@@ -320,6 +320,33 @@ public class ProductManageController {
 		return ".admin.product.stock";
 	}
 	
+	// 재고 처리
+	@PostMapping("updateStock")
+	public String updateStockSubmit(ProductStockManage dto,
+			@RequestParam long product_num,
+			@RequestParam long stock_num,
+			@RequestParam String page,
+			HttpSession session,
+			Model model) {
+		
+		try {
+			if(stock_num == 0) {
+				service.insertProductStock(dto);
+			} else {				
+				service.updateProductStock(dto);
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String query = "product_num=" + dto.getProduct_num() + "&page=" + page;
+			
+		return "redirect:/admin/product/stock?" + query;
+	}
+	
+	
+	// 이 부분은 사용하지 않음
 	// 재고 추가
 	@PostMapping("insertStock")
 	@ResponseBody

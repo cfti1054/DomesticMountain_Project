@@ -196,7 +196,7 @@
 	
 	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">
 		INSERT INTO productStock(stock_num, detail_num, detail_num2, total_stock, product_num)
-			VALUES (productStock_seq.NEXTVAL, #{detail_num}, #{detail_num2},
+			VALUES (productStock_seq.NEXTVAL, #{detail_num}, #{detail_num2, jdbcType=BIGINT},
 					#{total_stock}, #{product_num})
 	</insert>
 	
