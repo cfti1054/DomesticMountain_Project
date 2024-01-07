@@ -19,12 +19,7 @@
 		<!-- Navbar Search-->
 		<form
 			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="Search for..."
-					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
-					<i class="fas fa-search"></i>
-				</button>				
+			<div class="input-group">			
 				<div class="p-2" style="color: gray;">
 					<a href="${pageContext.request.contextPath}/" title="사용자"><i class="fas fa-user fa-fw"></i></a>
 				</div>
@@ -65,7 +60,7 @@
 						data-bs-target="#collapseLayouts" aria-expanded="false"
 						aria-controls="collapseLayouts">
 						<div class="sb-nav-link-icon">
-							<i class="fas fa-columns"></i>
+							<i class="fas fa-user fa-fw"></i>
 						</div> 회원관리
 						<div class="sb-sidenav-collapse-arrow">
 							<i class="fas fa-angle-down"></i>
@@ -76,9 +71,7 @@
 						<nav class="sb-sidenav-menu-nested nav">
 							<a class="nav-link"
 								href="${pageContext.request.contextPath}/admin/memberManage/list">회원
-								목록</a> <a class="nav-link"
-								href="${pageContext.request.contextPath}/resources/admin/static/layout-sidenav-light.html">관리자
-								권한 설정</a>
+								목록</a> 
 						</nav>
 					</div>
 
