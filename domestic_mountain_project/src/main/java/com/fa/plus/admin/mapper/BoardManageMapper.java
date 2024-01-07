@@ -24,4 +24,6 @@ public interface BoardManageMapper {
 	public List<BoardManage> list_notice_board() throws SQLException;
 	
 	public void insert_notice_board(BoardManage dto) throws SQLException;
+	public void update_notice_board(BoardManage dto) throws SQLException;
+	
 }

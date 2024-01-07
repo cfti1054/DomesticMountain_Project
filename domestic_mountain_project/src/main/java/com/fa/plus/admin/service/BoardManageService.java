@@ -16,7 +16,7 @@ public interface BoardManageService {
 	public BoardManage find_by_notice_board_num(String s) throws Exception;
 	
 	public void insert_notice_board(BoardManage dto) throws Exception;
-	
+	public void update_notice_board(BoardManage dto) throws Exception;
 	
 	
 	

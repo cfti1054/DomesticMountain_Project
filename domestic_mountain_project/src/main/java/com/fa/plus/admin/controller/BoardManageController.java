@@ -147,4 +147,32 @@ public class BoardManageController {
 		return "redirect:/admin/boardManage/notice_board_list";
 	}
 	
+	@GetMapping("notice_board_update")
+	public String notice_board_update(@RequestParam String num, Model model) throws Exception {
+		BoardManage dto = null;
+		List<BoardManage> list = service.list_notice_category();
+		
+		try {
+			dto = service.find_by_notice_board_num(num);
+		} catch (Exception e) {
+		}
+		
+		model.addAttribute("list", list);
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
+		
+		
+		return ".admin.boardManage.notice_write";
+	}
+	
+	@PostMapping("notice_board_update")
+	public String notice_board_update_submit(BoardManage dto) throws Exception {
+		
+		try {
+			service.update_notice_board(dto);
+		} catch (Exception e) {
+		}
+		
+		return "redirect:/admin/boardManage/notice_board_list";
+	}
 }

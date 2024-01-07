@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.admin.mapper.StatsMapper">
+
+<select id="sort_by_age" resultType="com.fa.plus.admin.domain.Stats">
+	SELECT TO_CHAR(birth,'YYYY-MM-DD') AS age 
+	FROM user2
+</select>
+	
+</mapper>

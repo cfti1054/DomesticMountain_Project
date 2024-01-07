@@ -34,6 +34,7 @@ function check() {
     }
 	
 	str = f.notice_category_num.value;
+	console.log(str);
 	if(!str) {
 		alert("카테고리 분류를 선택하세요. ");
 		f.notice_category_num.focus();
@@ -88,10 +89,9 @@ $(function() {
 						<td class="bg-light col-sm-2" scope="row">카테고리 분류</td>
 						<td>
 							<select style="text-align: center;" id="notice_category_num" class="form-select" style=" width: 100%;">
-								<option value=""> :: 카테고리 선택 :: </option>
+									<option value=""> :: 카테고리 선택 :: </option>
 								<c:forEach var="dto" items="${list}" varStatus="status">
-								
-								<option value="${dto.notice_category_num}">${dto.notice_category_name}</option>
+									<option value="${dto.notice_category_num}">${dto.notice_category_name}</option>
 								</c:forEach>
 							</select>					
 						</td>
@@ -124,27 +124,7 @@ $(function() {
 						</td>
 					</tr>
 					
-					<tr>
-						<td class="bg-light col-sm-2">첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
-						<td> 
-							<input type="file" name="selectFile" class="form-control">
-						</td>
-					</tr>
 					
-					<c:if test="${mode=='update'}">
-						<tr>
-							<td class="bg-light col-sm-2" scope="row">첨부된파일</td>
-							<td> 
-								<p class="form-control-plaintext">
-									<c:if test="${not empty dto.saveFilename}">
-										<a href="javascript:deleteFile('${dto.num}');"><i class="bi bi-trash"></i></a>
-										${dto.originalFilename}
-									</c:if>
-									&nbsp;
-								</p>
-							</td>
-						</tr>
-					</c:if>
 				</table>
 				
 				<table class="table table-borderless">
@@ -155,9 +135,6 @@ $(function() {
 							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/boardManage/notice_board_list';">${mode=='update'?'수정취소':'등록취소'}&nbsp;<i class="bi bi-x"></i></button>
 							<c:if test="${mode=='update'}">
 								<input type="hidden" name="num" value="${dto.notice_board_num}">
-								<input type="hidden" name="saveFilename" value="${dto.saveFilename}">
-								<input type="hidden" name="originalFilename" value="${dto.originalFilename}">
-								<input type="hidden" name="notice_category_num" value="${dto.notice_category_num}">
 								<%-- <input type="hidden" name="page" value="${page}"> --%>
 							</c:if>
 						</td>
@@ -169,17 +146,6 @@ $(function() {
 	</div>
 </div>
 
-<c:if test="${mode=='update'}">
-	<script type="text/javascript">
-		function deleteFile(num) {
-			if( ! confirm("파일을 삭제하시겠습니까 ?") ) {
-				return;
-			}
-			let url = "${pageContext.request.contextPath}/bbs/deleteFile?num=" + num + "&page=${page}";
-			location.href = url;
-		}
-	</script>
-</c:if>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">

@@ -110,4 +110,14 @@ public class BoardManageServiceImpl implements BoardManageService  {
 		}
 		
 	}
+
+	@Override
+	public void update_notice_board(BoardManage dto) throws Exception {
+		try {
+			mapper.update_notice_board(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

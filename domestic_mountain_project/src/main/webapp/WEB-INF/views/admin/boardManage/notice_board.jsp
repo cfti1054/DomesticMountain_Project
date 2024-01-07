@@ -214,7 +214,7 @@ function update(inquiry_board_num) {
 													${dto.notice_board_invisible_date}
 											</td>
 											<td>
-												관리 버튼
+												<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/boardManage/notice_board_update?num=${dto.notice_board_num}';" title="관리"><i class="fas fa-circle-info"></i></button>
 											</td>
 											
 										</tr>
@@ -222,9 +222,11 @@ function update(inquiry_board_num) {
 								</tbody>
 							</table>
 							</form>
-							<!-- <p>
-								<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
+							
+							<p>
+								<button type="submit" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/admin/boardManage/notice_board_write';" title="추가"><i class="fas fa-plus"></i></button>
 							</p>
+							<!-- 
 							<p>
 								<button type="button" class="btn btn-primary" id="add_button">추가</button>
 							</p> -->
@@ -352,36 +354,6 @@ function update(inquiry_board_num) {
         </script>
         
         <script>
-        
-        
-        function writeOk() {
-        	const f = document.answerWriteForm;
-        	
-        	if(! f.inquiry_answer_title.value.trim()) {
-        		alert("답변 제목을 입력하세요.");
-        		f.inquiry_answer_title.focus();
-        		return;
-        	}
-        	
-        	if(! f.inquiry_answer_content.value.trim()) {
-        		alert("답변 내용을 입력하세요.");
-        		f.inquiry_answer_content.focus();
-        		return;
-        	}
-        	
-        	
-        	
-        	let url = "${pageContext.request.contextPath}/admin/support/inquiry_answer";
-        	let query = $("#answerWriteForm").serialize();
-        	
-        	const fn = function(data) {
-        		
-        	}
-        	ajaxFun(url, "post", query, "json", fn);
-        	
-        	$("#inquiry-dialog").dialog("close");
-        	
-        }
         function isEmpty(strIn)
         {
             if (strIn === undefined)
@@ -401,47 +373,4 @@ function update(inquiry_board_num) {
                 return false;
             }
         }
-         
-		/* 수정 확정 */
-         function updateOk() {
-        	 const f = document.answerUpdateForm;
-        	 if(! f.inquiry_answer_title.value.trim()) {
-         		alert("답변 제목을 공백으로 입력할 수 없습니다.");
-         		f.inquiry_answer_title.focus();
-         		return;
-         	}
-        	 
-        	 if(! f.inquiry_answer_content.value.trim()) {
-         		alert("답변 내용을 공백으로 입력할 수 없습니다.");
-         		f.inquiry_answer_content.focus();
-         		return;
-         	}
- 
-					
-					/*
-					$(".textarea").each(function(index, item){
-						
-						if( isEmpty($(item).val()) ) {
-							alert("값을 입력하세요.");
-							return;
-						}
-						
-						content_list.push($(item).val())
-					});
-					*/
-					
-					
-					
-					let url = "${pageContext.request.contextPath}/admin/support/inquiry_answer_update";
-		        	let query = $("#answerUpdateForm").serialize();
-		        	
-		        	const fn = function(data) {
-		        		
-		        	}
-		        	ajaxFun(url, "post", query, "json", fn);
-		        	
-		        	
-		        	$("#inquiry-dialog").dialog("close");
-        
-        	 }
         </script>

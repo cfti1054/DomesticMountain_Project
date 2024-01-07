@@ -88,5 +88,22 @@
 			)
 	</insert>
 	
+	<update id="update_notice_board" parameterType="com.fa.plus.admin.domain.BoardManage">
+		UPDATE notice_board
+		SET notice_category_num = #{notice_category_num},
+			notice_title = #{notice_board_title},
+			notice_content = #{notice_board_content},
+			notice_visible = #{notice_board_visible},
+			notice_update_date = SYSDATE,
+			notice_invisible_date = 
+				<if test="notice_board_invisible_date == null">
+					TO_DATE(9999-12-30,'YYYY-MM-DD')
+				</if>
+				<if test="notice_board_invisible_date != null">
+					TO_DATE(#{notice_board_invisible_date},'YYYY-MM-DD')
+				</if>
+			WHERE notice_num = #{notice_board_num}
+	</update>
+	
 	
 </mapper>
