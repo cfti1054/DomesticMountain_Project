@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.TogetherMapper">
+
+	
+	<select id="post_seq" resultType="Long">
+		SELECT post_seq.NEXTVAL FROM dual
+	</select>
+	
+	<select id="gather_seq" resultType="Long">
+		SELECT gather_seq.NEXTVAL FROM dual
+	</select>
+	
+
+	<sql id="where-list">
+		<if test="schType=='all'">
+			( INSTR(post_title, #{kwd}) &gt; 0
+				OR INSTR(post_content, #{kwd}) &gt; 0 )
+		</if>
+		<if test="schType=='post_title'">
+			INSTR(post_title, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='post_content'">
+			INSTR(post_content, #{kwd}) &gt; 0 
+		</if>
+		<if test="schType=='user_name'">
+			user_name=#{kwd}
+		</if>
+		<if test="schType=='post_reg_date'">
+			( TO_CHAR(p.post_reg_date, 'YYYY-MM-DD') = #{kwd}
+				OR TO_CHAR(p.post_reg_date, 'YYYYMMDD') = #{kwd} )
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+		AND community_category_num = 3
+		</where>
+	</select>
+	
+	<select id="listTogether" parameterType="map" resultType="com.fa.plus.domain.Together">
+		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
+	           NVL(f.post_fileCount, 0) as post_fileCount,
+	           NVL(c.replyCount, 0) as replyCount,
+	           f.originalFilename
+	    FROM post p
+	    JOIN user1 m ON p.post_reg_id = m.useridx
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
+	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
+	        FROM post_file
+	        GROUP BY post_num
+	    ) f ON p.post_num = f.post_num
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as replyCount 
+	        FROM reply
+	        WHERE reply_visible = 1
+	        GROUP BY post_num
+	    ) c ON p.post_num = c.post_num
+	    <where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND community_category_num = 3
+		</where>
+	    ORDER BY p.post_num DESC
+	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<update id="updateHitCount" parameterType="Long">
+		UPDATE post SET post_hit_count = post_hit_count + 1
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Together">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (post_num &gt; #{post_num})
+			AND community_category_num = 3
+		</where>
+		ORDER BY post_num ASC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Together">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (post_num &lt; #{post_num})
+			AND community_category_num = 3
+		</where>
+		ORDER BY post_num DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	
+	<update id="insertTogether" parameterType="com.fa.plus.domain.Together">
+		INSERT ALL
+			INTO post(post_num, community_category_num, post_title, post_content, post_reg_id, 
+					post_reg_date, post_update_date, post_hit_count, post_visible, post_gather)
+				VALUES (#{post_num}, 3, #{post_title}, #{post_content}, #{post_reg_id},
+					SYSDATE, SYSDATE, 0, 1, 1)
+			INTO gather(gather_num, post_num, gather_max, gather_expire_date, 
+					location_addr, start_date, end_date)
+				VALUES (#{gather_num}, #{post_num}, #{gather_max}, 
+					TO_DATE(#{gather_expire_date}, 'YYYY-MM-DD'),
+					#{location_addr}, 
+					TO_DATE(#{start_date}, 'YYYY-MM-DD'),
+					TO_DATE(#{end_date}, 'YYYY-MM-DD'))
+		SELECT * FROM dual
+	</update>
+	
+	<update id="updateTogetherPost" parameterType="com.fa.plus.domain.Together">
+		UPDATE post
+		SET post_title = #{post_title}, post_content = #{post_content}, post_update_date = SYSDATE
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<update id="updateTogetherGather" parameterType="com.fa.plus.domain.Together">
+		UPDATE gather
+		SET gather_max = #{gather_max}, gather_expire_date = #{gather_expire_date}, 
+			location_addr = #{location_addr}, start_date = #{start_date}, 
+			end_date = #{end_date}
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<delete id="deleteTogether" parameterType="Long">
+		
+	</delete>
+	
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Together">
+		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id,
+	           NVL(f.post_fileCount, 0) as post_fileCount,
+	           originalFilename,
+	           gather_max, 
+	           TO_CHAR(gather_expire_date, 'yyyy-mm-dd') as gather_expire_date,
+	           TO_CHAR(start_date, 'yyyy-mm-dd') as start_date,
+	           TO_CHAR(end_date, 'yyyy-mm-dd') as end_date,
+	           location_addr,
+	           participant_Count
+	    FROM post p
+	    JOIN user1 m ON p.post_reg_id = m.useridx
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
+	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
+	        FROM post_file
+	        GROUP BY post_num
+	    ) f ON p.post_num = f.post_num
+		LEFT JOIN (
+			SELECT *
+			FROM gather
+		) g ON p.post_num = g.post_num
+        LEFT OUTER JOIN (
+            SELECT gather_num, COUNT(*) participant_Count
+            FROM participant
+            GROUP BY gather_num
+        ) pc ON g.gather_num = pc.gather_num
+        
+	    WHERE community_category_num = 3 AND p.post_num = #{post_num}
+	</select>
+	
+	<!-- 파일 -->
+	
+	<insert id="insertTogetherFile" parameterType="com.fa.plus.domain.Together">
+		INSERT INTO post_file (file_num, post_num, saveFilename, originalFilename)
+			VALUES (post_file_seq.NEXTVAL, #{post_num}, #{saveFilename}, #{originalFilename})
+	</insert>
+	
+	<select id="listTogetherFile" parameterType="Long" resultType="com.fa.plus.domain.Together">
+		SELECT file_num, post_num, saveFilename, originalFilename
+		FROM post_file
+		WHERE post_num=#{post_num}    
+	</select>
+	
+	<select id="findByFileId" parameterType="Long" resultType="com.fa.plus.domain.Together">
+		SELECT file_num, post_num, saveFilename, originalFilename
+		FROM post_file
+	    WHERE file_num=#{file_num}
+	</select>
+	
+	<delete id="deleteTogetherFile" parameterType="map">
+		DELETE FROM post_file WHERE ${field} = #{post_num}
+	</delete>
+	
+	
+</mapper>

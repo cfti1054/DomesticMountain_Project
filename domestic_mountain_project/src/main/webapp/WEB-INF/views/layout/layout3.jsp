@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 
+<!-- 
 <script type="text/javascript">
 // <![CDATA[
 var colours=new Array("#a6f", "#60f", "#60f", "#a6f", "#ccc"); // colours for top, right, bottom and left borders and background of bubbles
@@ -202,6 +203,7 @@ function createDiv(height, width) {
 }
 // ]]>
 </script>
+ -->
 
 <head>
 	<meta charset="UTF-8">

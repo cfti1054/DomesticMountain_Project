@@ -14,7 +14,6 @@
 	display: flex;
 	margin: auto;
 }
-
 </style>
 
 
@@ -90,220 +89,107 @@
 
 
 			<div class="notice-container">
-				<ul class="article-movie-sub">
-					<li>
-						<div class="card_area">
-							<div class="con">
-								<div class="con_top">
-									<div class="tit_area">
-										<a href="#" class="tit"> <span class="inner"> <strong>제목입니당</strong>
-										</span>
-										</a>
-									</div>
-									<a href="#" class="txt">세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~ </a>
-								</div>
+				<div class="col-auto me-auto">
+					${dataCount}개(${page}/${total_page} 페이지)</div>
+				<c:forEach var="dto" items="${list}" varStatus="status">
+					<ul class="article-movie-sub" onclick="location.href='#';">
 
-								<div class="con_bottom">
-									<div class="user_info">
-										<div class="pers_nick_area">
-											<table role="presentation">
-												<tbody>
-													<tr>
-														<td class="p-nick"><a class="m-tcol-c" onclick="">관리자</a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
+
+						<li>
+							<div class="card_area">
+								<div class="con">
+									<div class="con_top">
+										<div class="tit_area">
+											<a href="${articleUrl}&post_num=${dto.post_num}" class="tit"> <span class="inner"> <strong>${dto.post_title}</strong>
+											</span>
+											</a>
 										</div>
-										<div class="date_num">
-											<span class="date">2021.12.31</span> <span class="num">조회수
-												2,509</span> <span class="comment_ico">댓글</span> <em class="num">7</em>
-										</div>
+										<a href="#" class="txt">${dto.post_content}</a>
 									</div>
-								</div>
-							</div>
-						</div>
-						<div class="movie-img">
-							<a href="#"> <img
-								src="${pageContext.request.contextPath}/resources/images/hiking.png"
-								width="200" height="120" alt="썸네일 이미지"> <span class="num">7<span
-									class="blind">개의 추가 이미지가 있습니다</span></span>
-							</a>
-						</div>
-					</li>
 
-
-					<li>
-						<div class="card_area">
-							<div class="con">
-								<div class="con_top">
-									<div class="tit_area">
-										<a href="#" class="tit"> <span class="inner"> <strong>제목입니당</strong>
-										</span>
-										</a>
-									</div>
-									<a href="#" class="txt">세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~ </a>
-								</div>
-
-								<div class="con_bottom">
-									<div class="user_info">
-										<div class="pers_nick_area">
-											<table role="presentation">
-												<tbody>
-													<tr>
-														<td class="p-nick"><a class="m-tcol-c" onclick="">관리자</a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div class="date_num">
-											<span class="date">2021.12.31</span> <span class="num">조회수
-												2,509</span> <span class="comment_ico">댓글</span> <em class="num">7</em>
+									<div class="con_bottom">
+										<div class="user_info">
+											<div class="pers_nick_area">
+												<table role="presentation">
+													<tbody>
+														<tr>
+															<td class="p-nick"><a class="m-tcol-c" onclick="">${dto.user_name}</a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="date_num">
+												<span class="date">${dto.post_reg_date}</span> <span
+													class="num">조회수 ${dto.post_hit_count}</span> <span
+													class="comment_ico">댓글</span> <em class="num">${dto.replyCount}</em>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						
-					</li>
-
-					<li>
-						<div class="card_area">
-							<div class="con">
-								<div class="con_top">
-									<div class="tit_area">
-										<a href="#" class="tit"> <span class="inner"> <strong>제목입니당</strong>
-										</span>
-										</a>
-									</div>
-									<a href="#" class="txt">세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~ </a>
+							</div> 
+							
+							<c:if test="${dto.post_fileCount != 0}">
+								<div class="movie-img">
+									<a href="#"> <img
+										src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+										width="200" height="120" alt="썸네일 이미지"> <span
+										class="num">${dto.post_fileCount}<span class="blind">개의
+												추가 이미지가 있습니다</span></span>
+									</a>
 								</div>
+							</c:if>
+						</li>
 
-								<div class="con_bottom">
-									<div class="user_info">
-										<div class="pers_nick_area">
-											<table role="presentation">
-												<tbody>
-													<tr>
-														<td class="p-nick"><a class="m-tcol-c" onclick="">관리자</a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div class="date_num">
-											<span class="date">2021.12.31</span> <span class="num">조회수
-												2,509</span> <span class="comment_ico">댓글</span> <em class="num">7</em>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="movie-img">
-							<a href="#"> <img
-								src="${pageContext.request.contextPath}/resources/images/hiking.png"
-								width="200" height="120" alt="썸네일 이미지"> <span class="num">7<span
-									class="blind">개의 추가 이미지가 있습니다</span></span>
-							</a>
-						</div>
-					</li>
 
-					<li>
-						<div class="card_area">
-							<div class="con">
-								<div class="con_top">
-									<div class="tit_area">
-										<a href="#" class="tit"> <span class="inner"> <strong>제목입니당</strong>
-										</span>
-										</a>
-									</div>
-									<a href="#" class="txt">세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분
-										입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~세부 설명부분 입니다~~~ </a>
-								</div>
 
-								<div class="con_bottom">
-									<div class="user_info">
-										<div class="pers_nick_area">
-											<table role="presentation">
-												<tbody>
-													<tr>
-														<td class="p-nick"><a class="m-tcol-c" onclick="">관리자</a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div class="date_num">
-											<span class="date">2021.12.31</span> <span class="num">조회수
-												2,509</span> <span class="comment_ico">댓글</span> <em class="num">7</em>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="movie-img">
-							<a href="#"> <img
-								src="${pageContext.request.contextPath}/resources/images/hiking.png"
-								width="200" height="120" alt="썸네일 이미지"> <span class="num">7<span
-									class="blind">개의 추가 이미지가 있습니다</span></span>
-							</a>
-						</div>
-					</li>
-				</ul>
-				<div class="page-navigation">1 2 3</div>
+					</ul>
+
+
+				</c:forEach>
+				<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</div>
 
 
 				<div class="row board-list-footer">
-							<div class="col">
-								<button type="button" class="btn btn-light" onclick="#"
-									title="새로고침">
-									<i class="bi bi-arrow-counterclockwise"></i>
+					<div class="col">
+						<button type="button" class="btn btn-light"
+							onclick="location.href='${pageContext.request.contextPath}/together/list';"
+							title="새로고침">
+							<i class="bi bi-arrow-counterclockwise"></i>
+						</button>
+					</div>
+					<div class="col text-center">&nbsp;</div>
+
+
+					<div class="col-6 text-end">
+						<form class="row text-end-row" name="searchForm" action="#"
+							method="post">
+							<div class="col-auto p-1">
+								<select name="schType" class="form-select">
+									<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
+									<option value="all">제목+내용</option>
+									<option value="reg_date">등록일</option>
+									<option value="subject">제목</option>
+									<option value="writer">작성자</option>
+									<option value="content">내용</option>
+								</select>
+							</div>
+							<div class="col-auto p-1">
+								<input type="text" name="kwd" value="${kwd}"
+									class="form-control">
+							</div>
+							<div class="col-auto p-1">
+								<button type="button" class="btn btn-light"
+									onclick="searchList()">
+									<i class="bi bi-search"></i>
 								</button>
-							</div>
-							<div class="col text-center">&nbsp;</div>
-							
 
-							<div class="col-6 text-end">
-								<form class="row text-end-row" name="searchForm" action="#"
-									method="post">
-									<div class="col-auto p-1">
-										<select name="schType" class="form-select">
-											<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-											<option value="all">제목+내용</option>
-											<option value="reg_date">등록일</option>
-											<option value="subject">제목</option>
-											<option value="writer">작성자</option>
-											<option value="content">내용</option>
-										</select>
-									</div>
-									<div class="col-auto p-1">
-										<input type="text" name="kwd" value="${kwd}"
-											class="form-control">
-									</div>
-									<div class="col-auto p-1">
-										<button type="button" class="btn btn-light"
-											onclick="searchList()">
-											<i class="bi bi-search"></i>
-										</button>
-
-										<button type="button" class="btn btn-light"
-											onclick="searchList()">글올리기</button>
-									</div>
-								</form>
+								<button type="button" class="btn btn-light"
+									onclick="location.href='${pageContext.request.contextPath}/together/write';">글올리기</button>
 							</div>
-						</div>
+						</form>
+					</div>
+				</div>
 
 			</div>
 
