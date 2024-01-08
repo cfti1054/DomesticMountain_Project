@@ -140,7 +140,7 @@
 							<td width="50%" align="left">동행 기간 : ${dto.start_date} ~
 								${dto.end_date}</td>
 							<td width="50%" align="right">응모한 인원 :
-								${dto.participantCount} / ${dto.gather_max}</td>
+								0 / ${dto.gather_max}</td>
 						</tr>
 
 						<tr>
@@ -161,7 +161,7 @@
 									class="btn btn-outline-secondary btnSendParticipantCount"
 									title="신청">
 									<i class="bi ${participantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
-									<span id="participantCount">신청하기${dto.participantCount}</span>
+									<span id="participantCount">신청하기</span>
 								</button>
 							</td>
 						</tr>
@@ -265,7 +265,7 @@
 						login();
 						return false;
 					} else if(jqXHR.status === 400) {
-						alert('요청 처리가 실패 했습니다11.');
+						alert('요청 처리가 실패 했습니다.');
 						return false;
 			    	}
 			    	
@@ -294,8 +294,8 @@ $(function(){
 		}
 		
 		let url = '${pageContext.request.contextPath}/together/insertParticipant';
-		let num = '${dto.post_num}';
-		let query = 'post_num=' + num + '&userApply=' + userApply;
+		let num = '${dto.gather_num}';
+		let query = 'gather_num=' + num + '&userApply=' + userApply;
 		
 		const fn = function(data){
 			let state = data.state;

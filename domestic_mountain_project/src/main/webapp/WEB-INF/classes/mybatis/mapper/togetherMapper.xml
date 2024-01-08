@@ -95,7 +95,6 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
-	<!-- 다음글 -->
 	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Together">
 		SELECT post_num, post_title
 		FROM post p
@@ -150,13 +149,13 @@
 		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
-	           saveFilename,
+	           saveFilename, g.gather_num,
 	           gather_max, 
 	           TO_CHAR(gather_expire_date, 'yyyy-mm-dd') as gather_expire_date,
 	           TO_CHAR(start_date, 'yyyy-mm-dd') as start_date,
 	           TO_CHAR(end_date, 'yyyy-mm-dd') as end_date,
 	           location_addr,
-	           participant_Count
+	           participantCount
 	    FROM post p
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
@@ -170,8 +169,9 @@
 			FROM gather
 		) g ON p.post_num = g.post_num
         LEFT OUTER JOIN (
-            SELECT gather_num, COUNT(*) participant_Count
+            SELECT gather_num, COUNT(*) participantCount
             FROM participant
+            WHERE gather_num = #{gather_num}
             GROUP BY gather_num
         ) pc ON g.gather_num = pc.gather_num
         
@@ -204,12 +204,12 @@
 	
 	<!-- 신청 추가 -->
 	<insert id="insertParticipant" parameterType="map">
-		INSERT INTO participant(gather_num, participant_num) VALUES (#{gather_num}, #{useridx})
+		INSERT INTO participant(gather_num, participant_num) VALUES (#{gather_num}, #{participant_num})
 	</insert>
 	
 	<!-- 신청 삭제 -->
 	<delete id="deleteParticipant" parameterType="map">
-		DELETE FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{useridx}
+		DELETE FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{participant_num}
 	</delete>
     
 	<!-- 신청 개수 -->
@@ -219,7 +219,7 @@
 
 	<!-- 신청 여부 -->
 	<select id="userParticipantCount" parameterType="map" resultType="com.fa.plus.domain.Together">
-		SELECT gather_num, participant_num FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{useridx}
+		SELECT gather_num, participant_num FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{participant_num}
 	</select>
 	
 	
