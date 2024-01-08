@@ -39,7 +39,7 @@ function sendOk() {
 		return;
 	}
 
-	f.action = "${pageContext.request.contextPath}/member/idFind";
+	f.action = "${pageContext.request.contextPath}/user/idFind";
 	f.submit();
 }
 </script>

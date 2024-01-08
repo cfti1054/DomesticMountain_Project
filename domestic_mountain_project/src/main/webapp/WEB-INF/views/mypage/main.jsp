@@ -62,7 +62,7 @@
 								<span style="font-weight: lighter; font-size: 15px;">jypark234@naver.com</span>
 							</div>
 						</div>
-						<button type="button" class="btn_edit" onclick="#">
+						<button type="button" class="btn_edit" onclick="location.href='${pageContext.request.contextPath}/user/pwd';">
                     		<span class="text">정보수정</span>
                 		</button>
 					</div>

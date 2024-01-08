@@ -40,6 +40,7 @@ public class UserController {
 		return ".user.user"; 
 	}
 	
+	
 	@PostMapping("login")
 	public String loginSubmit(
 			@RequestParam String user_id,
@@ -92,14 +93,13 @@ public class UserController {
 		// 권한이 없는 유저가 접근 한 경우
 		return ".user.noAuthorized";
 	}
-	
-	// 회원가입 폼
-//		@GetMapping("user")
-//		public String userForm(Model model) {
-//			model.addAttribute("mode", "user");
-//			return ".user.user";
-//		}
+	@RequestMapping(value = "expired")
+	public String expired() throws Exception {
+		// 세션이 만료 된 경우
 		
+		return ".user.expired";
+	}
+	
 	// 회원 가입 완료 
 	@PostMapping("user")
 	public String userSubmit(User dto,
@@ -187,6 +187,7 @@ public class UserController {
 			return "redirect:/";
 		}
 		
+		
 		if(! dto.getUser_pwd().equals(user_pwd)) {
 			model.addAttribute("mode", mode);
 			model.addAttribute("message", "패스워드가 일치하지 않습니다.");
@@ -208,7 +209,7 @@ public class UserController {
 			rAttr.addFlashAttribute("title", "회원 탈퇴");
 			rAttr.addFlashAttribute("message", sb.toString());
 			
-		return "redirect:/";
+		return "redirect:/user/complete";
 		}
 		// 회원 수정 폼
 		model.addAttribute("dto", dto);
@@ -218,7 +219,7 @@ public class UserController {
 		
 	}
 	
-	@PostMapping()
+	@PostMapping("update")
 	public String updateSubmit(User dto,
 			final RedirectAttributes reAttr,
 			Model model) {
