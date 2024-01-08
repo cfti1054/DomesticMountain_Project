@@ -13,7 +13,24 @@ public class Stats {
 	public String reg_date;
 	public int reg_num;
 	
+	// 총 매출
+	public String sales_date;
+	public int sales_num;
 	
+	
+	
+	public String getSales_date() {
+		return sales_date;
+	}
+	public void setSales_date(String sales_date) {
+		this.sales_date = sales_date;
+	}
+	public int getSales_num() {
+		return sales_num;
+	}
+	public void setSales_num(int sales_num) {
+		this.sales_num = sales_num;
+	}
 	public String getReg_date() {
 		return reg_date;
 	}

@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-
+<script src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
 <style type="text/css">
 ul.tabs {
 	display: flex;
@@ -52,78 +52,33 @@ $(function(){
 		 }
 	});
 }); 
-
+*/
 $(function(){
-	let categoryNum = "${categoryNum}";
+	let categoryNum = 0;
 
 	$("#tab-"+categoryNum).addClass("active");
 
 	$("ul.tabs li").click(function() {
 		categoryNum = $(this).attr("data-categoryNum");
-		
+		console.log(categoryNum);
 		$("ul.tabs li").each(function(){
 			$(this).removeClass("active");
 		});
 		
 		$("#tab-content div").each(function() {
-			$(this).hide();
+			$(this).css('display','none');
 		});
 		$("#tab-"+categoryNum).addClass("active");
-		$("#chart-"+categoryNum).show();
+		$("#show-"+categoryNum).css('display','block');
+
 	});
 });
-*/
 
 
 
 
-function ajaxFun(url, method, formData, dataType, fn, file = false) {
-	const settings = {
-			type: method, 
-			data: formData,
-			success:function(data) {
-				fn(data);
-			},
-			beforeSend: function(jqXHR) {
-				jqXHR.setRequestHeader('AJAX', true);
-			},
-			complete: function () {
-			},
-			error: function(jqXHR) {
-				if(jqXHR.status === 403) {
-					login();
-					return false;
-				} else if(jqXHR.status === 400) {
-					alert('요청 처리가 실패 했습니다.');
-					return false;
-		    	}
-		    	
-				console.log(jqXHR.responseText);
-			}
-	};
-	
-	if(file) {
-		settings.processData = false;  // file 전송시 필수. 서버로전송할 데이터를 쿼리문자열로 변환여부
-		settings.contentType = false;  // file 전송시 필수. 서버에전송할 데이터의 Content-Type. 기본:application/x-www-urlencoded
-	}
-	
-	$.ajax(url, settings);
-}
 
-// 글리스트 및 페이징 처리
 
-function listChart(num) {
-	const $tab = $(".tabs .active");
-	let categoryNum = $tab.attr("data-categoryNum");
-	
-	let url = "${pageContext.request.contextPath}/admin/stats/member_main";
-	let query = "categoryNum="+ num;
-	
-	
-	const fn = function(){
-	};
-	ajaxFun(url, "get", query, "html", fn);
-}
 </script>
 
 
@@ -138,29 +93,168 @@ function listChart(num) {
     </div>
 		<div>
 			<ul class="tabs">
-				<li id="tab-0" data-categoryNum=0 onclick="listChart('0');">나이 별 회원 분포</li>
-				<li id="tab-1" data-categoryNum=1  onclick="listChart('1');">성별</li>
+				<li id="tab-0" data-categoryNum=0>나이 별 회원 분포</li>
+				<li id="tab-1" data-categoryNum=1>성별</li>
 			</ul>
 		</div>
 		<div id="tab-content" style="padding: 15px 10px 5px;">
-			<c:choose>
-			<c:when test="${categoryNum == 0}">
-				<div id="chart-0" style="min-height: 800px;" class="echart"></div>
-			</c:when>
-			<c:when test="${categoryNum == 1}">
+			<div id="show-0">
 				<div id="chart-1" style="min-height: 800px;" class="echart"></div>
-			</c:when>
-			</c:choose>
-			
+				<script type="text/javascript">
+	var dom = document.getElementById('chart-1');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: ['${reg_date_list[0]}','${reg_date_list[1]}',
+    	  '${reg_date_list[2]}','${reg_date_list[3]}',
+    	  '${reg_date_list[4]}','${reg_date_list[5]}','${reg_date_list[6]}'],
+      axisTick: {
+        alignWithLabel: true
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: '가입자 수',
+      type: 'bar',
+      barWidth: '60%',
+      data: ${reg_num_list}
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script> 
+			</div>
+					
+			<div id="show-1">
+				두번째 표
+			</div>
 		</div>
+		
 		 
   			
 		</div>
 	</div>	
 			
-		  
-		  <script>
-			document.addEventListener("DOMContentLoad", () => {
+
+	
+			
+	
+			</div>
+	</main>
+</div>
+<script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    top: '5%',
+    left: 'center'
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: ['40%', '70%'],
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderRadius: 10,
+        borderColor: '#fff',
+        borderWidth: 2
+      },
+      label: {
+        show: false,
+        position: 'center'
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 40,
+          fontWeight: 'bold'
+        }
+      },
+      labelLine: {
+        show: false
+      },
+      data: [
+    	  {value: ${value_list[0]},
+				name: '${name_list[0]}'
+				},
+				{value: ${value_list[1]},
+				name: '${name_list[1]}'
+				},
+				{value: ${value_list[2]},
+				name: '${name_list[2]}'
+				},
+				{value: ${value_list[3]},
+				name: '${name_list[3]}'
+				},
+				{value: ${value_list[4]},
+				name: '${name_list[4]}'
+				},	
+				{value: ${value_list[5]},
+				name: '${name_list[5]}'
+				},
+				{value: ${value_list[6]},
+				name: '${name_list[6]}'
+				}
+      ]
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+	<!-- 
+	
+	<div id="chart-0" style="min-height: 800px;" class="echart"></div>
+				<script>		  
+			window.addEventListener("DOMContentLoaded", () => {
 			  echarts.init(document.querySelector("#chart-0")).setOption({
 				title: {
 				  text: '나이대 별 회원 분포',
@@ -211,9 +305,16 @@ function listChart(num) {
 				}]
 			  });
 			});
-		  </script>
-	<script type="text/javascript">
-    var dom = document.getElementById('chart-1');
+			
+			
+	</script>
+	
+	
+	
+	
+				<div id="chart-1" style="min-height: 800px;" class="echart"></div>
+				<script type="text/javascript">
+	var dom = document.getElementById('chart-1');
     var myChart = echarts.init(dom, null, {
       renderer: 'canvas',
       useDirtyRect: false
@@ -238,7 +339,7 @@ function listChart(num) {
   xAxis: [
     {
       type: 'category',
-      data: '${reg_date_list}',
+      data: ${reg_date_list},
       axisTick: {
         alignWithLabel: true
       }
@@ -254,7 +355,7 @@ function listChart(num) {
       name: 'Direct',
       type: 'bar',
       barWidth: '60%',
-      data: '${reg_num_list}'
+      data: ${reg_num_list}
     }
   ]
 };
@@ -264,9 +365,4 @@ function listChart(num) {
     }
 
     window.addEventListener('resize', myChart.resize);
-  </script>
-			
-	
-			</div>
-	</main>
-</div>
+  </script> -->
