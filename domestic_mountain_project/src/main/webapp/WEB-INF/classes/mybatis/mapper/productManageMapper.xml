@@ -197,13 +197,12 @@
 	<insert id="insertProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">
 		INSERT INTO productStock(stock_num, detail_num, detail_num2, total_stock, product_num)
 			VALUES (productStock_seq.NEXTVAL, #{detail_num}, #{detail_num2, jdbcType=BIGINT},
-					#{total_stock}, #{product_num})
+				#{total_stock}, #{product_num})
 	</insert>
 	
 	<update id="updateProductStock" parameterType="com.fa.plus.admin.domain.ProductStockManage">
 		UPDATE productStock SET total_stock = #{total_stock}
 		WHERE stock_num = #{stock_num}
 	</update>	
-	
-	
+
 </mapper>

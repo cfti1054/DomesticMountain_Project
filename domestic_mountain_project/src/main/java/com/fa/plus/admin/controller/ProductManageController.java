@@ -328,7 +328,7 @@ public class ProductManageController {
 			@RequestParam String page,
 			HttpSession session,
 			Model model) {
-		
+
 		try {
 			if(stock_num == 0) {
 				service.insertProductStock(dto);
