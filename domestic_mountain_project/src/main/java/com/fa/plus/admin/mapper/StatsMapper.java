@@ -11,4 +11,5 @@ import com.fa.plus.admin.domain.Stats;
 public interface StatsMapper {
 	
 	public List<Stats> sort_by_age() throws SQLException;
+	public List<Stats> sort_by_weekly_reg() throws SQLException;
 }
