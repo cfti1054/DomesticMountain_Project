@@ -78,7 +78,7 @@
 	    FROM post p
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
-	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
+	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num, 
 	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
 	        FROM post_file
 	        GROUP BY post_num

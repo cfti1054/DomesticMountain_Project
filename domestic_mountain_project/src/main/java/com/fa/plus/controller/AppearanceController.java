@@ -165,7 +165,7 @@ public class AppearanceController {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		// 게시글 좋아요 여부
-		map.put("userid", info.getUserid());
+		map.put("useridx", info.getUseridx());
 		boolean userBoardLiked = service.userBoardLiked(map);
 		
 		model.addAttribute("dto", dto);
@@ -239,6 +239,8 @@ public class AppearanceController {
 
 		return "redirect:/appearance/list?" + query;
 	}
+	/*
+	 * 
 	
 	// 댓글 리스트 : AJAX-TEXT
 	@GetMapping("listReply")
@@ -324,6 +326,6 @@ public class AppearanceController {
 
 			return model;
 		}
-	
+	 */
 }
 

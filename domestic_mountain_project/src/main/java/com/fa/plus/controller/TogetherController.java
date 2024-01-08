@@ -31,7 +31,7 @@ import com.fa.plus.service.TogetherService;
 @Controller
 @RequestMapping("/together/*")
 public class TogetherController {
-
+ 
 	@Autowired
 	private TogetherService service;
 

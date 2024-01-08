@@ -101,9 +101,6 @@
 			
 			<table class="table table-borderless mb-2">
 				<tr>
-				${sessionScope.loginUser.userid}
-				${dto.user_id }
-				${sessionScope.loginUser.usership }
 					<td width="50%">
 						<c:choose>
 							<c:when test="${sessionScope.loginUser.userid==dto.user_id}">
@@ -179,7 +176,7 @@ function ajaxFun(url, method, formData, dataType, fn, file = false) {
 					login();
 					return false;
 				} else if(jqXHR.status === 400) {
-					alert('요청 처리가 실패 했습니다.');
+					alert('요청 처리가 실패 했습니다.11');
 					return false;
 		    	}
 		    	
