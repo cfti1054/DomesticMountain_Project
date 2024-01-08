@@ -247,11 +247,11 @@ public class TogetherServiceImpl implements TogetherService {
 	}
 
 	@Override
-	public int ParticipantCount(long post_num) {
+	public int participantCount(long post_num) {
 		int result = 0;
 		
 		try {
-			result = mapper.ParticipantCount(post_num);
+			result = mapper.participantCount(post_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

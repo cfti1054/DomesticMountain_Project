@@ -37,7 +37,7 @@ public interface TogetherMapper {
 	// 신청인
 	public void insertParticipant(Map<String, Object> map) throws SQLException;
 	public void deleteParticipant(Map<String, Object> map) throws SQLException;
-	public int ParticipantCount(long post_num);
+	public int participantCount(long post_num);
 	public Together userParticipantCount(Map<String, Object> map); 
 	
 }

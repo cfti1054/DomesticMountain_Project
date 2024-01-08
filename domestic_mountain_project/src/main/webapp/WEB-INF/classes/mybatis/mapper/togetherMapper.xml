@@ -50,12 +50,12 @@
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
 	           NVL(c.replyCount, 0) as replyCount,
-	           f.originalFilename
+	           f.saveFilename
 	    FROM post p
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
 	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
-	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
+	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
 	        FROM post_file
 	        GROUP BY post_num
 	    ) f ON p.post_num = f.post_num
@@ -149,7 +149,7 @@
 		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
-	           originalFilename,
+	           saveFilename,
 	           gather_max, 
 	           TO_CHAR(gather_expire_date, 'yyyy-mm-dd') as gather_expire_date,
 	           TO_CHAR(start_date, 'yyyy-mm-dd') as start_date,
@@ -160,7 +160,7 @@
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
 	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
-	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
+	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
 	        FROM post_file
 	        GROUP BY post_num
 	    ) f ON p.post_num = f.post_num
@@ -199,6 +199,31 @@
 	<delete id="deleteTogetherFile" parameterType="map">
 		DELETE FROM post_file WHERE ${field} = #{post_num}
 	</delete>
+	
+	
+	<!-- 신청 추가 -->
+	<insert id="insertParticipant" parameterType="map">
+		INSERT INTO participant(gather_num, participant_num) VALUES (#{gather_num}, #{useridx})
+	</insert>
+	
+	<!-- 신청 삭제 -->
+	<delete id="deleteParticipant" parameterType="map">
+		DELETE FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{useridx}
+	</delete>
+    
+	<!-- 신청 개수 -->
+	<select id="participantCount" parameterType="Long" resultType="Integer">
+		SELECT COUNT(*) FROM participant WHERE gather_num=#{gather_num}
+	</select>
+
+	<!-- 신청 여부 -->
+	<select id="userParticipantCount" parameterType="map" resultType="com.fa.plus.domain.Together">
+		SELECT gather_num, participant_num FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{useridx}
+	</select>
+	
+	
+	
+	
 	
 	
 </mapper>

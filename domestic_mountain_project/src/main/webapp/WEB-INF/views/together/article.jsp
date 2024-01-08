@@ -10,7 +10,6 @@
 	href="${pageContext.request.contextPath}/resources/css/together.css"
 	type="text/css">
 
-
 <style type="text/css">
 .features-1 {
 	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
@@ -41,8 +40,8 @@
 
 .table {
 	margin: 3rem auto;
-	width: 900px; -
-	-bs-table-bg: none;
+	width: 900px; 
+	--bs-table-bg: none;
 }
 </style>
 
@@ -161,8 +160,7 @@
 								<button type="button"
 									class="btn btn-outline-secondary btnSendParticipantCount"
 									title="신청">
-									<i
-										class="bi (여기 조건 추가)"></i>&nbsp;&nbsp;
+									<i class="bi ${participantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
 									<span id="participantCount">신청하기</span>
 								</button>
 							</td>
@@ -262,6 +260,7 @@
 				complete: function () {
 				},
 				error: function(jqXHR) {
+					console.log(formData);
 					if(jqXHR.status === 403) {
 						login();
 						return false;
@@ -282,44 +281,44 @@
 		$.ajax(url, settings);
 	}
 	
-/*
+
 // 신청인
 $(function(){
-	$('.btnSendBoardLike').click(function(){
+	$('.btnSendParticipantCount').click(function(){
 		const $i = $(this).find('i');
-		let userLiked = $i.hasClass('bi-hand-thumbs-up-fill');
-		let msg = userLiked ? '게시글 공감을 취소하시겠습니까 ? ' : '게시글에 공감하십니까 ? ';
+		let userApply = $i.hasClass('fa-solid fa-circle-check');
+		let msg = userApply ? '신청을 취소하시겠습니까 ? ' : '신청을 하시겠습니까 ? ';
 		
 		if(! confirm( msg )) {
 			return false;
 		}
 		
-		let url = '${pageContext.request.contextPath}/appearance/insertBoardLike';
+		let url = '${pageContext.request.contextPath}/together/insertParticipant';
 		let num = '${dto.post_num}';
-		let query = 'post_num=' + num + '&userLiked=' + userLiked;
+		let query = 'post_num=' + num + '&userApply=' + userApply;
 		
 		const fn = function(data){
 			let state = data.state;
 			if(state === 'true') {
-				if( userLiked ) {
-					$i.removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
+				if( userApply ) {
+					$i.removeClass('fa-solid fa-circle-check').addClass('fa-regular fa-circle-check');
 				} else {
-					$i.removeClass('bi-hand-thumbs-up').addClass('bi-hand-thumbs-up-fill');
+					$i.removeClass('fa-regular fa-circle-check').addClass('fa-solid fa-circle-check');
 				}
 				
-				let count = data.boardLikeCount;
-				$('#boardLikeCount').text(count);
-			} else if(state === 'liked') {
-				alert('게시글 공감은 한번만 가능합니다. !!!');
+				let count = data.participantCount;
+				$('#participantCount').text(count);
+			} else if(state === 'apply') {
+				alert('동행 신청은 한번만 가능합니다. !!!');
 			} else if(state === "false") {
-				alert('게시물 공감 여부 처리가 실패했습니다. !!!');
+				alert('동행 신청 처리가 실패했습니다. !!!');
 			}
 		};
 		
 		ajaxFun(url, 'post', query, 'json', fn);
 	});
 });
-*/
+
 	
 	
 </script>

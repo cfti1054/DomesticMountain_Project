@@ -28,6 +28,6 @@ public interface TogetherService {
 	// 신청인
 	public void insertParticipant(Map<String, Object> map) throws Exception;
 	public void deleteParticipant(Map<String, Object> map) throws Exception;
-	public int ParticipantCount(long post_num);
+	public int participantCount(long post_num);
 	public boolean userParticipantCount(Map<String, Object> map); 
 }

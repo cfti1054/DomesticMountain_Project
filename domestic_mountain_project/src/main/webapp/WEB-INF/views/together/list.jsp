@@ -132,7 +132,7 @@
 							<c:if test="${dto.post_fileCount != 0}">
 								<div class="movie-img">
 									<a href="#"> <img
-										src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+										src="${pageContext.request.contextPath}/uploads/together/${dto.saveFilename}"
 										width="200" height="120" alt="썸네일 이미지"> <span
 										class="num">${dto.post_fileCount}<span class="blind">개의
 												추가 이미지가 있습니다</span></span>

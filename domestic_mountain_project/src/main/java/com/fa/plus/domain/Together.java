@@ -42,7 +42,7 @@ public class Together {
 	private String end_date;
 	
 	// participant
-		// participant_num(신청인) : useridx
+	private long participant_num;
 		// gather_num : 모집 번호
 	private long participantCount; // 신청한 인원수
 	
@@ -337,6 +337,14 @@ public class Together {
 
 	public void setPost_fileCount(long post_fileCount) {
 		this.post_fileCount = post_fileCount;
+	}
+
+	public long getParticipant_num() {
+		return participant_num;
+	}
+
+	public void setParticipant_num(long participant_num) {
+		this.participant_num = participant_num;
 	}
 	
 	

@@ -325,7 +325,7 @@ public class TogetherController {
 	@PostMapping("insertParticipant")
 	@ResponseBody
 	public Map<String, Object> insertParticipant(
-			@RequestParam long post_num,
+			@RequestParam long gather_num,
 			@RequestParam boolean userApply,
 			HttpSession session
 			) throws Exception {
@@ -336,8 +336,8 @@ public class TogetherController {
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("post_num", post_num);
-		paramMap.put("useridx", info.getUseridx());
+		paramMap.put("gather_num", gather_num);
+		paramMap.put("participant_num", info.getUseridx());
 
 		try {
 			if(userApply) {
@@ -346,12 +346,12 @@ public class TogetherController {
 				service.insertParticipant(paramMap);
 			}
 		} catch (DuplicateKeyException e) {
-			state = "liked";
+			state = "apply";
 		} catch (Exception e) {
 			state = "false";
 		}
 
-		participantCount = service.ParticipantCount(post_num);
+		participantCount = service.participantCount(gather_num);
 
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
