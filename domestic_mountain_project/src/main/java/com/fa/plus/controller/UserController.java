@@ -185,7 +185,7 @@ public class UserController {
 		if(dto == null) {
 			session.invalidate();
 			return "redirect:/";
-		}
+		} 
 		
 		
 		if(! dto.getUser_pwd().equals(user_pwd)) {
