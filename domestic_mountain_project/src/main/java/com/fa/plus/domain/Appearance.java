@@ -34,6 +34,7 @@ public class Appearance {
 	private long post_fileCount;
 
 	private int boardLikeCount;
+
 	
 	public int getBoardLikeCount() {
 		return boardLikeCount;

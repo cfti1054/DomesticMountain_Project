@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 </head>
+
 <style>
 .features-1 {
 	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
@@ -20,6 +21,7 @@
 </style>
 
 <section class="features-1">
+	<form action="${pageContext.request.contextPath}/user/pwd" method="get">
 	<div class="body-container">
 		<div class="mypage-main">
 			<div class="mypage-left">
@@ -62,9 +64,9 @@
 								<span style="font-weight: lighter; font-size: 15px;">jypark234@naver.com</span>
 							</div>
 						</div>
-						<button type="button" class="btn_edit" onclick="location.href='${pageContext.request.contextPath}/user/pwd';">
-                    		<span class="text">정보수정</span>
-                		</button>
+						<button type="submit" class="btn_edit">
+					        <span class="text">정보수정</span>
+					    </button>
 					</div>
 
 					<div class="privacy">
@@ -189,6 +191,7 @@
 			</div>
 		</div>
 	</div>
+	</form>
 </section>
 
 </html>

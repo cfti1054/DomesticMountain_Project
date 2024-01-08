@@ -77,7 +77,7 @@
     		<exclude-mapping path="/user/complete"/>
     		<exclude-mapping path="/user/idFind"/>
     		<exclude-mapping path="/user/pwdFind"/>
-    		
+    		<exclude-mapping path="/user/pwd"/>
     		
     		<exclude-mapping path="/echartsMap/**"/>
 

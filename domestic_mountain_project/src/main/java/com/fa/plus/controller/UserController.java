@@ -179,7 +179,7 @@ public class UserController {
 			HttpSession session,
 			Model model) {
 		
-		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
 		User dto = service.findById(info.getUserid());
 		
 		if(dto == null) {

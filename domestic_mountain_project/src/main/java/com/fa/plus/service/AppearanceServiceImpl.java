@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fa.plus.common.FileManager;
 import com.fa.plus.domain.Appearance;
+import com.fa.plus.domain.Reply;
 import com.fa.plus.mapper.AppearanceMapper;
 
 @Service
@@ -23,6 +24,7 @@ public class AppearanceServiceImpl implements AppearanceService {
 	public void insertAppearance(Appearance dto, String pathname) throws Exception {
 		
 		try {
+
 			long post_num = mapper.post_seq();
 			long file_num = mapper.post_file_seq();
 			
@@ -33,8 +35,10 @@ public class AppearanceServiceImpl implements AppearanceService {
 			if(saveFilename != null) {
 				dto.setSaveFilename(saveFilename);
 				dto.setOriginalFilename(dto.getSelectFile().getOriginalFilename());
+				
+				mapper.insertAppearance(dto);
 			}
-			mapper.insertAppearance(dto);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,11 +110,11 @@ public class AppearanceServiceImpl implements AppearanceService {
 	}
 
 	@Override
-	public Appearance findById(long file_num) {
+	public Appearance findById(long post_num) {
 		Appearance dto = null;
 		
 		try {
-			dto = mapper.findById(file_num);
+			dto = mapper.findById(post_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -200,6 +204,88 @@ public class AppearanceServiceImpl implements AppearanceService {
 		}
 		
 	}
+	
+	@Override
+	public void deletePostlike(long post_num, String pathname, String userid, int usership) throws Exception {
+		try {
+			Appearance dto = findById(post_num);
+			if (dto == null || (usership < 51 && ! dto.getUser_id().equals(userid))) {
+				return;
+			}
+
+			fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+
+			mapper.deletePostlike(post_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deletePostfile(long post_num, String pathname, String userid, int usership) throws Exception {
+		try {
+			Appearance dto = findById(post_num);
+			if (dto == null || (usership < 51 && ! dto.getUser_id().equals(userid))) {
+				return;
+			}
+
+			fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+
+			mapper.deletePostfile(post_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+	
+	@Override
+	public void deleteAppearance(long post_num, String pathname, String userid, int usership) throws Exception {
+		try {
+			// Appearance dto = findById(post_num);
+			/*
+			 * if (dto == null || (usership < 51 && ! dto.getUser_id().equals(userid))) {
+			 
+				return;
+			}
+			*/
+			mapper.deleteAppearance(post_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public List<Reply> listReply(Map<String, Object> map) {
+		List<Reply> list = null;
+		
+		try {
+			list = mapper.listReply(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int replyCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.replyCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	
 
 	
 	

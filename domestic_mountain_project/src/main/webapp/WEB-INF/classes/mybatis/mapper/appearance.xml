@@ -74,12 +74,12 @@
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
 	           NVL(c.replyCount, 0) as replyCount,
-	           f.originalFilename
+	           f.saveFilename
 	    FROM post p
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
 	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
-	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
+	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
 	        FROM post_file
 	        GROUP BY post_num
 	    ) f ON p.post_num = f.post_num
@@ -101,7 +101,7 @@
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Appearance">
 		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
-	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id,
 	           originalFilename, saveFilename,
 	           NVL(boardLikeCount, 0) boardLikeCount
 	    FROM post p
@@ -150,7 +150,20 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
-    
+	<!-- post_like 테이블 삭제 -->
+	<delete id="deletePostlike" parameterType="Long">
+	    DELETE FROM post_like WHERE post_num = #{post_num}
+	</delete>
+	
+	<!-- post_file 테이블 삭제 -->
+	<delete id="deletePostfile" parameterType="Long">
+	    DELETE FROM post_file WHERE post_num = #{post_num}
+	</delete>
+	
+	<!-- post 테이블 삭제 -->
+	<delete id="deleteAppearance" parameterType="Long">
+		DELETE FROM post WHERE post_num = #{post_num}
+	</delete>
 	
 	<!-- 게시 글 좋아요 추가 -->
 	<insert id="insertBoardLike" parameterType="map">
@@ -172,6 +185,51 @@
 		SELECT post_num, useridx FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
 	</select>
 	
-	
-	
+	<!-- 댓글 
+	<insert id="insertReply" parameterType="com.sp.app.domain.Reply">
+		INSERT INTO bbsReply(replyNum, num, userId, content, answer, showReply, reg_date)
+		VALUES (bbsReply_seq.NEXTVAL, #{num}, #{userId}, #{content}, #{answer}, 1, SYSDATE)
+	</insert>
+	-->
+	<!-- 
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM Reply
+		WHERE post_num=#{post_num} AND reply_secret=1
+		<if test="usership lt 51">
+			AND ( showReply=1 OR ( showReply=1 AND reply_reg_id=#{useridx} ) )
+		</if>
+	</select>
+ -->
+	<!-- 댓글리스트
+	<select id="listReply" parameterType="map" resultType="com.sp.app.domain.Reply">
+		SELECT r.replyNum, r.userId, userName, num, content, r.reg_date, NVL(showReply, 1) showReply, 
+			   NVL(answerCount, 0) answerCount,
+			   NVL(likeCount, 0) likeCount,
+			   NVL(disLikeCount, 0) disLikeCount
+		FROM bbsReply r
+		JOIN member1 m ON r.userId = m.userId
+		LEFT OUTER JOIN (
+			SELECT answer, COUNT(*) answerCount
+			FROM bbsReply
+			WHERE answer!=0
+			<if test="membership lt 51">
+				AND ( showReply=1 OR ( showReply=0 AND userId=#{userId} ) )
+			</if>	
+			GROUP BY answer
+		) a ON r.replyNum = a.answer
+		LEFT OUTER JOIN (
+			SELECT replyNum, COUNT(DECODE(replyLike, 1, 1)) likeCount,
+				   COUNT(DECODE(replyLike, 0, 1)) disLikeCount
+			FROM bbsReplyLike
+			GROUP BY replyNum
+		) c ON r.replyNum = c.replyNum
+		WHERE num=#{num} AND r.answer=0
+		<if test="membership lt 51">
+			AND ( showReply=1 OR ( showReply=0 AND r.userId=#{userId} ) )
+		</if>
+		ORDER BY r.replyNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	 -->
 </mapper>

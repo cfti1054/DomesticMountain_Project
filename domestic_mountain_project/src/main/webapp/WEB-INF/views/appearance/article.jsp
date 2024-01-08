@@ -22,7 +22,7 @@
 	<script type="text/javascript">
 		function deleteBoard() {
 		    if(confirm('게시글을 삭제 하시 겠습니까 ? ')) {
-			    let query = 'num=${dto.post_num}&${query}';
+			    let query = 'post_num=${dto.post_num}&${query}';
 			    let url = '${pageContext.request.contextPath}/appearance/delete?' + query;
 		    	location.href = url;
 		    }
@@ -101,6 +101,9 @@
 			
 			<table class="table table-borderless mb-2">
 				<tr>
+				${sessionScope.loginUser.userid}
+				${dto.user_id }
+				${sessionScope.loginUser.usership }
 					<td width="50%">
 						<c:choose>
 							<c:when test="${sessionScope.loginUser.userid==dto.user_id}">
@@ -110,7 +113,7 @@
 								<button type="button" class="btn btn-light" disabled>수정</button>
 							</c:otherwise>
 						</c:choose>
-				    	
+				    	<!--  -->
 						<c:choose>
 				    		<c:when test="${sessionScope.loginUser.userid==dto.user_id || sessionScope.loginUser.usership>50}">
 				    			<button type="button" class="btn btn-light" onclick="deleteBoard();">삭제</button>

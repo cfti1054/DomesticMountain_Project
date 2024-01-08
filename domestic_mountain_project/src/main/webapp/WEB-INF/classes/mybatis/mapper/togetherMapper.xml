@@ -95,6 +95,7 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
+	<!-- 다음글 -->
 	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Together">
 		SELECT post_num, post_title
 		FROM post p

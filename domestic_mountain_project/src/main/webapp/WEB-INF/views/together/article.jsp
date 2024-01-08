@@ -161,7 +161,7 @@
 									class="btn btn-outline-secondary btnSendParticipantCount"
 									title="신청">
 									<i class="bi ${participantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
-									<span id="participantCount">신청하기</span>
+									<span id="participantCount">신청하기${dto.participantCount}</span>
 								</button>
 							</td>
 						</tr>
@@ -265,7 +265,7 @@
 						login();
 						return false;
 					} else if(jqXHR.status === 400) {
-						alert('요청 처리가 실패 했습니다.');
+						alert('요청 처리가 실패 했습니다11.');
 						return false;
 			    	}
 			    	

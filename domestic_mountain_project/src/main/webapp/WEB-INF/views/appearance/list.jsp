@@ -100,7 +100,7 @@
 
 								<li class="show-2-li"><a href="#" class="album-img"> <img
 										width="200" height="200"
-										src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+										src="${pageContext.request.contextPath}/uploads/appearance/${dto.saveFilename}"
 										alt="">
 								</a>
 

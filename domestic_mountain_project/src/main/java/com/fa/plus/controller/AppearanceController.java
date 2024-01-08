@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Appearance;
+import com.fa.plus.domain.Reply;
 import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.service.AppearanceService;
 
@@ -113,11 +114,11 @@ public class AppearanceController {
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "appearance";
+		String path = root + "uploads" + File.separator + "appearance";
 		
 		try {
 			dto.setPost_reg_id(info.getUseridx());
-			service.insertAppearance(dto, pathname);
+			service.insertAppearance(dto, path);
 			System.out.println(dto.getPost_title());
 		} catch (Exception e) {
 		}
@@ -146,6 +147,7 @@ public class AppearanceController {
 		service.updateHitCount(post_num);
 		
 		Appearance dto = service.findById(post_num);
+		System.out.println("----------------------------------------------------------------------------------------");
 		if (dto == null) {
 			return "redirect:/appearance/list?" + query;
 		}
@@ -163,7 +165,7 @@ public class AppearanceController {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		// 게시글 좋아요 여부
-		map.put("useridx", info.getUseridx());
+		map.put("userid", info.getUserid());
 		boolean userBoardLiked = service.userBoardLiked(map);
 		
 		model.addAttribute("dto", dto);
@@ -203,7 +205,7 @@ public class AppearanceController {
 			HttpSession session) throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "bbs";
+		String pathname = root + "uploads" + File.separator + "appearance";
 
 		try {
 			service.updateAppearance(dto, pathname);
@@ -211,7 +213,81 @@ public class AppearanceController {
 		} catch (Exception e) {
 		}
 
-		return "redirect:/Appearance/list?page=" + page;
+		return "redirect:/appearance/list?page=" + page;
+	}
+	
+	@GetMapping(value = "delete")
+	public String delete(@RequestParam long post_num,
+			@RequestParam String page,
+			@RequestParam(defaultValue = "all") String schType,
+			@RequestParam(defaultValue = "") String kwd,
+			HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+
+		kwd = URLDecoder.decode(kwd, "utf-8");
+		String query = "page=" + page;
+		if (kwd.length() != 0) {
+			query += "&schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "UTF-8");
+		}
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "appearance";
+		
+		service.deletePostlike(post_num, pathname, info.getUserid(), info.getUsership());
+		service.deletePostfile(post_num, pathname, info.getUserid(), info.getUsership());
+		service.deleteAppearance(post_num, pathname, info.getUserid(), info.getUsership());
+
+		return "redirect:/appearance/list?" + query;
+	}
+	
+	// 댓글 리스트 : AJAX-TEXT
+	@GetMapping("listReply")
+	public String listReply(@RequestParam long post_num, 
+			@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
+			HttpSession session,
+			Model model) throws Exception {
+
+		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
+		
+		int size = 5;
+		int total_page = 0;
+		int dataCount = 0;
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("post_num", post_num);
+		
+		map.put("usership", info.getUsership());
+		map.put("userid", info.getUserid());
+		
+		dataCount = service.replyCount(map);
+		total_page = myUtil.pageCount(dataCount, size);
+		if (current_page > total_page) {
+			current_page = total_page;
+		}
+
+		int offset = (current_page - 1) * size;
+		if(offset < 0) offset = 0;
+
+		map.put("offset", offset);
+		map.put("size", size);
+		
+		List<Reply> listReply = service.listReply(map);
+
+		for (Reply dto : listReply) {
+			dto.setReply_content(dto.getReply_content().replaceAll("\n", "<br>"));
+		}
+
+		// AJAX 용 페이징
+		String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
+
+		// 포워딩할 jsp로 넘길 데이터
+		model.addAttribute("listReply", listReply);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("replyCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+
+		return "appearance/listReply";
 	}
 	
 	// 게시글 좋아요 추가/삭제 : AJAX-JSON
@@ -219,7 +295,7 @@ public class AppearanceController {
 		@ResponseBody
 		public Map<String, Object> insertBoardLike(@RequestParam long post_num, 
 				@RequestParam boolean userLiked,
-				HttpSession session) {
+				HttpSession session) throws Exception {
 			String state = "true";
 			int boardLikeCount = 0;
 			SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
