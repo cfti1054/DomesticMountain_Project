@@ -195,6 +195,8 @@ function printMemberManage() {
 	let url="${pageContext.request.contextPath}/admin/memberManage/print";
 	window.open(url, "score", "width=800, height=500, left=50, top=50");
 }
+
+
 </script>
 
 <style type="text/css">
@@ -226,8 +228,7 @@ function printMemberManage() {
 
 			<h2>회원 목록</h2>
 			<hr>
-
-
+			
 			<div>
 				<ul class="tabs">
 					<li id="tab-0" data-tab="0"><i class="fa-solid fa-person"></i>&nbsp;회원

@@ -357,6 +357,9 @@ public class ProductManageServiceImpl implements ProductManageService {
 	@Override
 	public void insertProductStock(ProductStockManage dto) throws SQLException {
 		try {
+			if(dto.getDetail_num2() !=  null && dto.getDetail_num2()== 0) {
+				dto.setDetail_num2(null);
+			}			
 			mapper.insertProductStock(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
