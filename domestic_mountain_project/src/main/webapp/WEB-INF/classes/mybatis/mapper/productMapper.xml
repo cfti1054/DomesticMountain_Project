@@ -27,7 +27,7 @@
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Product">
 		SELECT p.product_num, p.category_num, p.product_status, category_name, 
-		    product_name, product_price,
+		    product_name, product_price, 
 			product_summary, p.product_content, p.product_reg_date,
 			NVL(review_star, 0) review_star, NVL(review_count, 0) review_count
 		FROM product p

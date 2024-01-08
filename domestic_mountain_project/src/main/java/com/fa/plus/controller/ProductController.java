@@ -113,6 +113,9 @@ public class ProductController {
 		
 		String paging = myUtil.pagingUrl(current_page, total_page, listUrl);
 		
+		// Product dto = service.findById(category_num);
+		
+		// model.addAttribute("dto", dto);
 		model.addAttribute("list", list);
 		model.addAttribute("category_num", category_num);
 		model.addAttribute("page", current_page);
@@ -133,6 +136,12 @@ public class ProductController {
 	}
 	*/
 	
+	
+	@GetMapping("buy")
+	public String buy() {
+		
+		return ".product.buy";
+	}
 	
 	
 }

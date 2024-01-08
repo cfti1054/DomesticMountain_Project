@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+.buy-main {
+	width: 1150px;
+	margin: 0 auto;
+}
+
+.buy-title {
+	padding: 18px 0 14px;
+	padding-right: 50px;
+	text-align: right;
+}
+
+.buy-box {
+	display: flex;
+	height: auto;
+}
+
+.buy-main h3 {
+	margin-top: 40px;
+}
+
+.buy-box .buy-left {
+	flex: 0 0 60%;
+	min-width: 0px;
+	padding: 0 20px;
+	height: auto;
+	background-color: #f5f6ff;
+	border-radius: 30px;
+	box-shadow: 5px 5px 5px 5px #e2e2e2;
+	margin-bottom: 80px;
+}
+
+.buy-box .buy-right {
+	flex: 0 0 35%;
+	min-width: 0px;
+	margin-left: auto;
+	height: 50%;
+	padding: 0 10px;
+	border-radius: 30px;
+	box-shadow: 5px 5px 5px 5px #e2e2e2;
+	background-color: #f9f4ff;
+}
+
+.ProductList_thumbnail img {
+	border: 1px solid #ccc;
+}
+
+.address-title-box {
+	border-bottom: 1px solid #111;
+}
+
+.AddressView_article {
+	position: relative;
+	padding: 12px 14px;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.AddressView_article-2 {
+	position: relative;
+	padding: 12px 14px;
+	border-radius: 10px 10px 0 0;
+	background-color: white;
+}
+
+.AddressView_name {
+	font-size: 16px;
+	line-height: 22px;
+	letter-spacing: -.3px;
+	overflow-wrap: break-word;
+	word-break: break-all;
+	color: #1e1e23;
+}
+
+.AddressView_item-tel {
+	font-size: 16px;
+	line-height: 22px;
+	letter-spacing: -.3px;
+	display: inline-block;
+	color: #767678;
+}
+
+.AddressView_area-tel ul {
+	padding-inline-start: 0;
+}
+
+.AddressView_address {
+	font-size: 16px;
+	line-height: 22px;
+	letter-spacing: -.3px;
+	overflow-wrap: break-word;
+	line-height: 24px;
+	word-break: break-all;
+	color: #1e1e23;
+	margin: 0;
+}
+
+.AddressView_button-action {
+	font-size: 13px;
+	line-height: 19px;
+	letter-spacing: -.3px;
+	position: absolute;
+	top: 12px;
+	right: 14px;
+	width: 42px;
+	padding: 7px 0 6px;
+	border-radius: 2px;
+	background-color: #a4aab6;
+	color: #fff;
+}
+
+.ProductList_area {
+	display: flex;
+}
+
+.ProductList_area .ProductList_thumbnail {
+	height: 120px;
+	left: 0;
+	top: 0;
+	display: block;
+	height: 110px;
+}
+
+.ProductList_area .ProductList_info .ProductList_name {
+	display: block;
+	font-size: 16px;
+	line-height: 20px;
+	color: #252525;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-left: 40px;
+	text-decoration-line: none;
+}
+
+.ProductList_area .ProductList_add-list .ProductList_option {
+	font-size: 13px;
+	line-height: 17px;
+	color: #8f8f8f;
+	display: inline-block;
+}
+
+.ProductList_area .ProductList_info .ProductList_amount .ProductList_pay-sum,
+	.ProductList_area .ProductList_info .ProductList_amount .ProductList_price
+	{
+	display: inline-block;
+	font-size: 15px;
+	line-height: 23px;
+	color: #1088ed;
+	vertical-align: top;
+	margin-left: 40px;
+}
+
+.AmountArea_article.AmountArea_type-order {
+	padding: 13px 13px 15px;
+	border-top: 1px solid #dbe8ee;
+	background-color: #b6ccd6;
+	border-radius: 0 0 10px 10px; font-size : 16px;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.AmountArea_article {
+	display: flex;
+	display: -ms-flexbox;
+	padding: 11px 13px;
+	font-size: 15px;
+	line-height: 21px;
+	color: #1e1e23;
+}
+
+.AmountArea_cell {
+	position: relative;
+}
+
+.AmountArea_title {
+	font-weight: 700;
+}
+
+.AmountArea_cell+.AmountArea_cell {
+	margin-left: auto;
+}
+
+.AmountArea_cell {
+	position: relative;
+}
+
+.AmountArea_amount {
+	font-weight: 500;
+}
+
+.Payment_payment-button {
+	position: relative;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
+	vertical-align: top;
+	cursor: pointer;
+	background-color: yellow;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.Alignment_article {
+	display: flex;
+	display: -ms-flexbox;
+	position: relative;
+	color: inherit;
+	line-height: 22px;
+}
+
+.Alignment_article .Alignment_value {
+	margin-left: auto;
+	color: inherit;
+	white-space: nowrap;
+}
+
+.OrderSummary_inner {
+	position: relative;
+	margin-top: 10px;
+	padding-left: 14px;
+}
+
+.OrderSummary_inner .OrderSummary_sub-list:before {
+	position: absolute;
+	left: 0;
+	top: 2px;
+	bottom: 2px;
+	width: 4px;
+	background-color: #7e7e89;
+	content: "";
+}
+
+.OrderSummary_article .OrderSummary_sub-list .OrderSummary_sub-item {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #666;
+}
+
+.OrderSummary_inner ul, .ProductList_info ul {
+	list-style-type: none;
+	padding-inline-start: 0;
+}
+
+.ProductList_info ul {
+	margin-left: 40px;
+}
+
+.Payment-box .AddressView_article {
+	margin-bottom: 40px;
+}
