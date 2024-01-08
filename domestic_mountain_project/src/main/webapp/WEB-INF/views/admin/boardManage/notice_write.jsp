@@ -44,7 +44,7 @@ function check() {
 	
 	str = f.notice_board_invisible_date.value;
 	x = f.expireUse.value;
-	if(!str && x) {
+	if(!str && $('#expireUse').is(':checked')) {
 		alert("만료일자를 입력하세요. ");
 		f.notice_board_invisible_date.focus();
 		return false;
@@ -67,7 +67,9 @@ $(function() {
 	})
 });
 </script>
-
+<div id="layoutSidenav_content">
+	<main class="mt-4">
+		<div class="container-fluid px-4">
 <div class="container">
 	<div class="body-container">	
 		<div class="body-title">
@@ -88,7 +90,7 @@ $(function() {
 					<tr>
 						<td class="bg-light col-sm-2" scope="row">카테고리 분류</td>
 						<td>
-							<select style="text-align: center;" id="notice_category_num" class="form-select" style=" width: 100%;">
+							<select style="text-align: center;" name="notice_category_num" id="notice_category_num" class="form-select" style=" width: 100%;">
 									<option value=""> :: 카테고리 선택 :: </option>
 								<c:forEach var="dto" items="${list}" varStatus="status">
 									<option value="${dto.notice_category_num}">${dto.notice_category_name}</option>
@@ -144,6 +146,9 @@ $(function() {
 		
 		</div>
 	</div>
+</div>
+</div>
+</main>
 </div>
 
 
