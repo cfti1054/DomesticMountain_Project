@@ -8,4 +8,48 @@
 	FROM user2
 </select>
 	
+<select id="sort_by_weekly_reg" resultType="com.fa.plus.admin.domain.Stats">
+SELECT TO_CHAR(SYSDATE-6, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_num
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-6, 'YYYY-MM-DD')
+    UNION ALL
+
+SELECT TO_CHAR(SYSDATE-5, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_num
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-5, 'YYYY-MM-DD')
+    UNION ALL
+
+SELECT TO_CHAR(SYSDATE-4, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_num
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-4, 'YYYY-MM-DD')
+    UNION ALL
+
+SELECT TO_CHAR(SYSDATE-3, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_num
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-3, 'YYYY-MM-DD')
+    UNION ALL
+
+SELECT TO_CHAR(SYSDATE-2, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_num
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-2, 'YYYY-MM-DD')
+    UNION ALL
+
+SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_num
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-1, 'YYYY-MM-DD')
+    UNION ALL
+
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_num
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+
+</select>	
+	
 </mapper>
