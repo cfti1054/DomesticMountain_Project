@@ -15,6 +15,7 @@
 	margin: auto;
 }
 
+
 .board-article img {
 	max-width: 650px;
 }
@@ -316,14 +317,14 @@ $(function(){
 	});
 });
 
-// 페이징 처리
+//페이징 처리
 $(function(){
 	listPage(1);
 });
 
 function listPage(page) {
 	let url = '${pageContext.request.contextPath}/appearance/listReply';
-	let query = 'num=${dto.post_num}&pageNo=' + page;
+	let query = 'post_num=${dto.post_num}&pageNo=' + page;
 	let selector = '#listReply';
 	
 	const fn = function(data){
@@ -347,7 +348,7 @@ $(function(){
 		content = encodeURIComponent(content);
 		
 		let url = '${pageContext.request.contextPath}/appearance/insertReply';
-		let query = 'num=' + num + '&content=' + content + '&answer=0';
+		let query = 'post_num=' + post_num + '&reply_content=' + reply_content + '&reply_answer=0';
 		
 		const fn = function(data){
 			$tb.find('textarea').val('');

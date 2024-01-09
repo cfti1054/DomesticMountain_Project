@@ -5,7 +5,6 @@ public class Reply {
 	private long post_num;
 	private long reply_reg_id;
 	private long useridx;
-	private String user_name;
 	private int reply_secret;
 	private String reply_content;
 	private String reply_reg_date;
@@ -18,8 +17,17 @@ public class Reply {
 	private int likeCount;
 	private int disLikeCount;
 	
+	private String user_name;
+	private String user_id;
 	
 	
+	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public int getReply_answer() {
 		return reply_answer;
 	}

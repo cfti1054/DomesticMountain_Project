@@ -191,45 +191,46 @@
 		VALUES (bbsReply_seq.NEXTVAL, #{num}, #{userId}, #{content}, #{answer}, 1, SYSDATE)
 	</insert>
 	-->
-	<!-- 
+	<!--  -->
 	<select id="replyCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM Reply
+		FROM reply
 		WHERE post_num=#{post_num} AND reply_secret=1
-		<if test="usership lt 51">
-			AND ( showReply=1 OR ( showReply=1 AND reply_reg_id=#{useridx} ) )
-		</if>
+		<!--  <if test="usership lt 51">  -->
+			AND ( reply_visible=1 OR ( reply_visible=1 AND reply_reg_id=#{useridx} ) )
+		<!-- </if>  -->
 	</select>
- -->
-	<!-- 댓글리스트
-	<select id="listReply" parameterType="map" resultType="com.sp.app.domain.Reply">
-		SELECT r.replyNum, r.userId, userName, num, content, r.reg_date, NVL(showReply, 1) showReply, 
+
+	<!-- 댓글리스트 -->
+	<select id="listReply" parameterType="map" resultType="com.fa.plus.domain.Reply">
+		SELECT r.reply_num, r.reply_reg_id, user_name, post_num, reply_content, r.reply_reg_date, user_id,
+			   NVL(reply_visible, 1) reply_visible,
 			   NVL(answerCount, 0) answerCount,
 			   NVL(likeCount, 0) likeCount,
 			   NVL(disLikeCount, 0) disLikeCount
-		FROM bbsReply r
-		JOIN member1 m ON r.userId = m.userId
+		FROM reply r
+		JOIN user1 m ON r.reply_reg_id = m.useridx
 		LEFT OUTER JOIN (
-			SELECT answer, COUNT(*) answerCount
-			FROM bbsReply
-			WHERE answer!=0
-			<if test="membership lt 51">
-				AND ( showReply=1 OR ( showReply=0 AND userId=#{userId} ) )
+			SELECT reply_answer, COUNT(*) answerCount
+			FROM reply
+			WHERE reply_answer!=0
+			<if test="usership lt 51">
+				AND ( reply_visible=1 OR ( reply_visible=0 AND reply_reg_id=#{useridx} ) )
 			</if>	
-			GROUP BY answer
-		) a ON r.replyNum = a.answer
+			GROUP BY reply_answer
+		) a ON r.reply_num = a.reply_answer
 		LEFT OUTER JOIN (
-			SELECT replyNum, COUNT(DECODE(replyLike, 1, 1)) likeCount,
-				   COUNT(DECODE(replyLike, 0, 1)) disLikeCount
-			FROM bbsReplyLike
-			GROUP BY replyNum
-		) c ON r.replyNum = c.replyNum
-		WHERE num=#{num} AND r.answer=0
-		<if test="membership lt 51">
-			AND ( showReply=1 OR ( showReply=0 AND r.userId=#{userId} ) )
+			SELECT reply_num, COUNT(DECODE(replylike, 1, 1)) likeCount,
+				   COUNT(DECODE(replylike, 0, 1)) disLikeCount
+			FROM reply_like
+			GROUP BY reply_num
+		) c ON r.reply_num = c.reply_num
+		WHERE post_num=#{post_num} AND r.reply_answer=0
+		<if test="usership lt 51">
+			AND ( reply_visible=1 OR ( reply_visible=0 AND r.reply_reg_id=#{useridx} ) )
 		</if>
-		ORDER BY r.replyNum DESC
+		ORDER BY r.reply_num DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
-	 -->
+	
 </mapper>

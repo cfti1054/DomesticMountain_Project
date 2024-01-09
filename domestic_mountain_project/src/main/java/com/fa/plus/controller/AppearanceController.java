@@ -239,8 +239,6 @@ public class AppearanceController {
 
 		return "redirect:/appearance/list?" + query;
 	}
-	/*
-	 * 
 	
 	// 댓글 리스트 : AJAX-TEXT
 	@GetMapping("listReply")
@@ -259,7 +257,7 @@ public class AppearanceController {
 		map.put("post_num", post_num);
 		
 		map.put("usership", info.getUsership());
-		map.put("userid", info.getUserid());
+		map.put("useridx", info.getUseridx());
 		
 		dataCount = service.replyCount(map);
 		total_page = myUtil.pageCount(dataCount, size);
@@ -326,6 +324,6 @@ public class AppearanceController {
 
 			return model;
 		}
-	 */
+
 }
 
