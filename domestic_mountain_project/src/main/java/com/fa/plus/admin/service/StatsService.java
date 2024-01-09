@@ -15,4 +15,10 @@ public interface StatsService {
 	
 	public List<Stats> sort_by_weekly_sales_sum() throws Exception;
 	public List<Stats> sort_by_weekly_revenue_sum() throws Exception;
+	
+	public List<Stats> sort_by_monthly_sales() throws Exception;
+	public List<Stats> sort_by_monthly_revenue() throws Exception;
+	
+	public List<Stats> sort_by_monthly_sales_sum() throws Exception;
+	public List<Stats> sort_by_monthly_revenue_sum() throws Exception;
 }

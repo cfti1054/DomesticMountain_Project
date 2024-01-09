@@ -21,8 +21,45 @@ public class Stats {
 	public int sales_sum;
 	public int revenue_sum;
 	
+	// 월별 매출
+	public String sales_month;
+	public int monthly_sales_num;
+	public int monthly_revenue_num;
+	public int monthly_sales_sum;
+	public int monthly_revenue_sum; 
 	
 	
+	
+	public String getSales_month() {
+		return sales_month;
+	}
+	public void setSales_month(String sales_month) {
+		this.sales_month = sales_month;
+	}
+	public int getMonthly_sales_num() {
+		return monthly_sales_num;
+	}
+	public void setMonthly_sales_num(int monthly_sales_num) {
+		this.monthly_sales_num = monthly_sales_num;
+	}
+	public int getMonthly_revenue_num() {
+		return monthly_revenue_num;
+	}
+	public void setMonthly_revenue_num(int monthly_revenue_num) {
+		this.monthly_revenue_num = monthly_revenue_num;
+	}
+	public int getMonthly_sales_sum() {
+		return monthly_sales_sum;
+	}
+	public void setMonthly_sales_sum(int monthly_sales_sum) {
+		this.monthly_sales_sum = monthly_sales_sum;
+	}
+	public int getMonthly_revenue_sum() {
+		return monthly_revenue_sum;
+	}
+	public void setMonthly_revenue_sum(int monthly_revenue_sum) {
+		this.monthly_revenue_sum = monthly_revenue_sum;
+	}
 	public int getSales_sum() {
 		return sales_sum;
 	}
