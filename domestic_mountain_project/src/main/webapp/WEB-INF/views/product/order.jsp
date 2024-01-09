@@ -210,6 +210,44 @@
 						// 페이지 로드 시 초기 업데이트 수행
 						updateTotal();
 					});
+	
+	
+
+	function sendOk(mode) {
+		
+		
+		let totalQty = 0;
+		$(".order-qty").each(function(){
+			let qty = parseInt($(this).find("input[name=selectOption1]").val());
+			
+			totalQty += qty;
+		});
+		
+		if(totalQty <= 0) {
+			alert("구매 상품의 수량을 선택하세요 !!! ");
+			return;
+		}
+
+		const f = document.buyForm;
+		if(mode === "buy") {
+			// GET 방식으로 전송. 로그인후 결제화면으로 이동하기 위해
+			// 또는 자바스크립트 sessionStorage를 활용 할 수 있음
+			f.method = "get";
+			f.action = "${pageContext.request.contextPath}/order/payment";
+		} else {
+			if(! confirm("선택한 상품을 장바구니에 담으시겠습니까 ? ")) {
+				return false;
+			}
+			
+			f.method = "post";
+			f.action = "${pageContext.request.contextPath}/myPage/saveCart";
+		}
+		
+		f.submit();
+	}
+
+	
+	
 </script>
 
 
@@ -223,8 +261,8 @@
 			</h1>
 		</div>
 
-		<div class="order">
-			<form name="buyForm">
+		<form name="buyForm">
+			<div class="order">
 				<div class="order-part order-img">
 					<div>
 						<c:choose>
@@ -244,11 +282,15 @@
 						</c:choose>
 					</div>
 				</div>
+				
+				
 				<div class="order-part order-content">
 					<p class="jemok1">${dto.product_name}</p>
 					<span class="percent">50%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<span class="jul">${dto.product_price}원</span>&nbsp;&nbsp;<span
 						class="amount">${dto.product_price}원</span><br> <br>
+						
+						
 					<c:if test="${not empty listOptionDetail}">
 						<select class="select" name="selectOption1" id="selectOption1"
 							data-optionNum="${listOption[0].option_num}">
@@ -297,7 +339,7 @@
 					</div>
 					<br>
 					<button class="gume"
-						onclick="location.href='${pageContext.request.contextPath}/product/buy'">결제하기</button>
+						onclick="sendOk('buy');">결제하기</button>
 					<br> <br>
 					<div class="gume1">
 						<div class="gume2">
@@ -314,8 +356,8 @@
 						</div>
 					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 </section>
 <section class="features-6">

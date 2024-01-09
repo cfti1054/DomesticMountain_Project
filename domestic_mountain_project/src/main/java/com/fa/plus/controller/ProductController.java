@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Product;
@@ -77,7 +77,7 @@ public class ProductController {
 			return "redirect:/product/product";
 		}
 		 
-		return ".product.order";
+		return ".product.order2";
 	}
 	
 	@RequestMapping("product_detail")
@@ -129,20 +129,31 @@ public class ProductController {
 	}
 	
 	
-	/*
-	@GetMapping("product_detail")
-	public String product_detail() {
-		
-		return ".product.product_detail";
-	}
-	*/
-	
-	
 	@GetMapping("buy")
 	public String buy() {
 		
 		return ".product.buy";
 	}
+	
+	@GetMapping("listOptionDetail2")
+	@ResponseBody
+	public List<Product> listOptionDetail2(
+			@RequestParam long option_num,
+			@RequestParam long option_num2, 
+			@RequestParam long detail_num
+			) {
+		
+		List<Product> list = service.listOptionDetail(option_num2);
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
