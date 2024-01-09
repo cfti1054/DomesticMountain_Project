@@ -9,6 +9,12 @@
 		WHERE product_status=1 AND category_num = #{category_num}
 	</select>
 	
+	<select id="categoryName" parameterType="Long" resultType="com.fa.plus.domain.Product">
+		SELECT category_name
+		FROM product_category
+		WHERE category_num = #{category_num}
+	</select>
+	
 	<select id="listProduct" parameterType="map" resultType="com.fa.plus.domain.Product">
 		SELECT p.product_num, p.category_num, category_name, product_name, product_price, product_summary,
 			product_content, product_hit, NVL(review_star, 0) review_star, NVL(review_count, 0) review_count

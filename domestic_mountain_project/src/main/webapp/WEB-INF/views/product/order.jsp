@@ -224,101 +224,101 @@
 		</div>
 
 		<div class="order">
-			<div class="order-part order-img">
-				<div>
-					<c:choose>
-						<c:when
-							test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
-							<img class="img"
-								src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
-						</c:when>
-						<c:when
-							test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
-							<img class="img" src="${dto.product_summary}">
-						</c:when>
+			<form name="buyForm">
+				<div class="order-part order-img">
+					<div>
+						<c:choose>
+							<c:when
+								test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+								<img class="img"
+									src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+							</c:when>
+							<c:when
+								test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+								<img class="img" src="${dto.product_summary}">
+							</c:when>
 
-						<c:otherwise>
+							<c:otherwise>
 
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</div>
-			<div class="order-part order-content">
-				<p class="jemok1">${dto.product_name}</p>
-				<span class="percent">50%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<span class="jul">${dto.product_price}원</span>&nbsp;&nbsp;<span
-					class="amount">${dto.product_price}원</span><br>
-				<br>
-				<c:if test="${not empty listOptionDetail}">
-					<select class="select" data-optionNum="${listOption[0].option_num}">
-						<option value="">${listOption[0].option_name}</option>
-						<c:forEach var="vo" items="${listOptionDetail}">
-							<option value="${vo.detail_num}">${vo.option_value}</option>
-						</c:forEach>
-					</select>
-					<br>
-					<br>
-				</c:if>
-				<c:if test="${not empty listOptionDetail1}">
-					<select class="select"
-						data-optionNum2="${listOption[1].option_num}">
-						<option value="">${listOption[1].option_name}</option>
-						<c:forEach var="vo1" items="${listOptionDetail1}">
-							<option value="${vo1.detail_num}">${vo1.option_value}</option>
-						</c:forEach>
-					</select>
-					<br>
-					<br>
-				</c:if>
-
-
-				<select class="select3">
-					<option disabled selected>수량</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-				</select> <br>
-				<br>
-				<div class="price">
-					<div style="margin-left: 150px">
-						<p>총 상품금액</p>
-					</div>
-					<div style="margin-right: 150px">
-						<span>총 수량 <span class="product-totalQty">0</span>개 |
-						</span> <span class="blue"><span class="product-totalAmount">0</span>원</span>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
-				<br>
-				<button class="gume" onclick="location.href='${pageContext.request.contextPath}/product/buy'">결제하기</button>
-				<br>
-				<br>
-				<div class="gume1">
-					<div class="gume2">
-						<img class="gara"
-							src="${pageContext.request.contextPath}/resources/images/product/gogek.png">&nbsp;<span>문의</span>
+				<div class="order-part order-content">
+					<p class="jemok1">${dto.product_name}</p>
+					<span class="percent">50%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="jul">${dto.product_price}원</span>&nbsp;&nbsp;<span
+						class="amount">${dto.product_price}원</span><br> <br>
+					<c:if test="${not empty listOptionDetail}">
+						<select class="select" name="selectOption1" id="selectOption1"
+							data-optionNum="${listOption[0].option_num}">
+							<option value="">${listOption[0].option_name}</option>
+							<c:forEach var="vo" items="${listOptionDetail}">
+								<option value="${vo.detail_num}">${vo.option_value}</option>
+							</c:forEach>
+						</select>
+						<br>
+						<br>
+					</c:if>
+					<c:if test="${not empty listOptionDetail1}">
+						<select class="select" name="selectOption2" id="selectOption2"
+							data-optionNum2="${listOption[1].option_num}">
+							<option value="">${listOption[1].option_name}</option>
+							<c:forEach var="vo1" items="${listOptionDetail1}">
+								<option value="${vo1.detail_num}">${vo1.option_value}</option>
+							</c:forEach>
+						</select>
+						<br>
+						<br>
+					</c:if>
+
+
+					<select class="select3" name="selectOption3" id="selectOption3">
+						<option disabled selected>수량</option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+						<option>9</option>
+						<option>10</option>
+					</select> <br> <br>
+					<div class="price">
+						<div style="margin-left: 150px">
+							<p>총 상품금액</p>
+						</div>
+						<div style="margin-right: 150px">
+							<span>총 수량 <span class="product-totalQty">0</span>개 |
+							</span> <span class="blue"><span class="product-totalAmount">0</span>원</span>
+						</div>
 					</div>
-					<div class="gume3">
-						<img class="gara"
-							src="${pageContext.request.contextPath}/resources/images/product/love.png">&nbsp;<span>찜하기</span>
-					</div>
-					<div class="gume4">
-						<img class="gara"
-							src="${pageContext.request.contextPath}/resources/images/product/jangbaguni.png">&nbsp;<span>장바구니</span>
+					<br>
+					<button class="gume"
+						onclick="location.href='${pageContext.request.contextPath}/product/buy'">결제하기</button>
+					<br> <br>
+					<div class="gume1">
+						<div class="gume2">
+							<img class="gara"
+								src="${pageContext.request.contextPath}/resources/images/product/gogek.png">&nbsp;<span>문의</span>
+						</div>
+						<div class="gume3">
+							<img class="gara"
+								src="${pageContext.request.contextPath}/resources/images/product/love.png">&nbsp;<span>찜하기</span>
+						</div>
+						<div class="gume4">
+							<img class="gara"
+								src="${pageContext.request.contextPath}/resources/images/product/jangbaguni.png">&nbsp;<span>장바구니</span>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </section>
 <section class="features-6">
-	<br>
-	<br>
+	<br> <br>
 	<div class="centered">${dto.product_content}</div>
 </section>

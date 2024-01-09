@@ -153,8 +153,8 @@ figure img {
 	
 		<div class="amain">
 			<h1 class="amain-main">
-				<a>${dto.category_name}<span>| DM Store</span></a> <span><a href="/plus/">home</a>
-					&gt; DM Store &gt; ${dto.category_name}</span>
+				<a>${vo.category_name}<span>| DM Store</span></a> <span><a href="/plus/">home</a>
+					&gt; DM Store &gt; ${vo.category_name}</span>
 			</h1>
 		</div>
 

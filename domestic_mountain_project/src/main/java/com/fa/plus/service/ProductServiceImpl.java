@@ -105,6 +105,20 @@ public class ProductServiceImpl implements ProductService{
 		
 		return list;
 	}
+
+	@Override
+	public Product categoryName(long product_num) {
+		Product dto = null;
+		
+		try {
+			dto = mapper.categoryName(product_num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 	
 	
 }

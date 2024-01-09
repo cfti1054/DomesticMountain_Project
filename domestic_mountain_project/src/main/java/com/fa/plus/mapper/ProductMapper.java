@@ -10,6 +10,7 @@ import com.fa.plus.domain.Product;
 public interface ProductMapper {
 	public int dataCount(Map<String, Object> map);
 	public List<Product> listProduct(Map<String, Object> map);
+	public Product categoryName(long product_num);
 	
 	public Product findById(long product_num);
 	// public List<Product> listProductFile(long product_num);
