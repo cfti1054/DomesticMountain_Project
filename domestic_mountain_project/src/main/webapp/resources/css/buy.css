@@ -40,6 +40,7 @@
 	border-radius: 30px;
 	box-shadow: 5px 5px 5px 5px #e2e2e2;
 	background-color: #f9f4ff;
+	
 }
 
 .ProductList_thumbnail img {
@@ -103,7 +104,7 @@
 	position: absolute;
 	top: 12px;
 	right: 14px;
-	width: 42px;
+	width: 110px;
 	padding: 7px 0 6px;
 	border-radius: 2px;
 	background-color: #a4aab6;
@@ -251,4 +252,9 @@
 
 .Payment-box .AddressView_article {
 	margin-bottom: 40px;
+}
+
+.recipient {
+	display: flex;
+	margin: 8px;
 }
