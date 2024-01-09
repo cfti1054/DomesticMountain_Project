@@ -325,10 +325,7 @@ function sendOk(mode) {
 									결제)</label>
 							</div>
 							<div>
-								<label>제주 추가 배송비 3,000 / 제주 제외 도서 산간 추가 배송비 5,000</label>
-							</div>
-							<div>
-								<label>200,000 이상 구매시 무료</label>
+								<label>회원 등급이 높아짐에 따라 할인율이 더 많아집니다!</label>
 							</div>
 						</div>
 
