@@ -15,4 +15,7 @@ public interface StatsMapper {
 	public List<Stats> sort_by_monthly_reg() throws SQLException;
 	
 	public List<Stats> sort_by_weekly_sales() throws SQLException;
+	public List<Stats> sort_by_weekly_revenue() throws SQLException;
+	public List<Stats> sort_by_weekly_sales_sum() throws SQLException;
+	public List<Stats> sort_by_weekly_revenue_sum() throws SQLException;
 }

@@ -54,10 +54,49 @@ public class StatsServiceImpl implements StatsService {
 
 	@Override
 	public List<Stats> sort_by_weekly_sales() throws Exception {
-List<Stats> list = null;
+		List<Stats> list = null;
 		
 		try {
 			list = mapper.sort_by_weekly_sales();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Stats> sort_by_weekly_revenue() throws Exception {
+		List<Stats> list = null;
+		
+		try {
+			list = mapper.sort_by_weekly_revenue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Stats> sort_by_weekly_sales_sum() throws Exception {
+		List<Stats> list = null;
+		
+		try {
+			list = mapper.sort_by_weekly_sales_sum();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Stats> sort_by_weekly_revenue_sum() throws Exception {
+		List<Stats> list = null;
+		
+		try {
+			list = mapper.sort_by_weekly_revenue_sum();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
