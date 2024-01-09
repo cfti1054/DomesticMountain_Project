@@ -172,6 +172,7 @@ public class UserController {
 		
 		return ".user.pwd";
 	}
+	
 	@PostMapping("pwd")
 	public String pwdSubmit(@RequestParam String user_pwd,
 			@RequestParam String mode,
@@ -209,7 +210,7 @@ public class UserController {
 			rAttr.addFlashAttribute("title", "회원 탈퇴");
 			rAttr.addFlashAttribute("message", sb.toString());
 			
-		return "redirect:/user/complete";
+			return "redirect:/user/complete";
 		}
 		// 회원 수정 폼
 		model.addAttribute("dto", dto);
@@ -221,13 +222,17 @@ public class UserController {
 	
 	@PostMapping("update")
 	public String updateSubmit(User dto,
+			HttpSession session,
 			final RedirectAttributes reAttr,
 			Model model) {
 		
 		try {
+			SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
+			dto.setUseridx(info.getUseridx());
+			
 			service.updateUser(dto);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 
 		StringBuilder sb = new StringBuilder();

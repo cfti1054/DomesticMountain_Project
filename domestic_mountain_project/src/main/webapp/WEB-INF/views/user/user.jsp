@@ -128,7 +128,6 @@
 			return;
 		}
 
-
 		f.action = "${pageContext.request.contextPath}/user/${mode}";
 		f.submit();
 	}
@@ -336,18 +335,20 @@
 						</div>
 					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label" for="agree">약관 동의</label>
-						<div class="col-sm-8" style="padding-top: 5px;">
-							<input type="checkbox" id="agree" name="agree"
-								class="form-check-input" checked style="margin-left: 0;"
-								onchange="form.sendButton.disabled = !checked"> <label
-								class="form-check-label"> <a href="#"
-								class="text-decoration-none">이용약관</a>에 동의합니다.
-							</label>
+					<c:if test="${mode=='user'}">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="agree">약관 동의</label>
+							<div class="col-sm-8" style="padding-top: 5px;">
+								<input type="checkbox" id="agree" name="agree"
+									class="form-check-input" checked style="margin-left: 0;"
+									onchange="form.sendButton.disabled = !checked"> <label
+									class="form-check-label"> <a href="#"
+									class="text-decoration-none">이용약관</a>에 동의합니다.
+								</label>
+							</div>
 						</div>
-					</div>
-
+					</c:if>
+					
 					<div class="row mb-3">
 						<div class="text-center">
 							<button type="button" name="sendButton" class="btn btn-primary"

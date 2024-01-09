@@ -97,9 +97,9 @@ public class UserServiceImpl implements UserService {
 //			
 //			dto.setUser_pwd(encPwd);
 			
-			mapper.insertUser1(dto);
+			mapper.updateUser1(dto);
 			
-			mapper.insertUser2(dto);
+			mapper.updateUser2(dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

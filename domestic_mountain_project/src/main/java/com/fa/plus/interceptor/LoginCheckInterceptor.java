@@ -31,7 +31,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 		
 		try {
 			HttpSession session = request.getSession();
-			SessionInfo info = (SessionInfo)session.getAttribute("user");
+			SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
 			String cp = request.getContextPath();
 			String uri = request.getRequestURI();
 			String qs = request.getQueryString();
