@@ -32,7 +32,7 @@
 					<span>jypark234@naver.com</span>
 				</div>
 				<p class="p1">내프로필</p>
-				<p class="p1">보안설정</p>
+				<p class="p1" ><a href="${pageContext.request.contextPath}/mypage/cart">장바구니</a></p>
 				<p class="p1">이력관리</p>
 				<br>
 				<hr>

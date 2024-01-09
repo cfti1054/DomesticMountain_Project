@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.MyPageMapper">
+
+	<!-- 장바구니 등록 -->
+	<insert id="insertCart" parameterType="com.fa.plus.domain.Order">
+		INSERT INTO cart(useridx, detail_num1, detail_num2, product_num,
+			cart_reg_date, qty, cart_update_date)
+				VALUES(#{useridx}, #{detail_num1}, #{detail_num2}, #{product_num},
+					SYSDATE, #{qty}, SYSDATE)		
+	</insert>
+	
+	<!-- 장바구니 업데이트 -->
+	<update id="updateCart" parameterType="com.fa.plus.domain.Order">
+		UPDATE cart SET qty = #{qty}, cart_update_date = SYSDATE
+		WHERE detail_num2 = #{detail_num2} AND useridx = #{useridx}
+	</update>	
+
+	<select id="findByCartId" parameterType="map" resultType="com.fa.plus.domain.Order">
+		SELECT useridx, detail_num1, detail_num2, qty, product_num,
+			cart_reg_date, cart_update_date
+		FROM cart
+		WHERE detail_num2 = #{detail_num2} AND useridx = #{useridx}
+	</select>
+
+	<!-- 장바구니 리스트 -->
+	<select id="listCart" resultType="com.fa.plus.domain.Order" parameterType="Long">
+		SELECT useridx, c.detail_num1, c.detail_num2, c.product_num, qty,
+			c.cart_reg_date, c.cart_update_date, product_name,
+				d.option_value, d2.option_value option_value2
+		FROM cart c
+		JOIN product p ON c.product_num = p.product_num
+		JOIN optionDetail d ON c.detail_num1 = d.detail_num
+		JOIN optionDetail d2 ON c.detail_num2 = d2.detail_num
+		WHERE useridx = #{useridx}
+		ORDER BY cart_reg_date DESC 
+	</select>
+
+</mapper>
