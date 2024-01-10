@@ -156,4 +156,30 @@ public class StatsServiceImpl implements StatsService {
 		return list;
 	}
 
+	@Override
+	public List<Stats> sort_by_weekly_reg_sum() throws Exception {
+		List<Stats> list = null;
+		
+		try {
+			list = mapper.sort_by_weekly_reg_sum();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Stats> sort_by_monthly_reg_sum() throws Exception {
+		List<Stats> list = null;
+		
+		try {
+			list = mapper.sort_by_monthly_reg_sum();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 }

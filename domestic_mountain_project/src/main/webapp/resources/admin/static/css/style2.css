@@ -21131,5 +21131,12 @@ div.tagsinput {
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1; }
+  
+.chart-wrapper {
+  background: rgb(15, 12, 40);
+  padding: 1.875rem 1.75rem;
+  width: 100%;
+  -webkit-flex-grow: 1;
+  flex-grow: 1; }  
 
 /*# sourceMappingURL=maps/style.css.map */
