@@ -527,7 +527,7 @@ $(function(){
 		
 		ajaxFun(url, 'post', formData, 'json', fn);
 	});
-});
+}); 
 
 // 댓글별 답글 삭제
 $(function(){
