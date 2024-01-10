@@ -35,6 +35,7 @@ public class Order {
 	private int od_price;					// 제품단가
 	private String option_value;			// 상세옵션값
 	private String option_value2;			// 상세옵션값2
+	private String product_summary;			// 제품 썸네일
 	
 	// 찜
 	private String zzim_date;				// 찜등록날짜
@@ -446,6 +447,12 @@ public class Order {
 	}
 	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
+	}
+	public String getProduct_summary() {
+		return product_summary;
+	}
+	public void setProduct_summary(String product_summary) {
+		this.product_summary = product_summary;
 	}
 	
 	
