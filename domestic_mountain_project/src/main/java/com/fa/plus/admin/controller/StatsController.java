@@ -71,8 +71,8 @@ public class StatsController {
 				case 7: value_list.set(6, value_list.get(6) + 1); break;
 				}
 			}
-			list = null;
-			list = service.sort_by_monthly_reg();
+
+			list = service.sort_by_weekly_reg();
 			int i = 0;
 			for(Stats dto: list) {
 				reg_date_list.set(i,dto.getReg_date());
@@ -80,7 +80,8 @@ public class StatsController {
 				i+=1;
 			}
 			
-			
+			list = service.sort_by_monthly_reg();
+			// 월간 가입자 수
 			
 		} catch (Exception e) {
 		}
@@ -100,22 +101,92 @@ public class StatsController {
 		List<Stats> list = null;
 		List<String> sales_date_list = Arrays.asList("","","","","","","");
 		List<Integer> sales_num_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		List<Integer> revenue_num_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		List<Integer> sales_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		List<Integer> revenue_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		
+		List<Integer> monthly_sales_num_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		List<Integer> monthly_revenue_num_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		
+		List<Integer> monthly_sales_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		List<Integer> monthly_revenue_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
 		
 		try {
-			list = service.sort_by_weekly_sales();
-			
 			int i = 0;
+			// 일주일 간 매출
+			list = service.sort_by_weekly_sales();
 			for(Stats dto : list) {
 				sales_date_list.set(i, dto.getSales_date());
 				sales_num_list.set(i, dto.getSales_num());
 				i+=1;
 			}
+			// 일주일 간 순이익
+			list = service.sort_by_weekly_revenue();
+			i = 0;
+			for(Stats dto: list) {
+				revenue_num_list.set(i, dto.getRevenue_num());
+				i+=1;
+			}
+			
+			// 일주일 간 누적 매출
+			list = service.sort_by_weekly_sales_sum();
+			i = 0;
+			for(Stats dto: list) {
+				sales_sum_list.set(i, dto.getSales_sum());
+				i+=1;
+			}
+			// 일주일 간 누적 순이익
+			list = service.sort_by_weekly_revenue_sum();
+			i = 0;
+			for(Stats dto: list) {
+				revenue_sum_list.set(i, dto.getRevenue_sum());
+				i+=1;
+			}
+			
+			// 월별 매출
+			list = service.sort_by_monthly_sales();
+			i = 0;
+			for(Stats dto: list) {
+				monthly_sales_num_list.set(i, dto.getMonthly_sales_num());
+				i+=1;
+			}
+			// 월별 순이익
+			list = service.sort_by_monthly_revenue();
+			i = 0;
+			for(Stats dto: list) {
+				monthly_revenue_num_list.set(i, dto.getMonthly_revenue_num());
+				i+=1;
+			}
+			// 월별 누적 매출
+			list = service.sort_by_monthly_sales_sum();
+			i = 0;
+			for(Stats dto: list) {
+				monthly_sales_sum_list.set(i, dto.getMonthly_sales_sum());
+				i+=1;
+			}
+			// 월별 누적 순이익
+			list = service.sort_by_monthly_revenue_sum();
+			i = 0;
+			for(Stats dto: list) {
+				monthly_revenue_sum_list.set(i, dto.getMonthly_revenue_sum());
+				i+=1;
+			}
+			
+			
 			
 		} catch (Exception e) {
 		}
 		
 		model.addAttribute("sales_date_list", sales_date_list);
 		model.addAttribute("sales_num_list", sales_num_list);
+		model.addAttribute("revenue_num_list", revenue_num_list);
+		model.addAttribute("sales_sum_list", sales_sum_list);
+		model.addAttribute("revenue_sum_list", revenue_sum_list);
+		model.addAttribute("monthly_sales_num_list", monthly_sales_num_list);
+		model.addAttribute("monthly_revenue_num_list", monthly_revenue_num_list);
+		model.addAttribute("monthly_sales_sum_list", monthly_sales_sum_list);
+		model.addAttribute("monthly_revenue_sum_list", monthly_revenue_sum_list);
+		
 		
 		return ".admin.stats.sales_main";
 	}

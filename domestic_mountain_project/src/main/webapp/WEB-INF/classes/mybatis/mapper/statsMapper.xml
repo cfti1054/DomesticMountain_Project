@@ -132,6 +132,313 @@ WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE,
 	'YYYY-MM-DD')
 	)
-
 </select>
+
+<select id="sort_by_weekly_revenue" resultType="com.fa.plus.admin.domain.Stats">
+	SELECT *
+	FROM (
+	SELECT TO_CHAR(SYSDATE-6, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(total_amount),0) revenue_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-6,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-5, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(total_amount),0) revenue_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-5,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-4, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(total_amount),0) revenue_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-4,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-3, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(total_amount),0) revenue_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-3,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-2, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(total_amount),0) revenue_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-2,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(total_amount),0) revenue_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-1,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(total_amount),0) revenue_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE,
+	'YYYY-MM-DD')
+	)
+</select>
+
+<select id="sort_by_weekly_sales_sum" resultType="com.fa.plus.admin.domain.Stats">
+SELECT sales_date, SUM(sales_num) OVER(ORDER BY sales_date) AS sales_sum
+	FROM (
+	SELECT TO_CHAR(SYSDATE-6, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(order_total_money),0) sales_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-6,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-5, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(order_total_money),0) sales_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-5,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-4, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(order_total_money),0) sales_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-4,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-3, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(order_total_money),0) sales_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-3,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-2, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(order_total_money),0) sales_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-2,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(order_total_money),0) sales_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-1,
+	'YYYY-MM-DD')
+	UNION ALL
+
+	SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') sales_date,
+	NVL(SUM(order_total_money),0) sales_num
+	FROM totalorder
+	WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE,
+	'YYYY-MM-DD')
+	)
+	</select>
+	<select id="sort_by_weekly_revenue_sum" resultType="com.fa.plus.admin.domain.Stats">
+	SELECT sales_date, SUM(revenue_num) OVER(ORDER BY sales_date) AS revenue_sum
+		FROM (
+		SELECT TO_CHAR(SYSDATE-6, 'YYYY-MM-DD') sales_date,
+		NVL(SUM(total_amount),0) revenue_num
+		FROM totalorder
+		WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-6,
+		'YYYY-MM-DD')
+		UNION ALL
+	
+		SELECT TO_CHAR(SYSDATE-5, 'YYYY-MM-DD') sales_date,
+		NVL(SUM(total_amount),0) revenue_num
+		FROM totalorder
+		WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-5,
+		'YYYY-MM-DD')
+		UNION ALL
+	
+		SELECT TO_CHAR(SYSDATE-4, 'YYYY-MM-DD') sales_date,
+		NVL(SUM(total_amount),0) revenue_num
+		FROM totalorder
+		WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-4,
+		'YYYY-MM-DD')
+		UNION ALL
+	
+		SELECT TO_CHAR(SYSDATE-3, 'YYYY-MM-DD') sales_date,
+		NVL(SUM(total_amount),0) revenue_num
+		FROM totalorder
+		WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-3,
+		'YYYY-MM-DD')
+		UNION ALL
+	
+		SELECT TO_CHAR(SYSDATE-2, 'YYYY-MM-DD') sales_date,
+		NVL(SUM(total_amount),0) revenue_num
+		FROM totalorder
+		WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-2,
+		'YYYY-MM-DD')
+		UNION ALL
+	
+		SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD') sales_date,
+		NVL(SUM(total_amount),0) revenue_num
+		FROM totalorder
+		WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-1,
+		'YYYY-MM-DD')
+		UNION ALL
+	
+		SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') sales_date,
+		NVL(SUM(total_amount),0) revenue_num
+		FROM totalorder
+		WHERE TO_CHAR(order_datetime, 'YYYY-MM-DD') = TO_CHAR(SYSDATE,
+		'YYYY-MM-DD')
+		)
+	</select>
+	<select id="sort_by_monthly_sales" resultType="com.fa.plus.admin.domain.Stats">
+		SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,0),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE, 0),'YYYY-MM')
+	</select>
+	<select id="sort_by_monthly_revenue" resultType="com.fa.plus.admin.domain.Stats">
+	SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_revenue_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_revenue_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_revenue_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_revenue_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_revenue_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,0),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_revenue_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE, 0),'YYYY-MM')
+	</select>
+	
+	<select id="sort_by_monthly_sales_sum" resultType="com.fa.plus.admin.domain.Stats">
+	SELECT sales_month, SUM(monthly_sales_num) OVER(ORDER BY sales_month) AS monthly_sales_num
+FROM(
+SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,0),'YYYY-MM') sales_month,
+      NVL(SUM(order_total_money),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE, 0),'YYYY-MM'))
+	</select>
+	
+	<select id="sort_by_monthly_revenue_sum" resultType="com.fa.plus.admin.domain.Stats">
+	SELECT sales_month, SUM(monthly_sales_num) OVER(ORDER BY sales_month) AS monthly_sales_num
+FROM(
+SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM')
+      UNION ALL
+
+SELECT TO_CHAR(add_months(SYSDATE,0),'YYYY-MM') sales_month,
+      NVL(SUM(total_amount),0) monthly_sales_num
+FROM totalorder
+WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE, 0),'YYYY-MM'))
+	</select>
 </mapper>

@@ -26,6 +26,8 @@ public class Order {
 	private List<Integer> od_count;			// 제품수량
 	private List<Integer> od_total_amount;	// 총 금액
 	private int od_price;					// 제품단가
+	private String option_value;			// 상세옵션값
+	private String option_value2;			// 상세옵션값2
 	
 	// 찜
 	private String zzim_date;				// 찜등록날짜
@@ -233,6 +235,18 @@ public class Order {
 	}
 	public void setOd_price(int od_price) {
 		this.od_price = od_price;
+	}
+	public String getOption_value() {
+		return option_value;
+	}
+	public void setOption_value(String option_value) {
+		this.option_value = option_value;
+	}
+	public String getOption_value2() {
+		return option_value2;
+	}
+	public void setOption_value2(String option_value2) {
+		this.option_value2 = option_value2;
 	}
 	
 	

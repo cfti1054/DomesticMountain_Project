@@ -55,7 +55,7 @@ $(function(){
 */
 $(function(){
 	let categoryNum = 0;
-
+	$(".show-content").hide();
 	$("#tab-"+categoryNum).addClass("active");
 
 	$("ul.tabs li").click(function() {
@@ -64,20 +64,18 @@ $(function(){
 		$("ul.tabs li").each(function(){
 			$(this).removeClass("active");
 		});
-		
+		/*
 		$("#tab-content div").each(function() {
-			$(this).css('display','none');
+			$(this).hide();
 		});
+		*/
+		$(".show-content").hide();
+		
 		$("#tab-"+categoryNum).addClass("active");
-		$("#show-"+categoryNum).css('display','block');
+		$("#show-"+categoryNum).show();
 
 	});
 });
-
-
-
-
-
 
 </script>
 
@@ -93,89 +91,15 @@ $(function(){
     </div>
 		<div>
 			<ul class="tabs">
-				<li id="tab-0" data-categoryNum=0>나이 별 회원 분포</li>
-				<li id="tab-1" data-categoryNum=1>성별</li>
+				<li id="tab-0" data-categoryNum=0>세대별 회원 분포</li>
+				<li id="tab-1" data-categoryNum=1>최근 7일간 가입자 수</li>
 			</ul>
 		</div>
 		<div id="tab-content" style="padding: 15px 10px 5px;">
-			<div id="show-0">
-				<div id="chart-1" style="min-height: 800px;" class="echart"></div>
+			<div id="show-0" class="show-content">
+				 <div id="chart-1" style="min-height: 800px;" class="echart"></div>
 				<script type="text/javascript">
-	var dom = document.getElementById('chart-1');
-    var myChart = echarts.init(dom, null, {
-      renderer: 'canvas',
-      useDirtyRect: false
-    });
-    var app = {};
-    
-    var option;
-
-    option = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis: [
-    {
-      type: 'category',
-      data: ['${reg_date_list[0]}','${reg_date_list[1]}',
-    	  '${reg_date_list[2]}','${reg_date_list[3]}',
-    	  '${reg_date_list[4]}','${reg_date_list[5]}','${reg_date_list[6]}'],
-      axisTick: {
-        alignWithLabel: true
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: 'value'
-    }
-  ],
-  series: [
-    {
-      name: '가입자 수',
-      type: 'bar',
-      barWidth: '60%',
-      data: ${reg_num_list}
-    }
-  ]
-};
-
-    if (option && typeof option === 'object') {
-      myChart.setOption(option);
-    }
-
-    window.addEventListener('resize', myChart.resize);
-  </script> 
-			</div>
-					
-			<div id="show-1">
-				두번째 표
-			</div>
-		</div>
-		
-		 
-  			
-		</div>
-	</div>	
-			
-
-	
-			
-	
-			</div>
-	</main>
-</div>
-<script type="text/javascript">
-    var dom = document.getElementById('container');
+    var dom = document.getElementById('chart-1');
     var myChart = echarts.init(dom, null, {
       renderer: 'canvas',
       useDirtyRect: false
@@ -250,71 +174,12 @@ $(function(){
 
     window.addEventListener('resize', myChart.resize);
   </script>
-	<!-- 
-	
-	<div id="chart-0" style="min-height: 800px;" class="echart"></div>
-				<script>		  
-			window.addEventListener("DOMContentLoaded", () => {
-			  echarts.init(document.querySelector("#chart-0")).setOption({
-				title: {
-				  text: '나이대 별 회원 분포',
-				  subtext: '',
-				  left: 'center'
-				},
-				tooltip: {
-				  trigger: 'item'
-				},
-				legend: {
-				  orient: 'vertical',
-				  left: 'left'
-				},
-				series: [{
-				  name: '나이 대',
-				  type: 'pie',
-				  radius: '70%',
-				  data: [
-						{value: ${value_list[0]},
-						name: '${name_list[0]}'
-						},
-						{value: ${value_list[1]},
-						name: '${name_list[1]}'
-						},
-						{value: ${value_list[2]},
-						name: '${name_list[2]}'
-						},
-						{value: ${value_list[3]},
-						name: '${name_list[3]}'
-						},
-						{value: ${value_list[4]},
-						name: '${name_list[4]}'
-						},	
-						{value: ${value_list[5]},
-						name: '${name_list[5]}'
-						},
-						{value: ${value_list[6]},
-						name: '${name_list[6]}'
-						}
-				  ],
-				  emphasis: {
-					itemStyle: {
-					  shadowBlur: 10,
-					  shadowOffsetX: 0,
-					  shadowColor: 'rgba(0, 0, 0, 0.5)'
-					}
-				  }
-				}]
-			  });
-			});
-			
-			
-	</script>
-	
-	
-	
-	
-				<div id="chart-1" style="min-height: 800px;" class="echart"></div>
+			</div>
+					
+			<div id="show-1" class="show-content">
+  <div id="chart-0" style="min-height: 800px;" class="echart"></div>
 				<script type="text/javascript">
-	var dom = document.getElementById('chart-1');
+	var dom = document.getElementById('chart-0');
     var myChart = echarts.init(dom, null, {
       renderer: 'canvas',
       useDirtyRect: false
@@ -339,7 +204,9 @@ $(function(){
   xAxis: [
     {
       type: 'category',
-      data: ${reg_date_list},
+      data: ['${reg_date_list[0]}','${reg_date_list[1]}',
+    	  '${reg_date_list[2]}','${reg_date_list[3]}',
+    	  '${reg_date_list[4]}','${reg_date_list[5]}','${reg_date_list[6]}'],
       axisTick: {
         alignWithLabel: true
       }
@@ -352,7 +219,7 @@ $(function(){
   ],
   series: [
     {
-      name: 'Direct',
+      name: '가입자 수',
       type: 'bar',
       barWidth: '60%',
       data: ${reg_num_list}
@@ -365,4 +232,20 @@ $(function(){
     }
 
     window.addEventListener('resize', myChart.resize);
-  </script> -->
+  </script>
+			</div>
+		</div>
+		
+		 
+  			
+		</div>
+	</div>	
+			
+
+	
+			
+	
+			</div>
+	</main>
+</div>
+
