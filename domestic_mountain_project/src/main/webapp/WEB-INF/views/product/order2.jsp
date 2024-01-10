@@ -69,7 +69,19 @@ $(function(){
 	$(".requiredOption").change(function(){
 		let option2 = $(this).val();
 		
-		// 있는지 없는지 확인 있으면 아래 실행 없으면 리턴 펄스?
+		// 있는지 없는지 확인 있으면 아래 실행 없으면 option 하나 
+		if($('.list-option').find('.requiredOption2').length==0){
+			if(! $(".requiredOption :selected").val()){
+				return false;
+			}
+			
+			optionSelect();
+			
+			// 번외로 결제 페이지로 넘길때 옵션 1개인지 2개인지 확인 필요 
+			// 1개면 넘길때 값을 0으로 설정하고 null로 받게 해야함 -> Long 타입으로 잡아야 null값이 들어감
+			
+			return false;
+		}
 		
 		$(".requiredOption2 option").each(function(){
 			
@@ -101,6 +113,63 @@ $(function(){
 			});
 		});
 	});
+	
+	function optionSelect(){
+		let productNum = "${dto.product_num}";
+		if(! productNum) {
+			return false;
+		}
+		
+		let detailNum = $(".requiredOption").val();
+		
+		let b = true;
+		$(".order-area input[name=detailNums]").each(function(){
+			let dnum = $(this).val();
+			if(detailNum === dnum) {
+				alert("선택된 옵션입니다.");
+				$(".requiredOption").val("");
+				b = false;
+				return false;
+			}
+		});
+		if(! b) {
+			return false;
+		}
+		
+		let optionValue = $(".requiredOption :selected").text();
+		
+		let salePrice = ${dto.product_price};
+		let totalPrice = salePrice.toLocaleString();
+		
+		let s = optionValue;
+		
+		let out = "";
+		out += "<div class='order-qty'>";
+		out += "  <div class='mt-2 pb-1'>";
+		out += "    <label>"+s+"</label>";
+		out += "  </div>";
+		out += "  <div class='border-bottom mt-1 pb-2'>";
+		out += "    <div class='col'>";
+		out += "      <div class='input-group'>";
+		out += "        <i class='bi bi-dash input-group-text bg-white qty-minus'></i>";
+		out += "        <input type='text' name='buyQtys' class='form-control' value='1' style='flex:none; width: 60px; text-align: center;' readonly>";
+		out += "        <input type='hidden' name='productNums' value='"+productNum+"'>";
+		out += "        <input type='hidden' name='detailNums' value='"+detailNum+"'>";
+		out += "        <i class='bi bi-plus input-group-text bg-white qty-plus'></i>";
+		out += "      </div>";
+		out += "    </div>";
+		out += "    <div class='col text-end product-salePrice' data-salePrice='"+salePrice+"';>";
+		out += "      <label class='pt-2 fs-6 fw-semibold item-totalPrice'>"+totalPrice+"원</label>";
+		out += "      <label class='pt-2 ps-1'><i class='bi bi-x qty-remove'></i></label>";
+		out += "    </div>";
+		out += "  </div>";
+		out += "</div>";
+		
+		$(".order-area").append(out);
+		
+		totalProductPrice();		
+		
+	}
 	
 	
 	// 필수 옵션-2
@@ -144,7 +213,7 @@ $(function(){
 		out += "  <div class='mt-2 pb-1'>";
 		out += "    <label>"+s+"</label>";
 		out += "  </div>";
-		out += "  <div class='row border-bottom mt-1 pb-2'>";
+		out += "  <div class='border-bottom mt-1 pb-2'>";
 		out += "    <div class='col'>";
 		out += "      <div class='input-group'>";
 		out += "        <i class='bi bi-dash input-group-text bg-white qty-minus'></i>";
@@ -258,7 +327,7 @@ function sendOk(mode) {
 		// GET 방식으로 전송. 로그인후 결제화면으로 이동하기 위해
 		// 또는 자바스크립트 sessionStorage를 활용 할 수 있음
 		f.method = "get";
-		f.action = "#";
+		f.action = "${pageContext.request.contextPath}/order/buy";
 	} else {
 		if(! confirm("선택한 상품을 장바구니에 담으시겠습니까 ? ")) {
 			return false;
@@ -330,7 +399,7 @@ function sendOk(mode) {
 						</div>
 
 						<div class="mt-2">* 필수 옵션</div>
-						<div class="mt-2">
+						<div class="mt-2 list-option">
 
 							<c:if test="${not empty listOptionDetail}">
 								<select class="form-select requiredOption"
