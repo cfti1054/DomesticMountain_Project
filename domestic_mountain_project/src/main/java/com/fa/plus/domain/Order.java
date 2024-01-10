@@ -25,10 +25,12 @@ public class Order {
 	private List<Integer> buyQtys;			// 구매수량
 	private List<Integer> od_counts;		// 총 수량
 	private List<Integer> od_total_amounts;	// 총 금액
-	
+    private List<Integer> product_prices;   // 상품-상품가격
+    
 	// 상품
 	private String product_name;			// 상품이름
 	private int od_count;					// 제품 수량
+	private int product_price;               // 상품-상품가격
 	private int od_total_amount;			// 총 금액
 	private int od_price;					// 제품단가
 	private String option_value;			// 상세옵션값
@@ -77,12 +79,18 @@ public class Order {
 	
 	// 배송 테이블 
 		// order_num : 주문번호
-	private int cp_num; // 1 : 롯데택배
+	private int cp_num; // 1 : 롯데택배		// 배송회사번호
 	private String tracking_no;				// 운송장번호
 	private String reception_datatime;		// 접수시간 
 	private String tr_status;				// 배송상태
 	private String completion_datetime;		// 완료시간
 	private String transports_memo;			// 요청사항
+	
+	
+	// 등급 및 세일
+	private String rank1;					// 등급
+	private int sale;						// 할인율 -> order_sale과 동일?
+	
 	
 	
 	public long getUseridx() {
@@ -414,6 +422,30 @@ public class Order {
 	}
 	public void setOd_total_amount(int od_total_amount) {
 		this.od_total_amount = od_total_amount;
+	}
+	public String getRank1() {
+		return rank1;
+	}
+	public void setRank1(String rank1) {
+		this.rank1 = rank1;
+	}
+	public int getSale() {
+		return sale;
+	}
+	public void setSale(int sale) {
+		this.sale = sale;
+	}
+	public List<Integer> getProduct_prices() {
+		return product_prices;
+	}
+	public void setProduct_prices(List<Integer> product_prices) {
+		this.product_prices = product_prices;
+	}
+	public int getProduct_price() {
+		return product_price;
+	}
+	public void setProduct_price(int product_price) {
+		this.product_price = product_price;
 	}
 	
 	
