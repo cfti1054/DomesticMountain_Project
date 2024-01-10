@@ -4,9 +4,9 @@
 
 <c:forEach var="vo" items="${listReplyAnswer}">
 	<div class='border-bottom m-1'>
-		<div class='row p-1'>
+		<div class='p-1'>
 			<div class='col-auto'>
-				<div class='row reply-writer' >
+				<div class='reply-writer' >
 					<div class='col-1'><i class='bi bi-person-circle text-muted icon'></i></div>
 					<div class='col ms-2 align-self-center'>
 						<div class='name'>${vo.user_name}</div>
