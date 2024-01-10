@@ -15,6 +15,7 @@ public interface AppearanceMapper {
 	public void insertAppearance(Appearance dto) throws SQLException;
 	public void updateAppearance(Appearance dto) throws SQLException;
 	public void updateAppearance2(Appearance dto) throws SQLException;
+	public void deleteAppearance1(long file_num) throws SQLException;
 	public void deletePostlike(long post_num) throws SQLException;
 	public void deletePostfile(long post_num) throws SQLException;
 	public void deleteAppearance(long post_num) throws SQLException;
@@ -26,6 +27,7 @@ public interface AppearanceMapper {
 	public int dataCount(Map<String, Object> map);
 	
 	public Appearance findById(long post_num);
+	public Appearance findById1(long file_num);
 	public void updateHitCount(long post_num) throws SQLException;
 	public Appearance findByPrev(Map<String, Object> map);
 	public Appearance findByNext(Map<String, Object> map);

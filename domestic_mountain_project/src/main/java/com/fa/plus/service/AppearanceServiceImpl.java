@@ -366,6 +366,30 @@ public class AppearanceServiceImpl implements AppearanceService {
 		}			
 	}
 
+	@Override
+	public void deleteAppearance1(long file_num) throws Exception {
+		try {
+			mapper.deleteAppearance1(file_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public Appearance findById1(long file_num) {
+		Appearance dto = null;
+		
+		try {
+			dto = mapper.findById1(file_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
+
 	
 
 	

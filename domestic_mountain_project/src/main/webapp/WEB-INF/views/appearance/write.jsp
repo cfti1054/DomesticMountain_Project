@@ -28,7 +28,7 @@
 		const f = document.appearanceForm;
 		let str;
 
-		str = f.post_title.value.trim();
+		str = f.post_title.value;
 		if (!str) {
 			alert("제목을 입력하세요. ");
 			f.post_title.focus();
@@ -114,9 +114,10 @@
 				</h1>
 			</div>
 
-			<form name="appearanceForm" method="post"
+			
+			<div class="notice-container">
+				<form name="appearanceForm" method="post"
 				enctype="multipart/form-data">
-				<div class="notice-container">
 					<table class="table mt-5 write-form">
 						<tr>
 							<td class="bg-light col-sm-2" scope="row">제 목</td>
@@ -183,8 +184,9 @@
 							</td>
 						</tr>
 					</table>
+					</form>
 				</div>
-			</form>
+			
 
 		</div>
 	</div>
@@ -192,13 +194,14 @@
 
 <c:if test="${mode=='update'}">
 	<script type="text/javascript">
-		function deleteFile(num) {
+		function deleteFile(file_num) {
 			if (!confirm("파일을 삭제하시겠습니까 ?")) {
 				return;
 			}
-			let url = "${pageContext.request.contextPath}/appearance/deleteFile?num="
-					+ file_num + "&page=${page}";
+			let url = "${pageContext.request.contextPath}/appearance/deleteFile?file_num="
+					+ file_num + "&page=${page}&post_num=${dto.post_num}";
 			location.href = url;
+			alert('--------------------')
 		}
 	</script>
 </c:if>

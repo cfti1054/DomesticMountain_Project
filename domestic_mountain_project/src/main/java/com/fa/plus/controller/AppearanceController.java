@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+// import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Appearance;
 import com.fa.plus.domain.Reply;
@@ -36,7 +37,10 @@ public class AppearanceController {
 	
 	@Autowired
 	private MyUtil myUtil;
-	
+	/*
+	@Autowired
+	private FileManager fileManager;
+	*/
 	@RequestMapping(value = "list")
 	public String recommendForm(
 			@RequestParam(value = "page", defaultValue = "1") int current_page,
@@ -47,7 +51,7 @@ public class AppearanceController {
 		
 		String cp = req.getContextPath();
 
-		int size = 5;
+		int size = 8;
 		int total_page;
 		int dataCount;
 
@@ -154,7 +158,7 @@ public class AppearanceController {
 		}
 		
 		// 스마트 에디터 사용시
-		dto.setPost_content(myUtil.htmlSymbols(dto.getPost_content()));
+		dto.setPost_content(dto.getPost_content().replaceAll("\n", "<br>"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("schType", schType);
@@ -216,7 +220,35 @@ public class AppearanceController {
 
 		return "redirect:/appearance/list?page=" + page;
 	}
-	
+
+	/*
+	@GetMapping("deleteFile")
+	public String deleteFile(@RequestParam long file_num,
+			@RequestParam long post_num,
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "appearance";
+		
+		Appearance dto = service.findById1(file_num);
+		if (dto == null) {
+			return "redirect:/appearance/list?page=" + page;
+		}
+
+		try {
+			if (dto.getSaveFilename() != null) {
+				fileManager.doFileDelete(dto.getSaveFilename(), pathname); // 실제파일삭제
+				dto.setSaveFilename("");
+				dto.setOriginalFilename("");
+				service.deleteAppearance1(file_num);
+			}
+		} catch (Exception e) {
+		}
+
+		return "redirect:/appearance/update?post_num=" + post_num + "&page=" + page;
+	}
+	*/
 	@GetMapping(value = "delete")
 	public String delete(@RequestParam long post_num,
 			@RequestParam String page,

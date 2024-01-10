@@ -14,11 +14,13 @@ public interface AppearanceService {
 	public int dataCount(Map<String, Object> map);
 	
 	public Appearance findById(long post_num);
+	public Appearance findById1(long file_num);
 	public void updateHitCount(long file_num) throws Exception;
 	public Appearance findByPrev(Map<String, Object> map);
 	public Appearance findByNext(Map<String, Object> map);
 	public void updateAppearance(Appearance dto, String pathname) throws Exception;
 	public void updateAppearance2(Appearance dto, String pathname) throws Exception;
+	public void deleteAppearance1(long file_num) throws Exception;
 	public void deletePostlike(long post_num, String pathname, String userid, int usership) throws Exception;
 	public void deletePostfile(long post_num, String pathname, String userid, int usership) throws Exception;
 	public void deleteAppearance(long post_num, String pathname, String userid, int usership) throws Exception;

@@ -85,10 +85,10 @@
     		<exclude-mapping path="/faq/**"/>
     		<exclude-mapping path="/notice/**"/>
     		<exclude-mapping path="/ootd/**"/>
-    		<exclude-mapping path="/appearance/**"/>
+    		<exclude-mapping path="/appearance/list"/>
     		<exclude-mapping path="/product/**"/>
-    		<exclude-mapping path="/recommend/**"/>
-    		<exclude-mapping path="/together/**"/>
+    		<exclude-mapping path="/recommend/list"/>
+    		<exclude-mapping path="/together/list"/>
     		<exclude-mapping path="/share/**"/>
     		<exclude-mapping path="/made/**"/>
     		<exclude-mapping path="/Related/**"/>
@@ -98,8 +98,7 @@
     		<exclude-mapping path="/product/**"/>
 			<exclude-mapping path="/uploads/**"/>
 			<exclude-mapping path="/image/**"/>
-
-                                    
+                       
     		
     		<!-- 인터셉터 빈 -->
     		<beans:bean class="com.fa.plus.interceptor.LoginCheckInterceptor"/>

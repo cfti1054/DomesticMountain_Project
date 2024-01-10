@@ -37,6 +37,11 @@
 		WHERE post_num = #{post_num}
 	</update>
 
+	<!-- 삭제 -->
+	<delete id="deleteAppearance1" parameterType="com.fa.plus.domain.Appearance">
+		DELETE FROM post_file WHERE file_num = #{file_num}
+	</delete>
+
 	<sql id="where-list">
 		<if test="schType=='all'">
 			( INSTR(post_title, #{kwd}) &gt; 0
@@ -101,7 +106,7 @@
 	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Appearance">
 		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
-	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id, file_num,
 	           originalFilename, saveFilename,
 	           NVL(boardLikeCount, 0) boardLikeCount
 	    FROM post p
@@ -113,6 +118,12 @@
 	    	GROUP BY post_num
 	    ) pl ON p.post_num = pl.post_num
 	    WHERE p.post_num = #{post_num}
+	</select>
+	
+	<select id="findById1" parameterType="Long" resultType="com.fa.plus.domain.Appearance">
+		SELECT originalFilename, saveFilename, post_num
+	    FROM post_file
+	    WHERE file_num = #{file_num}
 	</select>
 	
 	<update id="updateHitCount" parameterType="Long">

@@ -6,6 +6,7 @@
 /*=============== body (area) ===============*/
 .features-1 {
 	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	margin-bottom: 100px;
 }
 
 .body-container {
@@ -14,6 +15,12 @@
 	display: flex;
 	margin: auto;
 }
+
+.show-2-li:hover .album-img img {
+    transform: scale(1.1); 
+    transition: transform 0.3s ease; 
+  }
+
 </style>
 
 
@@ -96,13 +103,18 @@
 					<div class="article-album-sub">
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<ul>
-
-
-								<li class="show-2-li"><a href="#" class="album-img"> <img
-										width="200" height="200"
-										src="${pageContext.request.contextPath}/uploads/appearance/${dto.saveFilename}"
-										alt="">
-								</a>
+								<li class="show-2-li">
+									<c:url var="url" value="/appearance/article">
+						                <c:param name="post_num" value="${dto.post_num}"/>
+						                <c:param name="page" value="${page}"/>
+						                <c:if test="${not empty kwd}">
+						                    <c:param name="schType" value="${schType}"/>
+						                    <c:param name="kwd" value="${kwd}"/>
+						                </c:if>	
+						            </c:url>
+									<a href="${url}" class="album-img"> <img width="200" height="200"
+										src="${pageContext.request.contextPath}/uploads/appearance/${dto.saveFilename}" alt="">
+									</a>
 
 									<dl>
 										<dt>
@@ -132,17 +144,16 @@
 											<span class="date">${dto.post_reg_date}</span> <span
 												class="num">조회: ${dto.post_hit_count}</span>
 										</dd>
-									</dl></li>
-
+									</dl>
+								</li>
 							</ul>
-
 						</c:forEach>
 
 						<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</div>
 
 						<div class="row board-list-footer">
 							<div class="col">
-								<button type="button" class="btn btn-light" onclick="#"
+								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/appearance/list';"
 									title="새로고침">
 									<i class="bi bi-arrow-counterclockwise"></i>
 								</button>
@@ -155,12 +166,11 @@
 									method="post">
 									<div class="col-auto p-1">
 										<select name="schType" class="form-select">
-											<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-											<option value="all">제목+내용</option>
-											<option value="reg_date">등록일</option>
-											<option value="subject">제목</option>
-											<option value="writer">작성자</option>
-											<option value="content">내용</option>
+											<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
+											<option value="post_reg_date" ${schType=="post_reg_date"?"selected":""}>등록일</option>
+											<option value="post_title" ${schType=="post_title"?"selected":""}>제목</option>
+											<option value="user_name" ${schType=="user_name"?"selected":""}>작성자</option>
+											<option value="post_content" ${schType=="post_content"?"selected":""}>내용</option>
 										</select>
 									</div>
 									<div class="col-auto p-1">
