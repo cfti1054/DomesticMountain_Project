@@ -285,6 +285,87 @@ public class AppearanceServiceImpl implements AppearanceService {
 		return result;
 	}
 
+	@Override
+	public void insertReply(Reply dto) throws Exception {
+		try {
+			mapper.insertReply(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteReply(Map<String, Object> map) throws Exception {
+		try {
+			mapper.deleteReply(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public List<Reply> listReplyAnswer(Map<String, Object> map) {
+		List<Reply> list = null;
+		
+		try {
+			list = mapper.listReplyAnswer(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int replyAnswerCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.replyAnswerCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void insertReplyLike(Map<String, Object> map) throws Exception {
+		try {
+			mapper.insertReplyLike(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public Map<String, Object> replyLikeCount(Map<String, Object> map) {
+		Map<String, Object> countMap = null;
+		
+		try {
+			countMap = mapper.replyLikeCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return countMap;
+	}
+
+	@Override
+	public void updateReplyShowHide(Map<String, Object> map) throws Exception {
+		try {
+			mapper.updateReplyShowHide(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}			
+	}
+
 	
 
 	

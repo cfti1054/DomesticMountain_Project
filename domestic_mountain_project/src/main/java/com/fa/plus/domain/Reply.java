@@ -17,11 +17,18 @@ public class Reply {
 	private int likeCount;
 	private int disLikeCount;
 	
+	private int usership;
 	private String user_name;
 	private String user_id;
 	
 	
 	
+	public int getUsership() {
+		return usership;
+	}
+	public void setUsership(int usership) {
+		this.usership = usership;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

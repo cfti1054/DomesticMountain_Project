@@ -337,15 +337,15 @@ function listPage(page) {
 // 리플 등록
 $(function(){
 	$('.btnSendReply').click(function(){
-		let num = '${dto.post_num}';
+		let post_num = '${dto.post_num}';
 		const $tb = $(this).closest('table');
 
-		let content = $tb.find('textarea').val().trim();
-		if(! content) {
+		let reply_content = $tb.find('textarea').val().trim();
+		if(! reply_content) {
 			$tb.find('textarea').focus();
 			return false;
 		}
-		content = encodeURIComponent(content);
+		reply_content = encodeURIComponent(reply_content);
 		
 		let url = '${pageContext.request.contextPath}/appearance/insertReply';
 		let query = 'post_num=' + post_num + '&reply_content=' + reply_content + '&reply_answer=0';
@@ -395,11 +395,11 @@ $(function(){
 		    return false;
 		}
 		
-		let replyNum = $(this).attr('data-replyNum');
+		let reply_num = $(this).attr('data-replyNum');
 		let page = $(this).attr('data-pageNo');
 		
 		let url = '${pageContext.request.contextPath}/appearance/deleteReply';
-		let query = 'replyNum=' + replyNum + '&mode=reply';
+		let query = 'reply_num=' + reply_num + '&mode=reply';
 		
 		const fn = function(data){
 			// let state = data.state;
@@ -414,12 +414,12 @@ $(function(){
 $(function(){
 	// 댓글 좋아요 / 싫어요 등록
 	$('.reply').on('click', '.btnSendReplyLike', function(){
-		let replyNum = $(this).attr('data-replyNum');
-		let replyLike = $(this).attr('data-replyLike');
+		let reply_num = $(this).attr('data-replyNum');
+		let replylike = $(this).attr('data-replyLike');
 		const $btn = $(this);
 		
 		let msg = '게시물이 마음에 들지 않으십니까 ?';
-		if(replyLike === '1') {
+		if(replylike === '1') {
 			msg = '게시물에 공감하십니까 ?';
 		}
 		
@@ -428,7 +428,7 @@ $(function(){
 		}
 		
 		let url = '${pageContext.request.contextPath}/appearance/insertReplyLike';
-		let query = 'replyNum=' + replyNum + '&replyLike=' + replyLike;
+		let query = 'reply_num=' + reply_num + '&replylike=' + replylike;
 		
 		const fn = function(data){
 			let state = data.state;
@@ -450,10 +450,10 @@ $(function(){
 });
 
 // 댓글별 답글 리스트
-function listReplyAnswer(answer) {
+function listReplyAnswer(reply_answer) {
 	let url = '${pageContext.request.contextPath}/appearance/listReplyAnswer';
-	let query = 'answer=' + answer;
-	let selector = '#listReplyAnswer' + answer;
+	let query = 'reply_answer=' + reply_answer;
+	let selector = '#listReplyAnswer' + reply_answer;
 	
 	const fn = function(data){
 		$(selector).html(data);
@@ -462,13 +462,13 @@ function listReplyAnswer(answer) {
 }
 
 // 댓글별 답글 개수
-function countReplyAnswer(answer) {
+function countReplyAnswer(reply_answer) {
 	let url = '${pageContext.request.contextPath}/appearance/countReplyAnswer';
-	let query = 'answer=' + answer;
+	let query = 'reply_answer=' + reply_answer;
 	
 	const fn = function(data){
 		let count = data.count;
-		let selector = '#answerCount' + answer;
+		let selector = '#answerCount' + reply_answer;
 		$(selector).html(count);
 	};
 	
@@ -481,7 +481,7 @@ $(function(){
 		const $trReplyAnswer = $(this).closest('tr').next();
 		
 		let isVisible = $trReplyAnswer.is(':visible');
-		let replyNum = $(this).attr('data-replyNum');
+		let reply_num = $(this).attr('data-replyNum');
 			
 		if(isVisible) {
 			$trReplyAnswer.hide();
@@ -489,10 +489,10 @@ $(function(){
 			$trReplyAnswer.show();
             
 			// 답글 리스트
-			listReplyAnswer(replyNum);
+			listReplyAnswer(reply_num);
 			
 			// 답글 개수
-			countReplyAnswer(replyNum);
+			countReplyAnswer(reply_num);
 		}
 	});
 	
@@ -501,27 +501,27 @@ $(function(){
 // 댓글별 답글 등록
 $(function(){
 	$('.reply').on('click', '.btnSendReplyAnswer', function(){
-		let num = '${dto.post_num}';
-		let replyNum = $(this).attr('data-replyNum');
+		let post_num = '${dto.post_num}';
+		let reply_num = $(this).attr('data-replyNum');
 		const $td = $(this).closest('td');
 		
-		let content = $td.find('textarea').val().trim();
-		if(! content) {
+		let reply_content = $td.find('textarea').val().trim();
+		if(! reply_content) {
 			$td.find('textarea').focus();
 			return false;
 		}
 		
 		let url = '${pageContext.request.contextPath}/appearance/insertReply';
 		// let formData = 'num=' + num + '&content=' + encodeURIComponent(content) + '&answer=' + replyNum;
-		let formData = {num:num, content:content, answer:replyNum}; // formData를 객체로 전송하면 인코딩하면 안됨
+		let formData = {post_num:post_num, reply_content:reply_content, reply_answer:reply_num}; // formData를 객체로 전송하면 인코딩하면 안됨
 		
 		const fn = function(data){
 			$td.find('textarea').val('');
 			
 			var state = data.state;
 			if(state === 'true') {
-				listReplyAnswer(replyNum);
-				countReplyAnswer(replyNum);
+				listReplyAnswer(reply_num);
+				countReplyAnswer(reply_num);
 			}
 		};
 		
@@ -536,11 +536,11 @@ $(function(){
 		    return false;
 		}
 		
-		let replyNum = $(this).attr('data-replyNum');
+		let reply_num = $(this).attr('data-replyNum');
 		let answer = $(this).attr('data-answer');
 		
 		let url = '${pageContext.request.contextPath}/appearance/deleteReply';
-		let query = 'replyNum=' + replyNum + '&mode=answer';
+		let query = 'reply_num=' + reply_num + '&mode=answer';
 		
 		const fn = function(data){
 			listReplyAnswer(answer);
@@ -556,25 +556,25 @@ $(function(){
 	$('.reply').on('click', '.hideReply', function(){
 		let $menu = $(this);
 		
-		let replyNum = $(this).attr('data-replyNum');
-		let showReply = $(this).attr('data-showReply');
+		let reply_num = $(this).attr('data-replyNum');
+		let reply_visible = $(this).attr('data-showReply');
 		let msg = '댓글을 숨김 하시겠습니까 ? ';
-		if(showReply === '0') {
+		if(reply_visible === '0') {
 			msg = '댓글 숨김을 해제 하시겠습니까 ? ';
 		}
 		if(! confirm(msg)) {
 			return false;
 		}
 		
-		showReply = showReply === '1' ? '0' : '1';
+		reply_visible = reply_visible === '1' ? '0' : '1';
 		
 		let url = '${pageContext.request.contextPath}/appearance/replyShowHide';
-		let query = 'replyNum=' + replyNum + '&showReply=' + showReply;
+		let query = 'reply_num=' + reply_num + '&reply_visible=' + reply_visible;
 		
 		const fn = function(data){
 			if(data.state === 'true') {
 				let $item = $($menu).closest('tr').next('tr').find('td');
-				if(showReply === "1") {
+				if(reply_visible === "1") {
 					$item.removeClass('text-primary').removeClass('text-opacity-50');
 					$menu.attr('data-showReply', '1');
 					$menu.html('숨김');
@@ -596,26 +596,26 @@ $(function(){
 	$('.reply').on('click', '.hideReplyAnswer', function(){
 		let $menu = $(this);
 		
-		let replyNum = $(this).attr('data-replyNum');
-		let showReply = $(this).attr('data-showReply');
+		let reply_num = $(this).attr('data-replyNum');
+		let reply_visible = $(this).attr('data-showReply');
 		
 		let msg = '댓글을 숨김 하시겠습니까 ? ';
-		if(showReply === '0') {
+		if(reply_visible === '0') {
 			msg = '댓글 숨김을 해제 하시겠습니까 ? ';
 		}
 		if(! confirm(msg)) {
 			return false;
 		}
 		
-		showReply = showReply === '1' ? '0' : '1';
+		reply_visible = reply_visible === '1' ? '0' : '1';
 		
 		let url = '${pageContext.request.contextPath}/appearance/replyShowHide';
-		let query = 'replyNum=' + replyNum + '&showReply='+showReply;
+		let query = 'reply_num=' + reply_num + '&reply_visible='+reply_visible;
 		
 		const fn = function(data){
 			if(data.state === 'true') {
 				let $item = $($menu).closest('.row').next('div');
-				if(showReply === '1') {
+				if(reply_visible === '1') {
 					$item.removeClass('text-primary').removeClass('text-opacity-50');
 					$menu.attr('data-showReply', '1');
 					$menu.html('숨김');

@@ -30,11 +30,9 @@ public interface AppearanceService {
 	
 	public List<Reply> listReply(Map<String, Object> map);
 	public int replyCount(Map<String, Object> map);
-	
-	/*
 	public void insertReply(Reply dto) throws Exception;
-	
 	public void deleteReply(Map<String, Object> map) throws Exception;
+	
 	
 	public List<Reply> listReplyAnswer(Map<String, Object> map);
 	public int replyAnswerCount(Map<String, Object> map);
@@ -43,5 +41,5 @@ public interface AppearanceService {
 	public Map<String, Object> replyLikeCount(Map<String, Object> map);
 	
 	public void updateReplyShowHide(Map<String, Object> map) throws Exception;
-	*/
+	
 }

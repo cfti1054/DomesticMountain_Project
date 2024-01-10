@@ -11,7 +11,7 @@
 	<c:forEach var="vo" items="${listReply}">
 		<tr class='border table-light'>
 			<td width='50%'>
-				<div class='row reply-writer'>
+				<div class='row reply-writer' style="width:800px">
 					<div class='col-1'><i class='bi bi-person-circle text-muted icon'></i></div>
 					<div class='col-auto align-self-center'>
 						<div class='name'>${vo.user_name}</div>

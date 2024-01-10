@@ -37,11 +37,8 @@ public interface AppearanceMapper {
 	
 	public int replyCount(Map<String, Object> map);
 	public List<Reply> listReply(Map<String, Object> map);
-	
-	/*
-	 * 
 	public void insertReply(Reply dto) throws SQLException;
-	
+
 	public void deleteReply(Map<String, Object> map) throws SQLException;
 	
 	public List<Reply> listReplyAnswer(Map<String, Object> map);
@@ -51,5 +48,5 @@ public interface AppearanceMapper {
 	public Map<String, Object> replyLikeCount(Map<String, Object> map);
 	
 	public void updateReplyShowHide(Map<String, Object> map) throws SQLException;	
-	 */
+
 }

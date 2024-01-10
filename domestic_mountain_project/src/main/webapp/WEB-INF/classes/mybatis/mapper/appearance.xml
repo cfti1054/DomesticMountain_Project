@@ -185,13 +185,14 @@
 		SELECT post_num, useridx FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
 	</select>
 	
-	<!-- 댓글 
-	<insert id="insertReply" parameterType="com.sp.app.domain.Reply">
-		INSERT INTO bbsReply(replyNum, num, userId, content, answer, showReply, reg_date)
-		VALUES (bbsReply_seq.NEXTVAL, #{num}, #{userId}, #{content}, #{answer}, 1, SYSDATE)
+	<!-- 댓글 -->
+	<insert id="insertReply" parameterType="com.fa.plus.domain.Reply">
+		INSERT INTO reply(reply_num, post_num, reply_secret, reply_content, reply_reg_id, 
+		reply_reg_date, reply_update_date, reply_report_count, reply_visible, reply_answer)
+		VALUES (reply_seq.NEXTVAL, #{post_num}, 1, #{reply_content}, #{useridx}, SYSDATE, SYSDATE, 0, 1, #{reply_answer})
 	</insert>
-	-->
-	<!--  -->
+	
+	<!-- 댓글개수 -->
 	<select id="replyCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM reply
@@ -232,5 +233,56 @@
 		ORDER BY r.reply_num DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
+	
+	<!-- 댓글 및 답글삭제 -->
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM reply
+		WHERE reply_num=#{reply_num}
+		<if test="mode=='reply'">
+			OR reply_answer=#{reply_num}
+		</if>
+	</delete>
+
+	<!-- 댓글의 답글 리스트 -->
+	<select id="listReplyAnswer" parameterType="map" resultType="com.fa.plus.domain.Reply">
+		SELECT reply_num, post_num, r.reply_reg_id, user_name, reply_content, reply_reg_date, 
+		reply_answer, NVL(reply_visible, 1) reply_visible, useridx
+		FROM reply r
+		JOIN user1 m ON r.reply_reg_id = m.useridx
+		WHERE reply_answer = #{reply_answer}
+		<if test="usership lt 51">
+			AND ( reply_visible=1 OR ( reply_visible=0 AND r.reply_reg_id=#{useridx} ) )
+		</if>
+		ORDER BY reply_num DESC
+	</select>
+	
+	<!-- 댓글의 답글 개수 -->
+	<select id="replyAnswerCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM reply
+		WHERE reply_answer = #{reply_answer}
+		<if test="usership lt 51">
+			AND ( reply_visible=1 OR ( reply_visible=0 AND reply_reg_id=#{useridx} ) )
+		</if>
+	</select>	
+
+	<!-- 좋아요/싫어요 추가 -->
+	<insert id="insertReplyLike" parameterType="map">
+		INSERT INTO reply_like(reply_num, useridx, replylike)
+		VALUES (#{reply_num}, #{useridx}, #{replylike})
+	</insert>
+	
+	<!-- 좋아요/싫어요 개수 -->
+	<select id="replyLikeCount" parameterType="map" resultType="map">
+		SELECT COUNT(DECODE(replylike, 1, 1)) likeCount,
+			   COUNT(DECODE(replylike, 0, 1)) disLikeCount
+		FROM reply_like WHERE reply_num = #{reply_num}
+	</select>
+	
+	<!-- 댓글 보이기/숨기기 -->
+	<update id="updateReplyShowHide" parameterType="map">
+		UPDATE reply SET reply_visible = #{reply_visible}
+		WHERE reply_num = #{reply_num} AND reply_reg_id = #{useridx}
+	</update>
 	
 </mapper>
