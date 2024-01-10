@@ -46,35 +46,108 @@ FROM user1
 WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 </select>	
 
-<select id="sort_by_monthly_reg" resultType="com.fa.plus.admin.domain.Stats">	
-	SELECT * 
+<select id="sort_by_weekly_reg_sum" resultType="com.fa.plus.admin.domain.Stats">
+SELECT reg_date, SUM(reg_sum) OVER(ORDER BY reg_date) AS reg_sum
+FROM (SELECT TO_CHAR(SYSDATE-6, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_sum
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-6, 'YYYY-MM-DD')
+    UNION ALL
+SELECT TO_CHAR(SYSDATE-5, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_sum
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-5, 'YYYY-MM-DD')
+    UNION ALL
+SELECT TO_CHAR(SYSDATE-4, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_sum
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-4, 'YYYY-MM-DD')
+    UNION ALL
+SELECT TO_CHAR(SYSDATE-3, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_sum
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-3, 'YYYY-MM-DD')
+    UNION ALL
+SELECT TO_CHAR(SYSDATE-2, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_sum
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-2, 'YYYY-MM-DD')
+    UNION ALL
+SELECT TO_CHAR(SYSDATE-1, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_sum
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE-1, 'YYYY-MM-DD')
+    UNION ALL
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') reg_date,
+    COUNT(*) reg_sum
+FROM user1
+WHERE TO_CHAR(reg_date, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+</select>
+
+<select id="sort_by_monthly_reg_sum" resultType="com.fa.plus.admin.domain.Stats">
+	SELECT reg_date AS reg_month, SUM(monthly_reg_sum) OVER(ORDER BY reg_date) AS monthly_reg_sum
 	FROM(
 		SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') reg_date,
-		      COUNT(*) reg_num
+		      COUNT(*) monthly_reg_sum
 		FROM user1
 		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM')
 		      UNION ALL
 		SELECT TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM') reg_date,
-		      COUNT(*) reg_num
+		      COUNT(*) monthly_reg_sum
 		FROM user1
 		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM')
 		      UNION ALL
 		SELECT TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM') reg_date,
-		      COUNT(*) reg_num
+		      COUNT(*) monthly_reg_sum
 		FROM user1
 		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM')
 		      UNION ALL
 		SELECT TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM') reg_date,
-		      COUNT(*) reg_num
+		      COUNT(*) monthly_reg_sum
 		FROM user1
 		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM')
 		      UNION ALL
 		SELECT TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM') reg_date,
-		      COUNT(*) reg_num
+		      COUNT(*) monthly_reg_sum
 		FROM user1
 		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM')
 		      UNION ALL
 		SELECT TO_CHAR(add_months(SYSDATE,0),'YYYY-MM') reg_date,
+		      COUNT(*) monthly_reg_sum
+		FROM user1
+		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,0),'YYYY-MM')
+	)
+</select>
+
+<select id="sort_by_monthly_reg" resultType="com.fa.plus.admin.domain.Stats">	
+	SELECT * 
+	FROM(
+		SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') reg_month,
+		      COUNT(*) reg_num
+		FROM user1
+		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM')
+		      UNION ALL
+		SELECT TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM') reg_month,
+		      COUNT(*) reg_num
+		FROM user1
+		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-4),'YYYY-MM')
+		      UNION ALL
+		SELECT TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM') reg_month,
+		      COUNT(*) reg_num
+		FROM user1
+		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-3),'YYYY-MM')
+		      UNION ALL
+		SELECT TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM') reg_month,
+		      COUNT(*) reg_num
+		FROM user1
+		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-2),'YYYY-MM')
+		      UNION ALL
+		SELECT TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM') reg_month,
+		      COUNT(*) reg_num
+		FROM user1
+		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM')
+		      UNION ALL
+		SELECT TO_CHAR(add_months(SYSDATE,0),'YYYY-MM') reg_month,
 		      COUNT(*) reg_num
 		FROM user1
 		WHERE TO_CHAR(reg_date,'YYYY-MM') = TO_CHAR(add_months(SYSDATE,0),'YYYY-MM')
@@ -365,7 +438,7 @@ WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE, 0),'YYYY-M
 	</select>
 	
 	<select id="sort_by_monthly_sales_sum" resultType="com.fa.plus.admin.domain.Stats">
-	SELECT sales_month, SUM(monthly_sales_num) OVER(ORDER BY sales_month) AS monthly_sales_num
+	SELECT sales_month, SUM(monthly_sales_num) OVER(ORDER BY sales_month) AS monthly_sales_sum
 FROM(
 SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') sales_month,
       NVL(SUM(order_total_money),0) monthly_sales_num
@@ -404,7 +477,7 @@ WHERE TO_CHAR(order_datetime,'YYYY-MM') = TO_CHAR(add_months(SYSDATE, 0),'YYYY-M
 	</select>
 	
 	<select id="sort_by_monthly_revenue_sum" resultType="com.fa.plus.admin.domain.Stats">
-	SELECT sales_month, SUM(monthly_sales_num) OVER(ORDER BY sales_month) AS monthly_sales_num
+	SELECT sales_month, SUM(monthly_sales_num) OVER(ORDER BY sales_month) AS monthly_revenue_sum
 FROM(
 SELECT TO_CHAR(add_months(SYSDATE,-5),'YYYY-MM') sales_month,
       NVL(SUM(total_amount),0) monthly_sales_num

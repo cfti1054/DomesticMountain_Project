@@ -51,7 +51,12 @@ public class StatsController {
 		// 최근 7일간 가입자 수
 		List<String> reg_date_list = Arrays.asList("","","","","","","");
 		List<Integer> reg_num_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+		List<Integer> reg_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
 		
+		// 최근 6개월간 가입자 수
+		List<String> reg_month_list = Arrays.asList("","","","","","");
+		List<Integer> reg_monthly_num_list = Arrays.asList(0, 0, 0, 0, 0, 0);
+		List<Integer> reg_monthly_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0);
 		
 		try {
 			list = service.sort_by_age();
@@ -80,8 +85,32 @@ public class StatsController {
 				i+=1;
 			}
 			
-			list = service.sort_by_monthly_reg();
+			// 7일간 누적 가입자 수
+			i = 0;
+			list = service.sort_by_weekly_reg_sum();
+			for(Stats dto: list) {
+				reg_sum_list.set(i, dto.getReg_sum());
+				i+=1;
+			}
+			
 			// 월간 가입자 수
+			list = service.sort_by_monthly_reg();
+			i = 0;
+			for(Stats dto: list) {
+				reg_month_list.set(i,dto.getReg_month());
+				reg_monthly_num_list.set(i,dto.getReg_num());
+				i+=1;
+			}
+			
+			// 월간 누적 가입자 수
+			list = service.sort_by_monthly_reg_sum();
+			i = 0;
+			for(Stats dto: list) {
+				reg_monthly_sum_list.set(i, dto.getMonthly_reg_sum());
+				i+=1;
+			}
+			
+			
 			
 		} catch (Exception e) {
 		}
@@ -91,7 +120,13 @@ public class StatsController {
 		model.addAttribute("value_list", value_list);
 		model.addAttribute("reg_date_list", reg_date_list);
 		model.addAttribute("reg_num_list", reg_num_list);
-	
+		model.addAttribute("reg_sum_list", reg_sum_list);
+		model.addAttribute("reg_month_list", reg_month_list);
+		model.addAttribute("reg_monthly_num_list", reg_monthly_num_list);
+		model.addAttribute("reg_monthly_sum_list", reg_monthly_sum_list);
+		
+		
+		
 		return ".admin.stats.member_main";
 	}
 	
@@ -105,6 +140,7 @@ public class StatsController {
 		List<Integer> sales_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
 		List<Integer> revenue_sum_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
 		
+		List<String> sales_month_list = Arrays.asList("","","","","","");
 		List<Integer> monthly_sales_num_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
 		List<Integer> monthly_revenue_num_list = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
 		
@@ -147,6 +183,7 @@ public class StatsController {
 			list = service.sort_by_monthly_sales();
 			i = 0;
 			for(Stats dto: list) {
+				sales_month_list.set(i, dto.getSales_month());
 				monthly_sales_num_list.set(i, dto.getMonthly_sales_num());
 				i+=1;
 			}
@@ -182,6 +219,7 @@ public class StatsController {
 		model.addAttribute("revenue_num_list", revenue_num_list);
 		model.addAttribute("sales_sum_list", sales_sum_list);
 		model.addAttribute("revenue_sum_list", revenue_sum_list);
+		model.addAttribute("sales_month_list", sales_month_list);
 		model.addAttribute("monthly_sales_num_list", monthly_sales_num_list);
 		model.addAttribute("monthly_revenue_num_list", monthly_revenue_num_list);
 		model.addAttribute("monthly_sales_sum_list", monthly_sales_sum_list);

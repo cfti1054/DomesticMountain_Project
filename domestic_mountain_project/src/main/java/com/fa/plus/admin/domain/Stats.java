@@ -12,7 +12,38 @@ public class Stats {
 	// 멤버 - 등록일자
 	public String reg_date;
 	public int reg_num;
+	public int reg_sum;
+	// 멤버 - 월별 등록일자
 	
+	public String reg_month;
+	public int monthly_reg_num;
+	public int monthly_reg_sum;
+	
+	
+	public int getReg_sum() {
+		return reg_sum;
+	}
+	public void setReg_sum(int reg_sum) {
+		this.reg_sum = reg_sum;
+	}
+	public String getReg_month() {
+		return reg_month;
+	}
+	public void setReg_month(String reg_month) {
+		this.reg_month = reg_month;
+	}
+	public int getMonthly_reg_num() {
+		return monthly_reg_num;
+	}
+	public void setMonthly_reg_num(int monthly_reg_num) {
+		this.monthly_reg_num = monthly_reg_num;
+	}
+	public int getMonthly_reg_sum() {
+		return monthly_reg_sum;
+	}
+	public void setMonthly_reg_sum(int monthly_reg_sum) {
+		this.monthly_reg_sum = monthly_reg_sum;
+	}
 	// 총 매출
 	public String sales_date;
 	public int sales_num;

@@ -16,18 +16,26 @@ public class Order {
 	private String cart_update_date;		// 수정일자
 	private int qty;						// 제품수량
 	
-	private String product_name;			// 상품이름
+	// 상품들
 	private List<Long> product_nums;		// 상품번호(리스트용)
 	private List<Long> detail_nums;			// 상세번호
 	private List<Long> detail_nums2;		// 상세번호2
 	private List<String> option_values;		// 옵션값
 	private List<String> option_values2;	// 옵션값2
 	private List<Integer> buyQtys;			// 구매수량
-	private List<Integer> od_count;			// 제품수량
-	private List<Integer> od_total_amount;	// 총 금액
+	private List<Integer> od_counts;		// 총 수량
+	private List<Integer> od_total_amounts;	// 총 금액
+    private List<Integer> product_prices;   // 상품-상품가격
+    
+	// 상품
+	private String product_name;			// 상품이름
+	private int od_count;					// 제품 수량
+	private int product_price;               // 상품-상품가격
+	private int od_total_amount;			// 총 금액
 	private int od_price;					// 제품단가
 	private String option_value;			// 상세옵션값
 	private String option_value2;			// 상세옵션값2
+	private String product_summary;			// 제품 썸네일
 	
 	// 찜
 	private String zzim_date;				// 찜등록날짜
@@ -48,6 +56,42 @@ public class Order {
 	// 주문 상세
 	private long od_num;					// 주문상세번호			
 	private long change_num;				// 주문상태번호
+	
+	
+	// 회원 배송지 정보 : user_delivery 테이블
+	private long ud_num;					// 배송지 넘버
+	private String ud_name;					// 배송지명
+	private int ud_addressnum;				// 우편번호
+	private String ud_address1;				// 기본주소
+	private String ud_address2;				// 상세주소
+	private String ud_recipient_name;		// 수령인 
+	private String ud_recipient_phone;		// 수령인 전화번호
+	private String ud_memo;					// 메모(요청사항)
+	private String basics_delivery;			// 기본배송지여부 : O, X
+		// useridx : 회원번호
+	
+	// 배송지 테이블 : delivery 테이블
+		// order_num : 배송테이블 기본키
+	private int address_num;				// 우편번호
+	private String address1;				// 기본주소
+	private String address2;				// 상세주소
+	private String recipient_name;			// 수령인 
+	private String recipient_phone;			// 수령인 전화번호
+	
+	// 배송 테이블 
+		// order_num : 주문번호
+	private int cp_num; // 1 : 롯데택배		// 배송회사번호
+	private String tracking_no;				// 운송장번호
+	private String reception_datatime;		// 접수시간 
+	private String tr_status;				// 배송상태
+	private String completion_datetime;		// 완료시간
+	private String transports_memo;			// 요청사항
+	
+	
+	// 등급 및 세일
+	private String rank1;					// 등급
+	private int sale;						// 할인율 -> order_sale과 동일?
+	
 	
 	
 	public long getUseridx() {
@@ -158,18 +202,6 @@ public class Order {
 	public void setChange_num(long change_num) {
 		this.change_num = change_num;
 	}
-	public List<Integer> getOd_count() {
-		return od_count;
-	}
-	public void setOd_count(List<Integer> od_count) {
-		this.od_count = od_count;
-	}
-	public List<Integer> getOd_total_amount() {
-		return od_total_amount;
-	}
-	public void setOd_total_amount(List<Integer> od_total_amount) {
-		this.od_total_amount = od_total_amount;
-	}
 	public String getOrder_num() {
 		return order_num;
 	}
@@ -247,6 +279,180 @@ public class Order {
 	}
 	public void setOption_value2(String option_value2) {
 		this.option_value2 = option_value2;
+	}
+	public long getUd_num() {
+		return ud_num;
+	}
+	public void setUd_num(long ud_num) {
+		this.ud_num = ud_num;
+	}
+	public String getUd_name() {
+		return ud_name;
+	}
+	public void setUd_name(String ud_name) {
+		this.ud_name = ud_name;
+	}
+	public int getUd_addressnum() {
+		return ud_addressnum;
+	}
+	public void setUd_addressnum(int ud_addressnum) {
+		this.ud_addressnum = ud_addressnum;
+	}
+	public String getUd_address1() {
+		return ud_address1;
+	}
+	public void setUd_address1(String ud_address1) {
+		this.ud_address1 = ud_address1;
+	}
+	public String getUd_address2() {
+		return ud_address2;
+	}
+	public void setUd_address2(String ud_address2) {
+		this.ud_address2 = ud_address2;
+	}
+	public String getUd_recipient_name() {
+		return ud_recipient_name;
+	}
+	public void setUd_recipient_name(String ud_recipient_name) {
+		this.ud_recipient_name = ud_recipient_name;
+	}
+	public String getUd_recipient_phone() {
+		return ud_recipient_phone;
+	}
+	public void setUd_recipient_phone(String ud_recipient_phone) {
+		this.ud_recipient_phone = ud_recipient_phone;
+	}
+	public String getUd_memo() {
+		return ud_memo;
+	}
+	public void setUd_memo(String ud_memo) {
+		this.ud_memo = ud_memo;
+	}
+	public String getBasics_delivery() {
+		return basics_delivery;
+	}
+	public void setBasics_delivery(String basics_delivery) {
+		this.basics_delivery = basics_delivery;
+	}
+	public int getAddress_num() {
+		return address_num;
+	}
+	public void setAddress_num(int address_num) {
+		this.address_num = address_num;
+	}
+	public String getAddress1() {
+		return address1;
+	}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	public String getRecipient_name() {
+		return recipient_name;
+	}
+	public void setRecipient_name(String recipient_name) {
+		this.recipient_name = recipient_name;
+	}
+	public String getRecipient_phone() {
+		return recipient_phone;
+	}
+	public void setRecipient_phone(String recipient_phone) {
+		this.recipient_phone = recipient_phone;
+	}
+	public int getCp_num() {
+		return cp_num;
+	}
+	public void setCp_num(int cp_num) {
+		this.cp_num = cp_num;
+	}
+	public String getTracking_no() {
+		return tracking_no;
+	}
+	public void setTracking_no(String tracking_no) {
+		this.tracking_no = tracking_no;
+	}
+	public String getReception_datatime() {
+		return reception_datatime;
+	}
+	public void setReception_datatime(String reception_datatime) {
+		this.reception_datatime = reception_datatime;
+	}
+	public String getTr_status() {
+		return tr_status;
+	}
+	public void setTr_status(String tr_status) {
+		this.tr_status = tr_status;
+	}
+	public String getCompletion_datetime() {
+		return completion_datetime;
+	}
+	public void setCompletion_datetime(String completion_datetime) {
+		this.completion_datetime = completion_datetime;
+	}
+	public String getTransports_memo() {
+		return transports_memo;
+	}
+	public void setTransports_memo(String transports_memo) {
+		this.transports_memo = transports_memo;
+	}
+	public List<Integer> getOd_counts() {
+		return od_counts;
+	}
+	public void setOd_counts(List<Integer> od_counts) {
+		this.od_counts = od_counts;
+	}
+	public List<Integer> getOd_total_amounts() {
+		return od_total_amounts;
+	}
+	public void setOd_total_amounts(List<Integer> od_total_amounts) {
+		this.od_total_amounts = od_total_amounts;
+	}
+	public int getOd_count() {
+		return od_count;
+	}
+	public void setOd_count(int od_count) {
+		this.od_count = od_count;
+	}
+	public int getOd_total_amount() {
+		return od_total_amount;
+	}
+	public void setOd_total_amount(int od_total_amount) {
+		this.od_total_amount = od_total_amount;
+	}
+	public String getRank1() {
+		return rank1;
+	}
+	public void setRank1(String rank1) {
+		this.rank1 = rank1;
+	}
+	public int getSale() {
+		return sale;
+	}
+	public void setSale(int sale) {
+		this.sale = sale;
+	}
+	public List<Integer> getProduct_prices() {
+		return product_prices;
+	}
+	public void setProduct_prices(List<Integer> product_prices) {
+		this.product_prices = product_prices;
+	}
+	public int getProduct_price() {
+		return product_price;
+	}
+	public void setProduct_price(int product_price) {
+		this.product_price = product_price;
+	}
+	public String getProduct_summary() {
+		return product_summary;
+	}
+	public void setProduct_summary(String product_summary) {
+		this.product_summary = product_summary;
 	}
 	
 	

@@ -192,15 +192,15 @@
 
 					<div class="sb-sidenav-menu-heading">통계</div>
 					<a class="nav-link"
-						href="${pageContext.request.contextPath}/resources/admin/static/charts.html">
+						href="${pageContext.request.contextPath}/admin/stats/member_main">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-chart-area"></i>
-						</div> Charts
+						</div> 회원 통계
 					</a> <a class="nav-link"
-						href="${pageContext.request.contextPath}/resources/admin/static/tables.html">
+						href="${pageContext.request.contextPath}/admin/stats/sales_main">
 						<div class="sb-nav-link-icon">
-							<i class="fas fa-table"></i>
-						</div> Tables
+							<i class="fas 	fa-won-sign"></i>
+						</div> 거래 통계
 					</a>
 				</div>
 			</div>

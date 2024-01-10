@@ -92,6 +92,7 @@
     		<exclude-mapping path="/share/**"/>
     		<exclude-mapping path="/made/**"/>
     		<exclude-mapping path="/Related/**"/>
+    		<exclude-mapping path="/Order/**"/>
     		
     		<exclude-mapping path="/mypage/**"/>
     		<exclude-mapping path="/admin/**"/>
