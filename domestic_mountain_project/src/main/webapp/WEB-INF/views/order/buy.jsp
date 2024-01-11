@@ -50,8 +50,7 @@
 									</div>
 								</div>
 								<div class="AddressView_section-address">
-									<p class="AddressView_address">${vo.addr1}${vo.addr2}
-										(${vo.zip})</p>
+									<p class="AddressView_address">${vo.addr1}&#09;${vo.addr2}&#09;(${vo.zip})</p>
 								</div>
 
 							</div>
@@ -167,7 +166,7 @@
 											</ul>
 											<div class="ProductList_amount">
 												<span class="ProductList_pay-sum"> <span
-													class="blind">상품 금액</span> <b>${dto.od_price}</b>원
+													class="blind">상품 금액</span> <b><fmt:formatNumber value="${dto.total_amount}" pattern="#,###"/></b>원
 												</span>
 											</div>
 										</div>
@@ -180,7 +179,7 @@
 									<span class="AmountArea_title">전체 주문금액</span>
 								</div>
 								<div class="AmountArea_cell">
-									<span class="AmountArea_amount">${dto.od_total_amounts}원</span>
+									<span class="AmountArea_amount"><fmt:formatNumber value="${totalMoney}" pattern="#,###"/>원</span>
 								</div>
 							</div>
 						</div>
@@ -211,7 +210,7 @@
 							<div class="AddressView_article-2">
 								<div class="Alignment_article">
 									<span class="Alignment_title">주문금액</span> <span
-										class="Alignment_value"><b>219,000</b>원</span>
+										class="Alignment_value"><b><fmt:formatNumber value="${totalMoney}" pattern="#,###"/></b>원</span>
 								</div>
 								<div class="OrderSummary_inner">
 									<ul class="OrderSummary_sub-list">
@@ -219,17 +218,17 @@
 											<div class="Alignment_article">
 												<span class="Alignment_title">상품금액</span> <span
 													class="Alignment_icon"></span> <span
-													class="Alignment_value"><b>219,000</b>원</span>
+													class="Alignment_value"><b><fmt:formatNumber value="${totalMoney}" pattern="#,###"/></b>원</span>
 											</div>
 											<div class="Alignment_article">
 												<span class="Alignment_title">배송비</span> <span
 													class="Alignment_icon"></span> <span
-													class="Alignment_value"><b>0</b>원</span>
+													class="Alignment_value"><b><fmt:formatNumber value="${deliveryCharge}" pattern="#,###"/></b>원</span>
 											</div>
 											<div class="Alignment_article">
 												<span class="Alignment_title">할인된 금액</span> <span
 													class="Alignment_icon"></span> <span
-													class="Alignment_value"><b>0</b>원</span>
+													class="Alignment_value"><b><fmt:formatNumber value="${percentSale}" pattern="#,###"/></b>원</span>
 											</div>
 										</li>
 									</ul>
@@ -237,10 +236,10 @@
 							</div>
 							<div class="AmountArea_article AmountArea_type-order">
 								<div class="AmountArea_cell">
-									<span class="AmountArea_title">전체 주문금액</span>
+									<span class="AmountArea_title">최종 주문금액</span>
 								</div>
 								<div class="AmountArea_cell">
-									<span class="AmountArea_amount">219,000원</span>
+									<span class="AmountArea_amount"><fmt:formatNumber value="${payment}" pattern="#,###"/>원</span>
 								</div>
 							</div>
 						</div>
@@ -251,7 +250,7 @@
 							<div class="AddressView_article">
 								<div class="Alignment_article">
 									<span class="Alignment_title">회원 등급</span> <span
-										class="Alignment_value">브론즈</span>
+										class="Alignment_value">${vo.rank1}</span>
 								</div>
 								<div class="OrderSummary_inner">
 									<ul class="OrderSummary_sub-list">
@@ -259,7 +258,7 @@
 											<div class="Alignment_article">
 												<span class="Alignment_title">적용 할인율</span> <span
 													class="Alignment_icon"></span> <span
-													class="Alignment_value"><b>1</b>%</span>
+													class="Alignment_value"><b>${vo.sale}</b>%</span>
 											</div>
 
 										</li>

@@ -75,15 +75,15 @@ public class OrderServiceImpl implements OrderService {
 			
 			// 상세 주문 정보 및 주문 상태 저장
 			for(int i=0; i < dto.getProduct_nums().size(); i++) {
-				dto.setProduct_num(i);
-				dto.setQty(dto.getBuyQtys().get(i));
-				dto.setDetail_num1(dto.getDetail_nums().get(i));
-				dto.setDetail_num2(dto.getDetail_nums2().get(i));
-				dto.setProduct_price(dto.getProduct_prices().get(i));
-				dto.setOd_total_amount(dto.getOd_total_amounts().get(i));
+				dto.setProduct_num(i); // 상품 번호
+				dto.setQty(dto.getBuyQtys().get(i)); // 주문 상품 개수
+				dto.setDetail_num1(dto.getDetail_nums().get(i)); // 옵션1
+				dto.setDetail_num2(dto.getDetail_nums2().get(i)); // 옵션2
+				dto.setProduct_price(dto.getProduct_prices().get(i)); // 상품 가격
+				dto.setOd_total_amount(dto.getOd_total_amounts().get(i)); // 총 가격?
 				
-				// dto.setSalePrice(dto.getSalePrices().get(i)); // 없는거 아님?
-				// dto.setSavedMoney(dto.getSavedMoneys().get(i)); // 포인트 적립...
+				// dto.setSale(dto.getSales().get(i)); // 할인가격
+				// dto.setSavedMoney(dto.getSavedMoneys().get(i)); // 포인트
 			
 				// 상세 주문 정보 저장
 				mapper.insertOrderDetail(dto);

@@ -12,6 +12,8 @@
 	
 	<!-- 주문, 주문상세, (주문상세상태), 배송, 배송지, (결제카드정보) -->
 	
+	
+	<!-- 시퀀스로 받으면 안됨 수정 필요 -->
 	<!-- 주문 테이블 -->
 	<insert id="insertOrder" parameterType="com.fa.plus.domain.Order">
 		INSERT INTO totalorder (order_num, order_datetime, transport_date, order_delete, 
@@ -107,10 +109,15 @@
 	</select>
 	
 	<select id="findByMyInformation" parameterType="Long" resultType="com.fa.plus.domain.Order">
-		SELECT user_name, addr1, addr2, zip, tel
+		SELECT u1.useridx, user_name, addr1, addr2, zip, tel, rank1, sale, update_rank
 		FROM user1 u1 
 		JOIN user2 u2 ON u1.useridx = u2.useridx
-		WHERE u1.useridx = #{useridx}
+		JOIN user_rank_history rh ON u1.useridx = rh.useridx
+		JOIN user_rank ur ON rh.rank_num = ur.rank_num
+        WHERE update_rank = (SELECT MAX(update_rank) update_rank 
+                            FROM user_rank_history rh
+                            JOIN user1 u1 ON u1.useridx = rh.useridx
+                            WHERE u1.useridx = #{useridx})
 	</select>
 
 </mapper>

@@ -7,14 +7,24 @@ public class Order {
 	// 상품 주문 및 결제에 필요한건 여기에 다 때려넣어주세요.
 	//
 	
-	// 장바구니
-	private long useridx;					// 회원번호
+	// 수혁이가 쓰는중...(Controller)
+	private int product_price;              // 상품-상품가격
+	private int qty;						// 제품수량
 	private Long detail_num1;				// 상세번호(색상, 구분)
 	private Long detail_num2;				// 상세번호(사이즈)
+	private int od_total_amount;			// 각 상품의 총 금액 (상품 가격 * 수량)
+	private int sale;						// 할인율
+	
+	
+	
+	// 장바구니
+	private long useridx;					// 회원번호
+		// private Long detail_num1;				// 상세번호(색상, 구분)
+		// private Long detail_num2;				// 상세번호(사이즈)
 	private long product_num;				// 상품번호
 	private String cart_reg_date;			// 등록일자
 	private String cart_update_date;		// 수정일자
-	private int qty;						// 제품수량
+	//	private int qty;						// 제품수량
 	
 	// 상품들
 	private List<Long> product_nums;		// 상품번호(리스트용)
@@ -30,9 +40,9 @@ public class Order {
 	// 상품
 	private String product_name;			// 상품이름
 	private int od_count;					// 제품 수량
-	private int product_price;              // 상품-상품가격
-	private int od_total_amount;			// 총 금액
-	private int od_price;					// 제품단가
+		// private int product_price;              // 상품-상품가격
+		// private int od_total_amount;			// 총 금액
+	private int od_price;					// 제품단가 - 세일 적용된 가격
 	private String option_value;			// 상세옵션값
 	private String option_value2;			// 상세옵션값2
 	private String product_summary;			// 제품 썸네일
@@ -92,8 +102,9 @@ public class Order {
 	
 	
 	// 등급 및 세일
+	private long rank_num;					// 등급 번호
 	private String rank1;					// 등급
-	private int sale;						// 할인율 -> order_sale과 동일?
+		// private int sale;						// 할인율
 	
 	// user1 user2 테이블
 	private String addr1;					// 주소
@@ -103,6 +114,7 @@ public class Order {
 	private String tel1;
 	private String tel2;
 	private String tel3;
+	
 	
 	
 	
@@ -556,6 +568,12 @@ public class Order {
 	}
 	public void setUd_recipient_phone3(String ud_recipient_phone3) {
 		this.ud_recipient_phone3 = ud_recipient_phone3;
+	}
+	public long getRank_num() {
+		return rank_num;
+	}
+	public void setRank_num(long rank_num) {
+		this.rank_num = rank_num;
 	}
 	
 	

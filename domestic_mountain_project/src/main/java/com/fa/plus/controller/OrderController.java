@@ -47,11 +47,12 @@ public class OrderController {
 			Order vo = orderService.findByMyInformation(info.getUseridx());
 			
 			String productOrderNumber = null; // 주문번호
+			
 			int totalMoney = 0; // 상품합
-			int deliveryCharge = 0; // 배송비
+			int deliveryCharge = 3000; // 배송비(고정)
 			int payment = 0; // 결제할 금액(상품합 + 배송비)
-			int totalSavedMoney = 0; // 적립금 총합
 			int totalDiscountPrice = 0; // 총 할인액
+			int percentSale = 0; // 전체가격 * (퍼센트 / 100)
 
 			productOrderNumber = orderService.productOrderNumber();
 
@@ -71,13 +72,19 @@ public class OrderController {
 					Order dto = listProduct.get(i);
 
 					dto.setQty(buyQtys.get(i));
-					dto.setOd_price(buyQtys.get(i) * dto.getOrder_sale());
-
-					// totalSavedMoney += (buyQtys.get(i) * dto.getOd_total_amount());
-					dto.setOd_total_amount(buyQtys.get(i) * dto.getOd_total_amount());
-
-					totalMoney += buyQtys.get(i) * dto.getOrder_sale();
-					totalDiscountPrice += buyQtys.get(i) * dto.getOrder_sale();
+					
+					// 각 상품의 총 금액 (상품 가격 * 수량)
+					dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
+					
+					// 전체 상품합 = 수량 * 세일 적용된 가격
+					totalMoney += dto.getTotal_amount();
+					
+					// 세일할 가격 = 원가 * (% / 100)
+					percentSale = totalMoney * vo.getSale() / 100;
+					
+					// 결제할 금액
+					payment = totalMoney - deliveryCharge - percentSale;
+					
 				}
 
 				model.addAttribute("listProduct", listProduct);
@@ -97,23 +104,24 @@ public class OrderController {
 					Order dto = listProduct.get(i);
 
 					dto.setQty(buyQtys.get(i));
-					dto.setOd_price(buyQtys.get(i) * dto.getOrder_sale());
-
-					// totalSavedMoney += (buyQtys.get(i) * dto.getOd_total_amount());
-					dto.setOd_total_amount(buyQtys.get(i) * dto.getOd_total_amount());
-
-					totalMoney += buyQtys.get(i) * dto.getOrder_sale();
-					totalDiscountPrice += buyQtys.get(i) * dto.getOrder_sale();
+					
+					// 각 상품의 총 금액 (상품 가격 * 수량)
+					dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
+					
+					// 전체 상품합 = 수량 * 세일 적용된 가격
+					totalMoney += dto.getTotal_amount();
+					
+					// 세일할 가격 = 원가 * (% / 100)
+					percentSale = totalMoney * vo.getSale() / 100;
+					
+					// 결제할 금액
+					payment = totalMoney - deliveryCharge - percentSale;
+					
 				}
-
 				
 				
 				model.addAttribute("listProduct", listProduct);
 			}
-			
-			
-
-			payment = totalMoney + deliveryCharge;
 			
 			model.addAttribute("vo", vo);
 			model.addAttribute("productOrderNumber", productOrderNumber); // 주문 번호
@@ -121,9 +129,9 @@ public class OrderController {
 
 			model.addAttribute("totalMoney", totalMoney); // 총금액 (수량*할인가격 의 합)
 			model.addAttribute("payment", payment); // 결제할 금액
-			model.addAttribute("totalSavedMoney", totalSavedMoney); // 총 적림예정액
 			model.addAttribute("totalDiscountPrice", totalDiscountPrice); // 할인 총액
 			model.addAttribute("deliveryCharge", deliveryCharge); // 배송비
+			model.addAttribute("percentSale", percentSale); // 전체가격 * (퍼센트 / 100)
 
 			model.addAttribute("mode", mode); // 바로구매인지 장바구니 구매인지를 가지고 있음
 
