@@ -94,7 +94,6 @@
     		<exclude-mapping path="/Related/**"/>
     		<exclude-mapping path="/Order/**"/>
     		
-    		<exclude-mapping path="/mypage/main"/>
     		<exclude-mapping path="/admin/**"/>
     		<exclude-mapping path="/product/**"/>
 			<exclude-mapping path="/uploads/**"/>
