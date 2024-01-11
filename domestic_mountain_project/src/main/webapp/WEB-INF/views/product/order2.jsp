@@ -69,7 +69,7 @@ $(function(){
 	$(".requiredOption").change(function(){
 		let option2 = $(this).val();
 		
-		// 있는지 없는지 확인 있으면 아래 실행 없으면 option 하나 
+		// 있는지 없는지 확인 있으면 아래 실행, 없으면 option 하나 
 		if($('.list-option').find('.requiredOption2').length==0){
 			if(! $(".requiredOption :selected").val()){
 				return false;
@@ -92,8 +92,8 @@ $(function(){
         	$(this).remove();
         });
 		
-		let detail_num = $(this).val();
-		if(! detail_num) {
+		let detail_num1 = $(this).val();
+		if(! detail_num1) {
 			return false;
 		}
 		
@@ -102,7 +102,7 @@ $(function(){
 		
 		
 		let url = "${pageContext.request.contextPath}/product/listOptionDetail2";
-		$.get(url, {option_num:option_num, option_num2:option_num2, detail_num:detail_num}, function(data){
+		$.get(url, {option_num:option_num, option_num2:option_num2, detail_num:detail_num1}, function(data){
 			$(data).each(function(index, item){
 				let detail_num = item.detail_num;
 				let option_value = item.option_value;
@@ -115,17 +115,17 @@ $(function(){
 	});
 	
 	function optionSelect(){
-		let productNum = "${dto.product_num}";
-		if(! productNum) {
+		let product_num = "${dto.product_num}";
+		if(! product_num) {
 			return false;
 		}
 		
-		let detailNum = $(".requiredOption").val();
+		let detail_num1 = $(".requiredOption").val();
 		
 		let b = true;
-		$(".order-area input[name=detailNums]").each(function(){
+		$(".order-area input[name=detail_nums]").each(function(){
 			let dnum = $(this).val();
-			if(detailNum === dnum) {
+			if(detail_num1 === dnum) {
 				alert("선택된 옵션입니다.");
 				$(".requiredOption").val("");
 				b = false;
@@ -153,8 +153,8 @@ $(function(){
 		out += "      <div class='input-group'>";
 		out += "        <i class='bi bi-dash input-group-text bg-white qty-minus'></i>";
 		out += "        <input type='text' name='buyQtys' class='form-control' value='1' style='flex:none; width: 60px; text-align: center;' readonly>";
-		out += "        <input type='hidden' name='productNums' value='"+productNum+"'>";
-		out += "        <input type='hidden' name='detailNums' value='"+detailNum+"'>";
+		out += "        <input type='hidden' name='product_nums' value='"+product_num+"'>";
+		out += "        <input type='hidden' name='detail_nums' value='"+detail_num1+"'>";
 		out += "        <i class='bi bi-plus input-group-text bg-white qty-plus'></i>";
 		out += "      </div>";
 		out += "    </div>";
@@ -177,19 +177,19 @@ $(function(){
 		if(! $(this).val()) {
 			return false;
 		}
-		let productNum = "${dto.product_num}";
-		if(! productNum) {
+		let product_num = "${dto.product_num}";
+		if(! product_num) {
 			return false;
 		}
 		
-		let detailNum = $(".requiredOption").val();
-		let detailNum2 = $(this).val();
+		let detail_num1 = $(".requiredOption").val();
+		let detail_num2 = $(this).val();
 		
 		let b = true;
-		$(".order-area input[name=detailNums2]").each(function(){
-			let dnum = $(this).closest(".input-group").find("input[name=detailNums]").val();
+		$(".order-area input[name=detail_nums2]").each(function(){
+			let dnum = $(this).closest(".input-group").find("input[name=detail_nums]").val();
 			let dnum2 = $(this).val();
-			if(detailNum === dnum && detailNum2 === dnum2) {
+			if(detail_num1 === dnum && detail_num2 === dnum2) {
 				alert("선택된 옵션입니다.");
 				$(".requiredOption").val("");
 				$(".requiredOption").trigger("change");
@@ -218,9 +218,9 @@ $(function(){
 		out += "      <div class='input-group'>";
 		out += "        <i class='bi bi-dash input-group-text bg-white qty-minus'></i>";
 		out += "        <input type='text' name='buyQtys' class='form-control' value='1' style='flex:none; width: 60px; text-align: center;' readonly>";
-		out += "        <input type='hidden' name='productNums' value='"+productNum+"'>";
-		out += "        <input type='hidden' name='detailNums' value='"+detailNum+"'>";
-		out += "        <input type='hidden' name='detailNums2' value='"+detailNum2+"'>";
+		out += "        <input type='hidden' name='product_nums' value='"+product_num+"'>";
+		out += "        <input type='hidden' name='detail_nums' value='"+detail_num1+"'>";
+		out += "        <input type='hidden' name='detail_nums2' value='"+detail_num2+"'>";
 		out += "        <i class='bi bi-plus input-group-text bg-white qty-plus'></i>";
 		out += "      </div>";
 		out += "    </div>";

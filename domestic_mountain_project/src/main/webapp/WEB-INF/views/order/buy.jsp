@@ -32,215 +32,241 @@
 
 
 		<div class="buy-main">
-			<div class="buy-title">장바구니 > 주문 및 결제 > 완료</div>
-			<div class="buy-box">
-				<div class="buy-left">
-					<div class="address-box">
-						<h3 class="order-title">배송인</h3>
+			<form name="buyForm" method="post">
+				<div class="buy-title">장바구니 > 주문 및 결제 > 완료</div>
+				<div class="buy-box">
+					<div class="buy-left">
+						<div class="address-box">
+							<h3 class="order-title">배송인</h3>
 
-						<div class="AddressView_article">
-							<div class="AddressView_section-info">
-								<strong class="AddressView_name">홍길동</strong>
-								<div class="AddressView_area-tel">
-									<ul class="AddressView_list-tel">
-										<li class="AddressView_item-tel">010-1212-3434</li>
-									</ul>
+							<div class="AddressView_article">
+								<div class="AddressView_section-info">
+									<strong class="AddressView_name">${sessionScope.loginUser.username}</strong>
+									<div class="AddressView_area-tel">
+										<ul class="AddressView_list-tel">
+											<li class="AddressView_item-tel">${vo.tel}</li>
+										</ul>
 
-								</div>
-							</div>
-							<div class="AddressView_section-address">
-								<p class="AddressView_address">대한민국 서울특별시 관악구 신림동 (12126)</p>
-							</div>
-
-						</div>
-
-					</div>
-
-					<div class="address-box">
-						<h3 class="order-title">수령인</h3>
-
-						<div class="AddressView_article">
-							<div class="AddressView_section-info">
-
-								<div class="recipient">
-									<label class="col-sm-2 col-form-label" for="user_name">이름</label>
-									<input type="text" name=user_name id="user_name" style="width: auto;"
-										class="form-control" value="" placeholder="이름">
-								</div>
-								<div class="recipient">
-									<label class="col-sm-2 col-form-label" for="tel1">전화번호</label>
-									<div class="col-sm-3 pe-1">
-										<input type="text" name="tel1" id="tel1" class="form-control"
-											value="" maxlength="3">
-									</div>
-									<div class="col-sm-1 px-1" style="width: 2%;">
-										<p class="form-control-plaintext text-center">-</p>
-									</div>
-									<div class="col-sm-3 px-1">
-										<input type="text" name="tel2" id="tel2" class="form-control"
-											value="" maxlength="4">
-									</div>
-									<div class="col-sm-1 px-1" style="width: 2%;">
-										<p class="form-control-plaintext text-center">-</p>
-									</div>
-									<div class="col-sm-3 ps-1">
-										<input type="text" name="tel3" id="tel3" class="form-control"
-											value="" maxlength="4">
 									</div>
 								</div>
-
 								<div class="AddressView_section-address">
-
-									<div class="recipient">
-										<label class="col-sm-2 col-form-label" for="zip">우편번호</label>
-										<div class="col-sm-5">
-											<div class="input-group">
-												<input type="text" name="zip" id="zip" class="form-control"
-													placeholder="우편번호" value="${dto.zip}" readonly>
-												<button class="btn btn-light" type="button" onclick="daumPostcode();">우편번호
-													검색</button>
-											</div>
-										</div>
-									</div>
-
-									<div class="recipient">
-										<label class="col-sm-2 col-form-label" for="addr1">주소</label>
-										<div class="col-sm-10">
-											<div style="margin-bottom: 8px;">
-												<input type="text" name="addr1" id="addr1"
-													class="form-control" placeholder="기본 주소"
-													value="${dto.addr1}" readonly>
-											</div>
-											<div>
-												<input type="text" name="addr2" id="addr2"
-													class="form-control" placeholder="상세 주소"
-													value="${dto.addr2}">
-											</div>
-										</div>
-									</div>
+									<p class="AddressView_address">${vo.addr1}${vo.addr2}
+										(${vo.zip})</p>
 								</div>
 
-
 							</div>
-							<button type="button" class="AddressView_button-action">배송인 정보 동일</button>
+
 						</div>
 
+						<div class="address-box">
+							<h3 class="order-title">수령인</h3>
+
+							<div class="AddressView_article">
+								<div class="AddressView_section-info">
+
+									<div class="recipient">
+										<label class="col-sm-2 col-form-label" for="user_name">이름</label>
+										<input type="text" name=user_name id="user_name"
+											style="width: auto;" class="form-control"
+											value="${dto.ud_recipient_name}" placeholder="이름">
+									</div>
+									<div class="recipient">
+										<label class="col-sm-2 col-form-label" for="tel1">전화번호</label>
+										<div class="col-sm-3 pe-1">
+											<input type="text" name="ud_recipient_phone1"
+												id="ud_recipient_phone1" class="form-control"
+												value="${dto.ud_recipient_phone1}" maxlength="3">
+										</div>
+										<div class="col-sm-1 px-1" style="width: 2%;">
+											<p class="form-control-plaintext text-center">-</p>
+										</div>
+										<div class="col-sm-3 px-1">
+											<input type="text" name="ud_recipient_phone2"
+												id="ud_recipient_phone2" class="form-control"
+												value="${dto.ud_recipient_phone2}" maxlength="4">
+										</div>
+										<div class="col-sm-1 px-1" style="width: 2%;">
+											<p class="form-control-plaintext text-center">-</p>
+										</div>
+										<div class="col-sm-3 ps-1">
+											<input type="text" name="ud_recipient_phone3"
+												id="ud_recipient_phone3" class="form-control"
+												value="${dto.ud_recipient_phone3}" maxlength="4">
+										</div>
+									</div>
+
+									<div class="AddressView_section-address">
+
+										<div class="recipient">
+											<label class="col-sm-2 col-form-label" for="zip">우편번호</label>
+											<div class="col-sm-5">
+												<div class="input-group">
+													<input type="text" name="ud_addressnum" id="ud_addressnum"
+														class="form-control" placeholder="우편번호"
+														value="${dto.ud_addressnum}" readonly>
+													<button class="btn btn-light" type="button"
+														onclick="daumPostcode();">우편번호 검색</button>
+												</div>
+											</div>
+										</div>
+
+										<div class="recipient">
+											<label class="col-sm-2 col-form-label" for="addr1">주소</label>
+											<div class="col-sm-10">
+												<div style="margin-bottom: 8px;">
+													<input type="text" name="ud_address1" id="ud_address1"
+														class="form-control" placeholder="기본 주소"
+														value="${dto.ud_address1}" readonly>
+												</div>
+												<div>
+													<input type="text" name="ud_address2" id="ud_address2"
+														class="form-control" placeholder="상세 주소"
+														value="${dto.ud_address2}">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="recipient">
+										<label class="col-sm-2 col-form-label" for="memo">메모</label> <input
+											type="text" name=memo id="memo" class="form-control"
+											value="${dto.ud_memo}" placeholder="요청사항을 입력하세요.">
+									</div>
+
+
+								</div>
+								<div class="recipient">
+									<input type="checkbox" id="shippingInfo" name="shippingInfo">
+									<label style="margin-left: 10px;"for="bill_info" class="check">주문인 정보와 배송인 정보가 같습니다.</label>
+								</div>
+							</div>
+
+						</div>
+
+
+						<div class="product-main">
+							<h3 class="order-title">주문 상품</h3>
+							<c:forEach var="dto" items="${listProduct}" varStatus="status">
+								<div class="AddressView_article-2">
+
+									<div class="ProductList_area">
+										<a href="#" class="ProductList_thumbnail"><img
+											src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}"
+											alt="" width="110" height="110"></a>
+										<div class="ProductList_info">
+											<a href="#" class="ProductList_name">${dto.product_name}</a>
+											<ul class="ProductList_add-list">
+												<li class="ProductList_option"><span
+													class="ProductList_value"> <span>상품선택:
+															${dto.option_name} : ${dto.option_value} /
+															${dto.option_name2} : ${dto.option_value2} </span> <span
+														class="ProductList_count__2S3qL"> ${dto.qty}개</span>
+												</span></li>
+											</ul>
+											<div class="ProductList_amount">
+												<span class="ProductList_pay-sum"> <span
+													class="blind">상품 금액</span> <b>${dto.od_price}</b>원
+												</span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</c:forEach>
+							<div class="AmountArea_article AmountArea_type-order">
+								<div class="AmountArea_cell">
+									<span class="AmountArea_title">전체 주문금액</span>
+								</div>
+								<div class="AmountArea_cell">
+									<span class="AmountArea_amount">${dto.od_total_amounts}원</span>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="Payment-box">
+							<h3 class="order-title">결제</h3>
+
+							<div class="AddressView_article">
+
+								<div class="Payment_payment">
+									<button type="button" name="payment " id="payment-point"
+										class="Payment_payment-button">
+										<span class="blind">카카오 페이</span>
+									</button>
+								</div>
+
+							</div>
+						</div>
 					</div>
 
+					<div class="buy-right" id="scroll-order">
 
-					<div class="product-main">
-						<h3 class="order-title">주문 상품</h3>
-						<div class="AddressView_article-2">
+						<div class="Payment-box-detail">
+							<h3 class="order-title">결제 상세</h3>
 
-							<div class="ProductList_area">
-								<a href="#" class="ProductList_thumbnail"><img src="#"
-									alt="" width="110" height="110"></a>
-								<div class="ProductList_info">
-									<a href="#" class="ProductList_name">상품 명</a>
-									<ul class="ProductList_add-list">
-										<li class="ProductList_option"><span
-											class="ProductList_value"> <span>상품선택:
-													BBLC(레귤러) / 옵션 선택: 사이즈 260, 색상 레드</span> <span
-												class="ProductList_count__2S3qL">1개</span>
-										</span></li>
+							<div class="AddressView_article-2">
+								<div class="Alignment_article">
+									<span class="Alignment_title">주문금액</span> <span
+										class="Alignment_value"><b>219,000</b>원</span>
+								</div>
+								<div class="OrderSummary_inner">
+									<ul class="OrderSummary_sub-list">
+										<li class="OrderSummary_sub-item">
+											<div class="Alignment_article">
+												<span class="Alignment_title">상품금액</span> <span
+													class="Alignment_icon"></span> <span
+													class="Alignment_value"><b>219,000</b>원</span>
+											</div>
+											<div class="Alignment_article">
+												<span class="Alignment_title">배송비</span> <span
+													class="Alignment_icon"></span> <span
+													class="Alignment_value"><b>0</b>원</span>
+											</div>
+											<div class="Alignment_article">
+												<span class="Alignment_title">할인된 금액</span> <span
+													class="Alignment_icon"></span> <span
+													class="Alignment_value"><b>0</b>원</span>
+											</div>
+										</li>
 									</ul>
-									<div class="ProductList_amount">
-										<span class="ProductList_pay-sum"> <span class="blind">상품
-												금액</span> <b>219,000</b>원
-										</span>
-									</div>
 								</div>
 							</div>
-
-						</div>
-						<div class="AmountArea_article AmountArea_type-order">
-							<div class="AmountArea_cell">
-								<span class="AmountArea_title">전체 주문금액</span>
-							</div>
-							<div class="AmountArea_cell">
-								<span class="AmountArea_amount">219,000원</span>
-							</div>
-						</div>
-					</div>
-
-					<div class="Payment-box">
-						<h3 class="order-title">결제</h3>
-
-						<div class="AddressView_article">
-
-							<div class="Payment_payment">
-								<button type="button" name="payment " id="payment-point"
-									class="Payment_payment-button">
-									<span class="blind">카카오 페이</span>
-								</button>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				
-				<div class="buy-right" id="scroll-order">
-				
-					<div class="Payment-box-detail">
-						<h3 class="order-title">결제 상세</h3>
-
-						<div class="AddressView_article-2">
-							<div class="Alignment_article">
-								<span class="Alignment_title">주문금액</span> <span
-									class="Alignment_value"><b>219,000</b>원</span>
-							</div>
-							<div class="OrderSummary_inner">
-								<ul class="OrderSummary_sub-list">
-									<li class="OrderSummary_sub-item">
-										<div class="Alignment_article">
-											<span class="Alignment_title">상품금액</span> <span
-												class="Alignment_icon"></span> <span class="Alignment_value"><b>219,000</b>원</span>
-										</div>
-										<div class="Alignment_article">
-											<span class="Alignment_title">배송비</span> <span
-												class="Alignment_icon"></span> <span class="Alignment_value"><b>0</b>원</span>
-										</div>
-										<div class="Alignment_article">
-											<span class="Alignment_title">포인트</span> <span
-												class="Alignment_icon"></span> <span class="Alignment_value"><b>0</b>원</span>
-										</div>
-									</li>
-								</ul>
+							<div class="AmountArea_article AmountArea_type-order">
+								<div class="AmountArea_cell">
+									<span class="AmountArea_title">전체 주문금액</span>
+								</div>
+								<div class="AmountArea_cell">
+									<span class="AmountArea_amount">219,000원</span>
+								</div>
 							</div>
 						</div>
-						<div class="AmountArea_article AmountArea_type-order">
-							<div class="AmountArea_cell">
-								<span class="AmountArea_title">전체 주문금액</span>
-							</div>
-							<div class="AmountArea_cell">
-								<span class="AmountArea_amount">219,000원</span>
-							</div>
-						</div>
-					</div>
 
-					<div class="Payment-box">
-						<h3 class="order-title">포인트 혜택</h3>
+						<div class="Payment-box">
+							<h3 class="order-title">포인트 혜택</h3>
 
-						<div class="AddressView_article">
-							<div class="Alignment_article">
-								<span class="Alignment_title">회원 등급</span> <span
-									class="Alignment_value">브론즈</span>
-							</div>
-							<div class="OrderSummary_inner">
-								<ul class="OrderSummary_sub-list">
-									<li class="OrderSummary_sub-item">
-										<div class="Alignment_article">
-											<span class="Alignment_title">적용 포인트</span> <span
-												class="Alignment_icon"></span> <span class="Alignment_value"><b>0</b>p</span>
-										</div>
+							<div class="AddressView_article">
+								<div class="Alignment_article">
+									<span class="Alignment_title">회원 등급</span> <span
+										class="Alignment_value">브론즈</span>
+								</div>
+								<div class="OrderSummary_inner">
+									<ul class="OrderSummary_sub-list">
+										<li class="OrderSummary_sub-item">
+											<div class="Alignment_article">
+												<span class="Alignment_title">적용 할인율</span> <span
+													class="Alignment_icon"></span> <span
+													class="Alignment_value"><b>1</b>%</span>
+											</div>
 
-									</li>
-								</ul>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 
 
@@ -249,10 +275,6 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-
-
-
-
 	function daumPostcode() {
 		new daum.Postcode(
 				{
@@ -289,12 +311,46 @@
 						}
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('zip').value = data.zonecode; //5자리 새우편번호 사용
-						document.getElementById('addr1').value = fullAddr;
+						document.getElementById('ud_addressnum').value = data.zonecode; //5자리 새우편번호 사용
+						document.getElementById('ud_address1').value = fullAddr;
 
 						// 커서를 상세주소 필드로 이동한다.
-						document.getElementById('addr2').focus();
+						document.getElementById('ud_address2').focus();
 					}
 				}).open();
 	}
+
+	
+	// 수령인 = 배송인 정보 넣기
+	var check = document.querySelector("#shippingInfo"); //체크박스의 id
+
+	check.addEventListener("click", function() {//check요소에 이벤트가 발생했을 때 실행할 함수
+
+						if (check.checked == true) { //체크되었다면
+							document.querySelector("#user_name").value = "${sessionScope.loginUser.username}";
+							document.querySelector("#ud_recipient_phone1").value = "${vo.tel1}";
+							document.querySelector("#ud_recipient_phone2").value = "${vo.tel2}";
+							document.querySelector("#ud_recipient_phone3").value = "${vo.tel3}";
+							document.querySelector("#ud_addressnum").value = "${vo.zip}";
+							document.querySelector("#ud_address1").value = "${vo.addr1}";
+							document.querySelector("#ud_address2").value = "${vo.addr2}";
+							
+						} else {
+							document.querySelector("#user_name").value = "";
+							document.querySelector("#ud_recipient_phone1").value = "";
+							document.querySelector("#ud_recipient_phone2").value = "";
+							document.querySelector("#ud_recipient_phone3").value = "";
+							document.querySelector("#ud_addressnum").value = "";
+							document.querySelector("#ud_address1").value = "";
+							document.querySelector("#ud_address2").value = "";
+						}
+	
+						if (document.querySelector("#ud_recipient_phone1").value !== "${vo.tel1}") {
+							$("#shippingInfo").prop("checked", false);
+						}
+						
+					});
+	
+	
+
 </script>

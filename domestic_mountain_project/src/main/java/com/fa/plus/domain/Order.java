@@ -30,7 +30,7 @@ public class Order {
 	// 상품
 	private String product_name;			// 상품이름
 	private int od_count;					// 제품 수량
-	private int product_price;               // 상품-상품가격
+	private int product_price;              // 상품-상품가격
 	private int od_total_amount;			// 총 금액
 	private int od_price;					// 제품단가
 	private String option_value;			// 상세옵션값
@@ -66,8 +66,11 @@ public class Order {
 	private String ud_address2;				// 상세주소
 	private String ud_recipient_name;		// 수령인 
 	private String ud_recipient_phone;		// 수령인 전화번호
+	private String ud_recipient_phone1;
+	private String ud_recipient_phone2;
+	private String ud_recipient_phone3;
 	private String ud_memo;					// 메모(요청사항)
-	private String basics_delivery;			// 기본배송지여부 : O, X
+	private String basics_delivery;			// 기본배송지여부 : T, F
 		// useridx : 회원번호
 	
 	// 배송지 테이블 : delivery 테이블
@@ -92,6 +95,22 @@ public class Order {
 	private String rank1;					// 등급
 	private int sale;						// 할인율 -> order_sale과 동일?
 	
+	// user1 user2 테이블
+	private String addr1;					// 주소
+	private String addr2;					// 상세주소
+	private String zip;						// 우편번호
+	private String tel;						// 전화번호
+	private String tel1;
+	private String tel2;
+	private String tel3;
+	
+	
+	
+	
+	private String option_name;
+	private String option_name2;
+	private List<String> option_names;
+	private List<String> option_names2;
 	
 	
 	public long getUseridx() {
@@ -453,6 +472,90 @@ public class Order {
 	}
 	public void setProduct_summary(String product_summary) {
 		this.product_summary = product_summary;
+	}
+	public String getOption_name() {
+		return option_name;
+	}
+	public void setOption_name(String option_name) {
+		this.option_name = option_name;
+	}
+	public String getOption_name2() {
+		return option_name2;
+	}
+	public void setOption_name2(String option_name2) {
+		this.option_name2 = option_name2;
+	}
+	public List<String> getOption_names() {
+		return option_names;
+	}
+	public void setOption_names(List<String> option_names) {
+		this.option_names = option_names;
+	}
+	public List<String> getOption_names2() {
+		return option_names2;
+	}
+	public void setOption_names2(List<String> option_names2) {
+		this.option_names2 = option_names2;
+	}
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getTel1() {
+		return tel1;
+	}
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
+	}
+	public String getTel2() {
+		return tel2;
+	}
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
+	}
+	public String getTel3() {
+		return tel3;
+	}
+	public void setTel3(String tel3) {
+		this.tel3 = tel3;
+	}
+	public String getUd_recipient_phone1() {
+		return ud_recipient_phone1;
+	}
+	public void setUd_recipient_phone1(String ud_recipient_phone1) {
+		this.ud_recipient_phone1 = ud_recipient_phone1;
+	}
+	public String getUd_recipient_phone2() {
+		return ud_recipient_phone2;
+	}
+	public void setUd_recipient_phone2(String ud_recipient_phone2) {
+		this.ud_recipient_phone2 = ud_recipient_phone2;
+	}
+	public String getUd_recipient_phone3() {
+		return ud_recipient_phone3;
+	}
+	public void setUd_recipient_phone3(String ud_recipient_phone3) {
+		this.ud_recipient_phone3 = ud_recipient_phone3;
 	}
 	
 	
