@@ -63,29 +63,24 @@
 		WHERE (od.detail_num, od2.detail_num) IN
 		<foreach collection="list" item="item" index="index"
 			open="(" separator="," close=")">
-			(#{item.detail_num1}, #{item.detail_num2, jdbcType=VARCHAR})
+			(#{item.detail_num1}, #{item.detail_num2})
 		</foreach>
 	</select>
 	
-	<!--
+	
 	<select id="listProduct2" parameterType="java.util.List" resultType="com.fa.plus.domain.Order">
 		SELECT p.product_num, p.product_name, p.product_price, p.product_summary, 
 				po.option_num, po.option_name, po.parent,
-				od.detail_num, od.option_value,
-				po2.option_num option_num2, po2.option_name option_name2,
-    			od2.detail_num detail_num2, od2.option_value option_value2
+				od.detail_num, od.option_value
 		FROM product p
 		JOIN productOption po ON p.product_num = po.product_num
-		JOIN productOption po2 ON po.option_num = po2.parent
 		JOIN optionDetail od ON po.option_num = od.option_num
-		JOIN optionDetail od2 ON po2.option_num = od2.option_num
-		WHERE (od.detail_num, od2.detail_num) IN
+		WHERE (od.detail_num) IN
 		<foreach collection="list" item="item" index="index"
 			open="(" separator="," close=")">
-			(#{item.detail_num1}, #{item.detail_num2, jdbcType=VARCHAR})
+			(#{item.detail_num1})
 		</foreach>
 	</select>
-	 -->
 
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Order">
 		SELECT product_num, product_name, product_price

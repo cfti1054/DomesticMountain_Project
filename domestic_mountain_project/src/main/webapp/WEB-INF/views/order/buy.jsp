@@ -136,7 +136,8 @@
 								</div>
 								<div class="recipient">
 									<input type="checkbox" id="shippingInfo" name="shippingInfo">
-									<label style="margin-left: 10px;"for="bill_info" class="check">주문인 정보와 배송인 정보가 같습니다.</label>
+									<label style="margin-left: 10px;" for="bill_info" class="check">주문인
+										정보와 배송인 정보가 같습니다.</label>
 								</div>
 							</div>
 
@@ -157,9 +158,11 @@
 											<ul class="ProductList_add-list">
 												<li class="ProductList_option"><span
 													class="ProductList_value"> <span>상품선택:
-															${dto.option_name} : ${dto.option_value} /
-															${dto.option_name2} : ${dto.option_value2} </span> <span
-														class="ProductList_count__2S3qL"> ${dto.qty}개</span>
+															${dto.option_name} : ${dto.option_value} <c:if
+																test="${not empty dto.option_name2}">
+															/ ${dto.option_name2} : ${dto.option_value2} 
+															</c:if>
+													</span> <span class="ProductList_count__2S3qL"> ${dto.qty}개</span>
 												</span></li>
 											</ul>
 											<div class="ProductList_amount">
@@ -320,11 +323,13 @@
 				}).open();
 	}
 
-	
 	// 수령인 = 배송인 정보 넣기
 	var check = document.querySelector("#shippingInfo"); //체크박스의 id
 
-	check.addEventListener("click", function() {//check요소에 이벤트가 발생했을 때 실행할 함수
+	check
+			.addEventListener(
+					"click",
+					function() {//check요소에 이벤트가 발생했을 때 실행할 함수
 
 						if (check.checked == true) { //체크되었다면
 							document.querySelector("#user_name").value = "${sessionScope.loginUser.username}";
@@ -334,7 +339,7 @@
 							document.querySelector("#ud_addressnum").value = "${vo.zip}";
 							document.querySelector("#ud_address1").value = "${vo.addr1}";
 							document.querySelector("#ud_address2").value = "${vo.addr2}";
-							
+
 						} else {
 							document.querySelector("#user_name").value = "";
 							document.querySelector("#ud_recipient_phone1").value = "";
@@ -344,13 +349,10 @@
 							document.querySelector("#ud_address1").value = "";
 							document.querySelector("#ud_address2").value = "";
 						}
-	
+
 						if (document.querySelector("#ud_recipient_phone1").value !== "${vo.tel1}") {
 							$("#shippingInfo").prop("checked", false);
 						}
-						
-					});
-	
-	
 
+					});
 </script>

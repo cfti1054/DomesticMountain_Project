@@ -137,11 +137,11 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> listProduct2(List<Map<String, Long>> list) {
-		List<Order> listProduct = null;
+		List<Order> listProduct2 = null;
 		
 		try {
-			listProduct = mapper.listProduct2(list);
-			for(Order dto : listProduct) {
+			listProduct2 = mapper.listProduct2(list);
+			for(Order dto : listProduct2) {
 				
 				dto.setTotal_amount(dto.getProduct_price());
 			}
@@ -149,7 +149,7 @@ public class OrderServiceImpl implements OrderService {
 			e.printStackTrace();
 		}
 		
-		return listProduct;
+		return listProduct2;
 	}
 	
 	@Override

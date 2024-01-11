@@ -35,7 +35,10 @@ public class OrderController {
 			@RequestParam List<Long> detail_nums,
 			@RequestParam(required = false) List<Long> detail_nums2,
 			@RequestParam List<Integer> buyQtys,
-			@RequestParam(defaultValue = "buy") String mode, HttpSession session, Model model) throws Exception {
+			@RequestParam(defaultValue = "buy") String mode, 
+			HttpSession session, 
+			Model model
+			) throws Exception {
 
 		try {
 			SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
@@ -62,6 +65,8 @@ public class OrderController {
 				}
 
 				List<Order> listProduct = orderService.listProduct(list);
+				
+				
 				for (int i = 0; i < listProduct.size(); i++) {
 					Order dto = listProduct.get(i);
 
@@ -75,9 +80,8 @@ public class OrderController {
 					totalDiscountPrice += buyQtys.get(i) * dto.getOrder_sale();
 				}
 
-				
-				
 				model.addAttribute("listProduct", listProduct);
+				
 			} else {
 				List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
 				for (int i = 0; i < detail_nums.size(); i++) {
@@ -86,7 +90,9 @@ public class OrderController {
 					list.add(map);
 				}
 
-				List<Order> listProduct = orderService.listProduct(list);
+				List<Order> listProduct = orderService.listProduct2(list);
+				
+				
 				for (int i = 0; i < listProduct.size(); i++) {
 					Order dto = listProduct.get(i);
 
