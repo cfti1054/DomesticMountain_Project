@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.domain.Order;
 import com.fa.plus.mapper.MyPageMapper;
 
@@ -52,7 +53,7 @@ public class MyPageServiceImpl implements MyPageService {
 			
 			for(Order dto : list) {
 
-				dto.setOrder_total_money(dto.getOd_price() * dto.getQty());
+				dto.setOrder_total_money(dto.getProduct_price() * dto.getQty());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,4 +72,43 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 	}
 	///////////////////////////////////////////////////
+
+	@Override
+	public List<MemberManage> listMember(long useridx) {
+		List<MemberManage> list = null;
+		
+		try {
+			list = mapper.listMember(useridx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public MemberManage findById(long useridx) {
+		MemberManage dto = null;
+
+		try {
+			dto = mapper.findById(useridx);
+
+			if (dto != null) {
+				if (dto.getEmail() != null) {
+					String[] s = dto.getEmail().split("@");
+					dto.setEmail(s[0]);
+				}
+
+				if (dto.getTel() != null) {
+					String[] s = dto.getTel().split("-");
+					dto.setTel(s[0]);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
 }

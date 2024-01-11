@@ -14,8 +14,55 @@
     padding-top: 120px;
 }
 
-
 </style>
+
+<script type="text/javascript">
+
+// 결제로 이동
+function sendOk() {
+		
+}
+
+// 수량 증가/감소
+$(function(){
+	$(".btnMinus").click(function(){
+		const $tr = $(this).closest("tr");
+		let qty = Number($tr.find("input[name=buyQtys]").val()) || 1;
+		let product_price = Number($tr.find("input[name=product_prices]").val()) || 0;
+		
+		if(qty <= 1) {
+			return false;
+		}
+		
+		qty--;
+		$tr.find("input[name=buyQtys]").val(qty);
+		let total = product_price * qty;
+		
+		$tr.find(".product_prices").text(total.toLocaleString());
+		$tr.find("input[name=product_prices]").val(total);
+	});
+	
+	$(".btnPlus").click(function(){
+		const $tr = $(this).closest("tr");
+		let qty = Number($tr.find("input[name=buyQtys]").val()) || 1;
+		let price = Number($tr.find("input[name=product_prices]").val()) || 0;
+	
+		if(qty >= 99) {
+			return false;
+		}
+		
+		qty++;
+		$tr.find("input[name=buyQtys]").val(qty);
+		let total = product_price * qty;
+		
+		$tr.find(".product_prices").text(total.toLocaleString());
+		$tr.find("input[name=product_prices]").val(total);
+	});
+});	
+
+</script>
+
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" type="text/css">
 
 <section class="features-1">
@@ -66,7 +113,7 @@
 		                <input class="checkbox" name="nums" type="checkbox" value="${dto.detail_num2}">
 		              </td>
 		                <td class="w-144 h-144">
-		                  <img class="border rounded" src="">
+		                  <img class="border rounded" src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
 		               </td>
 		                <td class="cart-name">
 		                	<p>이름${dto.product_name}</p>
@@ -79,19 +126,32 @@
 		                <td class="number-input-container">
 		                  <input type="text" name="buyQtys" class="number-input" value="${dto.qty}" readonly class="form-control">
 		                  <div>
-		                    <button class="number-input-button btnPlus">▲</button>
-		                    <button class="number-input-button btnMinus">▼</button>
+		                    <button class="number-input-button btn btnPlus">▲</button>
+		                    <button class="number-input-button btn btnMinus">▼</button>
 		                  </div>
 		                </td>
 		                <td class="cart-price">
-		                	<label><fmt:formatNumber value=""/></label><label>원</label>
-		                	<input type="hidden" name="prices" value="">
+							<label><fmt:formatNumber value="${dto.product_price}"/></label><label>원</label>
+							<input type="hidden" name="product_prices" value="${dto.product_price}">
 		                </td>
 		            </tr>
 				</c:forEach>
 	            </tbody>
 		
            </table>
+           
+				<c:choose>
+					<c:when test="${list.size() == 0}">
+						<div class="mt-3 p-3 text-center">
+							장바구니가 비었습니다.
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="mt-3 p-3 text-end">
+							<input type="hidden" name="mode" value="cart">
+						</div>
+					</c:otherwise>
+				</c:choose>           
 
           </section>
 			   <section class="cart-right-section">

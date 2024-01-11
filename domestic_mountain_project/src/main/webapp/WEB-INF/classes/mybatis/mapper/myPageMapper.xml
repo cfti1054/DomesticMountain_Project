@@ -28,7 +28,8 @@
 	<select id="listCart" resultType="com.fa.plus.domain.Order" parameterType="Long">
 		SELECT useridx, c.detail_num1, c.detail_num2, c.product_num, qty,
 			c.cart_reg_date, c.cart_update_date, product_name,
-				d.option_value, d2.option_value option_value2
+				d.option_value, d2.option_value option_value2,
+					product_summary, product_price
 		FROM cart c
 		JOIN product p ON c.product_num = p.product_num
 		JOIN optionDetail d ON c.detail_num1 = d.detail_num
@@ -36,5 +37,36 @@
 		WHERE useridx = #{useridx}
 		ORDER BY cart_reg_date DESC 
 	</select>
+	
+	<delete id="deleteCart" parameterType="map">
+		DELETE FROM cart
+		WHERE useridx = #{useridx} 
+		<if test="gubun == 'item' ">
+			AND detail_num2 = #{detail_num2}
+		</if>
+		<if test="gubun == 'list' ">
+			AND detail_num2 IN
+			<foreach collection="list" item="detail_num2" index="index"
+				open="(" separator="," close=")">
+				#{detail_num2}
+			</foreach>
+		</if>
+	</delete>
+
+	<delete id="deleteCartExpiration">
+		DELETE FROM cart
+		WHERE cart_reg_date + 15 &lt; SYSDATE
+	</delete>	
+	
+	<!-- 회원 -->
+	<select id="listMember" parameterType="Long" resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT m1.useridx, m.usership, m1.user_name, 
+			m1.reg_date, m2.email, m2.tel, 
+			TO_CHAR(birth, 'YYYY-MM-DD') birth, m2.addr1, m2.addr2
+		FROM userall m
+		JOIN user1 m1 ON m.useridx = m1.useridx
+		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
+		WHERE m1.useridx = #{useridx}
+	</select>	
 
 </mapper>
