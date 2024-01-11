@@ -3,8 +3,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.OrderManageMapper">
 
-<select id="list_order" resultType="com.fa.plus.admin.domain.OrderManageMapper">
-	SELECT order_num, order_datetime, transport_date, order_total_money, shipping, order_sale, order_point, order_earn, total_amount, useridx
-	FROM totalorder
+<select id="list_order" resultType="com.fa.plus.admin.domain.OrderManage">
+	SELECT order_num, TO_CHAR(order_datetime, 'YYYY-MM-DD') AS order_date , TO_CHAR(transport_date, 'YYYY-MM-DD') AS transport_date, order_total_money, shipping, order_sale, order_point, order_earn, total_amount, u.useridx, u.user_name
+	FROM totalorder o
+	JOIN user1 u ON o.useridx = u.useridx
 	</select> 
 </mapper>

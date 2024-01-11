@@ -17,6 +17,7 @@ public class OrderManageController {
 	@Autowired
 	private OrderManageService service;
 	
+	@RequestMapping("order_list")
 	public String list_order(Model model) throws Exception {
 		List<OrderManage> list = null;
 		

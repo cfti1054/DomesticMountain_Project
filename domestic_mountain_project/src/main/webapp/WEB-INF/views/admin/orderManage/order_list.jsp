@@ -77,26 +77,35 @@
 
 					<div class="card-body">
 						<form id="faq">
-							<table id="faq_category_table" class="display"
+							<table id="order_table" class="display"
 								style="width: 100%; text-align: center">
 								<thead>
 									<tr>
-										<th>번호</th>
+										<th>주문번호</th>
 										<th>주문일자</th>
 										<th>배송일자</th>
-										<th>등록인</th>
-										<th>등록일자 </th>
-										<th>보이기</th>
+										<th>회원 아이디</th>
+										<th>총 주문 금액</th>
+										<th>배송비</th>
+										<th>할인 금액</th>
+										<th>포인트 사용 금액 </th>
+										<th>총 적립 금액</th>
+										<th>총 결제 금액</th>
 									</tr>
 								</thead>
 
 								<tfoot>
 									<tr>
-										<th>번호</th>
+										<th>주문번호</th>
 										<th>주문일자</th>
-										<th>등록인</th>
-										<th>등록일자</th>
-										<th>보이기</th>
+										<th>배송일자</th>
+										<th>회원 아이디</th>
+										<th>총 주문 금액</th>
+										<th>배송비</th>
+										<th>할인 금액</th>
+										<th>포인트 사용 금액 </th>
+										<th>총 적립 금액</th>
+										<th>총 결제 금액</th>
 									</tr>
 								</tfoot>
 
@@ -104,15 +113,21 @@
 									<c:forEach var="dto" items="${list}" varStatus="status">
 
 										<tr>
-											<td>${dto.faq_category_num}</td>
-											<td>${dto.category_name}</td>
-											<td>${dto.category_reg_id}</td>
-											<td>${dto.category_reg_date}</td>
-											<td>${dto.category_visible == 1 ? "O":"X"}</td>
+											<td>${dto.order_num}</td>
+											<td>${dto.order_date}</td>
+											<td>${dto.transport_date}</td>
+											<td>${dto.user_name}</td>
+											<td>${dto.order_total_money}</td>
+											<td>${dto.shipping}</td>
+											<td>${dto.order_sale}</td>
+											<td>${dto.order_point}</td>
+											<td>${dto.order_earn}</td>
+											<td>${dto.total_amount}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
+							<input type="hidden" value="${dto.useridx}">
 						</form>
 						<p>
 							<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
@@ -124,7 +139,7 @@
 
 					</div>
 				</div>
-				<div id="faq-dialog" style="display: none;"></div>
+				<div id="order-dialog" style="display: none;"></div>
 			</div>
 
 
@@ -157,9 +172,9 @@
         	 }
              
         $(document).ready(function() {
-        	var oTable = $('#faq_category_table').DataTable();
+        	var oTable = $('#order_table').DataTable();
 
-        	$('#faq_category_table tbody').on( 'click', 'tr', function () {
+        	$('#order_table tbody').on( 'click', 'tr', function () {
         	    $(this).toggleClass('selected');
         	    var pos = oTable.row(this).index();
         	    var row = oTable.row(pos).data();
@@ -167,7 +182,7 @@
 
         	$("#visible_button").on("click",function() {
         		var oAll =[];
-        	 $('#faq_category_table tbody tr.selected').each(function(){
+        	 $('#order_table tbody tr.selected').each(function(){
         		 var pos = oTable.row(this).index();
         		 var row = oTable.row(pos).data();
         	    oAll.push(row);
@@ -181,7 +196,7 @@
         	 	}
         	 	
         	 	
-        	 		 let dlg = $("#faq-dialog").dialog({
+        	 		 let dlg = $("#order-dialog").dialog({
              			autoOpen: false,
              			modal: true,
              			buttons: {
@@ -204,7 +219,7 @@
              		
              		
              		const fn = function(data) {
-             			$("#faq-dialog").html(data);
+             			$("#order-dialog").html(data);
              			dlg.dialog("open");
              		};
              		ajaxFun(url, "get", query, "text", fn);
@@ -226,7 +241,7 @@
         
         /* 추가 모달 생성 */
         $("#add_button").on("click",function() {
-        	let dlg = $("#faq-dialog").dialog({
+        	let dlg = $("#order-dialog").dialog({
         		autoOpen: false,
         		modal: true,
         		buttons: {
@@ -248,7 +263,7 @@
         	let query = "mode=write&type=category";
         	
         	const fn = function(data) {
-        		$("#faq-dialog").html(data);
+        		$("#order-dialog").html(data);
         		dlg.dialog("open");
         	};
         	
@@ -279,7 +294,7 @@
         	}
         	ajaxFun(url, "post", query, "json", fn);
         	
-        	$("#faq-dialog").dialog("close");
+        	$("#order-dialog").dialog("close");
         	
         }
         

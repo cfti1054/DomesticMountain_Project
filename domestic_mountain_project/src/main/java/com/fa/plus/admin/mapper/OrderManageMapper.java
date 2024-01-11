@@ -9,6 +9,5 @@ import com.fa.plus.admin.domain.OrderManage;
 
 @Mapper
 public interface OrderManageMapper {
-
 	public List<OrderManage> list_order() throws SQLException;
 }
