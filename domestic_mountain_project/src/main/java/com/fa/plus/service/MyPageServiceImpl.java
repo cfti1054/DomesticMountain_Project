@@ -1,5 +1,7 @@
 package com.fa.plus.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +55,7 @@ public class MyPageServiceImpl implements MyPageService {
 			
 			for(Order dto : list) {
 
-				dto.setOrder_total_money(dto.getProduct_price() * dto.getQty());
+				dto.setOd_total_amount(dto.getProduct_price() * dto.getQty());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -110,5 +112,61 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 
 		return dto;
+	}
+
+	@Override
+	public int countPayment(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.countPayment(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Order> listPayment(Map<String, Object> map) {
+		List<Order> list = null;
+		
+		try {
+			// OrderState.ORDERSTATEINFO : 주문상태 정보
+			// OrderState.DETAILSTATEINFO : 주문상세상태 정보
+			
+			String productState;
+			
+			list = mapper.listPayment(map);
+
+			Date endDate = new Date();
+			long gap;
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			/*
+			for(Order dto : list) {
+				dto.setOrderDate(dto.getOrderDate().replaceAll("-", ".").substring(5,10));
+				dto.setOrderStateInfo(OrderState.ORDERSTATEINFO[dto.getOrderState()]);
+				dto.setDetailStateInfo(OrderState.DETAILSTATEINFO[dto.getDetailState()]);
+				
+				productState = OrderState.ORDERSTATEINFO[dto.getOrderState()];
+				if(dto.getDetailState() > 0) {
+					productState = OrderState.DETAILSTATEINFO[dto.getDetailState()];
+				}
+				dto.setStateProduct(productState);
+				
+				// 배송 완료후 지난 일자
+				if(dto.getOrderState() == 5 && dto.getStateDate() != null) {
+					Date beginDate = formatter.parse(dto.getStateDate());
+					gap = (endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60 * 1000);
+					dto.setAfterDelivery(gap);
+				}
+			}
+			*/
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		return list;
 	}
 }

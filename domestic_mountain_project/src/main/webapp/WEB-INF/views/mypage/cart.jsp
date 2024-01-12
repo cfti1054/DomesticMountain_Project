@@ -17,6 +17,44 @@
 </style>
 
 <script type="text/javascript">
+$(function(){
+	let cartSize = "${list.size()}";
+	if(cartSize!=="" && cartSize!=="0") {
+		$(".cart-chkAll").prop("checked", true);
+		$("form input[name=nums]").prop("checked", true);
+	}
+	
+    $(".cart-chkAll").click(function() {
+    	$("form input[name=nums]").prop("checked", $(this).is(":checked"));
+    });
+});
+
+function deleteCartAll() {
+	// 장바구니 비우기
+	if(! confirm('장바구니를 비우시겠습니까 ? ')) {
+		return;
+	}
+
+	location.href = '${pageContext.request.contextPath}/mypage/deleteCartAll';	
+}
+
+function deleteCartSelect() {
+	// 선택된 항목 삭제
+	let cnt = $("form input[name=nums]:checked").length;
+    if (cnt === 0) {
+		alert("삭제할 상품을 선택해주세요. ");
+		return;
+    }
+    
+	if(! confirm('선택한 상품을 장바구니에서 비우시겠습니까 ? ')) {
+		return;
+	}
+	
+	const f = document.cartForm;
+	f.action = "${pageContext.request.contextPath}/mypage/deleteListCart";
+	f.submit();
+}
+
 
 // 결제로 이동
 function sendOk() {
@@ -39,13 +77,13 @@ $(function(){
 		let total = product_price * qty;
 		
 		$tr.find(".product_prices").text(total.toLocaleString());
-		$tr.find("input[name=product_prices]").val(total);
+		$tr.find("input[name=od_total_amounts]").val(total);
 	});
 	
 	$(".btnPlus").click(function(){
 		const $tr = $(this).closest("tr");
 		let qty = Number($tr.find("input[name=buyQtys]").val()) || 1;
-		let price = Number($tr.find("input[name=product_prices]").val()) || 0;
+		let product_price = Number($tr.find("input[name=product_prices]").val()) || 0;
 	
 		if(qty >= 99) {
 			return false;
@@ -56,7 +94,7 @@ $(function(){
 		let total = product_price * qty;
 		
 		$tr.find(".product_prices").text(total.toLocaleString());
-		$tr.find("input[name=product_prices]").val(total);
+		$tr.find("input[name=od_total_amounts]").val(total);
 	});
 });	
 
@@ -96,9 +134,10 @@ $(function(){
                 />
                 <label class="checkbox-label" for="checkbox">모두&nbsp;선택/해제</label>
               </div>
-              
-              <button type="button" class="delete-button btn cart-deleteCheck" onclick="deleteCartSelect();">상품삭제</button>
-              
+              <div>
+              <button type="button" class="delete-button btn cart-deleteCheck" onclick="deleteCartAll();">모두 비우기</button>
+              <button type="button" class="delete-button btn cart-deleteCheck" onclick="deleteCartSelect();">선택 삭제</button>
+              </div>
             </div>
             
             <h3 class="cart-title">배송 상품(개)</h3>
@@ -111,6 +150,7 @@ $(function(){
 		            <tr class="cart-container">
 		              <td class="flex gap-15 mt-10">
 		                <input class="checkbox" name="nums" type="checkbox" value="${dto.detail_num2}">
+		                <input type="hidden" name="cart_nums" value="${dto.cart_num}">
 		              </td>
 		                <td class="w-144 h-144">
 		                  <img class="border rounded" src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
@@ -124,15 +164,15 @@ $(function(){
 							<input type="hidden" name="detail_nums2" value="${dto.detail_num2}">		                	
 		                </td>
 		                <td class="number-input-container">
-		                  <input type="text" name="buyQtys" class="number-input" value="${dto.qty}" readonly class="form-control">
+		                  <input type="text" name="buyQtys" class="number-input" value="${dto.qty}" >
 		                  <div>
-		                    <button class="number-input-button btn btnPlus">▲</button>
-		                    <button class="number-input-button btn btnMinus">▼</button>
+		                    <button type="button" class="number-input-button btn btnPlus">▲</button>
+		                    <button type="button" class="number-input-button btn btnMinus">▼</button>
 		                  </div>
 		                </td>
 		                <td class="cart-price">
-							<label><fmt:formatNumber value="${dto.product_price}"/></label><label>원</label>
-							<input type="hidden" name="product_prices" value="${dto.product_price}">
+							<label><fmt:formatNumber value="${dto.od_total_amount}"/></label><label>원</label>
+							<input type="hidden" name="od_total_amounts" value="${dto.od_total_amount}">
 		                </td>
 		            </tr>
 				</c:forEach>
@@ -162,12 +202,12 @@ $(function(){
 			            <div class="cart-right-section__bottom">
 			              <div class="flex justify-between p-20 mt-20">
 			                <span class="highlight-text">결제예상금액</span>
-			                <span class="highlight-text"></span>
-			                <input type="hidden" name="total_amounts" value="">
+			                <span class="highlight-text">${od_total_amount}</span>
+			                <input type="hidden" name="od_total_amounts" value="${dto.od_total_amount}">
 			              </div>
 			              <div class="flex-center mt-30 mx-10">
 			                <button class="primary-button flex-center">
-			                  주문하기(3개)
+			                  주문하기
 			                </button>
 			              </div>
 			            </div>

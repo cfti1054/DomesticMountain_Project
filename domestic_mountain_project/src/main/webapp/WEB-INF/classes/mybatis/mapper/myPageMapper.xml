@@ -5,10 +5,10 @@
 
 	<!-- 장바구니 등록 -->
 	<insert id="insertCart" parameterType="com.fa.plus.domain.Order">
-		INSERT INTO cart(useridx, detail_num1, detail_num2, product_num,
+		INSERT INTO cart(cart_num, useridx, detail_num1, detail_num2, product_num,
 			cart_reg_date, qty, cart_update_date)
-				VALUES(#{useridx}, #{detail_num1}, #{detail_num2}, #{product_num},
-					SYSDATE, #{qty}, SYSDATE)		
+				VALUES(cart_seq.NEXTVAL, #{useridx}, #{detail_num1},
+				#{detail_num2}, #{product_num}, SYSDATE, #{qty}, SYSDATE)		
 	</insert>
 	
 	<!-- 장바구니 업데이트 -->
@@ -16,9 +16,9 @@
 		UPDATE cart SET qty = #{qty}, cart_update_date = SYSDATE
 		WHERE detail_num2 = #{detail_num2} AND useridx = #{useridx}
 	</update>	
-
+	
 	<select id="findByCartId" parameterType="map" resultType="com.fa.plus.domain.Order">
-		SELECT useridx, detail_num1, detail_num2, qty, product_num,
+		SELECT cart_num, useridx, detail_num1, detail_num2, qty, product_num,
 			cart_reg_date, cart_update_date
 		FROM cart
 		WHERE detail_num2 = #{detail_num2} AND useridx = #{useridx}
@@ -26,10 +26,10 @@
 
 	<!-- 장바구니 리스트 -->
 	<select id="listCart" resultType="com.fa.plus.domain.Order" parameterType="Long">
-		SELECT useridx, c.detail_num1, c.detail_num2, c.product_num, qty,
+		SELECT c.cart_num, useridx, c.detail_num1, c.detail_num2, c.product_num, c.qty,
 			c.cart_reg_date, c.cart_update_date, product_name,
 				d.option_value, d2.option_value option_value2,
-					product_summary, product_price
+					product_summary, p.product_price
 		FROM cart c
 		JOIN product p ON c.product_num = p.product_num
 		JOIN optionDetail d ON c.detail_num1 = d.detail_num
@@ -38,6 +38,7 @@
 		ORDER BY cart_reg_date DESC 
 	</select>
 	
+	<!-- 장바구니 삭제 -->
 	<delete id="deleteCart" parameterType="map">
 		DELETE FROM cart
 		WHERE useridx = #{useridx} 
@@ -52,7 +53,8 @@
 			</foreach>
 		</if>
 	</delete>
-
+	
+	<!-- 장바구니 만료 -->
 	<delete id="deleteCartExpiration">
 		DELETE FROM cart
 		WHERE cart_reg_date + 15 &lt; SYSDATE
@@ -69,4 +71,21 @@
 		WHERE m1.useridx = #{useridx}
 	</select>	
 
+	<!-- 결제 내역 -->
+	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.Order">
+		SELECT to.order_num, order_datetime, transport_date, order_delete,
+			order_total_money, shipping, order_sale, order_point, order_earn,
+				total_amount, to.useridx, od.product_num, product_name,
+					de.detail_num1, detail_num2, de.option_value,
+						de2.option_value option_value2, to.order_total_money,
+							od.od_total_amount
+		FROM totalorder to
+		JOIN order_detail od ON to.order_num = od.order_num
+		JOIN product p ON od.product_num = p.product_num
+		JOIN optionDetail de ON od.detail_num1 = op.detail_num
+		JOIN optionDetail de2 ON od.detail_num2 = de2.detail_num
+		WHERE to.useridx = #{useridx} AND userDelete = 0
+		ORDER BY order_datetime DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY		
+	</select>
 </mapper>

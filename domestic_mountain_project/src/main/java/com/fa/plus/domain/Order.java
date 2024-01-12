@@ -18,6 +18,7 @@ public class Order {
 	
 	
 	// 장바구니
+	private long cart_num;					// 장바구니 번호
 	private long useridx;					// 회원번호
 		// private Long detail_num1;				// 상세번호(색상, 구분)
 		// private Long detail_num2;				// 상세번호(사이즈)
@@ -27,6 +28,7 @@ public class Order {
 	//	private int qty;						// 제품수량
 	
 	// 상품들
+	private List<Long> cart_nums;			// 장바구니 번호
 	private List<Long> product_nums;		// 상품번호(리스트용)
 	private List<Long> detail_nums;			// 상세번호
 	private List<Long> detail_nums2;		// 상세번호2
@@ -574,6 +576,18 @@ public class Order {
 	}
 	public void setRank_num(long rank_num) {
 		this.rank_num = rank_num;
+	}
+	public long getCart_num() {
+		return cart_num;
+	}
+	public void setCart_num(long cart_num) {
+		this.cart_num = cart_num;
+	}
+	public List<Long> getCart_nums() {
+		return cart_nums;
+	}
+	public void setCart_nums(List<Long> cart_nums) {
+		this.cart_nums = cart_nums;
 	}
 	
 	

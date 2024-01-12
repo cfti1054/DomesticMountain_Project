@@ -21,4 +21,8 @@ public interface MyPageMapper {
 	
 	public List<MemberManage> listMember(long useridx); // 회원리스트
 	public MemberManage findById(long useridx); // 회원찾기
+
+	// 결제내역
+	public int countPayment(Map<String, Object> map);
+	public List<Order> listPayment(Map<String, Object> map);
 }
