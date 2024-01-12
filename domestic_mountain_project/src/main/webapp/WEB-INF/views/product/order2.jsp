@@ -370,14 +370,11 @@ function sendOk(mode) {
 
 
 						<div class="row-style mt-2">
-							<div class="col-auto fs-5 pe-2 text-danger">50%</div>
 
 							<div class="col text-end">
 								<label class="fs-5 pe-2 fw-semibold"> <fmt:formatNumber
 										value="${dto.product_price}" />원
-								</label> <label class="fs-6 fw-light text-decoration-line-through">
-									<fmt:formatNumber value="${dto.product_price}" />원
-								</label>
+								</label> 
 
 							</div>
 						</div>
