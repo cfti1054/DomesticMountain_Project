@@ -22,6 +22,13 @@ public class User {
 	private String tel2;
 	private String tel3;
 	
+	// rank
+	private long uph_num;			// 등급 변경번호(시퀀스)
+	private int rank_num;			// 회원 등급 번호
+	private String update_rank; 	// 등급 변동 날짜 (디폴트 : 브론즈)
+	
+	
+	
 	
 	// private int failure_cnt;
 	// private String last_login
@@ -133,6 +140,24 @@ public class User {
 	}
 	public void setTel3(String tel3) {
 		this.tel3 = tel3;
+	}
+	public long getUph_num() {
+		return uph_num;
+	}
+	public void setUph_num(long uph_num) {
+		this.uph_num = uph_num;
+	}
+	public int getRank_num() {
+		return rank_num;
+	}
+	public void setRank_num(int rank_num) {
+		this.rank_num = rank_num;
+	}
+	public String getUpdate_rank() {
+		return update_rank;
+	}
+	public void setUpdate_rank(String update_rank) {
+		this.update_rank = update_rank;
 	}
 
 }

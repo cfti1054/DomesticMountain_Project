@@ -1,6 +1,7 @@
 package com.fa.plus.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
 			// user1, user2 테이블에 저장
 			mapper.insertUser1(dto);
 			mapper.insertUser2(dto);
+			mapper.insertRank(dto);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,7 +100,6 @@ public class UserServiceImpl implements UserService {
 //			dto.setUser_pwd(encPwd);
 			
 			mapper.updateUser1(dto);
-			
 			mapper.updateUser2(dto);
 			
 		} catch (Exception e) {
@@ -140,7 +141,7 @@ public class UserServiceImpl implements UserService {
 		boolean b = false;
 		
 		try {
-			//List<User> list = mapper.findByEmail(email);
+			// List<User> list = mapper.findByEmail(email);
 		} catch (Exception e) {
 			
 		}

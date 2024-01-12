@@ -17,7 +17,8 @@ public interface UserMapper {
 	public void insertUserAll(long useridx) throws SQLException; //
 	public void insertUser1(User dto) throws SQLException; //
 	public void insertUser2(User dto) throws SQLException; //
-	public void insertUser12(User dto) throws SQLException; //
+	public void insertRank(User dto) throws SQLException;
+	public void insertUser12(User dto) throws SQLException; // insert all 
 	
 	
 	public User findById(String user_id); // 아이디 찾기

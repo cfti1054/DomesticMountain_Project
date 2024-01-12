@@ -24,6 +24,11 @@
 			VALUES(#{useridx}, #{user_id}, #{user_name}, #{user_pwd}, 1, SYSDATE)
 	</insert>
 	
+	<insert id="insertRank" parameterType="com.fa.plus.domain.User">
+		INSERT INTO user_rank_history(uph_num, rank_num, update_rank, useridx)
+			VALUES (user_rank_history_seq.NEXTVAL, 1, SYSDATE, #{useridx})
+	</insert>
+	
 	<insert id="insertUser2" parameterType="com.fa.plus.domain.User">
 		INSERT INTO user2(useridx, birth, email, addr1, addr2, zip, tel)
 			VALUES(#{useridx}, #{birth}, #{email},
