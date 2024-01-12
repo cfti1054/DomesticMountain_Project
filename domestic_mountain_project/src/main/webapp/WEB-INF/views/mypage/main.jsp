@@ -25,27 +25,30 @@
 	<div class="body-container">
 		<div class="mypage-main">
 			<div class="mypage-left">
-				<div class="mymain-img-div">
-					<img class="mymain-img"
-						src="${pageContext.request.contextPath}/resources/images/climbing.png">
-					<h2>박진영</h2>
-					<span>jypark234@naver.com</span>
-				</div>
-				<p class="p1">내프로필</p>
-				<p class="p1" ><a href="${pageContext.request.contextPath}/mypage/cart">장바구니</a></p>
-				<p class="p1">이력관리</p>
-				<br>
-				<hr>
-				<p class="p2">스마트봇 상담</p>
-				<p class="p2">회원톡톡</p>
-				<br> <img class="ad-img"
-					src="${pageContext.request.contextPath}/resources/images/mypage.jpg">
-				<hr>
-				<br>
-				<p class="p3">로그아웃&nbsp;&nbsp; | &nbsp;&nbsp;고객센터&nbsp;&nbsp; |
-					&nbsp;&nbsp;한국어</p>
-				<img class="left-footer-img"
-					src="${pageContext.request.contextPath}/resources/images/logo/logo_black.png">
+				<c:forEach var="dto" items="${list}">
+					<div class="mymain-img-div">
+						<img class="mymain-img"
+							src="${pageContext.request.contextPath}/resources/images/climbing.png">
+						<h2>${dto.user_name}</h2>
+						<span>${dto.email}</span>
+						<input type="hidden" name="useridx" value="${dto.useridx}">
+					</div>
+					<p class="p1">내프로필</p>
+					<p class="p1" ><a href="${pageContext.request.contextPath}/mypage/cart">장바구니</a></p>
+					<p class="p1">이력관리</p>
+					<br>
+					<hr>
+					<p class="p2">스마트봇 상담</p>
+					<p class="p2">회원톡톡</p>
+					<br> <img class="ad-img"
+						src="${pageContext.request.contextPath}/resources/images/mypage.jpg">
+					<hr>
+					<br>
+					<p class="p3">로그아웃&nbsp;&nbsp; | &nbsp;&nbsp;고객센터&nbsp;&nbsp; |
+						&nbsp;&nbsp;한국어</p>
+					<img class="left-footer-img"
+						src="${pageContext.request.contextPath}/resources/images/logo/logo_black.png">
+				</c:forEach>
 			</div>
 
 
@@ -53,6 +56,7 @@
 				<br>
 				<br>
 				<div class="profile">
+				<c:forEach var="dto" items="${list}">
 					<div class="profile-correction" style="border-bottom: 1px solid #ccc;">
 						<div class="privacy-main">
 							<div>
@@ -60,8 +64,8 @@
 									src="${pageContext.request.contextPath}/resources/images/climbing.png">
 							</div>
 							<div>
-								<span style="font-weight: bold; font-size: 20px;">박진영</span><br>
-								<span style="font-weight: lighter; font-size: 15px;">jypark234@naver.com</span>
+								<span style="font-weight: bold; font-size: 20px;">${dto.user_name}</span><br>
+								<span style="font-weight: lighter; font-size: 15px;">${dto.email}</span>
 							</div>
 						</div>
 						<button type="submit" class="btn_edit">
@@ -75,7 +79,7 @@
 								<i class="small-img fa-solid fa-phone"></i>
 							</div>
 							<div>
-								<span style="font-size: 13px;">+82 010-1111-2222</span>
+								<span style="font-size: 13px;">+82 ${dto.tel}</span>
 							</div>
 						</div>
 					</div>
@@ -86,7 +90,7 @@
 								<i class="small-img fa-solid fa-cake-candles"></i>
 							</div>
 							<div>
-								<span style="font-size: 13px;">2019-03-01</span>
+								<span style="font-size: 13px;">${dto.birth}</span>
 							</div>
 						</div>
 					</div>
@@ -97,10 +101,12 @@
 								<i class="small-img fa-solid fa-location-dot"></i>
 							</div>
 							<div>
-								<span style="font-size: 13px;">서울시 강남구 @@@@@</span>
+								<span style="font-size: 13px;">${dto.addr1}, ${dto.addr2}</span>
 							</div>
 						</div>
 					</div>
+					
+				</c:forEach>	
 				</div>
 				<br>
 

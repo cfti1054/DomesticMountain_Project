@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.domain.Order;
 
 @Mapper
@@ -17,4 +18,7 @@ public interface MyPageMapper {
 	public List<Order> listCart(long useridx);		   		// 카트 리스트
 	public void deleteCart(Map<String, Object> map) throws SQLException; // 장바구니 삭제
 	public void deleteCartExpiration() throws SQLException;	// 장바구니 만료
+	
+	public List<MemberManage> listMember(long useridx); // 회원리스트
+	public MemberManage findById(long useridx); // 회원찾기
 }
