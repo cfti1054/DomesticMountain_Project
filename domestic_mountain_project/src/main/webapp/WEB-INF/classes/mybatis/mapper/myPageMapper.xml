@@ -8,7 +8,7 @@
 		INSERT INTO cart(cart_num, useridx, detail_num1, detail_num2, product_num,
 			cart_reg_date, qty, cart_update_date)
 				VALUES(cart_seq.NEXTVAL, #{useridx}, #{detail_num1},
-				#{detail_num2}, #{product_num}, SYSDATE, #{qty}, SYSDATE)		
+				#{detail_num2, jdbcType=BIGINT}, #{product_num}, SYSDATE, #{qty}, SYSDATE)		
 	</insert>
 	
 	<!-- 장바구니 업데이트 -->

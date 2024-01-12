@@ -76,7 +76,7 @@ $(function(){
 		$tr.find("input[name=buyQtys]").val(qty);
 		let total = product_price * qty;
 		
-		$tr.find(".product_prices").text(total.toLocaleString());
+		$tr.find(".cart-price").text(total.toLocaleString());
 		$tr.find("input[name=od_total_amounts]").val(total);
 	});
 	
@@ -84,7 +84,7 @@ $(function(){
 		const $tr = $(this).closest("tr");
 		let qty = Number($tr.find("input[name=buyQtys]").val()) || 1;
 		let product_price = Number($tr.find("input[name=product_prices]").val()) || 0;
-	
+		
 		if(qty >= 99) {
 			return false;
 		}
@@ -93,7 +93,7 @@ $(function(){
 		$tr.find("input[name=buyQtys]").val(qty);
 		let total = product_price * qty;
 		
-		$tr.find(".product_prices").text(total.toLocaleString());
+		$tr.find(".cart-price").text(total.toLocaleString());
 		$tr.find("input[name=od_total_amounts]").val(total);
 	});
 });	
@@ -140,7 +140,7 @@ $(function(){
               </div>
             </div>
             
-            <h3 class="cart-title">배송 상품(개)</h3>
+            <h3 class="cart-title">배송 상품</h3>
             <hr class="divide-line-gray mt-10" />
             
             
@@ -157,21 +157,22 @@ $(function(){
 		               </td>
 		                <td class="cart-name">
 		                	<p>이름${dto.product_name}</p>
-		                	<p>선택사항 : ${dto.option_value}, ${dto.option_value2}</p>
+		                	<p style="font-size: small; font-weight: bold;">선택사항 : ${dto.option_value}, ${dto.option_value2}</p>
 		         
 							<input type="hidden" name="product_nums" value="${dto.product_num}">
 							<input type="hidden" name="detail_nums" value="${dto.detail_num1}">
-							<input type="hidden" name="detail_nums2" value="${dto.detail_num2}">		                	
+							<input type="hidden" name="detail_nums2" value="${dto.detail_num2}">		                		                	
 		                </td>
 		                <td class="number-input-container">
 		                  <input type="text" name="buyQtys" class="number-input" value="${dto.qty}" >
+		                  <input type="hidden" name="product_prices" value="${dto.product_price}">	
 		                  <div>
 		                    <button type="button" class="number-input-button btn btnPlus">▲</button>
 		                    <button type="button" class="number-input-button btn btnMinus">▼</button>
 		                  </div>
 		                </td>
 		                <td class="cart-price">
-							<label><fmt:formatNumber value="${dto.od_total_amount}"/></label><label>원</label>
+							<label><fmt:formatNumber value="${dto.od_total_amount}"/>원</label>
 							<input type="hidden" name="od_total_amounts" value="${dto.od_total_amount}">
 		                </td>
 		            </tr>
@@ -201,7 +202,6 @@ $(function(){
 			            <hr class="divide-line-thin" />
 			            <div class="cart-right-section__bottom">
 			              <div class="flex justify-between p-20 mt-20">
-			                <span class="highlight-text">결제예상금액</span>
 			                <span class="highlight-text">${od_total_amount}</span>
 			                <input type="hidden" name="od_total_amounts" value="${dto.od_total_amount}">
 			              </div>

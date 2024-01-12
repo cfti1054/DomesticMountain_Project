@@ -63,9 +63,9 @@ public class MypageController {
 	@GetMapping("cart")
 	public String listCart(HttpSession session,
 			Model model) throws Exception {
-
+		
 		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
-
+		
 		List<Order> list = service.listCart(info.getUseridx());
 		
 		model.addAttribute("list", list);

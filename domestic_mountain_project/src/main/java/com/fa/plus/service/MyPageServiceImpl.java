@@ -26,13 +26,19 @@ public class MyPageServiceImpl implements MyPageService {
 		map.put("useridx", dto.getUseridx());
 		
 		try {
+			if(dto.getDetail_num2() !=  null && dto.getDetail_num2()== 0) {
+				dto.setDetail_num2(null);
+			}			
+					
 			for(int i = 0; i < dto.getProduct_nums().size(); i++) {
 				map.put("detail_num2", dto.getDetail_nums2().get(i));
+				
 				
 				dto.setProduct_num(dto.getProduct_nums().get(i));
 				dto.setDetail_num1(dto.getDetail_nums().get(i));
 				dto.setDetail_num2(dto.getDetail_nums2().get(i));
 				dto.setQty(dto.getBuyQtys().get(i));
+				
 				
 				if(mapper.findByCartId(map) == null) {
 					mapper.insertCart(dto);
@@ -56,9 +62,11 @@ public class MyPageServiceImpl implements MyPageService {
 			for(Order dto : list) {
 
 				dto.setOd_total_amount(dto.getProduct_price() * dto.getQty());
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 		return list;
