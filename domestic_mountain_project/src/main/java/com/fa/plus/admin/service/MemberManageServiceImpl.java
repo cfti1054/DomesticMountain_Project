@@ -172,5 +172,18 @@ public class MemberManageServiceImpl implements MemberManageService {
 		return list;
 	}
 
+	@Override
+	public List<MemberManage> listMember2(Map<String, Object> map) {
+		List<MemberManage> list = null;
+		
+		try {
+			list = mapper.listMember2(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 	
 }

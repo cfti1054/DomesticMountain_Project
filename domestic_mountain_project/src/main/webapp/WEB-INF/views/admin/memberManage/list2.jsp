@@ -227,8 +227,17 @@ function printMemberManage() {
 	<main class="mt-4">
 		<div class="container-fluid px-4">
 
-			<h2>등급변경 내역</h2>
+			<h2>회원 목록</h2>
+			<hr>
 			
+			<div>
+				<ul class="tabs">
+					<li id="tab-0" data-tab="0"><i class="fa-solid fa-person"></i>&nbsp;회원
+						리스트</li>
+					<li id="tab-1" data-tab="1"><i
+						class="fa-solid fa-chart-column"></i>&nbsp;회원 분석</li>
+				</ul>
+			</div>
 
 			<div class="container">
 
@@ -255,6 +264,7 @@ function printMemberManage() {
 							type="hidden" name="page" value="1">
 						<button type="button" class="btn" onclick="searchList()"
 							style="width: 100px; padding: 3px;">검색</button>
+						<a>${dataCount}개(${page}/${total_page} 페이지)</a>
 					</form>
 					<button type="button" class="btn1" onclick="printMemberManage();"
 						style="float: right;">Print</button>
@@ -272,12 +282,10 @@ function printMemberManage() {
 					<table class="table table-border table-form" id="">
 						<tr>
 							<td style="width: 10%;" align="center">회원번호</td>
-							<td style="width: 10%;" align="center">회원이름</td>
-							<td style="width: 10%;" align="center">회원구분</td>
-							<td style="width: 10%;" align="center">생년월일</td>
-							<td style="width: 30%;" align="center">등급변동날짜</td>
-							<td style="width: 10%;" align="center">회원등급</td>
-							<td style="width: 10%;" align="center">할인율</td>
+							<td style="width: 15%;" align="center">회원이름</td>
+							<td style="width: 15%;" align="center">회원구분</td>
+							<td style="width: 20%;" align="center">생년월일</td>
+							<td style="width: 30%;" align="center">가입일</td>
 							<td style="width: 10%;" align="center">상태</td>
 						</tr>
 
@@ -288,9 +296,7 @@ function printMemberManage() {
 								<td align="center">
 									${dto.usership==1?"일반회원":(dto.usership==51?"직원":"관리자")}</td>
 								<td align="center">${dto.birth}</td>
-								<td align="center">${dto.update_rank}</td>
-								<td align="center">${dto.rank1}</td>
-								<td align="center">${dto.sale}%</td>
+								<td align="center">${dto.reg_date}</td>
 								<td align="center">${dto.enabled==1?"활성":"잠금"}</td>
 							</tr>
 						</c:forEach>

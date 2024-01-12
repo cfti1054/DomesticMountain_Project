@@ -33,7 +33,7 @@
 			</if>
 
 		</where> 
-		ORDER BY useridx DESC
+		ORDER BY update_rank DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 
@@ -52,6 +52,28 @@
 			
 		</where> 
     </select>
+    
+	<!-- 리스트 출력2  -->
+	<select id="listMember2" parameterType="map" resultType="com.fa.plus.admin.domain.MemberManage">
+		SELECT m1.useridx, usership, user_name, 
+			m1.reg_date, 
+			enabled, email, tel, 
+			TO_CHAR(birth, 'YYYY-MM-DD') birth,
+			u.rank_num, uph_num, update_rank, rank1, base_order_money, sale
+		FROM userall m
+		JOIN user1 m1 ON m.useridx = m1.useridx
+		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
+		LEFT OUTER JOIN user_rank_history u ON m1.useridx = u.useridx  
+		LEFT OUTER JOIN user_rank r ON u.rank_num = r.rank_num
+		<where>
+			<if test="kwd!=null and kwd!='' ">
+				<include refid="where-list"/>
+			</if>
+
+		</where> 
+		ORDER BY useridx DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>    
 
 	<select id="findById" parameterType="long" resultType="com.fa.plus.admin.domain.MemberManage">
 		SELECT usership, ur.useridx, m1.user_name, m1.user_pwd, m1.enabled,

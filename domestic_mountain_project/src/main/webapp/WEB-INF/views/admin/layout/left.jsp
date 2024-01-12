@@ -70,8 +70,10 @@
 						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 						<nav class="sb-sidenav-menu-nested nav">
 							<a class="nav-link"
-								href="${pageContext.request.contextPath}/admin/memberManage/list">회원
+								href="${pageContext.request.contextPath}/admin/memberManage/list2">회원
 								목록</a> 
+							<a class="nav-link"
+								href="${pageContext.request.contextPath}/admin/memberManage/list">등급변경내역</a> 								
 						</nav>
 					</div>
 

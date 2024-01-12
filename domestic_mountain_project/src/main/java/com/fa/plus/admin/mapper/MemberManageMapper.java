@@ -13,6 +13,7 @@ import com.fa.plus.admin.domain.MemberManage;
 public interface MemberManageMapper {
 	public int dataCount(Map<String, Object> map);
 	public List<MemberManage> listMember(Map<String, Object> map);
+	public List<MemberManage> listMember2(Map<String, Object> map);
 	
 	public MemberManage findById(long useridx);
 	
