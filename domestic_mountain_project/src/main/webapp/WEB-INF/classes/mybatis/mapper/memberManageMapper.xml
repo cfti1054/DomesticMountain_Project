@@ -58,13 +58,11 @@
 		SELECT m1.useridx, usership, user_name, 
 			m1.reg_date, 
 			enabled, email, tel, 
-			TO_CHAR(birth, 'YYYY-MM-DD') birth,
-			u.rank_num, uph_num, update_rank, rank1, base_order_money, sale
+			TO_CHAR(birth, 'YYYY-MM-DD') birth
 		FROM userall m
 		JOIN user1 m1 ON m.useridx = m1.useridx
 		LEFT OUTER JOIN user2 m2 ON m1.useridx = m2.useridx
-		LEFT OUTER JOIN user_rank_history u ON m1.useridx = u.useridx  
-		LEFT OUTER JOIN user_rank r ON u.rank_num = r.rank_num
+
 		<where>
 			<if test="kwd!=null and kwd!='' ">
 				<include refid="where-list"/>
