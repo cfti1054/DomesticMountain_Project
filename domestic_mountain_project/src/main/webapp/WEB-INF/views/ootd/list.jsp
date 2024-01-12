@@ -162,7 +162,7 @@
 										</button>
 
 										<button type="button" class="btn btn-light"
-											onclick="searchList()">글올리기</button>
+											onclick="location.href='/plus/ootd/write';">글올리기</button>
 									</div>
 								</form>
 							</div>
