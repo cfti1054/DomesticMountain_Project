@@ -3,33 +3,25 @@ package com.fa.plus.admin.domain;
 public class BoardManage {
 	
 	// 공지사항 카테고리
-	public long notice_category_num;
-	public String notice_category_name;
-	public String notice_category_reg_id;
-	public String notice_category_reg_date;
-	public String notice_category_update_id;
-	public String notice_category_update_date;
-	public int notice_category_order;
-	public int notice_category_visible;
+	private long notice_category_num;
+	private String notice_category_name;
+	private String notice_category_reg_id;
+	private String notice_category_reg_date;
+	private String notice_category_update_id;
+	private String notice_category_update_date;
+	private int notice_category_order;
+	private int notice_category_visible;
 	
 	// 공지사항 게시판
-	public long notice_board_num;
-	public String notice_board_title;
-	public String notice_board_content;
-	public int notice_board_hit_count;
-	public String notice_board_reg_id;
-	public String notice_board_reg_date;
-	public String notice_board_update_id;
-	public String notice_board_update_date;
-	public int notice_board_visible;
-	
-	public long getNotice_board_num() {
-		return notice_board_num;
-	}
-	public void setNotice_board_num(long notice_board_num) {
-		this.notice_board_num = notice_board_num;
-	}
-	public String notice_board_invisible_date;
+	private long notice_board_num;
+	private String notice_board_title;
+	private String notice_board_content;
+	private int notice_board_hit_count;
+	private String notice_board_reg_id;
+	private String notice_board_reg_date;
+	private String notice_board_update_id;
+	private String notice_board_update_date;
+	private int notice_board_visible;
 	public long getNotice_category_num() {
 		return notice_category_num;
 	}
@@ -78,6 +70,12 @@ public class BoardManage {
 	public void setNotice_category_visible(int notice_category_visible) {
 		this.notice_category_visible = notice_category_visible;
 	}
+	public long getNotice_board_num() {
+		return notice_board_num;
+	}
+	public void setNotice_board_num(long notice_board_num) {
+		this.notice_board_num = notice_board_num;
+	}
 	public String getNotice_board_title() {
 		return notice_board_title;
 	}
@@ -125,12 +123,6 @@ public class BoardManage {
 	}
 	public void setNotice_board_visible(int notice_board_visible) {
 		this.notice_board_visible = notice_board_visible;
-	}
-	public String getNotice_board_invisible_date() {
-		return notice_board_invisible_date;
-	}
-	public void setNotice_board_invisible_date(String notice_board_invisible_date) {
-		this.notice_board_invisible_date = notice_board_invisible_date;
 	}
 	
 	

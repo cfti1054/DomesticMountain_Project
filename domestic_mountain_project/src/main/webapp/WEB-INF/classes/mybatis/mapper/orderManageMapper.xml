@@ -3,9 +3,157 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.admin.mapper.OrderManageMapper">
 
-<select id="list_order" resultType="com.fa.plus.admin.domain.OrderManage">
-	SELECT order_num, TO_CHAR(order_datetime, 'YYYY-MM-DD') AS order_date , TO_CHAR(transport_date, 'YYYY-MM-DD') AS transport_date, order_total_money, shipping, order_sale, order_point, order_earn, total_amount, u.useridx, u.user_name
+
+
+<select id="order_count" parameterType="map" resultType="Integer">
+SELECT NVL(COUNT(*), 0)
+FROM totalOrder o
+LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
+LEFT OUTER JOIN order_detail od ON od.order_num = od.order_num
+<where>
+	<!--  배송 전 주문들 -->
+		<if test="state == 1">
+			(od.change_num &gt;= 0 AND od.change_num &lt;= 1 
+				OR od.change_num &gt;= 3 AND od.change_num &lt;= 7
+				OR od.change_num &gt;= 9 AND od.change_num &lt;= 11
+				OR od.change_num &gt;= 13 AND od.change_num &lt;= 15 )
+		</if>
+	<!-- after 배송 주문들 --> 
+		<if test="state == 3">
+			(od.change_num = 0 
+				OR od.change_num = 8
+				OR  od.change_num = 12 
+				OR od.change_num &gt;= 16 AND od.change_num &lt;= 18
+				)
+		</if>
+	</where>
+</select>
+ 
+ 
+ 
+<select id="list_order" parameterType="map" resultType="com.fa.plus.admin.domain.OrderManage">
+	SELECT o.order_num, o.useridx, NVL(u.user_id,'손님') AS user_name, 
+		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS order_date, 
+		TO_CHAR(transport_date, 'YYYY-MM-DD') AS transport_date, order_total_money, 
+		shipping, order_sale, order_point, order_earn, total_amount,
+		NVL(total_order_count, 0) total_order_count, NVL(total_qty, 0) total_qty,
+        NVL(detail_cancel_count, 0) detail_cancel_count, os.order_status
 	FROM totalorder o
-	JOIN user1 u ON o.useridx = u.useridx
-	</select> 
+	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
+	LEFT OUTER JOIN (
+		SELECT order_num, COUNT(*) total_order_count, SUM(od_count) total_qty,
+		COUNT(DECODE(change_num,3,1,4,1,5,1,6,1,7,1,8,1,9,1,10,1,11,1,12,1,13,1,14,1)) detail_cancel_count
+		FROM order_detail
+		GROUP BY order_num
+	) od ON o.order_num = od.order_num
+	JOIN order_detail dt ON o.order_num = dt.order_num
+	JOIN order_status os ON dt.change_num = os.change_num
+	<where>
+	 <!-- 배송 전 주문들 -->
+		<if test="state == 1">
+			(dt.change_num &gt;= 0 AND dt.change_num &lt;= 1 
+				OR dt.change_num &gt;= 3 AND dt.change_num &lt;= 7
+				OR dt.change_num &gt;= 9 AND dt.change_num &lt;= 11
+				OR dt.change_num &gt;= 13 AND dt.change_num &lt;= 15 )
+		</if>
+	<!-- after 배송 주문들 -->
+		<if test="state == 3">
+			(dt.change_num = 0 
+				OR dt.change_num = 8
+				OR  dt.change_num = 12 
+				OR dt.change_num &gt;= 16 AND dt.change_num &lt;= 18
+				)
+		</if>
+	</where>
+	ORDER BY o.order_num DESC
+</select> 
+
+<!-- 결제정보 추가필요 -->
+<select id="find_by_order_num"  parameterType="Long" resultType="com.fa.plus.admin.domain.OrderManage">
+SELECT o.order_num, u.useridx, NVL(u.user_id, '손님') AS user_name, 
+	TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI:SS') AS order_date, order_total_money,
+	o.order_earn, o.shipping, o.total_amount, os.change_num, order_status,
+	TO_CHAR(transport_date, 'YYYY-MM-DD') AS transport_date,  
+	order_sale, order_point, order_earn, total_amount, 
+	cp_name, tracking_no AS invoiceNumber, 
+	payMethod, card_name, auth_number, auth_date
+	FROM totalorder o
+	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
+	LEFT OUTER JOIN card c ON o.order_num = c.order_num
+	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
+	LEFT OUTER JOIN company cp ON t.cp_num = cp.cp_num
+    LEFT OUTER JOIN order_detail od ON o.order_num = od.order_num
+    LEFT OUTER JOIN order_status os ON od.change_num = os.change_num
+	WHERE o.order_num = #{order_num}
+</select>
+
+<select id="find_order_detail_by_order_num" parameterType="Long" resultType="com.fa.plus.admin.domain.OrderManage">
+SELECT od.order_num AS order_num, od.od_num AS order_detail_num,
+	od_count AS order_detail_count,	
+	od_total_amount AS order_detail_total_amount, o.order_sale,
+	op.detail_num, op.option_value, od.detail_num2, op2.option_value AS option_value2,
+	OD_PRICE AS order_detail_price,
+ 	p.product_name, od.change_num, p.product_num
+ 	
+FROM order_detail od
+JOIN product p ON od.product_num = p.product_num
+JOIN optionDetail op ON od.detail_num1 = op.detail_num
+JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
+JOIN totalOrder o ON od.order_num = o.order_num
+
+WHERE order_num = #{order_num} 
+</select>
+
+<select id="order_detail_count" parameterType="map" resultType="Integer">
+SELECT NVL(COUNT(*), 0)
+FROM totalorder o
+LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
+JOIN order_detail od ON o.order_num = od.order_num
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<select id="list_company" resultType="map">
+SELECT cp_num AS company_num, cp_name AS company_name, cp_tel AS company_tel, cp_email AS company_email
+FROM company
+
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
