@@ -262,6 +262,13 @@ function sendOk() {
 								</div>
 
 							</div>
+							<div style="margin: 5px;">
+									<button type="button" name="payment-cancell" id="payment-point"
+										class="Payment_payment-button cancell" onclick="location.href='${pageContext.request.contextPath}/product/product/'"
+										style="float: right; background-color: unset; margin-bottom: 10px;">
+									<span class="blind">결제 취소</span>
+									</button>
+							</div>
 						</div>
 					</div>
 
