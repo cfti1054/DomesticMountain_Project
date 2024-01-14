@@ -7,6 +7,7 @@ import com.fa.plus.domain.Order;
 
 public interface OrderService {
 	public String productOrderNumber();
+	public String productWaybillNumber();
 	public void insertOrder(Order dto) throws Exception;
 	public Order findByMyInformation(long useridx);
 	

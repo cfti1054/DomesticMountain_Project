@@ -10,29 +10,37 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
-	<!-- 주문, 주문상세, (주문상세상태), 배송, 배송지, (결제카드정보) -->
+	<select id="findByMaxWaybillNumber" resultType="String">
+		SELECT tracking_no
+		FROM transports
+		ORDER BY reception_datatime DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	<!-- 주문, 주문상세, 배송, 배송지, (결제카드정보) -->
 	
 	
 	<!-- 시퀀스로 받으면 안됨 수정 필요 -->
 	<!-- 주문 테이블 -->
 	<insert id="insertOrder" parameterType="com.fa.plus.domain.Order">
 		INSERT INTO totalorder (order_num, order_datetime, transport_date, order_delete, 
-				order_total_money, shipping, order_sale, order_point, order_earn, total_amount, useridx)
-		VALUES (totalorder_seq.NEXTVAL, SYSDATE, #{transport_date, jdbcType=VARCHAR},
-				0, #{order_total_money}, 0, #{order_sale}, 0, 0, #{total_amount}, #{useridx})
+				order_total_money, shipping, order_sale, order_point, order_earn, total_amount, 
+				useridx)
+		VALUES (#{order_num}, SYSDATE, #{transport_date, jdbcType=VARCHAR},
+				0, #{order_total_money}, #{shipping}, #{order_sale}, 0, 0, #{total_amount}, #{useridx})
 	</insert>
 	
-	<!-- 카드 정보? -->
-	<insert id="insertPayDetail" parameterType="com.fa.plus.domain.Order">
-		
-	</insert>
 
 	<!-- 주문 상세 테이블 -->
 	<insert id="insertOrderDetail" parameterType="com.fa.plus.domain.Order">
 		INSERT INTO order_detail (od_num, order_num, detail_num1, detail_num2, od_price, od_count, 
-				od_total_amount, change_num, product_num)
-		VALUES (order_detail.seq.NEXTVAL, totalorder_seq.CURRVAL, #{detail_num1}, #{detail_num2},
-				#{od_price}, #{od_count}, #{od_total_amount}, 0, #{product_num})
+				od_total_amount, change_num, product_num, 
+				order_status_update_useridx, 
+				order_status_update_date)
+		VALUES (order_detail_seq.NEXTVAL, #{order_num}, #{detail_num}, #{detail_num2, jdbcType=INTEGER},
+				#{od_price}, #{od_count}, #{od_total_amount}, 0, #{product_num}, 
+				#{order_status_update_useridx, jdbcType=VARCHAR},
+				SYSDATE)
 	</insert>
 
 	<!-- 배송 + 배송지 -->
@@ -40,13 +48,13 @@
 		INSERT ALL
 			INTO transports (order_num, cp_num, tracking_no, reception_datatime, 
 					tr_status, completion_datetime, transports_memo)
-				VALUES(totalorder_seq.CURRVAL, 1, #{tracking_no}, SYSDATE, 1, 
+				VALUES(#{order_num}, 1, #{tracking_no}, SYSDATE, 1, 
 					#{completion_datetime, jdbcType=VARCHAR},
 					#{transports_memo, jdbcType=VARCHAR})
 			INTO delivery (order_num, address_num, address1, address2, recipient_name, recipient_phone)
-				VALUES (totalorder_seq.CURRVAL, #{address_num}, #{address1}, 
+				VALUES (#{order_num}, #{address_num}, #{address1}, 
 					#{address2}, #{recipient_name}, #{recipient_phone})
-		SELECT * FROM dual;
+		SELECT * FROM dual
 	</update>
 	
 	
@@ -65,7 +73,7 @@
 		WHERE (od.detail_num, od2.detail_num) IN
 		<foreach collection="list" item="item" index="index"
 			open="(" separator="," close=")">
-			(#{item.detail_num1}, #{item.detail_num2})
+			(#{item.detail_num}, #{item.detail_num2})
 		</foreach>
 	</select>
 	
@@ -80,7 +88,7 @@
 		WHERE (od.detail_num) IN
 		<foreach collection="list" item="item" index="index"
 			open="(" separator="," close=")">
-			(#{item.detail_num1})
+			(#{item.detail_num})
 		</foreach>
 	</select>
 

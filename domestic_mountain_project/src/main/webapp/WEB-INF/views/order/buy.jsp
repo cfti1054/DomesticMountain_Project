@@ -19,6 +19,53 @@
 }
 </style>
 
+<script type="text/javascript">
+function sendOk() {
+	const f = document.buyForm;
+	
+	if(! f.shipperName.value) {
+		alert("먼저 배송지를 등록하세요..");
+		return;
+	}
+/* 
+	// 결제 API에서 응답 받을 파라미터
+	let payMethod = "카드결제"; // 결제유형
+	let cardName = "삼성 카드";  // 카드 이름
+	let authNumber = "1234567890"; // 승인번호
+	let authDate = ""; // 승인 날짜
+	// toISOString() : "YYYY-MM-DDTHH:mm:ss.sssZ" 형식
+	authDate = new Date().toISOString().replace('T', ' ').slice(0, -5); // YYYY-MM-DD HH:mm:ss
+
+	// 결제 API에 요청할 파라미터
+	let payment = f.payment.value; // 결제할 금액
+	let merchant_uid = "${productOrderNumber}";  // 고유 주문번호
+	let productName = "${productOrderName}";  // 주문상품명
+	let buyer_email = "${orderUser.email}";  // 구매자 이메일
+	let buyer_name = "${orderUser.userName}";  // 구매자 이름
+	let buyer_tel = "${orderUser.tel}";   // 구매자 전화번호(필수)
+	let buyer_addr = "${orderUser.addr1}" + " " + "${orderUser.addr2}";  // 구매자 주소
+	buyer_addr = buyer_addr.trim();
+	let buyer_postcode = "${orderUser.zip}"; // 구매자 우편번호
+	
+	// 결제 API로 결제 진행
+	
+	
+	
+	// 결제가 성공한 경우 ------------------------
+	
+	// 결제 방식, 카드번호, 승인번호, 결제 날짜
+	f.payMethod.value = payMethod;
+	f.cardName.value = cardName;
+	f.authNumber.value = authNumber;
+	f.authDate.value = authDate;
+ */	
+ 
+ 
+	f.action = "${pageContext.request.contextPath}/order/paymentOk"
+	f.submit();
+}
+</script>
+
 <section class="features-1">
 	<div class="body-container">
 		<div class="amain">
@@ -64,33 +111,33 @@
 								<div class="AddressView_section-info">
 
 									<div class="recipient">
-										<label class="col-sm-2 col-form-label" for="user_name">이름</label>
-										<input type="text" name=user_name id="user_name"
+										<label class="col-sm-2 col-form-label" for="recipient_name">이름</label>
+										<input type="text" name=recipient_name id="recipient_name"
 											style="width: auto;" class="form-control"
-											value="${dto.ud_recipient_name}" placeholder="이름">
+											value="${dto.recipient_name}" placeholder="이름">
 									</div>
 									<div class="recipient">
 										<label class="col-sm-2 col-form-label" for="tel1">전화번호</label>
 										<div class="col-sm-3 pe-1">
-											<input type="text" name="ud_recipient_phone1"
-												id="ud_recipient_phone1" class="form-control"
-												value="${dto.ud_recipient_phone1}" maxlength="3">
+											<input type="text" name="recipient_phone1"
+												id="recipient_phone1" class="form-control"
+												value="${dto.recipient_phone1}" maxlength="3">
 										</div>
 										<div class="col-sm-1 px-1" style="width: 2%;">
 											<p class="form-control-plaintext text-center">-</p>
 										</div>
 										<div class="col-sm-3 px-1">
-											<input type="text" name="ud_recipient_phone2"
-												id="ud_recipient_phone2" class="form-control"
-												value="${dto.ud_recipient_phone2}" maxlength="4">
+											<input type="text" name="recipient_phone2"
+												id="recipient_phone2" class="form-control"
+												value="${dto.recipient_phone2}" maxlength="4">
 										</div>
 										<div class="col-sm-1 px-1" style="width: 2%;">
 											<p class="form-control-plaintext text-center">-</p>
 										</div>
 										<div class="col-sm-3 ps-1">
-											<input type="text" name="ud_recipient_phone3"
-												id="ud_recipient_phone3" class="form-control"
-												value="${dto.ud_recipient_phone3}" maxlength="4">
+											<input type="text" name="recipient_phone3"
+												id="recipient_phone3" class="form-control"
+												value="${dto.recipient_phone3}" maxlength="4">
 										</div>
 									</div>
 
@@ -100,9 +147,9 @@
 											<label class="col-sm-2 col-form-label" for="zip">우편번호</label>
 											<div class="col-sm-5">
 												<div class="input-group">
-													<input type="text" name="ud_addressnum" id="ud_addressnum"
+													<input type="text" name="address_num" id="address_num"
 														class="form-control" placeholder="우편번호"
-														value="${dto.ud_addressnum}" readonly>
+														value="${dto.address_num}" readonly>
 													<button class="btn btn-light" type="button"
 														onclick="daumPostcode();">우편번호 검색</button>
 												</div>
@@ -113,24 +160,24 @@
 											<label class="col-sm-2 col-form-label" for="addr1">주소</label>
 											<div class="col-sm-10">
 												<div style="margin-bottom: 8px;">
-													<input type="text" name="ud_address1" id="ud_address1"
+													<input type="text" name="address1" id="address1"
 														class="form-control" placeholder="기본 주소"
-														value="${dto.ud_address1}" readonly>
+														value="${dto.address1}" readonly>
 												</div>
 												<div>
-													<input type="text" name="ud_address2" id="ud_address2"
+													<input type="text" name="address2" id="address2"
 														class="form-control" placeholder="상세 주소"
-														value="${dto.ud_address2}">
+														value="${dto.address2}">
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="recipient">
-										<label class="col-sm-2 col-form-label" for="memo">메모</label> <input
-											type="text" name=memo id="memo" class="form-control"
-											value="${dto.ud_memo}" placeholder="요청사항을 입력하세요.">
+										<label class="col-sm-2 col-form-label" for="transports_memo">메모</label>
+										<input type="text" name=transports_memo id="transports_memo"
+											class="form-control"
+											value="${dto.transports_memo}" placeholder="요구사항을 입력하세요">
 									</div>
-
 
 								</div>
 								<div class="recipient">
@@ -139,6 +186,10 @@
 										정보와 배송인 정보가 같습니다.</label>
 								</div>
 							</div>
+							
+							
+							<input type="hidden" name="shipperName" value="${sessionScope.loginUser.username}">
+						
 
 						</div>
 
@@ -171,7 +222,12 @@
 											</div>
 										</div>
 									</div>
-
+									<input type="hidden" name="product_nums" value="${dto.product_num}">
+									<input type="hidden" name="detail_nums" value="${dto.detail_num}">
+									<input type="hidden" name="detail_nums2" value="${dto.detail_num2}">
+									<input type="hidden" name="buyQtys" value="${dto.qty}">
+									<input type="hidden" name="product_prices" value="${dto.product_price}">
+									<input type="hidden" name="od_total_amounts" value="${dto.total_amount}">
 								</div>
 							</c:forEach>
 							<div class="AmountArea_article AmountArea_type-order">
@@ -193,7 +249,14 @@
 
 								<div class="Payment_payment">
 									<button type="button" name="payment " id="payment-point"
-										class="Payment_payment-button">
+										class="Payment_payment-button" onclick="sendOk()">
+										<span class="blind">일반 결제</span>
+									</button>
+								</div>
+								
+								<div class="Payment_payment">
+									<button type="button" name="payment " id="payment-point"
+										class="Payment_payment-button kakao-button">
 										<span class="blind">카카오 페이</span>
 									</button>
 								</div>
@@ -247,7 +310,7 @@
 						<div class="Payment-box">
 							<h3 class="order-title">포인트 혜택</h3>
 
-							<div class="AddressView_article">
+							<div class="AddressView_article-point">
 								<div class="Alignment_article">
 									<span class="Alignment_title">회원 등급</span> <span
 										class="Alignment_value">${vo.rank1}</span>
@@ -266,6 +329,16 @@
 								</div>
 							</div>
 						</div>
+						
+						
+						<input type="hidden" name="order_num" value="${productOrderNumber}">
+						<input type="hidden" name="tracking_no" value="${productWaybillNumber}">
+						<input type="hidden" name="order_total_money" value="${totalMoney}">
+						<input type="hidden" name="shipping" value="${deliveryCharge}">
+						<input type="hidden" name="order_sale" value="${percentSale}">
+						<input type="hidden" name="total_amount" value="${payment}">
+						
+						<input type="hidden" name="mode" value="${mode}">
 					</div>
 				</div>
 			</form>
@@ -313,11 +386,11 @@
 						}
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('ud_addressnum').value = data.zonecode; //5자리 새우편번호 사용
-						document.getElementById('ud_address1').value = fullAddr;
+						document.getElementById('address_num').value = data.zonecode; //5자리 새우편번호 사용
+						document.getElementById('address1').value = fullAddr;
 
 						// 커서를 상세주소 필드로 이동한다.
-						document.getElementById('ud_address2').focus();
+						document.getElementById('address2').focus();
 					}
 				}).open();
 	}
@@ -331,27 +404,24 @@
 					function() {//check요소에 이벤트가 발생했을 때 실행할 함수
 
 						if (check.checked == true) { //체크되었다면
-							document.querySelector("#user_name").value = "${sessionScope.loginUser.username}";
-							document.querySelector("#ud_recipient_phone1").value = "${vo.tel1}";
-							document.querySelector("#ud_recipient_phone2").value = "${vo.tel2}";
-							document.querySelector("#ud_recipient_phone3").value = "${vo.tel3}";
-							document.querySelector("#ud_addressnum").value = "${vo.zip}";
-							document.querySelector("#ud_address1").value = "${vo.addr1}";
-							document.querySelector("#ud_address2").value = "${vo.addr2}";
+							document.querySelector("#recipient_name").value = "${sessionScope.loginUser.username}";
+							document.querySelector("#recipient_phone1").value = "${vo.tel1}";
+							document.querySelector("#recipient_phone2").value = "${vo.tel2}";
+							document.querySelector("#recipient_phone3").value = "${vo.tel3}";
+							document.querySelector("#address_num").value = "${vo.zip}";
+							document.querySelector("#address1").value = "${vo.addr1}";
+							document.querySelector("#address2").value = "${vo.addr2}";
 
 						} else {
-							document.querySelector("#user_name").value = "";
-							document.querySelector("#ud_recipient_phone1").value = "";
-							document.querySelector("#ud_recipient_phone2").value = "";
-							document.querySelector("#ud_recipient_phone3").value = "";
-							document.querySelector("#ud_addressnum").value = "";
-							document.querySelector("#ud_address1").value = "";
-							document.querySelector("#ud_address2").value = "";
+							document.querySelector("#recipient_name").value = "";
+							document.querySelector("#recipient_phone1").value = "";
+							document.querySelector("#recipient_phone2").value = "";
+							document.querySelector("#recipient_phone3").value = "";
+							document.querySelector("#address_num").value = "";
+							document.querySelector("#address1").value = "";
+							document.querySelector("#address2").value = "";
 						}
 
-						if (document.querySelector("#ud_recipient_phone1").value !== "${vo.tel1}") {
-							$("#shippingInfo").prop("checked", false);
-						}
 
 					});
 </script>

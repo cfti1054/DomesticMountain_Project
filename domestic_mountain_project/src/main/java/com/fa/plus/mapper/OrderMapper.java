@@ -12,10 +12,11 @@ import com.fa.plus.domain.Order;
 @Mapper
 public interface OrderMapper {
 	public String findByMaxOrderNumber();
+	public String findByMaxWaybillNumber();
 	public Order findByMyInformation(long useridx);
 	
 	public void insertOrder(Order dto) throws SQLException;
-	public void insertPayDetail(Order dto) throws SQLException;
+	// public void insertPayDetail(Order dto) throws SQLException; // 결제 카드 정보 
 	public void insertOrderDetail(Order dto) throws SQLException;
 	public void insertOrderDelivery(Order dto) throws SQLException;
 	

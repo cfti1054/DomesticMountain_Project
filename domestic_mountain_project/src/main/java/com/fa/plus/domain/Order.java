@@ -10,7 +10,8 @@ public class Order {
 	// 수혁이가 쓰는중...(Controller)
 	private int product_price;              // 상품-상품가격
 	private int qty;						// 제품수량
-	private Long detail_num1;				// 상세번호(색상, 구분)
+	
+	private long detail_num;				// 상세번호(색상, 구분)
 	private Long detail_num2;				// 상세번호(사이즈)
 	private int od_total_amount;			// 각 상품의 총 금액 (상품 가격 * 수량)
 	private int sale;						// 할인율
@@ -29,15 +30,22 @@ public class Order {
 	
 	// 상품들
 	private List<Long> cart_nums;			// 장바구니 번호
-	private List<Long> product_nums;		// 상품번호(리스트용)
+	
+	
 	private List<Long> detail_nums;			// 상세번호
 	private List<Long> detail_nums2;		// 상세번호2
+	private List<Integer> product_prices;   // 상품-상품가격
+	private List<Integer> buyQtys;			// 구매수량
+	private List<Integer> od_total_amounts;	// 총 금액
+	private List<Long> product_nums;		// 상품번호(리스트용)
+	
+	
+	
+	
 	private List<String> option_values;		// 옵션값
 	private List<String> option_values2;	// 옵션값2
-	private List<Integer> buyQtys;			// 구매수량
 	private List<Integer> od_counts;		// 총 수량
-	private List<Integer> od_total_amounts;	// 총 금액
-    private List<Integer> product_prices;   // 상품-상품가격
+    
     
 	// 상품
 	private String product_name;			// 상품이름
@@ -68,30 +76,20 @@ public class Order {
 	// 주문 상세
 	private long od_num;					// 주문상세번호			
 	private long change_num;				// 주문상태번호
+	private long order_status_update_useridx;
+	private String order_status_update_date;
 	
-	
-	// 회원 배송지 정보 : user_delivery 테이블
-	private long ud_num;					// 배송지 넘버
-	private String ud_name;					// 배송지명
-	private int ud_addressnum;				// 우편번호
-	private String ud_address1;				// 기본주소
-	private String ud_address2;				// 상세주소
-	private String ud_recipient_name;		// 수령인 
-	private String ud_recipient_phone;		// 수령인 전화번호
-	private String ud_recipient_phone1;
-	private String ud_recipient_phone2;
-	private String ud_recipient_phone3;
-	private String ud_memo;					// 메모(요청사항)
-	private String basics_delivery;			// 기본배송지여부 : T, F
-		// useridx : 회원번호
 	
 	// 배송지 테이블 : delivery 테이블
 		// order_num : 배송테이블 기본키
-	private int address_num;				// 우편번호
+	private String address_num;				// 우편번호
 	private String address1;				// 기본주소
 	private String address2;				// 상세주소
 	private String recipient_name;			// 수령인 
 	private String recipient_phone;			// 수령인 전화번호
+	private String recipient_phone1;			
+	private String recipient_phone2;			
+	private String recipient_phone3;			
 	
 	// 배송 테이블 
 		// order_num : 주문번호
@@ -132,12 +130,6 @@ public class Order {
 	}
 	public void setUseridx(long useridx) {
 		this.useridx = useridx;
-	}
-	public Long getDetail_num1() {
-		return detail_num1;
-	}
-	public void setDetail_num1(Long detail_num1) {
-		this.detail_num1 = detail_num1;
 	}
 	public Long getDetail_num2() {
 		return detail_num2;
@@ -313,64 +305,10 @@ public class Order {
 	public void setOption_value2(String option_value2) {
 		this.option_value2 = option_value2;
 	}
-	public long getUd_num() {
-		return ud_num;
-	}
-	public void setUd_num(long ud_num) {
-		this.ud_num = ud_num;
-	}
-	public String getUd_name() {
-		return ud_name;
-	}
-	public void setUd_name(String ud_name) {
-		this.ud_name = ud_name;
-	}
-	public int getUd_addressnum() {
-		return ud_addressnum;
-	}
-	public void setUd_addressnum(int ud_addressnum) {
-		this.ud_addressnum = ud_addressnum;
-	}
-	public String getUd_address1() {
-		return ud_address1;
-	}
-	public void setUd_address1(String ud_address1) {
-		this.ud_address1 = ud_address1;
-	}
-	public String getUd_address2() {
-		return ud_address2;
-	}
-	public void setUd_address2(String ud_address2) {
-		this.ud_address2 = ud_address2;
-	}
-	public String getUd_recipient_name() {
-		return ud_recipient_name;
-	}
-	public void setUd_recipient_name(String ud_recipient_name) {
-		this.ud_recipient_name = ud_recipient_name;
-	}
-	public String getUd_recipient_phone() {
-		return ud_recipient_phone;
-	}
-	public void setUd_recipient_phone(String ud_recipient_phone) {
-		this.ud_recipient_phone = ud_recipient_phone;
-	}
-	public String getUd_memo() {
-		return ud_memo;
-	}
-	public void setUd_memo(String ud_memo) {
-		this.ud_memo = ud_memo;
-	}
-	public String getBasics_delivery() {
-		return basics_delivery;
-	}
-	public void setBasics_delivery(String basics_delivery) {
-		this.basics_delivery = basics_delivery;
-	}
-	public int getAddress_num() {
+	public String getAddress_num() {
 		return address_num;
 	}
-	public void setAddress_num(int address_num) {
+	public void setAddress_num(String address_num) {
 		this.address_num = address_num;
 	}
 	public String getAddress1() {
@@ -553,24 +491,6 @@ public class Order {
 	public void setTel3(String tel3) {
 		this.tel3 = tel3;
 	}
-	public String getUd_recipient_phone1() {
-		return ud_recipient_phone1;
-	}
-	public void setUd_recipient_phone1(String ud_recipient_phone1) {
-		this.ud_recipient_phone1 = ud_recipient_phone1;
-	}
-	public String getUd_recipient_phone2() {
-		return ud_recipient_phone2;
-	}
-	public void setUd_recipient_phone2(String ud_recipient_phone2) {
-		this.ud_recipient_phone2 = ud_recipient_phone2;
-	}
-	public String getUd_recipient_phone3() {
-		return ud_recipient_phone3;
-	}
-	public void setUd_recipient_phone3(String ud_recipient_phone3) {
-		this.ud_recipient_phone3 = ud_recipient_phone3;
-	}
 	public long getRank_num() {
 		return rank_num;
 	}
@@ -589,6 +509,41 @@ public class Order {
 	public void setCart_nums(List<Long> cart_nums) {
 		this.cart_nums = cart_nums;
 	}
-	
+	public String getRecipient_phone1() {
+		return recipient_phone1;
+	}
+	public void setRecipient_phone1(String recipient_phone1) {
+		this.recipient_phone1 = recipient_phone1;
+	}
+	public String getRecipient_phone2() {
+		return recipient_phone2;
+	}
+	public void setRecipient_phone2(String recipient_phone2) {
+		this.recipient_phone2 = recipient_phone2;
+	}
+	public String getRecipient_phone3() {
+		return recipient_phone3;
+	}
+	public void setRecipient_phone3(String recipient_phone3) {
+		this.recipient_phone3 = recipient_phone3;
+	}
+	public long getOrder_status_update_useridx() {
+		return order_status_update_useridx;
+	}
+	public void setOrder_status_update_useridx(long order_status_update_useridx) {
+		this.order_status_update_useridx = order_status_update_useridx;
+	}
+	public String getOrder_status_update_date() {
+		return order_status_update_date;
+	}
+	public void setOrder_status_update_date(String order_status_update_date) {
+		this.order_status_update_date = order_status_update_date;
+	}
+	public long getDetail_num() {
+		return detail_num;
+	}
+	public void setDetail_num(long detail_num) {
+		this.detail_num = detail_num;
+	}
 	
 }

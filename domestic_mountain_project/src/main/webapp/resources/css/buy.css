@@ -199,9 +199,13 @@
 	line-height: 22px;
 	vertical-align: top;
 	cursor: pointer;
-	background-color: yellow;
+	background-color: #ccc;
 	border-radius: 5px;
 	padding: 10px;
+}
+
+.kakao-button {
+	background-color: yellow;
 }
 
 .Alignment_article {
@@ -252,9 +256,18 @@
 
 .Payment-box .AddressView_article {
 	margin-bottom: 40px;
+	display: flex;
+}
+
+.Payment-box .AddressView_article-point {
+	margin-bottom: 40px;
 }
 
 .recipient {
 	display: flex;
 	margin: 8px;
+}
+
+.Payment-box .AddressView_article .Payment_payment {
+	margin-right: 10px;
 }

@@ -240,11 +240,48 @@ $(function(){
 	$(".order-area").on("click", ".qty-plus", function() {
 		let $order = $(this).closest(".order-qty");
 		let qty = parseInt($order.find("input[name=buyQtys]").val()) + 1;
+		
+		
+		/* 
+		let option_num = $(".requiredOption").attr("data-optionNum");
+		let option_num2 = $(".requiredOption2").attr("data-optionNum2");
+		
+		let dnum = $(this).closest(".input-group").find("input[name=detail_nums]").val();
+		let dnum2 = $(this).val();
+
+		// 옵션이 하나인가 두개인가 체크 -> 해당되는 옵션 넘버를 찾는다 -> 옵션의 수량 조건을 건다.?????
+		if($('.list-option').find('.requiredOption2').length==0) { // 옵션 하나
+			if(option_num) {
+				console.log(option_num)
+				console.log(${dto.total_stock})
+			}
+			
+		} else { // 옵션 두개
+			console.log("옵션 두개");
+			if(option_num2 && option_num) {
+				console.log(option_num, option_num2)
+				console.log(${dto.total_stock})
+			}
+		}
+		 */
+		
+		
+		if(qty > 5) {
+			alert("한 상품 옵션당 최대 5개까지 구매 가능합니다.");
+			$(".requiredOption").val("");
+			$(".requiredOption").trigger("change");
+				
+			totalProductPrice();
+				
+			return false;
+		}
+		
 		$order.find("input[name=buyQtys]").val(qty);
 		let salePrice = $order.find(".product-salePrice").attr("data-salePrice");
 		let item = qty * salePrice;
 		let totalPrice = item.toLocaleString();
 		$order.find(".item-totalPrice").text(totalPrice+"원");
+		
 		
 		totalProductPrice();
 	});
@@ -257,7 +294,6 @@ $(function(){
 			alert("구매 수량은 한개 이상입니다.");
 			$(".requiredOption").val("");
 			$(".requiredOption").trigger("change");
-			$order.remove();
 			
 			totalProductPrice()
 			
@@ -334,7 +370,7 @@ function sendOk(mode) {
 		}
 		
 		f.method = "post";
-		f.action = "#";
+        f.action = "${pageContext.request.contextPath}/mypage/saveCart";
 	}
 	
 	f.submit();
@@ -374,7 +410,7 @@ function sendOk(mode) {
 							<div class="col text-end">
 								<label class="fs-5 pe-2 fw-semibold"> <fmt:formatNumber
 										value="${dto.product_price}" />원
-								</label> 
+								</label>
 
 							</div>
 						</div>
@@ -392,6 +428,10 @@ function sendOk(mode) {
 							</div>
 							<div>
 								<label>회원 등급이 높아짐에 따라 할인율이 더 많아집니다!</label>
+							</div>
+							<div>
+								<label style="color: darkblue; font-weight: 700;">할인 적용
+									가격은 결제 페이지에서 적용됩니다.</label>
 							</div>
 						</div>
 
@@ -447,9 +487,8 @@ function sendOk(mode) {
 									찜하기 <i class="bi bi-heart heart"></i>
 								</button>
 							</div>
-							<div class="col ps-1">
+							<div class="col ps-1" onclick="sendOk('cart');">
 								<button type="button" class="btn w-100 btn-productCart"
-									onclick="sendOk('cart');"
 									${empty sessionScope.member.memberIdx ? "disabled='disabled'" : ""}>
 									장바구니 <i class="bi bi-bag bag"></i>
 								</button>
@@ -465,6 +504,7 @@ function sendOk(mode) {
 </section>
 
 <section class="features-6 features-6-product">
-<br><br>
+	<br>
+	<br>
 	<div class="centered">${dto.product_content}</div>
 </section>

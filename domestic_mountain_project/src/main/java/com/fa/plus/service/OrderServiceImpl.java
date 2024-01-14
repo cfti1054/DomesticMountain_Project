@@ -58,6 +58,48 @@ public class OrderServiceImpl implements OrderService {
 			
 			result = preNumber + String.format("%09d", lastNumber);
 			
+			
+		} catch (Exception e) {
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public String productWaybillNumber() {
+		// 운송장 번호 생성
+		String result = "";
+		
+		try {
+			Calendar cal = Calendar.getInstance();
+			String m = String.format("%02d", (cal.get(Calendar.MONTH) + 1));
+			String d = String.format("%03d", cal.get(Calendar.DATE) * 7);
+			
+			String preNumber = m + d;
+			String savedPreNumber = "0";
+			long savedLastNumber = 0;
+			String maxOrderNumber = mapper.findByMaxWaybillNumber();
+			if(maxOrderNumber != null && maxOrderNumber.length() > 5) {
+				savedPreNumber = maxOrderNumber.substring(0, 5);
+				savedLastNumber = Long.parseLong(maxOrderNumber.substring(5));
+			}
+			
+			long lastNumber = 1;
+			if(! preNumber.equals(savedPreNumber)) {
+				count.set(0);
+				lastNumber = count.incrementAndGet();
+			} else {
+				lastNumber = count.incrementAndGet();
+				
+				if( savedLastNumber >= lastNumber )  {
+					count.set(savedLastNumber);
+					lastNumber = count.incrementAndGet();
+				}
+			}
+			
+			result = preNumber + String.format("%05d", lastNumber);
+			
+			
 		} catch (Exception e) {
 		}
 		
@@ -68,29 +110,34 @@ public class OrderServiceImpl implements OrderService {
 	public void insertOrder(Order dto) throws Exception {
 		try {
 			// 주문 정보 저장
+			
 			mapper.insertOrder(dto);
+			
 
-			// 결재 내역 저장
-			mapper.insertPayDetail(dto);
+			// 결제 내역 저장
+			// mapper.insertPayDetail(dto);
 			
 			// 상세 주문 정보 및 주문 상태 저장
 			for(int i=0; i < dto.getProduct_nums().size(); i++) {
-				dto.setProduct_num(i); // 상품 번호
-				dto.setQty(dto.getBuyQtys().get(i)); // 주문 상품 개수
-				dto.setDetail_num1(dto.getDetail_nums().get(i)); // 옵션1
-				dto.setDetail_num2(dto.getDetail_nums2().get(i)); // 옵션2
-				dto.setProduct_price(dto.getProduct_prices().get(i)); // 상품 가격
-				dto.setOd_total_amount(dto.getOd_total_amounts().get(i)); // 총 가격?
-				
-				// dto.setSale(dto.getSales().get(i)); // 할인가격
-				// dto.setSavedMoney(dto.getSavedMoneys().get(i)); // 포인트
-			
+				dto.setProduct_num(dto.getProduct_nums().get(i)); // 상품 번호
+				dto.setOd_count(dto.getBuyQtys().get(i)); // 주문 상품 개수
+				dto.setDetail_num(dto.getDetail_nums().get(i)); // 옵션1
+				if(dto.getDetail_nums2().size() != 0) {
+					dto.setDetail_num2(dto.getDetail_nums2().get(i)); // 옵션2
+				}
+				dto.setOd_price(dto.getProduct_prices().get(i)); // 상품 가격
+				dto.setOd_total_amount(dto.getOd_total_amounts().get(i)); // 총 가격
+
 				// 상세 주문 정보 저장
 				mapper.insertOrderDetail(dto);
 			}
 			
 			// 배송지 저장 
+			
+			dto.setRecipient_phone(dto.getRecipient_phone1() + "-" + dto.getRecipient_phone2() + "-" + dto.getRecipient_phone3());
+			
 			mapper.insertOrderDelivery(dto);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,7 +1,7 @@
 package com.fa.plus.domain;
 
 public class Product {
-	private int product_num;
+	private int product_num;		// 재품 번호
 	private int category_num;
 	private String product_name;
 	private int product_status;
@@ -18,10 +18,10 @@ public class Product {
 	private int category_order;
 	private int parent_num;
 	
-	private int stock_num;
-	private int total_stock;
-	private int detail_num1;
-	private int detail_num2;
+	private int stock_num;			// 재고 번호
+	private int total_stock;		// 재고 수량
+	private int detail_num1;		// 옵션1
+	private int detail_num2;		// 옵션2
 	
 	private int option_num;
 	private String option_name;
