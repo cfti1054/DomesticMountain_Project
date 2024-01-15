@@ -71,21 +71,40 @@
 		WHERE m1.useridx = #{useridx}
 	</select>	
 
-	<!-- 결제 내역 -->
-	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.Order">
-		SELECT to.order_num, order_datetime, transport_date, order_delete,
-			order_total_money, shipping, order_sale, order_point, order_earn,
-				total_amount, to.useridx, od.product_num, product_name,
-					de.detail_num1, detail_num2, de.option_value,
-						de2.option_value option_value2, to.order_total_money,
-							od.od_total_amount
-		FROM totalorder to
-		JOIN order_detail od ON to.order_num = od.order_num
-		JOIN product p ON od.product_num = p.product_num
-		JOIN optionDetail de ON od.detail_num1 = op.detail_num
-		JOIN optionDetail de2 ON od.detail_num2 = de2.detail_num
-		WHERE to.useridx = #{useridx} AND userDelete = 0
-		ORDER BY order_datetime DESC
-		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY		
+
+	
+	<!-- 찜 리스트 -->
+	<select id="listZzim" resultType="com.fa.plus.domain.Zzim" parameterType="Long">
+		SELECT p.product_num, u.useridx, zzim_date, zzim_update_date,
+			p.product_name, p.product_price, u.user_name, p.product_summary
+		FROM zzim z
+		JOIN user1 u ON z.useridx = u.useridx
+		JOIN product p ON z.product_num = p.product_num
+		WHERE u.useridx = #{useridx}
+		ORDER BY zzim_date DESC 
 	</select>
+	
+	<!-- 찜목록 등록 -->
+	<insert id="insertZzim" parameterType="com.fa.plus.domain.Zzim">
+		INSERT INTO zzim(product_num, useridx, zzim_date, zzim_update_date)
+			VALUES(#{product_num}, #{useridx}, SYSDATE, SYSDATE)	
+	</insert>		
+	
+	<!-- 찜목록 삭제 -->
+	<delete id="deleteZzim" parameterType="map">
+		DELETE FROM zzim
+		WHERE useridx = #{useridx} 
+		<if test="gubun == 'item' ">
+			AND product_num = #{product_num}
+		</if>
+		<if test="gubun == 'list' ">
+			AND product_num IN
+			<foreach collection="list" item="product_num" index="index"
+				open="(" separator="," close=")">
+				#{product_num}
+			</foreach>
+		</if>
+	</delete>	
+	
+	
 </mapper>

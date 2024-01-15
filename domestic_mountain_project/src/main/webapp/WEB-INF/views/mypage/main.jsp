@@ -33,9 +33,9 @@
 						<span>${dto.email}</span>
 						<input type="hidden" name="useridx" value="${dto.useridx}">
 					</div>
-					<p class="p1">내프로필</p>
-					<p class="p1" ><a href="${pageContext.request.contextPath}/mypage/cart">장바구니</a></p>
-					<p class="p1">이력관리</p>
+					<p class="p1"><a href="${pageContext.request.contextPath}/mypage/zzim">찜 목록</a></p>
+					<p class="p1"><a href="${pageContext.request.contextPath}/mypage/cart">장바구니</a></p>
+					<p class="p1"><a href="*">주문내역</p>
 					<br>
 					<hr>
 					<p class="p2">스마트봇 상담</p>

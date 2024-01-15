@@ -152,11 +152,11 @@ $(function(){
 		                <input class="checkbox" name="nums" type="checkbox" value="${dto.detail_num2}">
 		                <input type="hidden" name="cart_nums" value="${dto.cart_num}">
 		              </td>
-		                <td class="w-144 h-144">
+		                <td class="w-144 h-144" >
 		                  <img class="border rounded" src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
 		               </td>
 		                <td class="cart-name">
-		                	<p>이름${dto.product_name}</p>
+		                	<p>${dto.product_name}</p>
 		                	<p style="font-size: small; font-weight: bold;">선택사항 : ${dto.option_value}, ${dto.option_value2}</p>
 		         
 							<input type="hidden" name="product_nums" value="${dto.product_num}">

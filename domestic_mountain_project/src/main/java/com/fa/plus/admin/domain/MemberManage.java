@@ -5,7 +5,7 @@ public class MemberManage {
 	private long usership;		// 회원권한
 	
 	private String user_id; 	// 회원아이디
-	private String user_name; 	// 회원 비밀번호
+	private String user_name; 	// 회원이름
 	private int enabled; 		// 로그인 가능 여부
 	private String reg_date; 	// 가입일
 	private String pwd_date; 	// 비밀번호 변경일

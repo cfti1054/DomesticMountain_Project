@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.domain.Order;
+import com.fa.plus.domain.Zzim;
 
 @Mapper
 public interface MyPageMapper {
@@ -21,8 +22,11 @@ public interface MyPageMapper {
 	
 	public List<MemberManage> listMember(long useridx); // 회원리스트
 	public MemberManage findById(long useridx); // 회원찾기
+	
+	// 찜
+	public List<Zzim> listZzim(long useridx);
+	public void insertZzim(Zzim dto) throws SQLException;
+	public void deleteZzim(Map<String, Object> map) throws SQLException; 
+	
 
-	// 결제내역
-	public int countPayment(Map<String, Object> map);
-	public List<Order> listPayment(Map<String, Object> map);
 }

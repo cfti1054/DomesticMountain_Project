@@ -1,10 +1,12 @@
 package com.fa.plus.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.domain.Order;
+import com.fa.plus.domain.Zzim;
 
 public interface MyPageService {
 	public void insertCart(Order dto) throws Exception;	// 카트 등록
@@ -13,7 +15,11 @@ public interface MyPageService {
 	
 	public List<MemberManage> listMember(long useridx);	// 회원 리스트
 	public MemberManage findById(long useridx);
+	
+	// 찜
+	public List<Zzim> listZzim(long useridx);			// 찜 리스트
+	public void insertZzim(Zzim dto) throws SQLException;
+	public void deleteZzim(Map<String, Object> map) throws SQLException;
+	
 
-	public int countPayment(Map<String, Object> map);
-	public List<Order> listPayment(Map<String, Object> map);
 }
