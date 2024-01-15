@@ -5,7 +5,7 @@
 
 
 
-<select id="order_count" parameterType="map" resultType="Integer">
+<select id="orderCount" parameterType="map" resultType="Integer">
 SELECT NVL(COUNT(*), 0)
 FROM totalOrder o
 LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
@@ -31,13 +31,13 @@ LEFT OUTER JOIN order_detail od ON od.order_num = od.order_num
  
  
  
-<select id="list_order" parameterType="map" resultType="com.fa.plus.admin.domain.OrderManage">
-	SELECT o.order_num, o.useridx, NVL(u.user_id,'손님') AS user_name, 
-		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS order_date, 
-		TO_CHAR(transport_date, 'YYYY-MM-DD') AS transport_date, order_total_money, 
-		shipping, order_sale, order_point, order_earn, total_amount,
-		NVL(total_order_count, 0) total_order_count, NVL(total_qty, 0) total_qty,
-        NVL(detail_cancel_count, 0) detail_cancel_count, os.order_status
+<select id="listOrder" parameterType="map" resultType="com.fa.plus.admin.domain.OrderManage">
+SELECT o.order_num AS orderNum, o.useridx as memberIdx, NVL(u.user_id,'손님') AS userName, order_total_money AS totalMoney,
+		order_point usedSaved, shipping AS deliveryCharge, total_amount AS payment, refund_total_amount AS cancelAmount,
+		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS orderDate,
+		dt.change_num AS orderState, cp.cp_name AS deliveryName, t.tracking_no AS invoiceNumber,
+		NVL(total_order_count, 0) totalOrderCount, NVL(total_qty, 0) totalQty,
+		NVL(detail_cancel_count, 0) detailCancelCount
 	FROM totalorder o
 	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
 	LEFT OUTER JOIN (
@@ -46,8 +46,11 @@ LEFT OUTER JOIN order_detail od ON od.order_num = od.order_num
 		FROM order_detail
 		GROUP BY order_num
 	) od ON o.order_num = od.order_num
-	JOIN order_detail dt ON o.order_num = dt.order_num
-	JOIN order_status os ON dt.change_num = os.change_num
+	LEFT OUTER JOIN order_detail dt ON o.order_num = dt.order_num
+	LEFT OUTER JOIN order_status os ON dt.change_num = os.change_num
+	LEFT OUTER JOIN refund rf ON dt.od_num = rf.od_num
+	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
+	LEFT OUTER JOIN company cp ON cp.cp_num = t.cp_num
 	<where>
 	 <!-- 배송 전 주문들 -->
 		<if test="state == 1">
@@ -69,14 +72,12 @@ LEFT OUTER JOIN order_detail od ON od.order_num = od.order_num
 </select> 
 
 <!-- 결제정보 추가필요 -->
-<select id="find_by_order_num"  parameterType="Long" resultType="com.fa.plus.admin.domain.OrderManage">
-SELECT o.order_num, u.useridx, NVL(u.user_id, '손님') AS user_name, 
-	TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI:SS') AS order_date, order_total_money,
-	o.order_earn, o.shipping, o.total_amount, os.change_num, order_status,
-	TO_CHAR(transport_date, 'YYYY-MM-DD') AS transport_date,  
-	order_sale, order_point, order_earn, total_amount, 
-	cp_name, tracking_no AS invoiceNumber, 
-	payMethod, card_name, auth_number, auth_date
+<select id="findById"  parameterType="String" resultType="com.fa.plus.admin.domain.OrderManage">
+SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님') AS userName, 
+	TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI:SS') AS orderDate, order_total_money AS totalMoney,
+	o.order_point AS usedSaved, o.shipping AS deliveryCharge, o.total_amount AS payment, refund_total_amount AS cancelAmount ,  tr_status AS orderState, order_status,
+	TO_CHAR(ORDER_STATUS_UPDATE_DATE, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, cp_name AS deliveryName, tracking_no AS invoiceNumber, 
+	payMethod, card_name AS cardName, auth_number AS authNumber, auth_date AS authDate	
 	FROM totalorder o
 	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
 	LEFT OUTER JOIN card c ON o.order_num = c.order_num
@@ -84,63 +85,176 @@ SELECT o.order_num, u.useridx, NVL(u.user_id, '손님') AS user_name,
 	LEFT OUTER JOIN company cp ON t.cp_num = cp.cp_num
     LEFT OUTER JOIN order_detail od ON o.order_num = od.order_num
     LEFT OUTER JOIN order_status os ON od.change_num = os.change_num
+    LEFT OUTER JOIN refund rf ON od.od_num = rf.od_num
 	WHERE o.order_num = #{order_num}
 </select>
 
-<select id="find_order_detail_by_order_num" parameterType="Long" resultType="com.fa.plus.admin.domain.OrderManage">
-SELECT od.order_num AS order_num, od.od_num AS order_detail_num,
-	od_count AS order_detail_count,	
-	od_total_amount AS order_detail_total_amount, o.order_sale,
-	op.detail_num, op.option_value, od.detail_num2, op2.option_value AS option_value2,
-	OD_PRICE AS order_detail_price,
- 	p.product_name, od.change_num, p.product_num
- 	
+<select id="findByOrderDetails" parameterType="String" resultType="com.fa.plus.admin.domain.OrderDetailManage">
+SELECT od.order_num AS orderNum, od.od_num AS orderDetailNum,
+	od_count AS qty, od.od_price AS price, NVL((0.01 * rk.sale) * od_total_amount,0) AS salePrice,
+	((0.01 * rk.sale) * od_total_amount) * od_count AS productMoney, order_earn AS savedMoney,
+	op.detail_num AS detailNum, op.option_value AS optionValue, od.detail_num2 AS detailNum2, op2.option_value AS optionValue2,
+	od.product_num AS productNum, product_name AS productName, od.change_num AS detailState
 FROM order_detail od
 JOIN product p ON od.product_num = p.product_num
 JOIN optionDetail op ON od.detail_num1 = op.detail_num
 JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
 JOIN totalOrder o ON od.order_num = o.order_num
+JOIN user_rank_history ht ON o.useridx = ht.useridx
+JOIN user_rank rk ON ht.rank_num = rk.rank_num
 
-WHERE order_num = #{order_num} 
+WHERE od.order_num = #{order_num} 
 </select>
 
-<select id="order_detail_count" parameterType="map" resultType="Integer">
+<select id="orderDetailCount" parameterType="map" resultType="Integer">
 SELECT NVL(COUNT(*), 0)
 FROM totalorder o
 LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
 JOIN order_detail od ON o.order_num = od.order_num
 </select>
 
+<select id="listOrderDetail" parameterType = "map" resultType="com.fa.plus.admin.domain.OrderDetailManage">
+	SELECT o.order_num AS orderNum, o.useridx AS memberidx, NVL(user_name,'손님') AS userName,
+		order_datetime AS orderDate, order_total_money AS totalMoney, order_earn AS savedMoney,
+		order_point AS userSaved, shipping AS deliveryCharge, total_amount AS payment, od_count AS qty, NVL((0.01 * rk.sale) * od_total_amount,0) AS salePrice, 
+		od.od_num AS orderDetailNum, od.product_num AS productNum, product_name AS productName,
+            op.detail_num AS detailNum, op.option_value AS optionValue, od.detail_num2 AS detailNum2, op2.option_value AS optionValue2
+            , os.change_num AS detailState, cp_name, tracking_no
 
+	FROM totalorder o
+	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
+	JOIN order_detail od ON o.order_num = od.order_num
+	JOIN user_rank_history ht ON o.useridx = ht.useridx
+	JOIN user_rank rk ON ht.rank_num = rk.rank_num
+	JOIN product p ON od.product_num = p.product_num
+	JOIN optionDetail op ON od.detail_num1 = op.detail_num
+	JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
+      JOIN order_status os ON od.change_num = os.change_num
+	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
+	LEFT OUTER JOIN company cp ON t.cp_num = cp.cp_num
+</select>
 
+<update id="updateOrderState" parameterType="map">
+	UPDATE transports SET tr_status = #{orderState}, order_status_update_date = SYSDATE,
+	order_status_update_useridx = 1
+	WHERE order_num = #{orderNum}
+</update>
 
+<update id="updateOrderState2" parameterType="map">
+	UPDATE order_detail SET change_num = 
+	<choose>
+		<when test="orderState=1">
+			16
+		</when>
+		<when test="orderState=2">
+			17
+		</when>
+		<when test="orderState=3">
+			18
+		</when>	
+		
+		<otherwise>
+			15
+		</otherwise>	
+	</choose>	
+	, order_status_update_date = SYSDATE,
+	order_status_update_useridx = 1
+	WHERE order_num = #{orderNum}
+</update>
 
+<select id="findByTotalCancelAmount" parameterType="String" resultType="Integer">
+	SELECT NVL(SUM(productMoney), 0) totalCancelAmount
+	FROM (
+		SELECT ((0.01 * rk.sale) * od_total_amount) * od_count AS productMoney
+		FROM order_detail od
+		JOIN totalorder o ON od.order_num = o.order_num 
+		JOIN user_rank_history ht ON o.useridx = ht.useridx
+		JOIN user_rank rk ON ht.rank_num = rk.rank_num
+		WHERE od.order_num = #{orderNum} AND (change_num != 3 AND change_num != 5 AND change_num != 12)
+	)
+</select>
 
-
-
-
-
-
-
-
-
-
-
-
-<select id="list_company" resultType="map">
-SELECT cp_num AS company_num, cp_name AS company_name, cp_tel AS company_tel, cp_email AS company_email
-FROM company
-
+<select id="totalOrderCount" parameterType="String" resultType="Integer">
+SELECT NVL(COUNT(*), 0) orderCount
+FROM order_detail
+WHERE order_num = #{orderNum} AND (change_num != 3 AND change_num != 5 AND change_num != 12)
 </select>
 
 
+<!-- 주문취소는 수정 필요  -->
+<insert id="updateCancelAmount1" parameterType="map">
+INSERT INTO refund(OD_NUM,REFUND_REASON,REFUND_STATUS,
+	REFUND_TOTAL_AMOUNT,REFUND_MEMO,REFUND_APPLICATION_DATE,)
+VALUES(#{orderDetailNum}, '환불 / 취소 사유', #{change_num}, #{totalAmount},'취소 메모', SYSDATE)	
+</insert>
+
+<update id="updateCancelAmount2" parameterType="map">
+UPDATE order_detail SET change_num = 3
+WHERE od_num = #{orderDetailNum}
+</update>
+
+<!-- orderState, deliveryName <-> cp_name 적용 필요 -->
+<insert id="updateOrderInvoiceNumber1" parameterType="map">
+	INSERT INTO transports(order_num, cp_num, tracking_no, reception_datatime, tr_status)
+	VALUES(#{orderNum}, #{cpNum}, #{invoiceNumber}, SYSDATE, #{trStatus})
+</insert>
+
+<update id="updateOrderInvoiceNumber2" parameterType="map">
+	UPDATE order_detail SET change_num = #{orderState}, order_status_update_date = SYSDATE,
+		order_status_update_useridx = 1
+	WHERE order_num = #{orderNum}
+</update>
+
+<update id="updateOrderDetailState" parameterType="map">
+	UPDATE order_detail SET change_num = #{detailState}
+	WHERE od_num = #{orderDetailNum}
+</update>
+
+<select id="listDeliveryCompany" resultType="map">
+SELECT cp_num AS num, cp_name AS deliveryName, cp_tel AS tel, cp_email AS email
+FROM company
+</select>
+
+<insert id="insertDetailStateInfo" parameterType="map">
+<!-- 에러나면 조치 필요  -->
+</insert>
+
+<select id="listDetailStateInfo" parameterType="long" resultType="map">
+	SELECT od.change_num AS stateNum, od_num AS orderDetailNum, o.useridx AS memberidx, NVL(user_name,'손님') AS userName,
+		od.change_num AS detailState, order_status AS stateMemo, TO_CHAR(order_status_update_date, 'YYYYMMDD HH24:MI') AS detailStateDate
+	FROM order_detail od
+	JOIN totalOrder o ON od.order_num = o.order_num 
+	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
+	JOIN order_status os ON od.change_num = os.change_num
+	WHERE od_num = #{orderDetailNum}
+	ORDER BY od.change_num DESC 
+</select>
 
 
+<!--배송완료 5일후 자동 구매 확정  -->
+<select id="listExpiredPeriodOrder" resultType="Long">
+	SELECT od_num AS orderDetailNum
+	FROM totalOrder o
+	JOIN order_detail od ON o.order_num = od.order_num
+	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
+	WHERE  ( od.change_num = 5 OR t.tr_status = 3) AND TRUNC(SYSDATE - order_dateTime) &gt; = 5  
+</select>
 
+<update id="updateAutoPurchaseconfirmation" parameterType="Long">
+	UPDATE order_detail SET change_num = 2
+	WHERE od_num = #{orderDetailNum}
+</update>
 
-
-
-
+<update id="updateAutoPurchaseconfirmation2">
+		UPDATE order_detail SET change_num = 2
+		WHERE od_num IN (
+			SELECT od_num AS orderDetailNum
+	FROM totalOrder o
+	JOIN order_detail od ON o.order_num = od.order_num
+	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
+	WHERE  ( od.change_num = 5 OR t.tr_status = 3) AND TRUNC(SYSDATE - order_dateTime) &gt; = 5  
+		)
+</update>
 
 
 

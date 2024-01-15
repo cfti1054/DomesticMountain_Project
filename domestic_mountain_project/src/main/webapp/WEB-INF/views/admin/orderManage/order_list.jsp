@@ -115,7 +115,6 @@
 									<tr>
 										<th>주문번호</th>
 										<th>주문일자</th>
-										<th>배송일자</th>
 										<th>회원 아이디</th>
 										<th>${orderStatus=="status"?"주문수량":"송장번호"}</th>
 										<th>취소건수</th>
@@ -128,7 +127,6 @@
 									<tr>
 										<th>주문번호</th>
 										<th>주문일자</th>
-										<th>배송일자</th>
 										<th>회원 아이디</th>
 										<th>${orderStatus=="status"?"주문수량":"송장번호"}</th>
 										<th>취소건수</th>
@@ -140,20 +138,19 @@
 								<tbody>
 									<c:forEach var="dto" items="${list}" varStatus="status">
 
-										<tr valign="middle" data-orderNum="${dto.order_num}">
-											<td>${dto.order_num}</td>
-											<td>${dto.order_date}</td>
-											<td>${dto.transport_date}</td>
-											<td>${dto.user_name}</td>
+										<tr valign="middle" data-orderNum="${dto.orderNum}">
+											<td>${dto.orderNum}</td>
+											<td>${dto.orderDate}</td>
+											<td>${dto.userName}</td>
 											<td>${orderStatus=="status"?dto.totalQty:dto.invoiceNumber}</td>
 											<td>${dto.detailCancelCount}</td>
-											<td><fmt:formatNumber value="${dto.order_total_money}"/></td>
-											<td><fmt:formatNumber value="${dto.total_amount}"/></td>
+											<td><fmt:formatNumber value="${dto.totalMoney}"/></td>
+											<td><fmt:formatNumber value="${dto.payment}"/></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<input type="hidden" value="${dto.useridx}">
+							<input type="hidden" value="${dto.memberIdx}">
 						</form>
 					</div>
 				</div>
@@ -289,7 +286,7 @@
 $(function(){
 	$("input[name=orderstatus]").click(function(){
 		let state = $(this).val();
-		let url = "${pageContext.request.contextPath}/admin/order/${orderStatus}?state="+state;
+		let url = "${pageContext.request.contextPath}/admin/orderManage/${orderStatus}?state="+state;
 		location.href = url;
 	});
 });
@@ -299,7 +296,7 @@ $(function(){
 	$(".orderStatus-update").click(function(){
 		let orderNum = $(this).attr("data-orderNum");
 		let orderStatus = "${orderStatus}";
-		let url = "${pageContext.request.contextPath}/admin/order/detail/info?orderNum="+orderNum+"&orderStatus="+orderStatus;
+		let url = "${pageContext.request.contextPath}/admin/orderManage/order_detail/info?orderNum="+orderNum+"&orderStatus="+orderStatus;
 		
 		$(".modal-order-detail").load(url);
 		
@@ -328,7 +325,7 @@ $(function(){
 		}
 		
 		let qs = $('form[name=invoiceNumberForm]').serialize();
-		let url = '${pageContext.request.contextPath}/admin/order/detail/invoiceNumber';
+		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/invoiceNumber';
 		
 		const fn = function(data) {
 			if(data.state === "true") {
@@ -338,7 +335,7 @@ $(function(){
 				$("#prepareDialogModal").modal("hide");
 				$("#orderDialogModal").modal("hide");
 				
-				let url = "${pageContext.request.contextPath}/admin/order/${orderStatus}";
+				let url = "${pageContext.request.contextPath}/admin/orderManage/${orderStatus}";
 				location.href = url;
 			} else {
 				alert("발송처리가 실패 했습니다.");
@@ -365,14 +362,14 @@ $(function(){
 		}
 		
 		let qs = 'orderNum=' + orderNum + '&orderState=' + orderState;
-		let url = '${pageContext.request.contextPath}/admin/order/detail/delivery';
+		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/delivery';
 
 		const fn = function(data) {
 			if(data.state === "true") {
 				
 				$("#orderDialogModal").modal("hide");
 				
-				let url = "${pageContext.request.contextPath}/admin/order/${orderStatus}";
+				let url = "${pageContext.request.contextPath}/admin/orderManage/${orderStatus}";
 				location.href = url;
 			}
 		};
@@ -452,7 +449,7 @@ $(function(){
 		let orderDetailNum = f.orderDetailNum.value;
 		
 		let qs = 'orderDetailNum=' + orderDetailNum;
-		let url = '${pageContext.request.contextPath}/admin/order/detail/listDetailState';
+		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/listDetailState';
 
 		const fn = function(data) {
 			let out;
@@ -505,7 +502,7 @@ $(function(){
 		}
 		
 		let qs = $('form[name=detailStateForm]').serialize();
-		let url = '${pageContext.request.contextPath}/admin/order/detail/updateDetailState';
+		let url = '${pageContext.request.contextPath}/admin/orderManage/detail/updateDetailState';
 
 		const fn = function(data) {
 			if(data.state === "true") {
@@ -542,7 +539,8 @@ $(document).ready(function() {
 	
 	$('#order_table tbody').on( 'click', 'tr', function () {
 		let orderNum = $(this).attr("data-orderNum");
-		let url = "${pageContext.request.contextPath}/admin/orderManage/order_detail/info?orderNum="+orderNum;
+		let orderStatus = "${orderStatus}";
+		let url = "${pageContext.request.contextPath}/admin/orderManage/order_detail/info?orderNum="+orderNum+"&orderStatus="+orderStatus;
 		
 		$(".modal-order-detail").load(url);
 		

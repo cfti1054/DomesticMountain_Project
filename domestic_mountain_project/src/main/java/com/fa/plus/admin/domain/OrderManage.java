@@ -1,207 +1,213 @@
 package com.fa.plus.admin.domain;
 
 public class OrderManage {
-	// 주문
-	private long order_num;
-	private String order_date;
-	private String transport_date;
-	private int order_total_money;
-	private int shipping;
-	private int order_sale;
-	private int order_point;
-	private int order_earn;
-	private int total_amount;
-	private long useridx;
-	private String user_name;
-	//임시
+	private String orderNum;
+	private String memberIdx;
+	private String userName;
+	private String orderDate;
 	
+	private int totalMoney;
+	private int usedSaved;
+	private int deliveryCharge;
+	private int payment;
+	private int cancelAmount;
+	private int orderState;
+	private String orderStateInfo;
 	
-	// 주문 상세 
-	private long order_detail_num;
-	private long detail_num1;
-	private long detail_num2;
-	private int order_detail_price;
-	private int order_detail_count;
-	private int order_detail_total_amount;
-	private int total_order_count;
-	private int total_qty;
-	private int detail_cancel_count;
-	private int change_num;
-	private long product_num;
-	private String order_status;
+	private String orderStateDate; // 상태변경일자
+	private String deliveryName; // 택배사
+	private String invoiceNumber; // 송장번호
 	
-	// 택배회사
-	private long company_num;
-	private String company_name;
-	private String company_tel;
-	private String company_email;
+	private int totalOrderCount; // 주문 상품수
+	private int totalQty; // 상품 주문 개수
+	private int detailCancelCount; // 취소건수(취소요청, 취소완료, 반품요청, 반품완료)
+	
+	// 결제 정보
+	private String payMethod;
+	private String cardName;
+	private String authNumber;
+	private String authDate;
+	
+	private String cancelDate;
 
-	// 배송정보
-	private String invoiceNumber;
+	public String getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public String getMemberIdx() {
+		return memberIdx;
+	}
+
+	public void setMemberIdx(String memberIdx) {
+		this.memberIdx = memberIdx;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public int getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(int totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+
+	public int getUsedSaved() {
+		return usedSaved;
+	}
+
+	public void setUsedSaved(int usedSaved) {
+		this.usedSaved = usedSaved;
+	}
+
+	public int getDeliveryCharge() {
+		return deliveryCharge;
+	}
+
+	public void setDeliveryCharge(int deliveryCharge) {
+		this.deliveryCharge = deliveryCharge;
+	}
+
+	public int getPayment() {
+		return payment;
+	}
+
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+
+	public int getCancelAmount() {
+		return cancelAmount;
+	}
+
+	public void setCancelAmount(int cancelAmount) {
+		this.cancelAmount = cancelAmount;
+	}
+
+	public int getOrderState() {
+		return orderState;
+	}
+
+	public void setOrderState(int orderState) {
+		this.orderState = orderState;
+	}
+
+	public String getOrderStateInfo() {
+		return orderStateInfo;
+	}
+
+	public void setOrderStateInfo(String orderStateInfo) {
+		this.orderStateInfo = orderStateInfo;
+	}
+
+	public String getOrderStateDate() {
+		return orderStateDate;
+	}
+
+	public void setOrderStateDate(String orderStateDate) {
+		this.orderStateDate = orderStateDate;
+	}
+
+	public String getDeliveryName() {
+		return deliveryName;
+	}
+
+	public void setDeliveryName(String deliveryName) {
+		this.deliveryName = deliveryName;
+	}
+
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+
+	public int getTotalOrderCount() {
+		return totalOrderCount;
+	}
+
+	public void setTotalOrderCount(int totalOrderCount) {
+		this.totalOrderCount = totalOrderCount;
+	}
+
+	public int getTotalQty() {
+		return totalQty;
+	}
+
+	public void setTotalQty(int totalQty) {
+		this.totalQty = totalQty;
+	}
+
+	public int getDetailCancelCount() {
+		return detailCancelCount;
+	}
+
+	public void setDetailCancelCount(int detailCancelCount) {
+		this.detailCancelCount = detailCancelCount;
+	}
+
+	public String getPayMethod() {
+		return payMethod;
+	}
+
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
+	}
+
+	public String getCardName() {
+		return cardName;
+	}
+
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+
+	public String getAuthNumber() {
+		return authNumber;
+	}
+
+	public void setAuthNumber(String authNumber) {
+		this.authNumber = authNumber;
+	}
+
+	public String getAuthDate() {
+		return authDate;
+	}
+
+	public void setAuthDate(String authDate) {
+		this.authDate = authDate;
+	}
+
+	public String getCancelDate() {
+		return cancelDate;
+	}
+
+	public void setCancelDate(String cancelDate) {
+		this.cancelDate = cancelDate;
+	}
 	
 	
-	public String getOrder_status() {
-		return order_status;
-	}
-	public void setOrder_status(String order_status) {
-		this.order_status = order_status;
-	}
-	public int getTotal_order_count() {
-		return total_order_count;
-	}
-	public void setTotal_order_count(int total_order_count) {
-		this.total_order_count = total_order_count;
-	}
-	public int getTotal_qty() {
-		return total_qty;
-	}
-	public void setTotal_qty(int total_qty) {
-		this.total_qty = total_qty;
-	}
-	public int getDetail_cancel_count() {
-		return detail_cancel_count;
-	}
-	public void setDetail_cancel_count(int detail_cancel_count) {
-		this.detail_cancel_count = detail_cancel_count;
-	}
-	public long getOrder_num() {
-		return order_num;
-	}
-	public void setOrder_num(long order_num) {
-		this.order_num = order_num;
-	}
-	public String getOrder_date() {
-		return order_date;
-	}
-	public void setOrder_date(String order_date) {
-		this.order_date = order_date;
-	}
-	public String getTransport_date() {
-		return transport_date;
-	}
-	public void setTransport_date(String transport_date) {
-		this.transport_date = transport_date;
-	}
-	public int getOrder_total_money() {
-		return order_total_money;
-	}
-	public void setOrder_total_money(int order_total_money) {
-		this.order_total_money = order_total_money;
-	}
-	public int getShipping() {
-		return shipping;
-	}
-	public void setShipping(int shipping) {
-		this.shipping = shipping;
-	}
-	public int getOrder_sale() {
-		return order_sale;
-	}
-	public void setOrder_sale(int order_sale) {
-		this.order_sale = order_sale;
-	}
-	public int getOrder_point() {
-		return order_point;
-	}
-	public void setOrder_point(int order_point) {
-		this.order_point = order_point;
-	}
-	public int getOrder_earn() {
-		return order_earn;
-	}
-	public void setOrder_earn(int order_earn) {
-		this.order_earn = order_earn;
-	}
-	public int getTotal_amount() {
-		return total_amount;
-	}
-	public void setTotal_amount(int total_amount) {
-		this.total_amount = total_amount;
-	}
-	public long getUseridx() {
-		return useridx;
-	}
-	public void setUseridx(long useridx) {
-		this.useridx = useridx;
-	}
-	public String getUser_name() {
-		return user_name;
-	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
-	public long getOrder_detail_num() {
-		return order_detail_num;
-	}
-	public void setOrder_detail_num(long order_detail_num) {
-		this.order_detail_num = order_detail_num;
-	}
-	public long getDetail_num1() {
-		return detail_num1;
-	}
-	public void setDetail_num1(long detail_num1) {
-		this.detail_num1 = detail_num1;
-	}
-	public long getDetail_num2() {
-		return detail_num2;
-	}
-	public void setDetail_num2(long detail_num2) {
-		this.detail_num2 = detail_num2;
-	}
-	public int getOrder_detail_price() {
-		return order_detail_price;
-	}
-	public void setOrder_detail_price(int order_detail_price) {
-		this.order_detail_price = order_detail_price;
-	}
-	public int getOrder_detail_count() {
-		return order_detail_count;
-	}
-	public void setOrder_detail_count(int order_detail_count) {
-		this.order_detail_count = order_detail_count;
-	}
-	public int getOrder_detail_total_amount() {
-		return order_detail_total_amount;
-	}
-	public void setOrder_detail_total_amount(int order_detail_total_amount) {
-		this.order_detail_total_amount = order_detail_total_amount;
-	}
-	public int getChange_num() {
-		return change_num;
-	}
-	public void setChange_num(int change_num) {
-		this.change_num = change_num;
-	}
-	public long getProduct_num() {
-		return product_num;
-	}
-	public void setProduct_num(long product_num) {
-		this.product_num = product_num;
-	}
-	public long getCompany_num() {
-		return company_num;
-	}
-	public void setCompany_num(long company_num) {
-		this.company_num = company_num;
-	}
-	public String getCompany_name() {
-		return company_name;
-	}
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
-	}
-	public String getCompany_tel() {
-		return company_tel;
-	}
-	public void setCompany_tel(String company_tel) {
-		this.company_tel = company_tel;
-	}
-	public String getCompany_email() {
-		return company_email;
-	}
-	public void setCompany_email(String company_email) {
-		this.company_email = company_email;
-	}
+	
 	
 	
 	
