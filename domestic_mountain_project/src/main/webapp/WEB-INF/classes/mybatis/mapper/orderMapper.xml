@@ -127,5 +127,8 @@
                             JOIN user1 u1 ON u1.useridx = rh.useridx
                             WHERE u1.useridx = #{useridx})
 	</select>
+	
+	
+	
 
 </mapper>

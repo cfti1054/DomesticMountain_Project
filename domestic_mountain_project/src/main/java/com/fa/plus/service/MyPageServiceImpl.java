@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.domain.Order;
+import com.fa.plus.domain.Payment;
 import com.fa.plus.domain.Zzim;
 import com.fa.plus.mapper.MyPageMapper;
 
@@ -166,5 +167,66 @@ public class MyPageServiceImpl implements MyPageService {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	
+	
+	@Override
+	public int countPayment(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = mapper.countPayment(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Payment> listPayment(Map<String, Object> map) {
+		
+		List<Payment> list = null;
+		
+		try {
+			
+			
+			list = mapper.listPayment(map);
+			
+			
+			/*
+			String productState;
+			Date endDate = new Date();
+			long gap;
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			for(Payment dto : list) {
+				dto.setOrderDate(dto.getOrderDate().replaceAll("-", ".").substring(5,10));
+				dto.setOrderStateInfo(OrderState.ORDERSTATEINFO[dto.getOrderState()]);
+				dto.setDetailStateInfo(OrderState.DETAILSTATEINFO[dto.getDetailState()]);
+				
+				productState = OrderState.ORDERSTATEINFO[dto.getOrderState()];
+				if(dto.getDetailState() > 0) {
+					productState = OrderState.DETAILSTATEINFO[dto.getDetailState()];
+				}
+				dto.setStateProduct(productState);
+				
+				// 배송 완료후 지난 일자
+				if(dto.getOrderState() == 5 && dto.getStateDate() != null) {
+					Date beginDate = formatter.parse(dto.getStateDate());
+					gap = (endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60 * 1000);
+					dto.setAfterDelivery(gap);
+				}
+			}
+			*/
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
 	}
 }

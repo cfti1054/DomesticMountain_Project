@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Order;
+import com.fa.plus.domain.Payment;
 import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.domain.Zzim;
 import com.fa.plus.service.MyPageService;
@@ -221,6 +222,53 @@ public class MypageController {
 		return "redirect:/mypage/zzim"; 
 	}		
 	
+	
+	// 주문 리스트
+		@GetMapping("paymentList")
+		public String paymentList(
+				@RequestParam(value = "page", defaultValue = "1") int current_page,
+				HttpServletRequest req,
+				HttpSession session,
+				Model model
+				) throws Exception {
+			
+			SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
+			String cp = req.getContextPath();
+			
+			int size = 5;
+			int total_page;
+			int dataCount;
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("useridx", info.getUseridx());
+			
+			dataCount = service.countPayment(map);
+			total_page = myUtil.pageCount(dataCount, size);
+			if(current_page > total_page) {
+				current_page = total_page;
+			}
+			
+			int offset = (current_page - 1) * size;
+			if(offset < 0) offset = 0;
+			
+			map.put("offset", offset);
+			map.put("size", size);
+			
+			List<Payment> list = service.listPayment(map);
+			
+			String listUrl = cp + "/mypage/paymentList";
+			
+			String paging = myUtil.pagingUrl(current_page, total_page, listUrl);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("page", current_page);
+			model.addAttribute("dataCount", dataCount);
+			model.addAttribute("size", size);
+			model.addAttribute("total_page", total_page);
+			model.addAttribute("paging", paging);
+			
+			return ".mypage.paymentList";
+		}
 	
 
 }

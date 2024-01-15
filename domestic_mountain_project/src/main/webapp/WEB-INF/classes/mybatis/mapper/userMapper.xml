@@ -48,7 +48,7 @@
            		#{addr1, jdbcType=VARCHAR},
            		#{addr2, jdbcType=VARCHAR},
            		#{tel})
-    SELECT * FROM dual
+    	SELECT * FROM dual
 	</update>
 	
 	<select id="findById" parameterType="String" resultType="com.fa.plus.domain.User">

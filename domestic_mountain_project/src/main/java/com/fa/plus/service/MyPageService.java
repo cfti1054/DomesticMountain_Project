@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.domain.Order;
+import com.fa.plus.domain.Payment;
 import com.fa.plus.domain.Zzim;
 
 
@@ -22,5 +23,9 @@ public interface MyPageService {
 	public void insertZzim(Zzim dto) throws SQLException;
 	public void deleteZzim(Map<String, Object> map) throws SQLException;
 	
+	// 주문 리스트
+	public int countPayment(Map<String, Object> map);
+	public List<Payment> listPayment(Map<String, Object> map);
+
 
 }
