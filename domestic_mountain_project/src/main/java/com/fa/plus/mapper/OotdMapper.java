@@ -13,6 +13,7 @@ public interface OotdMapper {
 	public void insertOotd(Ootd dto) throws SQLException;
 	public void updateOotd(Ootd dto) throws SQLException;
 	public void updateOotd2(Ootd dto) throws SQLException;
+	public void deleteOotd1(long file_num) throws SQLException;
 	public void deletePostlike(long post_num) throws SQLException;
 	public void deletePostfile(long post_num) throws SQLException;
 	public void deleteOotd(long post_num) throws SQLException;
@@ -24,6 +25,7 @@ public interface OotdMapper {
 	public int dataCount(Map<String, Object> map);
 	
 	public Ootd findById(long post_num);
+	public Ootd findById1(long file_num);
 	public void updateHitCount(long post_num) throws SQLException;
 	public Ootd findByPrev(Map<String, Object> map);
 	public Ootd findByNext(Map<String, Object> map);

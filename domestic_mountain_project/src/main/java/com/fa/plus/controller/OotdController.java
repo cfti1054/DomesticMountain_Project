@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Ootd;
 import com.fa.plus.domain.SessionInfo;
@@ -35,11 +34,7 @@ public class OotdController {
 	
 	@Autowired
 	private MyUtil myUtil;
-	
-	@Autowired
-	private FileManager fileManager;
-	
-	
+
 	@GetMapping("list")
 	public String recommendForm(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(defaultValue = "all") String schType,
@@ -47,9 +42,11 @@ public class OotdController {
 			HttpServletRequest req,
 			Model model) throws Exception {
 		
-		int size = 10;
-		int total_page = 0;
-		int dataCount = 0;
+		String cp = req.getContextPath();
+		
+		int size = 1;
+		int total_page;
+		int dataCount;
 		
 		if (req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
 			kwd = URLDecoder.decode(kwd, "utf-8");
@@ -61,9 +58,7 @@ public class OotdController {
 		map.put("kwd", kwd);
 
 		dataCount = service.dataCount(map);
-		if (dataCount != 0) {
-			total_page = dataCount / size + (dataCount % size > 0 ? 1 : 0);
-		}
+		total_page = myUtil.pageCount(dataCount, size);
 		
 		// 다른 사람이 자료를 삭제하여 전체 페이지수가 변화 된 경우
 		if (total_page < current_page) {
@@ -80,11 +75,27 @@ public class OotdController {
 		// 글 리스트
 		List<Ootd> list = service.listOotd(map);
 		
+		String query = "";
+		String listUrl = cp + "/ootd/list";
+		String articleUrl = cp + "/ootd/article?page=" + current_page;
+		if (kwd.length() != 0) {
+			query = "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
+		}
+
+		if (query.length() != 0) {
+			listUrl += "?" + query;
+			articleUrl = cp + "/ootd/article?page=" + current_page + "&" + query;
+		}
+		
+		String paging = myUtil.paging(current_page, total_page, listUrl);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
+		model.addAttribute("articleUrl", articleUrl);
+		model.addAttribute("paging", paging);
 
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
@@ -102,21 +113,29 @@ public class OotdController {
 	
 	@PostMapping("write")
 	public String writeSubmit(Ootd dto, HttpSession session) throws Exception {
-		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
-		
-		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "ootd";
-		
-		try {
-			dto.setPost_reg_id(info.getUseridx());
-			service.insertOotd(dto, pathname);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return "redirect:/ootd/list";
+	    // 세션에서 로그인 정보 가져오기
+	    SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+
+	    // 로그인 정보가 없거나 세션이 만료된 경우 로그인 페이지로 리다이렉트
+	    if (info == null) {
+	        return "redirect:/user/login";
+	    }
+
+	    String root = session.getServletContext().getRealPath("/");
+	    String pathname = root + "uploads" + File.separator + "ootd";
+
+	    try {
+	        // 현재 로그인한 사용자의 ID를 Ootd 객체에 설정
+	        dto.setPost_reg_id(info.getUseridx());
+	        // Ootd 객체의 정보를 서비스를 통해 DB에 삽입
+	        service.insertOotd(dto, pathname);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    // 리스트 페이지로 리다이렉트
+	    return "redirect:/ootd/list";
 	}
-	
 	@GetMapping("article")
 	public String article(@RequestParam long post_num,
 			@RequestParam String page,
@@ -152,9 +171,9 @@ public class OotdController {
 		Ootd prevDto = service.findByPrev(map);
 		Ootd nextDto = service.findByNext(map);
 
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		// 게시글 좋아요 여부
-		map.put("userId", info.getUseridx());
+		map.put("useridx", info.getUseridx());
 		boolean userBoardLiked = service.userBoardLiked(map);
 		
 		model.addAttribute("dto", dto);

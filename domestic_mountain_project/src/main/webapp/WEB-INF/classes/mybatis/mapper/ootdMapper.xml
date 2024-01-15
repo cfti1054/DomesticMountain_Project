@@ -4,11 +4,16 @@
 <mapper namespace="com.fa.plus.mapper.OotdMapper">
 	
 	<insert id="insertOotd" parameterType="com.fa.plus.domain.Ootd">
-		INSERT INTO ootd(post_num, community_category_num, post_title, post_content, post_reg_id,
+		INSERT INTO post(post_num, community_category_num, post_title, post_content, post_reg_id,
 			post_reg_date, post_update_date, post_hit_count, post_visible, post_gather)
 		VALUES (#{post_num}, 6, #{post_title}, #{post_content}, #{post_reg_id}, 
 			SYSDATE, SYSDATE, 0, 1, 1)
 	</insert>
+	
+	<insert id="insertOotdFile" parameterType="com.fa.plus.domain.Ootd">       
+        INSERT INTO post_file (file_num, post_num, saveFilename, originalFilename)
+      	VALUES (#{file_num}, #{post_num}, #{saveFilename, jdbcType=VARCHAR}, #{originalFilename, jdbcType=VARCHAR})
+    </insert>	
 		
 	<select id="post_seq" resultType="Long">     
 		SELECT post_seq.NEXTVAL FROM dual        
@@ -18,7 +23,6 @@
 		SELECT post_file_seq.NEXTVAL FROM dual   
 	</select>                                    
                                              
-	
 	<sql id="where-list">
 		<if test="schType=='all'">
 			( INSTR(post_title, #{kwd}) &gt; 0
@@ -40,12 +44,19 @@
 	</sql>
 		 
 	<update id="updateOotd" parameterType="com.fa.plus.domain.Ootd">
-	
+		UPDATE post SET post_title=#{post_title}, post_content=#{post_content}
+		WHERE post_num = #{post_num}
 	</update>
 	
 	<update id="updateOotd2" parameterType="com.fa.plus.domain.Ootd">
-	
+		UPDATE post_file SET saveFilename=#{saveFilename, jdbcType=VARCHAR},
+				originalFilename=#{originalFilename, jdbcType=VARCHAR}
+		WHERE post_num = #{post_num}
 	</update>
+	
+	<delete id="deleteOotd1" parameterType="com.fa.plus.domain.Ootd">
+		DELETE FROM post_file WHERE file_num = #{file_num}
+	</delete>
 	
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
@@ -60,10 +71,34 @@
 	</select>
 	
 	<select id="listOotd" parameterType="map" resultType="com.fa.plus.domain.Ootd">
-		 
+		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
+	           NVL(f.post_fileCount, 0) as post_fileCount,
+	           NVL(c.replyCount, 0) as replyCount,
+	           f.saveFilename
+	    FROM post p
+	    JOIN user1 m ON p.post_reg_id = m.useridx
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num, 
+	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
+	        FROM post_file
+	        GROUP BY post_num
+	    ) f ON p.post_num = f.post_num
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as replyCount 
+	        FROM reply
+	        WHERE reply_visible = 1
+	        GROUP BY post_num
+	    ) c ON p.post_num = c.post_num	
+	    <where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND community_category_num = 6
+		</where>
+	    ORDER BY p.post_num DESC
+	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
-	
-	
 	
 	
 </mapper>

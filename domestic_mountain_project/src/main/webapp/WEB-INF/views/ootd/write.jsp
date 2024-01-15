@@ -108,7 +108,7 @@
 
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>스트릿 스냅<span>| OOTD</span></a> <span><a
+					<a>스트릿 스냅<span>| Look & Style </span></a> <span><a
 						href="${pageContext.request.contextPath}/">home</a> &gt; community
 						&gt; 스트릿 스냅</span>
 				</h1>

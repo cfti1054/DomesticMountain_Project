@@ -33,9 +33,9 @@ public class OotdServiceImpl implements OotdService{
 			if (saveFilename != null) {
 				dto.setSaveFilename(saveFilename);
 				dto.setOriginalFilename(dto.getSelectFile().getOriginalFilename());
+				mapper.insertOotd(dto);
 			}
 
-			mapper.insertOotd(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
