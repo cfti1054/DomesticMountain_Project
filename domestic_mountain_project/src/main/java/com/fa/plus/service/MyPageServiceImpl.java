@@ -1,8 +1,6 @@
 package com.fa.plus.service;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,17 +26,18 @@ public class MyPageServiceImpl implements MyPageService {
 		map.put("useridx", dto.getUseridx());
 		
 		try {
-			if(dto.getDetail_num2() !=  null && dto.getDetail_num2()== 0) {
-				dto.setDetail_num2(null);
-			}			
-					
 			for(int i = 0; i < dto.getProduct_nums().size(); i++) {
-				map.put("detail_num2", dto.getDetail_nums2().get(i));
-				
+				if(dto.getDetail_nums2() == null) {
+					map.put("detail_num2", dto.getDetail_nums().get(i));
+				} else {
+					map.put("detail_num2", dto.getDetail_nums2().get(i));
+				}
 				
 				dto.setProduct_num(dto.getProduct_nums().get(i));
 				dto.setDetail_num1(dto.getDetail_nums().get(i));
-				dto.setDetail_num2(dto.getDetail_nums2().get(i));
+				if(dto.getDetail_nums2() != null) {
+					dto.setDetail_num2(dto.getDetail_nums2().get(i));
+				}
 				dto.setQty(dto.getBuyQtys().get(i));
 				
 				
@@ -77,7 +76,9 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void deleteCart(Map<String, Object> map) throws Exception {
 		try {
+
 			mapper.deleteCart(map);
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -145,6 +146,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public void insertZzim(Zzim dto) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("useridx", dto.getUseridx());
+		map.put("product_num", dto.getProduct_num());
 		
 		try {
 			

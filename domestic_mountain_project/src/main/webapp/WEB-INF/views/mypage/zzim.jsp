@@ -174,6 +174,7 @@ function deleteZzimSelect() {
                         <figure>
 						<input type="hidden" name="product_nums" value="${dto.product_num}">
 						<input type="hidden" name="useridx" value="${dto.useridx}">
+                          <a href="#" class="btn-wishlist"><i class="bi bi-heart" style="width: px; height: 24px;"></i></a>
                           <a href="${pageContext.request.contextPath}/product/${dto.product_num}">
                             <img src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}" class="tab-image">
                           </a>

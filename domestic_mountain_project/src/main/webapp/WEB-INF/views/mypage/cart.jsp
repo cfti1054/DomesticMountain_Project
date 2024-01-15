@@ -149,7 +149,7 @@ $(function(){
 				<c:forEach var="dto" items="${list}">
 		            <tr class="cart-container">
 		              <td class="flex gap-15 mt-10">
-		                <input class="checkbox" name="nums" type="checkbox" value="${dto.detail_num2}">
+		                <input class="checkbox" name="nums" type="checkbox" value="${dto.cart_num}">
 		                <input type="hidden" name="cart_nums" value="${dto.cart_num}">
 		              </td>
 		                <td class="w-144 h-144" >
@@ -157,7 +157,7 @@ $(function(){
 		               </td>
 		                <td class="cart-name">
 		                	<p>${dto.product_name}</p>
-		                	<p style="font-size: small; font-weight: bold;">선택사항 : ${dto.option_value}, ${dto.option_value2}</p>
+		                	<p style="font-size: small; font-weight: bold;">선택사항 : ${dto.option_value}, ${dto.option_value2}, ${dto.cart_num}</p>
 		         
 							<input type="hidden" name="product_nums" value="${dto.product_num}">
 							<input type="hidden" name="detail_nums" value="${dto.detail_num1}">

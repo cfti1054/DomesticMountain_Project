@@ -364,18 +364,24 @@ function sendOk(mode) {
 		// 또는 자바스크립트 sessionStorage를 활용 할 수 있음
 		f.method = "get";
 		f.action = "${pageContext.request.contextPath}/order/buy";
-	} else {
+	} else if(mode == "cart"){
 		if(! confirm("선택한 상품을 장바구니에 담으시겠습니까 ? ")) {
 			return false;
 		}
 		
 		f.method = "post";
         f.action = "${pageContext.request.contextPath}/mypage/saveCart";
+	} else if(mode == "zzim"){
+		if(! confirm("선택한 상품을 찜하시겠습니까 ? ")) {
+			return false;
+		}
+		
+		f.method = "post";
+        f.action = "${pageContext.request.contextPath}/mypage/saveZzim";		
 	}
 	
 	f.submit();
 }
-
 
 </script>
 
@@ -481,7 +487,7 @@ function sendOk(mode) {
 								onclick="sendOk('buy');">구매하기</button>
 						</div>
 						<div class="row-style mt-2 mb-2">
-							<div class="col pe-1">
+							<div class="col pe-1" onclick="sendOk('zzim');">
 								<button type="button" class="btn w-100 btn-productBlind"
 									${empty sessionScope.member.memberIdx ? "disabled='disabled'" : ""}>
 									찜하기 <i class="bi bi-heart heart"></i>

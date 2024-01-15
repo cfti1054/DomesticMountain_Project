@@ -44,21 +44,6 @@ public class MypageController {
 		return ".mypage.main";		
 	}
 	
-	/*
-	// 회원리스트 - 메인으로 가야해서 이동
-	@GetMapping("list")
-	public String listMember(HttpSession session,
-			Model model) throws Exception {
-		
-		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
-		
-		List<MemberManage> list = service.listMember(info.getUseridx());
-		
-		model.addAttribute("list", list);
-		
-		return ".mypage.main";
-	}
-	*/
 	
 	// 장바구니 상품 리스트
 	@GetMapping("cart")
@@ -95,15 +80,15 @@ public class MypageController {
 	// 장바구니 등록된 상품 삭제
 	@GetMapping("deleteCart")
 	public String deleteCart(
-			@RequestParam long detail_num2,
+			@RequestParam long cart_num,
 			HttpSession session) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
 		
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("gubun", "item");
 			map.put("useridx", info.getUseridx());
-			map.put("detail_num2", detail_num2);
+			map.put("cart_num", cart_num);
+
 			
 			service.deleteCart(map);
 			
@@ -123,13 +108,15 @@ public class MypageController {
 		
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("gubun", "list");
 			map.put("useridx", info.getUseridx());
 			map.put("list", nums);
+			map.put("mode", "list");
 			
 			service.deleteCart(map);
 			
 		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 		
 		return "redirect:/mypage/cart"; 
@@ -143,8 +130,8 @@ public class MypageController {
 		
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("gubun", "all");
 			map.put("useridx", info.getUseridx());
+			map.put("mode", "all");
 			
 			service.deleteCart(map);
 			
@@ -181,6 +168,7 @@ public class MypageController {
 		
 		try {
 			dto.setUseridx(info.getUseridx());
+			dto.setProduct_num(dto.getProduct_nums().get(0));
 			
 			service.insertZzim(dto);
 			
@@ -200,7 +188,6 @@ public class MypageController {
 		
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("gubun", "item");
 			map.put("useridx", info.getUseridx());
 			map.put("product_num", product_num);
 			
@@ -224,6 +211,7 @@ public class MypageController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("useridx", info.getUseridx());
 			map.put("list", nums);
+			map.put("mode", "list");
 			
 			service.deleteZzim(map);
 			
