@@ -21,7 +21,7 @@ public class Order {
 	// 장바구니
 	private long cart_num;					// 장바구니 번호
 	private long useridx;					// 회원번호
-		// private Long detail_num1;				// 상세번호(색상, 구분)
+	private Long detail_num1;				// 상세번호(색상, 구분)
 		// private Long detail_num2;				// 상세번호(사이즈)
 	private long product_num;				// 상품번호
 	private String cart_reg_date;			// 등록일자
@@ -544,6 +544,12 @@ public class Order {
 	}
 	public void setDetail_num(long detail_num) {
 		this.detail_num = detail_num;
+	}
+	public Long getDetail_num1() {
+		return detail_num1;
+	}
+	public void setDetail_num1(Long detail_num1) {
+		this.detail_num1 = detail_num1;
 	}
 	
 }
