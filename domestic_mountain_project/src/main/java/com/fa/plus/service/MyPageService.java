@@ -8,6 +8,7 @@ import com.fa.plus.admin.domain.MemberManage;
 import com.fa.plus.domain.Order;
 import com.fa.plus.domain.Zzim;
 
+
 public interface MyPageService {
 	public void insertCart(Order dto) throws Exception;	// 카트 등록
 	public List<Order> listCart(long useridx);			// 카트 리스트
