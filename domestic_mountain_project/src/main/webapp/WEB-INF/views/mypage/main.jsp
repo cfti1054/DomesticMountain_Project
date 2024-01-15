@@ -35,7 +35,7 @@
 					</div>
 					<p class="p1"><a href="${pageContext.request.contextPath}/mypage/zzim">찜 목록</a></p>
 					<p class="p1"><a href="${pageContext.request.contextPath}/mypage/cart">장바구니</a></p>
-					<p class="p1">주문내역</p>
+					<p class="p1"><a href="${pageContext.request.contextPath}/mypage/paymentList">주문내역</a></p>
 					<br>
 					<hr>
 					<p class="p2">스마트봇 상담</p>
