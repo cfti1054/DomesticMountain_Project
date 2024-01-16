@@ -15,7 +15,29 @@
 	margin: auto;
 }
 
+.page-item { cursor: pointer; }
 </style>
+
+<script type="text/javascript">
+
+function listPage(page) {
+	let show = $('.tab-show-menu').attr('data-show');
+	let listUrl = "${listUrl}";
+	if(listUrl.indexOf("?") >= 0) {
+		listUrl += "&page="+page+"&show="+show;
+	} else {
+		listUrl += "?page="+page+"&show="+show;
+	}
+	
+	location.href = listUrl;
+}
+
+function searchList(f) {
+	let show = $('.tab-show-menu').attr('data-show');
+	f.show.value = show;
+	f.submit();
+}
+</script>
 
 <section class="features-1">
 	<div class="body-container">
@@ -79,248 +101,123 @@
 				</h1>
 			</div>
 
-
-			<div class="show1 tab-show">
+			<div>
 				<div class="output-type">
-
-					<div class="sort_form">
-						<a href="#" onclick="" class="sort_card "><span class="blind"><i
-								class="fa-solid fa-server fa-2x sort-color btn-show" data-show="1"></i></span></a> <a
-							href="#" onclick="" class="sort_album "><span class="blind"><i
-								class="fa-solid fa-border-all fa-2x btn-show" data-show="2"></i></span></a> <a href="#"
-							onclick="" class="sort_list "><span class="blind"><i
-								class="fa-solid fa-list-ul fa-2x btn-show" data-show="3"></i></span></a>
+					<div class="sort_form tab-show-menu" data-show="${show}">
+						<a href="#" onclick="" class="sort_card ">
+							<span class="blind"><i class="fa-solid fa-server fa-2x ${show==1?'sort-color':''} btn-show" data-show="1"></i></span>
+						</a>
+						<a href="#" onclick="" class="sort_album ">
+							<span class="blind"><i class="fa-solid fa-border-all fa-2x ${show==2?'sort-color':''} btn-show" data-show="2"></i></span>
+						</a>
+						<a href="#" onclick="" class="sort_list ">
+							<span class="blind"><i class="fa-solid fa-list-ul fa-2x ${show==3?'sort-color':''} btn-show" data-show="3"></i></span>
+						</a>
 					</div>
 				</div>
-
-
-
+				
 				<div class="notice-container">
-					<div class="col-auto me-auto">
-						${dataCount}개(${page}/${total_page} 페이지)</div>
-					<c:forEach var="dto" items="${list}" varStatus="status">
-						<ul class="article-movie-sub"
-							onclick="location.href='${articleUrl}&num=${dto.post_num}';">
-							<li>
-								<div class="card_area">
-									<div class="con">
-										<div class="con_top">
-											<div class="tit_area">
-												<span class="inner"> <strong>${dto.post_title}</strong>
-												</span>
-											</div>
-
-
-											<p class="txt">${dto.post_content}</p>
-										</div>
-
-										<div class="con_bottom">
-											<div class="user_info">
-												<div class="pers_nick_area">
-													<table role="presentation">
-														<tbody>
-															<tr>
-																<td class="p-nick"><a class="m-tcol-c"
-																	onclick="location.href='${articleUrl}&post_num=${dto.post_num}';">${dto.user_name}</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
+					<div class="tab-show show1">
+						<div class="col-auto me-auto">${dataCount}개(${page}/${total_page} 페이지)</div>
+					
+						<c:forEach var="dto" items="${list}" varStatus="status">
+							<ul class="article-movie-sub"
+								onclick="location.href='${articleUrl}&num=${dto.post_num}';">
+								<li>
+									<div class="card_area">
+										<div class="con">
+											<div class="con_top">
+												<div class="tit_area">
+													<span class="inner"> <strong>${dto.post_title}</strong>
+													</span>
 												</div>
-												<div class="date_num">
-													<span class="date">${dto.post_reg_date}</span> <span
-														class="num">조회수 ${dto.post_hit_count}</span> <span
-														class="comment_ico">댓글</span> <em class="num">${dto.replyCount}</em>
+	
+	
+												<p class="txt">${dto.post_content}</p>
+											</div>
+	
+											<div class="con_bottom">
+												<div class="user_info">
+													<div class="pers_nick_area">
+														<table role="presentation">
+															<tbody>
+																<tr>
+																	<td class="p-nick"><a class="m-tcol-c"
+																		onclick="location.href='${articleUrl}&post_num=${dto.post_num}';">${dto.user_name}</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="date_num">
+														<span class="date">${dto.post_reg_date}</span> <span
+															class="num">조회수 ${dto.post_hit_count}</span> <span
+															class="comment_ico">댓글</span> <em class="num">${dto.replyCount}</em>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="movie-img">
-
-									<a href="#"> <img
-										src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
-										width="200" height="120" alt="썸네일 이미지"> <span
-										class="num">${dto.post_fileCount}<span class="blind">개의
-												추가 이미지가 있습니다</span></span>
-									</a>
-								</div>
-							</li>
-
-
-						</ul>
-					</c:forEach>
-					<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
-					</div>
-
-					<div class="row board-list-footer">
-						<div class="col">
-							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/recommend/list';"
-								title="새로고침">
-								<i class="bi bi-arrow-counterclockwise"></i>
-							</button>
-						</div>
-						<div class="col text-center">&nbsp;</div>
-
-
-						<div class="col-6 text-end">
-							<form class="row text-end-row" name="searchForm1"
-								action="${pageContext.request.contextPath}/recommend/list" method="post">
-								<div class="col-auto p-1">
-									<select id="schType1" name="schType" class="form-select">
-										<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-										<option value="all">제목+내용</option>
-												<option value="post_reg_date">등록일</option>
-												<option value="post_title">제목</option>
-												<option value="user_name">작성자</option>
-												<option value="post_content">내용</option>
-									</select>
-								</div>
-								<div class="col-auto p-1">
-									<input type="text" name="kwd" value="${kwd}"
-										class="form-control">
-								</div>
-								<div class="col-auto p-1">
-									<input type="hidden" name="show" value="1">
-									<button type="button" class="btn btn-light" onclick="searchList(this.form)">
-										<i class="bi bi-search"></i>
-									</button>
-
-								</div>
-							</form>
-						</div>
-					</div>
-
-
-				</div>
-			</div>
-
-
-
-			<div class="show2 tab-show">
-				<div class="output-type">
-
-
-					<div class="sort_form">
-
-						<a href="#" onclick="" class="sort_card "><span class="blind"><i
-								class="fa-solid fa-server fa-2x btn-show" data-show="1"></i></span></a> <a href="#"
-							onclick="" class="sort_album "><span class="blind"><i
-								class="fa-solid fa-border-all fa-2x sort-color btn-show" data-show="2"></i></span></a> <a
-							href="#" onclick="" class="sort_list "><span class="blind"><i
-								class="fa-solid fa-list-ul fa-2x btn-show" data-show="3"></i></span></a>
-					</div>
-				</div>
-
-
-				<div class="notice-container">
-
-					<div class="section">
-						<div class="article-album-sub">
-							<c:forEach var="dto" items="${list}" varStatus="status">
-								<ul>
-									<li class="show-2-li"><a href="#" class="album-img"> <img
-											width="200" height="200"
+									<div class="movie-img">
+	
+										<a href="#"> <img
 											src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
-											alt="">
-									</a>
-
-										<dl>
-											<dt>
-												<a href="#" class="tit"> <span class="inner"> <span
-														class="ellipsis">${dto.post_title}</span>
-												</span>
-												</a> <a href="#" class="m-tcol-p"> <span class="num">[${dto.replyCount}]</span>
-												</a>
-											</dt>
-
-											<dd class="p-nick">
-												<div class="pers_nick_area">
-													<span>${dto.user_name}</span>
-												</div>
-											</dd>
-
-											<dd class="date_num">
-												<span class="date">${dto.post_reg_date}</span> <span
-													class="num">조회: ${dto.post_hit_count}</span>
-											</dd>
-										</dl></li>
-								</ul>
-							</c:forEach>
-							<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
-							</div>
-
-
-							<div class="row board-list-footer">
-								<div class="col">
-									<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/recommend/list';"
-										title="새로고침">
-										<i class="bi bi-arrow-counterclockwise"></i>
-									</button>
-								</div>
-								<div class="col text-center">&nbsp;</div>
-
-
-								<div class="col-6 text-end">
-									<form class="row text-end-row" name="searchForm2"
-										action="${pageContext.request.contextPath}/recommend/list" method="post">
-										<div class="col-auto p-1">
-											<select id="schType2" name="schType" class="form-select">
-												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-												<option value="all">제목+내용</option>
-												<option value="post_reg_date">등록일</option>
-												<option value="post_title">제목</option>
-												<option value="user_name">작성자</option>
-												<option value="post_content">내용</option>
-											</select>
-										</div>
-										<div class="col-auto p-1">
-											<input type="text" id="kwd2" name="kwd" value="${kwd}"
-												class="form-control">
-										</div>
-										<div class="col-auto p-1">
-											<input type="hidden" name="show" value="2">
-											<button type="button" class="btn btn-light" onclick="searchList(this.form)">
-												<i class="bi bi-search"></i>
-											</button>
-
-											<button type="button" class="btn btn-light">글올리기</button>
-										</div>
-									</form>
-								</div>
-							</div>
-
-
-						</div>
+											width="200" height="120" alt="썸네일 이미지"> <span
+											class="num">${dto.post_fileCount}<span class="blind">개의
+													추가 이미지가 있습니다</span></span>
+										</a>
+									</div>
+								</li>
+	
+							</ul>
+						</c:forEach>					
+					
 					</div>
-				</div>
-			</div>
-
-
-			<div class="show3 tab-show">
-				<div class="output-type">
-
-
-					<div class="sort_form">
-						<a href="#" onclick="" class="sort_card "><span class="blind"><i
-								class="fa-solid fa-server fa-2x btn-show" data-show="1"></i></span></a> <a href="#"
-							onclick="" class="sort_album "><span class="blind"><i
-								class="fa-solid fa-border-all fa-2x btn-show" data-show="2"></i></span></a> <a href="#"
-							onclick="" class="sort_list "><span class="blind"><i
-								class="fa-solid fa-list-ul fa-2x sort-color btn-show" data-show="3"></i></span></a>
+					
+					<div class="tab-show show2">
+						<div class="col-auto me-auto">${dataCount}개(${page}/${total_page} 페이지)</div>
+					
+						<div class="section">
+							<div class="article-album-sub">
+								<c:forEach var="dto" items="${list}" varStatus="status">
+									<ul>
+										<li class="show-2-li"><a href="#" class="album-img"> <img
+												width="200" height="200"
+												src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+												alt="">
+										</a>
+		
+											<dl>
+												<dt>
+													<a href="#" class="tit"> <span class="inner"> <span
+															class="ellipsis">${dto.post_title}</span>
+													</span>
+													</a> <a href="#" class="m-tcol-p"> <span class="num">[${dto.replyCount}]</span>
+													</a>
+												</dt>
+		
+												<dd class="p-nick">
+													<div class="pers_nick_area">
+														<span>${dto.user_name}</span>
+													</div>
+												</dd>
+		
+												<dd class="date_num">
+													<span class="date">${dto.post_reg_date}</span> <span
+														class="num">조회: ${dto.post_hit_count}</span>
+												</dd>
+											</dl></li>
+									</ul>
+								</c:forEach>
+							</div>
+						</div>					
+					
 					</div>
-				</div>
-
-
-
-				<div class="notice-container">
-					<div class="notice-body">
+					
+					<div class="tab-show show3">
+						<div class="col-auto me-auto">${dataCount}개(${page}/${total_page} 페이지)</div>
+						
 						<div class="body-main">
-							<div class="row board-list-header">
-								<div class="col-auto me-auto">${dataCount}개(${page}/${total_page}
-									페이지)</div>
-								<div class="col-auto">&nbsp;</div>
-							</div>
 							<table class="table table-hover board-list">
 								<thead class="table-light">
 									<tr>
@@ -344,53 +241,43 @@
 											<td>${dto.post_hit_count}</td>
 										</tr>
 									</tbody>
-							</c:forEach>
+								</c:forEach>
 							</table>
-							<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}
+						</div>					
+					
+					</div>										
+				</div>
+
+				<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</div>
+
+				<div class="row board-list-footer">
+					<div class="col">
+						<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/recommend/list';" title="새로고침">
+							<i class="bi bi-arrow-counterclockwise"></i>
+						</button>
+					</div>
+					<div class="col text-center">&nbsp;</div>
+					<div class="col-6 text-end">
+						<form class="row text-end-row" name="searchForm1" action="${pageContext.request.contextPath}/recommend/list" method="post">
+							<div class="col-auto p-1">
+								<select id="schType1" name="schType" class="form-select">
+									<option value="all">제목+내용</option>
+									<option value="post_reg_date">등록일</option>
+									<option value="post_title">제목</option>
+									<option value="user_name">작성자</option>
+									<option value="post_content">내용</option>
+								</select>
 							</div>
-
-							<div class="row board-list-footer">
-								<div class="col">
-									<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/recommend/list';"
-										title="새로고침">
-										<i class="bi bi-arrow-counterclockwise"></i>
-									</button>
-								</div>
-								<div class="col text-center">&nbsp;</div>
-
-
-								<div class="col-6 text-end">
-									<form class="row text-end-row kwd-search" name="searchForm3"
-										action="${pageContext.request.contextPath}/recommend/list" method="post">
-										<div class="col-auto p-1">
-											<select id="schType3" name="schType" class="form-select">
-												<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-												<option value="all">제목+내용</option>
-												<option value="post_reg_date">등록일</option>
-												<option value="post_title">제목</option>
-												<option value="user_name">작성자</option>
-												<option value="post_content">내용</option>
-											</select>
-										</div>
-										<div class="col-auto p-1">
-											<input type="text" id="kwd3" name="kwd" value="${kwd}"
-												class="form-control">
-										</div>
-										<div class="col-auto p-1">
-											<input type="hidden" name="show" value="3">
-											<button type="button" class="btn btn-light" onclick="searchList(this.form)">
-												<i class="bi bi-search"></i>
-											</button>
-
-											<button type="button" class="btn btn-light">글올리기</button>
-										</div>
-									</form>
-								</div>
+							<div class="col-auto p-1">
+								<input type="text" name="kwd" value="${kwd}" class="form-control">
 							</div>
-
-
-
-						</div>
+							<div class="col-auto p-1">
+								<input type="hidden" name="show" value="${show}">
+								<button type="button" class="btn btn-light" onclick="searchList(this.form)">
+									<i class="bi bi-search"></i>
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -422,13 +309,16 @@
 		$('.btn-show').click(function(){
 			let $btn = $(this);
 			let s = $btn.attr('data-show');
+			
+			$('.tab-show-menu a i').each(function(){
+				$(this).removeClass('sort-color');
+			});
+			$btn.addClass('sort-color');
+			
+			$('.tab-show-menu').attr('data-show', s);
 
 			$('.tab-show').hide();
 			$('.show'+s).show();
 		});		
 	});
-	
-	function searchList(f) {
-		f.submit();
-	}
 </script>

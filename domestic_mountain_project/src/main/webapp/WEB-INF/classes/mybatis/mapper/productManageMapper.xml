@@ -101,10 +101,15 @@
 			FROM productStock
 			GROUP BY product_num
 		) t ON p.product_num = t.product_num
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+		</where>
 		ORDER BY p.product_num DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
-	
+	 
 	
 	
 	<!-- 상품 상세 정보 -->

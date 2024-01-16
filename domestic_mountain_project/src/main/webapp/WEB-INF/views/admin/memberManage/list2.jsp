@@ -24,7 +24,7 @@ $(function(){
 function searchList() {
 	const f = document.searchForm;
 	f.enabled.value = $("#selectEnabled").val();
-	f.action = "${pageContext.request.contextPath}/admin/memberManage/list";
+	f.action = "${pageContext.request.contextPath}/admin/memberManage/list2";
 
 	f.submit();
 }
@@ -222,7 +222,6 @@ function printMemberManage() {
 }
 </style>
 
-
 <div id="layoutSidenav_content">
 	<main class="mt-4">
 		<div class="container-fluid px-4">
@@ -257,14 +256,14 @@ function printMemberManage() {
 							style="width: 200px; padding: 3px;">
 							<option value="useridx" ${schType=="useridx" ? "selected":""}>회원번호</option>
 							<option value="user_name" ${schType=="user_name" ? "selected":""}>이름</option>
-							<option value="birth" ${schType=="birth" ? "selected":""}>생년월일</option>
+							
 						</select> <input type="text" name="kwd" class="form-control" value="${kwd}"
 							style="width: 200px; padding: 3px; display: flex;"> <input
 							type="hidden" name="enabled" value="${enabled}"> <input
 							type="hidden" name="page" value="1">
 						<button type="button" class="btn" onclick="searchList()"
-							style="width: 100px; padding: 3px;">검색</button>
-						<a>${dataCount}개(${page}/${total_page} 페이지)</a>
+							style="width: 60px; padding: 3px;">검색</button>
+						<a style="padding-left: 20px;">${dataCount}개(${page}/${total_page} 페이지)</a>
 					</form>
 					<button type="button" class="btn1" onclick="printMemberManage();"
 						style="float: right;">Print</button>

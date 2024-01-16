@@ -118,6 +118,8 @@
 										<th>회원 아이디</th>
 										<th>${orderStatus=="status"?"주문수량":"송장번호"}</th>
 										<th>취소건수</th>
+										<th>할인 액</th>
+										<th>배송비</th>
 										<th>총 주문 금액</th>
 										<th>총 결제 금액</th>
 									</tr>
@@ -130,6 +132,8 @@
 										<th>회원 아이디</th>
 										<th>${orderStatus=="status"?"주문수량":"송장번호"}</th>
 										<th>취소건수</th>
+										<th>할인 액</th>
+										<th>배송비</th>
 										<th>총 주문 금액</th>
 										<th>총 결제 금액</th>
 									</tr>
@@ -144,6 +148,8 @@
 											<td>${dto.userName}</td>
 											<td>${orderStatus=="status"?dto.totalQty:dto.invoiceNumber}</td>
 											<td>${dto.detailCancelCount}</td>
+											<td><fmt:formatNumber value="${dto.orderSale}"/></td>
+											<td><fmt:formatNumber value="${dto.deliveryCharge}"/></td>
 											<td><fmt:formatNumber value="${dto.totalMoney}"/></td>
 											<td><fmt:formatNumber value="${dto.payment}"/></td>
 										</tr>
@@ -383,7 +389,20 @@ $(function(){
 	$('body').on('click', '.btn-cancel-order',function(){
 		let orderNum = $(this).attr('data-orderNum');
 		
-		alert('모든 구매내역 판매취소...');
+		
+		let qs = 'orderNum=' + orderNum;
+		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/cancel';
+		
+		const fn = function(data) {
+			if(data.state === "true") {
+				alert('모든 구매내역 판매취소...');
+				$("#orderDialogModal").modal("hide");
+			} else {
+				alert("취소처리가 실패했습니다.");
+			}
+		};
+	
+		ajaxFun(url, "post", qs , "json" , fn);
 		
 	});
 });

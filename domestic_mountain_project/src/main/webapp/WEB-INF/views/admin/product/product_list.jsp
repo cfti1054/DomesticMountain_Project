@@ -41,7 +41,8 @@ ul.tabs li.active {
 }
 .table form {
 	display: flex;
-	padding: 0 200px;
+	float: right;
+	
 }
 
 .table button,
@@ -117,7 +118,7 @@ function changeSubList() {
 }
 
 </script>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <div id="layoutSidenav_content">
 	<main class="mt-4">
@@ -129,12 +130,6 @@ function changeSubList() {
 				</h2>
 			</div>
 
-			<div>
-				<ul class="tabs">
-					<li id="tab-all" data-category="all">등산장비 목록</li>
-					<li id="tab-review" data-category="review">상품리뷰 및 문의</li>
-				</ul>
-			</div>
 
 
 			<div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
@@ -197,10 +192,11 @@ function changeSubList() {
 				<table class="table table-border table-list">
 					<thead class="table-light">
 						<tr>
+							<th width="80">이미지</th>
 							<th width="60">번호</th>
 							<th>이름</th>
-							<th width="200">상품코드</th>
-							<th width="150">등록일</th>
+							<th width="150">상품코드</th>
+							<th width="120">등록일</th>
 							<th width="80">진열상태</th>
 							<th width="80">재고</th>
 							<th width="150">판매가</th>
@@ -211,15 +207,32 @@ function changeSubList() {
 					<tbody>
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr>
+								<td>
+									 <c:choose>
+										<c:when
+											test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+											<img class="img"
+												src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+										</c:when>
+										<c:when
+											test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+											<img class="img" src="${dto.product_summary}">
+										</c:when>
+			
+										<c:otherwise>
+			
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>${dataCount - (page-1) * size - status.index}</td>
 								<td class="left">
-									<a href="#">${dto.product_name}</a>
+									<a href="${pageContext.request.contextPath}/product/${dto.product_num}">${dto.product_name}</a>
 								</td>
 								<td>${dto.product_num}</td>
 								<td>${dto.product_reg_date}</td>
 								<td>${dto.product_status == 1 ? "진열" : "숨김"}</td>
 								<td>${dto.total_stock}</td>
-								<td>${dto.product_price}</td>
+								<td><label><fmt:formatNumber value="${dto.product_price}"/>원</label></td>
 									<c:url var="updateUrl" value="/admin/product/update">
 										<c:param name="product_num" value="${dto.product_num}"/>
 										<c:param name="parent_num" value="${parent_num}"/>
@@ -244,15 +257,10 @@ function changeSubList() {
 
 				<table class="table">
 					<tr>
-						<td align="left" width="200">
-							<button type="button" class="btn" onclick="location.href='#';"
-								title="모두선택">모두선택</button>
-							<button type="button" class="btn" onclick="location.href='#';"
-								title="선택해제">선택해제</button>
-						</td>
-						<td align="center">
+	
+						<td>
 							<form name="searchForm" 
-								action="${pageContext.request.contextPath}/admin/product/product_list"
+								action="#"
 								method="post">
 							<div class="col-auto p-1">
 										<select name="schType" class="form-select">
@@ -269,19 +277,17 @@ function changeSubList() {
 										<input type="hidden" name="category_num" value="${category_num}">
 										<input type="hidden" name="product_status" value="${product_status}">
 									</div>
-									<div>	
+									<div class="col-auto p-1">	
 										<button type="button" class="btn" onclick="searchList()">검색</button>
 									</div>
-							</form>
-						</td>
-						<td align="right" width="200">
-							<button type="button" class="btn" onclick="location.href='#';">선택삭제</button>
-						</td>
-							<td align="right" width="200">
+
+							<div>
 								<c:url var="url" value="/admin/product/write">
 								</c:url>
-								<button type="button" class="btn btn-light" onclick="location.href='${url}';">등록하기</button>
-							</td>
+								<button type="button" class="btn" onclick="location.href='${url}';">등록하기</button>
+							</div>
+							</form>
+						</td>
 					</tr>
 				</table>
 			</div>

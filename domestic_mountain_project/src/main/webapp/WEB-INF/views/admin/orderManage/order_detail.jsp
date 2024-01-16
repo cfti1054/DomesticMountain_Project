@@ -28,7 +28,7 @@
 					<td class="text-primary"><fmt:formatNumber value="${order.payment}"/></td>
 					<td class="table-light">취소금액</td>
 					<td class="text-warning order-cancelAmount" data-cancelAmount="order.cancelAmount">
-						<fmt:formatNumber value="10000"/>
+						<fmt:formatNumber value="${order.cancelAmount}"/>
 					</td>
 				</tr>
 				<tr>
@@ -41,7 +41,7 @@
 					<td class="table-light">상태변경일</td>
 					<td>${order.orderStateDate}</td>
 				</tr>
-				<tr>
+				<%-- <tr>
 					<td class="table-light">결제구분</td>
 					<td>${order.payMethod}</td>
 					<td class="table-light">결제카드</td>
@@ -50,17 +50,17 @@
 					<td>${order.authNumber}</td>
 					<td class="table-light">승인일자</td>
 					<td>${order.authDate}</td>
-				</tr>
+				</tr> --%>
 			</table>
 			<table class="table table-borderless mb-1">
 				<tr>
 					<td width="50%">
-						<c:if test= "${order.orderState == null}">
+						<c:if test= "${order.orderState == 1}">
 							<button type="button" class="btn btn-light btn-cancel-order" data-orderNum="${order.orderNum}">판매취소</button>
 						</c:if>
 					</td>
 					<td class="text-end">
-						<c:if test="${order.orderState == null }">
+						<c:if test="${order.orderState == 1 }">
 							<button type="button" class="btn btn-light btn-prepare-order" data-orderNum="${order.orderNum}">발송처리</button>
 						</c:if>
 					
@@ -96,17 +96,16 @@
 		</div>
 		<div class="mt-3 p-3">
 			
-			<table class="table board-list order-detail-list">
+			<table class="table board-list order-detail-list" style="text-align:center;">
 				<thead class="table-light">
 					<tr>
 						<th width="80">상세번호</th>
 						<th>상품명</th>
-						<th width="90">상품가격</th>
-						<th width="90">할인가격</th>
 						<th width="130">옵션</th>
 						<th width="80">주문수량</th>
+						<th width="90">상품가격</th>
+						<th width="90">할인가격</th>
 						<th width="100">주문총금액</th>
-						<th width="90">적립금</th>
 						<th width="110">주문상태</th>
 						<th width="60">변경</th>
 					</tr>
@@ -117,20 +116,20 @@
 						<tr valign="middle" id="orderDetail-list${dto.orderDetailNum}">
 							<td>${dto.orderDetailNum}</td>
 							<td>${dto.productName}</td>
-							<td><fmt:formatNumber value="${dto.price}"/></td>
-							<td><fmt:formatNumber value="${dto.salePrice}"/></td>
-							<td>${dto.optionValue} / ${dto.optionValue2}</td>
+							<td>${dto.optionValue}  ${dto.optionValue2==null ? "":dto.optionValue2}</td>
 							<td>${dto.qty}</td>
-							<td><fmt:formatNumber value="${dto.productMoney}"/></td>
+							<td><fmt:formatNumber value="${dto.price}"/></td>
 							<td><fmt:formatNumber value="${dto.savedMoney}"/></td>
+							<td><fmt:formatNumber value="${dto.totalMoney}"/></td>
 							<td>${order.orderState==1 && dto.detailState<2?"상품준비중":dto.detailStateInfo}</td>
 							<td>
 								<span class="orderDetailStatus-update" 
 										data-orderNum="${order.orderNum}" 
 										data-orderState="${order.orderState}"
-										data-productMoney="${dto.productMoney}"
+										data-productMoney="${dto.price}"
 										data-orderDetailNum="${dto.orderDetailNum}" 
-										data-detailState="${dto.detailState}">수정</span>
+										data-detailState="${dto.detailState}" style="border-style: ridge;
+    padding: 2px 2px 2px 2px;">수정</span>
 							</td>
 						</tr>
 					</c:forEach>

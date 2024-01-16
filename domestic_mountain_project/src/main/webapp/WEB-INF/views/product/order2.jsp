@@ -397,9 +397,21 @@ function sendOk(mode) {
 		<div class="body-main">
 			<div class="product-main-box">
 				<div class="product-detail-img-box">
-					<img class=""
-						src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+					<c:choose>
+						<c:when
+							test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+							<img class="img"
+								src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+						</c:when>
+						<c:when
+							test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+							<img class="img" src="${dto.product_summary}">
+						</c:when>
 
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
 				</div>
 
 				<div class="col-md-6 detail-main-box">
@@ -510,7 +522,7 @@ function sendOk(mode) {
 </section>
 
 <section class="features-6 features-6-product">
-	<br>
-	<br>
+	<br> <br>
 	<div class="centered">${dto.product_content}</div>
+	<div> </div>
 </section>

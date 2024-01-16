@@ -175,9 +175,24 @@ public class OrderManageController {
 		return "";
 	}
 
-	public String cancel() throws Exception {
-		// 반품 및 주문취소
-		return "";
+	@PostMapping("order_detail/cancel")
+	@ResponseBody
+	public Map<String, Object> cancel(@RequestParam String orderNum) throws Exception {
+		String state = "true";
+		Map<String, Object> map = null;
+		
+		map.put("orderNum", orderNum);
+		map.put("detailState", 5);
+		try {
+			service.updateOrderDetailState(map);
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("state", state);
+		
+		return model;
 	}
 	
 	
