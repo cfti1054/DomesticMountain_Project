@@ -34,7 +34,7 @@ LEFT OUTER JOIN order_detail od ON od.order_num = od.order_num
 <select id="listOrder" parameterType="map" resultType="com.fa.plus.admin.domain.OrderManage">
 SELECT o.order_num AS orderNum, o.useridx as memberIdx, NVL(u.user_id,'손님') AS userName, order_total_money AS totalMoney,
 		order_point usedSaved, shipping AS deliveryCharge, total_amount AS payment, refund_total_amount AS cancelAmount,
-		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS orderDate,
+		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS orderDate, order_sale AS orderSale,
 		dt.change_num AS orderState, cp.cp_name AS deliveryName, t.tracking_no AS invoiceNumber,
 		NVL(total_order_count, 0) totalOrderCount, NVL(total_qty, 0) totalQty,
 		NVL(detail_cancel_count, 0) detailCancelCount
@@ -91,18 +91,15 @@ SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님')
 
 <select id="findByOrderDetails" parameterType="String" resultType="com.fa.plus.admin.domain.OrderDetailManage">
 SELECT od.order_num AS orderNum, od.od_num AS orderDetailNum,
-	od_count AS qty, od.od_price AS price, NVL((0.01 * rk.sale) * od_total_amount,0) AS salePrice,
-	((0.01 * rk.sale) * od_total_amount) * od_count AS productMoney, order_earn AS savedMoney,
-	op.detail_num AS detailNum, op.option_value AS optionValue, od.detail_num2 AS detailNum2, op2.option_value AS optionValue2,
-	od.product_num AS productNum, product_name AS productName, od.change_num AS detailState
+	od_count AS qty, od.od_price AS price, order_earn AS savedMoney,
+	op.detail_num AS detailNum, op.option_value AS optionValue, NVL(od.detail_num2,null) AS detailNum2, NVL(op2.option_value, null) AS optionValue2,
+	od.product_num AS productNum, product_name AS productName, od.change_num AS detailState, refund_total_amount AS cancelAmount
 FROM order_detail od
 JOIN product p ON od.product_num = p.product_num
 JOIN optionDetail op ON od.detail_num1 = op.detail_num
-JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
+LEFT OUTER JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
 JOIN totalOrder o ON od.order_num = o.order_num
-JOIN user_rank_history ht ON o.useridx = ht.useridx
-JOIN user_rank rk ON ht.rank_num = rk.rank_num
-
+LEFT OUTER JOIN refund rf ON od.od_num = rf.od_num
 WHERE od.order_num = #{order_num} 
 </select>
 
@@ -124,11 +121,25 @@ JOIN order_detail od ON o.order_num = od.order_num
 	FROM totalorder o
 	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
 	JOIN order_detail od ON o.order_num = od.order_num
-	JOIN user_rank_history ht ON o.useridx = ht.useridx
+	JOIN (
+        SELECT USERIDX,
+        UPH_NUM
+     , RANK_NUM
+     , UPDATE_RANK
+  FROM (
+         SELECT UPH_NUM
+     , RANK_NUM
+     , UPDATE_RANK
+     , USERIDX
+              , ROW_NUMBER() OVER(PARTITION BY useridx ORDER BY UPDATE_RANK DESC) AS rn
+           FROM user_rank_history
+       )
+ WHERE rn = 1
+    ) ht ON o.useridx = ht.useridx
 	JOIN user_rank rk ON ht.rank_num = rk.rank_num
 	JOIN product p ON od.product_num = p.product_num
 	JOIN optionDetail op ON od.detail_num1 = op.detail_num
-	JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
+	LEFT OUTER JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
       JOIN order_status os ON od.change_num = os.change_num
 	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
 	LEFT OUTER JOIN company cp ON t.cp_num = cp.cp_num
@@ -221,7 +232,7 @@ FROM company
 
 <select id="listDetailStateInfo" parameterType="long" resultType="map">
 	SELECT od.change_num AS stateNum, od_num AS orderDetailNum, o.useridx AS memberidx, NVL(user_name,'손님') AS userName,
-		od.change_num AS detailState, order_status AS stateMemo, TO_CHAR(order_status_update_date, 'YYYYMMDD HH24:MI') AS detailStateDate
+		od.change_num AS detailState, order_status AS detailStateInfo, TO_CHAR(order_status_update_date, 'YYYYMMDD HH24:MI') AS detailStateDate
 	FROM order_detail od
 	JOIN totalOrder o ON od.order_num = o.order_num 
 	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
@@ -255,7 +266,6 @@ FROM company
 	WHERE  ( od.change_num = 5 OR t.tr_status = 3) AND TRUNC(SYSDATE - order_dateTime) &gt; = 5  
 		)
 </update>
-
 
 
 

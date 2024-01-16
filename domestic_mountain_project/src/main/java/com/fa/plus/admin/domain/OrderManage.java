@@ -11,6 +11,7 @@ public class OrderManage {
 	private int deliveryCharge;
 	private int payment;
 	private int cancelAmount;
+	private int orderSale;
 	private int orderState;
 	private String orderStateInfo;
 	
@@ -29,6 +30,15 @@ public class OrderManage {
 	private String authDate;
 	
 	private String cancelDate;
+
+	
+	public int getOrderSale() {
+		return orderSale;
+	}
+
+	public void setOrderSale(int orderSale) {
+		this.orderSale = orderSale;
+	}
 
 	public String getOrderNum() {
 		return orderNum;
