@@ -7,11 +7,7 @@
 	<select id="post_seq" resultType="Long">
 		SELECT post_seq.NEXTVAL FROM dual
 	</select>
-	
-	<select id="gather_seq" resultType="Long">
-		SELECT gather_seq.NEXTVAL FROM dual
-	</select>
-	
+
 
 	<sql id="where-list">
 		<if test="schType=='all'">
@@ -117,9 +113,9 @@
 					post_reg_date, post_update_date, post_hit_count, post_visible, post_gather)
 				VALUES (#{post_num}, 3, #{post_title}, #{post_content}, #{post_reg_id},
 					SYSDATE, SYSDATE, 0, 1, 1)
-			INTO gather(gather_num, post_num, gather_max, gather_expire_date, 
+			INTO gather(post_num, gather_max, gather_expire_date, 
 					location_addr, start_date, end_date)
-				VALUES (#{gather_num}, #{post_num}, #{gather_max}, 
+				VALUES (#{post_num}, #{gather_max}, 
 					TO_DATE(#{gather_expire_date}, 'YYYY-MM-DD'),
 					#{location_addr}, 
 					TO_DATE(#{start_date}, 'YYYY-MM-DD'),
@@ -141,21 +137,17 @@
 		WHERE post_num = #{post_num}
 	</update>
 	
-	<delete id="deleteTogether" parameterType="Long">
-		
-	</delete>
-	
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Together">
-		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	    SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
-	           saveFilename, g.gather_num,
+	           saveFilename, 
 	           gather_max, 
 	           TO_CHAR(gather_expire_date, 'yyyy-mm-dd') as gather_expire_date,
 	           TO_CHAR(start_date, 'yyyy-mm-dd') as start_date,
 	           TO_CHAR(end_date, 'yyyy-mm-dd') as end_date,
 	           location_addr,
-	           participantCount
+	           NVL(pc.participantCount, 0) as participantCount
 	    FROM post p
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
@@ -164,19 +156,15 @@
 	        FROM post_file
 	        GROUP BY post_num
 	    ) f ON p.post_num = f.post_num
-		LEFT JOIN (
-			SELECT *
-			FROM gather
-		) g ON p.post_num = g.post_num
-        LEFT OUTER JOIN (
-            SELECT gather_num, COUNT(*) participantCount
-            FROM participant
-            WHERE gather_num = #{gather_num}
-            GROUP BY gather_num
-        ) pc ON g.gather_num = pc.gather_num
-        
+	    LEFT OUTER JOIN gather g ON p.post_num = g.post_num
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) participantCount
+	        FROM participant
+	        GROUP BY post_num
+	    ) pc ON g.post_num = pc.post_num
 	    WHERE community_category_num = 3 AND p.post_num = #{post_num}
 	</select>
+
 	
 	<!-- 파일 -->
 	
@@ -197,29 +185,33 @@
 	    WHERE file_num=#{file_num}
 	</select>
 	
+	<delete id="deleteTogether" parameterType="Long">
+		DELETE FROM post WHERE post_num = #{post_num}
+	</delete>
+	
 	<delete id="deleteTogetherFile" parameterType="map">
-		DELETE FROM post_file WHERE ${field} = #{post_num}
+		DELETE FROM post_file WHERE post_num = #{post_num}
 	</delete>
 	
 	
 	<!-- 신청 추가 -->
 	<insert id="insertParticipant" parameterType="map">
-		INSERT INTO participant(gather_num, participant_num) VALUES (#{gather_num}, #{participant_num})
+		INSERT INTO participant(post_num, participant_num) VALUES (#{post_num}, #{participant_num})
 	</insert>
 	
 	<!-- 신청 삭제 -->
 	<delete id="deleteParticipant" parameterType="map">
-		DELETE FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{participant_num}
+		DELETE FROM participant WHERE post_num = #{post_num} AND participant_num = #{participant_num}
 	</delete>
     
 	<!-- 신청 개수 -->
 	<select id="participantCount" parameterType="Long" resultType="Integer">
-		SELECT COUNT(*) FROM participant WHERE gather_num=#{gather_num}
+		SELECT COUNT(*) FROM participant WHERE post_num=#{post_num}
 	</select>
 
 	<!-- 신청 여부 -->
 	<select id="userParticipantCount" parameterType="map" resultType="com.fa.plus.domain.Together">
-		SELECT gather_num, participant_num FROM participant WHERE gather_num = #{gather_num} AND participant_num = #{participant_num}
+		SELECT post_num, participant_num FROM participant WHERE post_num = #{post_num} AND participant_num = #{participant_num}
 	</select>
 	
 	

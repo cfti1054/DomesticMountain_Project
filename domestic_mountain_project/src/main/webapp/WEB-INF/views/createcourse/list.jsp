@@ -44,7 +44,7 @@
 						<li class=""><a
 							href="${pageContext.request.contextPath}/recommend/list">&gt;
 								추천 코스</a></li>
-						<li class=""><a
+						<li class="eq1"><a
 							href="${pageContext.request.contextPath}/createcourse/list">&gt; 유저가
 								만든 코스</a></li>
 						<li class=""><a href="#">&nbsp;</a></li>
@@ -66,7 +66,7 @@
 						<a>Walk &amp; Climbing</a>
 					</h3>
 					<ul>
-						<li class="eq1"><a
+						<li class=""><a
 							href="${pageContext.request.contextPath}/appearance/list">&gt;
 								회원들의 모습</a></li>
 					</ul>
@@ -87,7 +87,7 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>회원들의 모습<span>| Members' Appearance</span></a> <span><a
+					<a>유저가 만든 코스<span>| Members' createcourse</span></a> <span><a
 						href="${pageContext.request.contextPath}/">home</a> &gt; community
 						&gt; 회원들의 모습</span>
 				</h1>
@@ -104,7 +104,7 @@
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<ul>
 								<li class="show-2-li">
-									<c:url var="url" value="/appearance/article">
+									<c:url var="url" value="/createcourse/article">
 						                <c:param name="post_num" value="${dto.post_num}"/>
 						                <c:param name="page" value="${page}"/>
 						                <c:if test="${not empty kwd}">
@@ -113,12 +113,12 @@
 						                </c:if>	
 						            </c:url>
 									<a href="${url}" class="album-img"> <img width="200" height="200"
-										src="${pageContext.request.contextPath}/uploads/appearance/${dto.saveFilename}" alt="">
+										src="${pageContext.request.contextPath}/uploads/createcourse/${dto.saveFilename}" alt="">
 									</a>
 
 									<dl>
 										<dt>
-											<c:url var="url" value="/appearance/article">
+											<c:url var="url" value="/createcourse/article">
 												<c:param name="post_num" value="${dto.post_num}"/>
 												<c:param name="page" value="${page}"/>
 												<c:if test="${not empty kwd}">
@@ -153,7 +153,7 @@
 
 						<div class="row board-list-footer">
 							<div class="col">
-								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/appearance/list';"
+								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/createcourse/list';"
 									title="새로고침">
 									<i class="bi bi-arrow-counterclockwise"></i>
 								</button>
@@ -184,7 +184,7 @@
 										</button>
 
 										<button type="button" class="btn btn-light"
-											onclick="location.href='${pageContext.request.contextPath}/appearance/write';">글올리기</button>
+											onclick="location.href='${pageContext.request.contextPath}/createcourse/write';">글올리기</button>
 									</div>
 								</form>
 							</div>

@@ -17,7 +17,7 @@ public interface TogetherService {
 
 	public void insertTogether(Together dto, String pathname) throws Exception;
 	public void updateTogether(Together dto, String pathname) throws Exception;
-	public void deleteTogether(long num, String pathname) throws Exception;
+	public void deleteTogether(long post_num, String pathname, String userid, int usership) throws Exception;
 	
 
 	// public void insertTogetherFile(Together dto) throws Exception;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fa.plus.mapper.AppearanceMapper">
+<mapper namespace="com.fa.plus.mapper.CreatecourseMapper">
 
 	<select id="post_file_seq" resultType="Long"> 
 		SELECT post_file_seq.NEXTVAL FROM dual
@@ -11,12 +11,12 @@
 		SELECT post_seq.NEXTVAL FROM dual
 	</select>
 
-	<update id="insertAppearance" parameterType="com.fa.plus.domain.Appearance">
+	<update id="insertCreatecourse" parameterType="com.fa.plus.domain.Createcourse">
 	
 		INSERT ALL
 		INTO post(post_num, community_category_num, post_title, post_content, post_reg_id, 
 				post_reg_date, post_update_date, post_hit_count, post_visible, post_gather)
-			VALUES (#{post_num}, 5, #{post_title}, #{post_content}, #{post_reg_id},
+			VALUES (#{post_num}, 2, #{post_title}, #{post_content}, #{post_reg_id},
 				SYSDATE, SYSDATE, 0, 1, 1)
 		INTO post_file (file_num, post_num, saveFilename, originalFilename)
 			VALUES (#{file_num}, #{post_num}, #{saveFilename}, #{originalFilename})
@@ -25,20 +25,20 @@
 	</update>
 	
 	<!-- 수정 -->
-	<update id="updateAppearance" parameterType="com.fa.plus.domain.Appearance">
+	<update id="updateCreatecourse" parameterType="com.fa.plus.domain.Createcourse">
 		UPDATE post SET post_title=#{post_title}, post_content=#{post_content}
 		WHERE post_num = #{post_num}
 	</update>
 	
 	<!-- 수정 -->
-	<update id="updateAppearance2" parameterType="com.fa.plus.domain.Appearance">
+	<update id="updateCreatecourse2" parameterType="com.fa.plus.domain.Createcourse">
 		UPDATE post_file SET saveFilename=#{saveFilename, jdbcType=VARCHAR},
 				originalFilename=#{originalFilename, jdbcType=VARCHAR}
 		WHERE post_num = #{post_num}
 	</update>
 
 	<!-- 삭제 --> <!-- 
-	<delete id="deleteAppearance1" parameterType="com.fa.plus.domain.Appearance">
+	<delete id="deleteCreatecourse1" parameterType="com.fa.plus.domain.Createcourse">
 		DELETE FROM post_file WHERE file_num = #{file_num}
 	</delete>
  	-->
@@ -70,11 +70,11 @@
 			<if test="kwd != null and kwd != '' ">
 				<include refid="where-list"/>
 			</if>
-		AND community_category_num = 5
+		AND community_category_num = 2
 		</where>
 	</select>
 	
-	<select id="listAppearance" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+	<select id="listCreatecourse" parameterType="map" resultType="com.fa.plus.domain.Createcourse">
 	    SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
@@ -98,13 +98,13 @@
 			<if test="kwd != null and kwd != '' ">
 				<include refid="where-list"/>
 			</if>
-			AND community_category_num = 5
+			AND community_category_num = 2
 		</where>
 	    ORDER BY p.post_num DESC
 	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
-	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Appearance">
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Createcourse">
 		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id, file_num,
 	           originalFilename, saveFilename,
@@ -120,7 +120,7 @@
 	    WHERE p.post_num = #{post_num}
 	</select>
 	
-	<select id="findById1" parameterType="Long" resultType="com.fa.plus.domain.Appearance">
+	<select id="findById1" parameterType="Long" resultType="com.fa.plus.domain.Createcourse">
 		SELECT originalFilename, saveFilename, post_num
 	    FROM post_file
 	    WHERE file_num = #{file_num}
@@ -131,7 +131,7 @@
 		WHERE post_num = #{post_num}
 	</update>
 	
-	<select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+	<select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Createcourse">
 		SELECT post_num, post_title
 		FROM post p
 		JOIN user1 u ON p.post_reg_id = u.useridx
@@ -140,13 +140,13 @@
 				<include refid="where-list"/>
 			</if>
 			AND (post_num &gt; #{post_num})
-			AND community_category_num = 5
+			AND community_category_num = 2
 		</where>
 		ORDER BY post_num ASC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
-	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Createcourse">
 		SELECT post_num, post_title
 		FROM post p
 		JOIN user1 u ON p.post_reg_id = u.useridx
@@ -155,7 +155,7 @@
 				<include refid="where-list"/>
 			</if>
 			AND (post_num &lt; #{post_num})
-			AND community_category_num = 5
+			AND community_category_num = 2
 		</where>
 		ORDER BY post_num DESC
 		FETCH FIRST 1 ROWS ONLY
@@ -172,7 +172,7 @@
 	</delete>
 	
 	<!-- post 테이블 삭제 -->
-	<delete id="deleteAppearance" parameterType="Long">
+	<delete id="deleteCreatecourse" parameterType="Long">
 		DELETE FROM post WHERE post_num = #{post_num}
 	</delete>
 	
@@ -192,7 +192,7 @@
 	</select>
 
 	<!-- 게시글 좋아요 여부 -->
-	<select id="userBoardLiked" parameterType="map" resultType="com.fa.plus.domain.Appearance">
+	<select id="userBoardLiked" parameterType="map" resultType="com.fa.plus.domain.Createcourse">
 		SELECT post_num, useridx FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
 	</select>
 	

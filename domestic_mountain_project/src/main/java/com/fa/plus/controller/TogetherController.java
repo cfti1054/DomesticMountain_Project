@@ -142,6 +142,7 @@ public class TogetherController {
 			@RequestParam String page,
 			@RequestParam(defaultValue = "all") String schType, 
 			@RequestParam(defaultValue = "") String kwd,
+			HttpSession session,
 			Model model
 			) throws Exception {
 		
@@ -171,6 +172,11 @@ public class TogetherController {
 		Together prevDto = service.findByPrev(map);
 		Together nextDto = service.findByNext(map);
 		
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+		// 게시글 좋아요 여부
+		map.put("participant_num", info.getUseridx());
+		boolean userParticipantCount = service.userParticipantCount(map);
+		
 		// file
 		List<Together> listFile = service.listTogetherFile(post_num);
 		
@@ -180,6 +186,8 @@ public class TogetherController {
 		model.addAttribute("listFile", listFile);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
+		
+		model.addAttribute("userParticipantCount", userParticipantCount);
 		
 		return ".together.article";
 	}
@@ -241,6 +249,7 @@ public class TogetherController {
 			@RequestParam(defaultValue = "") String kwd,
 			HttpSession session
 			) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		
 		kwd = URLDecoder.decode(kwd, "utf-8");
 		String query = "page=" + page;
@@ -251,8 +260,9 @@ public class TogetherController {
 		
 		try {
 			String root = session.getServletContext().getRealPath("/");
-			String pathname = root + "uploads" + File.separator + "notice";
-			service.deleteTogether(post_num, pathname);
+			String pathname = root + "uploads" + File.separator + "together";
+			
+			service.deleteTogether(post_num, pathname, info.getUserid(), info.getUsership());
 		} catch (Exception e) {
 		}
 		
@@ -261,17 +271,17 @@ public class TogetherController {
 	
 	@GetMapping("download")
 	public void download(
-			@RequestParam long file_num,
+			@RequestParam long post_num,
 			HttpServletResponse resp,
 			HttpSession session
 			) throws Exception {
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "notice";
+		String pathname = root + "uploads" + File.separator + "together";
 
 		boolean b = false;
 		
-		Together dto = service.findByFileId(file_num);
+		Together dto = service.findById(post_num);
 		if(dto != null) {
 			String saveFilename = dto.getSaveFilename();
 			String originalFilename = dto.getOriginalFilename();
@@ -298,7 +308,7 @@ public class TogetherController {
 			) throws Exception {
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "notice";
+		String pathname = root + "uploads" + File.separator + "together";
 
 		Together dto = service.findByFileId(file_num);
 		if (dto != null) {
@@ -325,7 +335,7 @@ public class TogetherController {
 	@PostMapping("insertParticipant")
 	@ResponseBody
 	public Map<String, Object> insertParticipant(
-			@RequestParam long gather_num,
+			@RequestParam long post_num,
 			@RequestParam boolean userApply,
 			HttpSession session
 			) throws Exception {
@@ -334,9 +344,12 @@ public class TogetherController {
 		
 		int participantCount = 0;
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
-
+		System.out.println(post_num);
+		System.out.println(userApply);
+		System.out.println("----------------------------------------------------------------------------------------");
+		
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("gather_num", gather_num);
+		paramMap.put("post_num", post_num);
 		paramMap.put("participant_num", info.getUseridx());
 
 		try {
@@ -351,7 +364,7 @@ public class TogetherController {
 			state = "false";
 		}
 
-		participantCount = service.participantCount(gather_num);
+		participantCount = service.participantCount(post_num);
 
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
@@ -359,6 +372,7 @@ public class TogetherController {
 
 		
 		return model;
+		
 	}
 	
 	

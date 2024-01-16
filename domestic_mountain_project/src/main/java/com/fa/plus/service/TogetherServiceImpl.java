@@ -1,6 +1,5 @@
 package com.fa.plus.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -100,10 +99,8 @@ public class TogetherServiceImpl implements TogetherService {
 
 		try {
 			long post_num = mapper.post_seq();
-			long gather_num = mapper.gather_seq();
 
 			dto.setPost_num(post_num);
-			dto.setGather_num(gather_num);
 
 			mapper.insertTogether(dto);
 			
@@ -160,32 +157,6 @@ public class TogetherServiceImpl implements TogetherService {
 
 	}
 
-	@Override
-	public void deleteTogether(long num, String pathname) throws Exception {
-		try {
-			
-			List<Together> listFile = listTogetherFile(num);
-			if (listFile != null) {
-				for (Together dto : listFile) {
-					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
-				}
-			}
-			
-			// 파일 내용 지우기
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("field", "file_num");
-			map.put("post_num", num);
-			
-			deleteTogetherFile(map);
-			
-			mapper.deleteTogether(num);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-
-	}
 
 	@Override
 	public void deleteTogetherFile(Map<String, Object> map) throws Exception {
@@ -274,5 +245,21 @@ public class TogetherServiceImpl implements TogetherService {
 		
 		return result;
 	}
+
+	@Override
+	public void deleteTogether(long post_num, String pathname, String userid, int usership) throws Exception {
+		try {
+			
+			mapper.deleteTogether(post_num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+
+
 
 }

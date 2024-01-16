@@ -91,6 +91,7 @@
     		<exclude-mapping path="/together/list"/>
     		<exclude-mapping path="/share/**"/>
     		<exclude-mapping path="/made/**"/>
+    		<exclude-mapping path="/createcourse/list"/>
     		<exclude-mapping path="/Related/**"/>
     		<exclude-mapping path="/Order/**"/>
     		

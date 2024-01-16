@@ -24,24 +24,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
-import com.fa.plus.domain.Appearance;
+import com.fa.plus.domain.Createcourse;
 import com.fa.plus.domain.Reply;
 import com.fa.plus.domain.SessionInfo;
-import com.fa.plus.service.AppearanceService;
+import com.fa.plus.service.CreatecourseService;
 
 @Controller
-@RequestMapping("appearance/*")
-public class AppearanceController {
+@RequestMapping("createcourse/*")
+public class CreatecourseController {
 	
 	@Autowired
-	private AppearanceService service;
+	private CreatecourseService service;
 	
 	@Autowired
 	private MyUtil myUtil;
-	
+
 	@Autowired
 	private FileManager fileManager;
-	
+
 	@RequestMapping(value = "list")
 	public String recommendForm(
 			@RequestParam(value = "page", defaultValue = "1") int current_page,
@@ -78,18 +78,18 @@ public class AppearanceController {
 		map.put("offset", offset);
 		map.put("size", size);
 
-		List<Appearance> list = service.listAppearance(map);
+		List<Createcourse> list = service.listCreatecourse(map);
 
 		String query = "";
-		String listUrl = cp + "/appearance/list";
-		String articleUrl = cp + "/appearance/article?page=" + current_page;
+		String listUrl = cp + "/createcourse/list";
+		String articleUrl = cp + "/createcourse/article?page=" + current_page;
 		if (kwd.length() != 0) {
 			query = "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
 		}
 
 		if (query.length() != 0) {
 			listUrl += "?" + query;
-			articleUrl = cp + "/appearance/article?page=" + current_page + "&" + query;
+			articleUrl = cp + "/createcourse/article?page=" + current_page + "&" + query;
 		}
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
@@ -105,31 +105,31 @@ public class AppearanceController {
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
 		
-		return ".appearance.list";
+		return ".createcourse.list";
 	}
 	
 	@GetMapping("write")
 	public String writeForm(Model model) throws Exception {
 		model.addAttribute("mode", "write");
 		
-		return ".appearance.write";
+		return ".createcourse.write";
 	}
 	
 	@PostMapping("write")
-	public String writeSubmit(Appearance dto, HttpSession session) throws Exception {
+	public String writeSubmit(Createcourse dto, HttpSession session) throws Exception {
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		
 		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator + "appearance";
+		String path = root + "uploads" + File.separator + "createcourse";
 		
 		try {
 			dto.setPost_reg_id(info.getUseridx());
-			service.insertAppearance(dto, path);
+			service.insertCreatecourse(dto, path);
 			System.out.println(dto.getPost_title());
 		} catch (Exception e) {
 		}
 		
-		return "redirect:/appearance/list";
+		return "redirect:/createcourse/list";
 	}
 	
 	@GetMapping("article")
@@ -152,10 +152,10 @@ public class AppearanceController {
 		
 		service.updateHitCount(post_num);
 		
-		Appearance dto = service.findById(post_num);
+		Createcourse dto = service.findById(post_num);
 		System.out.println("----------------------------------------------------------------------------------------");
 		if (dto == null) {
-			return "redirect:/appearance/list?" + query;
+			return "redirect:/createcourse/list?" + query;
 		}
 		
 		// 스마트 에디터 사용시
@@ -166,8 +166,8 @@ public class AppearanceController {
 		map.put("kwd", kwd);
 		map.put("post_num", post_num);
 		
-		Appearance prevDto = service.findByPrev(map);
-		Appearance nextDto = service.findByNext(map);
+		Createcourse prevDto = service.findByPrev(map);
+		Createcourse nextDto = service.findByNext(map);
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 		// 게시글 좋아요 여부
@@ -183,7 +183,7 @@ public class AppearanceController {
 
   		model.addAttribute("userBoardLiked", userBoardLiked);
 		
-		return ".appearance.article";
+		return ".createcourse.article";
 	}
 	
 	@GetMapping("update")
@@ -193,33 +193,33 @@ public class AppearanceController {
 			Model model) throws Exception {
 		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
 
-		Appearance dto = service.findById(post_num);
+		Createcourse dto = service.findById(post_num);
 		if (dto == null || ! info.getUserid().equals(dto.getUser_id())) {
-			return "redirect:/appearance/list?page=" + page;
+			return "redirect:/createcourse/list?page=" + page;
 		}
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode", "update");
 		model.addAttribute("page", page);
 
-		return ".appearance.write";
+		return ".createcourse.write";
 	}
 
 	@PostMapping("update")
-	public String updateSubmit(Appearance dto,
+	public String updateSubmit(Createcourse dto,
 			@RequestParam String page,
 			HttpSession session) throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "appearance";
+		String pathname = root + "uploads" + File.separator + "createcourse";
 
 		try {
-			service.updateAppearance(dto, pathname);
-			service.updateAppearance2(dto, pathname);
+			service.updateCreatecourse(dto, pathname);
+			service.updateCreatecourse2(dto, pathname);
 		} catch (Exception e) {
 		}
 
-		return "redirect:/appearance/list?page=" + page;
+		return "redirect:/createcourse/list?page=" + page;
 	}
 
 	/*
@@ -265,15 +265,15 @@ public class AppearanceController {
 		}
 
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "appearance";
+		String pathname = root + "uploads" + File.separator + "createcource";
 		
 		service.deletePostlike(post_num, pathname, info.getUserid(), info.getUsership());
 		service.deletePostfile(post_num, pathname, info.getUserid(), info.getUsership());
 		// service.deleteReplylike(post_num, pathname, info.getUserid(), info.getUsership());
 		// service.deleteReply(post_num, pathname, info.getUserid(), info.getUsership());
-		service.deleteAppearance(post_num, pathname, info.getUserid(), info.getUsership());
+		service.deleteCreatecourse(post_num, pathname, info.getUserid(), info.getUsership());
 
-		return "redirect:/appearance/list?" + query;
+		return "redirect:/createcourse/list?" + query;
 	}
 
 	@GetMapping("download")
@@ -282,9 +282,9 @@ public class AppearanceController {
 			HttpSession session) throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "appearance";
+		String pathname = root + "uploads" + File.separator + "createcource";
 
-		Appearance dto = service.findById(post_num);
+		Createcourse dto = service.findById(post_num);
 
 		if (dto != null) {
 			boolean b = fileManager.doFileDownload(dto.getSaveFilename(), 
@@ -381,7 +381,7 @@ public class AppearanceController {
 			model.addAttribute("total_page", total_page);
 			model.addAttribute("paging", paging);
 
-			return "appearance/listReply";
+			return "createcourse/listReply";
 		}
 		
 		// 댓글 및 댓글의 답글 등록 : AJAX-JSON
@@ -436,7 +436,7 @@ public class AppearanceController {
 			}
 
 			model.addAttribute("listReplyAnswer", listReplyAnswer);
-			return "appearance/listReplyAnswer";
+			return "createcourse/listReplyAnswer";
 		}	
 
 		// 댓글의 답글 개수 : AJAX-JSON

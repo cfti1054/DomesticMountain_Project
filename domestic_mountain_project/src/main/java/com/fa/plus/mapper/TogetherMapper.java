@@ -25,7 +25,7 @@ public interface TogetherMapper {
 	public void insertTogether(Together dto) throws SQLException;
 	public void updateTogetherPost(Together dto) throws SQLException;
 	public void updateTogetherGather(Together dto) throws SQLException;
-	public void deleteTogether(long num) throws SQLException;
+	public void deleteTogether(long post_num) throws SQLException;
 	
 	
 	public void insertTogetherFile(Together dto) throws SQLException;

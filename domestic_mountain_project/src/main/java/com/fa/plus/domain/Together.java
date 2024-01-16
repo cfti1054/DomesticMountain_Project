@@ -33,7 +33,6 @@ public class Together {
 	private long usership;
 	
 	// gather
-	private long gather_num;
 			//private long post_num;
 	private long gather_max;
 	private String gather_expire_date;
@@ -43,7 +42,6 @@ public class Together {
 	
 	// participant
 	private long participant_num;
-		// gather_num : 모집 번호
 	private long participantCount; // 신청한 인원수
 	
 	// reply 
@@ -209,14 +207,6 @@ public class Together {
 
 	public void setUsership(long usership) {
 		this.usership = usership;
-	}
-
-	public long getGather_num() {
-		return gather_num;
-	}
-
-	public void setGather_num(long gather_num) {
-		this.gather_num = gather_num;
 	}
 
 	public long getGather_max() {

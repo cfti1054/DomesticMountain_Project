@@ -38,7 +38,7 @@
 							href="${pageContext.request.contextPath}/recommend/list">&gt;
 								추천 코스</a></li>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/made/list">&gt; 유저가
+							href="${pageContext.request.contextPath}/createcourse/list">&gt; 유저가
 								만든 코스</a></li>
 						<li class=""><a href="#">&nbsp;</a></li>
 						<li class="eq1"><a
@@ -104,7 +104,7 @@
 											</span>
 											</a>
 										</div>
-										<a href="#" class="txt">${dto.post_content}</a>
+										<a href="${articleUrl}&post_num=${dto.post_num}" class="txt">${dto.post_content}</a>
 									</div>
 
 									<div class="con_bottom">
@@ -131,7 +131,7 @@
 							
 							<c:if test="${dto.post_fileCount != 0}">
 								<div class="movie-img">
-									<a href="#"> <img
+									<a href="${articleUrl}&post_num=${dto.post_num}"> <img
 										src="${pageContext.request.contextPath}/uploads/together/${dto.saveFilename}"
 										width="200" height="120" alt="썸네일 이미지"> <span
 										class="num">${dto.post_fileCount}<span class="blind">개의

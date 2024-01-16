@@ -140,9 +140,9 @@
 							<td width="50%" align="left">동행 기간 : ${dto.start_date} ~
 								${dto.end_date}</td>
 							<td width="50%" align="right">응모한 인원 :
-								0 / ${dto.gather_max}</td>
+								<span class="count_max">${dto.participantCount} / ${dto.gather_max}</span></td>
 						</tr>
-
+ 
 						<tr>
 							<td width="50%" align="left">모집 종료 일자 :
 								${dto.gather_expire_date}</td>
@@ -155,23 +155,37 @@
 						</tr>
 
 						<tr>
-							<td colspan="2" class="text-center p-3"
-								style="border-bottom: none;">
-								<button type="button"
-									class="btn btn-outline-secondary btnSendParticipantCount"
-									title="신청">
-									<i class="bi ${participantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
-									<span id="participantCount">신청하기</span>
-								</button>
+							<td colspan="2" class="text-center p-3"	style="border-bottom: none;">
+								<c:choose>
+									<c:when	test="${userParticipantCount==true}">
+										<button type="button" class="btn btn-outline-secondary btnSendParticipantCount"	title="신청222">
+											<i class="bi ${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
+											<span id="participantCount">신청취소</span>
+										</button>
+									</c:when>
+									<c:when	test="${dto.participantCount==dto.gather_max}">
+										<button type="button" class="btn btn-outline-secondary btnSendParticipantCount"	title="신청222" disabled>
+											<i class="bi ${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
+											<span id="participantCount">인원이 가득참</span>
+										</button>
+									</c:when>
+									
+									<c:otherwise>
+										<button type="button" class="btn btn-outline-secondary btnSendParticipantCount"	title="신청222">
+											<i class="bi ${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
+											<span id="participantCount">신청하기1</span>
+										</button>
+									</c:otherwise>
+								</c:choose>	
 							</td>
 						</tr>
+						
 						<tr>
-							<td colspan="2"><c:forEach var="vo" items="${listFile}"
-									varStatus="status">
+							<td colspan="2"><c:forEach var="vo" items="${listFile}" varStatus="status">
 									<p class="file-item">
 
 										<i class="fa-regular fa-folder-open"></i> <a
-											href="${pageContext.request.contextPath}/together/download?file_num=${vo.file_num}">${vo.originalFilename}</a>
+											href="${pageContext.request.contextPath}/together/download?post_num=${vo.post_num}">${vo.originalFilename}</a>
 
 									</p>
 								</c:forEach></td>
@@ -200,7 +214,8 @@
 
 				<table class="table">
 					<tr>
-						<td width="50%" align="left"><c:choose>
+						<td width="50%" align="left">
+							<c:choose>
 								<c:when
 									test="${sessionScope.loginUser.userid==dto.user_id||sessionScope.loginUser.usership>50}">
 									<button type="button" class="btn"
@@ -253,6 +268,7 @@
 				data: formData,
 				success:function(data) {
 					fn(data);
+					
 				},
 				beforeSend: function(jqXHR) {
 					jqXHR.setRequestHeader('AJAX', true);
@@ -282,7 +298,7 @@
 	}
 	
 
-// 신청인
+// 신청하기
 $(function(){
 	$('.btnSendParticipantCount').click(function(){
 		const $i = $(this).find('i');
@@ -294,20 +310,24 @@ $(function(){
 		}
 		
 		let url = '${pageContext.request.contextPath}/together/insertParticipant';
-		let num = '${dto.gather_num}';
-		let query = 'gather_num=' + num + '&userApply=' + userApply;
+		let num = '${dto.post_num}';
+		let query = 'post_num=' + num + '&userApply=' + userApply;
 		
 		const fn = function(data){
 			let state = data.state;
 			if(state === 'true') {
 				if( userApply ) {
 					$i.removeClass('fa-solid fa-circle-check').addClass('fa-regular fa-circle-check');
+					$('#participantCount').text('신청하기');
 				} else {
 					$i.removeClass('fa-regular fa-circle-check').addClass('fa-solid fa-circle-check');
+					$('#participantCount').text('신청취소');
 				}
-				
+			
 				let count = data.participantCount;
-				$('#participantCount').text(count);
+				let s = count + " / ${dto.gather_max}";
+				$(".count_max").html(s);
+				
 			} else if(state === 'apply') {
 				alert('동행 신청은 한번만 가능합니다. !!!');
 			} else if(state === "false") {
