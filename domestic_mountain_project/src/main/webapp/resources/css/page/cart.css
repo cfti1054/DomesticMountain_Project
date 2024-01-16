@@ -44,6 +44,7 @@
 .cart-container {
   display: flex;
   justify-content: space-between;
+  border-bottom: 2px solid #d5d4d4;
 }
 
 .cart-trash-svg {

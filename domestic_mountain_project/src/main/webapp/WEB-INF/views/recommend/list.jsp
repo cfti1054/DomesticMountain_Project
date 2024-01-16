@@ -181,7 +181,7 @@ function searchList(f) {
 							<div class="article-album-sub">
 								<c:forEach var="dto" items="${list}" varStatus="status">
 									<ul>
-										<li class="show-2-li"><a href="#" class="album-img"> <img
+										<li class="show-2-li"><a href="${articleUrl}&num=${dto.post_num}" class="album-img"> <img
 												width="200" height="200"
 												src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
 												alt="">
@@ -189,10 +189,10 @@ function searchList(f) {
 		
 											<dl>
 												<dt>
-													<a href="#" class="tit"> <span class="inner"> <span
+													<a href="${articleUrl}&num=${dto.post_num}" class="tit"> <span class="inner"> <span
 															class="ellipsis">${dto.post_title}</span>
 													</span>
-													</a> <a href="#" class="m-tcol-p"> <span class="num">[${dto.replyCount}]</span>
+													</a> <a href="${articleUrl}&num=${dto.post_num}" class="m-tcol-p"> <span class="num">[${dto.replyCount}]</span>
 													</a>
 												</dt>
 		
@@ -234,7 +234,7 @@ function searchList(f) {
 
 										<tr>
 											<td>${dto.post_num }</td>
-											<td class="left"><a href="#" class="text-reset">${dto.post_title}</a>
+											<td class="left"><a href="${articleUrl}&num=${dto.post_num}" class="text-reset">${dto.post_title}</a>
 												<span class="badge text-bg-info">New</span></td>
 											<td>${dto.user_name}</td>
 											<td>${dto.post_reg_date}</td>
