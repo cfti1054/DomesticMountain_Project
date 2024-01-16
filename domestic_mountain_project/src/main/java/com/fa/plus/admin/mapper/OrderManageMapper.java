@@ -25,6 +25,10 @@ public interface OrderManageMapper {
 	public int findByTotalCancelAmount(String orderNum);
 	public int totalOrderCount(String orderNum);
 
+	public void updateCancelOrder1(Map<String, Object> map) throws SQLException;
+	public void updateCancelOrder2(Map<String, Object> map) throws SQLException;
+	public void updateCancelDetail1(Map<String, Object> map) throws SQLException;
+	public void updateCancelDetail2(Map<String, Object> map) throws SQLException;
 	public void updateCancelAmount1(Map<String, Object> map) throws SQLException;
 	public void updateCancelAmount2(Map<String, Object> map) throws SQLException;
 	public void updateOrderInvoiceNumber1(Map<String, Object> map) throws SQLException;

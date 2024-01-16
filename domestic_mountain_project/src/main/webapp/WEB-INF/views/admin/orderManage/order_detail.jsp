@@ -20,7 +20,7 @@
 					<td width="150">${order.orderStateInfo}</td>
 				</tr>
 				<tr>
-					<td class="table-light">총금액</td>
+					<td class="table-light">총 금액</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.totalMoney}"/></td>
 					<td class="table-light">적림금사용액</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.usedSaved}"/></td>
@@ -55,26 +55,26 @@
 			<table class="table table-borderless mb-1">
 				<tr>
 					<td width="50%">
-						<c:if test= "${order.orderState == 1}">
+						<c:if test= "${order.orderState <= 1}">
 							<button type="button" class="btn btn-light btn-cancel-order" data-orderNum="${order.orderNum}">판매취소</button>
 						</c:if>
 					</td>
 					<td class="text-end">
-						<c:if test="${order.orderState == 1 }">
+						<c:if test="${order.orderState <= 1 }">
 							<button type="button" class="btn btn-light btn-prepare-order" data-orderNum="${order.orderNum}">발송처리</button>
 						</c:if>
 					
 						<div class="row justify-content-end delivery-update-area">
-							<c:if test="${order.orderState > 1 && order.orderState < 5 }">
+							<c:if test="${order.trStatus > 1 && order.orderState < 5 }">
 								<div class="col-auto">
 									<select class="form-select delivery-select">
-										<option value="2" ${order.orderState==1?"selected":"" }>발송준비</option>
-										<option value="4" ${order.orderState==2?"selected":"" }>배송중</option>
-										<option value="5" ${order.orderState==3?"selected":"" }>배송완료</option>
+										<option value="1" ${order.orderState==1?"selected":"" }>발송준비</option>
+										<option value="2" ${order.orderState==2?"selected":"" }>배송중</option>
+										<option value="3" ${order.orderState==3?"selected":"" }>배송완료</option>
 									</select>
 								</div>
 								<div class="col-auto">
-									<button type="button" class="btn btn-light btn-delivery-order" data-orderNum="${order.orderNum}" data-orderState="${order.orderState}">배송변경</button>
+									<button type="button" class="btn btn-light btn-delivery-order" data-trStatus="${order.trStatus}" data-orderNum="${order.orderNum}" data-orderState="${order.orderState}">배송변경</button>
 								</div>
 							</c:if>
 							<c:if test="${order.orderState == 3}">
@@ -105,7 +105,7 @@
 						<th width="80">주문수량</th>
 						<th width="90">상품가격</th>
 						<th width="90">할인가격</th>
-						<th width="100">주문총금액</th>
+						<th width="100">주문총액</th>
 						<th width="110">주문상태</th>
 						<th width="60">변경</th>
 					</tr>
@@ -120,7 +120,7 @@
 							<td>${dto.qty}</td>
 							<td><fmt:formatNumber value="${dto.price}"/></td>
 							<td><fmt:formatNumber value="${dto.savedMoney}"/></td>
-							<td><fmt:formatNumber value="${dto.totalMoney}"/></td>
+							<td><fmt:formatNumber value="${dto.price * dto.qty - dto.savedMoney}"/></td>
 							<td>${order.orderState==1 && dto.detailState<2?"상품준비중":dto.detailStateInfo}</td>
 							<td>
 								<span class="orderDetailStatus-update" 

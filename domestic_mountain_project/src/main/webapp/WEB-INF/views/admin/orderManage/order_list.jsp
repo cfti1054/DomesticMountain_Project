@@ -357,7 +357,7 @@ $(function(){
 	$("body").on("click", ".btn-delivery-order", function(){
 		const $EL = $(this);
 		let orderNum = $EL.attr("data-orderNum");
-		let preState = $EL.attr("data-orderState");
+		let preState = $EL.attr("data-trStatus");
 		
 		let orderState = $EL.closest(".delivery-update-area").find("select").val();
 		let orderStateInfo = $EL.closest(".delivery-update-area").find("select option:selected").text();
@@ -417,7 +417,9 @@ $(function(){
 		let orderState = $(this).attr("data-orderState");
 		let orderDetailNum = $(this).attr("data-orderDetailNum");
 		let detailState = $(this).attr("data-detailState");
+		
 		let productMoney = $(this).attr("data-productMoney");
+		console.log(productMoney);
 		let cancelAmount = $(".order-cancelAmount").attr("data-cancelAmount");
 		
 		f.orderNum.value = orderNum;
@@ -430,10 +432,10 @@ $(function(){
 		let $SELECT = $('form[name=detailStateForm] select[name=detailState]');
 		$('form[name=detailStateForm] select[name=detailState] option').remove();
 		
-		if(orderState==="6") {
+		if(orderState==="3") {
 			// 주문상태-판매취소
 			$(".detailStateUpdate-form").hide();
-		} else if(detailState==='1' || detailState==='2' || detailState==='3' || detailState==='5' || detailState==='12') {
+		} else if(detailState==='1' || detailState==='2' || detailState==='5' || detailState==='12') {
 			// 주문상세상태- 구매확정,자동구매확정,취소완료,반품완료,판매취소
 			$SELECT.append('<option value="14">기타</option>');
 		} else if(detailState==='4') { // 주문상세상태-주문취소요청
@@ -448,7 +450,7 @@ $(function(){
 			$SELECT.append('<option value="13">반품불가</option>');
 		} else {
 			 // 배송완료
-			if(orderState==="5") {
+			if(orderState==="18") {
 				$SELECT.append('<option value="2">자동구매확정</option>');
 			}
 			
@@ -521,7 +523,7 @@ $(function(){
 		}
 		
 		let qs = $('form[name=detailStateForm]').serialize();
-		let url = '${pageContext.request.contextPath}/admin/orderManage/detail/updateDetailState';
+		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/updateDetailState';
 
 		const fn = function(data) {
 			if(data.state === "true") {

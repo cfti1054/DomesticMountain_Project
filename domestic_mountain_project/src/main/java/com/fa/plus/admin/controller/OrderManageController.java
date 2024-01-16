@@ -179,12 +179,12 @@ public class OrderManageController {
 	@ResponseBody
 	public Map<String, Object> cancel(@RequestParam String orderNum) throws Exception {
 		String state = "true";
-		Map<String, Object> map = null;
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("orderNum", orderNum);
 		map.put("detailState", 5);
 		try {
-			service.updateOrderDetailState(map);
+			service.updateOrder("cancelAmount", map);
 		} catch (Exception e) {
 			state = "false";
 		}

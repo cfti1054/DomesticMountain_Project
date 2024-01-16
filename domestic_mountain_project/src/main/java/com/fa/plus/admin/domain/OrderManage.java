@@ -14,6 +14,7 @@ public class OrderManage {
 	private int orderSale;
 	private int orderState;
 	private String orderStateInfo;
+	private int trStatus;
 	
 	private String orderStateDate; // 상태변경일자
 	private String deliveryName; // 택배사
@@ -32,6 +33,15 @@ public class OrderManage {
 	private String cancelDate;
 
 	
+	
+	public int getTrStatus() {
+		return trStatus;
+	}
+
+	public void setTrStatus(int trStatus) {
+		this.trStatus = trStatus;
+	}
+
 	public int getOrderSale() {
 		return orderSale;
 	}

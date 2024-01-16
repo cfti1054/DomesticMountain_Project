@@ -36,7 +36,7 @@ SELECT o.order_num AS orderNum, o.useridx as memberIdx, NVL(u.user_id,'손님') 
 		order_point usedSaved, shipping AS deliveryCharge, total_amount AS payment, refund_total_amount AS cancelAmount,
 		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS orderDate, order_sale AS orderSale,
 		dt.change_num AS orderState, cp.cp_name AS deliveryName, t.tracking_no AS invoiceNumber,
-		NVL(total_order_count, 0) totalOrderCount, NVL(total_qty, 0) totalQty,
+		NVL(total_order_count, 0) totalOrderCount, NVL(total_qty, 0) totalQty, order_status AS orderStateInfo,
 		NVL(detail_cancel_count, 0) detailCancelCount
 	FROM totalorder o
 	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
@@ -75,9 +75,9 @@ SELECT o.order_num AS orderNum, o.useridx as memberIdx, NVL(u.user_id,'손님') 
 <select id="findById"  parameterType="String" resultType="com.fa.plus.admin.domain.OrderManage">
 SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님') AS userName, 
 	TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI:SS') AS orderDate, order_total_money AS totalMoney,
-	o.order_point AS usedSaved, o.shipping AS deliveryCharge, o.total_amount AS payment, refund_total_amount AS cancelAmount ,  tr_status AS orderState, order_status,
+	o.order_point AS usedSaved, o.shipping AS deliveryCharge, o.total_amount AS payment, refund_total_amount AS cancelAmount ,  od.change_num AS orderState, order_status,
 	TO_CHAR(ORDER_STATUS_UPDATE_DATE, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, cp_name AS deliveryName, tracking_no AS invoiceNumber, 
-	payMethod, card_name AS cardName, auth_number AS authNumber, auth_date AS authDate	
+	payMethod, card_name AS cardName, auth_number AS authNumber, auth_date AS authDate, order_status AS orderStateInfo, t.tr_status AS trStatus	
 	FROM totalorder o
 	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
 	LEFT OUTER JOIN card c ON o.order_num = c.order_num
@@ -93,13 +93,14 @@ SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님')
 SELECT od.order_num AS orderNum, od.od_num AS orderDetailNum,
 	od_count AS qty, od.od_price AS price, order_earn AS savedMoney,
 	op.detail_num AS detailNum, op.option_value AS optionValue, NVL(od.detail_num2,null) AS detailNum2, NVL(op2.option_value, null) AS optionValue2,
-	od.product_num AS productNum, product_name AS productName, od.change_num AS detailState, refund_total_amount AS cancelAmount
+	od.product_num AS productNum, product_name AS productName, od.change_num AS detailState, refund_total_amount AS cancelAmount, order_status AS detailStateInfo
 FROM order_detail od
 JOIN product p ON od.product_num = p.product_num
 JOIN optionDetail op ON od.detail_num1 = op.detail_num
 LEFT OUTER JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
 JOIN totalOrder o ON od.order_num = o.order_num
 LEFT OUTER JOIN refund rf ON od.od_num = rf.od_num
+JOIN order_status os ON od.change_num = os.change_num
 WHERE od.order_num = #{order_num} 
 </select>
 
@@ -193,15 +194,37 @@ WHERE order_num = #{orderNum} AND (change_num != 3 AND change_num != 5 AND chang
 
 
 <!-- 주문취소는 수정 필요  -->
+<insert id="updateCancelOrder1" parameterType="map">
+INSERT INTO refund(OD_NUM,REFUND_REASON,REFUND_STATUS,
+	REFUND_TOTAL_AMOUNT, REFUND_MEMO, REFUND_APPLICATION_DATE)
+VALUES(#{orderDetailNum}, #{refundReason}, #{change_num}, #{totalAmount},'취소 메모', SYSDATE)	
+</insert>
+
+<update id="updateCancelOrder2" parameterType="map">
+UPDATE order_detail SET change_num = 3
+WHERE order_num = #{orderNum}
+</update>
+
+<insert id="updateCancelDetail1" parameterType="map">
+INSERT INTO refund(OD_NUM,REFUND_REASON,REFUND_STATUS,
+	REFUND_TOTAL_AMOUNT, REFUND_MEMO, REFUND_APPLICATION_DATE)
+VALUES(#{orderDetailNum}, #{refundReason}, #{change_num}, #{totalAmount},'취소 메모', SYSDATE)	
+</insert>
+
+<update id="updateCancelDetail2" parameterType="map">
+UPDATE order_detail SET change_num = 3
+WHERE order_num = #{orderNum}
+</update>
+
 <insert id="updateCancelAmount1" parameterType="map">
 INSERT INTO refund(OD_NUM,REFUND_REASON,REFUND_STATUS,
-	REFUND_TOTAL_AMOUNT,REFUND_MEMO,REFUND_APPLICATION_DATE,)
-VALUES(#{orderDetailNum}, '환불 / 취소 사유', #{change_num}, #{totalAmount},'취소 메모', SYSDATE)	
+	REFUND_TOTAL_AMOUNT, REFUND_MEMO, REFUND_APPLICATION_DATE)
+VALUES(#{orderDetailNum}, #{refundReason}, #{change_num}, #{totalAmount},'취소 메모', SYSDATE)	
 </insert>
 
 <update id="updateCancelAmount2" parameterType="map">
 UPDATE order_detail SET change_num = 3
-WHERE od_num = #{orderDetailNum}
+WHERE order_num = #{orderNum}
 </update>
 
 <!-- orderState, deliveryName <-> cp_name 적용 필요 -->
@@ -217,7 +240,7 @@ WHERE od_num = #{orderDetailNum}
 </update>
 
 <update id="updateOrderDetailState" parameterType="map">
-	UPDATE order_detail SET change_num = #{detailState}
+	UPDATE order_detail SET change_num = #{detailState}, ORDER_STATUS_UPDATE_DATE = SYSDATE
 	WHERE od_num = #{orderDetailNum}
 </update>
 

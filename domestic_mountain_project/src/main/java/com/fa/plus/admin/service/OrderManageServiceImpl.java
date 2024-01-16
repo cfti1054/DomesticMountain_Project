@@ -1,6 +1,8 @@
 package com.fa.plus.admin.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -124,8 +126,18 @@ public class OrderManageServiceImpl implements OrderManageService {
 				mapper.updateOrderState(map);
 				mapper.updateOrderState2(map);
 			} else if(mode.equals("cancelAmount")) { // 주문취소 금액 수정
-				mapper.updateCancelAmount1(map);
-				mapper.updateCancelAmount1(map);
+				
+				List<OrderDetailManage> list = mapper.findByOrderDetails((String)map.get("orderNum"));
+				map.put("refundReason", "관리자 요청");
+				map.put("change_num", "3");
+				
+				for(OrderDetailManage dto : list) {
+					map.put("orderDetailNum", dto.getOrderDetailNum());
+					map.put("totalAmount", dto.getTotalMoney());
+					mapper.updateCancelOrder1(map);
+				}
+				
+				mapper.updateCancelOrder2(map);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,7 +149,10 @@ public class OrderManageServiceImpl implements OrderManageService {
 	public void updateOrderDetailState(Map<String, Object> map) throws Exception {
 		try {
 			String orderNum = (String)map.get("orderNum");
-			int detailState = Integer.parseInt((String)map.get("detailState"));
+			
+			int detailState = Integer.parseInt(map.get("detailState").toString());
+			
+//			int detailState = Integer.parseInt((String)map.get("detailState"));
 			int productMoney = Integer.parseInt((String)map.get("productMoney"));
 			
 			// 주문에 대한 전체 취소 금액 가져오기
@@ -145,6 +160,13 @@ public class OrderManageServiceImpl implements OrderManageService {
 			if(detailState == 3 || detailState == 5 || detailState == 12) {
 				// totalCancelAmount = dao.selectOne("adminOrder.readTotalCancelAmount", orderNum);
 				cancelAmount = Integer.parseInt((String)map.get("cancelAmount"));
+				System.out.println("============================================");
+				System.out.println("============================================");
+				System.out.println("============================================");
+				System.out.println(cancelAmount);
+				System.out.println("============================================");
+				System.out.println("============================================");
+				System.out.println("============================================");
 			}
 			
 			// orderDetail 테이블 상태 변경
@@ -159,13 +181,22 @@ public class OrderManageServiceImpl implements OrderManageService {
 				cancelAmount += productMoney;
 				map.put("cancelAmount", cancelAmount);
 
-				mapper.updateCancelAmount1(map);
-				mapper.updateCancelAmount2(map);
+				if(detailState == 3) {
+					map.put("refundReason", "관리자 요청");
+				} else if(detailState == 4) {
+					map.put("refundReason", "소비자 요청");
+				} else {
+					map.put("refundReason", "기타");
+				}
+				
+				mapper.updateCancelDetail1(map);
+				mapper.updateCancelDetail2(map);
 				
 				// 주문정보에 대한 모든 주문 내역이 주문 취소이면 주문정보의 상태는 판매 취소로 변경
 				int totalOrderCount = mapper.totalOrderCount(orderNum);
 				if(totalOrderCount == 0) {
-					map.put("orderState", 6);
+					map.put("orderState", 0);
+					
 					mapper.updateOrderState(map);
 				}
 				
