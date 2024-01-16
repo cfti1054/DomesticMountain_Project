@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Ootd;
 import com.fa.plus.domain.SessionInfo;
@@ -34,6 +37,9 @@ public class OotdController {
 	
 	@Autowired
 	private MyUtil myUtil;
+	
+	@Autowired
+	private FileManager fileManager;
 
 	@GetMapping("list")
 	public String recommendForm(@RequestParam(value = "page", defaultValue = "1") int current_page,
@@ -44,7 +50,7 @@ public class OotdController {
 		
 		String cp = req.getContextPath();
 		
-		int size = 1;
+		int size = 8;
 		int total_page;
 		int dataCount;
 		
@@ -153,7 +159,7 @@ public class OotdController {
 		}
 
 		service.updateHitCount(post_num);
-
+		
 		// 해당 레코드 가져 오기
 		Ootd dto = service.findById(post_num);
 		if (dto == null) {
@@ -243,10 +249,69 @@ public class OotdController {
 		String pathname = root + "uploads" + File.separator + "ootd";
 		
 		service.deleteOotd(post_num, pathname, info.getUserid(), info.getUsership());
+		service.deletePostlike(post_num, pathname, info.getUserid(), info.getUsership());
+		service.deletePostfile(post_num, pathname, info.getUserid(), info.getUsership());
 		
 		return "redirect:/ootd/list?" + query;
 	}
+	@GetMapping("download")
+	public String download(@RequestParam long post_num, 
+			HttpServletRequest req, HttpServletResponse resp,
+			HttpSession session) throws Exception {
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "ootd";
+
+		Ootd dto = service.findById(post_num);
+
+		if (dto != null) {
+			boolean b = fileManager.doFileDownload(dto.getSaveFilename(), 
+					dto.getOriginalFilename(), pathname, resp);
+			if (b) {
+				
+				return null;
+			}
+		}
+
+		return ".error.filedownloadFailure";
+	}
 	
+	// 게시글 좋아요 추가/삭제 : AJAX-JSON
+	@PostMapping("insertBoardLike")
+	@ResponseBody
+	public Map<String, Object> insertBoardLike(@RequestParam long post_num, 
+			@RequestParam boolean userLiked,
+			HttpSession session) throws Exception {
+		String state = "true";
+		int boardLikeCount = 0;
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("post_num", post_num);
+		paramMap.put("useridx", info.getUseridx());
+
+		try {
+			if(userLiked) {
+				service.deleteBoardLike(paramMap);
+			} else {
+				service.insertBoardLike(paramMap);
+			}
+		} catch (DuplicateKeyException e) {
+			state = "liked";
+		} catch (Exception e) {
+			state = "false";
+		}
+
+		boardLikeCount = service.boardLikeCount(post_num);
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		model.put("boardLikeCount", boardLikeCount);
+
+		return model;
+	}
+	
+	//
 	// 댓글 리스트 : AJAX-TEXT
 	@GetMapping("listReply")
 	public String listReply() throws Exception {
@@ -254,9 +319,9 @@ public class OotdController {
 		return null;
 		}
 		
-	@PostMapping("insertBoardLike")
+	@PostMapping("insertReply")
 	@ResponseBody
-	public Map<String, Object> insertBoardLike() throws Exception {
+	public Map<String, Object> insertReply() throws Exception {
 		
 		return null;
 	}
