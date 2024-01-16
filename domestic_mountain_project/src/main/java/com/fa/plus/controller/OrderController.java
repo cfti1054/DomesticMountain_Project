@@ -93,7 +93,7 @@ public class OrderController {
 					percentSale = totalMoney * vo.getSale() / 100;
 					
 					// 결제할 금액
-					payment = totalMoney - deliveryCharge - percentSale;
+					payment = totalMoney + deliveryCharge - percentSale;
 					
 					
 				}
