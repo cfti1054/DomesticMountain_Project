@@ -118,7 +118,7 @@
 						&gt; 동행 산행 신청</span>
 				</h1>
 			</div>
-
+ 
 			<div class="notice-container">
 
 				<table class="table table-border table-article">
