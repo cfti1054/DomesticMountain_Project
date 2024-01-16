@@ -1,6 +1,7 @@
 package com.fa.plus.controller;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Ootd;
+import com.fa.plus.domain.Reply;
 import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.service.OotdService;
 
@@ -314,19 +316,194 @@ public class OotdController {
 	//
 	// 댓글 리스트 : AJAX-TEXT
 	@GetMapping("listReply")
-	public String listReply() throws Exception {
-			
-		return null;
+	public String listReply(@RequestParam long post_num, 
+			@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
+			HttpSession session,
+			Model model) throws Exception {
+
+		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
+		
+		int size = 4;
+		int total_page = 0;
+		int dataCount = 0;
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("post_num", post_num);
+		
+		map.put("usership", info.getUsership());
+		map.put("useridx", info.getUseridx());
+		
+		dataCount = service.replyCount(map);
+		total_page = myUtil.pageCount(dataCount, size);
+		if (current_page > total_page) {
+			current_page = total_page;
 		}
+
+		int offset = (current_page - 1) * size;
+		if(offset < 0) offset = 0;
+
+		map.put("offset", offset);
+		map.put("size", size);
+		
+		List<Reply> listReply = service.listReply(map);
+
+		for (Reply dto : listReply) {
+			dto.setReply_content(dto.getReply_content().replaceAll("\n", "<br>"));
+		}
+
+		// AJAX 용 페이징
+		String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
+
+		// 포워딩할 jsp로 넘길 데이터
+		model.addAttribute("listReply", listReply);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("replyCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+
+		return "ootd/listReply";
+		
+	}
 		
 	@PostMapping("insertReply")
 	@ResponseBody
-	public Map<String, Object> insertReply() throws Exception {
-		
-		return null;
+	public Map<String, Object> insertReply(Reply dto, HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+		String state = "true";
+
+		try {
+			dto.setUseridx(info.getUseridx());
+			service.insertReply(dto);
+		} catch (Exception e) {
+			state = "false";
+		}
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
 	}
 		
+	@PostMapping("deleteReply")
+	@ResponseBody
+	public Map<String, Object> deleteReply(@RequestParam Map<String, Object> paramMap) {
+		String state = "true";
 		
+		try {
+			service.deleteReply(paramMap);
+		} catch (Exception e) {
+			state = "false";
+		}
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("state", state);
+		return map;
+	}
 		
+	@GetMapping("listReplyAnswer")
+	public String listReplyAnswer(@RequestParam Map<String, Object> paramMap, 
+			HttpSession session, Model model) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
+		
+		paramMap.put("usership", info.getUsership());
+		paramMap.put("useridx", info.getUseridx());
+		
+		List<Reply> listReplyAnswer = service.listReplyAnswer(paramMap);
+		
+		for (Reply dto : listReplyAnswer) {
+			dto.setReply_content(dto.getReply_content().replaceAll("\n", "<br>"));
+		}
+
+		model.addAttribute("listReplyAnswer", listReplyAnswer);
+		
+		return "ootd/listReplyAnswer";
+	}
+		
+	@PostMapping("countReplyAnswer")
+	@ResponseBody
+	public Map<String, Object> countReplyAnswer(@RequestParam Map<String, Object> paramMap,
+			HttpSession session) {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
+		
+		paramMap.put("usership", info.getUsership());
+		paramMap.put("useridx", info.getUseridx());
+		
+		int count = service.replyAnswerCount(paramMap);
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("count", count);
+		return model;
+	}
+	
+	// 댓글의 좋아요/싫어요 추가 : AJAX-JSON
+	@PostMapping("insertReplyLike")
+	@ResponseBody
+	public Map<String, Object> insertReplyLike(@RequestParam Map<String, Object> paramMap,
+			HttpSession session) {
+			
+		String state = "true";
+
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+		Map<String, Object> model = new HashMap<>();
+		
+		try {
+			paramMap.put("useridx", info.getUseridx());
+			service.insertReplyLike(paramMap);
+		} catch (DuplicateKeyException e) {
+			state = "liked";
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> countMap = service.replyLikeCount(paramMap);
+
+		// 마이바티스의 resultType이 map인 경우 int는 BigDecimal로 넘어옴
+		int likeCount = ((BigDecimal) countMap.get("LIKECOUNT")).intValue();
+		int disLikeCount = ((BigDecimal)countMap.get("DISLIKECOUNT")).intValue();
+		
+		model.put("likeCount", likeCount);
+		model.put("disLikeCount", disLikeCount);
+		model.put("state", state);
+		return model;
+	}
+	
+	
+	@PostMapping("countReplyLike")
+	@ResponseBody
+	public Map<String, Object> countReplyLike(@RequestParam Map<String, Object> paramMap,
+			HttpSession session) {
+		
+		Map<String, Object> countMap = service.replyLikeCount(paramMap);
+		// 마이바티스의 resultType이 map인 경우 int는 BigDecimal로 넘어옴
+		// countMap를 model에 담아 JSON으로 넘겨도 가능
+		int likeCount = ((BigDecimal) countMap.get("LIKECOUNT")).intValue();
+		int disLikeCount = ((BigDecimal)countMap.get("DISLIKECOUNT")).intValue();
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("likeCount", likeCount);
+		model.put("disLikeCount", disLikeCount);
+
+		return model;
+	}
+	
+	@PostMapping("replyShowHide")
+	@ResponseBody
+	public Map<String, Object> replyShowHide(@RequestParam Map<String, Object> paramMap,
+			HttpSession session) {
+		String state = "true";
+
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+
+		try {
+			paramMap.put("useridx", info.getUseridx());
+			service.updateReplyShowHide(paramMap);
+		} catch (Exception e) {
+			state = "false";
+		}
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}	
 }
 

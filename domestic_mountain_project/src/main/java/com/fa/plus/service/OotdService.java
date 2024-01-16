@@ -12,7 +12,8 @@ public interface OotdService {
 	List<Ootd> listOotd(Map<String, Object> map);                                                  
 	public int dataCount(Map<String, Object> map);                                                             
 	                                                                                                           
-	public Ootd findById(long post_num);                                                                 
+	public Ootd findById(long post_num);     
+	public Ootd findById1(long file_num); 
 	public void updateHitCount(long file_num) throws Exception;                                                
 	public Ootd findByPrev(Map<String, Object> map);                                                     
 	public Ootd findByNext(Map<String, Object> map);                                                     

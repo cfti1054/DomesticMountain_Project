@@ -279,44 +279,94 @@ public class OotdServiceImpl implements OotdService{
 
 	@Override
 	public void deleteReply(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			mapper.deleteReply(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
 	@Override
 	public List<Reply> listReplyAnswer(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Reply> list = null;
+		
+		try {
+			list = mapper.listReplyAnswer(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	@Override
 	public int replyAnswerCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		try {
+			result = mapper.replyAnswerCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
 	public void insertReplyLike(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			mapper.insertReplyLike(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
 	public Map<String, Object> replyLikeCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> countMap = null;
+		
+		try {
+			countMap = mapper.replyLikeCount(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return countMap;
 	}
 
 	@Override
 	public void updateReplyShowHide(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			mapper.updateReplyShowHide(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}			
 	}
 
 	@Override
 	public void deleteOotd1(long file_num) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			mapper.deleteOotd(file_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
+	@Override
+	public Ootd findById1(long file_num) {
+		Ootd dto = null;
+		
+		try {
+			dto = mapper.findById1(file_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
 }
