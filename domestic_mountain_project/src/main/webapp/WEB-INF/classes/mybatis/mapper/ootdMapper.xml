@@ -100,5 +100,62 @@
 	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Ootd">
+		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id, file_num,
+	           originalFilename, saveFilename,
+	           NVL(boardLikeCount, 0) boardLikeCount
+	    FROM post p
+	    JOIN post_file fp ON p.post_num = fp.post_num
+	    JOIN user1 u ON p.post_reg_id = u.useridx
+	    LEFT OUTER JOIN (
+	    	SELECT post_num, COUNT(*) boardLikeCount
+	    	FROM post_like
+	    	GROUP BY post_num
+	    ) pl ON p.post_num = pl.post_num
+	    WHERE p.post_num = #{post_num}
+	</select>
+	
+	<select id="findById1" parameterType="Long" resultType="com.fa.plus.domain.Ootd">
+		SELECT originalFilename, saveFilename, post_num
+	    FROM post_file
+	    WHERE file_num = #{file_num}
+	</select>
+	
+	<update id="updateHitCount" parameterType="Long">
+		UPDATE post SET post_hit_count = post_hit_count + 1
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Ootd">
+		SELECT post_num, post_title                                                        
+		FROM post p                                                                        
+		JOIN user1 u ON p.post_reg_id = u.useridx                                          
+		<where>                                                                            
+			<if test="kwd != null and kwd != '' ">                                         
+				<include refid="where-list"/>                                              
+			</if>                                                                          
+			AND (post_num &gt; #{post_num})                                                
+			AND community_category_num = 6                                                
+		</where>                                                                           
+		ORDER BY post_num ASC                                                              
+		FETCH FIRST 1 ROWS ONLY                                                            
+	</select>                                                                              
+                                                                                       
+	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Ootd">
+		SELECT post_num, post_title                                                        
+		FROM post p                                                                        
+		JOIN user1 u ON p.post_reg_id = u.useridx                                          
+		<where>                                                                            
+			<if test="kwd != null and kwd != '' ">                                         
+				<include refid="where-list"/>                                              
+			</if>                                                                          
+			AND (post_num &lt; #{post_num})                                                
+			AND community_category_num = 6                                               
+		</where>                                                                           
+		ORDER BY post_num DESC                                                             
+		FETCH FIRST 1 ROWS ONLY                                                            
+	</select>                                                                              
+	
 	
 </mapper>

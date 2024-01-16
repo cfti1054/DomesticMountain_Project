@@ -103,15 +103,24 @@
 						                    <c:param name="kwd" value="${kwd}"/>
 						                </c:if>	
 						            </c:url>
-								<a href="#" class="album-img"> <img width="200" height="200"
-										src="${pageContext.request.contextPath}/resources/images/hiking.png" alt="">
+								<a href="${url}" class="album-img"> <img width="200" height="200"
+									src="${pageContext.request.contextPath}/uploads/ootd/${dto.saveFilename}" alt="">
 								</a>
 									<dl>
 										<dt>
-											<a href="#" class="tit"> <span class="inner"> <span
-													class="ellipsis">데일리룩</span>
+											<c:url var="url" value="/ootd/article">
+												<c:param name="post_num" value="${dto.post_num}"/>
+												<c:param name="page" value="${page}"/>
+												<c:if test="${not empty kwd}">
+													<c:param name="schType" value="${schType}"/>
+													<c:param name="kwd" value="${kwd}"/>
+												</c:if>	
+											</c:url>
+										
+											<a href="${url}" class="tit"> <span class="inner"> <span
+													class="ellipsis">${dto.post_title}</span>
 											</span>
-											</a> <a href="#" class="m-tcol-p"> <span class="num">[7]</span>
+											</a> <a href="#" class="m-tcol-p"> <span class="num">[${dto.replyCount}]</span>
 											</a>
 										</dt>
 	
@@ -147,11 +156,11 @@
 									<div class="col-auto p-1">
 										<select name="schType" class="form-select">
 											<!-- 예시 : <option value="all" ${schType=="all"?"selected":""}>제목+내용</option> -->
-											<option value="all">제목+내용</option>
-											<option value="reg_date">등록일</option>
-											<option value="subject">제목</option>
-											<option value="writer">작성자</option>
-											<option value="content">내용</option>
+											<option value="all" ${schType=="all"?"selected":""}>제목+내용</option>
+											<option value="post_reg_date" ${schType=="post_reg_date"?"selected":""}>등록일</option>
+											<option value="post_title" ${schType=="post_title"?"selected":""}>제목</option>
+											<option value="user_name" ${schType=="user_name"?"selected":""}>작성자</option>
+											<option value="post_content" ${schType=="post_content"?"selected":""}>내용</option>
 										</select>
 									</div>
 									<div class="col-auto p-1">
@@ -165,7 +174,7 @@
 										</button>
 
 										<button type="button" class="btn btn-light"
-											onclick="location.href='/plus/ootd/write';">글올리기</button>
+											onclick="location.href='${pageContext.request.contextPath}/ootd/write';">글올리기</button>
 									</div>
 								</form>
 							</div>
