@@ -14,6 +14,26 @@
     padding-top: 120px;
 }
 
+.delete-button {
+  padding: 12px 22px;
+  border: 1px solid #bbbbbb;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.number-input-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 12px;
+  border: 1px solid #dddddd;
+  font-size: 100%;
+  cursor: pointer;
+}
 </style>
 
 <script type="text/javascript">
@@ -166,7 +186,7 @@ $(function(){
 		                <td class="number-input-container">
 		                  <input type="text" name="buyQtys" class="number-input" value="${dto.qty}" >
 		                  <input type="hidden" name="product_prices" value="${dto.product_price}">	
-		                  <div>
+		                  <div class="border-box">
 		                    <button type="button" class="number-input-button btn btnPlus">▲</button>
 		                    <button type="button" class="number-input-button btn btnMinus">▼</button>
 		                  </div>
