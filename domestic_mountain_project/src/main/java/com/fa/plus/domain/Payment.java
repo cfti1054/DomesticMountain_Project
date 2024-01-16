@@ -50,6 +50,12 @@ public class Payment {
 	
 	
 	
+	private String product_name;
+	private String option_name;
+	private String option_name2;
+	private String option_value;
+	private String option_value2;
+	
 	
 	
 	public long getUseridx() {
@@ -225,6 +231,36 @@ public class Payment {
 	}
 	public void setRecipient_phone(String recipient_phone) {
 		this.recipient_phone = recipient_phone;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public String getOption_name() {
+		return option_name;
+	}
+	public void setOption_name(String option_name) {
+		this.option_name = option_name;
+	}
+	public String getOption_name2() {
+		return option_name2;
+	}
+	public void setOption_name2(String option_name2) {
+		this.option_name2 = option_name2;
+	}
+	public String getOption_value() {
+		return option_value;
+	}
+	public void setOption_value(String option_value) {
+		this.option_value = option_value;
+	}
+	public String getOption_value2() {
+		return option_value2;
+	}
+	public void setOption_value2(String option_value2) {
+		this.option_value2 = option_value2;
 	}
 	
 	

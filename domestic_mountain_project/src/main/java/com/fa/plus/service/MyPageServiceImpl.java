@@ -194,7 +194,6 @@ public class MyPageServiceImpl implements MyPageService {
 			
 			list = mapper.listPayment(map);
 			
-			
 			/*
 			String productState;
 			Date endDate = new Date();
@@ -226,6 +225,19 @@ public class MyPageServiceImpl implements MyPageService {
 			e.printStackTrace();
 		}
 		
+		return list;
+	}
+
+	@Override
+	public List<Payment> listPaymentProduct(Map<String, Object> map) {
+		List<Payment> list = null;
+		
+		try {
+			list = mapper.listPaymentProduct(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return list;
 	}

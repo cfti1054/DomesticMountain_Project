@@ -106,6 +106,32 @@
 		WHERE t.useridx = #{useridx} AND order_delete = 0
 	</select>
 	
+	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.Payment">
+		SELECT DISTINCT t.order_num, TO_CHAR(order_datetime, 'YYYY-MM-DD') order_datetime, order_delete, shipping, 
+		    total_amount, order_sale, order_point, useridx, order_delete, 
+		    cp_num, tracking_no, tr_status, transports_memo, completion_datetime,
+		    address_num, address1, address2, recipient_name, recipient_phone, 
+		    detail_num1, detail_num2,
+		    od_price, od_count, od_total_amount, change_num
+		FROM totalorder t
+		JOIN transports tp ON t.order_num = tp.order_num
+		JOIN delivery dl ON tp.order_num = dl.order_num
+		JOIN order_detail od ON t.order_num = od.order_num
+		WHERE useridx = #{useridx} AND order_delete = 0
+	</select>
 	
-	
+	<select id="listPaymentProduct" parameterType="map" resultType="com.fa.plus.domain.Payment">
+		SELECT p.product_num, p.product_name, 
+				po.option_name, 
+				od.detail_num, od.option_value,
+				po2.option_name option_name2,
+    			od2.detail_num detail_num2, od2.option_value option_value2
+		FROM product p
+		JOIN productOption po ON p.product_num = po.product_num
+		LEFT OUTER JOIN productOption po2 ON po.option_num = po2.parent
+		JOIN optionDetail od ON po.option_num = od.option_num
+		LEFT OUTER JOIN optionDetail od2 ON po2.option_num = od2.option_num
+        WHERE od.detail_num = #{detail_num1} AND od2.detail_num = #{detail_num2}
+        
+	</select>
 </mapper>

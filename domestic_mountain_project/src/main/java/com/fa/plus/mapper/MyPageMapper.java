@@ -33,4 +33,5 @@ public interface MyPageMapper {
 	// 주문 리스트
 	public int countPayment(Map<String, Object> map);
 	public List<Payment> listPayment(Map<String, Object> map);
+	public List<Payment> listPaymentProduct(Map<String, Object> map);
 }

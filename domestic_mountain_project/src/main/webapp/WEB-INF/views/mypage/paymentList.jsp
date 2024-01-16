@@ -281,7 +281,7 @@ $(function(){
 	<div class="body-container">
 
 		<ul class="nav nav-tabs mt-5" id="myTab" role="tablist"
-			style="--bs-nav-tabs-border-color: none">
+			style="-bs-nav-tabs-border-color: none">
 			<li class="nav-item" role="presentation">
 				<button class="nav-link active" id="tab-1" data-bs-toggle="tab"
 					data-bs-target="#tab-pane-1" type="button" role="tab"
@@ -335,14 +335,14 @@ $(function(){
 
 								<div class="col">
 									<div class="pt-1">
-										<label class="text-black-50">2024/01/08</label>
+										<label class="text-black-50">${dto.order_datetime}</label>
 									</div>
-									<div class="fw-semibold pt-2">등산화</div>
+									<div class="fw-semibold pt-2">${dto.reception_datatime}</div>
 									<div class="pt-1">
 										<label>주문수량 : 4</label> <label class="fw-semibold ps-3"><fmt:formatNumber
-												value="10000" />원</label>
+												value="${dto.total_amount}" />원</label>
 									</div>
-									<div class="pt-1">옵션 : 색상 / 퍼플, 사이즈 / XL</div>
+									<div class="pt-1">옵션 : ${dto.detail_num1} ${dto.option_name2}/ 퍼플, 사이즈 / XL</div>
 								</div>
 							</div>
 							<div class="mt-3 p-3 text-end">
@@ -374,9 +374,11 @@ $(function(){
 							</div>
 
 						</div>
+						
 					</c:forEach>
-
-					<div class="page-navigation">주문 내역이 없습니다.</div>
+					
+					
+					<div class="page-navigation">${dataCount == 0 ? "주문 내역이 없습니다." : paging }</div>
 
 				</div>
 			</div>
