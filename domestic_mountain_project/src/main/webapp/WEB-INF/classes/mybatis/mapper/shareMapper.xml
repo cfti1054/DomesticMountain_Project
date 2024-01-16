@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fa.plus.mapper.ShareMapper">
+
+	<select id="post_file_seq" resultType="Long"> 
+		SELECT post_file_seq.NEXTVAL FROM dual
+	</select>
+	
+	<select id="post_seq" resultType="Long">
+		SELECT post_seq.NEXTVAL FROM dual
+	</select>
+
+	<update id="insertShare" parameterType="com.fa.plus.domain.Share">
+	
+		INSERT ALL
+		INTO post(post_num, community_category_num, post_title, post_content, post_reg_id, 
+				post_reg_date, post_update_date, post_hit_count, post_visible, post_gather)
+			VALUES (#{post_num}, 4, #{post_title}, #{post_content}, #{post_reg_id},
+				SYSDATE, SYSDATE, 0, 1, 1)
+		INTO post_file (file_num, post_num, saveFilename, originalFilename)
+			VALUES (#{file_num}, #{post_num}, #{saveFilename}, #{originalFilename})
+		SELECT * FROM dual
+	
+	</update>
+	
+	<!-- 수정 -->
+	<update id="updateShare" parameterType="com.fa.plus.domain.Share">
+		UPDATE post SET post_title=#{post_title}, post_content=#{post_content}
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="updateShare2" parameterType="com.fa.plus.domain.Share">
+		UPDATE post_file SET saveFilename=#{saveFilename, jdbcType=VARCHAR},
+				originalFilename=#{originalFilename, jdbcType=VARCHAR}
+		WHERE post_num = #{post_num}
+	</update>
+
+	<!-- 삭제 --> <!-- 
+	<delete id="deleteShare1" parameterType="com.fa.plus.domain.Share">
+		DELETE FROM post_file WHERE file_num = #{file_num}
+	</delete>
+ 	-->
+	<sql id="where-list">
+		<if test="schType=='all'">
+			( INSTR(post_title, #{kwd}) &gt; 0
+				OR INSTR(post_content, #{kwd}) &gt; 0 )
+		</if>
+		<if test="schType=='post_title'">
+			INSTR(post_title, #{kwd}) &gt; 0
+		</if>
+		<if test="schType=='post_content'">
+			INSTR(post_content, #{kwd}) &gt; 0 
+		</if>
+		<if test="schType=='user_name'">
+			user_name=#{kwd}
+		</if>
+		<if test="schType=='post_reg_date'">
+			( TO_CHAR(p.post_reg_date, 'YYYY-MM-DD') = #{kwd}
+				OR TO_CHAR(p.post_reg_date, 'YYYYMMDD') = #{kwd} )
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+		AND community_category_num = 4
+		</where>
+	</select>
+	
+	<select id="listShare" parameterType="map" resultType="com.fa.plus.domain.Share">
+	    SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
+	           NVL(f.post_fileCount, 0) as post_fileCount,
+	           NVL(c.replyCount, 0) as replyCount,
+	           f.saveFilename
+	    FROM post p
+	    JOIN user1 m ON p.post_reg_id = m.useridx
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num, 
+	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
+	        FROM post_file
+	        GROUP BY post_num
+	    ) f ON p.post_num = f.post_num
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as replyCount 
+	        FROM reply
+	        WHERE reply_visible = 1
+	        GROUP BY post_num
+	    ) c ON p.post_num = c.post_num
+	    <where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND community_category_num = 4
+		</where>
+	    ORDER BY p.post_num DESC
+	    OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Share">
+		SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id, file_num,
+	           originalFilename, saveFilename,
+	           NVL(boardLikeCount, 0) boardLikeCount
+	    FROM post p
+	    JOIN post_file fp ON p.post_num = fp.post_num
+	    JOIN user1 u ON p.post_reg_id = u.useridx
+	    LEFT OUTER JOIN (
+	    	SELECT post_num, COUNT(*) boardLikeCount
+	    	FROM post_like
+	    	GROUP BY post_num
+	    ) pl ON p.post_num = pl.post_num
+	    WHERE p.post_num = #{post_num}
+	</select>
+	
+	<select id="findById1" parameterType="Long" resultType="com.fa.plus.domain.Share">
+		SELECT originalFilename, saveFilename, post_num
+	    FROM post_file
+	    WHERE file_num = #{file_num}
+	</select>
+	
+	<update id="updateHitCount" parameterType="Long">
+		UPDATE post SET post_hit_count = post_hit_count + 1
+		WHERE post_num = #{post_num}
+	</update>
+	
+	<select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Share">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (post_num &gt; #{post_num})
+			AND community_category_num = 4
+		</where>
+		ORDER BY post_num ASC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	<select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Share">
+		SELECT post_num, post_title
+		FROM post p
+		JOIN user1 u ON p.post_reg_id = u.useridx
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (post_num &lt; #{post_num})
+			AND community_category_num = 4
+		</where>
+		ORDER BY post_num DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	
+	<!-- post_like 테이블 삭제 -->
+	<delete id="deletePostlike" parameterType="Long">
+	    DELETE FROM post_like WHERE post_num = #{post_num}
+	</delete>
+	
+	<!-- post_file 테이블 삭제 -->
+	<delete id="deletePostfile" parameterType="Long">
+	    DELETE FROM post_file WHERE post_num = #{post_num}
+	</delete>
+	
+	<!-- post 테이블 삭제 -->
+	<delete id="deleteShare" parameterType="Long">
+		DELETE FROM post WHERE post_num = #{post_num}
+	</delete>
+	
+	<!-- 게시 글 좋아요 추가 -->
+	<insert id="insertBoardLike" parameterType="map">
+		INSERT INTO post_like(post_num, useridx) VALUES (#{post_num}, #{useridx})
+	</insert>
+	
+	<!-- 게시 글 좋아요 삭제 -->
+	<delete id="deleteBoardLike" parameterType="map">
+		DELETE FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
+	</delete>
+    
+	<!-- 게시글 좋아요 개수 -->
+	<select id="boardLikeCount" parameterType="Long" resultType="Integer">
+		SELECT COUNT(*) FROM post_like WHERE post_num=#{post_num}
+	</select>
+
+	<!-- 게시글 좋아요 여부 -->
+	<select id="userBoardLiked" parameterType="map" resultType="com.fa.plus.domain.Share">
+		SELECT post_num, useridx FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
+	</select>
+	
+	<!-- 댓글 -->
+	<insert id="insertReply" parameterType="com.fa.plus.domain.Reply">
+		INSERT INTO reply(reply_num, post_num, reply_secret, reply_content, reply_reg_id, 
+		reply_reg_date, reply_update_date, reply_report_count, reply_visible, reply_answer)
+		VALUES (reply_seq.NEXTVAL, #{post_num}, 1, #{reply_content}, #{useridx}, SYSDATE, SYSDATE, 0, 1, #{reply_answer})
+	</insert>
+	
+	<!-- 댓글개수 -->
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM reply
+		WHERE post_num=#{post_num} AND reply_secret=1
+		<!--  <if test="usership lt 51">  -->
+			AND ( reply_visible=1 OR ( reply_visible=1 AND reply_reg_id=#{useridx} ) )
+		<!-- </if>  -->
+	</select>
+
+	<!-- 댓글리스트 -->
+	<select id="listReply" parameterType="map" resultType="com.fa.plus.domain.Reply">
+		SELECT r.reply_num, r.reply_reg_id, user_name, post_num, reply_content, r.reply_reg_date, user_id,
+			   NVL(reply_visible, 1) reply_visible,
+			   NVL(answerCount, 0) answerCount,
+			   NVL(likeCount, 0) likeCount,
+			   NVL(disLikeCount, 0) disLikeCount
+		FROM reply r
+		JOIN user1 m ON r.reply_reg_id = m.useridx
+		LEFT OUTER JOIN (
+			SELECT reply_answer, COUNT(*) answerCount
+			FROM reply
+			WHERE reply_answer!=0
+			<if test="usership lt 51">
+				AND ( reply_visible=1 OR ( reply_visible=0 AND reply_reg_id=#{useridx} ) )
+			</if>	
+			GROUP BY reply_answer
+		) a ON r.reply_num = a.reply_answer
+		LEFT OUTER JOIN (
+			SELECT reply_num, COUNT(DECODE(replylike, 1, 1)) likeCount,
+				   COUNT(DECODE(replylike, 0, 1)) disLikeCount
+			FROM reply_like
+			GROUP BY reply_num
+		) c ON r.reply_num = c.reply_num
+		WHERE post_num=#{post_num} AND r.reply_answer=0
+		<if test="usership lt 51">
+			AND ( reply_visible=1 OR ( reply_visible=0 AND r.reply_reg_id=#{useridx} ) )
+		</if>
+		ORDER BY r.reply_num DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<!-- 댓글 및 답글삭제 -->
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM reply
+		WHERE reply_num=#{reply_num}
+		<if test="mode=='reply'">
+			OR reply_answer=#{reply_num}
+		</if>
+	</delete>
+
+	<!-- 댓글의 답글 리스트 -->
+	<select id="listReplyAnswer" parameterType="map" resultType="com.fa.plus.domain.Reply">
+		SELECT reply_num, post_num, r.reply_reg_id, user_name, reply_content, reply_reg_date, 
+		reply_answer, NVL(reply_visible, 1) reply_visible, useridx
+		FROM reply r
+		JOIN user1 m ON r.reply_reg_id = m.useridx
+		WHERE reply_answer = #{reply_answer}
+		<if test="usership lt 51">
+			AND ( reply_visible=1 OR ( reply_visible=0 AND r.reply_reg_id=#{useridx} ) )
+		</if>
+		ORDER BY reply_num DESC
+	</select>
+	
+	<!-- 댓글의 답글 개수 -->
+	<select id="replyAnswerCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM reply
+		WHERE reply_answer = #{reply_answer}
+		<if test="usership lt 51">
+			AND ( reply_visible=1 OR ( reply_visible=0 AND reply_reg_id=#{useridx} ) )
+		</if>
+	</select>	
+
+	<!-- 좋아요/싫어요 추가 -->
+	<insert id="insertReplyLike" parameterType="map">
+		INSERT INTO reply_like(reply_num, useridx, replylike)
+		VALUES (#{reply_num}, #{useridx}, #{replylike})
+	</insert>
+	
+	<!-- 좋아요/싫어요 개수 -->
+	<select id="replyLikeCount" parameterType="map" resultType="map">
+		SELECT COUNT(DECODE(replylike, 1, 1)) likeCount,
+			   COUNT(DECODE(replylike, 0, 1)) disLikeCount
+		FROM reply_like WHERE reply_num = #{reply_num}
+	</select>
+	
+	<!-- 댓글 보이기/숨기기 -->
+	<update id="updateReplyShowHide" parameterType="map">
+		UPDATE reply SET reply_visible = #{reply_visible}
+		WHERE reply_num = #{reply_num} AND reply_reg_id = #{useridx}
+	</update>
+	
+</mapper>

@@ -87,9 +87,9 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>유저가 만든 코스<span>| Members' createcourse</span></a> <span><a
+					<a>유저가 만든 코스<span>| Course created by the User</span></a> <span><a
 						href="${pageContext.request.contextPath}/">home</a> &gt; community
-						&gt; 회원들의 모습</span>
+						&gt; 유저가 만든 코스</span>
 				</h1>
 			</div>
 
