@@ -313,4 +313,10 @@ public class OotdServiceImpl implements OotdService{
 		
 	}
 
+	@Override
+	public void deleteOotd1(long file_num) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

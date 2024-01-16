@@ -17,10 +17,11 @@ public interface OotdService {
 	public Ootd findByPrev(Map<String, Object> map);                                                     
 	public Ootd findByNext(Map<String, Object> map);                                                     
 	public void updateOotd(Ootd dto, String pathname) throws Exception;                            
-	public void updateOotd2(Ootd dto, String pathname) throws Exception;                           
+	public void updateOotd2(Ootd dto, String pathname) throws Exception;    
+	public void deleteOotd(long post_num, String pathname, String userid, int usership) throws Exception;
+	public void deleteOotd1(long file_num) throws Exception;
 	public void deletePostlike(long post_num, String pathname, String userid, int usership) throws Exception;  
 	public void deletePostfile(long post_num, String pathname, String userid, int usership) throws Exception;  
-	public void deleteOotd(long post_num, String pathname, String userid, int usership) throws Exception;
 	                                                                                                           
 	public void insertBoardLike(Map<String, Object> map) throws Exception;                                     
 	public void deleteBoardLike(Map<String, Object> map) throws Exception;                                     
