@@ -38,7 +38,7 @@
 		function deleteBoard() {
 		    if(confirm('게시글을 삭제 하시 겠습니까 ? ')) {
 			    let query = 'post_num=${dto.post_num}&${query}';
-			    let url = '${pageContext.request.contextPath}/createcourse/delete?' + query;
+			    let url = '${pageContext.request.contextPath}/share/delete?' + query;
 		    	location.href = url;
 		    }
 		}
@@ -60,8 +60,8 @@
 						<li class=""><a
 							href="${pageContext.request.contextPath}/recommend/list">&gt;
 								추천 코스</a></li>
-						<li class="eq1"><a
-							href="${pageContext.request.contextPath}/createcourse/list">&gt; 유저가
+						<li class=""><a
+							href="${pageContext.request.contextPath}/made/list">&gt; 유저가
 								만든 코스</a></li>
 						<li class=""><a href="#">&nbsp;</a></li>
 						<li class=""><a
@@ -73,7 +73,7 @@
 						<a>Share Tips</a>
 					</h3>
 					<ul>
-						<li class=""><a
+						<li class="eq1"><a
 							href="${pageContext.request.contextPath}/share/list">&gt; 유용한
 								정보</a></li>
 					</ul>
@@ -83,7 +83,7 @@
 					</h3>
 					<ul>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/createcourse/list">&gt;
+							href="${pageContext.request.contextPath}/share/list">&gt;
 								회원들의 모습</a></li>
 					</ul>
 
@@ -104,9 +104,9 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>유저가 만든 코스<span>| Course created by the User</span></a> <span><a
+					<a>유용한 정보<span>| Share Tips</span></a> <span><a
 						href="${pageContext.request.contextPath}/">home</a> &gt; community
-						&gt; 유저가 만든 코스</span>
+						&gt; 유용한 정보</span>
 				</h1>
 			</div>
 
@@ -147,7 +147,7 @@
 							<td colspan="2"><c:if test="${not empty dto.saveFilename}">
 									<p class="border text-secondary my-1 p-2">
 										<i class="bi bi-folder2-open"></i> <a
-											href="${pageContext.request.contextPath}/createcourse/download?post_num=${dto.post_num}">${dto.originalFilename}</a>
+											href="${pageContext.request.contextPath}/share/download?post_num=${dto.post_num}">${dto.originalFilename}</a>
 									</p>
 								</c:if></td>
 						</tr>
@@ -155,14 +155,14 @@
 						<tr>
 							<td colspan="2">이전글 : <c:if test="${not empty prevDto}">
 									<a
-										href="${pageContext.request.contextPath}/createcourse/article?${query}&post_num=${prevDto.post_num}">${prevDto.post_title}</a>
+										href="${pageContext.request.contextPath}/share/article?${query}&post_num=${prevDto.post_num}">${prevDto.post_title}</a>
 								</c:if>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">다음글 : <c:if test="${not empty nextDto}">
 									<a
-										href="${pageContext.request.contextPath}/createcourse/article?${query}&post_num=${nextDto.post_num}">${nextDto.post_title}</a>
+										href="${pageContext.request.contextPath}/share/article?${query}&post_num=${nextDto.post_num}">${nextDto.post_title}</a>
 								</c:if>
 							</td>
 						</tr>
@@ -174,7 +174,7 @@
 						<td width="50%"><c:choose>
 								<c:when test="${sessionScope.loginUser.userid==dto.user_id}">
 									<button type="button" class="btn btn-light"
-										onclick="location.href='${pageContext.request.contextPath}/createcourse/update?post_num=${dto.post_num}&page=${page}';">수정</button>
+										onclick="location.href='${pageContext.request.contextPath}/share/update?post_num=${dto.post_num}&page=${page}';">수정</button>
 								</c:when>
 								<c:otherwise>
 									<button type="button" class="btn btn-light" disabled>수정</button>
@@ -191,7 +191,7 @@
 							</c:choose></td>
 						<td class="text-end">
 							<button type="button" class="btn btn-light"
-								onclick="location.href='${pageContext.request.contextPath}/createcourse/list?${query}';">리스트</button>
+								onclick="location.href='${pageContext.request.contextPath}/share/list?${query}';">리스트</button>
 						</td>
 					</tr>
 				</table>
@@ -291,7 +291,7 @@ $(function(){
 			return false;
 		}
 		
-		let url = '${pageContext.request.contextPath}/createcourse/insertBoardLike';
+		let url = '${pageContext.request.contextPath}/share/insertBoardLike';
 		let num = '${dto.post_num}';
 		let query = 'post_num=' + num + '&userLiked=' + userLiked;
 		
@@ -323,7 +323,7 @@ $(function(){
 });
 
 function listPage(page) {
-	let url = '${pageContext.request.contextPath}/createcourse/listReply';
+	let url = '${pageContext.request.contextPath}/share/listReply';
 	let query = 'post_num=${dto.post_num}&pageNo=' + page;
 	let selector = '#listReply';
 	
@@ -347,7 +347,7 @@ $(function(){
 		}
 		reply_content = encodeURIComponent(reply_content);
 		
-		let url = '${pageContext.request.contextPath}/createcourse/insertReply';
+		let url = '${pageContext.request.contextPath}/share/insertReply';
 		let query = 'post_num=' + post_num + '&reply_content=' + reply_content + '&reply_answer=0';
 		
 		const fn = function(data){
@@ -398,7 +398,7 @@ $(function(){
 		let reply_num = $(this).attr('data-replyNum');
 		let page = $(this).attr('data-pageNo');
 		
-		let url = '${pageContext.request.contextPath}/createcourse/deleteReply';
+		let url = '${pageContext.request.contextPath}/share/deleteReply';
 		let query = 'reply_num=' + reply_num + '&mode=reply';
 		
 		const fn = function(data){
@@ -427,7 +427,7 @@ $(function(){
 			return false;
 		}
 		
-		let url = '${pageContext.request.contextPath}/createcourse/insertReplyLike';
+		let url = '${pageContext.request.contextPath}/share/insertReplyLike';
 		let query = 'reply_num=' + reply_num + '&replylike=' + replylike;
 		
 		const fn = function(data){
@@ -451,7 +451,7 @@ $(function(){
 
 // 댓글별 답글 리스트
 function listReplyAnswer(reply_answer) {
-	let url = '${pageContext.request.contextPath}/createcourse/listReplyAnswer';
+	let url = '${pageContext.request.contextPath}/share/listReplyAnswer';
 	let query = 'reply_answer=' + reply_answer;
 	let selector = '#listReplyAnswer' + reply_answer;
 	
@@ -463,7 +463,7 @@ function listReplyAnswer(reply_answer) {
 
 // 댓글별 답글 개수
 function countReplyAnswer(reply_answer) {
-	let url = '${pageContext.request.contextPath}/createcourse/countReplyAnswer';
+	let url = '${pageContext.request.contextPath}/share/countReplyAnswer';
 	let query = 'reply_answer=' + reply_answer;
 	
 	const fn = function(data){
@@ -511,7 +511,7 @@ $(function(){
 			return false;
 		}
 		
-		let url = '${pageContext.request.contextPath}/createcourse/insertReply';
+		let url = '${pageContext.request.contextPath}/share/insertReply';
 		// let formData = 'num=' + num + '&content=' + encodeURIComponent(content) + '&answer=' + replyNum;
 		let formData = {post_num:post_num, reply_content:reply_content, reply_answer:reply_num}; // formData를 객체로 전송하면 인코딩하면 안됨
 		
@@ -539,7 +539,7 @@ $(function(){
 		let reply_num = $(this).attr('data-replyNum');
 		let answer = $(this).attr('data-answer');
 		
-		let url = '${pageContext.request.contextPath}/createcourse/deleteReply';
+		let url = '${pageContext.request.contextPath}/share/deleteReply';
 		let query = 'reply_num=' + reply_num + '&mode=answer';
 		
 		const fn = function(data){
@@ -568,7 +568,7 @@ $(function(){
 		
 		reply_visible = reply_visible === '1' ? '0' : '1';
 		
-		let url = '${pageContext.request.contextPath}/createcourse/replyShowHide';
+		let url = '${pageContext.request.contextPath}/share/replyShowHide';
 		let query = 'reply_num=' + reply_num + '&reply_visible=' + reply_visible;
 		
 		const fn = function(data){
@@ -609,7 +609,7 @@ $(function(){
 		
 		reply_visible = reply_visible === '1' ? '0' : '1';
 		
-		let url = '${pageContext.request.contextPath}/createcourse/replyShowHide';
+		let url = '${pageContext.request.contextPath}/share/replyShowHide';
 		let query = 'reply_num=' + reply_num + '&reply_visible='+reply_visible;
 		
 		const fn = function(data){

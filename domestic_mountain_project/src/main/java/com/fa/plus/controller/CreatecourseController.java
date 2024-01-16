@@ -265,7 +265,7 @@ public class CreatecourseController {
 		}
 
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "createcource";
+		String pathname = root + "uploads" + File.separator + "createcourse";
 		
 		service.deletePostlike(post_num, pathname, info.getUserid(), info.getUsership());
 		service.deletePostfile(post_num, pathname, info.getUserid(), info.getUsership());
@@ -282,7 +282,7 @@ public class CreatecourseController {
 			HttpSession session) throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "createcource";
+		String pathname = root + "uploads" + File.separator + "createcourse";
 
 		Createcourse dto = service.findById(post_num);
 
