@@ -232,7 +232,7 @@ function changeSubList() {
 								<td>${dto.product_reg_date}</td>
 								<td>${dto.product_status == 1 ? "진열" : "숨김"}</td>
 								<td>${dto.total_stock}</td>
-								<td>${dto.product_price}</td>
+								<td><label><fmt:formatNumber value="${dto.product_price}"/>원</label></td>
 									<c:url var="updateUrl" value="/admin/product/update">
 										<c:param name="product_num" value="${dto.product_num}"/>
 										<c:param name="parent_num" value="${parent_num}"/>
@@ -260,7 +260,7 @@ function changeSubList() {
 	
 						<td>
 							<form name="searchForm" 
-								action="${pageContext.request.contextPath}/admin/product/product_list"
+								action="#"
 								method="post">
 							<div class="col-auto p-1">
 										<select name="schType" class="form-select">
