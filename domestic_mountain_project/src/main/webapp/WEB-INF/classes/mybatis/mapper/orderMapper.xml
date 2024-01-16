@@ -10,12 +10,7 @@
 		FETCH FIRST 1 ROWS ONLY
 	</select>
 	
-	<select id="findByMaxWaybillNumber" resultType="String">
-		SELECT tracking_no
-		FROM transports
-		ORDER BY reception_datatime DESC
-		FETCH FIRST 1 ROWS ONLY
-	</select>
+	
 	
 	<!-- 주문, 주문상세, 배송, 배송지, (결제카드정보) -->
 	
@@ -48,7 +43,7 @@
 		INSERT ALL
 			INTO transports (order_num, cp_num, tracking_no, reception_datatime, 
 					tr_status, completion_datetime, transports_memo)
-				VALUES(#{order_num}, 1, #{tracking_no}, SYSDATE, 1, 
+				VALUES(#{order_num}, 0, #{tracking_no, jdbcType=VARCHAR}, SYSDATE, 1, 
 					#{completion_datetime, jdbcType=VARCHAR},
 					#{transports_memo, jdbcType=VARCHAR})
 			INTO delivery (order_num, address_num, address1, address2, recipient_name, recipient_phone)

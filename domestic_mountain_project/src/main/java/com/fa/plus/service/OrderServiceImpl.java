@@ -65,46 +65,6 @@ public class OrderServiceImpl implements OrderService {
 		return result;
 	}
 	
-	@Override
-	public String productWaybillNumber() {
-		// 운송장 번호 생성
-		String result = "";
-		
-		try {
-			Calendar cal = Calendar.getInstance();
-			String m = String.format("%02d", (cal.get(Calendar.MONTH) + 1));
-			String d = String.format("%03d", cal.get(Calendar.DATE) * 7);
-			
-			String preNumber = m + d;
-			String savedPreNumber = "0";
-			long savedLastNumber = 0;
-			String maxOrderNumber = mapper.findByMaxWaybillNumber();
-			if(maxOrderNumber != null && maxOrderNumber.length() > 5) {
-				savedPreNumber = maxOrderNumber.substring(0, 5);
-				savedLastNumber = Long.parseLong(maxOrderNumber.substring(5));
-			}
-			
-			long lastNumber = 1;
-			if(! preNumber.equals(savedPreNumber)) {
-				count.set(0);
-				lastNumber = count.incrementAndGet();
-			} else {
-				lastNumber = count.incrementAndGet();
-				
-				if( savedLastNumber >= lastNumber )  {
-					count.set(savedLastNumber);
-					lastNumber = count.incrementAndGet();
-				}
-			}
-			
-			result = preNumber + String.format("%05d", lastNumber);
-			
-			
-		} catch (Exception e) {
-		}
-		
-		return result;
-	}
 
 	@Override
 	public void insertOrder(Order dto) throws Exception {

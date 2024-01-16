@@ -339,7 +339,6 @@ function sendOk() {
 						
 						
 						<input type="hidden" name="order_num" value="${productOrderNumber}">
-						<input type="hidden" name="tracking_no" value="${productWaybillNumber}">
 						<input type="hidden" name="order_total_money" value="${totalMoney}">
 						<input type="hidden" name="shipping" value="${deliveryCharge}">
 						<input type="hidden" name="order_sale" value="${percentSale}">

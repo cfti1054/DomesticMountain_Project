@@ -12,7 +12,6 @@ import com.fa.plus.domain.Order;
 @Mapper
 public interface OrderMapper {
 	public String findByMaxOrderNumber();
-	public String findByMaxWaybillNumber();
 	public Order findByMyInformation(long useridx);
 	
 	public void insertOrder(Order dto) throws SQLException;

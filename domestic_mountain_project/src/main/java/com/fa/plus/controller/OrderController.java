@@ -53,7 +53,6 @@ public class OrderController {
 			
 			
 			String productOrderNumber = null; // 주문번호
-			String productWaybillNumber = null; // 운송장번호
 			String productOrderName = ""; // 주문상품번호
 			
 			int totalMoney = 0; // 상품합
@@ -63,7 +62,6 @@ public class OrderController {
 			int percentSale = 0; // 전체가격 * (퍼센트 / 100)
 
 			productOrderNumber = orderService.productOrderNumber();
-			productWaybillNumber = orderService.productWaybillNumber();
 			
 			
 			if (detail_nums2 != null) {
@@ -148,7 +146,6 @@ public class OrderController {
 			
 			model.addAttribute("vo", vo);
 			model.addAttribute("productOrderNumber", productOrderNumber); // 주문 번호
-			model.addAttribute("productWaybillNumber", productWaybillNumber); // 운송장 번호
 			model.addAttribute("productOrderName", productOrderName); // 주문 상품명
 			model.addAttribute("orderUser", orderUser); // 주문 유저
 
