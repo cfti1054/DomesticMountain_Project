@@ -67,26 +67,28 @@ public class RecommendController {
 		List<Recommend> list = service.listRecommend(map);
 
 		String query = "";
-		String listUrl = cp + "/recommend/list?show="+show;
+		String listUrl = cp + "/recommend/list";
 		String articleUrl = cp + "/recommend/article?page=" + current_page;
 		if (kwd.length() != 0) {
 			query = "schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "utf-8");
 		}
 
 		if (query.length() != 0) {
-			listUrl += "&" + query;
+			listUrl += "?" + query;
 			articleUrl = cp + "/recommend/article?page=" + current_page + "&" + query;
 		}
 
-		String paging = myUtil.paging(current_page, total_page, listUrl);
+		String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
 
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
+		model.addAttribute("listUrl", listUrl);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
 		model.addAttribute("paging", paging);
+		model.addAttribute("show", show);
 
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);

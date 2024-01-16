@@ -208,7 +208,21 @@ function changeSubList() {
 						<c:forEach var="dto" items="${list}" varStatus="status">
 							<tr>
 								<td>
-								 <img src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+									 <c:choose>
+										<c:when
+											test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+											<img class="img"
+												src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+										</c:when>
+										<c:when
+											test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+											<img class="img" src="${dto.product_summary}">
+										</c:when>
+			
+										<c:otherwise>
+			
+										</c:otherwise>
+									</c:choose>
 								</td>
 								<td>${dataCount - (page-1) * size - status.index}</td>
 								<td class="left">
