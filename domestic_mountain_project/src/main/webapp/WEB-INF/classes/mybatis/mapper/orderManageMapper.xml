@@ -209,11 +209,11 @@ WHERE order_num = #{orderNum}
 <insert id="updateCancelDetail1" parameterType="map">
 INSERT INTO refund(OD_NUM,REFUND_REASON,REFUND_STATUS,
 	REFUND_TOTAL_AMOUNT, REFUND_MEMO, REFUND_APPLICATION_DATE, REFUND_SUCCESS_DATE)
-VALUES(#{orderDetailNum}, #{refundReason}, #{detailState}, #{productMoney},'취소 메모', SYSDATE,SYSDATE)	
+VALUES(#{orderDetailNum}, #{refundReason}, #{refundState}, #{productMoney},'취소 메모', SYSDATE,SYSDATE)	
 </insert>
 
 <update id="updateCancelDetail2" parameterType="map">
-UPDATE order_detail SET change_num = 3
+UPDATE order_detail SET change_num = #{detailState}
 WHERE od_num = #{orderDetailNum}
 </update>
 
