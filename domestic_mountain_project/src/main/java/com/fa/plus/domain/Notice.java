@@ -22,6 +22,14 @@ public class Notice {
     private int notice_visible;
     private String notice_invisible_date;
     
+    private long gap;
+    
+	public long getGap() {
+		return gap;
+	}
+	public void setGap(long gap) {
+		this.gap = gap;
+	}
 	public int getNotice_category_num() {
 		return notice_category_num;
 	}

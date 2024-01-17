@@ -84,7 +84,7 @@ public class NoticeController {
 			Date beginDate = formatter.parse(dto.getNotice_reg_date());
 				
 			gap = (endDate.getTime() - beginDate.getTime()) / (60 * 60 * 1000);
-			// dto.어쩌구
+			dto.setGap(gap);
 				
 			dto.setNotice_reg_date(dto.getNotice_reg_date().substring(0, 10));
 		 	}

@@ -231,8 +231,10 @@ function searchList() {
 										<tr>
 											<td>${dataCount - (page-1) * size - status.index}</td>
 											<td class="left">
+												<c:if test="${dto.gap < 12}">
+		             		  	 					<span class="badge text-bg-info">New</span>
+		           		 						</c:if>
 												 <a href="${articleUrl}&notice_category_num=${dto.notice_category_num}" class="text-reset">${dto.notice_title}</a>
-													<span class="badge text-bg-info">New</span>
 											</td>
 											<td>관리자</td>
 											<td>${dto.notice_reg_date}</td>
