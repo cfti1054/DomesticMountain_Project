@@ -36,40 +36,31 @@
 			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/1.png">
+						<img alt="" src="resources/images/mountain/1.jpg">
 					</div>
 					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/2.png">
+						<img alt="" src="resources/images/mountain/2.jpg">
 					</div>
 					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/3.png">
+						<img alt="" src="resources/images/mountain/3.jpg">
 					</div>
 					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/4.png">
+						<img alt="" src="resources/images/mountain/4.jpg">
 					</div>
 					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/5.png">
+						<img alt="" src="resources/images/mountain/5.jpg">
 					</div>
 					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/6.png">
+						<img alt="" src="resources/images/mountain/6.jpg">
 					</div>
 					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/7.png">
-					</div>
-					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/8.png">
-					</div>
-					<div class="swiper-slide">
-						<img alt="" src="resources/images/mountain/9.png">
+						<img alt="" src="resources/images/mountain/7.jpg">
 					</div>
 				</div>
 				<div class="swiper-button-next"></div>
 				<div class="swiper-button-prev"></div>
 				<div class="swiper-pagination"></div>
 				<div class="autoplay-progress">
-					<svg viewBox="0 0 48 48">
-                           <circle cx="24" cy="24" r="20"></circle>
-                        </svg>
 					<span></span>
 				</div>
 			</div>
@@ -126,7 +117,7 @@
 								<div class="container_tags">
 									<div class="tags">
 										<ul>
-											<li><a href="#">더보기 >></a></li>
+											<li><a href="${pageContext.request.contextPath}/recommend/list">더보기 >></a></li>
 										</ul>
 									</div>
 
@@ -156,7 +147,7 @@
 								<div class="container_tags">
 									<div class="tags">
 										<ul>
-											<li><a href="#">더보기 >></a></li>
+											<li><a href="${pageContext.request.contextPath}/createcourse/list">더보기 >></a></li>
 										</ul>
 									</div>
 
@@ -198,13 +189,13 @@
 			<div class="cards">
 				<article class="card-1 information [ card ]">
 					<div class="div-tag">
-						<span class="tag">분류</span>
+						<span class="tag">Classification</span>
 					</div>
 					<h2 class="title">지역별 커뮤니티</h2>
 					<p class="info">추천 코스, 유저가 만든 코스의 정보와 함께 동행 산행 신청 할 수 있는
 						커뮤니티입니다.</p>
-					<button class="area-6-button" type="button" onclick="">
-						<span>보러 가기</span>
+					<button class="area-6-button" type="button" onclick="location.href='${pageContext.request.contextPath}/together/list'">
+						<span>Go to see</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />
@@ -217,12 +208,12 @@
 			<div class="cards">
 				<article class="card-2 information [ card ]">
 					<div class="div-tag">
-						<span class="tag">분류</span>
+						<span class="tag">Classification</span>
 					</div>
 					<h2 class="title">유용한 정보</h2>
 					<p class="info">유저들 각자의 꿀팁 혹은 공유하고 싶은 정보를 담은 커뮤니티입니다.</p>
-					<button class="area-6-button" type="button" onclick="">
-						<span>보러 가기</span>
+					<button class="area-6-button" type="button" onclick="location.href='${pageContext.request.contextPath}/share/list'">
+						<span>Go to see</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />
@@ -235,13 +226,13 @@
 			<div class="cards">
 				<article class="card-3 information [ card ]">
 					<div class="div-tag">
-						<span class="tag">분류</span>
+						<span class="tag">Classification</span>
 					</div>
 					<h2 class="title">회원들의 모습</h2>
 					<p class="info">유저들이 추천 코스, 유저가 만든 코스를 직접 다녀와 보고 후기나 리뷰를 블로그
 						형식으로 작성한 커뮤니티입니다.</p>
-					<button class="area-6-button" type="button" onclick="">
-						<span>보러 가기</span>
+					<button class="area-6-button" type="button" onclick="location.href='${pageContext.request.contextPath}/appearance/list'">
+						<span>Go to see</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />
@@ -254,13 +245,13 @@
 			<div class="cards">
 				<article class="card-4 information [ card ]">
 					<div class="div-tag">
-						<span class="tag">분류</span>
+						<span class="tag">Classification</span>
 					</div>
 					<h2 class="title">Look & Style</h2>
 					<p class="info">다른 유저의 각자 개성을 드러낸 등산복 착상을 확인할 수 있습니다. ootd 형식의
 						룩을 둘러보고 가세요!</p>
-					<button class="area-6-button" type="button" onclick="">
-						<span>보러 가기</span>
+					<button class="area-6-button" type="button" onclick="location.href='${pageContext.request.contextPath}/ootd/list'">
+						<span>Go to see</span>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px"
 							viewBox="0 0 24 24" width="24px" fill="none">
                            <path d="M0 0h24v24H0V0z" fill="none" />

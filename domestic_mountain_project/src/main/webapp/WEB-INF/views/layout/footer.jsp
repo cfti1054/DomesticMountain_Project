@@ -26,7 +26,7 @@
 			<h2 class="nav__title">DM</h2>
 
 			<ul class="nav__ul">
-				<li><a href="#">소개</a></li>
+				<li><a href="${pageContext.request.contextPath}/">소개</a></li>
 				
 			</ul>
 		</li>
@@ -36,13 +36,13 @@
 
 			<ul class="nav__ul nav__ul--extra">
 
-				<li><a href="#">개인정보처리방침</a></li>
+				<li><a href="${pageContext.request.contextPath}/services/privacy">개인정보처리방침</a></li>
 
-				<li><a href="#">이용약관</a></li>
+				<li><a href="${pageContext.request.contextPath}/services/policy">이용약관</a></li>
 
-				<li><a href="#">댓글 운영정책</a></li>
+				<li><a href="${pageContext.request.contextPath}/services/comment">댓글 운영정책</a></li>
 
-				<li><a href="#">서비스 전화번호 안내</a></li>
+				<li><a href="${pageContext.request.contextPath}/services/serviceTel">서비스 전화번호 안내</a></li>
 			</ul>
 		</li>
 
@@ -50,17 +50,17 @@
 			<h2 class="nav__title">통합</h2>
 
 			<ul class="nav__ul">
-				<li><a href="#">DM 스토어</a></li>
+				<li><a href="${pageContext.request.contextPath}/product/product">DM 스토어</a></li>
 				
-				<li><a href="#">커뮤니티</a></li>
+				<li><a href="${pageContext.request.contextPath}/recommend/list">커뮤니티</a></li>
 
-				<li><a href="#">지원</a></li>
+				<li><a href="${pageContext.request.contextPath}/notice/list">지원</a></li>
 			</ul>
 		</li>
 		<li class="nav__item">
-			<h2 class="nav__title"><a href="#" style="color: inherit;">QnA</a></h2>
+			<h2 class="nav__title"><a href="${pageContext.request.contextPath}/faq/main" style="color: inherit;">FaQ</a></h2>
 			
-			<h2 class="nav__title"><a href="#" style="color: inherit;">회원 정보</a></h2>
+			<h2 class="nav__title"><a href="${pageContext.request.contextPath}/mypage/main" style="color: inherit;">회원 정보</a></h2>
 		</li>
 	</ul>
 
