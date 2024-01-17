@@ -22,6 +22,14 @@
 	overflow-x: hidden;
 	max-width: 1300px;
 }
+
+.p-2 {
+	display: flex;
+}
+
+.icon {
+	margin: 10px;
+}
 </style>
 
 <script type="text/javascript">
@@ -522,7 +530,58 @@ function sendOk(mode) {
 </section>
 
 <section class="features-6 features-6-product">
-	<br> <br>
-	<div class="centered">${dto.product_content}</div>
-	<div> </div>
+	<ul class="nav nav-tabs mt-5" id="myTab" role="tablist"
+		style="align-items: end;">
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="tab-1" data-bs-toggle="tab"
+				data-bs-target="#tab-pane-1" type="button" role="tab"
+				aria-controls="1" aria-selected="true">상세정보</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="tab-2" data-bs-toggle="tab"
+				data-bs-target="#tab-pane-2" type="button" role="tab"
+				aria-controls="2" aria-selected="false">리뷰</button>
+		</li>
+
+	</ul>
+	<div class="tab-content pt-2" id="myTabContent">
+		<div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel"
+			aria-labelledby="tab-1" tabindex="0">
+			<br> <br>
+			<div class="centered">${dto.product_content}</div>
+			<div></div>
+		</div>
+
+
+
+		<div class="tab-pane fade" id="tab-pane-2" role="tabpanel"
+			aria-labelledby="tab-2" tabindex="0">
+			<div class="mt-3 pt-3 border-bottom">
+				<p class="fs-4 fw-semibold">리뷰</p>
+			</div>
+			<div class="mt-3">
+
+				<div class="mt-3 border-bottom">
+					<div class="p-2">
+						<div class="col-auto fs-2">
+							<i class="bi bi-person-circle text-muted icon"></i>
+						</div>
+						<div class="col pt-3 ps-0 fw-semibold">김*바</div>
+						<div class="col pt-3 text-end">
+							<span>2024-01-16</span> |<span class="notifyReview" data-num="4">신고</span>
+						</div>
+					</div>
+					<div class="mt-2 p-2">리뷰 내용</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+
+
+
 </section>
