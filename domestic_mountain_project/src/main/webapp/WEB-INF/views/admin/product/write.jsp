@@ -323,7 +323,7 @@ $(function(){
 <div class="container">
 	<div class="body-container" >
 		<div class="body-title">
-			<h3><i class="bi bi-app"></i> 상품관리 </h3>
+			<h3> ※ 상품등록 </h3>
 		</div>
 		
 		<div class="body-main">
@@ -334,7 +334,7 @@ $(function(){
 						<td class="table-light col-sm-2">카테고리</td>
 						<td>
 							<div class="row">
-								<div class="col-6 pe-1">
+								<div class="col-4 pe-1">
 									<select name="parent_num" class="form-select">
 										<option value="">:: 메인 카테고리 선택 ::</option>
 										<c:forEach var="vo" items="${listCategory}">
@@ -342,14 +342,14 @@ $(function(){
 										</c:forEach>
 									</select>
 								</div>
-								<div class="col-6 ps-1">
+								<div class="col-4 ps-1">
 									<select name="category_num" class="form-select">
 										<option value="">:: 카테고리 선택 ::</option>
 										<c:forEach var="vo" items="${listSubCategory}">
 											<option value="${vo.category_num}" ${dto.category_num==vo.category_num?"selected":""}>${vo.category_name}</option>
 										</c:forEach>
 									</select>
-								</div>
+								</div>							
 							</div>
 						</td>
 					</tr>
@@ -372,26 +372,7 @@ $(function(){
 							<input type="text" name="product_price" class="form-control" value="${dto.product_price}">
 						</td>
 					</tr>
-					<tr>
-						<td class="table-light col-sm-2">할인율</td>
-						<td>
-							<input type="text" name="discountRate" class="form-control" value="">
-							<small class="form-control-plaintext help-block">깎아주기 싫어요.</small>
-						</td>
-					</tr>
-					<tr>
-						<td class="table-light col-sm-2">적립금</td>
-						<td>
-							<input type="text" name="savedMoney" class="form-control" value="">
-						</td>
-					</tr>
-					<tr>
-						<td class="table-light col-sm-2">배송비</td>
-						<td>
-							<input type="text" name="delivery" class="form-control" value="">
-							<small class="form-control-plaintext help-block">배송비는 무료입니다.</small>
-						</td>
-					</tr>
+
 					
 					<tr>
 						<td class="table-light col-sm-2">상위 옵션</td>

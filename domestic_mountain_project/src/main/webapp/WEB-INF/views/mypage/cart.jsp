@@ -80,7 +80,22 @@
 
 	// 결제로 이동
 	function sendOk() {
-
+		const f = document.cartForm;
+		
+		let cnt = $("form input[name=nums]:checked").length;
+	    if (cnt === 0) {
+			alert("구매할 상품을 선택 하세요.");
+			return;
+	    }
+	    
+	    $("form input[name=nums]").each(function(index, item){
+			if(! $(this).is(":checked")) {
+				$(this).closest("tr").remove();
+			}
+		});
+		
+		f.action = "${pageContext.request.contextPath}/order/buy";
+		f.submit();
 	}
 
 	// 수량 증가/감소
@@ -246,7 +261,7 @@
 											value="${dto.od_total_amount}">
 									</div>
 									<div class="flex-center mt-30 mx-10">
-										<button class="primary-button flex-center">주문하기</button>
+										<button class="primary-button flex-center" onclick="sendOk();">주문하기</button>
 									</div>
 								</div>
 							</section>
