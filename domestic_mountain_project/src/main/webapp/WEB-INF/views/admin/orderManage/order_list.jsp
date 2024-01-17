@@ -193,13 +193,13 @@
 			<div class="modal-body pt-1">
 				<div class="mt-1 p-1">
 					<div class="p-1"><p class="form-control-plaintext optionDetail-value"></p></div>
-					<table class="table board-list">
+					<table class="table board-list" style="text-align: center;">
 						<thead class="table-light">
 							<tr>
 								<td width="50">코드</td>
-								<td width="120">구분</td>
-								<td width="90">작성자</td>
-								<td width="120">날짜</td>
+								<td width="200">구분</td>
+								<td width="100">작성자</td>
+								<td width="200">날짜</td>
 								<td>설명</td>
 							</tr>
 						</thead>
@@ -419,15 +419,15 @@ $(function(){
 		let detailState = $(this).attr("data-detailState");
 		
 		let productMoney = $(this).attr("data-productMoney");
-		console.log(productMoney);
 		let cancelAmount = $(".order-cancelAmount").attr("data-cancelAmount");
 		
 		f.orderNum.value = orderNum;
 		f.orderDetailNum.value = orderDetailNum;
 		f.productMoney.value = productMoney;
 		f.cancelAmount.value = cancelAmount;
+		 
 		
-		let opt = $(this).closest("tr").find("td").eq(4).text();
+		let opt = $(this).closest("tr").find("td").eq(3).text();
 
 		let $SELECT = $('form[name=detailStateForm] select[name=detailState]');
 		$('form[name=detailStateForm] select[name=detailState] option').remove();
@@ -477,12 +477,11 @@ $(function(){
 			for(let item of data.list) {
 				out  = '<tr>';
 				out += '<td>'+item.DETAILSTATE+'</td>';
-				out += '<td>'+item.DETALSTATEINFO+'</td>';
+				out += '<td>'+item.DETAILSTATEINFO+'</td>';
 				out += '<td>'+item.USERNAME+'</td>';
 				out += '<td>'+item.DETAILSTATEDATE+'</td>';
 				out += '<td align="left">'+item.STATEMEMO+'</td>';
 				out += '</tr>';
-				
 				$('.detailState-list').append(out);
 			}
 		};
@@ -508,14 +507,13 @@ $(function(){
 		let cancelAmount = f.cancelAmount.value;
 		
 		// 이전상태
-		let preDetailState = $("#orderDetail-list" + orderDetailNum).find("td").eq(9).attr("data-detailState");
+		let preDetailState = $("#orderDetail-list" + orderDetailNum).find("td").eq(8).find("span").attr("data-detailState");
 		if(preDetailState === "3" || preDetailState === "5" || preDetailState === "12") {
 			alert("판매취소 또는 반품완료 상품은 변경이 불가능합니다.");
 			return false;
 		}
 
 		let changeStateInfo = $("form[name=detailStateForm] select option:selected").text();
-		
 		if(! f.stateMemo.value.trim()) {
 			alert("상태 메시지를 등록하세요");
 			f.stateMemo.focus();
@@ -531,8 +529,8 @@ $(function(){
 				
 				let detailState = data.detailState;
 
-				$("#orderDetail-list" + orderDetailNum).find("td").eq(8).html(changeStateInfo);
-				$("#orderDetail-list" + orderDetailNum).find("td").eq(9).attr("data-detailState", detailState);
+				$("#orderDetail-list" + orderDetailNum).find("td").eq(7).html(changeStateInfo);
+				$("#orderDetail-list" + orderDetailNum).find("td").eq(8).find("span").attr("data-detailState", detailState);
 				
 				// 주문취소완료인 경우
 				if(detailState == 3 || detailState == 5 || detailState == 12) {

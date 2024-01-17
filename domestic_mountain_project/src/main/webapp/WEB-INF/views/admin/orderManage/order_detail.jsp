@@ -22,13 +22,21 @@
 				<tr>
 					<td class="table-light">총 금액</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.totalMoney}"/></td>
-					<td class="table-light">적림금사용액</td>
-					<td class="text-primary"><fmt:formatNumber value="${order.usedSaved}"/></td>
+					<td class="table-light">등급별 할인액</td>
+					<td class="text-primary"><fmt:formatNumber value="${order.orderSale}"/></td>
 					<td class="table-light">결제금액</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.payment}"/></td>
 					<td class="table-light">취소금액</td>
-					<td class="text-warning order-cancelAmount" data-cancelAmount="order.cancelAmount">
-						<fmt:formatNumber value="${order.cancelAmount}"/>
+					<td class="text-warning order-cancelAmount" data-cancelAmount="${order.cancelAmount}">
+						<c:if test=""></c:if>
+						<c:choose>
+							<c:when test="${order.cancelAmount > 0}">
+								<fmt:formatNumber value="${order.cancelAmount + 3000 - order.orderSale}"/>
+							</c:when>
+							<c:otherwise>
+								<fmt:formatNumber value="0"/>
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 				<tr>
@@ -78,6 +86,11 @@
 								</div>
 							</c:if>
 							<c:if test="${order.orderState == 3}">
+								<div class="col-auto">
+									<label>취소완료 일자 : ${order.orderStateDate}</label>
+								</div>
+							</c:if>
+							<c:if test="${order.orderState == 18}">
 								<div class="col-auto">
 									<label>배송완료 일자 : ${order.orderStateDate}</label>
 								</div>
