@@ -135,12 +135,11 @@ public class OrderManageController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		String state = "true";
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		try {
 			int detailState = Integer.parseInt((String)paramMap.get("detailState"));
 			
-			paramMap.put("memberIdx", info.getUseridx());
+			paramMap.put("memberIdx", 1);
 			
 			service.updateOrderDetailState(paramMap);
 			
@@ -162,6 +161,15 @@ public class OrderManageController {
 		List<Map<String, Object>> list = null;
 		try {
 			list = service.listDetailStateInfo(orderDetailNum);
+			for(Map<String, Object> dto : list) {
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("============================================");
+			}
 		} catch (Exception e) {
 		}
 		

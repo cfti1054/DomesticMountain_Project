@@ -133,7 +133,8 @@ public class OrderManageServiceImpl implements OrderManageService {
 				
 				for(OrderDetailManage dto : list) {
 					map.put("orderDetailNum", dto.getOrderDetailNum());
-					map.put("totalAmount", dto.getTotalMoney());
+					map.put("totalAmount", dto.getTotalAmount());
+					
 					mapper.updateCancelOrder1(map);
 				}
 				
@@ -160,20 +161,12 @@ public class OrderManageServiceImpl implements OrderManageService {
 			if(detailState == 3 || detailState == 5 || detailState == 12) {
 				// totalCancelAmount = dao.selectOne("adminOrder.readTotalCancelAmount", orderNum);
 				cancelAmount = Integer.parseInt((String)map.get("cancelAmount"));
-				System.out.println("============================================");
-				System.out.println("============================================");
-				System.out.println("============================================");
-				System.out.println(cancelAmount);
-				System.out.println("============================================");
-				System.out.println("============================================");
-				System.out.println("============================================");
+
 			}
 			
 			// orderDetail 테이블 상태 변경
 			mapper.updateOrderDetailState(map);
-			
-			// detailStateInfo 테이블에 상태 변경 내용 및 날짜 저장
-			mapper.insertDetailStateInfo(map);
+			// 필요 : orderDetailNum , detailState
 
 			// productOrder 테이블 취소금액 변경
 			// 환불-개별판매취소(관리자),주문취소완료(관리자),반품완료(관리자)
@@ -182,12 +175,26 @@ public class OrderManageServiceImpl implements OrderManageService {
 				map.put("cancelAmount", cancelAmount);
 
 				if(detailState == 3) {
-					map.put("refundReason", "관리자 요청");
+					map.put("refundReason", "관리자 요청".toString());
 				} else if(detailState == 4) {
 					map.put("refundReason", "소비자 요청");
 				} else {
 					map.put("refundReason", "기타");
 				}
+				
+				System.out.println("============================================");
+				System.out.println("============================================");
+				System.out.println("============================================");
+				System.out.println("============================================");
+				System.out.println(map.get("orderDetailNum").toString());
+				System.out.println(map.get("refundReason").toString());
+				System.out.println(map.get("detailState").toString());
+				System.out.println(map.get("cancelAmount").toString());
+				System.out.println(map.get("orderNum").toString());
+				System.out.println("============================================");
+				System.out.println("============================================");
+				System.out.println("============================================");
+				
 				
 				mapper.updateCancelDetail1(map);
 				mapper.updateCancelDetail2(map);
@@ -198,6 +205,7 @@ public class OrderManageServiceImpl implements OrderManageService {
 					map.put("orderState", 0);
 					
 					mapper.updateOrderState(map);
+					mapper.updateOrderState2(map);
 				}
 				
 				// 카드 취소내역 저장

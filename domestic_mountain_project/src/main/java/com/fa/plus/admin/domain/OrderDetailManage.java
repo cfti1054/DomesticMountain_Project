@@ -18,6 +18,7 @@ public class OrderDetailManage {
 	private int qty;
 	private int productMoney;
 	private int savedMoney;
+	private int totalAmount;
 	
 	private long detailNum;
 	private String optionValue;
@@ -34,6 +35,14 @@ public class OrderDetailManage {
 	
 	private String deliveryName; // 택배사
 	private String invoiceNumber; // 송장번호
+	
+	
+	public int getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	public long getProductNum() {
 		return productNum;
 	}
