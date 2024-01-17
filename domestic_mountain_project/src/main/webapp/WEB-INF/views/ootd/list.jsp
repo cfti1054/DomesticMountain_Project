@@ -39,7 +39,7 @@
 							href="${pageContext.request.contextPath}/recommend/list">&gt;
 								추천 코스</a></li>
 						<li class=""><a
-							href="${pageContext.request.contextPath}/made/list">&gt; 유저가
+							href="${pageContext.request.contextPath}/createcourse/list">&gt; 유저가
 								만든 코스</a></li>
 						<li class=""><a href="#">&nbsp;</a></li>
 						<li class=""><a
@@ -81,7 +81,7 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					<a>OOTD<span>| Look & Style</span></a> <span><a
+					<a>OOTD<span>| Look &amp; Style</span></a> <span><a
 						href="${pageContext.request.contextPath}/">home</a> &gt; community
 						&gt; ootd</span>
 				</h1>

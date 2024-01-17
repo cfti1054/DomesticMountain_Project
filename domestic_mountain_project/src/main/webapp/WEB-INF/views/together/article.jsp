@@ -43,6 +43,7 @@
 	width: 900px; 
 	--bs-table-bg: none;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -159,21 +160,24 @@
 								<c:choose>
 									<c:when	test="${userParticipantCount==true}">
 										<button type="button" class="btn btn-outline-secondary btnSendParticipantCount"	title="신청222">
-											<i class="bi ${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
+											
+											<i class="${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;
 											<span id="participantCount">신청취소</span>
 										</button>
 									</c:when>
 									<c:when	test="${dto.participantCount==dto.gather_max}">
 										<button type="button" class="btn btn-outline-secondary btnSendParticipantCount"	title="신청222" disabled>
-											<i class="bi ${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
+										
+											<i class="bi"></i>
 											<span id="participantCount">인원이 가득참</span>
 										</button>
 									</c:when>
 									
 									<c:otherwise>
 										<button type="button" class="btn btn-outline-secondary btnSendParticipantCount"	title="신청222">
-											<i class="bi ${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;&nbsp;
-											<span id="participantCount">신청하기1</span>
+											
+											<i class="${userParticipantCount ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>&nbsp;
+											<span id="participantCount">신청하기</span>
 										</button>
 									</c:otherwise>
 								</c:choose>	

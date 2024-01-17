@@ -99,6 +99,7 @@
 				<include refid="where-list"/>
 			</if>
 			AND (post_num &gt; #{num})
+			AND community_category_num = 1
 		</where>
 		 
 		ORDER BY post_num ASC
@@ -116,6 +117,7 @@
 				<include refid="where-list"/>
 			</if>
 			AND (post_num &lt; #{num})
+			AND community_category_num = 1
 		</where>
 		 
 		ORDER BY post_num DESC

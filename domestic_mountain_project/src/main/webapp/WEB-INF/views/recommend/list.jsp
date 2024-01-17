@@ -258,7 +258,8 @@ function searchList(f) {
 					</div>
 					<div class="col text-center">&nbsp;</div>
 					<div class="col-6 text-end">
-						<form class="row text-end-row" name="searchForm1" action="${pageContext.request.contextPath}/recommend/list" method="post">
+						<form class="row text-end-row" name="searchForm" action="#"
+										method="post">
 							<div class="col-auto p-1">
 								<select id="schType1" name="schType" class="form-select">
 									<option value="all">제목+내용</option>

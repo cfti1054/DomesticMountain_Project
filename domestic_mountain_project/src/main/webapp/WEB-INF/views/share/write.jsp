@@ -41,6 +41,12 @@
 			f.post_content.focus();
 			return false;
 		}
+		
+		str = f.selectFile.value;
+		if (!str || str === "<p><br></p>") {
+			alert("파일을 등록해주세요. ");
+			return false;
+		}
 
 		f.action = "${pageContext.request.contextPath}/share/${mode}";
 

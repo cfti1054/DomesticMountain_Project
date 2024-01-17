@@ -84,16 +84,17 @@
     		<exclude-mapping path="/services/**"/>
     		<exclude-mapping path="/faq/**"/>
     		<exclude-mapping path="/notice/**"/>
-    		<exclude-mapping path="/ootd/**"/>
-    		<exclude-mapping path="/appearance/list"/>
     		<exclude-mapping path="/product/**"/>
-    		<exclude-mapping path="/recommend/list"/>
-    		<exclude-mapping path="/together/list"/>
-    		<exclude-mapping path="/share/**"/>
     		<exclude-mapping path="/made/**"/>
-    		<exclude-mapping path="/createcourse/list"/>
     		<exclude-mapping path="/Related/**"/>
     		<exclude-mapping path="/Order/**"/>
+    		
+    		<exclude-mapping path="/recommend/list"/>
+    		<exclude-mapping path="/together/list"/>
+    		<exclude-mapping path="/createcourse/list"/>
+    		<exclude-mapping path="/appearance/list"/>
+    		<exclude-mapping path="/share/list"/>
+    		<exclude-mapping path="/ootd/list"/>
     		
     		<exclude-mapping path="/admin/**"/>
     		<exclude-mapping path="/product/**"/>

@@ -47,6 +47,7 @@ public class ShareController {
 			@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
+			@RequestParam(defaultValue = "1") String show,
 			HttpServletRequest req,
 			Model model) throws Exception {
 		
@@ -98,12 +99,14 @@ public class ShareController {
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
+		model.addAttribute("listUrl", listUrl);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
 		model.addAttribute("paging", paging);
 
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
+		model.addAttribute("show", show);
 		
 		return ".share.list";
 	}

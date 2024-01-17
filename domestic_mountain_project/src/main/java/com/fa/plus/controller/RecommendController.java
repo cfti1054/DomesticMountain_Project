@@ -88,7 +88,6 @@ public class RecommendController {
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
 		model.addAttribute("paging", paging);
-		model.addAttribute("show", show);
 
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);

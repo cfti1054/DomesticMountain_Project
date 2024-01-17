@@ -47,6 +47,7 @@ public class CreatecourseController {
 			@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
+			@RequestParam(defaultValue = "1") String show,
 			HttpServletRequest req,
 			Model model) throws Exception {
 		
@@ -92,18 +93,20 @@ public class CreatecourseController {
 			articleUrl = cp + "/createcourse/article?page=" + current_page + "&" + query;
 		}
 
-		String paging = myUtil.paging(current_page, total_page, listUrl);
+		String paging = myUtil.paging(current_page, total_page, "listPage");
 
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("size", size);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("articleUrl", articleUrl);
+		model.addAttribute("listUrl", listUrl);
 		model.addAttribute("page", current_page);
 		model.addAttribute("paging", paging);
 
 		model.addAttribute("schType", schType);
 		model.addAttribute("kwd", kwd);
+		model.addAttribute("show", show);
 		
 		return ".createcourse.list";
 	}
