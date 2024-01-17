@@ -5,7 +5,7 @@
 <style>
 /*=============== body (area) ===============*/
 .features-1 {
-	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
 	margin-bottom: 100px;
 }
 
@@ -41,8 +41,6 @@
 		f.show.value = show;
 		f.submit();
 	}
-	
-	
 </script>
 
 <section class="features-1">
@@ -255,7 +253,7 @@
 
 
 										<tr>
-											<td>${dto.post_num }</td>
+											<td>${dataCount - (page-1) * size - status.index}</td>
 											<td class="left"><a
 												href="${articleUrl}&post_num=${dto.post_num}"
 												class="text-reset">${dto.post_title}</a> <span
@@ -267,61 +265,61 @@
 									</tbody>
 								</c:forEach>
 							</table>
+
+
 						</div>
+					</div>
 
+
+
+
+					<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</div>
+
+					<div class="row board-list-footer">
+						<div class="col">
+							<button type="button" class="btn btn-light"
+								onclick="location.href='${pageContext.request.contextPath}/createcourse/list';"
+								title="새로고침">
+								<i class="bi bi-arrow-counterclockwise"></i>
+							</button>
+						</div>
+						<div class="col text-center">&nbsp;</div>
+
+
+						<div class="col-6 text-end">
+							<form class="row text-end-row" name="searchForm" action="#"
+								method="post">
+								<div class="col-auto p-1">
+									<select id="schType1" name="schType" class="form-select">
+										<option value="all">제목+내용</option>
+										<option value="post_reg_date">등록일</option>
+										<option value="post_title">제목</option>
+										<option value="user_name">작성자</option>
+										<option value="post_content">내용</option>
+									</select>
+								</div>
+								<div class="col-auto p-1">
+									<input type="text" name="kwd" value="${kwd}"
+										class="form-control">
+								</div>
+								<div class="col-auto p-1">
+									<input type="hidden" name="show" value="${show}">
+									<button type="button" class="btn btn-light"
+										onclick="searchList(this.form)">
+										<i class="bi bi-search"></i>
+									</button>
+
+									<button type="button" class="btn btn-light"
+										onclick="location.href='${pageContext.request.contextPath}/createcourse/write';">글올리기</button>
+								</div>
+							</form>
+
+
+						</div>
 					</div>
 				</div>
 
-
-
-
-				<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</div>
-
-				<div class="row board-list-footer">
-					<div class="col">
-						<button type="button" class="btn btn-light"
-							onclick="location.href='${pageContext.request.contextPath}/createcourse/list';"
-							title="새로고침">
-							<i class="bi bi-arrow-counterclockwise"></i>
-						</button>
-					</div>
-					<div class="col text-center">&nbsp;</div>
-
-
-					<div class="col-6 text-end">
-						<form class="row text-end-row" name="searchForm" action="#"
-							method="post">
-							<div class="col-auto p-1">
-								<select id="schType1" name="schType" class="form-select">
-									<option value="all">제목+내용</option>
-									<option value="post_reg_date">등록일</option>
-									<option value="post_title">제목</option>
-									<option value="user_name">작성자</option>
-									<option value="post_content">내용</option>
-								</select>
-							</div>
-							<div class="col-auto p-1">
-								<input type="text" name="kwd" value="${kwd}"
-									class="form-control">
-							</div>
-							<div class="col-auto p-1">
-								<input type="hidden" name="show" value="${show}">
-								<button type="button" class="btn btn-light"
-									onclick="searchList(this.form)">
-									<i class="bi bi-search"></i>
-								</button>
-
-								<button type="button" class="btn btn-light"
-									onclick="location.href='${pageContext.request.contextPath}/createcourse/write';">글올리기</button>
-							</div>
-						</form>
-
-
-					</div>
-				</div>
 			</div>
-
-
 		</div>
 	</div>
 </section>

@@ -252,7 +252,7 @@
 
 
 										<tr>
-											<td>${dto.post_num }</td>
+											<td>${dataCount - (page-1) * size - status.index}</td>
 											<td class="left"><a
 												href="${articleUrl}&post_num=${dto.post_num}"
 												class="text-reset">${dto.post_title}</a> <span

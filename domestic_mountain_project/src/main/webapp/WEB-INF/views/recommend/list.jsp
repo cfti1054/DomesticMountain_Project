@@ -233,7 +233,7 @@ function searchList(f) {
 
 
 										<tr>
-											<td>${dto.post_num }</td>
+											<td>${dataCount - (page-1) * size - status.index}</td>
 											<td class="left"><a href="${articleUrl}&num=${dto.post_num}" class="text-reset">${dto.post_title}</a>
 												<span class="badge text-bg-info">New</span></td>
 											<td>${dto.user_name}</td>
@@ -245,7 +245,7 @@ function searchList(f) {
 							</table>
 						</div>					
 					
-					</div>										
+															
 				</div>
 
 				<div class="page-navigation">${dataCount == 0 ? "등록된 게시물이 없습니다." : paging}</div>
@@ -282,7 +282,7 @@ function searchList(f) {
 					</div>
 				</div>
 			</div>
-
+</div>
 
 		</div>
 	</div>
