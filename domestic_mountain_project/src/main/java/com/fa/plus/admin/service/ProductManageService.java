@@ -29,6 +29,9 @@ public interface ProductManageService {
 	public ProductManage findByCategory(long category_num);
 	public List<ProductManage> listCategory();
 	public List<ProductManage> listSubCategory(long parent_num);
+	//
+	public List<ProductManage> listManCategory(long parent_num);
+	public List<ProductManage> listWomanCategory(long parent_num);
 	
 	// 상품 재고
 	public List<ProductStockManage> listProductStock(long product_num);

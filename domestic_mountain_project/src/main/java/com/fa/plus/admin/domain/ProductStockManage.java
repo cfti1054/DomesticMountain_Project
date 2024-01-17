@@ -1,5 +1,7 @@
 package com.fa.plus.admin.domain;
 
+import java.util.List;
+
 public class ProductStockManage {
 	private long product_num;		// 상품번호
 	private String product_name;	// 상품이름
@@ -21,6 +23,11 @@ public class ProductStockManage {
 	private Long stock_num;			// 재고번호
 	private String option_value;	// 상세값
 	private Long parent;			// 상위번호(부모값)
+	
+	private List<Long> stock_nums;
+	private List<Long> detail_nums;
+	private List<Long> detail_nums2;
+	private List<Integer> total_stocks;	
 	
 	public long getProduct_num() {
 		return product_num;
@@ -118,4 +125,29 @@ public class ProductStockManage {
 	public void setParent(Long parent) {
 		this.parent = parent;
 	}
+	public List<Long> getStock_nums() {
+		return stock_nums;
+	}
+	public void setStock_nums(List<Long> stock_nums) {
+		this.stock_nums = stock_nums;
+	}
+	public List<Long> getDetail_nums() {
+		return detail_nums;
+	}
+	public void setDetail_nums(List<Long> detail_nums) {
+		this.detail_nums = detail_nums;
+	}
+	public List<Long> getDetail_nums2() {
+		return detail_nums2;
+	}
+	public void setDetail_nums2(List<Long> detail_nums2) {
+		this.detail_nums2 = detail_nums2;
+	}
+	public List<Integer> getTotal_stocks() {
+		return total_stocks;
+	}
+	public void setTotal_stocks(List<Integer> total_stocks) {
+		this.total_stocks = total_stocks;
+	}
+	
 }

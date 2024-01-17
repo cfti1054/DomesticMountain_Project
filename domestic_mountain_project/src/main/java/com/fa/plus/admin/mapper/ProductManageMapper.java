@@ -21,7 +21,10 @@ public interface ProductManageMapper {
 	//옵션 리스트
 	public ProductManage findByCategory(long category_num);
 	public List<ProductManage> listCategory();
-	public List<ProductManage> listSubCategory(long parent_num);	
+	public List<ProductManage> listSubCategory(long parent_num);
+	//
+	public List<ProductManage> listManCategory(long parent_num);
+	public List<ProductManage> listWomanCategory(long parent_num);
 	
 	//옵션
 	public long optionSeq(); // 등산장비옵션

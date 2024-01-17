@@ -89,6 +89,14 @@
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM product p
+		<where>
+			<if test="product_status != -1">
+				AND product_status = #{product_status}
+			</if>
+			<if test="kwd != null and kwd != '' ">
+				AND <include refid="where-list"/>
+			</if>
+		</where>		
 	</select>	
 	
 	<select id="listProduct" parameterType="map" resultType="com.fa.plus.admin.domain.ProductManage">
@@ -209,5 +217,24 @@
 		UPDATE productStock SET total_stock = #{total_stock}
 		WHERE stock_num = #{stock_num}
 	</update>	
+	
+	
+	<!-- 남성 카테고리 목록 -->
+	<select id="listManCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT category_num, category_name, category_order, product_status, parent_num
+		FROM product_category
+		WHERE parent_num = 5
+		ORDER BY category_order
+	</select>	
+	
+	<!-- 여성 카테고리 목록 -->
+	<select id="listWomanCategory" parameterType="Long" resultType="com.fa.plus.admin.domain.ProductManage">
+		SELECT category_num, category_name, category_order, product_status, parent_num
+		FROM product_category
+		WHERE parent_num = 6
+		ORDER BY category_order
+	</select>		
+	
+	
 
 </mapper>

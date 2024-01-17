@@ -347,6 +347,9 @@ public class ProductManageServiceImpl implements ProductManageService {
 	@Override
 	public void updateProductStock(ProductStockManage dto) throws Exception {
 		try {
+			if(dto.getDetail_num2() !=  null && dto.getDetail_num2()== 0) {
+				dto.setDetail_num2(null);
+			}
 			mapper.updateProductStock(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -366,6 +369,32 @@ public class ProductManageServiceImpl implements ProductManageService {
 			throw e;
 		}
 		
+	}
+
+	@Override
+	public List<ProductManage> listManCategory(long parent_num) {
+		List<ProductManage> list = null;
+		
+		try {
+			list = mapper.listManCategory(parent_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ProductManage> listWomanCategory(long parent_num) {
+		List<ProductManage> list = null;
+		
+		try {
+			list = mapper.listWomanCategory(parent_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	

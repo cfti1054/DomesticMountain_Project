@@ -320,8 +320,28 @@ public class ProductManageController {
 		return ".admin.product.stock";
 	}
 	
+	/*
+	@PostMapping("updateStock")
+	@ResponseBody
+	public Map<String, Object> updateStock(ProductStockManage dto) throws Exception {
+		// 상세 옵션별 재고 추가 또는 변경 -----
+		String state = "true";
+		try {
+			service.updateProductStock(dto);
+		} catch (Exception e) {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}	
+	*/
+	
+	
 	// 재고 처리
 	@PostMapping("updateStock")
+	@ResponseBody
 	public String updateStockSubmit(ProductStockManage dto,
 			@RequestParam long product_num,
 			@RequestParam long stock_num,
@@ -329,8 +349,8 @@ public class ProductManageController {
 			HttpSession session,
 			Model model) {
 
-		try {
-			if(stock_num == 0) {
+		try {	
+			if(dto.getStock_num() == 0) {
 				service.insertProductStock(dto);
 			} else {				
 				service.updateProductStock(dto);
@@ -344,6 +364,7 @@ public class ProductManageController {
 			
 		return "redirect:/admin/product/stock?" + query;
 	}
+
 	
 	
 	// 이 부분은 사용하지 않음
@@ -368,6 +389,33 @@ public class ProductManageController {
 
 		Map<String, Object> model = new HashMap<>();
 		model.put("stock_num", stock_num);
+		return model;
+	}		
+	
+	//////////////////////////////////////
+	@GetMapping("listManCategory")
+	@ResponseBody
+	public Map<String, Object> listManCategory(
+			@RequestParam long parent_num) throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		List<ProductManage> listManCategory = service.listManCategory(parent_num);
+		
+		model.put("listManCategory", listManCategory);
+		
+		return model;
+	}	
+	
+	@GetMapping("listWomanCategory")
+	@ResponseBody
+	public Map<String, Object> listWomanCategory(
+			@RequestParam long parent_num) throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		List<ProductManage> listWomanCategory = service.listWomanCategory(parent_num);
+		
+		model.put("listWomanCategory", listWomanCategory);
+		
 		return model;
 	}		
 	
