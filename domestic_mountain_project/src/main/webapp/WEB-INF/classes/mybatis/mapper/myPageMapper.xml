@@ -35,7 +35,6 @@
 		JOIN optionDetail d ON c.detail_num1 = d.detail_num
 		LEFT OUTER JOIN optionDetail d2 ON c.detail_num2 = d2.detail_num
 		WHERE useridx = #{useridx}
-		ORDER BY cart_reg_date DESC 
 	</select>
 	
 	<!-- 장바구니 삭제 -->

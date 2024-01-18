@@ -63,8 +63,7 @@ public class OrderController {
 
 			productOrderNumber = orderService.productOrderNumber();
 			
-			
-			if (detail_nums2 != null) {
+			if (detail_nums2 != null && detail_nums2.equals("")) {
 				List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
 				for (int i = 0; i < detail_nums.size(); i++) {
 					Map<String, Long> map = new HashMap<String, Long>();
@@ -78,7 +77,7 @@ public class OrderController {
 				
 				for (int i = 0; i < listProduct.size(); i++) {
 					Order dto = listProduct.get(i);
-					
+					System.out.println(dto.getProduct_name() + i);
 					dto.setQty(buyQtys.get(i));
 					
 					// 각 상품의 총 금액 (상품 가격 * 수량)
@@ -116,7 +115,7 @@ public class OrderController {
 				
 				for (int i = 0; i < listProduct.size(); i++) {
 					Order dto = listProduct.get(i);
-
+					System.out.println(dto.getProduct_name() + i);
 					dto.setQty(buyQtys.get(i));
 					
 					// 각 상품의 총 금액 (상품 가격 * 수량)
