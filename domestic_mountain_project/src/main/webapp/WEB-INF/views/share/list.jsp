@@ -104,6 +104,7 @@
 						&gt; 유용한 정보</span>
 				</h1>
 			</div>
+			
 
 			<div>
 				<div class="output-type">
