@@ -133,7 +133,7 @@ function searchList(f) {
 												</div>
 	
 	
-												<p class="txt">${dto.post_content}</p>
+												<div class="txt">${dto.post_content}</div>
 											</div>
 	
 											<div class="con_bottom">

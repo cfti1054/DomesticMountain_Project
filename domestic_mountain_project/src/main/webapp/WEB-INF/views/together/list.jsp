@@ -92,7 +92,7 @@
 				<div class="col-auto me-auto">
 					${dataCount}개(${page}/${total_page} 페이지)</div>
 				<c:forEach var="dto" items="${list}" varStatus="status">
-					<ul class="article-movie-sub" onclick="location.href='#';">
+					<ul class="article-movie-sub" onclick="location.href='${articleUrl}&post_num=${dto.post_num}';">
 
 
 						<li>
@@ -100,11 +100,11 @@
 								<div class="con">
 									<div class="con_top">
 										<div class="tit_area">
-											<a href="${articleUrl}&post_num=${dto.post_num}" class="tit"> <span class="inner"> <strong>${dto.post_title}</strong>
+											<a  class="tit"> <span class="inner"> <strong>${dto.post_title}</strong>
 											</span>
 											</a>
 										</div>
-										<a href="${articleUrl}&post_num=${dto.post_num}" class="txt">${dto.post_content}</a>
+										<div class="txt">${dto.post_content}</div>
 									</div>
 
 									<div class="con_bottom">

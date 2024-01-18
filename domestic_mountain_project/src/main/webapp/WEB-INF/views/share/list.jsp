@@ -140,9 +140,8 @@
 													<span class="inner"> <strong>${dto.post_title}</strong>
 													</span>
 												</div>
+													<div class="txt">${dto.post_content}</div>
 
-
-												<p class="txt">${dto.post_content}</p>
 											</div>
 
 											<div class="con_bottom">
@@ -169,8 +168,8 @@
 									</div>
 									<div class="movie-img">
 
-										<a href="#"> <img
-											src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+										<a href="${url}"> <img
+											src="${pageContext.request.contextPath}/uploads/share/${dto.saveFilename}"
 											width="200" height="120" alt="썸네일 이미지"> <span
 											class="num">${dto.post_fileCount}<span class="blind">개의
 													추가 이미지가 있습니다</span></span>
@@ -199,7 +198,7 @@
 										<li class="show-2-li"><a
 											href="${articleUrl}&post_num=${dto.post_num}"
 											class="album-img"> <img width="200" height="200"
-												src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+												src="${pageContext.request.contextPath}/uploads/share/${dto.saveFilename}"
 												alt="">
 										</a>
 
