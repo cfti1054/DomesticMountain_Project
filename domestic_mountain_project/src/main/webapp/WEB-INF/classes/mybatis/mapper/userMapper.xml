@@ -52,7 +52,9 @@
 	</update>
 	
 	<select id="findById" parameterType="String" resultType="com.fa.plus.domain.User">
-		SELECT m.useridx, usership, m1.user_id, user_name, user_pwd, email, enabled
+		SELECT m.useridx, usership, m1.user_id, user_name, user_pwd,
+			TO_CHAR(birth, 'YYYY-MM-DD') birth, 
+			email, addr1, addr2, zip, tel, enabled
 		FROM userall m 
 		JOIN user1 m1 ON m.useridx = m1.useridx 
 		LEFT OUTER JOIN user2 m2 ON m2.useridx = m1.useridx

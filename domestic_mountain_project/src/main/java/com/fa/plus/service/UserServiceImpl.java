@@ -94,6 +94,8 @@ public class UserServiceImpl implements UserService {
 				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
 			}
 			
+			
+		        
 			// 패스워드가 변경된 경우만 member1 테이블의 패스워드를 변경하도록 변경해야함
 //			String encPwd = bcryptEncoder.encode(dto.getUser_pwd());
 //			

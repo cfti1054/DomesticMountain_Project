@@ -220,6 +220,7 @@
 							<input type="hidden" name="orderDetailNum">
 							<input type="hidden" name="productMoney">
 							<input type="hidden" name="cancelAmount">
+							<input type="hidden" name="qty">
 							<button type="button" class="btn btn-light btnDetailStateUpdateOk"> 변경 </button>
 						</div>
 					</form>
@@ -242,7 +243,7 @@
 					<div class="col-auto p-1">
 						<select name="deliveryName" class="form-select">
 							<c:forEach var="vo" items="${listDeliveryCompany}">
-								<option>${vo.DELIVERYNAME}</option>
+								<option value="${vo.num}">${vo.DELIVERYNAME}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -417,6 +418,7 @@ $(function(){
 		let orderState = $(this).attr("data-orderState");
 		let orderDetailNum = $(this).attr("data-orderDetailNum");
 		let detailState = $(this).attr("data-detailState");
+		let qty = $(this).attr("data-qty");
 		
 		let productMoney = $(this).attr("data-productMoney");
 		let cancelAmount = $(".order-cancelAmount").attr("data-cancelAmount");
@@ -425,7 +427,7 @@ $(function(){
 		f.orderDetailNum.value = orderDetailNum;
 		f.productMoney.value = productMoney;
 		f.cancelAmount.value = cancelAmount;
-		 
+		f.qty.value = qty; 
 		
 		let opt = $(this).closest("tr").find("td").eq(3).text();
 
