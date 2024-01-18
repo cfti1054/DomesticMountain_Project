@@ -193,7 +193,9 @@
 					</div>
 				</div>
 
-				<p class="secession-btn">회원탈퇴 ></p>
+				<div class="secession-btn mt-3">
+                	<button type="button" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/user/pwd?dropout';">회원탈퇴</button>
+                </div>
 			</div>
 		</div>
 	</div>

@@ -167,7 +167,7 @@ public class UserController {
 		if(dropout == null) {
 			model.addAttribute("mode", "update");
 		} else {
-			model.addAttribute("mode", "droupout");
+			model.addAttribute("mode", "dropout");
 		}
 		
 		return ".user.pwd";
@@ -199,6 +199,9 @@ public class UserController {
 		if(mode.equals("dropout")) {
 			// 회원 탈퇴
 			// 게시판 테이블등 데이터 삭제
+			
+			
+			
 			
 			session.removeAttribute("loginUser");
 			session.invalidate();
