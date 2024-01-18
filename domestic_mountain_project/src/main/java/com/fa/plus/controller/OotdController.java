@@ -250,9 +250,9 @@ public class OotdController {
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root + "uploads" + File.separator + "ootd";
 		
-		service.deleteOotd(post_num, pathname, info.getUserid(), info.getUsership());
 		service.deletePostlike(post_num, pathname, info.getUserid(), info.getUsership());
 		service.deletePostfile(post_num, pathname, info.getUserid(), info.getUsership());
+		service.deleteOotd(post_num, pathname, info.getUserid(), info.getUsership());
 		
 		return "redirect:/ootd/list?" + query;
 	}
