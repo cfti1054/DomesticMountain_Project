@@ -121,7 +121,7 @@ public class NoticeController {
 		return ".notice.list";
 	}
 	@GetMapping("article")
-	public String article(@RequestParam long notice_category_num,
+	public String article(@RequestParam long notice_num,
 			@RequestParam String page,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
@@ -134,9 +134,9 @@ public class NoticeController {
 			query += "&schType=" + schType + "&kwd=" + URLEncoder.encode(kwd, "UTF-8");
 		}
 		
-		service.updateHitCount(notice_category_num);
+		service.updateHitCount(notice_num);
 		
-		Notice dto = service.findById(notice_category_num);
+		Notice dto = service.findById(notice_num);
 		if (dto == null) {
 			return "redirect:/notice/list?" + query;
 		}
@@ -144,12 +144,12 @@ public class NoticeController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("schType", schType);
 		map.put("kwd", kwd);
-		map.put("notice_category_num", notice_category_num);
+		map.put("notice_num", notice_num);
 
 		Notice prevDto = service.findByPrev(map);
 		Notice nextDto = service.findByNext(map);
 		
-		List<Notice> listFile = service.listNoticeFile(notice_category_num);
+		List<Notice> listFile = service.listNoticeFile(notice_num);
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("prevDto", prevDto);

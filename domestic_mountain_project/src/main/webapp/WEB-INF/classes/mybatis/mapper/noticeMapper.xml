@@ -34,8 +34,7 @@
 	
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
-		FROM notice_board n
-		JOIN notice_category c ON n.notice_category_num = c.notice_category_num
+		FROM notice_board
 		<where>
 			notice_visible = 1
 			<if test="kwd != null and kwd!='' ">
@@ -46,36 +45,35 @@
 	</select>
 	
 	<select id="listNotice" parameterType="map" resultType="com.fa.plus.domain.Notice">
-    	SELECT n.notice_num, c.notice_category_num, n.notice_title, n.notice_reg_id, 
-       		n.notice_hit_count, n.notice_reg_date
-   		FROM notice_board n
-    	JOIN notice_category c ON n.notice_category_num = c.notice_category_num
+    	SELECT notice_num, notice_title, notice_reg_id, 
+       		notice_hit_count, notice_reg_date
+   		FROM notice_board
     	<where>
-        	n.notice_visible = 1
+        	notice_visible = 1
         	<if test="kwd != null and kwd != ''">
             	AND <include refid="where-list"/>
         	</if>
     	</where>
-    	ORDER BY n.notice_num DESC
+    	ORDER BY notice_num DESC
     	OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
 	<update id="updateHitCount" parameterType="Long">
 		UPDATE notice_board SET notice_hit_count=notice_hit_count+1 
-		WHERE notice_category_num=#{notice_category_num}
+		WHERE notice_num=#{notice_num}
 	
 	</update>
 	
 	 <select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Notice">
-	 	SELECT notice_category_num, n.notice_reg_id, notice_title, notice_content, notice_hit_count,
+	 	SELECT notice_num, n.notice_reg_id, notice_title, notice_content, notice_hit_count,
 	 		notice_reg_date, notice_visible
 	 		FROM notice_board n
 	 		JOIN user1 u ON n.notice_reg_id=u.useridx
-	 		WHERE notice_category_num = #{notice_category_num}
+	 		WHERE notice_num = #{notice_num}
 	 </select>
 	 
 	 <select id="findByPrev" parameterType="map" resultType="com.fa.plus.domain.Notice">
-	 	SELECT notice_category_num, notice_title
+	 	SELECT notice_num, notice_title
 	 	FROM notice_board n
 	 	JOIN user1 u ON n.notice_reg_id=u.useridx
 	 	<where>
@@ -83,15 +81,15 @@
 	 		<if test="kwd != null and kwd != '' ">
 				AND <include refid="where-list"/>
 			</if>
-			AND (notice_category_num &gt; #{notice_category_num})
+			AND (notice_num &gt; #{notice_num})
 	 	</where>
-	 	ORDER BY notice_category_num ASC, notice_reg_date DESC
+	 	ORDER BY notice_num ASC, notice_reg_date DESC
 	 	FETCH FIRST 1 ROWS ONLY
 	 	
 	 </select>
 		
 	 <select id="findByNext" parameterType="map" resultType="com.fa.plus.domain.Notice">
-		SELECT notice_category_num, notice_title
+		SELECT notice_num, notice_title
 	 	FROM notice_board n
 	 	JOIN user1 u ON n.notice_reg_id=u.useridx
 	 	<where>
@@ -99,9 +97,9 @@
 	 		<if test="kwd != null and kwd != '' ">
 				AND <include refid="where-list"/>
 			</if>
-			AND (notice_category_num &lt; #{notice_category_num})
+			AND (notice_num &lt; #{notice_num})
 	 	</where>
-	 	ORDER BY notice_category_num DESC, notice_reg_date DESC
+	 	ORDER BY notice_num DESC, notice_reg_date DESC
 	 	FETCH FIRST 1 ROWS ONLY
 	</select>
 	

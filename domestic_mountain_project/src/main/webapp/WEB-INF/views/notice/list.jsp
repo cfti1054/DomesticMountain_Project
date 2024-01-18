@@ -234,7 +234,7 @@ function searchList() {
 												<c:if test="${dto.gap < 12}">
 		             		  	 					<span class="badge text-bg-info">New</span>
 		           		 						</c:if>
-												 <a href="${articleUrl}&notice_category_num=${dto.notice_category_num}" class="text-reset">${dto.notice_title}</a>
+												 <a href="${articleUrl}&notice_num=${dto.notice_num}" class="text-reset">${dto.notice_title}</a>
 											</td>
 											<td>관리자</td>
 											<td>${dto.notice_reg_date}</td>

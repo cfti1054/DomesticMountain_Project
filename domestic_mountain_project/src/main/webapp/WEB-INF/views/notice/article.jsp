@@ -116,14 +116,14 @@
 							<tr>
 								<td colspan="2">이전글 : <c:if test="${not empty prevDto}">
 										<a
-											href="${pageContext.request.contextPath}/notice/article?${query}&notice_category_num=${prevDto.notice_category_num}">${prevDto.notice_title}</a>
+											href="${pageContext.request.contextPath}/notice/article?${query}&notice_num=${prevDto.notice_num}">${prevDto.notice_title}</a>
 									</c:if>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">다음글 : <c:if test="${not empty nextDto}">
 										<a
-											href="${pageContext.request.contextPath}/notice/article?${query}&notice_category_num=${nextDto.notice_category_num}">${nextDto.notice_title}</a>
+											href="${pageContext.request.contextPath}/notice/article?${query}&notice_num=${nextDto.notice_num}">${nextDto.notice_title}</a>
 									</c:if>
 								</td>
 							</tr>
