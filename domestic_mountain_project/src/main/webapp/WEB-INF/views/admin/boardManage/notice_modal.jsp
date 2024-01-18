@@ -17,7 +17,7 @@
 				<tr>
 					<td class="text-center bg-light"> 보이기 </td>
 					<td class="ps-5">
-						<select id="notice_category_visible" class="form-select">
+						<select id="notice_category_visible" name="notice_category_visible" class="form-select">
 							<option value=""> :: 보이기 상태 :: </option>
 							<option value="0">안보이기</option>
 							<option value="1">보이기</option>

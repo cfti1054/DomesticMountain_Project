@@ -42,8 +42,6 @@ public class BoardManageController {
 	// 공지사항 카테고리 추가 폼
 	@GetMapping("notice_category_write")
 	public String notice_category_write(@RequestParam String mode, @RequestParam String type, Model model) throws Exception {
-		System.out.println(mode);
-		System.out.println(type);
 		model.addAttribute("mode", mode);
 		model.addAttribute("type", type);
 
