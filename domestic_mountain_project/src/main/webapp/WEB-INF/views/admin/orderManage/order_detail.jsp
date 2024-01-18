@@ -137,6 +137,7 @@
 							<td>${order.orderState==1 && dto.detailState<2?"상품준비중":dto.detailStateInfo}</td>
 							<td>
 								<span class="orderDetailStatus-update" 
+										data-qty="${dto.qty}"
 										data-orderNum="${order.orderNum}" 
 										data-orderState="${order.orderState}"
 										data-productMoney="${dto.price}"

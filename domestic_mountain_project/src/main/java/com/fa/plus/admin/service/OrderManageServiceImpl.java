@@ -121,6 +121,13 @@ public class OrderManageServiceImpl implements OrderManageService {
 				mapper.updateOrderState(map);
 			} else if(mode.equals("invoiceNumber")) { // 송장번호 등록
 				mapper.updateOrderInvoiceNumber1(map);
+				System.out.println("updateOrderInvoiceNumber1 : ");
+				System.out.println(map.get("cpNum"));
+				System.out.println(map.get("invoiceNumber"));
+				System.out.println(map.get("trStatus"));
+				System.out.println(map.get("orderNum"));
+				System.out.println(map.get("orderState"));
+				map.put("trStatus", 1);	// 배송상태 -  준비로 변경
 				mapper.updateOrderInvoiceNumber2(map);
 			} else if(mode.equals("delivery")) { // 배송 변경
 				mapper.updateOrderState(map);
@@ -160,7 +167,7 @@ public class OrderManageServiceImpl implements OrderManageService {
 			int cancelAmount = 0;
 			if(detailState == 3 || detailState == 5 || detailState == 12) {
 				// totalCancelAmount = dao.selectOne("adminOrder.readTotalCancelAmount", orderNum);
-				cancelAmount = Integer.parseInt((String)map.get("cancelAmount"));
+//				cancelAmount = Integer.parseInt((String)map.get("cancelAmount"));
 
 			}
 			
@@ -195,7 +202,7 @@ public class OrderManageServiceImpl implements OrderManageService {
 				System.out.println("============================================");
 				System.out.println("============================================");
 				System.out.println("============================================");
-				
+				map.put("cancelAmount", Integer.parseInt(map.get("cancelAmount").toString()) * Integer.parseInt(map.get("qty").toString()) );
 				
 				mapper.updateCancelDetail1(map);
 				mapper.updateCancelDetail2(map);
