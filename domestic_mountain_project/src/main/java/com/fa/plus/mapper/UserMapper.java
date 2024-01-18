@@ -22,7 +22,7 @@ public interface UserMapper {
 	
 	
 	public User findById(String user_id); // 아이디 찾기
-	
+	public User findById(long useridx);
 	
 	// 비밀번호와 email이 UNIQUE가 아니므로 동일한 이메일이 존재할 수 있어서 List로 반환 받아야 함
 	public List<User> findByPwd(String user_pwd); // 비밀번호 찾기

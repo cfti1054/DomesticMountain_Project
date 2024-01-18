@@ -1,7 +1,6 @@
 package com.fa.plus.service;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -12,6 +11,7 @@ import com.fa.plus.domain.User;
 import com.fa.plus.mail.Mail;
 import com.fa.plus.mail.MailSender;
 import com.fa.plus.mapper.UserMapper;
+
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -205,9 +205,32 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findById(long useridx) {
-		// TODO Auto-generated method stub
-		return null;
+		User dto = null;
+
+		try {
+			dto = mapper.findById(useridx);
+
+			if (dto != null) {
+				if (dto.getEmail() != null) {
+					String[] s = dto.getEmail().split("@");
+					dto.setEmail1(s[0]);
+					dto.setEmail2(s[1]);
+				}
+
+				if (dto.getTel() != null) {
+					String[] s = dto.getTel().split("-");
+					dto.setTel1(s[0]);
+					dto.setTel2(s[1]);
+					dto.setTel3(s[2]);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
 	}
+	
 
 
 }
