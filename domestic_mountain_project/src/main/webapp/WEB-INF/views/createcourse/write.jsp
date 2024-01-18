@@ -69,8 +69,8 @@
 						<li class=""><a
 							href="${pageContext.request.contextPath}/recommend/list">&gt;
 								추천 코스</a></li>
-						<li class=""><a
-							href="${pageContext.request.contextPath}/made/list">&gt; 유저가
+						<li class="eq1"><a
+							href="${pageContext.request.contextPath}/createcourse/list">&gt; 유저가
 								만든 코스</a></li>
 						<li class=""><a href="#">&nbsp;</a></li>
 						<li class=""><a
@@ -91,8 +91,8 @@
 						<a>Walk &amp; Climbing</a>
 					</h3>
 					<ul>
-						<li class="eq1"><a
-							href="${pageContext.request.contextPath}/createcourse/list">&gt;
+						<li class=""><a
+							href="${pageContext.request.contextPath}/appearance/list">&gt;
 								회원들의 모습</a></li>
 					</ul>
 
