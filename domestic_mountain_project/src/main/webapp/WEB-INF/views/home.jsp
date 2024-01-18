@@ -12,6 +12,7 @@
 	<div class="row">
 		<div class="area-1">
 			<div class="area1-content">
+			
 				<h1 class="area1-h1">
 					저희 <strong class="area1-st">'국내산'</strong> 은 국내에 있는 산과 관련 정보를 <br>&nbsp;&nbsp;&nbsp;제공하기
 					위한 사이트입니다.
