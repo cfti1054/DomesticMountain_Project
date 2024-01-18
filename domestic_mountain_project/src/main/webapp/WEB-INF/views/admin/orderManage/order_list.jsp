@@ -241,9 +241,9 @@
 			<div class="modal-body pt-1">
 				<form class="row text-center" name="invoiceNumberForm">
 					<div class="col-auto p-1">
-						<select name="deliveryName" class="form-select">
+						<select id="deliveryName" name="deliveryName" class="form-select">
 							<c:forEach var="vo" items="${listDeliveryCompany}">
-								<option value="${vo.num}">${vo.DELIVERYNAME}</option>
+								<option value="${vo.NUM}">${vo.DELIVERYNAME}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -251,8 +251,10 @@
 						<input name="invoiceNumber" type="text" class="form-control" placeholder="송장번호입력">
 					</div>
 					<div class="col-auto p-1">
+						<input type="hidden" name="cpNum" value="">
 						<input type="hidden" name="orderNum" value="">
 						<input type="hidden" name="orderState" value="2">
+						<input type="hidden" name="trStatus" value="2">
 						<button type="button" class="btn btnInvoiceNumberOk">변경완료</button>
 					</div>
 				</form>
@@ -315,7 +317,6 @@ $(function(){
 $(function(){
 	$("body").on("click", ".btn-prepare-order",function(){
 		let orderNum = $(this).attr("data-orderNum");
-		
 		document.invoiceNumberForm.orderNum.value = orderNum;
 		
 		$("#prepareDialogModal").modal("show");
@@ -330,6 +331,12 @@ $(function(){
 			alert('송장 번호를 입력하세요');
 			return false;
 		}
+		
+		const deliveryName = document.getElementById('deliveryName');
+
+		let cpNum = deliveryName.options[deliveryName.selectedIndex].value;
+		f.cpNum.value = cpNum;
+		
 		
 		let qs = $('form[name=invoiceNumberForm]').serialize();
 		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/invoiceNumber';
@@ -370,7 +377,7 @@ $(function(){
 		
 		let qs = 'orderNum=' + orderNum + '&orderState=' + orderState;
 		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/delivery';
-
+		console.log(qs);
 		const fn = function(data) {
 			if(data.state === "true") {
 				

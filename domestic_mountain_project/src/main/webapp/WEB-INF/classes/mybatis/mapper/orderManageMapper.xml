@@ -34,7 +34,7 @@ LEFT OUTER JOIN order_detail od ON od.order_num = od.order_num
 <select id="listOrder" parameterType="map" resultType="com.fa.plus.admin.domain.OrderManage">
 SELECT o.order_num AS orderNum, o.useridx as memberIdx, NVL(u.user_id,'손님') AS userName, order_total_money AS totalMoney,
 		shipping AS deliveryCharge, total_amount AS payment,
-		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS orderDate, order_sale AS orderSale, detail_cancel_count, change_num,
+		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS orderDate, order_sale AS orderSale, detail_cancel_count AS detailCancelCount, change_num,
 		t.tracking_no AS invoiceNumber,
 		NVL(total_qty, 0) totalQty
 FROM totalorder o
@@ -50,20 +50,67 @@ FROM totalorder o
 	<where>
 	 <!-- 배송 전 주문들 -->
 		<if test="state == 1">
-			( change_num &lt;= 0)
+			 change_num &lt; 1
 		</if>
 	<!-- after 배송 주문들 -->
 		<if test="state == 3">
-		(change_num &gt;= 1  )
+		change_num &gt; 1  
 			
 		</if>
 	</where>
 	ORDER BY o.order_num DESC
 </select> 
 
-<!-- 결제정보 추가필요 -->
 <select id="findById"  parameterType="String" resultType="com.fa.plus.admin.domain.OrderManage">
+SELECT orderNum, memberIdx, userName, orderDate, totalMoney, orderSale, usedSaved, deliveryCharge, payment, NVL(SUM(cancelAmount),0) AS cancelAmount, orderState, orderStateInfo, detailStateInfo, orderStateInfo AS order_status, MAX(orderStateDate) AS orderStateDate,
+      deliveryName, invoiceNumber, detailState, trStatus
+FROM(
 SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님') AS userName, 
+	TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI:SS') AS orderDate, order_total_money AS totalMoney, order_sale AS orderSale,
+	o.order_point AS usedSaved, o.shipping AS deliveryCharge, o.total_amount AS payment, rf.refund_total_amount AS cancelAmount ,  
+    od.change_num AS orderState, 
+	TO_CHAR(ORDER_STATUS_UPDATE_DATE, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, cp_name AS deliveryName, tracking_no AS invoiceNumber, 
+    NVL(DECODE(od.change_num,999,14 , od.change_num), 14) AS detailState , orderStateInfo AS detailStateInfo ,
+    orderStateInfo AS orderStateInfo, t.tr_status AS trStatus	
+	FROM totalorder o
+	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
+	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
+	LEFT OUTER JOIN company cp ON t.cp_num = cp.cp_num
+      LEFT OUTER JOIN (
+            SELECT od1.order_num,
+            CASE
+                  WHEN COUNT(DISTINCT od1.change_num) = 1 THEN MAX(od1.change_num)
+                  ELSE 999
+            END AS change_num,
+            CASE
+                  WHEN COUNT(DISTINCT od1.change_num) = 1 THEN MAX(order_status)
+                  ELSE '부분 취소'
+            END AS orderStateInfo
+      FROM order_detail od1
+      JOIN totalOrder o2 ON od1.order_num = o2.order_num
+      LEFT JOIN order_status os ON od1.change_num = os.change_num
+      GROUP BY od1.order_num
+      ) od ON o.order_num = od.order_num
+      LEFT OUTER JOIN (
+            SELECT od_num, order_num, order_status_update_date
+            FROM order_detail
+      ) od2 ON o.order_num = od2.order_num
+      LEFT OUTER JOIN order_status os ON od.change_num = os.change_num
+      LEFT OUTER JOIN( 
+            SELECT f2.od_num, NVL(SUM(f2.refund_total_amount),0) AS refund_total_amount
+            FROM refund f2
+            JOIN order_detail od2 ON f2.od_num = od2.od_num
+            JOIN totalOrder o2 ON od2.order_num = o2.order_num
+            GROUP BY f2.od_num
+      ) rf ON od2.od_num = rf.od_num
+WHERE od.order_num = #{order_num}
+)
+GROUP BY orderNum, memberIdx, userName, orderDate, totalMoney, orderSale, usedSaved, deliveryCharge, payment, orderState, orderStateInfo, detailStateInfo, deliveryName, invoiceNumber, detailState, trStatus
+
+
+	
+	<!-- 
+	SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님') AS userName, 
 	TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI:SS') AS orderDate, order_total_money AS totalMoney, order_sale AS orderSale,
 	o.order_point AS usedSaved, o.shipping AS deliveryCharge, o.total_amount AS payment, refund_total_amount AS cancelAmount ,  od.change_num AS orderState, order_status,
 	TO_CHAR(ORDER_STATUS_UPDATE_DATE, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, cp_name AS deliveryName, tracking_no AS invoiceNumber, 
@@ -77,9 +124,12 @@ SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님')
     LEFT OUTER JOIN order_status os ON od.change_num = os.change_num
     LEFT OUTER JOIN refund rf ON od.od_num = rf.od_num
 	WHERE o.order_num = #{order_num}
+	 -->
 </select>
 
+
 <select id="findByOrderDetails" parameterType="String" resultType="com.fa.plus.admin.domain.OrderDetailManage">
+
 SELECT od.order_num AS orderNum, od.od_num AS orderDetailNum,
 	od_count AS qty, od.od_price AS price, order_earn AS savedMoney, od_total_amount AS totalAmount, 
 	op.detail_num AS detailNum, op.option_value AS optionValue, NVL(od.detail_num2,null) AS detailNum2, NVL(op2.option_value, null) AS optionValue2,
@@ -91,43 +141,10 @@ LEFT OUTER JOIN optionDetail op2 ON od.detail_num2 = op2.detail_num
 JOIN totalOrder o ON od.order_num = o.order_num
 LEFT OUTER JOIN refund rf ON od.od_num = rf.od_num
 JOIN order_status os ON od.change_num = os.change_num
-WHERE od.order_num = #{order_num} 
-<!-- 수정중 -->
-<!-- 
-SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님') AS userName, 
-	TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI:SS') AS orderDate, order_total_money AS totalMoney, order_sale AS orderSale,
-	o.order_point AS usedSaved, o.shipping AS deliveryCharge, o.total_amount AS payment, refund_total_amount AS cancelAmount ,  
-    od.change_num AS orderState, order_status,
-	TO_CHAR(ORDER_STATUS_UPDATE_DATE, 'YYYY-MM-DD HH24:MI:SS') orderStateDate, cp_name AS deliveryName, tracking_no AS invoiceNumber, 
-    NVL(DECODE(od.change_num,999,od.change_num),14) AS detailState ,NVL(DECODE(od.change_num,999,order_status),'부분취소') AS detailStateInfo ,
-    NVL(DECODE(od.change_num,999,order_status),'부분취소') AS orderStateInfo ,
-	payMethod, card_name AS cardName, auth_number AS authNumber, auth_date AS authDate, t.tr_status AS trStatus	
-	FROM totalorder o
-	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
-	LEFT OUTER JOIN card c ON o.order_num = c.order_num
-	LEFT OUTER JOIN transports t ON o.order_num = t.order_num
-	LEFT OUTER JOIN company cp ON t.cp_num = cp.cp_num
-    LEFT OUTER JOIN (
-         SELECT od.order_num, NVL(DECODE(MAX(change_num),MIN(change_num),999) ,111) AS change_num
-        FROM order_detail od
-        JOIN totalOrder o ON od.order_num = o.order_num
-        GROUP BY od.order_num
-        ) od ON o.order_num = od.order_num
-    LEFT OUTER JOIN (
-        SELECT od_num, order_num, order_status_update_date
-        FROM order_detail
-        ) od2 ON o.order_num = od2.order_num
-    LEFT OUTER JOIN order_status os ON od.change_num = os.change_num
-    LEFT OUTER JOIN( 
-        SELECT f2.od_num, NVL(SUM(f2.refund_total_amount),0) AS refund_total_amount
-        FROM refund f2
-        JOIN order_detail od2 ON f2.od_num = od2.od_num
-        JOIN totalOrder o2 ON od2.order_num = o2.order_num
-        GROUP BY f2.od_num
-    ) rf ON od2.od_num = rf.od_num
-WHERE od.order_num = 202401126000000001
-GROUP BY od2.od_num
- -->
+WHERE od.order_num = #{order_num}
+ 
+
+ 
 </select>
 
 <select id="orderDetailCount" parameterType="map" resultType="Integer">
@@ -256,12 +273,13 @@ WHERE order_num = #{orderNum}
 
 <!-- orderState, deliveryName <-> cp_name 적용 필요 -->
 <insert id="updateOrderInvoiceNumber1" parameterType="map">
-	INSERT INTO transports(order_num, cp_num, tracking_no, reception_datatime, tr_status)
-	VALUES(#{orderNum}, #{cpNum}, #{invoiceNumber}, SYSDATE, #{trStatus})
+	UPDATE transports SET cp_num = #{cpNum} , tracking_no = #{invoiceNumber}, 
+		reception_datatime = SYSDATE, tr_status = #{trStatus}
+	WHERE order_num = #{orderNum}
 </insert>
 
 <update id="updateOrderInvoiceNumber2" parameterType="map">
-	UPDATE order_detail SET change_num = #{orderState}, order_status_update_date = SYSDATE,
+	UPDATE order_detail SET change_num = 16, order_status_update_date = SYSDATE,
 		order_status_update_useridx = 1
 	WHERE order_num = #{orderNum}
 </update>

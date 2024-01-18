@@ -27,17 +27,8 @@
 					<td class="table-light">결제금액</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.payment}"/></td>
 					<td class="table-light">취소금액</td>
-					<td class="text-warning order-cancelAmount" data-cancelAmount="${order.cancelAmount}">
-						<c:if test=""></c:if>
-						<c:choose>
-							<c:when test="${order.cancelAmount > 0}">
-								<fmt:formatNumber value="${order.cancelAmount + 3000 - order.orderSale}"/>
-							</c:when>
-							<c:otherwise>
-								<fmt:formatNumber value="0"/>
-							</c:otherwise>
-						</c:choose>
-					</td>
+					<td class="text-danger order-cancelAmount" data-cancelAmount="${order.cancelAmount}">
+					<fmt:formatNumber value="${order.cancelAmount}"/></td>
 				</tr>
 				<tr>
 					<td class="table-light">배송비</td>

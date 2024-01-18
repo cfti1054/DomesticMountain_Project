@@ -83,7 +83,19 @@ public class OrderManageController {
 				
 				// 주문 상세 정보
 				List<OrderDetailManage> listDetail = service.orderDetails(orderNum);
-				
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println(order.getCancelAmount());
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
+				System.out.println("==================================================");
 				model.addAttribute("order", order);
 				model.addAttribute("listDetail", listDetail);
 		
@@ -98,6 +110,20 @@ public class OrderManageController {
 		String state = "true";
 		
 		try {
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("updateOrderInvoiceNumber1 : ");
+			System.out.println(paramMap.get("cpNum")); // 안들어옴
+			System.out.println(paramMap.get("invoiceNumber"));	// 들옴
+			System.out.println(paramMap.get("trStatus"));	// null
+			System.out.println(paramMap.get("orderNum"));	// 들엄
+			System.out.println(paramMap.get("orderState"));	//들옴
+			System.out.println("============================================");
+			System.out.println("============================================");
+			System.out.println("============================================");
+			
+			
 			service.updateOrder("invoiceNumber", paramMap);
 		} catch (Exception e) {
 			state = "false";
