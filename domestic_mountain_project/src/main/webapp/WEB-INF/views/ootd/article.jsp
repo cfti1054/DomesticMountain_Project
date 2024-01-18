@@ -104,7 +104,9 @@
 		<div class="contentWrap">
 			<div class="amain">
 				<h1 class="amain-main">
-					
+					<a>OOTD<span>| Look &amp; Style</span></a> <span><a
+						href="${pageContext.request.contextPath}/">home</a> &gt; community
+						&gt; ootd</span>
 				</h1>
 			</div>
 
