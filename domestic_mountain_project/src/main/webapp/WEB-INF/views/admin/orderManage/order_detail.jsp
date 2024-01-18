@@ -22,7 +22,7 @@
 				<tr>
 					<td class="table-light">총 금액</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.totalMoney}"/></td>
-					<td class="table-light">등급별 할인액</td>
+					<td class="table-light">등급별 할인</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.orderSale}"/></td>
 					<td class="table-light">결제금액</td>
 					<td class="text-primary"><fmt:formatNumber value="${order.payment}"/></td>

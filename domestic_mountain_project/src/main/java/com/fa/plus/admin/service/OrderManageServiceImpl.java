@@ -176,12 +176,13 @@ public class OrderManageServiceImpl implements OrderManageService {
 
 				if(detailState == 3) {
 					map.put("refundReason", "관리자 요청".toString());
-				} else if(detailState == 4) {
+					
+				} else if(detailState == 5) {
 					map.put("refundReason", "소비자 요청");
 				} else {
 					map.put("refundReason", "기타");
 				}
-				
+				map.put("refundState", 3);
 				System.out.println("============================================");
 				System.out.println("============================================");
 				System.out.println("============================================");
@@ -205,7 +206,6 @@ public class OrderManageServiceImpl implements OrderManageService {
 					map.put("orderState", 0);
 					
 					mapper.updateOrderState(map);
-					mapper.updateOrderState2(map);
 				}
 				
 				// 카드 취소내역 저장
