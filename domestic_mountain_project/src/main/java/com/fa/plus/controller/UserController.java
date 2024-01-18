@@ -198,10 +198,11 @@ public class UserController {
 		
 		if(mode.equals("dropout")) {
 			// 회원 탈퇴
-			// 게시판 테이블등 데이터 삭제
-			
-			
-			
+			/*
+			Map<String, Object> map = new HashMap<>();
+			map.put("memberIdx", info.getUseridx());
+			map.put("userId", info.getUserid());
+			*/
 			
 			session.removeAttribute("loginUser");
 			session.invalidate();
@@ -232,6 +233,9 @@ public class UserController {
 		try {
 			SessionInfo info = (SessionInfo)session.getAttribute("loginUser");
 			dto.setUseridx(info.getUseridx());
+			
+			System.out.println("==========================================================================================");
+			
 			
 			service.updateUser(dto);
 		} catch (Exception e) {
