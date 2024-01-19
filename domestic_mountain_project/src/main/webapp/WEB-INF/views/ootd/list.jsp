@@ -14,6 +14,10 @@
 	display: flex;
 	margin: auto;
 }
+.show-2-li:hover .album-img img {
+	transform: scale(1.1);
+	transition: transform 0.3s ease;
+}
 
 </style>
 

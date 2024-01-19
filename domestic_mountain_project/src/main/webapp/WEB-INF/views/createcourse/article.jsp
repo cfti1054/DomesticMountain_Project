@@ -27,7 +27,9 @@
 	-bs-table-bg: none;
 }
 
-.notice-container .table tbody tr td p {
+.notice-container .table tbody tr td,
+.notice-container .table tbody tr td p, 
+ .notice-container .table thead tr td{
 	word-break: break-all !important;
 	background-color: unset !important;
 }
@@ -130,7 +132,7 @@
 								${dto.post_hit_count}</td>
 						</tr>
 
-						<tr>
+						<tr class="content-img-center">
 							<td colspan="2" valign="top" height="200"
 								style="border-bottom: none;">${dto.post_content }</td>
 						</tr>

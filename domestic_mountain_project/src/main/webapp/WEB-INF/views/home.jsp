@@ -34,7 +34,7 @@
 	<div class="row">
 		<div class="area-2">
 
-			<div class="swiper mySwiper">
+			<div class="swiper mySwiper" style="z-index: 0;">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide">
 						<img alt="" src="resources/images/mountain/1.jpg">

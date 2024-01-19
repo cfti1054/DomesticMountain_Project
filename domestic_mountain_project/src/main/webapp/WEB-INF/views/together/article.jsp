@@ -157,7 +157,7 @@
 							<td width="50%" align="right">모집 장소 : ${dto.location_addr}</td>
 						</tr>
 
-						<tr style="border-bottom: none;">
+						<tr style="border-bottom: none;" class="content-img-center">
 							<td colspan="2" valign="top" height="200"
 								style="border-bottom-width: 0;">${dto.post_content}</td>
 						</tr>

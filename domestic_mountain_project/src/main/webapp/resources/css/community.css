@@ -521,9 +521,8 @@
 	font-size: 11pt !important;
 }
 
-.table tbody .content-img-center td span {
-	display: flex;
-	justify-content: center;
+.table tbody .content-img-center td img {
+	margin: auto;
 }
 
 

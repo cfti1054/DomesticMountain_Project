@@ -19,6 +19,14 @@
 	transform: scale(1.1);
 	transition: transform 0.3s ease;
 }
+
+.card_area .con .con_top .txt p {
+	word-break: break-all !important;
+	background-color: unset !important;
+	
+	justify-content: left;
+    display: flex;
+}
 </style>
 
 

@@ -133,7 +133,7 @@
 								${dto.post_hit_count}</td>
 						</tr>
 
-						<tr>
+						<tr class="content-img-center">
 							<td colspan="2" valign="top" height="200"
 								style="border-bottom: none;">${dto.post_content }</td>
 						</tr>
