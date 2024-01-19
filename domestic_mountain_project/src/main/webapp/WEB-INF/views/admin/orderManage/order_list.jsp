@@ -144,7 +144,7 @@
 
 										<tr valign="middle" data-orderNum="${dto.orderNum}">
 											<td>
-												<c:if test="${dto.detailCancelCount > 0 && dto.}">
+												<c:if test="${dto.detailCancelCount > 0}">
 													<i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i>
 												</c:if>
 										&nbsp;&nbsp;&nbsp;${dto.orderNum}</td>
