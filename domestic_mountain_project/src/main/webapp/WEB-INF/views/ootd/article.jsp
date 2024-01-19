@@ -248,8 +248,6 @@ $(document).ready(function() {
 
 
 
-
-
 function login() {
 	location.href = '${pageContext.request.contextPath}/user/login';
 }
