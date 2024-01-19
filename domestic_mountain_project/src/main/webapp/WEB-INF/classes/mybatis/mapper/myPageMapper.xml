@@ -105,32 +105,27 @@
 		WHERE t.useridx = #{useridx} AND order_delete = 0
 	</select>
 	
-	<select id="listPayment" parameterType="map" resultType="com.fa.plus.domain.Payment">
-		SELECT DISTINCT t.order_num, TO_CHAR(order_datetime, 'YYYY-MM-DD') order_datetime, order_delete, shipping, 
-		    total_amount, order_sale, order_point, useridx, order_delete, 
-		    cp_num, tracking_no, tr_status, transports_memo, completion_datetime,
-		    address_num, address1, address2, recipient_name, recipient_phone, 
-		    detail_num1, detail_num2,
-		    od_price, od_count, od_total_amount, change_num
-		FROM totalorder t
-		JOIN transports tp ON t.order_num = tp.order_num
-		JOIN delivery dl ON tp.order_num = dl.order_num
-		JOIN order_detail od ON t.order_num = od.order_num
-		WHERE useridx = #{useridx} AND order_delete = 0
+	<select id="listPayment" parameterType="Long" resultType="com.fa.plus.domain.Payment">
+		SELECT t.order_num, TO_CHAR(order_datetime, 'YYYY-MM-DD') order_datetime, t.order_delete, t.shipping, t.useridx, product_name, product_summary,
+            od.detail_num1, od.detail_num2, od.od_count, od.od_total_amount, od.change_num, od.product_num,
+            po1.option_name option_name1, d1.option_value option_value1,
+            po2.option_name option_name2, d2.option_value option_value2, tr_status, order_status, od_num
+        FROM totalOrder t
+        JOIN transports tr ON t.order_num = tr.order_num
+        JOIN order_detail od ON t.order_num = od.order_num
+        JOIN order_status os ON od.change_num = os.change_num
+        JOIN product p ON od.product_num = p.product_num
+        LEFT OUTER JOIN  productOption po1 ON p.product_num = po1.product_num AND parent IS NULL
+        LEFT OUTER JOIN  productOption po2 ON po1.option_num = po2.parent
+        LEFT OUTER JOIN optionDetail d1 ON od.detail_num1 = d1.detail_num
+        LEFT OUTER JOIN optionDetail d2 ON od.detail_num2 = d2.detail_num
+		WHERE t.useridx = #{useridx} AND order_delete = 0
+		ORDER BY order_datetime DESC 
 	</select>
 	
-	<select id="listPaymentProduct" parameterType="map" resultType="com.fa.plus.domain.Payment">
-		SELECT p.product_num, p.product_name, 
-				po.option_name, 
-				od.detail_num, od.option_value,
-				po2.option_name option_name2,
-    			od2.detail_num detail_num2, od2.option_value option_value2
-		FROM product p
-		JOIN productOption po ON p.product_num = po.product_num
-		LEFT OUTER JOIN productOption po2 ON po.option_num = po2.parent
-		JOIN optionDetail od ON po.option_num = od.option_num
-		LEFT OUTER JOIN optionDetail od2 ON po2.option_num = od2.option_num
-        WHERE od.detail_num = #{detail_num1} AND od2.detail_num = #{detail_num2}
-        
-	</select>
+	<update id="updateOrderstatus" parameterType="Long">
+		UPDATE order_detail SET change_num = 4, order_status_update_date = SYSDATE
+		WHERE od_num = #{od_num}
+	</update>
+	
 </mapper>

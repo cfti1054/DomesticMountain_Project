@@ -29,6 +29,7 @@ public class Payment {
 	private long order_status_update_useridx;	// 기본 : null (관리자 혹은 주문 취소시 사용자 idx가 박힘)
 	private String order_status_update_date;	// 주문 변경일
 	
+	private String order_status;
 	
 	
 	// 배송 테이블
@@ -51,13 +52,38 @@ public class Payment {
 	
 	
 	private String product_name;
-	private String option_name;
+	private String option_name1;
 	private String option_name2;
-	private String option_value;
+	private String option_value1;
 	private String option_value2;
+	private String product_summary;
 	
 	
 	
+	public String getOrder_status() {
+		return order_status;
+	}
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+	public String getProduct_summary() {
+		return product_summary;
+	}
+	public void setProduct_summary(String product_summary) {
+		this.product_summary = product_summary;
+	}
+	public String getOption_name1() {
+		return option_name1;
+	}
+	public void setOption_name1(String option_name1) {
+		this.option_name1 = option_name1;
+	}
+	public String getOption_value1() {
+		return option_value1;
+	}
+	public void setOption_value1(String option_value1) {
+		this.option_value1 = option_value1;
+	}
 	public long getUseridx() {
 		return useridx;
 	}
@@ -238,23 +264,12 @@ public class Payment {
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
-	public String getOption_name() {
-		return option_name;
-	}
-	public void setOption_name(String option_name) {
-		this.option_name = option_name;
-	}
+	
 	public String getOption_name2() {
 		return option_name2;
 	}
 	public void setOption_name2(String option_name2) {
 		this.option_name2 = option_name2;
-	}
-	public String getOption_value() {
-		return option_value;
-	}
-	public void setOption_value(String option_value) {
-		this.option_value = option_value;
 	}
 	public String getOption_value2() {
 		return option_value2;

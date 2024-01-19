@@ -241,4 +241,15 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return list;
 	}
+
+	@Override
+	public void updateOrderstatus(long od_num) throws Exception {
+		try {
+			mapper.updateOrderstatus(od_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
 }
