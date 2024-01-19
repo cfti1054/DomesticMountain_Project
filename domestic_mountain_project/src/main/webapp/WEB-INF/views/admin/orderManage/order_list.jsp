@@ -143,7 +143,11 @@
 									<c:forEach var="dto" items="${list}" varStatus="status">
 
 										<tr valign="middle" data-orderNum="${dto.orderNum}">
-											<td>${dto.orderNum}</td>
+											<td>
+												<c:if test="${dto.detailCancelCount > 0 && dto.}">
+													<i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i>
+												</c:if>
+										&nbsp;&nbsp;&nbsp;${dto.orderNum}</td>
 											<td>${dto.orderDate}</td>
 											<td>${dto.userName}</td>
 											<td>${orderStatus=="status"?dto.totalQty:dto.invoiceNumber}</td>

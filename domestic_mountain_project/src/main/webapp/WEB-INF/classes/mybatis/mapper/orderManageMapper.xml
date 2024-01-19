@@ -80,10 +80,12 @@ SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님')
             SELECT od1.order_num,
             CASE
                   WHEN COUNT(DISTINCT od1.change_num) = 1 THEN MAX(od1.change_num)
+                 WHEN COUNT(DISTINCT od1.change_num) > 1 AND MAX(od1.change_num) >= 15  THEN 888
                   ELSE 999
             END AS change_num,
             CASE
                   WHEN COUNT(DISTINCT od1.change_num) = 1 THEN MAX(order_status)
+                  WHEN COUNT(DISTINCT od1.change_num) > 1 AND MAX(od1.change_num) >= 15  THEN '부분 발송'
                   ELSE '부분 취소'
             END AS orderStateInfo
       FROM order_detail od1
@@ -106,6 +108,7 @@ SELECT o.order_num AS orderNum, u.useridx AS memberIdx, NVL(u.user_id, '손님')
 WHERE od.order_num = #{order_num}
 )
 GROUP BY orderNum, memberIdx, userName, orderDate, totalMoney, orderSale, usedSaved, deliveryCharge, payment, orderState, orderStateInfo, detailStateInfo, deliveryName, invoiceNumber, detailState, trStatus
+
 
 
 	
@@ -215,7 +218,7 @@ JOIN order_detail od ON o.order_num = od.order_num
 	</choose>	
 	, order_status_update_date = SYSDATE,
 	order_status_update_useridx = 1
-	WHERE order_num = #{orderNum}
+	WHERE order_num = #{orderNum} AND change_num &lt; 3 AND change_num &gt;13 
 </update>
 
 <select id="findByTotalCancelAmount" parameterType="String" resultType="Integer">
@@ -279,9 +282,9 @@ WHERE order_num = #{orderNum}
 </insert>
 
 <update id="updateOrderInvoiceNumber2" parameterType="map">
-	UPDATE order_detail SET change_num = 16, order_status_update_date = SYSDATE,
+	UPDATE order_detail SET change_num = 17, order_status_update_date = SYSDATE,
 		order_status_update_useridx = 1
-	WHERE order_num = #{orderNum}
+	WHERE order_num = #{orderNum} AND ( change_num &lt; 3 OR change_num &gt; 14)
 </update>
 
 <update id="updateOrderDetailState" parameterType="map">

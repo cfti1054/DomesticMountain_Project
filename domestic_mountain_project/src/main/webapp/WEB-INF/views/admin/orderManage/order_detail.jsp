@@ -59,16 +59,14 @@
 						</c:if>
 					</td>
 					<td class="text-end">
-						<c:if test="${order.orderState <= 1 }">
+						<c:if test="${order.orderState <= 1 || order.orderState == 999 }">
 							<button type="button" class="btn btn-light btn-prepare-order" data-orderNum="${order.orderNum}">발송처리</button>
 						</c:if>
 					
 						<div class="row justify-content-end delivery-update-area">
-							<c:if test="${order.trStatus > 1 && order.orderState < 5 }">
+							<c:if test="${order.trStatus >= 2 && order.orderState <= 888 }">
 								<div class="col-auto">
 									<select class="form-select delivery-select">
-										<option value="1" ${order.orderState==1?"selected":"" }>발송준비</option>
-										<option value="2" ${order.orderState==2?"selected":"" }>배송중</option>
 										<option value="3" ${order.orderState==3?"selected":"" }>배송완료</option>
 									</select>
 								</div>
