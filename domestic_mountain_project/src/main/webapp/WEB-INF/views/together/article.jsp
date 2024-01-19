@@ -12,7 +12,8 @@
 
 <style type="text/css">
 .features-1 {
-	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	    margin-bottom: 200px;
 }
 
 .body-container {
@@ -43,6 +44,11 @@
 	margin: 3rem auto;
 	width: 900px; 
 	--bs-table-bg: none;
+}
+
+.notice-container .table tbody tr td p {
+	word-break:break-all !important;
+	background-color: unset !important;
 }
 
 </style>
@@ -222,21 +228,30 @@
 						<td width="50%" align="left">
 							<c:choose>
 								<c:when
-									test="${sessionScope.loginUser.userid==dto.user_id||sessionScope.loginUser.usership>50}">
-									<button type="button" class="btn"
+									test="${sessionScope.loginUser.userid==dto.user_id}">
+									<button type="button" class="btn btn-light"
 										onclick="location.href='${pageContext.request.contextPath}/together/update?post_num=${dto.post_num}&page=${page}';">수정</button>
 								</c:when>
 								<c:otherwise>
-									<button type="button" class="btn" disabled>수정</button>
+									<button type="button" class="btn btn-light" disabled>수정</button>
 								</c:otherwise>
 							</c:choose>
 
-							<button type="button" class="btn" onclick="deleteOk();">삭제</button>
+							<c:choose>
+								<c:when
+									test="${sessionScope.loginUser.userid==dto.user_id || sessionScope.loginUser.usership>50}">
+									<button type="button" class="btn btn-light"
+										onclick="deleteOk();">삭제</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn btn-light" disabled>삭제</button>
+								</c:otherwise>
+							</c:choose>
+							
+							
 						</td>
-
 						<td align="right">
-
-							<button type="button" class="btn"
+							<button type="button" class="btn btn-light"
 								onclick="location.href='${pageContext.request.contextPath}/together/list?${query}';">리스트</button>
 						</td>
 					</tr>

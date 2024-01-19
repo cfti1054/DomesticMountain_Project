@@ -14,7 +14,8 @@
 
 <style type="text/css">
 .features-1 {
-	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	    margin-bottom: 200px;
 }
 
 .body-container {
@@ -299,8 +300,8 @@
 							<td align="center">
 								<button type="button" class="btn btn-dark"
 									onclick="submitContents(this.form);">${mode=='update'?'수정완료':'등록하기'}</button>
-								<button type="reset" class="btn">다시입력</button>
-								<button type="button" class="btn"
+								<button type="reset" class="btn btn-light">다시입력</button>
+								<button type="button" class="btn btn-light"
 									onclick="location.href='${pageContext.request.contextPath}/together/list';">${mode=='update'?'수정취소':'등록취소'}</button>
 
 								<c:if test="${mode=='update'}">

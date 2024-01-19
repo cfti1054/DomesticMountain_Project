@@ -6,7 +6,6 @@
 /*=============== body (area) ===============*/
 .features-1 {
 	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
-	margin-bottom: 100px;
 }
 
 .body-container {
@@ -171,9 +170,7 @@
 
 										<a href="${url}"> <img
 											src="${pageContext.request.contextPath}/uploads/share/${dto.saveFilename}"
-											width="200" height="120" alt="썸네일 이미지"> <span
-											class="num">${dto.post_fileCount}<span class="blind">개의
-													추가 이미지가 있습니다</span></span>
+											width="200" height="120" alt="썸네일 이미지">
 										</a>
 									</div>
 								</li>
@@ -255,8 +252,7 @@
 											<td>${dataCount - (page-1) * size - status.index}</td>
 											<td class="left"><a
 												href="${articleUrl}&post_num=${dto.post_num}"
-												class="text-reset">${dto.post_title}</a> <span
-												class="badge text-bg-info">New</span></td>
+												class="text-reset">${dto.post_title}</a></td>
 											<td>${dto.user_name}</td>
 											<td>${dto.post_reg_date}</td>
 											<td>${dto.post_hit_count}</td>

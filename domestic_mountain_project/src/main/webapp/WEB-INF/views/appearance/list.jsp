@@ -6,7 +6,6 @@
 /*=============== body (area) ===============*/
 .features-1 {
 	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
-	margin-bottom: 100px;
 }
 
 .body-container {

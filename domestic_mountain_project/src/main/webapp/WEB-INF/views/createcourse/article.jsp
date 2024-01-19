@@ -3,9 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
-
 .features-1 {
 	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	margin-bottom: 200px;
 }
 
 .body-container {
@@ -15,7 +15,6 @@
 	margin: auto;
 }
 
-
 .board-article img {
 	max-width: 650px;
 }
@@ -24,8 +23,13 @@
 	margin: 3rem;
 }
 
-.mb-0 {
---bs-table-bg: none;
+.mb-0 { -
+	-bs-table-bg: none;
+}
+
+.notice-container .table tbody tr td p {
+	word-break: break-all !important;
+	background-color: unset !important;
 }
 </style>
 <link rel="stylesheet"
@@ -61,8 +65,8 @@
 							href="${pageContext.request.contextPath}/recommend/list">&gt;
 								추천 코스</a></li>
 						<li class="eq1"><a
-							href="${pageContext.request.contextPath}/createcourse/list">&gt; 유저가
-								만든 코스</a></li>
+							href="${pageContext.request.contextPath}/createcourse/list">&gt;
+								유저가 만든 코스</a></li>
 						<li class=""><a href="#">&nbsp;</a></li>
 						<li class=""><a
 							href="${pageContext.request.contextPath}/together/list">&gt;
@@ -122,7 +126,7 @@
 					<tbody>
 						<tr>
 							<td width="50%">이름 : ${dto.user_name}</td>
-							<td align="right">${dto.post_reg_date} | 조회
+							<td align="right">${dto.post_reg_date}| 조회
 								${dto.post_hit_count}</td>
 						</tr>
 
@@ -179,7 +183,8 @@
 								<c:otherwise>
 									<button type="button" class="btn btn-light" disabled>수정</button>
 								</c:otherwise>
-							</c:choose> <!--  --> <c:choose>
+							</c:choose> <!--  --> 
+							<c:choose>
 								<c:when
 									test="${sessionScope.loginUser.userid==dto.user_id || sessionScope.loginUser.usership>50}">
 									<button type="button" class="btn btn-light"
@@ -188,8 +193,9 @@
 								<c:otherwise>
 									<button type="button" class="btn btn-light" disabled>삭제</button>
 								</c:otherwise>
-							</c:choose></td>
-						<td class="text-end">
+							</c:choose>
+							</td>
+							<td class="text-end">
 							<button type="button" class="btn btn-light"
 								onclick="location.href='${pageContext.request.contextPath}/createcourse/list?${query}';">리스트</button>
 						</td>

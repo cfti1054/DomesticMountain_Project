@@ -5,6 +5,7 @@
 <style type="text/css">
 .features-1 {
 	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	    margin-bottom: 200px;
 }
 
 .body-container {
@@ -187,6 +188,12 @@
 .features-1 {
 	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
 }
+
+.notice-container .table tbody tr td p {
+	word-break:break-all !important;
+	background-color: unset !important;
+}
+
 
 </style>
 

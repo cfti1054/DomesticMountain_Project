@@ -178,7 +178,7 @@
 
 .article-movie-sub .txt {
 	display: block;
-	max-height: 44px;
+	max-height: 60px;
 	margin-top: 6px;
 	font-size: 14px;
 	line-height: 22px;
@@ -197,7 +197,7 @@
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	padding-top: 35px;
+	padding-top: 15px;
 }
 
 .article-movie-sub .user_info {
@@ -506,7 +506,19 @@
 	background-color: #ada7e4;
 }
 
-.board-list-footer .col .btn-light, .board-list-footer .row .col-auto .btn-light,
-	.board-list-footer .row i {
+.board-list-footer .col .btn-light, 
+.board-list-footer .row .col-auto .btn-light,
+.board-list-footer .row i,
+.table tr td .btn-light {
 	color: white;
 }
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+	background-color: #ada7e4;
+}
+
+.card_area .con .con_top .txt p span {
+	font-size: 11pt !important;
+}
+
+

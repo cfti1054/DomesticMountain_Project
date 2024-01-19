@@ -4,7 +4,8 @@
 
 <style type="text/css">
 .features-1 {
-	height: 2000px; /* 수정 시 auto로 바꾸고 해야함 */
+	height: auto; /* 수정 시 auto로 바꾸고 해야함 */
+	    margin-bottom: 200px;
 }
 
 .body-container {
