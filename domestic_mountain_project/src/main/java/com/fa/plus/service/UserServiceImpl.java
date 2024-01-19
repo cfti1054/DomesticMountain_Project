@@ -189,7 +189,7 @@ public class UserServiceImpl implements UserService {
 		mail.setReceiverEmail(dto.getEmail());
 		
 		// 설정한 이메일
-		mail.setSenderEmail("4reoil@gmail.com");
+		mail.setSenderEmail("@gmail.com");	// 구글 이메일 입력칸
 		mail.setSenderName("관리자");
 		mail.setSubject("임시패스워드");
 		mail.setContent(result);
