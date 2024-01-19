@@ -27,5 +27,8 @@ public interface MyPageService {
 	public int countPayment(Map<String, Object> map);
 	public List<Payment> listPayment(Map<String, Object> map);
 	public List<Payment> listPaymentProduct(Map<String, Object> map);
-
+	
+	public void updateOrderstatus(long od_num) throws Exception;
+	
+	
 }

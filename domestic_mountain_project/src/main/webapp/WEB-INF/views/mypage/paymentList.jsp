@@ -37,8 +37,8 @@
 }
 
 .md-img {
-	width: 100px;
-	height: 100px;
+	width: 180px;
+	height: 180px;
 	object-fit: cover;
 }
 
@@ -309,15 +309,13 @@ $(function(){
 					<p class="fs-4 fw-semibold">주문 내역</p>
 				</div>
 
-
-
 				<div class="mt-3">
 					<c:forEach var="dto" items="${list}">
 						<div class="mt-3 p-2 border-bottom payment-list">
 							<div class="row pb-2">
 								<div class="col-6">
 									<div class="fs-6 fw-semibold text-black-50">
-										<label>stateProduct</label><label></label>
+										<label>${dto.product_name }</label><label></label>
 									</div>
 								</div>
 
@@ -329,33 +327,54 @@ $(function(){
 							</div>
 							<div class="row">
 								<div class="col-auto">
-									<img class="border rounded md-img" src="#">
+									<c:choose>
+										<c:when
+											test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+											<img class="border rounded md-img"
+												src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+										</c:when>
+										<c:when
+											test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+											<img class="img" src="${dto.product_summary}">
+										</c:when>
+				
+										<c:otherwise>
+				
+										</c:otherwise>
+									</c:choose>
+									
 								</div>
 
 
 								<div class="col">
 									<div class="pt-1">
-										<label class="text-black-50">${dto.order_datetime}</label>
+										<label class="text-black-50">구매날짜 : ${dto.order_datetime}</label>
 									</div>
 									<div class="fw-semibold pt-2">${dto.reception_datatime}</div>
 									<div class="pt-1">
-										<label>주문수량 : 4</label> <label class="fw-semibold ps-3"><fmt:formatNumber
-												value="${dto.total_amount}" />원</label>
+										<label>주문수량 : ${dto.od_count }</label> 
 									</div>
-									<div class="pt-1">옵션 : ${dto.detail_num1} ${dto.option_name2}/ 퍼플, 사이즈 / XL</div>
+									<div class="pt-1">${dto.option_name1} &nbsp;&nbsp; ${dto.option_value1} <br>
+										${dto.option_name2} &nbsp;&nbsp; ${dto.option_value2}
+										
+									</div><br>
+									<label class="fw-semibold">가격 : <fmt:formatNumber
+												value="${dto.od_total_amount}" />원</label>
 								</div>
 							</div>
 							<div class="mt-3 p-3 text-end">
-								<button type="button" class="btn border" style="width: 130px;"
-									data-orderDetailNum="#">배송조회</button>
+								<button type="button" class="btn border" style="width: 130px;" data-orderDetailNum="#">
+								    ${dto.order_status}
+								</button>
 
 								<c:if test="#">
 									<button type="button" class="btn border payment-confirmation"
 										style="width: 130px;" data-orderDetailNum="#">구매확정</button>
 								</c:if>
-								<button type="button" class="btn border" style="width: 130px;"
-									onclick="location.href='#';">재구매</button>
-
+								<c:if test="${dto.change_num != 4 && dto.change_num != 5}">
+									<button type="button" class="btn border" style="width: 130px;"
+										onclick="location.href='${pageContext.request.contextPath}/mypage/update?od_num=${dto.od_num}&page=${page}';">주문취소</button>	
+								</c:if>		
 								<button type="button" class="btn border payment-dropdown"
 									title="주문상세">
 									<i class="bi bi-three-dots"></i>
