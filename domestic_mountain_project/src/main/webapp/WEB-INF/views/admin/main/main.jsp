@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!DOCTYPE html>
 
-<html>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
@@ -55,35 +53,26 @@ $(function(){
 
 
 <script type="text/javascript">
-<%-- 수정중
 $(function(){
 	let url = "${pageContext.request.contextPath}/admin/chart";
 	
 	$.getJSON(url, function(data){
 		// console.log(data);	
-		chartsDayOfWeek(data);
+		chartsDay(data);
 	});
 
-	function chartsDayOfWeek(data) {
+	function chartsDay(data) {
 		let chartData = [];
 		
-		let m = new Date().getMonth()+1;
-		let m2 = parseInt(data.dayOfWeek.month.substring(4));
+		for(let item of data.days) {
+			let s = parseInt(item.ORDER_DATETIME.substring(5, 7))+'월 ';
+			s += parseInt(item.ORDER_DATETIME.substring(8))+'일';
 
-		// let title = (m !== 1 && m > m2) || (m === 1 && m2 === 12) ? "전월 요일별 판매건수" : "이번달 요일별 판매건수"
-		let title = (m !== m2) ? "전월 요일별 판매건수" : "이번달 요일별 판매건수"
+			let obj = {value:item.ORDER_TOTAL_MONEY, name:s};
+			chartData.push(obj);
+		}
 		
-		document.querySelector(".charts-dayOfWeek-title").innerHTML = title;
-		
-		chartData.push(data.dayOfWeek.SUN);
-		chartData.push(data.dayOfWeek.MON);
-		chartData.push(data.dayOfWeek.TUE);
-		chartData.push(data.dayOfWeek.WED);
-		chartData.push(data.dayOfWeek.THU);
-		chartData.push(data.dayOfWeek.FRI);
-		chartData.push(data.dayOfWeek.SAT);
-		
-		const chartDom = document.querySelector(".charts-dayOfWeek");
+		const chartDom = document.querySelector(".charts-day");
 		let myChart = echarts.init(chartDom);
 		let option;
 		
@@ -91,25 +80,44 @@ $(function(){
 		  tooltip: {
 		    trigger: 'item'
 		  },
-		  xAxis: {
-		    type: 'category',
-		    data: ['일', '월', '화', '수', '목', '금', '토']
-		  },
-		  yAxis: {
-		    type: 'value'
+		  legend: {
+		    top: '5%',
+		    left: 'center'
 		  },
 		  series: [
 		    {
-		      data: chartData,
-		      type: 'bar'
+		      name: '일별 판매현황',
+		      type: 'pie',
+		      radius: ['40%', '70%'],
+		      avoidLabelOverlap: false,
+		      itemStyle: {
+		        borderRadius: 10,
+		        borderColor: '#fff',
+		        borderWidth: 2
+		      },
+		      label: {
+		        show: false,
+		        position: 'center'
+		      },
+		      emphasis: {
+		        label: {
+		          show: true,
+		          fontSize: '40',
+		          fontWeight: 'bold'
+		        }
+		      },
+		      labelLine: {
+		        show: false
+		      },
+		      data: chartData
 		    }
 		  ]
-		};
+		};		
 		
 		option && myChart.setOption(option);
 	}
+	
 });	
---%>
 </script>
 
 
@@ -194,7 +202,7 @@ $(function(){
               <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">회원 분석</h4>
+                    <h4 class="card-title"><i class='far fa-address-book'></i> 회원 분석</h4>
                
 					<div id="tab-content" style=" width: 330px;">
 						<div id="chart-container"></div>
@@ -226,15 +234,15 @@ $(function(){
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-row justify-content-between">
-                      <h4 class="card-title mb-1">통계</h4>
+                      <h4 class="card-title mb-1"><i class="fas fa-chart-bar"></i> 통계</h4>
                       <p class="text-muted mb-1">Your data status</p>
                     </div>
                     <div class="row">
                       <div class="col-12">
                         <div class="preview-list">
  						<br>
- 						<div class="fs-6 fw-semibold mb-2 "><i class="bi bi-chevron-right"></i> <label class="charts-dayOfWeek-title">전월 요일별 판매건수</label></div>
-						<div class="charts-dayOfWeek border rounded" style="height: 500px;"></div>		
+				<div class="fs-6 fw-semibold mb-2"><i class='fab fa-cc-visa' style='font-size:19px; color:red;'></i> 최근 1주일 판매 현황</div>
+				<div class="charts-day border rounded" style="height: 550px;"></div>
    
                         </div>
                       </div>
@@ -365,4 +373,4 @@ $(function(){
 
 
 
-</html>
+

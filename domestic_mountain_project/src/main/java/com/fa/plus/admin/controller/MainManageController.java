@@ -65,7 +65,6 @@ public class MainManageController {
 		String month = String.format("%04d%02d", y, m);
 		
 		List<Map<String, Object>> days = service3.dayTotalMoney(date);
-		List<Map<String, Object>> months = service3.monthTotalMoney(month);
 		
 		if(d < 20) {
 			cal.add(Calendar.MONTH, -1);
@@ -78,7 +77,6 @@ public class MainManageController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		model.put("days", days);
-		model.put("months", months);
 		model.put("dayOfWeek", dayOfWeek);
 		
 		return model;
