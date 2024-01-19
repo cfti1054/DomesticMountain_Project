@@ -521,4 +521,9 @@
 	font-size: 11pt !important;
 }
 
+.table tbody .content-img-center td span {
+	display: flex;
+	justify-content: center;
+}
+
 

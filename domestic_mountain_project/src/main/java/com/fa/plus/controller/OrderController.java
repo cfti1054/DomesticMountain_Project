@@ -63,84 +63,171 @@ public class OrderController {
 
 			productOrderNumber = orderService.productOrderNumber();
 			
-			if (detail_nums2 != null && detail_nums2.equals("")) {
-				List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
-				for (int i = 0; i < detail_nums.size(); i++) {
-					Map<String, Long> map = new HashMap<String, Long>();
-					map.put("detail_num", detail_nums.get(i));
-					map.put("detail_num2", detail_nums2.get(i));
-					list.add(map);
+			
+			if (mode == "cart") {
+				if (detail_nums2 != null && detail_nums2.equals("")) {
+					
+					List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
+					for (int i = 0; i < detail_nums.size(); i++) {
+						Map<String, Long> map = new HashMap<String, Long>();
+						map.put("detail_num", detail_nums.get(i));
+						map.put("detail_num2", detail_nums2.get(i));
+						list.add(map);
+					}
+
+					List<Order> listProduct = orderService.listProduct(list);
+					
+					
+					for (int i = 0; i < listProduct.size(); i++) {
+						Order dto = listProduct.get(i);
+						System.out.println(dto.getProduct_name() + i);
+						dto.setQty(buyQtys.get(i));
+						
+						// 각 상품의 총 금액 (상품 가격 * 수량)
+						dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
+						
+						// 전체 상품합 = 수량 * 세일 적용된 가격
+						totalMoney += dto.getTotal_amount();
+						
+						// 세일할 가격 = 원가 * (% / 100)
+						percentSale = totalMoney * vo.getSale() / 100;
+						
+						// 결제할 금액
+						payment = totalMoney + deliveryCharge - percentSale;
+						
+						
+					}
+					productOrderName = listProduct.get(0).getProduct_name();
+					if(listProduct.size() > 1) {
+						productOrderName += " 외 " + (listProduct.size() - 1) + "건";
+					}
+					
+
+					model.addAttribute("listProduct", listProduct);
+					
+				} else {
+					List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
+					for (int i = 0; i < detail_nums.size(); i++) {
+						Map<String, Long> map = new HashMap<String, Long>();
+						map.put("detail_num", detail_nums.get(i));
+						list.add(map);
+					}
+
+					List<Order> listProduct = orderService.listProduct2(list);
+					
+					
+					for (int i = 0; i < listProduct.size(); i++) {
+						Order dto = listProduct.get(i);
+						System.out.println(dto.getProduct_name() + i);
+						dto.setQty(buyQtys.get(i));
+						
+						// 각 상품의 총 금액 (상품 가격 * 수량)
+						dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
+						
+						// 전체 상품합 = 수량 * 세일 적용된 가격
+						totalMoney += dto.getTotal_amount();
+						
+						// 세일할 가격 = 원가 * (% / 100)
+						percentSale = totalMoney * vo.getSale() / 100;
+						
+						// 결제할 금액
+						payment = totalMoney + deliveryCharge - percentSale;
+						
+						
+					}
+					productOrderName = listProduct.get(0).getProduct_name();
+					if(listProduct.size() > 1) {
+						productOrderName += " 외 " + (listProduct.size() - 1) + "건";
+					}
+					
+					model.addAttribute("listProduct", listProduct);
 				}
 
-				List<Order> listProduct = orderService.listProduct(list);
-				
-				
-				for (int i = 0; i < listProduct.size(); i++) {
-					Order dto = listProduct.get(i);
-					System.out.println(dto.getProduct_name() + i);
-					dto.setQty(buyQtys.get(i));
+			} else { // "buy"
+				if (detail_nums2 != null) {
 					
-					// 각 상품의 총 금액 (상품 가격 * 수량)
-					dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
-					
-					// 전체 상품합 = 수량 * 세일 적용된 가격
-					totalMoney += dto.getTotal_amount();
-					
-					// 세일할 가격 = 원가 * (% / 100)
-					percentSale = totalMoney * vo.getSale() / 100;
-					
-					// 결제할 금액
-					payment = totalMoney + deliveryCharge - percentSale;
-					
-					
-				}
-				productOrderName = listProduct.get(0).getProduct_name();
-				if(listProduct.size() > 1) {
-					productOrderName += " 외 " + (listProduct.size() - 1) + "건";
-				}
-				
+					List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
+					for (int i = 0; i < detail_nums.size(); i++) {
+						Map<String, Long> map = new HashMap<String, Long>();
+						map.put("detail_num", detail_nums.get(i));
+						map.put("detail_num2", detail_nums2.get(i));
+						list.add(map);
+					}
 
-				model.addAttribute("listProduct", listProduct);
-				
-			} else {
-				List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
-				for (int i = 0; i < detail_nums.size(); i++) {
-					Map<String, Long> map = new HashMap<String, Long>();
-					map.put("detail_num", detail_nums.get(i));
-					list.add(map);
-				}
+					List<Order> listProduct = orderService.listProduct(list);
+					
+					
+					for (int i = 0; i < listProduct.size(); i++) {
+						Order dto = listProduct.get(i);
+						System.out.println(dto.getProduct_name() + i);
+						dto.setQty(buyQtys.get(i));
+						
+						// 각 상품의 총 금액 (상품 가격 * 수량)
+						dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
+						
+						// 전체 상품합 = 수량 * 세일 적용된 가격
+						totalMoney += dto.getTotal_amount();
+						
+						// 세일할 가격 = 원가 * (% / 100)
+						percentSale = totalMoney * vo.getSale() / 100;
+						
+						// 결제할 금액
+						payment = totalMoney + deliveryCharge - percentSale;
+						
+						
+					}
+					productOrderName = listProduct.get(0).getProduct_name();
+					if(listProduct.size() > 1) {
+						productOrderName += " 외 " + (listProduct.size() - 1) + "건";
+					}
+					
 
-				List<Order> listProduct = orderService.listProduct2(list);
-				
-				
-				for (int i = 0; i < listProduct.size(); i++) {
-					Order dto = listProduct.get(i);
-					System.out.println(dto.getProduct_name() + i);
-					dto.setQty(buyQtys.get(i));
+					model.addAttribute("listProduct", listProduct);
 					
-					// 각 상품의 총 금액 (상품 가격 * 수량)
-					dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
-					
-					// 전체 상품합 = 수량 * 세일 적용된 가격
-					totalMoney += dto.getTotal_amount();
-					
-					// 세일할 가격 = 원가 * (% / 100)
-					percentSale = totalMoney * vo.getSale() / 100;
-					
-					// 결제할 금액
-					payment = totalMoney + deliveryCharge - percentSale;
+				} else {
+					List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
+					for (int i = 0; i < detail_nums.size(); i++) {
+						Map<String, Long> map = new HashMap<String, Long>();
+						map.put("detail_num", detail_nums.get(i));
+						list.add(map);
+					}
+
+					List<Order> listProduct = orderService.listProduct2(list);
 					
 					
+					for (int i = 0; i < listProduct.size(); i++) {
+						Order dto = listProduct.get(i);
+						System.out.println(dto.getProduct_name() + i);
+						dto.setQty(buyQtys.get(i));
+						
+						// 각 상품의 총 금액 (상품 가격 * 수량)
+						dto.setTotal_amount(dto.getProduct_price() * buyQtys.get(i));
+						
+						// 전체 상품합 = 수량 * 세일 적용된 가격
+						totalMoney += dto.getTotal_amount();
+						
+						// 세일할 가격 = 원가 * (% / 100)
+						percentSale = totalMoney * vo.getSale() / 100;
+						
+						// 결제할 금액
+						payment = totalMoney + deliveryCharge - percentSale;
+						
+						
+					}
+					productOrderName = listProduct.get(0).getProduct_name();
+					if(listProduct.size() > 1) {
+						productOrderName += " 외 " + (listProduct.size() - 1) + "건";
+					}
+					
+					
+					
+					model.addAttribute("listProduct", listProduct);
 				}
-				productOrderName = listProduct.get(0).getProduct_name();
-				if(listProduct.size() > 1) {
-					productOrderName += " 외 " + (listProduct.size() - 1) + "건";
-				}
-				
-				
-				
-				model.addAttribute("listProduct", listProduct);
 			}
+			
+			
+			
+			
 			
 			
 			model.addAttribute("vo", vo);
