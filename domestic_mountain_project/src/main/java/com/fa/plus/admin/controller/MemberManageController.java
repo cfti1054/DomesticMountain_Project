@@ -32,7 +32,7 @@ import com.fa.plus.common.MyUtil;
 public class MemberManageController {
 	@Autowired
 	private MemberManageService service;
-	
+
 	@Autowired
 	@Qualifier("myUtilGeneral")
 	private MyUtil myUtil;	

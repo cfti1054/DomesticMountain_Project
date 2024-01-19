@@ -49,17 +49,6 @@ public class MemberManageServiceImpl implements MemberManageService {
 		try {
 			dto = mapper.findById(useridx);
 
-			if (dto != null) {
-				if (dto.getEmail() != null) {
-					String[] s = dto.getEmail().split("@");
-					dto.setEmail(s[0]);
-				}
-
-				if (dto.getTel() != null) {
-					String[] s = dto.getTel().split("-");
-					dto.setTel(s[0]);
-				}
-			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

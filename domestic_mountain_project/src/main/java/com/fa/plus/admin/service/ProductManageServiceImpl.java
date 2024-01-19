@@ -337,6 +337,19 @@ public class ProductManageServiceImpl implements ProductManageService {
 		
 		try {
 			list = mapper.listProductStock(product_num);
+			
+			// 옵션이 하나인 경우
+			if(list.size() > 0 && list.get(0).getDetail_nums2() == null) {
+				List<ProductStockManage> listProductStock2 = mapper.listProductStock2(product_num);
+				
+				if(listProductStock2.size() > 0) {
+					ProductStockManage dto = list.get(0);
+					dto.setStock_num(listProductStock2.get(0).getStock_num());
+					dto.setTotal_stock(listProductStock2.get(0).getTotal_stock());
+				}
+				
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -347,9 +360,6 @@ public class ProductManageServiceImpl implements ProductManageService {
 	@Override
 	public void updateProductStock(ProductStockManage dto) throws Exception {
 		try {
-			if(dto.getDetail_num2() !=  null && dto.getDetail_num2()== 0) {
-				dto.setDetail_num2(null);
-			}
 			mapper.updateProductStock(dto);
 		} catch (Exception e) {
 			e.printStackTrace();

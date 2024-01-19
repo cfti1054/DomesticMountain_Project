@@ -341,7 +341,6 @@ public class ProductManageController {
 	
 	// 재고 처리
 	@PostMapping("updateStock")
-	@ResponseBody
 	public String updateStockSubmit(ProductStockManage dto,
 			@RequestParam long product_num,
 			@RequestParam long stock_num,

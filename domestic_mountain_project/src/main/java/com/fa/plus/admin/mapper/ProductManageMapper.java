@@ -50,6 +50,7 @@ public interface ProductManageMapper {
 	
 	// 상품 재고
 	public List<ProductStockManage> listProductStock(long product_num);
+	public List<ProductStockManage> listProductStock2(long product_num);
 	public void insertProductStock(ProductStockManage dto) throws SQLException;
 	public void updateProductStock(ProductStockManage dto) throws SQLException;
 	
