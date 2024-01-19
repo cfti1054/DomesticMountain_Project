@@ -14,7 +14,8 @@ public interface UserService {
 	public void updateUser(User dto) throws Exception;
 	
 	public User findById(String user_id);
-	public User findById(long useridx);
+	public User findById(long useridx); // 아이디 찾기 이메일로 아이디 전송
+	
 	public boolean findByEmailId(String email);
 	
 	public void deleteUser(Map<String, Object> map) throws Exception;

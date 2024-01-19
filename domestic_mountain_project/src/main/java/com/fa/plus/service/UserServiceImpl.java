@@ -1,6 +1,7 @@
 package com.fa.plus.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -141,14 +142,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean findByEmailId(String email) {
 		boolean b = false;
-		
 		try {
-			// List<User> list = mapper.findByEmail(email);
+			/*
+			 List<User> list = mapper.findByEmail(email);
+			 if(list.size() > 0) {
+					String result;
+					result = email + "님의 아이디는 <b>"
+							+ list.get(0).getUseridx()
+							+ "</b> 입니다.";
+			Mail mail = new Mail();
+			mail.setReceiverEmail(email);	
+		*/	
+			
+			
 		} catch (Exception e) {
 			
 		}
 		
-		return false;
+		return b;
 	}
 	
 	@Override

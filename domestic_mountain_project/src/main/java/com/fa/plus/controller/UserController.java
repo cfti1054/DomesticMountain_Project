@@ -198,11 +198,9 @@ public class UserController {
 		
 		if(mode.equals("dropout")) {
 			// 회원 탈퇴
-			/*
 			Map<String, Object> map = new HashMap<>();
-			map.put("memberIdx", info.getUseridx());
-			map.put("userId", info.getUserid());
-			*/
+			map.put("useridx", info.getUseridx());
+			map.put("userid", info.getUserid());
 			
 			session.removeAttribute("loginUser");
 			session.invalidate();
