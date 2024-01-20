@@ -120,10 +120,17 @@ public class OrderManageServiceImpl implements OrderManageService {
 			if(mode.equals("state")) {
 				mapper.updateOrderState(map);
 			} else if(mode.equals("invoiceNumber")) { // 송장번호 등록
+				map.put("trStatus", 2);	// 배송상태 -  준비로 변경
 				mapper.updateOrderInvoiceNumber1(map);
-				map.put("trStatus", 1);	// 배송상태 -  준비로 변경
 				mapper.updateOrderInvoiceNumber2(map);
 			} else if(mode.equals("delivery")) { // 배송 변경
+				System.out.println("========================");
+				System.out.println("========================");
+				System.out.println("========================");
+				System.out.println(map.get("orderState"));
+				System.out.println("========================");
+				System.out.println("========================");
+				System.out.println("========================");
 				mapper.updateOrderState(map);
 				mapper.updateOrderState2(map);
 			} else if(mode.equals("cancelAmount")) { // 주문취소 금액 수정

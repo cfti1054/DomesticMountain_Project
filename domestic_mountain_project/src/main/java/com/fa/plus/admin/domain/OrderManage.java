@@ -31,9 +31,28 @@ public class OrderManage {
 	private String authDate;
 	
 	private String cancelDate;
+	private int change_num;
+	private int deliveryListNum;
+	
 
 	
 	
+	public int getDeliveryListNum() {
+		return deliveryListNum;
+	}
+
+	public void setDeliveryListNum(int deliveryListNum) {
+		this.deliveryListNum = deliveryListNum;
+	}
+
+	public int getChange_num() {
+		return change_num;
+	}
+
+	public void setChange_num(int change_num) {
+		this.change_num = change_num;
+	}
+
 	public int getTrStatus() {
 		return trStatus;
 	}

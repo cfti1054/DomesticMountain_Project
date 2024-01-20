@@ -64,7 +64,7 @@
 						</c:if>
 					
 						<div class="row justify-content-end delivery-update-area">
-							<c:if test="${order.trStatus >= 2 && order.orderState <= 888 }">
+							<c:if test="${order.trStatus == 2 && order.orderState <= 888 }">
 								<div class="col-auto">
 									<select class="form-select delivery-select">
 										<option value="3" ${order.orderState==3?"selected":"" }>배송완료</option>

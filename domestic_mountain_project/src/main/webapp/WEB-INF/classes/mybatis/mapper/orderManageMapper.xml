@@ -35,14 +35,15 @@ LEFT OUTER JOIN order_detail od ON od.order_num = od.order_num
 SELECT o.order_num AS orderNum, o.useridx as memberIdx, NVL(u.user_id,'손님') AS userName, order_total_money AS totalMoney,
 		shipping AS deliveryCharge, total_amount AS payment,
 		TO_CHAR(order_datetime, 'YYYY-MM-DD HH24:MI') AS orderDate, order_sale AS orderSale, detail_cancel_count AS detailCancelCount, change_num,
-		t.tracking_no AS invoiceNumber,
+		t.tracking_no AS invoiceNumber, delivery_list_num AS deliveryListNum,
 		NVL(total_qty, 0) totalQty
 FROM totalorder o
 	LEFT OUTER JOIN user1 u ON o.useridx = u.useridx
 	LEFT OUTER JOIN (
 		SELECT order_num, COUNT(*) total_order_count, SUM(od_count) total_qty, 
 		COUNT(DECODE(change_num,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,0,11,0,12,0,13,0,14,0)) detail_cancel_count, 
-        NVL(SUM(DECODE(change_num,8,1,12,1,16,1,17,1,18,1)),0) change_num
+        NVL(SUM(DECODE(change_num,8,1,12,1,18,1)),0) change_num,
+        NVL(SUM(DECODE(change_num,8,1,12,1,16,1,17,1,18,1)),0) delivery_list_num
 		FROM order_detail
 		GROUP BY order_num
         ) od ON o.order_num = od.order_num
@@ -50,11 +51,11 @@ FROM totalorder o
 	<where>
 	 <!-- 배송 전 주문들 -->
 		<if test="state == 1">
-			 change_num &lt; 1
+			 delivery_list_num &lt; 1
 		</if>
 	<!-- after 배송 주문들 -->
 		<if test="state == 3">
-		change_num &gt; 1  
+		delivery_list_num &gt; 0  
 			
 		</if>
 	</where>
@@ -218,7 +219,7 @@ JOIN order_detail od ON o.order_num = od.order_num
 	</choose>	
 	, order_status_update_date = SYSDATE,
 	order_status_update_useridx = 1
-	WHERE order_num = #{orderNum} AND change_num &lt; 3 AND change_num &gt;13 
+	WHERE order_num = #{orderNum} AND change_num &lt; 3 OR change_num &gt;13 
 </update>
 
 <select id="findByTotalCancelAmount" parameterType="String" resultType="Integer">

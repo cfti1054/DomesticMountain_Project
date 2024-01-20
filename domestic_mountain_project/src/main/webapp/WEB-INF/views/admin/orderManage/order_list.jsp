@@ -144,10 +144,13 @@
 
 										<tr valign="middle" data-orderNum="${dto.orderNum}">
 											<td>
-												<c:if test="${dto.detailCancelCount > 0}">
+												<c:if test="${dto.detailCancelCount > 0 && dto.change_num < 1}">
 													<i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i>
 												</c:if>
-										&nbsp;&nbsp;&nbsp;${dto.orderNum}</td>
+												<c:if test="${dto.change_num >= 1}">
+													<i class="fa-solid fa-circle-check" style="color: #00c800;"></i>
+												</c:if>
+										&nbsp;&nbsp;${dto.orderNum}</td>
 											<td>${dto.orderDate}</td>
 											<td>${dto.userName}</td>
 											<td>${orderStatus=="status"?dto.totalQty:dto.invoiceNumber}</td>
@@ -373,7 +376,7 @@ $(function(){
 		
 		let orderState = $EL.closest(".delivery-update-area").find("select").val();
 		let orderStateInfo = $EL.closest(".delivery-update-area").find("select option:selected").text();
-		
+		console.log(orderState);
 		if(preState >= orderState) {
 			alert('배송 변경은 현 배송 단계보다 적거나 같을수 없습니다.');
 			return false;
@@ -381,7 +384,6 @@ $(function(){
 		
 		let qs = 'orderNum=' + orderNum + '&orderState=' + orderState;
 		let url = '${pageContext.request.contextPath}/admin/orderManage/order_detail/delivery';
-		console.log(qs);
 		const fn = function(data) {
 			if(data.state === "true") {
 				
