@@ -2,13 +2,30 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fa.plus.mapper.RecommendMapper">
-	<!--
+	<!-- 
 	<insert id="insertRecommend" parameterType="com.fa.plus.domain.Recommend">
 		INSERT INTO Recommend(num, userId, subject, imageFilename, content, reg_date)
 		VALUES (photo_seq.NEXTVAL, #{userId}, #{subject},  
 			#{imageFilename}, #{content}, SYSDATE)
 	</insert>
-	-->
+	 -->
+	<select id="post_file_seq" resultType="Long"> 
+		SELECT post_file_seq.NEXTVAL FROM dual
+	</select>
+	
+	<select id="post_seq" resultType="Long">
+		SELECT post_seq.NEXTVAL FROM dual
+	</select>
+		 
+	 <insert id="insertRecommend" parameterType="com.fa.plus.domain.Recommend">
+	
+		INSERT INTO post(post_num, community_category_num, post_title, post_content, post_reg_id, 
+				post_reg_date, post_update_date, post_hit_count, post_visible, post_gather)
+			VALUES (post_seq.NEXTVAL, 1, #{post_title}, #{post_content}, #{post_reg_id},
+				SYSDATE, SYSDATE, 0, 1, 1)
+	
+	</insert>
+	 
 	<sql id="where-list">
 		<if test="schType=='all' ">
 			( INSTR(post_title, #{kwd}) &gt; 0 
@@ -47,12 +64,12 @@
 	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date,
 	           NVL(f.post_fileCount, 0) as post_fileCount,
 	           NVL(c.replyCount, 0) as replyCount,
-	           f.originalFilename
+	           f.saveFilename
 	    FROM post p
 	    JOIN user1 m ON p.post_reg_id = m.useridx
 	    LEFT OUTER JOIN (
 	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
-	         MAX(originalFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as originalFilename
+	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
 	        FROM post_file
 	        GROUP BY post_num
 	    ) f ON p.post_num = f.post_num
@@ -134,4 +151,21 @@
 		DELETE FROM photo WHERE num=#{num}
 	</delete>
 	 -->
+	 
+	 <!-- 게시글 좋아요 여부 -->
+	<select id="userBoardLiked" parameterType="map" resultType="com.fa.plus.domain.Recommend">
+		SELECT post_num, useridx FROM post_like WHERE post_num = #{post_num} AND useridx = #{useridx}
+	</select>
+	 
+	 <insert id="insertRecommendFile" parameterType="com.fa.plus.domain.Recommend">
+		INSERT INTO post_file (file_num, post_num, saveFilename, originalFilename)
+			VALUES (post_file_seq.NEXTVAL, post_seq.CURRVAL, #{saveFilename}, #{originalFilename})
+	</insert>
+	
+	
+	<select id="listRecommendFile" parameterType="Long" resultType="com.fa.plus.domain.Recommend">
+		SELECT file_num, post_num, saveFilename, originalFilename
+		FROM post_file
+		WHERE post_num=#{post_num}    
+	</select>
 </mapper>

@@ -373,7 +373,7 @@ $(function(){
 								</c:if>
 								<c:if test="${dto.change_num != 4 && dto.change_num != 5}">
 									<button type="button" class="btn border" style="width: 130px;"
-										onclick="location.href='${pageContext.request.contextPath}/mypage/update?od_num=${dto.od_num}&page=${page}';">주문취소</button>	
+										onclick="cancelOrder('${pageContext.request.contextPath}/mypage/update?od_num=${dto.od_num}&page=${page}');">주문취소</button>	
 								</c:if>		
 								<button type="button" class="btn border payment-dropdown"
 									title="주문상세">
@@ -456,4 +456,14 @@ $(function(){
 		</div>
 	</div>
 </div>
+<script>
+    function cancelOrder(url) {
+        // 여기에 주문취소 로직 추가 (필요하면 서버로 요청을 보낼 수 있음)
 
+        // 주문취소 완료 후, alert 창 띄우기
+        alert("주문취소했습니다");
+
+        // 페이지 이동 (예시로 페이지 이동 코드를 추가함)
+        location.href = url;
+    }
+</script>

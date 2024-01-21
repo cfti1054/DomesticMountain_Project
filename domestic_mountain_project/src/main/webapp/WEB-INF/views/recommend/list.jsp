@@ -161,7 +161,7 @@ function searchList(f) {
 									<div class="movie-img">
 	
 										<a href="#"> <img
-											src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
+											src="${pageContext.request.contextPath}/uploads/recommend/${dto.saveFilename}"
 											width="200" height="120" alt="썸네일 이미지"> <span
 											class="num">${dto.post_fileCount}<span class="blind">개의
 													추가 이미지가 있습니다</span></span>
@@ -183,8 +183,7 @@ function searchList(f) {
 									<ul>
 										<li class="show-2-li"><a href="${articleUrl}&num=${dto.post_num}" class="album-img"> <img
 												width="200" height="200"
-												src="${pageContext.request.contextPath}/resources/images/${dto.originalFilename}"
-												alt="">
+												src="${pageContext.request.contextPath}/uploads/recommend/${dto.saveFilename}" alt="">
 										</a>
 		
 											<dl>
@@ -279,7 +278,7 @@ function searchList(f) {
 								</button>
 								
 								<button type="button" class="btn btn-light"
-										onclick="location.href='#'">글올리기</button>
+										onclick="location.href='${pageContext.request.contextPath}/recommend/write';">글올리기</button>
 							</div>
 						</form>
 					</div>

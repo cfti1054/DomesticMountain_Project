@@ -8,6 +8,8 @@ import com.fa.plus.domain.Recommend;
 
 public interface RecommendMapper {
 	public void insertRecommend(Recommend dto) throws SQLException;
+	public void insertRecommendFile(Recommend dto) throws SQLException;
+	
 	public void updateRecommend(Recommend dto) throws SQLException;
 	public void deleteRecommend(long num) throws SQLException;
 	
@@ -19,4 +21,9 @@ public interface RecommendMapper {
 	public Recommend findByNext(Map<String, Object> map);
 	
 	public void updateHitCount(long num) throws SQLException;
+	
+	public Recommend userBoardLiked(Map<String, Object> map);
+	public List<Recommend> listRecommendFile(long num);
+	public long post_file_seq();
+	public long post_seq();
 }

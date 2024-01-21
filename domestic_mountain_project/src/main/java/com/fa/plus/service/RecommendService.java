@@ -16,4 +16,7 @@ public interface RecommendService {
 	public void deleteRecommend(long num, String pathname) throws Exception;
 	
 	public void updateHitCount(long num) throws Exception;
+	
+	public List<Recommend> listRecommendFile(long num);
+	public boolean userBoardLiked(Map<String, Object> map);
 }

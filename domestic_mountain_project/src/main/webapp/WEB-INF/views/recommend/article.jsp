@@ -286,19 +286,19 @@
 							<td colspan="2" valign="top" height="200"
 								style="border-bottom: none;">${dto.post_content}</td>
 						</tr>
-						<!-- 
+						
 					<tr>
 						<td colspan="2">
 							<c:forEach var="vo" items="${listFile}" varStatus="status">
 								<p class="border text-secondary mb-1 p-2">
 									<i class="bi bi-folder2-open"></i>
-									<a href="${pageContext.request.contextPath}/notice/download?fileNum=${vo.fileNum}">${vo.originalFilename}</a>
-									[${vo.fileSize} byte]
+									<a href="${pageContext.request.contextPath}/notice/download?file_num=${vo.file_num}">${vo.originalFilename}</a>
+									
 								</p>
 							</c:forEach>
 						</td>
 					</tr>
-					-->
+					
 						<tr>
 							<td colspan="2">이전글 : <c:if test="${not empty prevDto}">
 									<a

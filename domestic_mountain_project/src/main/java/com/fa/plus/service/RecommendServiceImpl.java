@@ -1,10 +1,12 @@
 package com.fa.plus.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fa.plus.domain.Recommend;
 import com.fa.plus.mapper.RecommendMapper;
@@ -20,18 +22,30 @@ public class RecommendServiceImpl implements RecommendService{
 	
 	@Override
 	public void insertRecommend(Recommend dto, String pathname) throws Exception {
-		try {
-			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
-			if (saveFilename != null) {
-				dto.setOriginalFilename(saveFilename);
+	    try {
+	        mapper.insertRecommend(dto);
 
-				mapper.insertRecommend(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-		
+	        List<MultipartFile> fileList = Arrays.asList(dto.getSelectFile());
+	        
+	        if (!fileList.isEmpty()) {
+	            for (MultipartFile mf : fileList) {
+	                String saveFilename = fileManager.doFileUpload(mf, pathname);
+	                if (saveFilename == null) {
+	                    continue;
+	                }
+
+	                String originalFilename = mf.getOriginalFilename();
+
+	                dto.setOriginalFilename(originalFilename);
+	                dto.setSaveFilename(saveFilename);
+
+	                mapper.insertRecommendFile(dto);
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw e;
+	    }
 	}
 
 	@Override
@@ -148,6 +162,36 @@ public class RecommendServiceImpl implements RecommendService{
 					throw e;
 				}
 		
+	}
+
+	@Override
+	public List<Recommend> listRecommendFile(long num) {
+		List<Recommend> list = null;
+		
+		try {
+			list = mapper.listRecommendFile(num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public boolean userBoardLiked(Map<String, Object> map) {
+		
+		boolean result = false;
+		try {
+			Recommend dto = mapper.userBoardLiked(map);
+			if(dto != null) {
+				result = true; 
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

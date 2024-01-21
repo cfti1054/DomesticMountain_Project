@@ -1,5 +1,6 @@
 package com.fa.plus.controller;
 
+import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -7,16 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fa.plus.common.MyUtil;
 import com.fa.plus.domain.Recommend;
+import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.service.RecommendService;
 
 @Controller
@@ -95,12 +99,36 @@ public class RecommendController {
 
 		return ".recommend.list";
 	}
+
+	@GetMapping("write")
+	public String writeForm(Model model) throws Exception {
+		model.addAttribute("mode", "write");
+		
+		return ".recommend.write";
+	}
+	
+	@PostMapping("write")
+	public String writeSubmit(Recommend dto, HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+		
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + "uploads" + File.separator + "recommend";
+			
+			dto.setPost_reg_id(info.getUseridx());
+			service.insertRecommend(dto, pathname);
+		} catch (Exception e) {
+		}
+		
+		return "redirect:/recommend/list";
+	}
 	
 	@GetMapping("article")
 	public String article(@RequestParam long num,
 			@RequestParam String page,
 			@RequestParam(defaultValue = "all") String schType,
 			@RequestParam(defaultValue = "") String kwd,
+			HttpSession session,
 			Model model) throws Exception {
 
 		kwd = URLDecoder.decode(kwd, "utf-8");
@@ -126,15 +154,28 @@ public class RecommendController {
 
 		Recommend prevDto = service.findByPrev(map);
 		Recommend nextDto = service.findByNext(map);
-
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("loginUser");
+		// 게시글 좋아요 여부
+		map.put("useridx", info.getUseridx());
+		boolean userBoardLiked = service.userBoardLiked(map);
+		
+		// file
+		List<Recommend> listFile = service.listRecommendFile(num);
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("prevDto", prevDto);
 		model.addAttribute("nextDto", nextDto);
-
+		model.addAttribute("listFile", listFile);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
-
+		
+		model.addAttribute("userBoardLiked", userBoardLiked);
+		
 		return ".recommend.article";
 	}
+	
+
+	
 }
 
