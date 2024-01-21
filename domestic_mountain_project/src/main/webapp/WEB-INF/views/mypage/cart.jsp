@@ -208,7 +208,7 @@
 												<td class="cart-name">
 													<p>${dto.product_name}</p>
 													<p style="font-size: small; font-weight: bold;">선택사항 :
-														${dto.option_value}, ${dto.option_value2}, ${dto.cart_num}</p>
+														${dto.option_value}, ${dto.option_value2}</p>
 
 													<input type="hidden" name="product_nums"
 													value="${dto.product_num}"> <input type="hidden"
@@ -249,16 +249,18 @@
 
 							</section>
 							<section class="cart-right-section">
-								<div class="cart-right-section__top">
-									<h3 class="cart-title">결제예상금액</h3>
+								<div style="background-color: white;" class="cart-right-section__top">
+									<h3 class="cart-title"></h3>
 									
 								</div>
 								<hr class="divide-line-thin" />
-								<div class="cart-right-section__bottom">
+								<div style="background-color: white;" class="cart-right-section__bottom">
 									<div class="flex justify-between p-20 mt-20">
-										<span class="highlight-text">${od_total_amount}</span> <input
-											type="hidden" name="od_total_amounts"
-											value="${dto.od_total_amount}">
+						
+											<span class="highlight-text">${dto.total_amount}</span> <input
+												type="hidden" name="total_amounts"
+												value="${dto.total_amount}">
+	
 									</div>
 									<div class="flex-center mt-30 mx-10">
 										<button class="primary-button flex-center" onclick="sendOk();">주문하기</button>

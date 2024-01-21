@@ -323,7 +323,7 @@ $(function(){
 <div class="container">
 	<div class="body-container" >
 		<div class="body-title">
-			<h3> ※ 상품등록 </h3>
+			<h3><i class='fas fa-box-open'></i> 상품등록 </h3>
 		</div>
 		
 		<div class="body-main">

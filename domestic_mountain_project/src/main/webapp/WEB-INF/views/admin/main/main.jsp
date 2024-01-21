@@ -127,9 +127,9 @@ $(function(){
         <div class="content-wrapper">
 		
 		<div class="container-fluid px-4">
-			<h1 class="mt-4 h2 font-weight-bold mb-0">대시보드</h1>
+			<h1 class="mt-4 h2 font-weight-bold mb-0"><i class='fas fa-database' style='font-size:24px'></i> 대시보드</h1>
 			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item active font-weight-bold">대시보드</li>
+				<li class="breadcrumb-item active font-weight-bold">- ADMIN -</li>
 			</ol>
 		<div class="inner-page">
 		
@@ -212,10 +212,10 @@ $(function(){
                  
                       <div class="text-md-center text-xl-left">
                         <h6 class="mb-1">총 회원수</h6>
-                        <p class="text-muted mb-0">2024-01-19, 기준</p>
+                        <p class="text-muted mb-0">2024-01-21, 기준</p>
                       </div>
                       <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                        <h6 class="font-weight-bold mb-0">11명</h6>
+                        <h6 class="font-weight-bold mb-0">17명</h6>
                       </div>
                     </div>
                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
@@ -224,7 +224,7 @@ $(function(){
                         <p class="text-muted mb-0">2023-12, 기준</p>
                       </div>
                       <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                        <h6 class="font-weight-bold mb-0">3명</h6>
+                        <h6 class="font-weight-bold mb-0">8명</h6>
                       </div>
                     </div>
                   </div>
@@ -241,8 +241,9 @@ $(function(){
                       <div class="col-12">
                         <div class="preview-list">
  						<br>
-				<div class="fs-6 fw-semibold mb-2"><i class='fab fa-cc-visa' style='font-size:19px; color:red;'></i> 최근 1주일 판매 현황</div>
-				<div class="charts-day border rounded" style="height: 550px;"></div>
+ 						
+						<div class="fs-6 fw-semibold mb-2"><i class='fab fa-cc-visa' style='font-size:19px; color:red;'></i> 최근 1주일 판매 현황</div>
+						<div class="charts-day border rounded" style="height: 550px;"></div>
    
                         </div>
                       </div>
@@ -253,118 +254,7 @@ $(function(){
             </div>
             
 
-          <div class="row">
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">이곳은</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="">
-                        <i class="fas fa-chart-bar"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">대시보드</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="">
-                        <i class="fas fa-chart-pie"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last week</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">열심히</h5>
-                      <span class="h2 font-weight-bold mb-0">924</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="">
-                        <i class="fa-regular fa-calendar"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                    <span class="text-nowrap">Since yesterday</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">고치는중</h5>
-                      <span class="h2 font-weight-bold mb-0">49,65%</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="">
-                        <i class="fas fa-percent"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
 		</div>
-		</div>
-		<hr>
-
-		<div class="row">
-			<div class="col-xl-6">
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-chart-area me-1"></i> 차트
-					</div>
-					<div class="card-body">
-						<canvas id="myAreaChart" width="100%" height="40"></canvas>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-6">
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-chart-bar me-1"></i> 표
-					</div>
-					<div class="card-body">
-						<canvas id="myBarChart" width="100%" height="40"></canvas>
-					</div>
-				</div>
-			</div>
 		</div>
 	
 </div>

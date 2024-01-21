@@ -252,8 +252,7 @@ function changeSubList() {
 					</tbody>
 				</table>
 
-				<div class="page-navigation">${dataCount == 0 ? "등록된 상품이 없습니다." : paging}
-				</div>
+				<div class="page-navigation">${dataCount == 0 ? "등록된 상품이 없습니다." : paging}</div>
 
 				<table class="table">
 					<tr>

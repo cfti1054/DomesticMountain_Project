@@ -119,6 +119,28 @@
 }
 
 
+.btn-gradient {
+  margin: 5px;
+}
+.btn1.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn1 {
+  position: relative;
+  border: 0;
+  padding: 15px 25px;
+  display: inline-block;
+  text-align: center;
+  color: white;
+  background-color: #6698cb;
+  border-radius: 5px;
+
+}
+
 </style>
 
 <script type="text/javascript">
@@ -139,6 +161,15 @@ function deleteZzimSelect() {
 	f.submit();
 }
 
+function deleteZzim() {
+	if(! confirm('선택한 상품을 찜목록에서 비우시겠습니까 ? ')) {
+		return;
+	}	
+	
+	const f = document.zzimForm;
+	f.action = "${pageContext.request.contextPath}/mypage/deleteZzim";
+	f.submit();	
+}
 
 </script>
 
@@ -160,7 +191,7 @@ function deleteZzimSelect() {
               			<h3 style="font-weight: bold;">${list[0].user_name}님 찜목록</h3>
                     </c:when>
             	</c:choose>
-			<button type="button" class="delete-button btn zzim-deleteCheck" onclick="deleteZzimSelect();">선택 삭제</button>	
+			<button type="button" class="delete-button btn1 btn-gradient red small zzim-deleteCheck" onclick="deleteZzimSelect();">선택 삭제</button>	
               </div>
 				
               <form name="zzimForm" method="post">
@@ -175,17 +206,17 @@ function deleteZzimSelect() {
                         <figure>
 						<input type="hidden" name="product_nums" value="${dto.product_num}">
 						<input type="hidden" name="useridx" value="${dto.useridx}">
-                          <a href="#" class="btn-wishlist"><i class="bi bi-heart" style="width: 30px; height: 22px;"></i></a>
+                          <a href="#" class="btn-wishlist" onclick="deleteZzimSelect();"><i class="bi bi-heart" style="width: 30px; height: 22px;"></i></a>
                           <a href="${pageContext.request.contextPath}/product/${dto.product_num}">
                             <img src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}" class="tab-image">
                           </a>
                         </figure>
                         <h3>${dto.product_name}</h3>
                     	<hr>
-                        <span class="price">${dto.product_price}원</span>
+                        <span class="price"><label><fmt:formatNumber value="${dto.product_price}"/>원</label></span>
                         <div class="d-flex align-items-center justify-content-between">
 
-                          	<a href="#" class="nav-link">Add to Cart <iconify-icon icon="uil:shopping-cart"></a>
+                          	<a href="#" class="nav-link">Add to Cart <i class="bi bi-cart"></i></a>
                         	<input class="checkbox" name="nums" type="checkbox" value="${dto.product_num}" style="zoom:2.0;">
                         </div>
                       </div>

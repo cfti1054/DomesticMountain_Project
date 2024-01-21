@@ -38,6 +38,7 @@ public class Order {
 	private List<Integer> buyQtys;			// 구매수량
 	private List<Integer> od_total_amounts;	// 총 금액
 	private List<Long> product_nums;		// 상품번호(리스트용)
+	private List<Integer> total_amounts;	// 주문테이블의 총 금액
 	
 	
 	
@@ -550,6 +551,12 @@ public class Order {
 	}
 	public void setDetail_num1(Long detail_num1) {
 		this.detail_num1 = detail_num1;
+	}
+	public List<Integer> getTotal_amounts() {
+		return total_amounts;
+	}
+	public void setTotal_amounts(List<Integer> total_amounts) {
+		this.total_amounts = total_amounts;
 	}
 	
 }

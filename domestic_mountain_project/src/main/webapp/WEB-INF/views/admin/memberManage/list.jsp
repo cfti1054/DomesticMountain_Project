@@ -227,7 +227,7 @@ function printMemberManage() {
 	<main class="mt-4">
 		<div class="container-fluid px-4">
 
-			<h2>등급변경 내역</h2>
+			<h2>&nbsp;<i class='fas fa-user-tie'></i> 등급변경 내역</h2>
 			
 
 			<div class="container">

@@ -226,7 +226,7 @@ function printMemberManage() {
 	<main class="mt-4">
 		<div class="container-fluid px-4">
 
-			<h2>회원 목록</h2>
+			<h2><i class='fas fa-user-alt'></i> 회원 목록</h2>
 			<hr>
 			
 			<div>
