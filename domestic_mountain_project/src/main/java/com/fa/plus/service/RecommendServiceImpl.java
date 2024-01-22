@@ -1,6 +1,5 @@
 package com.fa.plus.service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fa.plus.common.FileManager;
 import com.fa.plus.domain.Recommend;
 import com.fa.plus.mapper.RecommendMapper;
-import com.fa.plus.common.FileManager;
 
 @Service
 public class RecommendServiceImpl implements RecommendService{
@@ -24,11 +23,9 @@ public class RecommendServiceImpl implements RecommendService{
 	public void insertRecommend(Recommend dto, String pathname) throws Exception {
 	    try {
 	        mapper.insertRecommend(dto);
-
-	        List<MultipartFile> fileList = Arrays.asList(dto.getSelectFile());
 	        
-	        if (!fileList.isEmpty()) {
-	            for (MultipartFile mf : fileList) {
+	        if (! dto.getSelectFile().isEmpty()) {
+	            for (MultipartFile mf : dto.getSelectFile()) {
 	                String saveFilename = fileManager.doFileUpload(mf, pathname);
 	                if (saveFilename == null) {
 	                    continue;
@@ -117,16 +114,21 @@ public class RecommendServiceImpl implements RecommendService{
 	public void updateRecommend(Recommend dto, String pathname) throws Exception {
 		try {
 			// 업로드한 파일이 존재한 경우
-			String saveFilename = fileManager.doFileUpload(dto.getSelectFile(), pathname);
+	        if (! dto.getSelectFile().isEmpty()) {
+	            for (MultipartFile mf : dto.getSelectFile()) {
+	                String saveFilename = fileManager.doFileUpload(mf, pathname);
+	                if (saveFilename == null) {
+	                    continue;
+	                }
 
-			if (saveFilename != null) {
-				// 이전 파일 지우기
-				if (dto.getOriginalFilename().length() != 0) {
-					fileManager.doFileDelete(dto.getOriginalFilename(), pathname);
-				}
+	                String originalFilename = mf.getOriginalFilename();
 
-				dto.setOriginalFilename(saveFilename);
-			}
+	                dto.setOriginalFilename(originalFilename);
+	                dto.setSaveFilename(saveFilename);
+
+	                mapper.insertRecommendFile(dto);
+	            }
+	        }			
 
 			 mapper.updateRecommend(dto);
 		} catch (Exception e) {

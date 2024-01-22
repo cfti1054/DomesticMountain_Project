@@ -1,18 +1,12 @@
 package com.fa.plus.domain;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Recommend {
 	
 	private long num;
-	
-	public long getNum() {
-		return num;
-	}
-
-	public void setNum(long num) {
-		this.num = num;
-	}
 
 	// post 테이블
 	private long post_num;
@@ -32,7 +26,7 @@ public class Recommend {
 	private String saveFilename;
 	private String originalFilename;
 	
-	private MultipartFile selectFile;
+	private List<MultipartFile> selectFile;
 
 	private String user_name;
 	
@@ -40,45 +34,13 @@ public class Recommend {
 	private long replyCount;
 	
 	private long post_fileCount;
-	
-	public String getSaveFilename() {
-		return saveFilename;
+
+	public long getNum() {
+		return num;
 	}
 
-	public void setSaveFilename(String saveFilename) {
-		this.saveFilename = saveFilename;
-	}
-
-	public String getOriginalFilename() {
-		return originalFilename;
-	}
-
-	public void setOriginalFilename(String originalFilename) {
-		this.originalFilename = originalFilename;
-	}
-	
-	public long getPost_fileCount() {
-		return post_fileCount;
-	}
-
-	public void setPost_fileCount(long post_fileCount) {
-		this.post_fileCount = post_fileCount;
-	}
-
-	public long getReply_num() {
-		return reply_num;
-	}
-
-	public void setReply_num(long reply_num) {
-		this.reply_num = reply_num;
-	}
-
-	public long getReplyCount() {
-		return replyCount;
-	}
-
-	public void setReplyCount(long replyCount) {
-		this.replyCount = replyCount;
+	public void setNum(long num) {
+		this.num = num;
 	}
 
 	public long getPost_num() {
@@ -169,11 +131,27 @@ public class Recommend {
 		this.file_num = file_num;
 	}
 
-	public MultipartFile getSelectFile() {
+	public String getSaveFilename() {
+		return saveFilename;
+	}
+
+	public void setSaveFilename(String saveFilename) {
+		this.saveFilename = saveFilename;
+	}
+
+	public String getOriginalFilename() {
+		return originalFilename;
+	}
+
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
+	}
+
+	public List<MultipartFile> getSelectFile() {
 		return selectFile;
 	}
 
-	public void setSelectFile(MultipartFile selectFile) {
+	public void setSelectFile(List<MultipartFile> selectFile) {
 		this.selectFile = selectFile;
 	}
 
@@ -184,9 +162,30 @@ public class Recommend {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
+
+	public long getReply_num() {
+		return reply_num;
+	}
+
+	public void setReply_num(long reply_num) {
+		this.reply_num = reply_num;
+	}
+
+	public long getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(long replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	public long getPost_fileCount() {
+		return post_fileCount;
+	}
+
+	public void setPost_fileCount(long post_fileCount) {
+		this.post_fileCount = post_fileCount;
+	}
 	
-	
-	
-	
-	
+
 }

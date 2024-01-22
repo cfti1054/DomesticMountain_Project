@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
+import com.fa.plus.domain.Appearance;
 import com.fa.plus.domain.Recommend;
 import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.service.RecommendService;
@@ -31,6 +34,9 @@ public class RecommendController {
 	
 	@Autowired
 	private MyUtil myUtil;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	@RequestMapping(value = "list")
 	public String list(@RequestParam(value = "page", defaultValue = "1") int current_page,
@@ -175,7 +181,29 @@ public class RecommendController {
 		return ".recommend.article";
 	}
 	
+	@GetMapping("download")
+	public String download(@RequestParam long num, 
+			HttpServletRequest req, HttpServletResponse resp,
+			HttpSession session) throws Exception {
 
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "recommend";
+
+		Recommend dto = service.findById(num);
+
+		if (dto != null) {
+			boolean b = fileManager.doFileDownload(dto.getSaveFilename(), 
+					dto.getOriginalFilename(), pathname, resp);
+			if (b) {
+				// void 반환 유형(또는 null 반환 값)이 있는 메소드는 
+				//    ServletResponse, OutputStream 인수 또는 @ResponseStatus 주석
+				//    도 있는 경우 응답을 완전히 처리한 것으로 간주
+				return null;
+			}
+		}
+
+		return ".error.filedownloadFailure";
+	}
 	
 }
 

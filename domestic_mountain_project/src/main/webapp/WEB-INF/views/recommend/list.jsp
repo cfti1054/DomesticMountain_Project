@@ -276,9 +276,10 @@ function searchList(f) {
 								<button type="button" class="btn btn-light" onclick="searchList(this.form)">
 									<i class="bi bi-search"></i>
 								</button>
-								
+								<c:if test="${sessionScope.loginUser.usership>50}">
 								<button type="button" class="btn btn-light"
 										onclick="location.href='${pageContext.request.contextPath}/recommend/write';">글올리기</button>
+								</c:if>
 							</div>
 						</form>
 					</div>

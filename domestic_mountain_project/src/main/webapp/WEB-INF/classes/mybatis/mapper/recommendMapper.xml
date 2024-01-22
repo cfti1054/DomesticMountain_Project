@@ -89,13 +89,19 @@
 	</select>
 
 
-	<!-- 글보기 -->
 	<select id="findById" parameterType="Long" resultType="com.fa.plus.domain.Recommend">
-		SELECT post_num, p.post_reg_id, user_name, post_title, post_hit_count,
-			post_content, post_reg_date
-		FROM post p
-		JOIN user1 m ON p.post_reg_id = m.useridx
-		WHERE post_num=#{num}
+	    SELECT p.post_num, p.post_reg_id, user_name, post_title, post_hit_count, post_content,
+	           TO_CHAR(post_reg_date, 'yyyy-mm-dd') as post_reg_date, user_id,
+	           NVL(f.post_fileCount, 0) as post_fileCount, saveFilename
+	    FROM post p
+	    JOIN user1 m ON p.post_reg_id = m.useridx
+	    LEFT OUTER JOIN (
+	        SELECT post_num, COUNT(*) as post_fileCount, MAX(file_num) as file_num,
+	         MAX(saveFilename) KEEP (DENSE_RANK FIRST ORDER BY file_num) as saveFilename
+	        FROM post_file
+	        GROUP BY post_num
+	    ) f ON p.post_num = f.post_num
+	    WHERE community_category_num = 1 AND p.post_num = #{num}
 	</select>
 
 	 

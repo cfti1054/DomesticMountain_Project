@@ -292,7 +292,7 @@
 							<c:forEach var="vo" items="${listFile}" varStatus="status">
 								<p class="border text-secondary mb-1 p-2">
 									<i class="bi bi-folder2-open"></i>
-									<a href="${pageContext.request.contextPath}/notice/download?file_num=${vo.file_num}">${vo.originalFilename}</a>
+									<a href="${pageContext.request.contextPath}/recommend/download?num=${vo.post_num}">${vo.originalFilename}</a>
 									
 								</p>
 							</c:forEach>
@@ -318,7 +318,28 @@
 
 				<table class="table table-borderless">
 					<tr>
-						<td width="50%">&nbsp;</td>
+						<td width="50%">
+							<c:choose>
+								<c:when
+									test="${sessionScope.loginUser.usership>50}">
+									<button type="button" class="btn btn-light"
+										onclick="location.href='${pageContext.request.contextPath}/recommend/update?post_num=${dto.post_num}&page=${page}';">수정</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn btn-light" disabled>수정</button>
+								</c:otherwise>
+							</c:choose>
+
+							<c:choose>
+								<c:when
+									test="${sessionScope.loginUser.usership>50}">
+									<button type="button" class="btn btn-light"
+										onclick="deleteOk();">삭제</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn btn-light" disabled>삭제</button>
+								</c:otherwise>
+							</c:choose></td>
 						<td class="text-end">
 							<button type="button" class="btn btn-light"
 								onclick="location.href='${pageContext.request.contextPath}/recommend/list?${query}';">리스트</button>
