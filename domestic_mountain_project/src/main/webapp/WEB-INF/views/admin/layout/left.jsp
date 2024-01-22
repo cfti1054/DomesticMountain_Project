@@ -93,9 +93,7 @@
 						aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
 						<nav class="sb-sidenav-menu-nested nav">
 							<a class="nav-link"
-								href="${pageContext.request.contextPath}/admin/product/product_list">장비 관리</a> <a
-								class="nav-link"
-								href="${pageContext.request.contextPath}/admin/productQna/review">상품 리뷰 및 문의</a>
+								href="${pageContext.request.contextPath}/admin/product/product_list">장비 관리</a>
 						</nav>
 					</div>
 
