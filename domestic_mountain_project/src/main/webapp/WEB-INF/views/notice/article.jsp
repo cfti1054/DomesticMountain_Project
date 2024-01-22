@@ -113,14 +113,14 @@
 						</td>
 					</tr> 
 					-->
-							<tr>
+							<tr class="prev-next">
 								<td colspan="2">&nbsp;<c:if test="${not empty prevDto}">
 										<a
 											href="${pageContext.request.contextPath}/notice/article?${query}&notice_num=${prevDto.notice_num}"><span class="a-span">이전글 : </span>${prevDto.notice_title}</a>
 									</c:if>
 								</td>
 							</tr>
-							<tr>
+							<tr class="prev-next">
 								<td colspan="2">&nbsp;<c:if test="${not empty nextDto}">
 										<a
 											href="${pageContext.request.contextPath}/notice/article?${query}&notice_num=${nextDto.notice_num}"><span class="a-span">다음글 : </span>${nextDto.notice_title}</a>

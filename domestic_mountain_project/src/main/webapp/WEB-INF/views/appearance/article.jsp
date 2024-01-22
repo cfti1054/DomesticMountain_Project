@@ -160,14 +160,14 @@
 								</c:if></td>
 						</tr>
 
-						<tr>
+						<tr class="prev-next">
 							<td colspan="2">&nbsp;<c:if test="${not empty prevDto}">
 									<a class="font-array"
 										href="${pageContext.request.contextPath}/appearance/article?${query}&post_num=${prevDto.post_num}"><span class="a-span">이전글 : </span>${prevDto.post_title}</a>
 								</c:if>
 							</td>
 						</tr>
-						<tr>
+						<tr class="prev-next">
 							<td colspan="2">&nbsp;<c:if test="${not empty nextDto}">
 									<a class="font-array"
 										href="${pageContext.request.contextPath}/appearance/article?${query}&post_num=${nextDto.post_num}"><span class="a-span">다음글 : </span>${nextDto.post_title}</a>

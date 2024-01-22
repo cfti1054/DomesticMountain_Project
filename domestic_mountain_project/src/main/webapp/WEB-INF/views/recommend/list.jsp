@@ -16,6 +16,13 @@
 }
 
 .page-item { cursor: pointer; }
+
+.show-2-li:hover .album-img img {
+	transform: scale(1.1);
+	transition: transform 0.3s ease;
+}
+
+
 </style>
 
 <script type="text/javascript">
@@ -244,7 +251,7 @@ function searchList(f) {
 										<tr>
 											<td>${dataCount - (page-1) * size - status.index}</td>
 											<td class="left"><a href="${articleUrl}&num=${dto.post_num}" class="text-reset">${dto.post_title}</a>
-												<span class="badge text-bg-info">New</span></td>
+												</td>
 											<td>${dto.user_name}</td>
 											<td>${dto.post_reg_date}</td>
 											<td>${dto.post_hit_count}</td>

@@ -282,7 +282,7 @@
 								${dto.post_hit_count}</td>
 						</tr>
 
-						<tr>
+						<tr class="content-img-center">
 							<td colspan="2" valign="top" height="200"
 								style="border-bottom: none;">${dto.post_content}</td>
 						</tr>
@@ -299,14 +299,14 @@
 						</td>
 					</tr>
 					
-						<tr>
+						<tr class="prev-next">
 							<td colspan="2">&nbsp;<c:if test="${not empty prevDto}">
 									<a class="font-array"
 										href="${pageContext.request.contextPath}/recommend/article?${query}&num=${prevDto.post_num}"><span class="a-span">이전글 : </span>${prevDto.post_title}</a>
 								</c:if>
 							</td>
 						</tr>
-						<tr>
+						<tr class="prev-next">
 							<td colspan="2">&nbsp;<c:if test="${not empty nextDto}">
 									<a class="font-array"
 										href="${pageContext.request.contextPath}/recommend/article?${query}&num=${nextDto.post_num}"><span class="a-span">다음글 : </span>${nextDto.post_title}</a>

@@ -179,7 +179,7 @@
 
 .article-movie-sub .txt {
 	display: block;
-	max-height: 63px;
+	max-height: 65px;
 	margin-top: 3px;
 	font-size: 14px;
 	line-height: 22px;
@@ -191,7 +191,7 @@
 	word-break: break-all;
 	word-wrap: break-word;
 	word-break: break-word;
-	color: #666;
+	color: rgb(30, 30, 30);;
 }
 
 .article-movie-sub .con_bottom {
@@ -575,6 +575,13 @@ element.style {
     max-width: 650px;
     display: block;
 }
-.notice-container .table tbody tr td {
+.notice-container .table tbody .prev-next td {
 	padding: 0.5rem 0 0 0;
 }
+
+
+.card_area .con .con_top .txt p,
+.card_area .con .con_top .txt p span {
+	background-color: unset !important;
+}
+

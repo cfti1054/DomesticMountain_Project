@@ -48,7 +48,7 @@ public class RecommendController {
 
 		String cp = req.getContextPath();
 
-		int size = 2;
+		int size = 8;
 		int total_page;
 		int dataCount;
 
