@@ -114,6 +114,7 @@ public class BoardManageServiceImpl implements BoardManageService  {
 	@Override
 	public void update_notice_board(BoardManage dto) throws Exception {
 		try {
+			System.out.println(dto.getNotice_board_num() + " == Notice_board_num");
 			mapper.update_notice_board(dto);
 		} catch (Exception e) {
 			e.printStackTrace();

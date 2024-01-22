@@ -20,7 +20,7 @@ public interface BoardManageMapper {
 	
 // 공지사항 게시판
 	public long notice_board_seq() throws SQLException;
-	public BoardManage find_by_notice_board_num(Long l) throws SQLException;
+	public BoardManage find_by_notice_board_num(long i) throws SQLException;
 	public List<BoardManage> list_notice_board() throws SQLException;
 	
 	public void insert_notice_board(BoardManage dto) throws SQLException;

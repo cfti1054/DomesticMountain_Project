@@ -12,7 +12,11 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css"/>   
 <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet"/>
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
+<style>
+    .showTable tr td:first-child {
+        vertical-align: middle;
+    }
+</style>
 <script>
         function ajaxFun(url, method, formData, dataType, fn, file = false) {
         	const settings = {
@@ -55,8 +59,8 @@
         	$.ajax(url, settings);
         }
         
-function showContent(inquiry_board_num) {
-        	let dlg = $("#inquiry-dialog").dialog({
+function showContent(notice_board_num) {
+        	let dlg = $("#notice-dialog").dialog({
        			autoOpen: false,
        			modal: true,
        			buttons: {
@@ -67,24 +71,24 @@ function showContent(inquiry_board_num) {
        			
        			height: 550,
        			width: 800,
-       			title: " 1:1문의 내용",
+       			title: " 공지내용",
        			close: function(event, ui) {
        			}
        		});
        		
-       		let url = "${pageContext.request.contextPath}/admin/support/show_inquiry_content";
-       		let query = "inquiry_board_num=" + inquiry_board_num;
+       		let url = "${pageContext.request.contextPath}/admin/boardManage/notice_board_show";
+       		let query = "notice_board_num=" + notice_board_num;
        		
        		
        		const fn = function(data) {
-       			$("#inquiry-dialog").html(data);
+       			$("#notice-dialog").html(data);
        			dlg.dialog("open");
        		};
        		ajaxFun(url, "get", query, "text", fn);
 }
 
 function answer(inquiry_board_num) {
-	let dlg = $("#inquiry-dialog").dialog({
+	let dlg = $("#notice-dialog").dialog({
 		autoOpen: false,
 		modal: true,
 		buttons: {
@@ -106,7 +110,7 @@ function answer(inquiry_board_num) {
 	let query = "inquiry_board_num=" + inquiry_board_num;
 	
 	const fn = function(data) {
-		$("#inquiry-dialog").html(data);
+		$("#notice-dialog").html(data);
 		dlg.dialog("open");
 	};
 	
@@ -136,7 +140,7 @@ function update(inquiry_board_num) {
 	let query = "inquiry_board_num=" + inquiry_board_num;
 	
 	const fn = function(data) {
-		$("#inquiry-dialog").html(data);
+		$("#notice-dialog").html(data);
 		dlg.dialog("open");
 	};
 	
@@ -232,7 +236,7 @@ function update(inquiry_board_num) {
 							</p> -->
                             </div>
                         </div>
-					<div id="inquiry-dialog" style="display: none;"></div>
+					<div id="notice-dialog" style="display: none;"></div>
 				</div>	
 		</div>
 	</main>

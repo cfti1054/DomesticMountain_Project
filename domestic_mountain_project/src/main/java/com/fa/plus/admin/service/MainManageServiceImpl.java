@@ -295,4 +295,27 @@ public class MainManageServiceImpl implements MainManageService {
 		return resultMap;
 	}
 
+	@Override
+	public Map<String, Object> thisMonthMember(){
+		Map<String, Object> resultMap = null;
+		try {
+			resultMap = mapper3.thisMonthMember();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> lastMonthMember(){
+		Map<String, Object> resultMap = null;
+		try {
+			resultMap = mapper3.lastMonthMember();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+
 }

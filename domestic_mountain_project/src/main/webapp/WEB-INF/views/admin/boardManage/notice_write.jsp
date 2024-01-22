@@ -34,7 +34,6 @@ function check() {
     }
 	
 	str = f.notice_category_num.value;
-	console.log(str);
 	if(!str) {
 		alert("카테고리 분류를 선택하세요. ");
 		f.notice_category_num.focus();
@@ -49,9 +48,10 @@ function check() {
 		f.notice_board_invisible_date.focus();
 		return false;
 	}
-	console.log(f.notice_board_invisible_date.value);
+	console.log(f.notice_board_num.value);    
 	
-    f.action = "${pageContext.request.contextPath}/admin/boardManage/notice_board_${mode}";
+    f.action = "${pageContext.request.contextPath}/admin/boardManage/notice_board_"+f.mode.value;
+	
     
     return true;
 }
@@ -126,7 +126,8 @@ $(function() {
 						</td>
 					</tr>
 					
-					
+					<input type="hidden" name="mode" value="${mode}">
+					<input type="hidden" name="notice_board_num" value="${dto.notice_board_num}">
 				</table>
 				
 				<table class="table table-borderless">
@@ -137,6 +138,7 @@ $(function() {
 							<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/boardManage/notice_board_list';">${mode=='update'?'수정취소':'등록취소'}&nbsp;<i class="bi bi-x"></i></button>
 							<c:if test="${mode=='update'}">
 								<input type="hidden" name="num" value="${dto.notice_board_num}">
+								
 								<%-- <input type="hidden" name="page" value="${page}"> --%>
 							</c:if>
 						</td>

@@ -110,7 +110,8 @@
 					</a>
 					<div class="collapse" id="collapseSupport"  aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
 						<nav class="sb-sidenav-menu-nested nav accordion"  id="sidenavAccordionPages">
-							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#pagesCollapseAuth" aria-expanded="false"  aria-controls="pagesCollapseInquiry"> 1 : 1 문의 관리
+						
+							<a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/support/inquiry_category_list" data-bs-toggle="collapse"  data-bs-target="#pagesCollapseInquiry" aria-expanded="false"  aria-controls="pagesCollapseInquiry"> 1 : 1 문의 관리
 								<div class="sb-sidenav-collapse-arrow">
 									<i class="fas fa-angle-down"></i>
 								</div>
