@@ -507,14 +507,14 @@ function sendOk(mode) {
 								onclick="sendOk('buy');">구매하기</button>
 						</div>
 						<div class="row-style mt-2 mb-2">
-							<div class="col pe-1" onclick="sendOk('zzim');">
-								<button type="button" class="btn w-100 btn-productBlind"
+							<div class="col pe-1 probtn-hover" onclick="sendOk('zzim');">
+								<button type="button" class="btn w-100 btn-productBlind" id="order-btn"
 									${empty sessionScope.member.memberIdx ? "disabled='disabled'" : ""}>
 									찜하기 <i class="bi bi-heart heart"></i>
 								</button>
 							</div>
-							<div class="col ps-1" onclick="sendOk('cart');">
-								<button type="button" class="btn w-100 btn-productCart"
+							<div class="col ps-1 probtn-hover" onclick="sendOk('cart');">
+								<button type="button" class="btn w-100 btn-productCart" id="order-btn"
 									${empty sessionScope.member.memberIdx ? "disabled='disabled'" : ""}>
 									장바구니 <i class="bi bi-bag bag"></i>
 								</button>

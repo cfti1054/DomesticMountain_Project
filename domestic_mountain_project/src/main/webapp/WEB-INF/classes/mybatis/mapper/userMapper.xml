@@ -32,9 +32,9 @@
 	<insert id="insertUser2" parameterType="com.fa.plus.domain.User">
 		INSERT INTO user2(useridx, birth, email, addr1, addr2, zip, tel)
 			VALUES(#{useridx}, #{birth}, #{email},
-			#{zip, jdbcType=VARCHAR},
 			#{addr1, jdbcType=VARCHAR},
 			#{addr2, jdbcType=VARCHAR},
+			#{zip, jdbcType=VARCHAR},
 			#{tel})
 	</insert>
 	

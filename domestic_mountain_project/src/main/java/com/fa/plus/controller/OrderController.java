@@ -64,8 +64,8 @@ public class OrderController {
 			productOrderNumber = orderService.productOrderNumber();
 			
 			
-			if (mode == "cart") {
-				if (detail_nums2 != null && detail_nums2.equals("")) {
+			if (mode == "buy") {
+				if (detail_nums2 != null) {
 					
 					List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
 					for (int i = 0; i < detail_nums.size(); i++) {
@@ -143,8 +143,8 @@ public class OrderController {
 					model.addAttribute("listProduct", listProduct);
 				}
 
-			} else { // "buy"
-				if (detail_nums2 != null) {
+			} else { // "cart"
+				if (detail_nums2 != null && detail_nums2.equals("")) {
 					
 					List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
 					for (int i = 0; i < detail_nums.size(); i++) {
@@ -294,16 +294,18 @@ public class OrderController {
 		
 		return "redirect:/";
 	}
-
+	
 	
 	@GetMapping("complete")
 	public String complete(@ModelAttribute("title") String title, 
 			@ModelAttribute("message") String message
 			) throws Exception {
+		
 		// F5를 누른 경우
 		if (message == null || message.length() == 0) { 
 			return "redirect:/";
 		}
+		
 		
 		return ".order.complete";
 	}

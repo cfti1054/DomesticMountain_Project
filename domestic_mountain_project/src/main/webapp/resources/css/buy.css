@@ -261,6 +261,10 @@
 
 .Payment-box .AddressView_article-point {
 	margin-bottom: 40px;
+	position: relative;
+    padding: 12px 14px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: white;
 }
 
 .recipient {

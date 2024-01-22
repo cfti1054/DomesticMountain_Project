@@ -88,6 +88,7 @@
 }
 #gallery .gallery-box:hover{
 	scale: 1.05;
+	cursor: pointer;
 }
 
 figure img {

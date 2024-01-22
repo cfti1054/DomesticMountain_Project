@@ -10,7 +10,7 @@
 .body-container {
 	padding-top: 120px;
 	max-width: 1400px;
-	margin: 30px 130px;
+	margin: 30px auto;
 }
 
 .delete-button {
@@ -35,6 +35,7 @@
 .table>:not(caption)>*>* {
 	border-bottom-width: unset;
 	border-style: none;
+	background-color: unset;
 } 
 
 </style>
@@ -205,7 +206,7 @@
 												<td class="w-144 h-144"><img class="border rounded"
 													src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
 												</td>
-												<td class="cart-name">
+												<td class="cart-name" style="width: 520px;">
 													<p>${dto.product_name}</p>
 													<p style="font-size: small; font-weight: bold;">선택사항 :
 														${dto.option_value}, ${dto.option_value2}</p>
@@ -249,23 +250,9 @@
 
 							</section>
 							<section class="cart-right-section">
-								<div style="background-color: white;" class="cart-right-section__top">
-									<h3 class="cart-title"></h3>
-									
-								</div>
-								<hr class="divide-line-thin" />
-								<div style="background-color: white;" class="cart-right-section__bottom">
-									<div class="flex justify-between p-20 mt-20">
-						
-											<span class="highlight-text">${dto.total_amount}</span> <input
-												type="hidden" name="total_amounts"
-												value="${dto.total_amount}">
-	
-									</div>
 									<div class="flex-center mt-30 mx-10">
 										<button class="primary-button flex-center" onclick="sendOk();">주문하기</button>
 									</div>
-								</div>
 							</section>
 						</div>
 					</form>
