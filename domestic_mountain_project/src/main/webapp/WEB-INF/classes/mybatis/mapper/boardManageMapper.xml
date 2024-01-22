@@ -4,7 +4,7 @@
 <mapper namespace="com.fa.plus.admin.mapper.BoardManageMapper">
 
 	<!-- 공지사항 카테고리 -->
-	<select id="notice_category_seq" resultType="Long">
+	<select id="notice_category_seq" resultType="long">
 		SELECT notice_category_seq.NEXTVAL FROM dual
 	</select>
 	
@@ -49,11 +49,11 @@
 	
 	
 	<!-- 공시사항 게시판 -->
-	<select id="notice_board_seq" resultType="Long">
+	<select id="notice_board_seq" resultType="long">
 		SELECT notice_board_seq.NEXTVAL FROM DUAL
 	</select>
 	
-	<select id="find_by_notice_board_num" parameterType="Long" resultType="com.fa.plus.admin.domain.BoardManage">
+	<select id="find_by_notice_board_num" parameterType="long" resultType="com.fa.plus.admin.domain.BoardManage">
 		SELECT notice_num AS notice_board_num, notice_title AS notice_board_title, 
 			notice_content AS notice_board_content, notice_hit_count AS notice_board_hit_count, 
 			u.user_name AS notice_board_reg_id, TO_CHAR(notice_reg_date,'YYYY-MM-DD') AS notice_board_reg_date,
@@ -92,16 +92,19 @@
 		UPDATE notice_board
 		SET notice_category_num = #{notice_category_num},
 			notice_title = #{notice_board_title},
-			notice_content = #{notice_board_content},
+			notice_content =TO_CLOB(#{notice_board_content}),
 			notice_visible = #{notice_board_visible},
 			notice_update_date = SYSDATE,
 			notice_invisible_date = 
-				<if test="notice_board_invisible_date == null">
+			<choose>
+				<when test="notice_board_invisible_date == null">
 					TO_DATE(9999-12-30,'YYYY-MM-DD')
-				</if>
-				<if test="notice_board_invisible_date != null">
+				</when>
+				
+				<when test="notice_board_invisible_date != null">
 					TO_DATE(#{notice_board_invisible_date},'YYYY-MM-DD')
-				</if>
+				</when>
+			</choose>
 			WHERE notice_num = #{notice_board_num}
 	</update>
 	

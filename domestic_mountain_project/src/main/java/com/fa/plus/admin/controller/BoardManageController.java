@@ -93,7 +93,7 @@ public class BoardManageController {
 			for(int i = 0; i < category_list.size(); i++) {
 				
 				if (i % 3 == 0 ) {
-					dto.setNotice_category_num(Long.parseLong(category_list.get(i)));
+					dto.setNotice_category_num(Integer.parseInt(category_list.get(i)));
 				} else if (i % 3 == 1) {
 					dto.setNotice_category_name(category_list.get(i));
 				} else if ( i % 3 == 2) {
@@ -167,10 +167,28 @@ public class BoardManageController {
 	public String notice_board_update_submit(BoardManage dto) throws Exception {
 		
 		try {
+			System.out.println("notice_board_num" + dto.getNotice_board_num());
 			service.update_notice_board(dto);
+		
 		} catch (Exception e) {
 		}
 		
 		return "redirect:/admin/boardManage/notice_board_list";
+	}
+	
+	@GetMapping("notice_board_show")
+	public String notice_board_show(@RequestParam String notice_board_num, Model model) throws Exception {
+		
+		BoardManage dto = null;
+		try {
+			dto = service.find_by_notice_board_num(notice_board_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("mode", "show");
+		model.addAttribute("type", "board");
+		model.addAttribute("dto", dto);
+		
+		return "admin/boardManage/notice_modal";
 	}
 }

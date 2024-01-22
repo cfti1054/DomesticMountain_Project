@@ -1,5 +1,6 @@
 package com.fa.plus.admin.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -39,5 +40,8 @@ public interface MainManageService {
 	
 	public List<Stats> sort_by_monthly_sales_sum() throws Exception;
 	public List<Stats> sort_by_monthly_revenue_sum() throws Exception;	
+	
+	public Map<String, Object> thisMonthMember();
+	public Map<String, Object> lastMonthMember();
 	
 }

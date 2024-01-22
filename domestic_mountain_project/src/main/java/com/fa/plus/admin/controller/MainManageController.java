@@ -32,14 +32,22 @@ public class MainManageController {
 	 
 	@RequestMapping(value="/admin", method=RequestMethod.GET)
 	public String method(Model model) {
-
+		Map<String, Object> thisMonthMember = null;
+		Map<String, Object> lastMonthMember = null;
+		
 		Map<String, Object> today = service3.todayProduct();
 		Map<String, Object> thisMonth = service3.thisMonthProduct();
 		Map<String, Object> previousMonth = service3.previousMonthProduct();
+			thisMonthMember = service3.thisMonthMember();
+			lastMonthMember = service3.lastMonthMember();
+		
+		
 		
 		model.addAttribute("today", today);
 		model.addAttribute("thisMonth", thisMonth);
 		model.addAttribute("previousMonth", previousMonth);
+		model.addAttribute("thisMonthMember", thisMonthMember);
+		model.addAttribute("lastMonthMember", lastMonthMember);
 		
 		return ".adminLayout";
 	}

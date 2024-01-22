@@ -23,10 +23,14 @@ $(function(){
 		
 		Highcharts.chart('chart-container', {
 		    chart: {
+		    	backgroundColor: '#1A1C24',
 		        type: 'column'
 		    },
 		    title: {
-		        text: '연령대별 회원수'
+		        text: '연령대별 회원수',
+		        style: {
+		        	        color: 'white'
+		        	        }
 		    },
 		    xAxis: {
 		        categories: titles
@@ -82,7 +86,12 @@ $(function(){
 		  },
 		  legend: {
 		    top: '5%',
-		    left: 'center'
+		    left: 'center',
+		    itemGap: 50,
+		        textStyle: {
+			        color: '#FFF',
+		            fontSize: 30  
+		          }
 		  },
 		  series: [
 		    {
@@ -204,7 +213,7 @@ $(function(){
                   <div class="card-body">
                     <h4 class="card-title"><i class='far fa-address-book'></i> 회원 분석</h4>
                
-					<div id="tab-content" style=" width: 330px;">
+					<div id="tab-content" style=" width: 100%;">
 						<div id="chart-container"></div>
 					</div>
 
@@ -212,19 +221,19 @@ $(function(){
                  
                       <div class="text-md-center text-xl-left">
                         <h6 class="mb-1">총 회원수</h6>
-                        <p class="text-muted mb-0">2024-01-21, 기준</p>
+                        <p class="text-muted mb-0">${thisMonthMember.THISDATE}, 기준</p>
                       </div>
                       <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                        <h6 class="font-weight-bold mb-0">17명</h6>
+                        <h6 class="font-weight-bold mb-0">${thisMonthMember.THISMONTHMEMBER} 명</h6>
                       </div>
                     </div>
                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                       <div class="text-md-center text-xl-left">
                         <h6 class="mb-1">저번달 회원수</h6>
-                        <p class="text-muted mb-0">2023-12, 기준</p>
+                        <p class="text-muted mb-0">${lastMonthMember.LASTDATE}, 기준</p>
                       </div>
                       <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                        <h6 class="font-weight-bold mb-0">8명</h6>
+                        <h6 class="font-weight-bold mb-0">${lastMonthMember.LASTMONTHMEMBER} 명</h6>
                       </div>
                     </div>
                   </div>
@@ -235,7 +244,7 @@ $(function(){
                   <div class="card-body">
                     <div class="d-flex flex-row justify-content-between">
                       <h4 class="card-title mb-1"><i class="fas fa-chart-bar"></i> 통계</h4>
-                      <p class="text-muted mb-1">Your data status</p>
+                      <p class="text-muted mb-1"><!-- Your data status --></p>
                     </div>
                     <div class="row">
                       <div class="col-12">
@@ -243,7 +252,7 @@ $(function(){
  						<br>
  						
 						<div class="fs-6 fw-semibold mb-2"><i class='fab fa-cc-visa' style='font-size:19px; color:red;'></i> 최근 1주일 판매 현황</div>
-						<div class="charts-day border rounded" style="height: 550px;"></div>
+						<div class="charts-day rounded" style="height: 550px;"></div>
    
                         </div>
                       </div>

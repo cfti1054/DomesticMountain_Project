@@ -17,8 +17,15 @@ public class BoardManage {
 	private String notice_board_title;
 	private String notice_board_content;
 	private int notice_board_hit_count;
+
 	private String notice_board_reg_id;
 	private String notice_board_reg_date;
+	public long getNotice_category_num() {
+		return notice_category_num;
+	}
+	public long getNotice_board_num() {
+		return notice_board_num;
+	}
 	private String notice_board_update_id;
 	private String notice_board_update_date;
 	private int notice_board_visible;
@@ -26,11 +33,11 @@ public class BoardManage {
 	private String notice_board_invisible_date;
 	
 	
-	public long getNotice_category_num() {
-		return notice_category_num;
-	}
 	public void setNotice_category_num(long notice_category_num) {
 		this.notice_category_num = notice_category_num;
+	}
+	public void setNotice_board_num(long notice_board_num) {
+		this.notice_board_num = notice_board_num;
 	}
 	public String getNotice_category_name() {
 		return notice_category_name;
@@ -74,12 +81,7 @@ public class BoardManage {
 	public void setNotice_category_visible(int notice_category_visible) {
 		this.notice_category_visible = notice_category_visible;
 	}
-	public long getNotice_board_num() {
-		return notice_board_num;
-	}
-	public void setNotice_board_num(long notice_board_num) {
-		this.notice_board_num = notice_board_num;
-	}
+	
 	public String getNotice_board_title() {
 		return notice_board_title;
 	}

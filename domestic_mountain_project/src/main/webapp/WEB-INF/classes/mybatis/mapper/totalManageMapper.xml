@@ -109,7 +109,7 @@
 	</select>
 	
 	<select id="monthTotalMoney2"  parameterType="String" resultType="map">
-	
+		
 	</select>		
 	
 	<!--  요일별 판매 건수 -->
@@ -125,5 +125,19 @@
          FROM totalorder
          WHERE EXTRACT(MONTH FROM order_datetime) = #{month}	
 	</select>	
-		
+	
+	<!-- 총 회원 수  -->
+	<select id="thisMonthMember" resultType="map">
+		SELECT COUNT(*) AS thisMonthMember, TO_CHAR(SYSDATE,'YYYY-MM-DD') AS thisDate
+		FROM user1
+	</select>
+
+	<select id="lastMonthMember" resultType="map">
+	<![CDATA[ 
+		SELECT COUNT(*) AS lastMonthMember, TO_CHAR(add_months(SYSDATE,-1),'YYYY-MM') AS lastDate
+		FROM user1
+		WHERE TO_DATE(reg_date) < TO_DATE(add_months(SYSDATE,-1))
+		]]>
+	</select>
+	
 </mapper>
