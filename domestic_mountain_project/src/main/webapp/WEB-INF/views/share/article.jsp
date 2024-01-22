@@ -122,7 +122,7 @@
 				<table class="table mt-5 mb-0 board-article">
 					<thead>
 						<tr>
-							<td colspan="2" align="center">${dto.post_title}</td>
+							<td colspan="2" align="center" style="font-weight: 900; color: #c4676e;">${dto.post_title}</td>
 						</tr>
 					</thead>
 
@@ -160,16 +160,16 @@
 						</tr>
 
 						<tr>
-							<td colspan="2">이전글 : <c:if test="${not empty prevDto}">
-									<a
-										href="${pageContext.request.contextPath}/share/article?${query}&post_num=${prevDto.post_num}">${prevDto.post_title}</a>
+							<td colspan="2">&nbsp;<c:if test="${not empty prevDto}">
+									<a class="font-array"
+										href="${pageContext.request.contextPath}/share/article?${query}&post_num=${prevDto.post_num}"><span class="a-span">이전글 : </span>${prevDto.post_title}</a>
 								</c:if>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">다음글 : <c:if test="${not empty nextDto}">
-									<a
-										href="${pageContext.request.contextPath}/share/article?${query}&post_num=${nextDto.post_num}">${nextDto.post_title}</a>
+							<td colspan="2">&nbsp;<c:if test="${not empty nextDto}">
+									<a class="font-array"
+										href="${pageContext.request.contextPath}/share/article?${query}&post_num=${nextDto.post_num}"><span class="a-span">다음글 : </span>${nextDto.post_title}</a>
 								</c:if>
 							</td>
 						</tr>

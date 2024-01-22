@@ -142,6 +142,7 @@
 	display: table-cell;
 	position: relative;
 	color: #222;
+	cursor: pointer;
 }
 
 .article-movie-sub .tit_area {
@@ -553,3 +554,27 @@ element.style {
     display: block;
 }
 
+.font-array {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 850px;
+    display: inline-block;
+}
+
+.a-span {
+	text-decoration: none; 
+	color:#000;
+}
+
+.show3 .body-main .board-list tbody tr td .text-reset {
+	color: inherit!important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 650px;
+    display: block;
+}
+.notice-container .table tbody tr td {
+	padding: 0.5rem 0 0 0;
+}
