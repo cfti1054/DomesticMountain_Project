@@ -158,6 +158,7 @@ function searchList(f) {
 											</div>
 										</div>
 									</div>
+									<c:if test="${dto.post_fileCount != 0}">
 									<div class="movie-img">
 	
 										<a href="#"> <img
@@ -167,6 +168,7 @@ function searchList(f) {
 													추가 이미지가 있습니다</span></span>
 										</a>
 									</div>
+									</c:if>
 								</li>
 	
 							</ul>
@@ -181,10 +183,18 @@ function searchList(f) {
 							<div class="article-album-sub">
 								<c:forEach var="dto" items="${list}" varStatus="status">
 									<ul>
-										<li class="show-2-li"><a href="${articleUrl}&num=${dto.post_num}" class="album-img"> <img
-												width="200" height="200"
-												src="${pageContext.request.contextPath}/uploads/recommend/${dto.saveFilename}" alt="">
-										</a>
+										<li class="show-2-li">
+											<a href="${articleUrl}&num=${dto.post_num}" class="album-img"> 
+												<c:choose>
+													<c:when test="${dto.post_fileCount != 0}">
+														<img width="200" height="200" src="${pageContext.request.contextPath}/uploads/recommend/${dto.saveFilename}" alt="">
+													</c:when>
+													<c:otherwise>
+														<img width="200" height="200" src="${pageContext.request.contextPath}/resources/images/mountain_route.png" alt="">
+													</c:otherwise>
+												</c:choose>
+												
+											</a>
 		
 											<dl>
 												<dt>

@@ -143,7 +143,7 @@
 							<td>첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
 							<td><input type="file" name="selectFile"
 								class="form-control" multiple>
-								<p class="help-block">파일은 선택사항입니다.(다중 선택 가능)11</p></td>
+								<p class="help-block">파일은 선택사항입니다.(다중 선택 가능)</p></td>
 
 						</tr>
 						<c:if test="${mode=='update'}">

@@ -543,3 +543,13 @@ element.style {
 .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
 	cursor: pointer;
 }
+
+.card_area .con .con_top .tit_area .inner strong {
+	
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 850px;
+    display: block;
+}
+
