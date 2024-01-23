@@ -75,7 +75,7 @@
 			<div>
 				<h1 class="mt-4">주문 현황</h1>
 				<ol class="breadcrumb mb-4">
-					<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/">Dashboard</a></li>
 					<li class="breadcrumb-item active">주문 리스트</li>
 				</ol>
 				<div class="card mb-4">
@@ -169,7 +169,7 @@
 				</div>
 			</div>
 
-
+			</div>
 		</div>
 	</main>
 </div>
@@ -568,8 +568,38 @@ $(function(){
         
         
 <script>
+var columnIndex = 1;
+var newHeaderText = "주문 일자";
 $(document).ready(function() {
-	var oTable = $('#order_table').DataTable();
+	var oTable = $('#order_table').DataTable({
+		language: {
+			"emptyTable": "데이터가 없습니다",
+		    "info": "_START_ - _END_ \/ _TOTAL_",
+		    "infoEmpty": "0 - 0 \/ 0",
+		    "infoFiltered": "(총 _MAX_ 개)",
+		    "infoThousands": ",",
+		    "lengthMenu": "페이지당 데이터 수 _MENU_",
+		    "loadingRecords": "읽는중...",
+		    "processing": "처리중...",
+		    "search": "검색:",
+		    "zeroRecords": "검색 결과가 없습니다",
+		    "paginate": {
+		        "first": "처음",
+		        "last": "마지막",
+		        "next": "다음",
+		        "previous": "이전"
+		    },
+		    "aria": {
+		        "sortAscending": ": 오름차순 정렬",
+		        "sortDescending": ": 내림차순 정렬"
+		    }
+		}
+	});
+	var columnHeader = oTable.column(columnIndex).header();
+	var columnFooter = oTable.column(columnIndex).footer();
+	/* $(columnHeader).attr('aria-label', newAriaLabel); */
+	$(columnHeader).text(newHeaderText);
+	$(columnFooter).text(newHeaderText);
 	
 	$('#order_table tbody').on( 'click', 'tr', function () {
 		let orderNum = $(this).attr("data-orderNum");
