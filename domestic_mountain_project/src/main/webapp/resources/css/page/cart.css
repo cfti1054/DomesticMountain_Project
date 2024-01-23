@@ -57,4 +57,7 @@
   align-self: flex-end;
 }
 
+.product-hov {
+	cursor: pointer;
+}
 

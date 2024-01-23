@@ -203,11 +203,13 @@
 													name="nums" type="checkbox" value="${dto.cart_num}">
 													<input type="hidden" name="cart_nums"
 													value="${dto.cart_num}"></td>
-												<td class="w-144 h-144"><img class="border rounded"
-													src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+												<td class="w-144 h-144">
+													<a class="product-hov" href="${pageContext.request.contextPath}/product/${dto.product_num}"><img class="border rounded"
+													src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}"></a>
 												</td>
+												
 												<td class="cart-name" style="width: 520px;">
-													<p>${dto.product_name}</p>
+													<a class="product-hov" href="${pageContext.request.contextPath}/product/${dto.product_num}" style="color: #000;"><span>${dto.product_name}</span></a>
 													<p style="font-size: small; font-weight: bold;">선택사항 :
 														${dto.option_value}, ${dto.option_value2}</p>
 

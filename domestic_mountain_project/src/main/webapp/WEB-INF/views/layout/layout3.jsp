@@ -274,7 +274,7 @@ function createDiv(height, width) {
 
 <body>
 
-	<div class="cursor" style="position: absolute;">
+	<div class="cursor" style="position: absolute; z-index: 99999;">
 		<img
 			src="${pageContext.request.contextPath}/resources/images/water.png"
 			width="25">
