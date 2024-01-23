@@ -56,7 +56,7 @@
 				<c:choose>
 				    <c:when test="${empty sessionScope.loginUser}">
 				        
-				        <div class="p-2">
+				        <div class="p-2" style="cursor: pointer;">
 				            <i class="fa-solid fa-user login-btn" id="login-btn"></i>
 				        </div>
 				        <a href="${pageContext.request.contextPath}/user/user" title="회원가입"><i class="fa-solid fa-user-plus login-btn"></i></a>
