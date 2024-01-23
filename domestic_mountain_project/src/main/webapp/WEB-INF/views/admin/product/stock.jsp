@@ -129,6 +129,7 @@ $(function(){
 	href="${pageContext.request.contextPath}/resources/css/boot-board.css"
 	type="text/css">
 
+
 <div id="container">
 	<main class="stockForm">
 		<div class="body-container">

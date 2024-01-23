@@ -98,6 +98,23 @@
 					</div>
 
 
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseOrder" aria-expanded="false"
+						aria-controls="collapseOrder">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-cart-shopping"></i>
+						</div> 주문 관리
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="collapseOrder"
+						aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav">
+							<a class="nav-link"
+								href="${pageContext.request.contextPath}/admin/orderManage/order_list">주문 관리</a>
+						</nav>
+					</div>
 
 
 					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapseSupport" aria-expanded="false"  aria-controls="collapseSupport">
@@ -108,7 +125,7 @@
 							<i class="fas fa-angle-down"></i>
 						</div>
 					</a>
-					<div class="collapse" id="collapseSupport"  aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+					<div class="collapse" id="collapseSupport"  aria-labelledby="headingFive" data-bs-parent="#sidenavAccordion">
 						<nav class="sb-sidenav-menu-nested nav accordion"  id="sidenavAccordionPages">
 						
 							<a class="nav-link collapsed" href="${pageContext.request.contextPath}/admin/support/inquiry_category_list" data-bs-toggle="collapse"  data-bs-target="#pagesCollapseInquiry" aria-expanded="false"  aria-controls="pagesCollapseInquiry"> 1 : 1 문의 관리
@@ -116,7 +133,7 @@
 									<i class="fas fa-angle-down"></i>
 								</div>
 							</a>
-							<div class="collapse" id="pagesCollapseInquiry" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+							<div class="collapse" id="pagesCollapseInquiry" aria-labelledby="headingSix" data-bs-parent="#sidenavAccordionPages">
 								<nav class="sb-sidenav-menu-nested nav">
 									<a class="nav-link" href="${pageContext.request.contextPath}/admin/support/inquiry_category_list">카테고리 관리</a>
 									<a class="nav-link" href="${pageContext.request.contextPath}/admin/support/inquiry_board_list">문의 관리</a>
@@ -128,7 +145,7 @@
 									<i class="fas fa-angle-down"></i>
 								</div>
 							</a>
-							<div class="collapse" id="pagesCollapseFaq"  aria-labelledby="headingOne"  data-bs-parent="#sidenavAccordionPages">
+							<div class="collapse" id="pagesCollapseFaq"  aria-labelledby="headingSeven"  data-bs-parent="#sidenavAccordionPages">
 								<nav class="sb-sidenav-menu-nested nav">
 									<a class="nav-link"  href="${pageContext.request.contextPath}/admin/support/faq_category_list">
 										카테고리 관리</a> 
@@ -164,25 +181,6 @@
 								</nav>
 							</div>
 
-							<a class="nav-link collapsed"
-								href="${pageContext.request.contextPath}/admin/support/faq_category_list"
-								data-bs-toggle="collapse" data-bs-target="#pagesCollapseReport"
-								aria-expanded="false" aria-controls="pagesCollapseReport">
-								신고 관리
-								<div class="sb-sidenav-collapse-arrow">
-									<i class="fas fa-angle-down"></i>
-								</div>
-							</a>
-							<div class="collapse" id="pagesCollapseReport"
-								aria-labelledby="headingOne"
-								data-bs-parent="#sidenavAccordionPages">
-								<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link"
-										href="#">
-										신고 현황</a> 
-								</nav>
-							</div>
-
 						</nav>
 					</div>
 
@@ -197,7 +195,8 @@
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-chart-area"></i>
 						</div> 회원 통계
-					</a> <a class="nav-link"
+					</a> 
+					<a class="nav-link"
 						href="${pageContext.request.contextPath}/admin/stats/sales_main">
 						<div class="sb-nav-link-icon">
 							<i class="fas 	fa-won-sign"></i>

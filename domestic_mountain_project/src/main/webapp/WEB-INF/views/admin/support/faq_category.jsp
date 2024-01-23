@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
 <link href="https://code.jquery.com/jquery-3.7.0.js"  rel="stylesheet"/>
@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css"/>   
 <link href="${pageContext.request.contextPath}/resources/admin/static/css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+
 <script>
         function ajaxFun(url, method, formData, dataType, fn, file = false) {
         	const settings = {
@@ -62,7 +64,7 @@
 			<div>
 				<h1 class="mt-4">고객지원</h1>
 				<ol class="breadcrumb mb-4">
-					<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/">Dashboard</a></li>
 					<li class="breadcrumb-item active">FAQ 카테고리</li>
 				</ol>
 				<div class="card mb-4">
@@ -154,10 +156,42 @@
         		 	console.log($(item).val());
         		 });
         	 }
-             
+            var columnIndex = 1;
+            var newAriaLabel = "카테고리 이름";
+            var newHeaderText = "카테고리 이름";
         $(document).ready(function() {
-        	var oTable = $('#faq_category_table').DataTable();
-
+        	var oTable = $('#faq_category_table').DataTable({
+        		language: {
+        			"emptyTable": "데이터가 없습니다",
+        		    "info": "_START_ - _END_ \/ _TOTAL_",
+        		    "infoEmpty": "0 - 0 \/ 0",
+        		    "infoFiltered": "(총 _MAX_ 개)",
+        		    "infoThousands": ",",
+        		    "lengthMenu": "페이지당 데이터 수 _MENU_",
+        		    "loadingRecords": "읽는중...",
+        		    "processing": "처리중...",
+        		    "search": "검색:",
+        		    "zeroRecords": "검색 결과가 없습니다",
+        		    "paginate": {
+        		        "first": "처음",
+        		        "last": "마지막",
+        		        "next": "다음",
+        		        "previous": "이전"
+        		    },
+        		    "aria": {
+        		        "sortAscending": ": 오름차순 정렬",
+        		        "sortDescending": ": 내림차순 정렬"
+        		    }
+        		}
+        	});
+					
+        	var columnHeader = oTable.column(columnIndex).header();
+        	var columnFooter = oTable.column(columnIndex).footer();
+        	/* $(columnHeader).attr('aria-label', newAriaLabel); */
+        	$(columnHeader).text(newHeaderText);
+        	$(columnFooter).text(newHeaderText);
+        	
+        	
         	$('#faq_category_table tbody').on( 'click', 'tr', function () {
         	    $(this).toggleClass('selected');
         	    var pos = oTable.row(this).index();
@@ -200,7 +234,7 @@
              		
              		let url = "${pageContext.request.contextPath}/admin/support/multi_category";
              		let query = "category_dto=" + oAll;
-             		
+
              		
              		const fn = function(data) {
              			$("#faq-dialog").html(data);

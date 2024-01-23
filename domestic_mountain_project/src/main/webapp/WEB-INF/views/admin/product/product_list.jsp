@@ -136,7 +136,7 @@ function changeSubList() {
 				
 				<table class="table-select" style="width: 100%">
 					<tr>
-						<td align="left" width="80%" >
+						<td align="left" width="100%">
 							<form>
 								<div style="float: left">
 									<select id="changeCategory" class="form-select" onchange="changeList();">
@@ -189,7 +189,7 @@ function changeSubList() {
 				</table>
 
 
-				<table class="table table-border table-list">
+				<table id="product_table" class="table table-border table-list">
 					<thead class="table-light">
 						<tr>
 							<th width="80">이미지</th>
@@ -294,4 +294,3 @@ function changeSubList() {
 		</div>
 	</main>
 </div>
-
