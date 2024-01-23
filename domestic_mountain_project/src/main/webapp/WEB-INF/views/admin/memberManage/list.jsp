@@ -230,8 +230,8 @@ function printMemberManage() {
 			<h2>&nbsp;<i class='fas fa-user-tie'></i> 등급변경 내역</h2>
 			
 
-			<div class="container">
-
+			<!-- <div class="container"> -->
+<div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
 				<div style="padding-bottom: 10px; display: flex;">
 					<select id="selectEnabled" class="form-select"
 						onchange="searchList();"
@@ -254,7 +254,7 @@ function printMemberManage() {
 							type="hidden" name="enabled" value="${enabled}"> <input
 							type="hidden" name="page" value="1">
 						<button type="button" class="btn" onclick="searchList()"
-							style="width: 100px; padding: 3px;">검색</button>
+							style="width: 100px; padding: 3px; margin: 0 30px 0; border: 0.5px solid;">검색</button>
 					</form>
 					<button type="button" class="btn1" onclick="printMemberManage();"
 						style="float: right;">Print</button>
@@ -270,8 +270,8 @@ function printMemberManage() {
 
 				<form name="memberForm" method="post">
 					<table class="table table-border table-form" id="">
-						<tr>
-							<td style="width: 10%;" align="center">회원번호</td>
+						<tr style="background: #c3c7cd !important; font-size: larger; color:white;">
+							<td style="width: 10%; background: #c3c7cd;"  align="center">회원번호</td>
 							<td style="width: 10%;" align="center">회원이름</td>
 							<td style="width: 10%;" align="center">회원구분</td>
 							<td style="width: 10%;" align="center">생년월일</td>

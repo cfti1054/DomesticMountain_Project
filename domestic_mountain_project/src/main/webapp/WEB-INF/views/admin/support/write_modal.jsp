@@ -4,7 +4,14 @@
 
 
 <h3 style="font-size: 15px; padding-top: 10px;"><i class="fa-solid fa-angles-right"></i> FAQ 추가 / 수정 </h3>
-
+<style>
+        .custom-div {
+            height: 100%; /* Set the height to the desired number of rows */
+            overflow: auto; /* Add a scrollbar if content exceeds the height */
+            border: 0.5px solid #ccc; /* Optional: Add a border for visual separation */
+            padding: 5px; /* Optional: Add padding for better appearance */
+        }
+    </style>
 <c:choose>
 	<c:when test="${mode == 'write' && type =='category' }">
 		<form name="categoryWriteForm" method="post" id="categoryWriteForm">
@@ -120,15 +127,15 @@
 	</c:when>
 	
 	<c:when test="${mode=='show'}">
-		<table class="table td-border mx-auto my-10" style="width: 99%;">
+		<table class="table td-border mx-auto my-10" style="vertical-align: middle; width: 99%; height: 100%;">
 			<tr>
 				<td width="30%" class="text-center bg-light">FAQ 질문</td>
-				<td width="70%" class="ps-3"><textarea class="input" name="faq_question" id="faq_question" cols="70" rows="2" readonly>${dto.faq_question}</textarea></td>
-						
+				<td width="70%" class="ps-3"><div class="custom-div">${dto.faq_question}</div></td>
 			</tr>
 			<tr>
 				<td class="text-center bg-light">FAQ 답변</td>
-				<td colspan="3" class="ps-3"><textarea class="input" name="faq_content" id="faq_content" cols="70" rows="7" readonly>${dto.faq_content}</textarea></td>	
+				<td colspan="3" class="ps-3"><div class="custom-div">${dto.faq_content}</div></td>
+				<%-- <textarea class="input" name="faq_content" id="faq_content" cols="70" rows="7" readonly>${dto.faq_content}</textarea> --%>	
 			</tr>
 			
 		</table>

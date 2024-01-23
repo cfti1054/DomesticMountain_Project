@@ -113,7 +113,7 @@
 								</tbody>
 							</table>
 						</form>
-							<div>
+							<div style="margin: 20px 5px 5px 5px; display: flex; justify-content: space-between;">
 								<p>
 									<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
 								</p>
@@ -157,6 +157,9 @@
              var columnIndex = 1;
              var newAriaLabel = "카테고리 이름";
              var newHeaderText = "카테고리 이름";
+             
+             var columnIndex2 = 3;
+             var newHeaderText2 = "내용";
         $(document).ready(function() {
         	var oTable = $('#notice_category_table').DataTable({
         		language: {
@@ -187,6 +190,12 @@
         	/* $(columnHeader).attr('aria-label', newAriaLabel); */
         	$(columnHeader).text(newHeaderText);
         	$(columnFooter).text(newHeaderText);
+        	
+        	var columnHeader2 = oTable.column(columnIndex2).header();
+        	var columnFooter2 = oTable.column(columnIndex2).footer();
+        	/* $(columnHeader).attr('aria-label', newAriaLabel); */
+        	$(columnHeader2).text(newHeaderText2);
+        	$(columnFooter2).text(newHeaderText2);
 
         	$('#notice_category_table tbody').on( 'click', 'tr', function () {
         	    $(this).toggleClass('selected');

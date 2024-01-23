@@ -227,7 +227,7 @@ function update(inquiry_board_num) {
 							</table>
 							</form>
 							
-							<p>
+							<p style="margin: 20px 5px 5px 5px; display: flex; justify-content: flex-end;">
 								<button type="submit" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/admin/boardManage/notice_board_write';" title="추가"><i class="fas fa-plus"></i></button>
 							</p>
 							<!-- 
@@ -256,6 +256,9 @@ function update(inquiry_board_num) {
              /* simple data table 행 다중선택 스크립트 */
              var columnIndex = 1;
             var newHeaderText = "분류";
+            
+            var columnIndex2 = 3;
+            var newHeaderText2 = "내용";
         $(document).ready(function() {
         	var oTable = $('#notice_board_table').DataTable({
         		language: {
@@ -286,6 +289,10 @@ function update(inquiry_board_num) {
         	/* $(columnHeader).attr('aria-label', newAriaLabel); */
         	$(columnHeader).text(newHeaderText);
         	$(columnFooter).text(newHeaderText);
+        	var columnHeader2 = oTable.column(columnIndex2).header();
+        	var columnFooter2 = oTable.column(columnIndex2).footer();
+        	$(columnHeader2).text(newHeaderText2);
+        	$(columnFooter2).text(newHeaderText2);
     	});
         	/*
         	$('#inquiry_board_table tbody').on( 'click', 'tr', function () {

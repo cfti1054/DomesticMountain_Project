@@ -2,6 +2,53 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<style>
+.table tr {
+	height: 48px;
+}
+
+.table tr td > * {
+	height: 38px;
+}
+.table form {
+	display: flex;
+	float: right;
+	
+}
+
+.table button,
+.table-select button {
+	width: auto;
+	border: 1px solid #ccc;
+}
+
+.table form .form-select,
+.table form .form-control{
+	width: 200px;
+	margin: 0 3px;
+}
+
+.table-select {
+	margin-bottom: 15px;
+}
+
+.table-list tbody tr {
+	height: 65px;
+}
+.table-list tbody tr td {
+	vertical-align: middle;
+}
+.form-list {
+	width: auto; 
+	padding: 0;
+	display: flex;
+}
+.form-list select,
+.form-list button {
+	margin-right: 5px;
+}
+</style>
+
 <script type="text/javascript">
 // 회원목록/회원분석 구분
 $(function(){
@@ -75,7 +122,7 @@ function profile(useridx) {
 			}
 		},
 		
-		height: 550,
+		height: 650,
 		width: 800,
 		title: "회원 상세 정보",
 		close: function(event, ui) {
@@ -133,7 +180,7 @@ function memberStateDetaileView() {
 	$("#memberStateDetaile").dialog({
 		modal: true,
 		minHeight: 100,
-		maxHeight: 450,
+		maxHeight: 650,
 		width: 750,
 		title: "회원 상태 상세",
 		close: function(event, ui) {
@@ -147,7 +194,7 @@ function memberRankDetaileView() {
 	$("#memberRankDetaile").dialog({
 		modal: true,
 		minHeight: 100,
-		maxHeight: 450,
+		maxHeight: 650,
 		width: 750,
 		title: "회원 등급 상세",
 		close: function(event, ui) {
@@ -229,16 +276,17 @@ function printMemberManage() {
 			<h2><i class='fas fa-user-alt'></i> 회원 목록</h2>
 			<hr>
 			
-			<div>
+			<!-- <div>
 				<ul class="tabs">
 					<li id="tab-0" data-tab="0"><i class="fa-solid fa-person"></i>&nbsp;회원
 						리스트</li>
 					<li id="tab-1" data-tab="1"><i
 						class="fa-solid fa-chart-column"></i>&nbsp;회원 분석</li>
 				</ul>
-			</div>
+			</div> -->
 
-			<div class="container">
+			<!-- <div class="container"> -->
+			<div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
 
 				<div style="padding-bottom: 10px; display: flex;">
 					<select id="selectEnabled" class="form-select"
@@ -262,8 +310,7 @@ function printMemberManage() {
 							type="hidden" name="enabled" value="${enabled}"> <input
 							type="hidden" name="page" value="1">
 						<button type="button" class="btn" onclick="searchList()"
-							style="width: 60px; padding: 3px;">검색</button>
-						<a style="padding-left: 20px;">${dataCount}개(${page}/${total_page} 페이지)</a>
+							style="width: 60px; padding: 3px; margin: 0 30px 0; border: 0.5px solid;">검색</button>
 					</form>
 					<button type="button" class="btn1" onclick="printMemberManage();"
 						style="float: right;">Print</button>
@@ -273,14 +320,15 @@ function printMemberManage() {
 					<button type="button"
 						onclick="location.href='${pageContext.request.contextPath}/admin/memberManage/pdf';"
 						class="btn3" style="float: right;">PDF</button>
+						<a style="margin-left: auto; padding-left: 20px;">${dataCount}개(${page}/${total_page} 페이지)</a>
 				</div>
 
 
 
 				<form name="memberForm" method="post">
 					<table class="table table-border table-form" id="">
-						<tr>
-							<td style="width: 10%;" align="center">회원번호</td>
+						<tr style="background: #c3c7cd !important; font-size: larger; color:white;">
+							<td style="width: 10%; background: #c3c7cd;" align="center">회원번호</td>
 							<td style="width: 15%;" align="center">회원이름</td>
 							<td style="width: 15%;" align="center">회원구분</td>
 							<td style="width: 20%;" align="center">생년월일</td>
@@ -319,7 +367,7 @@ function printMemberManage() {
 
 <script>
         // 부트스트랩 table (미적용)
-          window.addEventListener('DOMContentLoaded', event => {
+    /*       window.addEventListener('DOMContentLoaded', event => {
             const datatablesSimple = document.getElementById('memberManage_table');
             if (datatablesSimple) {
                 new simpleDatatables.DataTable(datatablesSimple);
@@ -331,7 +379,7 @@ function printMemberManage() {
             	
             	console.log(row)
             })
-        });  
+        });   */
                
         </script>
 

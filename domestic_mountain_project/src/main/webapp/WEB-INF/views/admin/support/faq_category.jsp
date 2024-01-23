@@ -115,14 +115,15 @@
 								</tbody>
 							</table>
 						</form>
-						<p>
-							<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
-						</p>
-						<p>
-							<button type="button" class="btn btn-primary" id="add_button" >추가</button>
-							<!-- onclick="write();" -->
-						</p>
-
+						<div style="margin: 20px 5px 5px 5px; display: flex; justify-content: space-between;">
+							<p>
+								<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
+							</p>
+							<p>
+								<button type="button" class="btn btn-primary" id="add_button" >추가</button>
+								<!-- onclick="write();" -->
+							</p>
+						</div>
 					</div>
 				</div>
 				<div id="faq-dialog" style="display: none;"></div>
@@ -159,6 +160,9 @@
             var columnIndex = 1;
             var newAriaLabel = "카테고리 이름";
             var newHeaderText = "카테고리 이름";
+            
+            var columnIndex2 = 3;
+            var newHeaderText2 = "등록일자";
         $(document).ready(function() {
         	var oTable = $('#faq_category_table').DataTable({
         		language: {
@@ -190,7 +194,10 @@
         	/* $(columnHeader).attr('aria-label', newAriaLabel); */
         	$(columnHeader).text(newHeaderText);
         	$(columnFooter).text(newHeaderText);
-        	
+        	var columnHeader2 = oTable.column(columnIndex2).header();
+        	var columnFooter2 = oTable.column(columnIndex2).footer();
+        	$(columnHeader2).text(newHeaderText2);
+        	$(columnFooter2).text(newHeaderText2);
         	
         	$('#faq_category_table tbody').on( 'click', 'tr', function () {
         	    $(this).toggleClass('selected');

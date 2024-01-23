@@ -174,7 +174,7 @@ function update(inquiry_board_num) {
 										<th>번호</th>
 										<th>분류</th>
 										<th>질문</th>
-										<th>내용 </th>
+										<th>내용</th>
 										<th>작성자</th>
 										<th>등록일자</th>
 										<th>답변 여부</th>
@@ -187,7 +187,7 @@ function update(inquiry_board_num) {
 										<th>번호</th>
 										<th>분류</th>
 										<th>질문</th>
-										<th>답변 </th>
+										<th>내용</th>
 										<th>작성자</th>
 										<th>등록일자</th>
 										<th>답변 여부</th>
@@ -266,6 +266,8 @@ function update(inquiry_board_num) {
              /* simple data table 행 다중선택 스크립트 */
              var columnIndex = 1;
             var newHeaderText = "분류";
+            var columnIndex2 = 3;
+            var newHeaderText2 = "내용";
         $(document).ready(function() {
         	var oTable = $('#inquiry_board_table').DataTable({
         		language: {
@@ -296,6 +298,12 @@ function update(inquiry_board_num) {
         	/* $(columnHeader).attr('aria-label', newAriaLabel); */
         	$(columnHeader).text(newHeaderText);
         	$(columnFooter).text(newHeaderText);
+        	
+        	var columnHeader2 = oTable.column(columnIndex2).header();
+        	var columnFooter2 = oTable.column(columnIndex2).footer();
+        	/* $(columnHeader).attr('aria-label', newAriaLabel); */
+        	$(columnHeader2).text(newHeaderText2);
+        	$(columnFooter2).text(newHeaderText2);
     	});
         	/*
         	$('#inquiry_board_table tbody').on( 'click', 'tr', function () {

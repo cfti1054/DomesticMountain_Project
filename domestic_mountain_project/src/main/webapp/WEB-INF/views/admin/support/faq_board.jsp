@@ -154,12 +154,14 @@ function showContent(faq_num) {
 								</tbody>
 							</table>
 							</form>
-							<p>
-								<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
-							</p>
-							<p>
-								<button type="button" class="btn btn-primary" id="add_button">추가</button>
-							</p>
+							<div style="margin: 20px 5px 5px 5px; display: flex; justify-content: space-between;">
+								<p>
+									<button type="submit" class="btn btn-secondary" id="visible_button">수정</button>
+								</p>
+								<p>
+									<button type="button" class="btn btn-primary" id="add_button">추가</button>
+								</p>
+							</div>
                             </div>
                         </div>
 					<div id="faq-dialog" style="display: none;"></div>
@@ -182,6 +184,8 @@ function showContent(faq_num) {
              /* simple data table 행 다중선택 스크립트 */
               var columnIndex = 1;
             var newHeaderText = "분류";
+            var columnIndex2 = 3;
+            var newHeaderText2 = "답변";
         $(document).ready(function() {
         	var oTable = $('#faq_board_table').DataTable({
         		language: {
@@ -212,6 +216,10 @@ function showContent(faq_num) {
         	/* $(columnHeader).attr('aria-label', newAriaLabel); */
         	$(columnHeader).text(newHeaderText);
         	$(columnFooter).text(newHeaderText);
+        	var columnHeader2 = oTable.column(columnIndex2).header();
+        	var columnFooter2 = oTable.column(columnIndex2).footer();
+        	$(columnHeader2).text(newHeaderText2);
+        	$(columnFooter2).text(newHeaderText2);
 
         	$('#faq_board_table tbody').on( 'click', 'tr', function () {
         	    $(this).toggleClass('selected');

@@ -57,10 +57,10 @@
 	
 
 	<c:when test="${mode=='show' && type=='board'}">
-		<table class="table td-border mx-auto my-10" style="width: 99%; word-break: keep-all;">
+		<table class="table td-border mx-auto my-10" style="width: 99%; word-break: keep-all; height:100%; vertical-align: middle;">
 			<tr>
 				<td class="text-center bg-light">1:1 질문</td>
-				<td class="ps-3"><p class="input" id="inquiry_board_title">${dto.inquiry_board_title}</p></td>
+				<td class="ps-3"><p class="input" id="inquiry_board_title" style="margin: 0;">${dto.inquiry_board_title}</p></td>
 			</tr>
 			
 			<tr>
@@ -76,7 +76,7 @@
 			
 			<tr>
 				<td class="text-center bg-light">질문 내용</td>
-				<td colspan="3" class="ps-3"><p class="input" id="inquiry_board_content">${dto.inquiry_board_content}</p></td>	
+				<td colspan="3" class="ps-3"><p class="input" id="inquiry_board_content" style="margin: 0;">${dto.inquiry_board_content}</p></td>	
 			</tr>
 			
 		</table>
@@ -109,7 +109,7 @@
 			</tr>
 			<tr>
 				<td>1:1 답변 제목</td>
-				<td class="ps-5"><textarea class="input" name="inquiry_answer_title" id="inquiry_answer_title" cols="35" rows="3" required>${dto.inquiry_answer_title}</textarea></td>
+				<td class="ps-5"><textarea class="input" name="inquiry_answer_title" id="inquiry_answer_title" cols="70" rows="3" required>${dto.inquiry_answer_title}</textarea></td>
 			</tr>
 			
 			<tr>
@@ -150,7 +150,7 @@
 				<tr>
 					<td class="text-center bg-light">1:1 답변 제목</td>
 					<td class="ps-3">
-						<textarea class="input" name="inquiry_answer_title" id="inquiry_answer_title" cols="35" rows="3" required>${dto.inquiry_answer_title}</textarea>
+						<textarea class="input" name="inquiry_answer_title" id="inquiry_answer_title" cols="70" rows="3" required>${dto.inquiry_answer_title}</textarea>
 					</td>
 				</tr>
 				
