@@ -192,8 +192,8 @@
 					<div class="div-tag">
 						<span class="tag">Classification</span>
 					</div>
-					<h2 class="title">지역별 커뮤니티</h2>
-					<p class="info">추천 코스, 유저가 만든 코스의 정보와 함께 동행 산행 신청 할 수 있는
+					<h2 class="title">동행 산행 신청</h2>
+					<p class="info">다른 유저들과 함께 동행 산행 신청 할 수 있는
 						커뮤니티입니다.</p>
 					<button class="area-6-button" type="button" onclick="location.href='${pageContext.request.contextPath}/together/list'">
 						<span>Go to see</span>
