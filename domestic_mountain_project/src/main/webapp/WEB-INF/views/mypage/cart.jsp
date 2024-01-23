@@ -196,6 +196,7 @@
 
 
 								<table class="table cart-list">
+								
 									<tbody>
 										<c:forEach var="dto" items="${list}">
 											<tr class="cart-container">
