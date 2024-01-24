@@ -295,7 +295,8 @@ public class ProductManageController {
 	
 	// 재고 관리 이동
 	@GetMapping("stock")
-	public String stockForm(@RequestParam long product_num,
+	public String stockForm(
+			@RequestParam long product_num,
 			@RequestParam String page,
 			Model model) throws Exception {
 

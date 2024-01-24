@@ -135,8 +135,9 @@ function searchList(f) {
 										<div class="con">
 											<div class="con_top">
 												<div class="tit_area">
-													<span class="inner"> <strong>${dto.post_title}</strong>
+													<a  class="tit"><span class="inner"> <strong>${dto.post_title}</strong>
 													</span>
+													</a>
 												</div>
 	
 	

@@ -179,7 +179,10 @@
 
 .article-movie-sub .txt {
 	display: block;
-	max-height: 70.22px;
+	
+	/* max-height: 70.22px;*/
+	max-height: 67px;
+	
 	margin-top: 3px;
 	font-size: 14px;
 	line-height: 22px;
