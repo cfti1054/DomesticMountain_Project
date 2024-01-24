@@ -556,23 +556,36 @@ function sendOk(mode) {
 
 		<div class="tab-pane fade" id="tab-pane-2" role="tabpanel"
 			aria-labelledby="tab-2" tabindex="0">
-			<div class="mt-3 pt-3 border-bottom">
-				<p class="fs-4 fw-semibold">리뷰</p>
-			</div>
-			<div class="mt-3">
+			<div class="mt-3 review-mainbox">
 
-				<div class="mt-3 border-bottom">
+				<div class="border-bottom review-box">
 					<div class="p-2">
 						<div class="col-auto fs-2">
 							<i class="bi bi-person-circle text-muted icon"></i>
 						</div>
-						<div class="col pt-3 ps-0 fw-semibold">김*바</div>
+						<div class="col pt-3 ps-0 fw-semibold">박*준</div>
 						<div class="col pt-3 text-end">
 							<span>2024-01-16</span> |<span class="notifyReview" data-num="4">신고</span>
 						</div>
 					</div>
-					<div class="mt-2 p-2">리뷰 내용</div>
+					<div class="mt-2 p-2">편해보이는 등산룩 맞춰보려고 여러 사이트에서 찾아보고 검색하고 있었는데 제가 딱 원하는 스타일의 제품을 찾은거 같아요!! 행복합니다 ㅎㅎㅎ</div>
 				</div>
+				
+				
+				<div class="border-bottom review-box">
+					<div class="p-2">
+						<div class="col-auto fs-2">
+							<i class="bi bi-person-circle text-muted icon"></i>
+						</div>
+						<div class="col pt-3 ps-0 fw-semibold">김*미</div>
+						<div class="col pt-3 text-end">
+							<span>2023-12-06</span> |<span class="notifyReview" data-num="4">신고</span>
+						</div>
+					</div>
+					<div class="mt-2 p-2">처음으로 다이어트를 하기 위해서 등산 관련 제품을 찾아봤는데 여기제품들은 너무 예쁜거 같아요!! <br> 앞으로 자주 이용해야겠어요! ㅎㅎ</div>
+				</div>
+				
+				
 			</div>
 		</div>
 

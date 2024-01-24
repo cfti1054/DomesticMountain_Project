@@ -211,7 +211,9 @@ function createDiv(height, width) {
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js">
+	
+	</script>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/vendor/bootstrap5/css/bootstrap.min.css"

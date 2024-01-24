@@ -27,8 +27,8 @@
 							<div class='blockReplyAnswer reply-menu-item'>차단</div>
 						</c:when>
 						<c:otherwise>
-							<div class='notifyReplyAnswer reply-menu-item'>신고1</div>
-							<div class='blockReplyAnswer reply-menu-item'>차단1</div>
+							<div class='notifyReplyAnswer reply-menu-item'>신고</div>
+							<div class='blockReplyAnswer reply-menu-item'>차단</div>
 						</c:otherwise>
 					</c:choose>
 				</div>
