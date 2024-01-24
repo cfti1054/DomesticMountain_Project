@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fa.plus.common.FileManager;
 import com.fa.plus.common.MyUtil;
-import com.fa.plus.domain.Appearance;
 import com.fa.plus.domain.Recommend;
 import com.fa.plus.domain.SessionInfo;
 import com.fa.plus.service.RecommendService;

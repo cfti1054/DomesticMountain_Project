@@ -582,3 +582,8 @@ margin: 140px 0 40px 0;
   transform: rotate(-90deg);
 }
 
+
+.page-item {
+	cursor: pointer;
+}
+

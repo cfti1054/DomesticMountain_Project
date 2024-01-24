@@ -53,7 +53,7 @@ public class CreatecourseController {
 		
 		String cp = req.getContextPath();
 
-		int size = 8;
+		int size = 2;
 		int total_page;
 		int dataCount;
 
@@ -93,7 +93,7 @@ public class CreatecourseController {
 			articleUrl = cp + "/createcourse/article?page=" + current_page + "&" + query;
 		}
 
-		String paging = myUtil.paging(current_page, total_page, "listPage");
+		String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
 
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);

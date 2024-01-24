@@ -93,7 +93,7 @@ public class ShareController {
 			articleUrl = cp + "/share/article?page=" + current_page + "&" + query;
 		}
 
-		String paging = myUtil.paging(current_page, total_page, listUrl);
+		String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
 
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);
