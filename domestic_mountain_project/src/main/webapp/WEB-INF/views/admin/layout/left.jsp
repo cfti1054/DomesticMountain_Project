@@ -61,7 +61,7 @@
 						aria-controls="collapseLayouts">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-user fa-fw"></i>
-						</div> 회원관리
+						</div> 회원 관리
 						<div class="sb-sidenav-collapse-arrow">
 							<i class="fas fa-angle-down"></i>
 						</div>
@@ -73,7 +73,7 @@
 								href="${pageContext.request.contextPath}/admin/memberManage/list2">회원
 								목록</a> 
 							<a class="nav-link"
-								href="${pageContext.request.contextPath}/admin/memberManage/list">등급변경내역</a> 								
+								href="${pageContext.request.contextPath}/admin/memberManage/list">등급 변경 내역</a> 								
 						</nav>
 					</div>
 
@@ -84,7 +84,7 @@
 						aria-controls="collapseProducts">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-columns"></i>
-						</div> 상품관리
+						</div> 상품 관리
 						<div class="sb-sidenav-collapse-arrow">
 							<i class="fas fa-angle-down"></i>
 						</div>

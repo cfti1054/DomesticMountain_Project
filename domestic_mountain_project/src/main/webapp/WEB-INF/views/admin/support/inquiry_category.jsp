@@ -60,7 +60,7 @@
 
 
 			<div>
-				<h1 class="mt-4">고객지원</h1>
+				<h1 class="mt-4">1:1 문의</h1>
 				<ol class="breadcrumb mb-4">
 					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/">Dashboard</a></li>
 					<li class="breadcrumb-item active">1:1 문의 카테고리</li>

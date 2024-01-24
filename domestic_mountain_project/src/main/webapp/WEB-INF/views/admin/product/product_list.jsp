@@ -126,8 +126,9 @@ function changeSubList() {
 
 			<div class="body-title">
 				<h2>
-					<i class="fa-regular fa-calendar"></i> Product Management
+					<i class="fa-regular fa-calendar"></i> 상품 관리
 				</h2>
+				<hr>
 			</div>
 
 
@@ -280,7 +281,7 @@ function changeSubList() {
 										<button type="button" class="btn" onclick="searchList()">검색</button>
 									</div>
 
-							<div>
+							<div class="col-auto p-1">
 								<c:url var="url" value="/admin/product/write">
 								</c:url>
 								<button type="button" class="btn" onclick="location.href='${url}';">등록하기</button>

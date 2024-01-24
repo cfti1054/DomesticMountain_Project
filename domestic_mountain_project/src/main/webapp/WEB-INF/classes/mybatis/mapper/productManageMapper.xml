@@ -192,7 +192,7 @@
                 os.option_num soption_num, os.option_name soption_name,
                 odp.detail_num pdetail_num, odp.option_value poption_value,
                 sdp.detail_num sdetail_num, sdp.option_value soption_value,
-                NVL(stock_num, 0) stock_num, NVL(total_stock, 0) total_stock
+                NVL(stock_num, 0) stock_num, NVL(total_stock, 0) total_stock, product_summary
 		FROM product p
 		JOIN (
             SELECT product_num, option_num, option_name, parent FROM productOption WHERE product_num = #{product_num} AND parent IS NULL

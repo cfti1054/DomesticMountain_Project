@@ -28,7 +28,16 @@ public class ProductStockManage {
 	private List<Long> detail_nums;
 	private List<Long> detail_nums2;
 	private List<Integer> total_stocks;	
+	private String product_summary; 	// 썸네일
 	
+	
+	
+	public String getProduct_summary() {
+		return product_summary;
+	}
+	public void setProduct_summary(String product_summary) {
+		this.product_summary = product_summary;
+	}
 	public long getProduct_num() {
 		return product_num;
 	}

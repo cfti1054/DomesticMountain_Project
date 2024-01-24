@@ -88,7 +88,7 @@ function showContent(faq_num) {
 	<main class="mt-4">
 		<div class="container-fluid px-4">
 			<div>
-			<h1 class="mt-4">Tables</h1>
+			<h1 class="mt-4">FAQ 분류</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/">Dashboard</a></li>
                             <li class="breadcrumb-item active">FAQ 질문과 답변</li>

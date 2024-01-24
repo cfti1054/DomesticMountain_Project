@@ -152,14 +152,14 @@ function update(inquiry_board_num) {
 	<main class="mt-4">
 		<div class="container-fluid px-4">
 			<div>
-			<h1 class="mt-4">Tables</h1>
+			<h1 class="mt-4">공지사항 관리</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin/">Dashboard</a></li>
                             <li class="breadcrumb-item active">공지사항 리스트</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                공지사항이나 뉴스/이벤트와 같은 게시물을 추가 / 수정할 수 있습니다.
+                                공지사항이나 뉴스 / 이벤트와 같은 게시물을 추가 / 수정할 수 있습니다.
                                 
                             </div>
                         </div>

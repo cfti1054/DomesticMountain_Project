@@ -6,6 +6,66 @@
 .body-container {
 	max-width: 850px;
 }
+</style><style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3.5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/boot-board.css" type="text/css">
 
@@ -48,7 +108,14 @@ function check() {
 		f.notice_board_invisible_date.focus();
 		return false;
 	}
-	console.log(f.notice_board_num.value);    
+	
+	 if($("input[name=slider]").is(":checked")) {
+		f.notice_board_visible.value = 1;
+	} else {
+		f.notice_board_visible.value = 0;
+	}
+	
+	console.log(f.notice_board_visible.value); 
 	
     f.action = "${pageContext.request.contextPath}/admin/boardManage/notice_board_"+f.mode.value;
 	
@@ -108,6 +175,16 @@ $(function() {
 					</tr>
 					
 					<tr>
+						<td class="bg-light col-sm-2" scope="row">보이기 기능</td>
+						<td>
+							<label class="switch">
+								<input type="checkbox" name="slider" id="slider" checked>
+								<span class="slider round"></span>
+							</label>
+						</td>
+					</tr>
+					
+					<tr>
 						<td class="bg-light col-sm-2" scope="row">만료 기한 사용</td>
 						<td><input type="checkbox" name="expireUse" id="expireUse" value="checked"></td>
 						
@@ -118,7 +195,6 @@ $(function() {
 							<td><input type="text" name="notice_board_invisible_date" id="notice_board_invisible_date" value="${dto.notice_board_invisible_date}"></td>
 					</tr>
 					
-					
 					<tr>
 						<td class="bg-light col-sm-2" scope="row">내 용</td>
 						<td>
@@ -127,7 +203,7 @@ $(function() {
 					</tr>
 					
 					<input type="hidden" name="mode" value="${mode}">
-					<input type="hidden" name="notice_board_num" value="${dto.notice_board_num}">
+					<input type="hidden" name="notice_board_visible" value="">
 				</table>
 				
 				<table class="table table-borderless">

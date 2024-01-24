@@ -130,24 +130,19 @@ $(function(){
 	type="text/css">
 
 
-<div id="layoutSidenav_content">
-	<main class="mt-4">
-		<div class="container-fluid px-4 ">
+<div id="container">
+	<main class="stockForm">
+		<div class="body-container">
 
 			<div class="body-title">
-				<h2>
-					<i class="fa-solid fa-warehouse"></i> 재고 관리
-				</h2>
-				<hr>
+				<h3>재고 관리</h3>
 			</div>
-			<div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
-				
-				
-				<div class="body-main">
+
+			<div class="body-main">
 
 				<div class="row board-list-header">
 					<div class="col-auto me-auto pt-2">
-						<h3>상품 : ${productName}(${productNum})</h3>
+						<h3>${productName}(${productNum})</h3>
 					</div>
 					<div class="col-auto pt-2">
 						<span>상품 종류 : ${listProductStock.size()} 개</span>
@@ -157,22 +152,19 @@ $(function(){
 				<table class="table table-borderless board-list" style="vertical-align:middle;">
 					<thead class="table-light">
 						<tr class="border-bottom1">
-							<th width="10%">번호</th>
-							<th width="25%">사진</th>
-							
-							
+							<th width="110">번호</th>
+							<th width="150">사진</th>
+							<th width="250">${titleOptionParent}</th>
 							<c:choose>
 								<c:when test="${not empty titleOptionSub}">
-									<th width="25%">${titleOptionParent}</th>
-									<th width="25%">${titleOptionSub}</th>
+									<th width="250">${titleOptionSub}</th>
 								</c:when>
-									<th width="50%">${titleOptionParent}</th>
 								<c:otherwise>
 									
 								</c:otherwise>
 							</c:choose>
-							<th width="25%">재고</th>
-							<th width="10%">관리</th>
+							<th width="250">재고</th>
+							<th>관리</th>
 						</tr>
 					</thead>
 
@@ -236,10 +228,7 @@ $(function(){
 				<input type="hidden" name="page" value="${page}">
 			</form>
 
-
-
-
-			</div>
 		</div>
 	</main>
 </div>
+

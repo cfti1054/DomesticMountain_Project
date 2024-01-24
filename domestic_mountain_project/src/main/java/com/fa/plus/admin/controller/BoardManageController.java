@@ -140,6 +140,7 @@ public class BoardManageController {
 		try {
 			service.insert_notice_board(dto);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return "redirect:/admin/boardManage/notice_board_list";

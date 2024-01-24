@@ -309,6 +309,7 @@ public class ProductManageController {
 		String titleOptionParent = listProductStock.get(0).getPoption_name();
 		String titleOptionSub = listProductStock.get(0).getSoption_name();
 		
+		
 		model.addAttribute("productNum", productNum);
 		model.addAttribute("productName", productName);
 		model.addAttribute("titleOptionParent", titleOptionParent);

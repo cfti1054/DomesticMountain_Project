@@ -228,7 +228,7 @@ function printMemberManage() {
 		<div class="container-fluid px-4">
 
 			<h2>&nbsp;<i class='fas fa-user-tie'></i> 등급변경 내역</h2>
-			
+			<hr>
 
 			<!-- <div class="container"> -->
 <div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
