@@ -7,7 +7,20 @@
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/static/css/style2.css" type="text/css">
+<style>
+.legend-text {
+  color: #FFF;
+  font-size: 30px;
+}
 
+/* Media query for smaller screens */
+@media only screen and (max-width: 600px) {
+  /* Adjust styles for smaller screens */
+  .legend-text {
+    font-size:106px;
+  }
+}
+</style>
 <script type="text/javascript">
 $(function(){
 	let url = "${pageContext.request.contextPath}/admin/memberManage/ageAnalysis";
@@ -79,7 +92,8 @@ $(function(){
 		const chartDom = document.querySelector(".charts-day");
 		let myChart = echarts.init(chartDom);
 		let option;
-		
+		let legendFontSize = window.innerWidth > 1024 ? 25 : 13;
+		 
 		option = {
 		  tooltip: {
 		    trigger: 'item'
@@ -88,10 +102,10 @@ $(function(){
 		    top: '5%',
 		    left: 'center',
 		    itemGap: 50,
-		        textStyle: {
+		    textStyle: {
 			        color: '#FFF',
-		            fontSize: 30  
-		          }
+		            fontSize: legendFontSize
+		          },
 		  },
 		  series: [
 		    {
@@ -104,6 +118,7 @@ $(function(){
 		        borderColor: '#fff',
 		        borderWidth: 2
 		      },
+		      top: 80,
 		      label: {
 		        show: false,
 		        position: 'center'
