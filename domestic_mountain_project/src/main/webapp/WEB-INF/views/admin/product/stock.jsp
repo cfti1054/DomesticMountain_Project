@@ -163,11 +163,11 @@ $(function(){
 							
 							<c:choose>
 								<c:when test="${not empty titleOptionSub}">
-									<th width="25%">${titleOptionParent}</th>
-									<th width="25%">${titleOptionSub}</th>
+									<th>${titleOptionParent}</th>
+									<th>${titleOptionSub}</th>
 								</c:when>
-									<th width="50%">${titleOptionParent}</th>
 								<c:otherwise>
+									<th>${titleOptionParent}</th>
 									
 								</c:otherwise>
 							</c:choose>
