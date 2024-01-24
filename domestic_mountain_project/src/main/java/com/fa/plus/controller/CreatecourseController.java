@@ -52,6 +52,7 @@ public class CreatecourseController {
 			Model model) throws Exception {
 		
 		String cp = req.getContextPath();
+		
 
 		int size = 8;
 		int total_page;
