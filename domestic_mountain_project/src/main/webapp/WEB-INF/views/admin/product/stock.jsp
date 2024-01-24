@@ -79,7 +79,7 @@ ul.tabs li.active {
 
 .btn1 {
 	background-color: #FFC596;
-	border-color: white;	
+	border-color: white;
 	border-radius: 5px;
 }
 
@@ -87,42 +87,44 @@ ul.tabs li.active {
 	border-radius: 5px;
 	border-color: #dcdcdc;
 }
-
 </style>
 <script type="text/javascript">
-$(function(){
-	$('.btnStockUpdate').click(function(){
-		const $btn = $(this);
-		const $input = $(this).closest('tr').find('input[name="total_stock"]');
-		
-		if(! /^[0-9]+$/.test($input.val())) {
-			alert('숫자만 가능합니다.');
-			$input.focus();
-			return false;
-		}
-		
-		if(parseInt($input.val()) < 1) {
-			alert('재고는 하나 이상 가능합니다.');
-			$input.focus();
-			return false;			
-		}
-	
-		let detail_num = $btn.attr("data-detail_num");
-		let detail_num2 = $btn.attr("data-detail_num2");
-		let stock_num = $btn.attr("data-stock_num");
-		let total_stock = $input.val();
-		
-		const f = document.stockUpdateForm;
-		f.detail_num.value = detail_num;
-		f.detail_num2.value = detail_num2;
-		f.stock_num.value = stock_num;
-		f.total_stock.value = total_stock;
-		
-		f.action = "${pageContext.request.contextPath}/admin/product/updateStock";
-		f.submit();
-		
+	$(function() {
+		$('.btnStockUpdate')
+				.click(
+						function() {
+							const $btn = $(this);
+							const $input = $(this).closest('tr').find(
+									'input[name="total_stock"]');
+
+							if (!/^[0-9]+$/.test($input.val())) {
+								alert('숫자만 가능합니다.');
+								$input.focus();
+								return false;
+							}
+
+							if (parseInt($input.val()) < 1) {
+								alert('재고는 하나 이상 가능합니다.');
+								$input.focus();
+								return false;
+							}
+
+							let detail_num = $btn.attr("data-detail_num");
+							let detail_num2 = $btn.attr("data-detail_num2");
+							let stock_num = $btn.attr("data-stock_num");
+							let total_stock = $input.val();
+
+							const f = document.stockUpdateForm;
+							f.detail_num.value = detail_num;
+							f.detail_num2.value = detail_num2;
+							f.stock_num.value = stock_num;
+							f.total_stock.value = total_stock;
+
+							f.action = "${pageContext.request.contextPath}/admin/product/updateStock";
+							f.submit();
+
+						});
 	});
-});
 </script>
 
 <link rel="stylesheet"
@@ -141,100 +143,109 @@ $(function(){
 				<hr>
 			</div>
 			<div id="tab-content" style="padding: 15px 10px 5px; clear: both;">
-				
-				
+
+
 				<div class="body-main">
 
-				<div class="row board-list-header">
-					<div class="col-auto me-auto pt-2">
-						<h3>상품 : ${productName}(${productNum})</h3>
+					<div class="row board-list-header">
+
+
+
+						<div class="col-auto me-auto pt-2">
+							<h3>상품 : ${productName}(${productNum})</h3>
+						</div>
+
+						<div class="col-auto pt-2">
+							<span>상품 종류 : ${listProductStock.size()} 개</span>
+						</div>
 					</div>
-					<div class="col-auto pt-2">
-						<span>상품 종류 : ${listProductStock.size()} 개</span>
-					</div>					
-				</div>
 
-				<table class="table table-borderless board-list" style="vertical-align:middle;">
-					<thead class="table-light">
-						<tr class="border-bottom1">
-							<th width="10%">번호</th>
-							<th width="25%">사진</th>
-							
-							
-							<c:choose>
-								<c:when test="${not empty titleOptionSub}">
-									<th>${titleOptionParent}</th>
-									<th>${titleOptionSub}</th>
-								</c:when>
-								<c:otherwise>
-									<th>${titleOptionParent}</th>
-									
-								</c:otherwise>
-							</c:choose>
-							<th width="25%">재고</th>
-							<th width="10%">관리</th>
-						</tr>
-					</thead>
+					<table class="table table-borderless board-list"
+						style="vertical-align: middle;">
+						<thead class="table-light">
+							<tr class="border-bottom1">
+								<th width="10%">번호</th>
+								<th width="25%">사진</th>
 
-					<tbody>
-						<c:forEach var="dto" items="${listProductStock}"
-							varStatus="status">
-							<tr class="item-basic-content border-bottom">
-								<td>${status.count}</td>
-								<td>
-										<c:choose>
-										<c:when
-											test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
-											<img class="img-thumbnail"
-												src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+
+								<c:choose>
+									<c:when test="${not empty titleOptionSub}">
+										<th>${titleOptionParent}</th>
+										<th>${titleOptionSub}</th>
+									</c:when>
+									<c:otherwise>
+										<th>${titleOptionParent}</th>
+
+									</c:otherwise>
+								</c:choose>
+								<th width="25%">재고</th>
+								<th width="10%">관리</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<c:forEach var="dto" items="${listProductStock}"
+								varStatus="status">
+								<tr class="item-basic-content border-bottom">
+									<td>${status.count}</td>
+									<td><c:choose>
+											<c:when
+												test="${not empty dto.product_summary and dto.product_summary.startsWith('TC')}">
+												<img class="img-thumbnail" style="max-width: 50px;"
+													src="${pageContext.request.contextPath}/resources/images/product/${dto.product_summary}">
+											</c:when>
+											<c:when
+												test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
+												<img class="img-thumbnail" style="max-width: 50px;" src="${dto.product_summary}">
+											</c:when>
+
+											<c:otherwise>
+
+											</c:otherwise>
+										</c:choose></td>
+									<td>${dto.poption_value}</td>
+									<c:choose>
+										<c:when test="${not empty titleOptionSub}">
+											<td>${dto.soption_value}</td>
 										</c:when>
-										<c:when
-											test="${not empty dto.product_summary and dto.product_summary.startsWith('ht')}">
-											<img class="img-thumbnail" src="${dto.product_summary}">
-										</c:when>
-			
 										<c:otherwise>
-			
+
 										</c:otherwise>
 									</c:choose>
-								</td>
-								<td>${dto.poption_value}</td>
-								<c:choose>
-								<c:when test="${not empty titleOptionSub}">
-								<td>${dto.soption_value}</td>
-								</c:when>
-								<c:otherwise>
-									
-								</c:otherwise>
-							</c:choose>
 
-								<td><input type="text" class="form-control" name="total_stock" value="${dto.total_stock}">  </td>
-								<td>	
-									<button type="button" class="form-control btnStockUpdate" data-detail_num="${dto.pdetail_num}" data-detail_num2="${dto.sdetail_num}" data-stock_num="${dto.stock_num}">${total_stock == 0 ?"변경":"등록"}</button>
-								</td>
-							</tr>
+									<td><input type="text" class="form-control"
+										name="total_stock" value="${dto.total_stock}"></td>
+									<td>
+										<button type="button" class="form-control btnStockUpdate"
+											data-detail_num="${dto.pdetail_num}"
+											data-detail_num2="${dto.sdetail_num}"
+											data-stock_num="${dto.stock_num}">${total_stock == 0 ?"변경":"등록"}</button>
+									</td>
+								</tr>
 
-						</c:forEach>
-					</tbody>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+				<table class="table table-borderless">
+					<tr>
+						<td>
+							<button type="button" class="btn btn-dark"
+								onclick="location.href='${pageContext.request.contextPath}/admin/product/product_list?page=${page}';"
+								style="float: right;">돌아가기</button>
+						</td>
+					</tr>
 				</table>
 
-			</div>
-			<table class="table table-borderless">
-				<tr>
-					<td>					
-						<button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/admin/product/product_list?page=${page}';" style="float: right;">돌아가기</button>
-					</td>
-				</tr>
-			</table>
-			
-			<form name="stockUpdateForm" method="post">
-				<input type="hidden" name="product_num" value="${productNum}">
-				<input type="hidden" name="detail_num" value="${detail_num}">
-				<input type="hidden" name="detail_num2" value="${detail_num2}">
-				<input type="hidden" name="stock_num" value="${stock_num}">
-				<input type="hidden" name="total_stock" value="${total_stock}">
-				<input type="hidden" name="page" value="${page}">
-			</form>
+				<form name="stockUpdateForm" method="post">
+					<input type="hidden" name="product_num" value="${productNum}">
+					<input type="hidden" name="detail_num" value="${detail_num}">
+					<input type="hidden" name="detail_num2" value="${detail_num2}">
+					<input type="hidden" name="stock_num" value="${stock_num}">
+					<input type="hidden" name="total_stock" value="${total_stock}">
+					<input type="hidden" name="page" value="${page}">
+				</form>
 
 
 
