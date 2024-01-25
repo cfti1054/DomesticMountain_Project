@@ -50,9 +50,12 @@ public class ProductController {
 		
 		try {
 			long product_num = Long.parseLong(product);
-			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("product_num", product_num);
 			// 상품
 			Product dto = service.findById(product_num);
+			
+			List<Product> list = service.listReview(map);
 			
 			// 옵션명
 			List<Product> listOption = service.listProductOption(product_num);
@@ -68,6 +71,7 @@ public class ProductController {
 	            listOptionDetail1 = service.listOptionDetail(listOption.get(1).getOption_num());
 	        }
 			
+	        model.addAttribute("list", list);
 			model.addAttribute("dto", dto);
 			model.addAttribute("listOption", listOption);
 			model.addAttribute("listOptionDetail", listOptionDetail);
@@ -109,6 +113,8 @@ public class ProductController {
 		map.put("size", size);
 		
 		List<Product> list = service.listProduct(map);
+		
+		
 		
 		String listUrl = cp + "/product/product_detail?category_num="+category_num;
 		

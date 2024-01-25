@@ -19,4 +19,6 @@ public interface ProductService {
 	
 	public List<Product> listProductOption(long product_num);
 	public List<Product> listOptionDetail(long option_num);
+	
+	public List<Product> listReview(Map<String, Object> map);
 }

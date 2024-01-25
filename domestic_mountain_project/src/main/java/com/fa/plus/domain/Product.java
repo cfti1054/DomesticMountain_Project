@@ -30,15 +30,58 @@ public class Product {
 	private int detail_num;
 	private String option_value;
 	
-	private int review_star;
+	private double review_star;
 	private int review_count;
 	
+	private long od_num;
+	private int review_stars;
+	private String review_content;
+	private String review_reg_date;
+	private int useridx;
+	private String user_name;
 	
 	
-	public int getReview_star() {
+	
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public long getOd_num() {
+		return od_num;
+	}
+	public void setOd_num(long od_num) {
+		this.od_num = od_num;
+	}
+	public int getReview_stars() {
+		return review_stars;
+	}
+	public void setReview_stars(int review_stars) {
+		this.review_stars = review_stars;
+	}
+	public String getReview_content() {
+		return review_content;
+	}
+	public void setReview_content(String review_content) {
+		this.review_content = review_content;
+	}
+	public String getReview_reg_date() {
+		return review_reg_date;
+	}
+	public void setReview_reg_date(String review_reg_date) {
+		this.review_reg_date = review_reg_date;
+	}
+	public int getUseridx() {
+		return useridx;
+	}
+	public void setUseridx(int useridx) {
+		this.useridx = useridx;
+	}
+	public double getReview_star() {
 		return review_star;
 	}
-	public void setReview_star(int review_star) {
+	public void setReview_star(double review_star) {
 		this.review_star = review_star;
 	}
 	public int getReview_count() {

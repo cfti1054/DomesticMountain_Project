@@ -17,11 +17,11 @@
 	
 	<select id="listProduct" parameterType="map" resultType="com.fa.plus.domain.Product">
 		SELECT p.product_num, p.category_num, category_name, product_name, product_price, product_summary,
-			product_content, product_hit, NVL(review_star, 0) review_star, NVL(review_count, 0) review_count
+			product_content, product_hit, NVL(ROUND(t.review_star, 1), 0) review_star, NVL(t.review_count, 0) review_count
 		FROM product p
 		JOIN product_category c ON p.category_num = c.category_num
 		LEFT OUTER JOIN (
-			SELECT product_num, ROUND(AVG(review_star), 1) review_star, COUNT(*) review_count
+			SELECT product_num, AVG(review_star) review_star, COUNT(*) review_count
 			FROM review
 			WHERE review_show = 1
 			GROUP BY product_num
@@ -35,7 +35,7 @@
 		SELECT p.product_num, p.category_num, p.product_status, category_name, 
 		    product_name, product_price, 
 			product_summary, p.product_content, p.product_reg_date,
-			NVL(review_star, 0) review_star, NVL(review_count, 0) review_count
+			NVL(ROUND(review_star, 1), 0) review_star, NVL(review_count, 0) review_count
 		FROM product p
 		JOIN product_category c ON p.category_num = c.category_num
 		LEFT OUTER JOIN (
@@ -66,5 +66,13 @@
 		ORDER BY detail_num
 	</select>
 	
+	<select id="listReview" parameterType="map" resultType="com.fa.plus.domain.Product">
+		SELECT review_star, review_content, review_reg_date, user_name
+		FROM review r
+		JOIN product p ON p.product_num = r.product_num
+		JOIN user1 u ON u.useridx = r.useridx
+		WHERE r.product_num = #{product_num}
+		ORDER BY r.product_num DESC
+	</select>
 	
 </mapper>

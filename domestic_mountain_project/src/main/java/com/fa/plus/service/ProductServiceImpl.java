@@ -119,6 +119,20 @@ public class ProductServiceImpl implements ProductService{
 		
 		return dto;
 	}
+
+	@Override
+	public List<Product> listReview(Map<String, Object> map) {
+		List<Product> list = null;
+		
+		try {
+			list = mapper.listReview(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 }

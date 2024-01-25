@@ -30,6 +30,11 @@
 .icon {
 	margin: 10px;
 }
+.star {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+}
 </style>
 
 <script type="text/javascript">
@@ -374,6 +379,7 @@ function sendOk(mode) {
 		f.action = "${pageContext.request.contextPath}/order/buy";
 	} else if(mode == "cart"){
 		if(! confirm("선택한 상품을 장바구니에 담으시겠습니까 ? ")) {
+			f.method = "get";
 			return false;
 		}
 		
@@ -485,11 +491,6 @@ function sendOk(mode) {
 
 						</div>
 
-
-
-
-
-
 						<div class="order-area"></div>
 
 						<div class="row-style mt-2 pb-2">
@@ -557,35 +558,21 @@ function sendOk(mode) {
 		<div class="tab-pane fade" id="tab-pane-2" role="tabpanel"
 			aria-labelledby="tab-2" tabindex="0">
 			<div class="mt-3 review-mainbox">
-
-				<div class="border-bottom review-box">
-					<div class="p-2">
-						<div class="col-auto fs-2">
-							<i class="bi bi-person-circle text-muted icon"></i>
+				<c:forEach var="dto" items="${list}" varStatus="status">
+					<div class="border-bottom review-box">
+						<div class="p-2">
+							<div class="col-auto fs-2">
+								<i class="bi bi-person-circle text-muted icon"></i>
+							</div>
+							<div class="col pt-3 ps-0 fw-semibold">${dto.user_name} &nbsp;&nbsp;&nbsp;&nbsp;
+								<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">${dto.review_star}</div>
+							<div class="col pt-3 text-end">
+								<span>${dto.review_reg_date}</span> |<span class="notifyReview" data-num="4">신고</span>
+							</div>
 						</div>
-						<div class="col pt-3 ps-0 fw-semibold">박*준</div>
-						<div class="col pt-3 text-end">
-							<span>2024-01-16</span> |<span class="notifyReview" data-num="4">신고</span>
-						</div>
+						<div class="mt-2 p-2">${dto.review_content}</div>
 					</div>
-					<div class="mt-2 p-2">편해보이는 등산룩 맞춰보려고 여러 사이트에서 찾아보고 검색하고 있었는데 제가 딱 원하는 스타일의 제품을 찾은거 같아요!! 행복합니다 ㅎㅎㅎ</div>
-				</div>
-				
-				
-				<div class="border-bottom review-box">
-					<div class="p-2">
-						<div class="col-auto fs-2">
-							<i class="bi bi-person-circle text-muted icon"></i>
-						</div>
-						<div class="col pt-3 ps-0 fw-semibold">김*미</div>
-						<div class="col pt-3 text-end">
-							<span>2023-12-06</span> |<span class="notifyReview" data-num="4">신고</span>
-						</div>
-					</div>
-					<div class="mt-2 p-2">처음으로 다이어트를 하기 위해서 등산 관련 제품을 찾아봤는데 여기제품들은 너무 예쁜거 같아요!! <br> 앞으로 자주 이용해야겠어요! ㅎㅎ</div>
-				</div>
-				
-				
+				</c:forEach>
 			</div>
 		</div>
 
