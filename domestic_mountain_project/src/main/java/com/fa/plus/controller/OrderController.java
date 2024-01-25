@@ -74,13 +74,14 @@ public class OrderController {
 						map.put("detail_num2", detail_nums2.get(i));
 						list.add(map);
 					}
+					
+					//System.out.println(detail_nums2);
 
 					List<Order> listProduct = orderService.listProduct(list);
 					
 					
 					for (int i = 0; i < listProduct.size(); i++) {
 						Order dto = listProduct.get(i);
-						System.out.println(dto.getProduct_name() + i);
 						dto.setQty(buyQtys.get(i));
 						
 						// 각 상품의 총 금액 (상품 가격 * 수량)
@@ -112,13 +113,13 @@ public class OrderController {
 						map.put("detail_num", detail_nums.get(i));
 						list.add(map);
 					}
+					//System.out.println(detail_nums2);
 
 					List<Order> listProduct = orderService.listProduct2(list);
 					
 					
 					for (int i = 0; i < listProduct.size(); i++) {
 						Order dto = listProduct.get(i);
-						System.out.println(dto.getProduct_name() + i);
 						dto.setQty(buyQtys.get(i));
 						
 						// 각 상품의 총 금액 (상품 가격 * 수량)
@@ -144,7 +145,7 @@ public class OrderController {
 				}
 
 			} else { // "cart"
-				if (detail_nums2 != null && detail_nums2.equals("")) {
+				if (!detail_nums2.isEmpty()) {
 					
 					List<Map<String, Long>> list = new ArrayList<Map<String, Long>>();
 					for (int i = 0; i < detail_nums.size(); i++) {
@@ -159,7 +160,6 @@ public class OrderController {
 					
 					for (int i = 0; i < listProduct.size(); i++) {
 						Order dto = listProduct.get(i);
-						System.out.println(dto.getProduct_name() + i);
 						dto.setQty(buyQtys.get(i));
 						
 						// 각 상품의 총 금액 (상품 가격 * 수량)
@@ -197,7 +197,6 @@ public class OrderController {
 					
 					for (int i = 0; i < listProduct.size(); i++) {
 						Order dto = listProduct.get(i);
-						System.out.println(dto.getProduct_name() + i);
 						dto.setQty(buyQtys.get(i));
 						
 						// 각 상품의 총 금액 (상품 가격 * 수량)
@@ -220,13 +219,9 @@ public class OrderController {
 					}
 					
 					
-					
 					model.addAttribute("listProduct", listProduct);
 				}
 			}
-			
-			
-			
 			
 			
 			
