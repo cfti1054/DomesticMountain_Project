@@ -38,6 +38,7 @@
 	text-transform: capitalize;
 	color: #333333;
 	margin: 0;
+	height: 70px;
 }
 
 .product-item figure {

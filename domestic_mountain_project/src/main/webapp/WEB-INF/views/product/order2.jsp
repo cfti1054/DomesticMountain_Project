@@ -564,7 +564,7 @@ function sendOk(mode) {
 							<div class="col-auto fs-2">
 								<i class="bi bi-person-circle text-muted icon"></i>
 							</div>
-							<div class="col pt-3 ps-0 fw-semibold">${dto.user_name} &nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="col pt-3 ps-0 fw-semibold" style="display: flex; align-items: center;">${dto.user_name} &nbsp;&nbsp;&nbsp;&nbsp;
 								<img class="star" src="${pageContext.request.contextPath}/resources/images/product/star.png">${dto.review_star}</div>
 							<div class="col pt-3 text-end">
 								<span>${dto.review_reg_date}</span> |<span class="notifyReview" data-num="4">신고</span>
