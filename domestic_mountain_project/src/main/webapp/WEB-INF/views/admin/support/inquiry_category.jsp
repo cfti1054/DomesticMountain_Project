@@ -310,11 +310,11 @@
         	let query = $("#categoryWriteForm").serialize();
         	
         	const fn = function(data) {
-        		
+        	$("#inquiry-dialog").dialog("close");
+        	location.href = "redirect:/admin/support/inquiry_category_list";        		
         	}
         	ajaxFun(url, "post", query, "json", fn);
         	
-        	$("#inquiry-dialog").dialog("close");
         	
         }
         
@@ -364,12 +364,12 @@
 		        	let query = "category_list=" + category_list;
 		        	
 		        	const fn = function(data) {
-		        		
+		        	$("#inquiry-dialog").dialog("close");
+		        		location.href = "redirect:/admin/support/inquiry_category_list";
 		        	}
 		        	ajaxFun(url, "get", query, "json", fn);
 		        	
 		        	
-		        	$("#inquiry-dialog").dialog("close");
         
         	 }
          	

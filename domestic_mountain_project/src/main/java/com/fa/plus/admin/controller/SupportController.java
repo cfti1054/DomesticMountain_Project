@@ -197,7 +197,7 @@ public class SupportController {
 		} catch (Exception e) {
 		}
 
-		return "redirect:/admin/support/faq_board_list";
+		return "redirect:/admin/support/inquiry_board_list";
 	}
 	
 	@GetMapping("inquiry_answer_update")
@@ -226,9 +226,11 @@ public class SupportController {
 		try {
 
 //			dto.setCategory_reg_id(info.getUserId());
-
+			System.out.println("CONTROLLER");
+			System.out.println(dto.getInquiry_answer_title());
+			System.out.println(dto.getInquiry_answer_content());
+			System.out.println(dto.getInquiry_board_num());
 			service.update_inquiry_answer(dto);
-
 			
 		} catch (Exception e) {
 		}

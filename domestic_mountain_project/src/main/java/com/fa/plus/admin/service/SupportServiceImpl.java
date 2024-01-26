@@ -282,8 +282,8 @@ public class SupportServiceImpl implements SupportService {
 	}
 
 	@Override
-	public void update_inquiry_answer(Support dto) {
-		
+	public void update_inquiry_answer(Support dto) throws Exception {
+		System.out.println("service");
 		try {
 			mapper.update_inquiry_answer(dto);
 		} catch (Exception e) {

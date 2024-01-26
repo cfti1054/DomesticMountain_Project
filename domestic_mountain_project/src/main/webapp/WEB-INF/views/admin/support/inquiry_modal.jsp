@@ -108,13 +108,13 @@
 				</td>	
 			</tr>
 			<tr>
-				<td>1:1 답변 제목</td>
-				<td class="ps-5"><textarea class="input" name="inquiry_answer_title" id="inquiry_answer_title" cols="70" rows="3" required>${dto.inquiry_answer_title}</textarea></td>
+				<td class="text-center bg-light">1:1 답변 제목</td>
+				<td class="ps-3"><textarea class="input" name="inquiry_answer_title" id="inquiry_answer_title" cols="70" rows="3" required>${dto.inquiry_answer_title}</textarea></td>
 			</tr>
 			
 			<tr>
 				<td class="text-center bg-light">1:1 답변 내용</td>
-				<td colspan="3" class="ps-5"><textarea class="input"
+				<td colspan="3" class="ps-3"><textarea class="input"
 						name="inquiry_answer_content" id="inquiry_answer_content" cols="70" rows="5" required>${dto.inquiry_answer_content}</textarea>
 						<input type="hidden" id="inquiry_board_num" name="inquiry_board_num" value="${dto.inquiry_board_num}"/>
 				</td>

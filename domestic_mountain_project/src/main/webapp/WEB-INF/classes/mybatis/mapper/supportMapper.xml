@@ -172,7 +172,7 @@
 	
 	
 	<select id="find_by_answer_num" parameterType="Long" resultType="com.fa.plus.admin.domain.Support">
-		SELECT inquiry_answer_num, inquiry_answer_title, inquiry_answer_content, inquiry_board_title, inquiry_board_content,
+		SELECT inquiry_answer_num, ia.inquiry_board_num, inquiry_answer_title, inquiry_answer_content, inquiry_board_title, inquiry_board_content,
 			u.user_name AS inquiry_board_reg_id, inquiry_board_reg_date, ic.inquiry_category_name
 		FROM inquiry_answer ia
 		JOIN inquiry_board i ON ia.inquiry_answer_num = i.inquiry_board_num
@@ -186,7 +186,6 @@
 		UPDATE inquiry_answer
 		SET inquiry_answer_title = #{inquiry_answer_title}, inquiry_answer_content = #{inquiry_answer_content}, inquiry_answer_update_date = SYSDATE
 		WHERE inquiry_answer_num = #{inquiry_board_num}
-	
 	</update>
 	
 	

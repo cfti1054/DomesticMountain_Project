@@ -36,7 +36,7 @@ public interface SupportService {
 	public void insert_inquiry_answer(Support dto) throws Exception;
 	
 	public Support find_by_answer_num(String num) throws Exception;
-	public void update_inquiry_answer(Support dto);
+	public void update_inquiry_answer(Support dto) throws Exception;
 	
 	
 }

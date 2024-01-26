@@ -429,11 +429,12 @@ function update(inquiry_board_num) {
         	let query = $("#answerWriteForm").serialize();
         	
         	const fn = function(data) {
+        	$("#inquiry-dialog").dialog("close");
         		
+        		location.href = "redirect:/admin/support/inquiry_board_list";
         	}
         	ajaxFun(url, "post", query, "json", fn);
         	
-        	$("#inquiry-dialog").dialog("close");
         	
         }
         function isEmpty(strIn)
@@ -490,12 +491,12 @@ function update(inquiry_board_num) {
 		        	let query = $("#answerUpdateForm").serialize();
 		        	
 		        	const fn = function(data) {
-		        		
+		        		$("#inquiry-dialog").dialog("close");
+		        		location.href = "redirect:/admin/support/inquiry_board_list";
 		        	}
 		        	ajaxFun(url, "post", query, "json", fn);
 		        	
 		        	
-		        	$("#inquiry-dialog").dialog("close");
         
         	 }
         </script>
